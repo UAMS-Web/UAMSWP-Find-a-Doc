@@ -1,0 +1,39 @@
+{
+    "label": "Specialty and Subspecialty Certificates",
+    "labels": {
+        "name": "Specialty and Subspecialty Certificates",
+        "singular_name": "Specialty or Subspecialty Certificate",
+        "search_items": "Search Specialty and Subspecialty Certificates",
+        "all_items": "All Specialty and Subspecialty Certificates",
+        "edit_item": "Edit Specialty or Subspecialty Certificate",
+        "update_item": "Update Specialty or Subspecialty Certificate",
+        "add_new_item": "Add New Specialty or Subspecialty Certificate",
+        "new_item_name": "New Specialty or Subspecialty Certificate",
+        "menu_name": "Certification \u2014 Specialty and Subspecialty Certificates",
+        "view_item": "View Specialty or Subspecialty Certificate",
+        "popular_items": "Popular Specialty and Subspecialty Certificates",
+        "separate_items_with_commas": "Separate Specialty and Subspecialty Certificates with commas",
+        "add_or_remove_items": "Add or remove Specialty and Subspecialty Certificates",
+        "choose_from_most_used": "Choose from the most used Specialty and Subspecialty Certificates",
+        "not_found": "No Specialty and Subspecialty Certificates found"
+    },
+    "public": true,
+    "hierarchical": false,
+    "show_ui": true,
+    "show_in_nav_menus": false,
+    "show_tagcloud": false,
+    "show_in_quick_edit": false,
+    "show_admin_column": false,
+    "meta_box_cb": false,
+    "capabilities": {
+        "manage_terms": "manage_options",
+        "edit_terms": "manage_options",
+        "delete_terms": "manage_options",
+        "assign_terms": "edit_physicians"
+    },
+    "rewrite": {
+        "slug": "board",
+        "with_front": false,
+        "hierarchical": false
+    }
+}
