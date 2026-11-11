@@ -53,3 +53,13 @@ Every entry heading is `## YYYY-MM-DD`, a space, and a short title. Leave exactl
 **Rejected.** Treating arbitrary filter-altered types as required metadata inputs, pinning accidental loose-comparison behavior, and excluding every surviving discarded expression without examining its dependencies.
 
 **Companion.** [UAMS-Web/UAMSWP-Find-a-Doc#904](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/904).
+
+## 2026-11-11 Apply the remove-ontology rule when any of a provider's regions is listed (#1132)
+
+**Decision.** The remove-ontology rule applies to a provider when at least one of the provider's regions is in the rule's region list, even if the provider also has a region that is not listed. `remove_service_lines` keeps its current check, since a provider carries a single service line. The implementation is #1185.
+
+**Why.** This is the behavior the rule was meant to have: a provider associated with a listed region is a provider the rule is about. The current helper matches only when the provider has exactly one distinct region, so a provider in a listed and an unlisted region shows the ontology the rule hides for everyone else in that region.
+
+**Rejected.** All of the provider's regions must be listed: it keeps the current non-match for a provider in a listed and an unlisted region. Only the primary (first) location's region: it ignores every other location the provider has, so a provider in a listed region at a non-primary location would still show the ontology.
+
+**Companion.** [UAMS-Web/UAMSWP-Find-a-Doc#1132](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1132); build in [UAMS-Web/UAMSWP-Find-a-Doc#1185](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1185).
