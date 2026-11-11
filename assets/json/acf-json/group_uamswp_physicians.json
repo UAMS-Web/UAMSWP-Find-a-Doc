@@ -2779,7 +2779,7 @@
 			"label": "Prefix",
 			"name": "physician_prefix",
 			"type": "select",
-			"instructions": "Only select \"Dr.\" if the provider has any of the following degrees: M.D., D.D.S., D.O., DPM or O.D.",
+			"instructions": "Not used. The \"Dr.\" prefix is added from the degrees: only M.D. or D.O.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
