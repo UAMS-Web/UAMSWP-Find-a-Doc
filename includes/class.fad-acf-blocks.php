@@ -83,7 +83,7 @@ function uams_fad_block_placeholder($block = null, $is_preview = false): bool
 
     printf(
         '<div class="uams-block-placeholder" style="padding:1.5rem;border:1px dashed currentColor;text-align:center;"><strong>%s</strong><br>%s</div>',
-        esc_html(! empty($block['title']) ? $block['title'] : __('Find-a-Doc block')),
+        esc_html(uamswp_fad_str(! empty($block['title']) ? $block['title'] : __('Find-a-Doc block'))),
         esc_html__('Click the pencil icon in the block toolbar to add content.')
     );
 

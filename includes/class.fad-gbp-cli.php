@@ -113,9 +113,9 @@ function uamswp_fad_gbp_manual_sync(array $post_ids, ?string $silo, bool $dry_ru
                 $entry = $sync->run([$item])[0];
                 $entries[] = $entry;
                 uamswp_fad_gbp_store_listing_ids([$item], [$entry]);
-                $action = (string) $entry['action'];
+                $action = uamswp_fad_str($entry['action']);
                 $counts[$action] = ($counts[$action] ?? 0) + 1;
-                $out(sprintf('%s  %s  %s  %s  %s', $entry['store_code'], (string) $entry['silo'], $entry['mode'], $action, $entry['reason']));
+                $out(sprintf('%s  %s  %s  %s  %s', uamswp_fad_str($entry['store_code']), uamswp_fad_str($entry['silo']), uamswp_fad_str($entry['mode']), $action, uamswp_fad_str($entry['reason'])));
 
                 if (in_array($action, ['error', 'review'], true)) {
                     $failed = true;
@@ -125,7 +125,7 @@ function uamswp_fad_gbp_manual_sync(array $post_ids, ?string $silo, bool $dry_ru
                 if (! empty($entry['defer_until'])) {
                     $held = true;
                     $failed = true;
-                    $resume = (int) $entry['defer_until'];
+                    $resume = uamswp_fad_int($entry['defer_until']);
                 }
 
                 if (! empty($entry['retryable'])) {
@@ -218,7 +218,7 @@ function uamswp_fad_gbp_backfill_ids(array $post_ids, bool $apply, callable $out
 
     foreach (['by_store_code', 'by_cid'] as $route) {
         foreach ($plan[$route] as $match) {
-            $out(sprintf('%s  %s  %s', $match['item']['store_code'], $match['name'], $route));
+            $out(sprintf('%s  %s  %s', uamswp_fad_str($match['item']['store_code']), uamswp_fad_str($match['name']), $route));
 
             if ($apply) {
                 uamswp_fad_gbp_write_listing_id($match['item'], $match['name']);
@@ -227,7 +227,7 @@ function uamswp_fad_gbp_backfill_ids(array $post_ids, bool $apply, callable $out
     }
 
     foreach ($plan['unmatched'] as $item) {
-        $out('UNMATCHED  '.$item['store_code'].'  (post '.($item['post_id'] ?? 0).')');
+        $out('UNMATCHED  '.uamswp_fad_str($item['store_code']).'  (post '.uamswp_fad_str($item['post_id'] ?? 0).')');
     }
 
     $out(sprintf(

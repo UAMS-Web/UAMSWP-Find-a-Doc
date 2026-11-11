@@ -27,7 +27,7 @@ class UAMS_Expertise_Attributes_Meta_Box
     }
 
     /**
-     * @param  mixed  $post
+     * @param  WP_Post  $post
      */
     public function expertise_attributes_meta_box($post): void
     {
@@ -79,11 +79,11 @@ class UAMS_Expertise_Attributes_Meta_Box
 
     <label class="screen-reader-text" for="sidebar"><?php _e('Sidebar') ?></label>
 
-    <p><input type="checkbox" id="sidebar_id" name="sidebarcheck" value="on" <?php if (! empty($sidebar)) { ?>checked="checked"<?php } ?> <?php echo $sidebar; ?> /><?php _e('No Sidebar') ?></p>
+    <p><input type="checkbox" id="sidebar_id" name="sidebarcheck" value="on" <?php if (! empty($sidebar)) { ?>checked="checked"<?php } ?> <?php echo uamswp_fad_str($sidebar); ?> /><?php _e('No Sidebar') ?></p>
 
     <p><strong><?php _e('Order') ?></strong></p>
 
-    <p><label class="screen-reader-text" for="menu_order"><?php _e('Order') ?></label><input name="menu_order" type="text" size="4" id="menu_order" value="<?php echo esc_attr($post->menu_order) ?>" /></p>
+    <p><label class="screen-reader-text" for="menu_order"><?php _e('Order') ?></label><input name="menu_order" type="text" size="4" id="menu_order" value="<?php echo esc_attr((string) $post->menu_order) ?>" /></p>
 
     <p><?php if ($post->post_type == 'page') {
         _e('Need help? Use the Help tab in the upper right of your screen.');
@@ -101,7 +101,7 @@ class UAMS_Expertise_Attributes_Meta_Box
      */
     public function save_postdata($post_ID = 0): int
     {
-        $post_ID = (int) $post_ID;
+        $post_ID = uamswp_fad_int($post_ID);
         $post_type = get_post_type($post_ID);
         get_post_status($post_ID);
         if ($post_type != 'expertise') {

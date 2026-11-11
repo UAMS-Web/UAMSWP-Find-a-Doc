@@ -62,7 +62,7 @@ final class UAMSWP_FAD_GBP_Sync
 
         foreach ($index as $listings) {
             foreach ($listings as $listing) {
-                $name = (string) ($listing['listing']['name'] ?? '');
+                $name = uamswp_fad_str(($listing['listing']['name'] ?? ''));
 
                 if ($name !== '') {
                     $this->by_name[$name] = $listing;
@@ -119,7 +119,7 @@ final class UAMSWP_FAD_GBP_Sync
         $index = [];
 
         foreach ($listings as $entry) {
-            $code = (string) ($entry['listing']['storeCode'] ?? '');
+            $code = uamswp_fad_str(($entry['listing']['storeCode'] ?? ''));
             if ($code !== '') {
                 $index[$code][] = $entry;
             }
@@ -192,7 +192,7 @@ final class UAMSWP_FAD_GBP_Sync
             ] + $entry;
         }
 
-        $account = (string) ($this->config['silos'][$silo]['accounts'][$item['kind']] ?? '');
+        $account = uamswp_fad_str(uamswp_fad_arr(uamswp_fad_arr($this->config['silos'][$silo]['accounts'] ?? null))[$item['kind']] ?? '');
         if ($account === '') {
             return ['reason' => 'Silo '.$silo.' has no '.$item['kind'].' account group'] + $entry;
         }
@@ -205,7 +205,7 @@ final class UAMSWP_FAD_GBP_Sync
         $match = $stored !== '' ? ($this->by_name[$stored] ?? null) : null;
 
         if ($match !== null) {
-            $others = array_filter($found, fn (array $listing): bool => (string) ($listing['listing']['name'] ?? '') !== $stored);
+            $others = array_filter($found, fn (array $listing): bool => uamswp_fad_str(($listing['listing']['name'] ?? '')) !== $stored);
 
             if ($others !== []) {
                 return ['action' => 'review', 'reason' => sprintf('Store code %s is already on another listing than the stored %s', $item['store_code'], $stored)] + $entry;
@@ -240,7 +240,7 @@ final class UAMSWP_FAD_GBP_Sync
     }
 
     /**
-     * @param  array<string, mixed>  $item
+     * @param  GbpSyncItem  $item
      * @param  array<string, mixed>  $entry
      * @param  array<string, mixed>  $listing
      * @return array<string, mixed>
@@ -248,11 +248,11 @@ final class UAMSWP_FAD_GBP_Sync
     private function update(array $item, array $entry, array $listing, string $mode, string $account): array
     {
         // Named on every outcome, so the caller can store the ID of the listing that was matched.
-        $entry = ['listing_name' => (string) ($listing['name'] ?? '')] + $entry;
+        $entry = ['listing_name' => uamswp_fad_str(($listing['name'] ?? ''))] + $entry;
         $changed = UAMSWP_FAD_GBP_Logic::changed_fields($item['fields'], $listing);
 
         try {
-            $attributes = $this->changed_attributes($item, (string) $listing['name']);
+            $attributes = $this->changed_attributes($item, uamswp_fad_str($listing['name']));
         } catch (RuntimeException $runtimeException) {
             return $this->failure($runtimeException) + $entry;
         }
@@ -272,11 +272,11 @@ final class UAMSWP_FAD_GBP_Sync
 
         try {
             if ($changed !== []) {
-                $this->client->patch((string) $listing['name'], $changed, UAMSWP_FAD_GBP_Logic::update_mask($changed));
+                $this->client->patch(uamswp_fad_str($listing['name']), $changed, UAMSWP_FAD_GBP_Logic::update_mask($changed));
             }
 
             if ($attributes !== []) {
-                $this->client->update_attributes((string) $listing['name'], $attributes);
+                $this->client->update_attributes(uamswp_fad_str($listing['name']), $attributes);
             }
         } catch (RuntimeException $runtimeException) {
             return $this->failure($runtimeException) + $entry;
@@ -285,7 +285,7 @@ final class UAMSWP_FAD_GBP_Sync
         $sent = [];
 
         try {
-            $this->send_photos($account, (string) $listing['name'], $photos, $sent);
+            $this->send_photos($account, uamswp_fad_str($listing['name']), $photos, $sent);
         } catch (RuntimeException $runtimeException) {
             return $this->failure($runtimeException) + ['photos_sent_now' => $sent] + $entry;
         }
@@ -294,13 +294,13 @@ final class UAMSWP_FAD_GBP_Sync
     }
 
     /**
-     * @param  array<string, mixed>  $item
+     * @param  GbpSyncItem  $item
      * @param  array<string, mixed>  $entry
      * @return array<string, mixed>
      */
     private function create(array $item, array $entry, string $account, string $mode): array
     {
-        $missing = array_values(array_diff(['title', 'storefrontAddress', 'categories'], array_keys($item['fields'])));
+        $missing = array_values(array_diff(['title', 'storefrontAddress', 'categories'], array_keys(uamswp_fad_arr($item['fields']))));
 
         if ($missing !== []) {
             return ['reason' => 'Cannot create, missing '.implode(', ', $missing)] + $entry;
@@ -308,7 +308,7 @@ final class UAMSWP_FAD_GBP_Sync
 
         $attributes = (array) ($item['attributes'] ?? []);
         $photos = UAMSWP_FAD_GBP_Logic::photos_to_send((array) ($item['photos'] ?? []), []);
-        $entry = ['action' => 'create', 'fields' => array_keys($item['fields']), 'attributes' => array_keys($attributes), 'photos' => array_column($photos, 'url')] + $entry;
+        $entry = ['action' => 'create', 'fields' => array_keys(uamswp_fad_arr($item['fields'])), 'attributes' => array_keys($attributes), 'photos' => array_column($photos, 'url')] + $entry;
 
         if ($mode !== 'live') {
             return ['reason' => 'Dry run, no listing created'] + $entry;
@@ -346,7 +346,7 @@ final class UAMSWP_FAD_GBP_Sync
         // Remember it, so the same store code later in this run is not created a second time.
         $listing = [
             'account' => $account,
-            'listing' => ['name' => (string) ($created['name'] ?? ''), 'storeCode' => $item['store_code']] + $item['fields'],
+            'listing' => ['name' => uamswp_fad_str(($created['name'] ?? '')), 'storeCode' => $item['store_code']] + $item['fields'],
         ];
         $this->index[$item['store_code']][] = $listing;
         $this->created[] = $listing;
@@ -358,11 +358,11 @@ final class UAMSWP_FAD_GBP_Sync
         // The listing exists now. A failure setting attributes is reported, and the next run
         // finds the listing by its store code and sets them as an update. Its name is on the entry
         // either way, so the caller stores the ID.
-        $entry = ['listing_name' => (string) ($created['name'] ?? '')] + $entry;
+        $entry = ['listing_name' => uamswp_fad_str(($created['name'] ?? ''))] + $entry;
 
         if ($attributes !== [] && ! empty($created['name'])) {
             try {
-                $this->client->update_attributes((string) $created['name'], $attributes);
+                $this->client->update_attributes(uamswp_fad_str($created['name']), $attributes);
             } catch (RuntimeException $runtimeException) {
                 return $this->failure($runtimeException) + $entry;
             }
@@ -373,13 +373,13 @@ final class UAMSWP_FAD_GBP_Sync
 
         if ($photos !== [] && ! empty($created['name'])) {
             try {
-                $this->send_photos($account, (string) $created['name'], $photos, $sent);
+                $this->send_photos($account, uamswp_fad_str($created['name']), $photos, $sent);
             } catch (RuntimeException $runtimeException) {
                 return $this->failure($runtimeException) + ['photos_sent_now' => $sent] + $entry;
             }
         }
 
-        return ['reason' => 'Created', 'listing_name' => (string) ($created['name'] ?? ''), 'photos_sent_now' => $sent] + $entry;
+        return ['reason' => 'Created', 'listing_name' => uamswp_fad_str(($created['name'] ?? '')), 'photos_sent_now' => $sent] + $entry;
     }
 
     /**
@@ -416,7 +416,7 @@ final class UAMSWP_FAD_GBP_Sync
      *
      * A listing is only read when the item states attributes, so provider items cost no call.
      *
-     * @param  array<string, mixed>  $item
+     * @param  GbpSyncItem  $item
      * @return array<string, bool>
      *
      * @throws RuntimeException When the live attributes cannot be read.

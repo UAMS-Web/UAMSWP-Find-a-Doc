@@ -104,7 +104,7 @@ function uamswp_fad_acf_table_map_check(string $dir): array
         $have = $cached[$name];
 
         if ($want['post_type'] !== $have['post_type']) {
-            $problems[] = sprintf('table `%s`: JSON says post_type `%s`, cache says `%s`', $name, $want['post_type'] ?? 'null', $have['post_type'] ?? 'null');
+            $problems[] = sprintf('table `%s`: JSON says post_type `%s`, cache says `%s`', $name, uamswp_fad_str($want['post_type'] ?? 'null'), uamswp_fad_str($have['post_type'] ?? 'null'));
         }
 
         $missing = array_values(array_diff($want['columns'], $have['columns']));

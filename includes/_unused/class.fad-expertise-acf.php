@@ -95,8 +95,8 @@ if (function_exists('acf_add_local_field_group')) {
 
 add_filter('acf/get_field_group', 'extend_header_field_group_function');
 /**
- * @param  mixed  $group
- * @return mixed
+ * @param  array<string, mixed>  $group
+ * @return array<string, mixed>
  */
 function extend_header_field_group_function($group)
 {

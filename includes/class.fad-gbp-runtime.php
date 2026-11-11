@@ -77,7 +77,7 @@ function uamswp_fad_gbp_credentials(?callable $lookup = null): ?array
 {
     $lookup ??= static function (string $name): string {
         if (defined($name)) {
-            return (string) constant($name);
+            return uamswp_fad_str(constant($name));
         }
 
         return (string) getenv($name);
@@ -331,6 +331,7 @@ function uamswp_fad_gbp_transport(string $method, string $url, array $headers, ?
  */
 function uamswp_fad_gbp_index(UAMSWP_FAD_GBP_Client $client): array
 {
+    /** @var array<int, array{account: string, listing: array<string, mixed>}>|false $cached */
     $cached = get_transient('uamswp_fad_gbp_index');
     if (is_array($cached)) {
         return $cached;
@@ -356,6 +357,7 @@ function uamswp_fad_gbp_index(UAMSWP_FAD_GBP_Client $client): array
  */
 function uamswp_fad_gbp_categories(UAMSWP_FAD_GBP_Client $client): array
 {
+    /** @var array<string, string>|false $cached */
     $cached = get_transient('uamswp_fad_gbp_categories');
     if (is_array($cached)) {
         return $cached;
@@ -404,7 +406,7 @@ const UAMSWP_FAD_GBP_PHOTOS_META = 'uamswp_fad_gbp_photos_sent';
  */
 function uamswp_fad_gbp_photos_sent_for(array $item): array
 {
-    $post_id = (int) ($item['post_id'] ?? 0);
+    $post_id = uamswp_fad_int(($item['post_id'] ?? 0));
 
     if ($post_id === 0 || ($item['stored_name'] ?? '') === '') {
         return [];
@@ -414,10 +416,10 @@ function uamswp_fad_gbp_photos_sent_for(array $item): array
         $sent = get_post_meta($post_id, UAMSWP_FAD_GBP_PHOTOS_META, true);
     } else {
         $map = get_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_MAP_META, true);
-        $sent = is_array($map) ? ($map[(int) ($item['location_id'] ?? 0)]['photos'] ?? []) : [];
+        $sent = is_array($map) ? (uamswp_fad_arr($map[uamswp_fad_int(($item['location_id'] ?? 0))] ?? null)['photos'] ?? []) : [];
     }
 
-    return is_array($sent) ? array_values(array_map(strval(...), $sent)) : [];
+    return is_array($sent) ? array_values(array_map(uamswp_fad_str(...), $sent)) : [];
 }
 
 /**
@@ -431,9 +433,9 @@ function uamswp_fad_gbp_photos_sent_for(array $item): array
  */
 function uamswp_fad_gbp_write_photos_sent(array $item, array $entry): void
 {
-    $post_id = (int) ($item['post_id'] ?? 0);
-    $name = (string) ($entry['listing_name'] ?? '');
-    $now_sent = array_values(array_map(strval(...), (array) ($entry['photos_sent_now'] ?? [])));
+    $post_id = uamswp_fad_int(($item['post_id'] ?? 0));
+    $name = uamswp_fad_str(($entry['listing_name'] ?? ''));
+    $now_sent = array_values(array_map(uamswp_fad_str(...), (array) ($entry['photos_sent_now'] ?? [])));
 
     if ($post_id === 0 || $name === '' || $now_sent === []) {
         return;
@@ -442,26 +444,28 @@ function uamswp_fad_gbp_write_photos_sent(array $item, array $entry): void
     $fresh = ($entry['action'] ?? '') === 'create';
 
     if ($item['kind'] === 'location') {
-        if ((string) get_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_META, true) !== $name) {
+        if (uamswp_fad_str(get_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_META, true)) !== $name) {
             return;
         }
 
         $stored = get_post_meta($post_id, UAMSWP_FAD_GBP_PHOTOS_META, true);
-        $before = $fresh || ! is_array($stored) ? [] : $stored;
+        $before = $fresh ? [] : array_map(uamswp_fad_str(...), uamswp_fad_arr($stored));
         update_post_meta($post_id, UAMSWP_FAD_GBP_PHOTOS_META, array_values(array_unique(array_merge($before, $now_sent))));
 
         return;
     }
 
     $map = get_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_MAP_META, true);
-    $location_id = (int) ($item['location_id'] ?? 0);
+    $location_id = uamswp_fad_int(($item['location_id'] ?? 0));
 
-    if (! is_array($map) || ($map[$location_id]['id'] ?? '') !== $name) {
+    if (! is_array($map) || (uamswp_fad_arr($map[$location_id] ?? null)['id'] ?? '') !== $name) {
         return;
     }
 
-    $before = $fresh ? [] : (array) ($map[$location_id]['photos'] ?? []);
-    $map[$location_id]['photos'] = array_values(array_unique(array_merge($before, $now_sent)));
+    $location_entry = uamswp_fad_arr($map[$location_id]);
+    $before = $fresh ? [] : array_map(uamswp_fad_str(...), uamswp_fad_arr($location_entry['photos'] ?? null));
+    $location_entry['photos'] = array_values(array_unique(array_merge($before, $now_sent)));
+    $map[$location_id] = $location_entry;
     update_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_MAP_META, $map);
 }
 
@@ -509,10 +513,10 @@ function uamswp_fad_gbp_attach_stored_ids(array $items): array
         }
 
         if ($item['kind'] === 'location') {
-            $name = (string) get_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_META, true);
+            $name = uamswp_fad_str(get_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_META, true));
         } else {
             $map = get_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_MAP_META, true);
-            $name = is_array($map) ? (string) ($map[(int) ($item['location_id'] ?? 0)]['id'] ?? '') : '';
+            $name = is_array($map) ? uamswp_fad_str(uamswp_fad_arr($map[(int) ($item['location_id'] ?? 0)] ?? null)['id'] ?? '') : '';
         }
 
         $items[$key]['stored_name'] = $name !== '' && ! uamswp_fad_gbp_name_held_elsewhere($post_id, $name) ? $name : '';
@@ -531,8 +535,8 @@ function uamswp_fad_gbp_attach_stored_ids(array $items): array
 function uamswp_fad_gbp_store_listing_ids(array $items, array $entries): void
 {
     foreach (array_values($items) as $position => $item) {
-        $name = (string) ($entries[$position]['listing_name'] ?? '');
-        $post_id = (int) ($item['post_id'] ?? 0);
+        $name = uamswp_fad_str(($entries[$position]['listing_name'] ?? ''));
+        $post_id = uamswp_fad_int(($item['post_id'] ?? 0));
 
         if ($name === '' || $post_id === 0 || ($entries[$position]['mode'] ?? '') !== 'live') {
             continue;
@@ -550,15 +554,15 @@ function uamswp_fad_gbp_store_listing_ids(array $items, array $entries): void
  */
 function uamswp_fad_gbp_write_listing_id(array $item, string $name): void
 {
-    $post_id = (int) ($item['post_id'] ?? 0);
+    $post_id = uamswp_fad_int(($item['post_id'] ?? 0));
 
     // No post or location to key it by, or the listing is another post's: store nothing.
-    if ($post_id === 0 || ($item['kind'] === 'provider' && (int) ($item['location_id'] ?? 0) === 0) || uamswp_fad_gbp_name_held_elsewhere($post_id, $name)) {
+    if ($post_id === 0 || ($item['kind'] === 'provider' && uamswp_fad_int(($item['location_id'] ?? 0)) === 0) || uamswp_fad_gbp_name_held_elsewhere($post_id, $name)) {
         return;
     }
 
     if ($item['kind'] === 'location') {
-        if ((string) get_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_META, true) !== $name) {
+        if (uamswp_fad_str(get_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_META, true)) !== $name) {
             update_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_META, $name);
 
             // The photos sent belong to the listing they went to.
@@ -569,9 +573,10 @@ function uamswp_fad_gbp_write_listing_id(array $item, string $name): void
     }
 
     $map = get_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_MAP_META, true);
+    /** @var array<int|string, array{id: string, orphaned_since: ?string, photos?: array<int, array{category: string, url: string}>}> $map */
     $map = is_array($map) ? $map : [];
 
-    $location_id = (int) ($item['location_id'] ?? 0);
+    $location_id = uamswp_fad_int(($item['location_id'] ?? 0));
 
     if (($map[$location_id]['id'] ?? '') !== $name || ($map[$location_id]['orphaned_since'] ?? null) !== null) {
         update_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_MAP_META, UAMSWP_FAD_GBP_Logic::remember_listing($map, $location_id, $name));
@@ -595,7 +600,8 @@ function uamswp_fad_gbp_mark_orphans(int $post_id, array $items, ?int $now = nul
         return;
     }
 
-    $marked = UAMSWP_FAD_GBP_Logic::mark_orphans($map, array_map(fn (array $item): int => (int) ($item['location_id'] ?? 0), $items), gmdate('Y-m-d', $now ?? time()));
+    /** @var array<int|string, array{id: string, orphaned_since: ?string, photos?: array<int, array{category: string, url: string}>}> $map */
+    $marked = UAMSWP_FAD_GBP_Logic::mark_orphans($map, array_map(fn (array $item): int => uamswp_fad_int(($item['location_id'] ?? 0)), $items), gmdate('Y-m-d', $now ?? time()));
 
     if ($marked !== $map) {
         update_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_MAP_META, $marked);
@@ -640,7 +646,7 @@ function uamswp_fad_gbp_items_for_provider(int $provider_id, array $categories):
     $items = [];
 
     foreach ($table['body'] as $row) {
-        $store_code = (string) ($row[0] ?? '');
+        $store_code = uamswp_fad_str(($row[0] ?? ''));
         $parts = UAMSWP_FAD_GBP_Logic::split_provider_store_code($store_code);
 
         if ($parts === null) {
@@ -714,8 +720,9 @@ function uamswp_fad_gbp_log(array $entry): void
 {
     $entry = ['time' => time()] + $entry;
 
-    $attention = get_option('uamswp_fad_gbp_attention', []);
-    $attention = is_array($attention) ? $attention : [];
+    $stored_attention = get_option('uamswp_fad_gbp_attention', []);
+    /** @var array<string, array<string, mixed>> $attention */
+    $attention = is_array($stored_attention) ? $stored_attention : [];
 
     $next = UAMSWP_FAD_GBP_Logic::next_attention($attention, $entry, UAMSWP_FAD_GBP_ATTENTION_CAP);
 
@@ -759,10 +766,10 @@ function uamswp_fad_gbp_create_gate(?int $now = null): array
 {
     $now ??= time();
     $count = get_option(UAMSWP_FAD_GBP_COUNT_OPTION, []);
-    $used = is_array($count) && ($count['day'] ?? '') === UAMSWP_FAD_GBP_Logic::pacific_day($now) ? (int) ($count['count'] ?? 0) : 0;
+    $used = is_array($count) && ($count['day'] ?? '') === UAMSWP_FAD_GBP_Logic::pacific_day($now) ? uamswp_fad_int(($count['count'] ?? 0)) : 0;
 
     return [
-        'creates_paused_until' => (int) get_option(UAMSWP_FAD_GBP_PAUSE_OPTION, 0),
+        'creates_paused_until' => uamswp_fad_int(get_option(UAMSWP_FAD_GBP_PAUSE_OPTION, 0)),
         'creates_left' => max(0, uamswp_fad_gbp_create_budget() - $used),
         'now' => $now,
     ];
@@ -807,7 +814,7 @@ function uamswp_fad_gbp_after_run(UAMSWP_FAD_GBP_Sync $sync, array $entries, ?in
 
             // A later-finishing run must not replace a newer day's budget with an older one.
             if (! is_array($count) || ($count['day'] ?? '') <= $day) {
-                $before = is_array($count) && ($count['day'] ?? '') === $day ? (int) ($count['count'] ?? 0) : 0;
+                $before = is_array($count) && ($count['day'] ?? '') === $day ? uamswp_fad_int(($count['count'] ?? 0)) : 0;
                 update_option(UAMSWP_FAD_GBP_COUNT_OPTION, ['day' => $day, 'count' => $before + $day_made], false);
             }
 
@@ -816,7 +823,7 @@ function uamswp_fad_gbp_after_run(UAMSWP_FAD_GBP_Sync $sync, array $entries, ?in
         }
     }
 
-    if ($sync->creates_paused_until() > (int) get_option(UAMSWP_FAD_GBP_PAUSE_OPTION, 0)) {
+    if ($sync->creates_paused_until() > uamswp_fad_int(get_option(UAMSWP_FAD_GBP_PAUSE_OPTION, 0))) {
         update_option(UAMSWP_FAD_GBP_PAUSE_OPTION, $sync->creates_paused_until(), false);
     }
 
@@ -858,7 +865,7 @@ function uamswp_fad_gbp_schedule_deferred(int $post_id, array $entries): void
     $deferred = array_column($entries, 'defer_until');
 
     if ($deferred !== [] && wp_next_scheduled(UAMSWP_FAD_GBP_SYNC_HOOK, [$post_id]) === false) {
-        wp_schedule_single_event(max($deferred) + 60 + ($post_id % 600), UAMSWP_FAD_GBP_SYNC_HOOK, [$post_id]);
+        wp_schedule_single_event(uamswp_fad_int(max($deferred)) + 60 + ($post_id % 600), UAMSWP_FAD_GBP_SYNC_HOOK, [$post_id]);
     }
 }
 
@@ -904,7 +911,7 @@ function uamswp_fad_gbp_retry_delay(int $attempt): int
 function uamswp_fad_gbp_schedule_retry(int $post_id): void
 {
     $key = 'uamswp_fad_gbp_attempts_'.$post_id;
-    $attempt = (int) get_transient($key) + 1;
+    $attempt = uamswp_fad_int(get_transient($key)) + 1;
 
     if ($attempt > UAMSWP_FAD_GBP_MAX_ATTEMPTS) {
         delete_transient($key);
@@ -920,7 +927,7 @@ function uamswp_fad_gbp_schedule_retry(int $post_id): void
         wp_schedule_single_event($until, UAMSWP_FAD_GBP_SYNC_HOOK, [$post_id]);
 
         // The dashboard shows the latest backoff in force.
-        if ($until > (int) get_option(UAMSWP_FAD_GBP_BACKOFF_OPTION, 0)) {
+        if ($until > uamswp_fad_int(get_option(UAMSWP_FAD_GBP_BACKOFF_OPTION, 0))) {
             update_option(UAMSWP_FAD_GBP_BACKOFF_OPTION, $until, false);
         }
     }

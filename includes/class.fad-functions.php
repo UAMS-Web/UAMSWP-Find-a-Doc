@@ -2,8 +2,8 @@
 // Ajax Search Pro modifications
 add_filter('asp_results', 'asp_custom_link_meta_results', 1, 2);
 /**
- * @param  mixed  $results
- * @return mixed
+ * @param  array<int|string, stdClass>  $results
+ * @return array<int|string, stdClass>
  */
 function asp_custom_link_meta_results($results)
 {
@@ -12,23 +12,24 @@ function asp_custom_link_meta_results($results)
     $full_name = '';
     $new_desc = '';
     foreach ($results as $k => $v) {
-        if (($v->content_type == 'pagepost') && (get_post_type($v->id) == 'provider')) {
-            $degrees = get_field('physician_degree', $v->id);
+        $v_id = uamswp_fad_int($v->id);
+        if (($v->content_type == 'pagepost') && (get_post_type($v_id) == 'provider')) {
+            $degrees = get_field('physician_degree', $v_id);
             $degree_list = '';
             $i = 1;
             if ($degrees) {
                 foreach ($degrees as $degree) {
                     $degree_name = get_term($degree, 'degree');
                     $degree_list .= ($degree_name->name ?? '');
-                    if (count($degrees) > $i) {
+                    if (count(uamswp_fad_arr($degrees)) > $i) {
                         $degree_list .= ', ';
                     }
                     $i++;
                 }
             }
             // $new_url = '/directory/physician/' . get_post_field( 'post_name', $v->id ) .'/';
-            $full_name = get_field('physician_first_name', $v->id).' '.(get_field('physician_middle_name', $v->id) ? get_field('physician_middle_name', $v->id).' ' : '').get_field('physician_last_name', $v->id).($degree_list ? ', '.$degree_list : '');
-            $new_desc = get_field('physician_short_clinical_bio', $v->id);
+            $full_name = get_field('physician_first_name', $v_id).' '.(get_field('physician_middle_name', $v_id) ? get_field('physician_middle_name', $v_id).' ' : '').get_field('physician_last_name', $v_id).($degree_list ? ', '.$degree_list : '');
+            $new_desc = get_field('physician_short_clinical_bio', $v_id);
         }
         // Change only, if the meta is specified
         // if ( !empty($new_url) )
@@ -105,7 +106,7 @@ class pubmed_field_on_change
             exit;
         }
 
-        $idstr = intval($_POST['pmid']); // '22703441';
+        $idstr = intval(uamswp_fad_str($_POST['pmid'])); // '22703441';
 
         // make json api call
         $host = 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&retmode=json&id={IDS}';
@@ -120,34 +121,38 @@ class pubmed_field_on_change
         }
 
         // make the data readable
+        /** @var object{result: stdClass} $obj */
         $obj = json_decode($json);
 
         // Get values
+        /** @var stdClass $result */
         $result = $obj->result->$idstr;
-        $title = $result->title;
+        $title = uamswp_fad_str($result->title);
         // create authors array, just in case
         $authors = [];
         $authorlist = '';
         // $last_author = end(array_keys($result->authors)); // unused
-        foreach ($result->authors as $author) {
-            $name = $author->name;
+        /** @var array<int, stdClass> $result_authors */
+        $result_authors = uamswp_fad_arr($result->authors);
+        foreach ($result_authors as $author) {
+            $name = uamswp_fad_str($author->name);
             $authors[] = $name;
             $authorlist .= $name;
-            if (next($result->authors) === false) {
+            if (next($result_authors) === false) {
                 $authorlist .= '.';
             } else {
                 $authorlist .= ', ';
             }
         }
-        $source = $result->source;
-        $volume = $result->volume;
-        $issue = $result->issue;
-        $pages = $result->pages;
-        $date = $result->pubdate;
-        $doi = $result->elocationid;
+        $source = uamswp_fad_str($result->source);
+        $volume = uamswp_fad_str($result->volume);
+        $issue = uamswp_fad_str($result->issue);
+        $pages = uamswp_fad_str($result->pages);
+        $date = uamswp_fad_str($result->pubdate);
+        $doi = uamswp_fad_str($result->elocationid);
 
         // create full reference
-        if ($title != '') {
+        if ($title !== '') {
             $full = $authorlist.' '.$title.' '.$source.'. '.$date.'; ';
             $full .= $volume.'('.$issue.'):'.$pages.'. '.$doi.' PMID: '.$idstr.'. <br/> View in Pubmed: <a href="https://www.ncbi.nlm.nih.gov/pubmed/'.$idstr.'" target="_blank">'.$idstr.'</a>';
         } else {
@@ -232,7 +237,7 @@ function uams_pubmed_shortcode($atts): string
     $atts = shortcode_atts([
         'terms' => '',
         'count' => '20',
-    ], $atts, 'pubmed');
+    ], uamswp_fad_arr($atts), 'pubmed');
 
     return "<ul class=\"pubmed-list\" data-terms=\"{$atts['terms']}\" data-count=\"{$atts['count']}\"></ul>";
 }
@@ -243,8 +248,8 @@ add_filter('manage_provider_posts_columns', 'posts_provider_columns', 10);
 add_action('manage_provider_posts_custom_column', 'posts_provider_custom_columns', 10, 2);
 
 /**
- * @param  mixed  $columns
- * @return mixed[]
+ * @param  array<string, string>  $columns
+ * @return array<string, string>
  */
 function posts_provider_columns($columns): array
 {
@@ -267,13 +272,13 @@ function posts_provider_columns($columns): array
 function posts_provider_custom_columns($column_name, $id): void
 {
     if ($column_name === 'provider_post_thumbs') {
-        echo get_the_post_thumbnail($id, [80, 80]);
+        echo get_the_post_thumbnail(uamswp_fad_int($id), [80, 80]);
     }
 }
 
 /**
- * @param  mixed  $schedules
- * @return mixed
+ * @param  array<string, array{interval: int, display: string}>  $schedules
+ * @return array<string, array{interval: int, display: string}>
  */
 function uamswp_cron_every_two_hours($schedules)
 {
@@ -311,9 +316,9 @@ add_filter('cron_schedules', 'uamswp_cron_every_two_hours');
 /**
  * 1. Safe API Fetcher with Correct JSON Parsing
  *
- * @param  mixed  $url
- * @param  mixed  $max_retries
- * @param  mixed  $delay_seconds
+ * @param  string  $url
+ * @param  int  $max_retries
+ * @param  int  $delay_seconds
  * @return mixed
  */
 function fetch_pg_api_with_retry($url, $max_retries = 3, $delay_seconds = 2)
@@ -338,10 +343,11 @@ function fetch_pg_api_with_retry($url, $max_retries = 3, $delay_seconds = 2)
 
         $response_code = wp_remote_retrieve_response_code($response);
         $response_body = wp_remote_retrieve_body($response);
-        $data = json_decode($response_body);
+        $data = uamswp_fad_arr(json_decode($response_body, true));
 
         // Check if we hit the 429 Spike Arrest
-        $is_rate_limited = ($response_code === 429 || (isset($data->status->code) && $data->status->code == 429));
+        $data_code = uamswp_fad_arr($data['status'] ?? null)['code'] ?? null;
+        $is_rate_limited = ($response_code === 429 || $data_code == 429);
 
         if ($is_rate_limited) {
             if ($attempts < $max_retries) {
@@ -498,7 +504,7 @@ function wp_pg_get_token()
         ]);
         $pg_status_code = (int) wp_remote_retrieve_response_code($pg_response);
         $pg_body = wp_remote_retrieve_body($pg_response);
-        $pg_data = json_decode($pg_body, true);
+        $pg_data = uamswp_fad_arr(json_decode($pg_body, true));
         if ($pg_status_code === 200 && $pg_data) {
             // Process data
             set_transient($pg_cache_key, $pg_data['accessToken'], MINUTE_IN_SECONDS * 25);
@@ -511,8 +517,8 @@ function wp_pg_get_token()
 
 // PressGaney JSON API Call
 /**
- * @param  mixed  $npi
- * @param  mixed  $count
+ * @param  int|string  $npi
+ * @param  int|string  $count
  * @return mixed
  */
 function wp_pg_cached_api($npi, $count = 6)
@@ -525,7 +531,7 @@ function wp_pg_cached_api($npi, $count = 6)
     $cache_key = 'pg_'.$npi;
     $request = get_transient($cache_key);
 
-    if ($request === false || (is_array($request) && ($request['status']['code'] !== '200'))) {
+    if ($request === false || (is_array($request) && (uamswp_fad_arr($request['status'] ?? null)['code'] !== '200'))) {
         $request = wp_remote_get($url, [
             'headers' => [
                 'Content-Type' => 'application/json',
@@ -540,9 +546,10 @@ function wp_pg_cached_api($npi, $count = 6)
 
         $response_code = wp_remote_retrieve_response_code($request);
         $response_body = wp_remote_retrieve_body($request);
-        $data = json_decode($response_body);
+        $data = uamswp_fad_arr(json_decode($response_body, true));
         // CRITICAL: Check if Spike Arrest or Rate Limit was hit
-        if ($response_code === 429 || (isset($data->status->code) && $data->status->code == 429)) {
+        $data_code = uamswp_fad_arr($data['status'] ?? null)['code'] ?? null;
+        if ($response_code === 429 || $data_code == 429) {
             // DO NOT cache this. Fail gracefully or serve the OLD cache if available.
             return false;
             // set_transient( $cache_key, $response_body, MINUTE_IN_SECONDS );
@@ -563,8 +570,8 @@ function pg_ajax_api(): void
 {
     check_ajax_referer('pg_pagination_posts', 'nonce');
 
-    $post_id = isset($_POST['post_id']) ? absint(wp_unslash($_POST['post_id'])) : 0;
-    $current_page = isset($_POST['page']) ? max(1, absint(wp_unslash($_POST['page']))) : 1;
+    $post_id = isset($_POST['post_id']) ? absint(uamswp_fad_str(wp_unslash($_POST['post_id']))) : 0;
+    $current_page = isset($_POST['page']) ? max(1, absint(uamswp_fad_str(wp_unslash($_POST['page'])))) : 1;
 
     // Only published providers have public reviews; the NPI is read server-side so the caller cannot choose it.
     if (! $post_id || get_post_type($post_id) !== 'provider' || get_post_status($post_id) !== 'publish') {
@@ -604,15 +611,15 @@ function pg_ajax_api(): void
         wp_send_json_error('upstream unavailable', 502);
     }
 
-    $pg_rating_data = json_decode(wp_remote_retrieve_body($response));
-    $reviews = (isset($pg_rating_data->data->entities[0]->comments) && is_array($pg_rating_data->data->entities[0]->comments))
-        ? $pg_rating_data->data->entities[0]->comments
-        : [];
+    $pg_rating_data = uamswp_fad_arr(json_decode(wp_remote_retrieve_body($response), true));
+    $pg_entities = uamswp_fad_arr(uamswp_fad_arr($pg_rating_data['data'] ?? null)['entities'] ?? null);
+    $reviews = uamswp_fad_arr(uamswp_fad_arr($pg_entities[0] ?? null)['comments'] ?? null);
 
     foreach ($reviews as $review) {
-        $rating = isset($review->overallRating->value) ? floatval($review->overallRating->value) : 0;
-        $comment = isset($review->comment) ? (string) $review->comment : '';
-        $when = isset($review->mentionTime) ? strtotime((string) $review->mentionTime) : false;
+        $review = uamswp_fad_arr($review);
+        $rating = uamswp_fad_float(uamswp_fad_arr($review['overallRating'] ?? null)['value'] ?? 0);
+        $comment = uamswp_fad_str($review['comment'] ?? '');
+        $when = isset($review['mentionTime']) ? strtotime(uamswp_fad_str($review['mentionTime'])) : false;
         ?>
 		<div class="card">
 			<div class="card-header bg-transparent">
@@ -637,10 +644,10 @@ function pg_ajax_api(): void
 }
 
 /**
- * @param  mixed  $args
- * @param  mixed  $field
- * @param  mixed  $post
- * @return mixed
+ * @param  array<string, mixed>  $args
+ * @param  array<string, mixed>  $field
+ * @param  int  $post
+ * @return array<string, mixed>
  */
 function limit_to_post_parent($args, $field, $post)
 {
@@ -779,7 +786,7 @@ function uamswp_load_by_ajax_callback(): void
     header('Content-Type: text/html');
     // if ('post' == $type) {
     $ids = $_POST['postid'] ?? '';
-    $ids_array = explode(',', $ids);
+    $ids_array = explode(',', uamswp_fad_str($ids));
     $args = [
         // 'suppress_filters' => true,
         'post_type' => 'provider',
@@ -964,8 +971,8 @@ function uamswp_load_by_ajax_callback(): void
 // add_action( 'init', 'register_recognition_shortcodes');
 
 /**
- * @param  mixed  $code
- * @param  mixed  $type
+ * @param  string  $code
+ * @param  string  $type
  * @return mixed
  */
 function get_medline_api_data($code, $type)
@@ -1023,45 +1030,49 @@ function get_medline_api_data($code, $type)
     return $json;
 }
 /**
- * @param  mixed  $code
- * @param  mixed  $type
+ * @param  string  $code
+ * @param  string  $type
  */
 function display_medline_api_data($code, $type): void
 {
     // Get data for api
     $json = get_medline_api_data($code, $type);
 
-    $feed = $json->feed;
-    $entry = $feed->entry;
+    // The stored feed is an object tree; read it as arrays, which the code below can type.
+    $feed = uamswp_fad_arr(uamswp_fad_arr(json_decode((string) wp_json_encode($json), true))['feed'] ?? null);
+    $entry = uamswp_fad_arr($feed['entry'] ?? null);
     // echo (count($entry->title));
-    if (isset($entry->title)) {
+    if (isset($entry['title'])) {
         // echo ('<h2>'. $entry->title->_value .'</h2>');
         // echo '<br>';
-        echo '<p>'.($entry->summary->_value ?? '').'</p>';
+        $summary = uamswp_fad_arr($entry['summary'] ?? null);
+        $href = uamswp_fad_str(uamswp_fad_arr($entry['link'] ?? null)['href'] ?? '');
+        echo '<p>'.uamswp_fad_str($summary['_value'] ?? '').'</p>';
         echo '<div class="cite">';
         echo '<p><em>Courtesy of <a href="https://medlineplus.gov/">MedlinePlus</a> from the <a href="https://www.nlm.nih.gov/">National Library of Medicine</a>.</em></p>';
         echo '<p><strong>Syndicated Content Details:</strong><br />';
-        echo 'Source URL: <a href="'.esc_url($entry->link->href ?? '').'">'.esc_html($entry->link->href ?? '').'</a><br />';
+        echo 'Source URL: <a href="'.esc_url($href).'">'.esc_html($href).'</a><br />';
         echo 'Source Agency: <a href="https://www.nlm.nih.gov/">National Library of Medicine</a></p>';
         echo '</div>';
     } else {
         for ($a = 0; $a < count($entry); $a++) {
-            if (str_contains($entry[$a]->link->href, 'medlineplus.gov')) {
+            $item = uamswp_fad_arr($entry[$a] ?? null);
+            $href = uamswp_fad_str(uamswp_fad_arr($item['link'] ?? null)['href'] ?? '');
+            if (str_contains($href, 'medlineplus.gov')) {
                 if ($a !== 0) {
-                    echo '<h2>'.$entry[$a]->title->_value.'</h2>'; // Add heading if there is more than one
+                    echo '<h2>'.uamswp_fad_str(uamswp_fad_arr($item['title'] ?? null)['_value'] ?? '').'</h2>'; // Add heading if there is more than one
                 }
-                echo '<p>'.($entry[$a]->summary->_value).'</p>';
+                echo '<p>'.uamswp_fad_str(uamswp_fad_arr($item['summary'] ?? null)['_value'] ?? '').'</p>';
                 echo '<div class="cite">';
                 echo '<p><em>Courtesy of <a href="https://medlineplus.gov/">MedlinePlus</a> from the <a href="https://www.nlm.nih.gov/">National Library of Medicine</a>.</em></p>';
                 echo '<p><strong>Syndicated Content Details:</strong><br />';
-                echo 'Source URL: <a href="'.esc_url($entry[$a]->link->href).'">'.esc_html($entry[$a]->link->href).'</a><br />';
+                echo 'Source URL: <a href="'.esc_url($href).'">'.esc_html($href).'</a><br />';
                 echo 'Source Agency: <a href="https://www.nlm.nih.gov/">National Library of Medicine</a></p>';
                 echo '</div>';
             }
         }
     }
 }
-
 // Provider AJAX
 /**
  * @param  mixed  $atts
@@ -1072,12 +1083,14 @@ function uamswp_provider_ajax_filter_shortcode($atts): string|false
         'providers' => '',
         // 'ppp' => '',
         'region' => '',
-    ], $atts);
+    ], uamswp_fad_arr($atts));
     $providers = explode(',', $a['providers']);
     // $ppp = $a['ppp'];
     $display_region = $a['region'];
+    /** @var array<int|string, string> $provider_titles */
     $provider_titles = [];
     $provider_titles_list = [];
+    /** @var list<int> $provider_regions */
     $provider_regions = [];
     foreach ($providers as $provider) {
         if (get_post_status((int) $provider) == 'publish') {
@@ -1158,7 +1171,7 @@ function uamswp_provider_ajax_filter_shortcode($atts): string|false
 
             foreach (is_array($provider_region) ? $provider_region : [] as $region) {
 
-                $provider_regions[] = $region;
+                $provider_regions[] = uamswp_fad_int($region);
 
             }
 
@@ -1243,22 +1256,22 @@ function provider_ajax_filter_callback(): void
     if (isset($_COOKIE['_provider_title'])) {
         $provider_title = $_COOKIE['_provider_title'];
     } elseif (isset($_POST['provider_title'])) {
-        $provider_title = sanitize_text_field($_POST['provider_title']);
+        $provider_title = sanitize_text_field(uamswp_fad_str($_POST['provider_title']));
     }
 
     $provider_region = '';
     if (isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region'])) {
         if (isset($_GET['_filter_region'])) {
-            setcookie('wp_filter_region', htmlspecialchars($_GET['_filter_region']), ['expires' => 0, 'path' => '/', 'domain' => $_SERVER['HTTP_HOST']]);
+            setcookie('wp_filter_region', htmlspecialchars(uamswp_fad_str($_GET['_filter_region'])), ['expires' => 0, 'path' => '/', 'domain' => uamswp_fad_str($_SERVER['HTTP_HOST'] ?? '')]);
         }
         $provider_region = $_COOKIE['wp_filter_region'];
     } elseif (isset($_POST['provider_region'])) {
-        $provider_region = sanitize_text_field($_POST['provider_region']);
+        $provider_region = sanitize_text_field(uamswp_fad_str($_POST['provider_region']));
     }
 
     $providers = [];
     if (isset($_POST['providers'])) {
-        $providers = sanitize_text_field($_POST['providers']);
+        $providers = sanitize_text_field(uamswp_fad_str($_POST['providers']));
         $providers = explode(',', $providers);
     }
 
@@ -1288,13 +1301,14 @@ function provider_ajax_filter_callback(): void
 
     $region_prov_ids = new WP_Query($args);
 
+    /** @var list<int> $region_IDs */
     $region_IDs = [];
     while ($region_prov_ids->have_posts()) {
         $region_prov_ids->the_post();
         $id = get_the_ID();
         $region_ID = get_field('physician_region', $id);
         if (is_array($region_ID)) {
-            $region_IDs = array_merge($region_IDs, $region_ID);
+            $region_IDs = array_merge($region_IDs, array_map(uamswp_fad_int(...), $region_ID));
         }
     }
     $region_IDs = array_unique($region_IDs);
@@ -1392,8 +1406,9 @@ function uamswp_provider_title_ajax_filter_shortcode($atts): string|false
 {
     $a = shortcode_atts([
         'providers' => '',
-    ], $atts);
+    ], uamswp_fad_arr($atts));
     $providers = explode(',', $a['providers']);
+    /** @var array<int|string, string> $provider_titles */
     $provider_titles = [];
     $provider_titles_list = [];
     foreach ($providers as $provider) {
@@ -1518,12 +1533,12 @@ function provider_title_ajax_filter_callback(): void
     // Get data variables
     $provider_title = '';
     if (isset($_POST['provider_title'])) {
-        $provider_title = sanitize_text_field($_POST['provider_title']);
+        $provider_title = sanitize_text_field(uamswp_fad_str($_POST['provider_title']));
     }
 
     $providers = [];
     if (isset($_POST['providers'])) {
-        $providers = sanitize_text_field($_POST['providers']);
+        $providers = sanitize_text_field(uamswp_fad_str($_POST['providers']));
         $providers = explode(',', $providers);
     }
 
@@ -1579,7 +1594,7 @@ function uamswp_location_ajax_filter_shortcode($atts): string|false
     $a = shortcode_atts([
         'locations' => '',
         'region' => '',
-    ], $atts);
+    ], uamswp_fad_arr($atts));
     $locations = explode(',', $a['locations']);
     $display_region = $a['region'];
     $location_regions = [];
@@ -1652,16 +1667,16 @@ function location_ajax_filter_callback(): void
     $location_region = '';
     if (isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region'])) {
         if (isset($_GET['_filter_region'])) {
-            setcookie('wp_filter_region', htmlspecialchars($_GET['_filter_region']), ['expires' => 0, 'path' => '/', 'domain' => $_SERVER['HTTP_HOST']]);
+            setcookie('wp_filter_region', htmlspecialchars(uamswp_fad_str($_GET['_filter_region'])), ['expires' => 0, 'path' => '/', 'domain' => uamswp_fad_str($_SERVER['HTTP_HOST'] ?? '')]);
         }
         $location_region = $_COOKIE['wp_filter_region'];
     } elseif (isset($_POST['location_region'])) {
-        $location_region = sanitize_text_field($_POST['location_region']);
+        $location_region = sanitize_text_field(uamswp_fad_str($_POST['location_region']));
     }
 
     $locations = [];
     if (isset($_POST['locations'])) {
-        $locations = sanitize_text_field($_POST['locations']);
+        $locations = sanitize_text_field(uamswp_fad_str($_POST['locations']));
         $locations = explode(',', $locations);
     }
 
@@ -1677,6 +1692,7 @@ function location_ajax_filter_callback(): void
     ];
     $region_loc_ids = new WP_Query($args);
 
+    /** @var list<int> $region_IDs */
     $region_IDs = [];
     while ($region_loc_ids->have_posts()) {
         $region_loc_ids->the_post();
@@ -1737,7 +1753,7 @@ function uamswp_add_trench(): void
             $trenchQS = $_GET['_filter_region'];
         }
         if ((isset($trench) && $trench) || $trenchQS) {
-            $region = $trench->slug ?: htmlspecialchars($trenchQS);
+            $region = $trench->slug ?: htmlspecialchars(uamswp_fad_str($trenchQS));
             ?>
 			<script type="text/javascript">
 				// Set cookie to expire at end of session
@@ -1756,8 +1772,8 @@ function schedule_ajax_filter_callback(): void
 {
     check_ajax_referer('load_more_posts', 'security');
 
-    $pid = isset($_POST['pid']) ? absint(wp_unslash($_POST['pid'])) : 0;
-    $schedule_key = isset($_POST['schedule_options']) ? absint(wp_unslash($_POST['schedule_options'])) : 0;
+    $pid = isset($_POST['pid']) ? absint(uamswp_fad_str(wp_unslash($_POST['pid']))) : 0;
+    $schedule_key = isset($_POST['schedule_options']) ? absint(uamswp_fad_str(wp_unslash($_POST['schedule_options']))) : 0;
 
     // Only published locations have public scheduling options.
     if (! $pid || get_post_type($pid) !== 'location' || get_post_status($pid) !== 'publish') {
@@ -1775,12 +1791,12 @@ function schedule_ajax_filter_callback(): void
     $mychart_scheduling_linksource = (string) get_field('mychart_scheduling_linksource', 'option');
     $mychart_scheduling_linksource = ($mychart_scheduling_linksource !== '') ? $mychart_scheduling_linksource : 'uamshealth.com';
 
-    $location_scheduling_ser = isset($row['location_scheduling_ser']) ? (string) $row['location_scheduling_ser'] : '';
-    $location_scheduling_dep = isset($row['location_scheduling_dep']) ? (string) $row['location_scheduling_dep'] : '';
-    $location_scheduling_vt = isset($row['location_scheduling_vt']) ? (string) $row['location_scheduling_vt'] : '';
-    $location_scheduling_item_title_nested = ! empty($row['location_scheduling_item_title_nested']) ? (string) $row['location_scheduling_item_title_nested'] : 'Schedule an Appointment Online';
-    $location_scheduling_item_intro_nested = isset($row['location_scheduling_item_intro_nested']) ? (string) $row['location_scheduling_item_intro_nested'] : '';
-    $location_scheduling_fallback = isset($row['location_scheduling_fallback']) ? (string) $row['location_scheduling_fallback'] : '';
+    $location_scheduling_ser = isset($row['location_scheduling_ser']) ? uamswp_fad_str($row['location_scheduling_ser']) : '';
+    $location_scheduling_dep = isset($row['location_scheduling_dep']) ? uamswp_fad_str($row['location_scheduling_dep']) : '';
+    $location_scheduling_vt = isset($row['location_scheduling_vt']) ? uamswp_fad_str($row['location_scheduling_vt']) : '';
+    $location_scheduling_item_title_nested = ! empty($row['location_scheduling_item_title_nested']) ? uamswp_fad_str($row['location_scheduling_item_title_nested']) : 'Schedule an Appointment Online';
+    $location_scheduling_item_intro_nested = isset($row['location_scheduling_item_intro_nested']) ? uamswp_fad_str($row['location_scheduling_item_intro_nested']) : '';
+    $location_scheduling_fallback = isset($row['location_scheduling_fallback']) ? uamswp_fad_str($row['location_scheduling_fallback']) : '';
 
     $widget_base = 'https://'.$mychart_scheduling_domain.'/'.$mychart_scheduling_instance;
     // Built by hand rather than add_query_arg so empty values still appear as "id=" the way the widget expects.
@@ -1848,7 +1864,7 @@ add_action('wp_enqueue_scripts', 'uamswp_fad_disable_scripts', 100);
 function uamswp_attr_conversion($input): string
 {
 
-    $input_attr = is_array($input) ? '' : (string) ($input ?? '');
+    $input_attr = is_array($input) ? '' : uamswp_fad_str(($input ?? ''));
 
     if (empty($input_attr)) {
         return '';

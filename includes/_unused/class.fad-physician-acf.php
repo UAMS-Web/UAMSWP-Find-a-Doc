@@ -1489,13 +1489,13 @@ function physician_save_post($post_id): void
     }
 
     // Create full name to store in 'physician_full_name' field
-    $first_name = $_POST['acf']['field_physician_first_name'];
-    $middle_name = $_POST['acf']['field_physician_middle_name'];
-    $last_name = $_POST['acf']['field_physician_last_name'];
+    $first_name = uamswp_fad_str(uamswp_fad_posted('field_physician_first_name'));
+    $middle_name = uamswp_fad_str(uamswp_fad_posted('field_physician_middle_name'));
+    $last_name = uamswp_fad_str(uamswp_fad_posted('field_physician_last_name'));
 
     $full_name = $last_name.' '.$first_name.' '.$middle_name;
 
-    $_POST['acf']['field_physician_full_name'] = $full_name;
+    uamswp_fad_post_set('field_physician_full_name', $full_name);
 
     // $short_bio = $_POST['acf']['field_physician_short_clinical_bio'];
     // if ($short_bio)
@@ -1532,8 +1532,8 @@ function physician_update_post_excerpt($post_id): void
 
     // Update post options array
     $update_post_excerpt_args = [
-        'ID' => $post_id,
-        'post_excerpt' => $post_excerpt,
+        'ID' => uamswp_fad_int($post_id),
+        'post_excerpt' => uamswp_fad_str($post_excerpt),
     ];
 
     // Update the post into the database
