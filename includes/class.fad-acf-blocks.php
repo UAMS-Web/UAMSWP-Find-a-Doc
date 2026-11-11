@@ -9,6 +9,33 @@ declare(strict_types=1);
  */
 
 /**
+ * Attributes for a link button's target, for printing inside an anchor tag.
+ *
+ * Returns ` target="..."` for a non-empty target, plus ` rel="noopener"` when the target is
+ * `_blank`, and an empty string when no target is set.
+ *
+ * @param  mixed  $target  Link target from an ACF link field, or null when unset.
+ */
+function uams_fad_link_target_attributes($target): string
+{
+    if (! is_string($target) || $target === '') {
+
+        return '';
+
+    }
+
+    $attributes = ' target="'.esc_attr($target).'"';
+
+    if ($target === '_blank') {
+
+        $attributes .= ' rel="noopener"';
+
+    }
+
+    return $attributes;
+}
+
+/**
  * Editor placeholder for a newly inserted, still-empty ACF block (ACF Blocks V3
  * always render a preview). Returns true after printing the placeholder.
  * Returns false outside block previews ($block / $is_preview not set).

@@ -79,7 +79,7 @@
                         <div class="col-12 more">
                             <p class="lead"><?php echo $more_text; ?></p>
                             <div class="cta-container">
-                                <a href="<?php echo esc_url($more_button_url); ?>" class="btn btn-outline-primary" aria-label="<?php echo esc_attr($more_button_description_attr); ?>"<?php $more_button_target ? ' target="'. esc_attr($more_button_target) . '"' : '' ?>><?php echo $more_button_text; ?></a>
+                                <a href="<?php echo esc_url($more_button_url); ?>" class="btn btn-outline-primary" aria-label="<?php echo esc_attr($more_button_description_attr); ?>"<?php echo uams_fad_link_target_attributes($more_button_target ?? null); ?>><?php echo $more_button_text; ?></a>
                             </div>
                         </div>
                     <?php } ?>
