@@ -194,6 +194,30 @@ final class GbpSyncTest extends UnitTestCase
         $this->assertArrayNotHasKey('title', $fields);
     }
 
+    public function test_an_existing_listing_is_found_only_by_its_store_code(): void
+    {
+        $other = $this->listing('accounts/up', 'other_clinic', ['title' => 'UAMS Health - Other']);
+        $match = $this->listing('accounts/up', 'jane_clinic', ['title' => 'Old']);
+
+        $this->sync(['uams' => 'live'], true, [$other, $match])->run([$this->item()]);
+
+        $this->assertSame(['update'], $this->actions());
+        $this->assertSame('locations/jane_clinic', $this->client->calls[0][1], 'the listing with the same store code is patched, and no other');
+        $this->assertCount(1, $this->client->calls);
+    }
+
+    public function test_a_changed_slug_makes_a_new_store_code_that_finds_nothing_and_the_old_listing_is_left_alone(): void
+    {
+        $old = $this->listing('accounts/up', 'jane_clinic', ['title' => 'UAMS Health - Jane']);
+
+        // The provider's slug changed, so the same person now produces a different store code.
+        $this->sync(['uams' => 'live'], true, [$old])->run([$this->item(['store_code' => 'jane-q_clinic'])]);
+
+        $this->assertSame(['create'], $this->actions());
+        $this->assertSame('jane-q_clinic', $this->client->calls[0][3], 'a second listing is created under the new code');
+        $this->assertSame([], array_filter($this->client->calls, fn (array $call): bool => in_array($call[0], ['patch', 'update_attributes'], true)), 'nothing is written to the listing under the old code');
+    }
+
     public function test_dry_run_update_logs_the_fields_and_makes_no_call(): void
     {
         $listing = $this->listing('accounts/up', 'jane_clinic', ['title' => 'Old']);
