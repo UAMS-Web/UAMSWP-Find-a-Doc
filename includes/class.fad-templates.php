@@ -93,7 +93,7 @@ add_filter('theme_page_templates', 'uamswp_taxonomy_archive_page_template');
 function uamswp_redirect_page_template($template)
 {
     $post = get_post();
-    $page_template = get_post_meta($post->ID, '_wp_page_template', true);
+    $page_template = get_post_meta($post->ID ?? 0, '_wp_page_template', true);
     if (basename($page_template) === 'archive-taxonomy-conditions.php') {
         $template = WP_PLUGIN_DIR.'/'.basename(dirname(__FILE__, 2)).'/templates/archive-taxonomy-conditions.php';
     }

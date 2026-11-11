@@ -34,7 +34,7 @@ class UAMS_Expertise_Attributes_Meta_Box
 
         $post_type_object = get_post_type_object($post->post_type);
 
-        if ($post_type_object->hierarchical) {
+        if ($post_type_object !== null && $post_type_object->hierarchical) {
             $dropdown_args = [
                 'post_type' => $post->post_type,
                 'exclude_tree' => $post->ID,

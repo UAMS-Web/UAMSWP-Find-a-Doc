@@ -307,7 +307,13 @@ function uamswp_fad_gbp_provider_ids_for_locations(array $location_ids): array
  */
 function uamswp_fad_gbp_transport(string $method, string $url, array $headers, ?string $body): array
 {
-    $response = wp_remote_request($url, ['method' => $method, 'headers' => $headers, 'body' => $body, 'timeout' => 45]);
+    $request = ['method' => $method, 'headers' => $headers, 'timeout' => 45.0];
+
+    if ($body !== null) {
+        $request['body'] = $body;
+    }
+
+    $response = wp_remote_request($url, $request);
 
     if (is_wp_error($response)) {
         return [0, $response->get_error_code().': '.$response->get_error_message()];

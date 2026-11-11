@@ -64,7 +64,7 @@ parameters:
     # from 0 upward (see the code-quality skill), then raise it by one per
     # change as findings are fixed, until `max`. Lowering it is a deliberate,
     # argued change, not a quiet edit to get a red run green.
-    level: 7
+    level: 8
 
     excludePaths:
         analyseAndScan:
