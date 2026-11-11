@@ -25,6 +25,12 @@ const UAMSWP_FAD_GBP_PAUSE_OPTION = 'uamswp_fad_gbp_creates_paused_until';
 /** The option that holds how many creates were made on a Pacific day: `day` and `count`. */
 const UAMSWP_FAD_GBP_COUNT_OPTION = 'uamswp_fad_gbp_create_count';
 
+/** The option holding the creates made on each recent Pacific day, for the dashboard. */
+const UAMSWP_FAD_GBP_HISTORY_OPTION = 'uamswp_fad_gbp_create_history';
+
+/** The option holding the moment a per-minute rate limit backoff ends. */
+const UAMSWP_FAD_GBP_BACKOFF_OPTION = 'uamswp_fad_gbp_backoff_until';
+
 /** Creates allowed per Pacific day by default, below the 102 Google accepted on 2026-10-30. */
 const UAMSWP_FAD_GBP_DEFAULT_CREATE_BUDGET = 80;
 
@@ -547,6 +553,9 @@ function uamswp_fad_gbp_after_run(UAMSWP_FAD_GBP_Sync $sync, array $entries, ?in
         $count = get_option(UAMSWP_FAD_GBP_COUNT_OPTION, []);
         $before = is_array($count) && ($count['day'] ?? '') === $day ? (int) ($count['count'] ?? 0) : 0;
         update_option(UAMSWP_FAD_GBP_COUNT_OPTION, ['day' => $day, 'count' => $before + $made], false);
+
+        $history = get_option(UAMSWP_FAD_GBP_HISTORY_OPTION, []);
+        update_option(UAMSWP_FAD_GBP_HISTORY_OPTION, UAMSWP_FAD_GBP_Logic::add_to_history(is_array($history) ? $history : [], $day, $made), false);
     }
 
     if ($sync->creates_paused_until() > (int) get_option(UAMSWP_FAD_GBP_PAUSE_OPTION, 0)) {
@@ -649,7 +658,13 @@ function uamswp_fad_gbp_schedule_retry(int $post_id): void
     set_transient($key, $attempt, DAY_IN_SECONDS);
 
     if (wp_next_scheduled(UAMSWP_FAD_GBP_SYNC_HOOK, [$post_id]) === false) {
-        wp_schedule_single_event(time() + uamswp_fad_gbp_retry_delay($attempt), UAMSWP_FAD_GBP_SYNC_HOOK, [$post_id]);
+        $until = time() + uamswp_fad_gbp_retry_delay($attempt);
+        wp_schedule_single_event($until, UAMSWP_FAD_GBP_SYNC_HOOK, [$post_id]);
+
+        // The dashboard shows the latest backoff in force.
+        if ($until > (int) get_option(UAMSWP_FAD_GBP_BACKOFF_OPTION, 0)) {
+            update_option(UAMSWP_FAD_GBP_BACKOFF_OPTION, $until, false);
+        }
     }
 }
 

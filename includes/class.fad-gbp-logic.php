@@ -453,6 +453,174 @@ class UAMSWP_FAD_GBP_Logic
     }
 
     /**
+     * Add a run's creates to the per-day history, keeping the most recent days.
+     *
+     * @param  array<mixed>  $history  Pacific day (`Y-m-d`) to creates made that day.
+     * @return array<string, int>
+     */
+    public static function add_to_history(array $history, string $day, int $made, int $keep = 14): array
+    {
+        $clean = [];
+
+        foreach ($history as $key => $count) {
+            if (is_string($key) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $key) === 1 && is_numeric($count)) {
+                $clean[$key] = max(0, (int) $count);
+            }
+        }
+
+        $clean[$day] = ($clean[$day] ?? 0) + max(0, $made);
+        ksort($clean);
+
+        return array_slice($clean, -max(1, $keep), null, true);
+    }
+
+    /**
+     * The creates made on each of the last Pacific days, oldest first and ending today.
+     *
+     * A day with no record is 0, so the list always has $days entries.
+     *
+     * @param  array<mixed>  $history  From self::add_to_history().
+     * @return array<int, array{day: string, count: int}>
+     */
+    public static function last_days(array $history, int $now, int $days = 7): array
+    {
+        $zone = new DateTimeZone('America/Los_Angeles');
+        $today = (new DateTimeImmutable('@'.$now))->setTimezone($zone)->setTime(12, 0);
+        $out = [];
+
+        for ($back = $days - 1; $back >= 0; $back--) {
+            $day = $today->modify('-'.$back.' days')->format('Y-m-d');
+            $out[] = ['day' => $day, 'count' => (int) ($history[$day] ?? 0)];
+        }
+
+        return $out;
+    }
+
+    /**
+     * What the sync is doing, as one status for the dashboard.
+     *
+     * The first that applies wins: no silo in use is Off; missing credentials is Not configured; a run holding the lock is Running; a pause on
+     * creates is Paused; a per-minute backoff is Backed off; every silo in use being a dry run is
+     * Dry run; anything else is Idle.
+     *
+     * @param  array<string, string>  $effective_modes  Each silo's effective mode.
+     * @param  bool  $configured  Whether the Google credentials are present. Without them a queued job does nothing.
+     * @return array{key: string, label: string}
+     */
+    public static function dashboard_status(array $effective_modes, bool $running, int $paused_until, int $backoff_until, int $now, bool $configured = true): array
+    {
+        $in_use = array_values(array_diff(array_values($effective_modes), ['off']));
+
+        if ($in_use === []) {
+            return ['key' => 'off', 'label' => 'Off'];
+        }
+
+        if (! $configured) {
+            return ['key' => 'unconfigured', 'label' => 'Not configured: the Google credentials are missing, so queued syncs do nothing'];
+        }
+
+        if ($running) {
+            return ['key' => 'running', 'label' => 'Running'];
+        }
+
+        if ($paused_until > $now) {
+            return ['key' => 'paused', 'label' => 'Creates paused until '.self::reset_label($paused_until).' (resets at Pacific midnight), '.self::remaining_label($paused_until - $now).' left'];
+        }
+
+        if ($backoff_until > $now) {
+            return ['key' => 'backoff', 'label' => 'Backed off until '.self::reset_label($backoff_until).' (rate limit), '.self::remaining_label($backoff_until - $now).' left'];
+        }
+
+        if (array_diff($in_use, ['dry-run']) === []) {
+            return ['key' => 'dry-run', 'label' => 'Dry run'];
+        }
+
+        return ['key' => 'idle', 'label' => 'Idle'];
+    }
+
+    /**
+     * A span of seconds written for a person: `2 h 5 min`, `45 min` or `under 1 min`.
+     */
+    public static function remaining_label(int $seconds): string
+    {
+        $minutes = intdiv(max(0, $seconds), 60);
+
+        if ($minutes < 1) {
+            return 'under 1 min';
+        }
+
+        $hours = intdiv($minutes, 60);
+
+        return $hours > 0 ? $hours.' h '.($minutes % 60).' min' : $minutes.' min';
+    }
+
+    /**
+     * Sort the scheduled sync events into due now, waiting for the create reset, and the next 24 hours.
+     *
+     * An event at or after a pause's end, while the pause is in force, is waiting for the reset; one
+     * before it, or any event when nothing is paused, is due now if its time has passed.
+     *
+     * @param  array<int, int>  $times  The scheduled time of each event.
+     * @return array{total: int, due: int, waiting: int, hours: array<int, int>} `hours[0]` is the next hour.
+     */
+    public static function queue_summary(array $times, int $now, int $paused_until): array
+    {
+        $summary = ['total' => 0, 'due' => 0, 'waiting' => 0, 'hours' => array_fill(0, 24, 0)];
+
+        foreach ($times as $time) {
+            $summary['total']++;
+
+            if ($paused_until > $now && $time >= $paused_until) {
+                $summary['waiting']++;
+
+                continue;
+            }
+
+            if ($time <= $now) {
+                $summary['due']++;
+
+                continue;
+            }
+
+            $hour = intdiv($time - $now, 3600);
+
+            if ($hour < 24) {
+                $summary['hours'][$hour]++;
+            }
+        }
+
+        return $summary;
+    }
+
+    /**
+     * Count the log entries from the last 24 hours by outcome.
+     *
+     * A create or update counts only when it was carried out (`Created` or `Updated`); a dry run does not.
+     *
+     * @param  array<int, array<string, mixed>>  $log
+     * @return array{create: int, update: int, review: int, error: int}
+     */
+    public static function outcome_counts(array $log, int $now): array
+    {
+        $counts = ['create' => 0, 'update' => 0, 'review' => 0, 'error' => 0];
+
+        foreach ($log as $entry) {
+            if ((int) ($entry['time'] ?? 0) < $now - 86400) {
+                continue;
+            }
+
+            $action = (string) ($entry['action'] ?? '');
+            $reason = (string) ($entry['reason'] ?? '');
+
+            if (($action === 'create' && $reason === 'Created') || ($action === 'update' && $reason === 'Updated') || $action === 'review' || $action === 'error') {
+                $counts[$action]++;
+            }
+        }
+
+        return $counts;
+    }
+
+    /**
      * Whether a run's outcome can be remembered as final for its fingerprint.
      *
      * A listing that matched, a skip decided from the items alone, and a write that succeeded

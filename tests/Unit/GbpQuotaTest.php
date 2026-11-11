@@ -281,6 +281,20 @@ final class GbpQuotaTest extends UnitTestCase
         $this->assertSame(['day' => '2026-11-03', 'count' => 2], $this->options[UAMSWP_FAD_GBP_COUNT_OPTION]);
     }
 
+    public function test_each_run_adds_its_creates_to_the_day_in_the_history_the_dashboard_reads(): void
+    {
+        $morning = $this->utc('2026-11-03 17:00:00');
+        $evening = $this->utc('2026-11-04 06:00:00'); // still 2026-11-03 in Los Angeles
+        $next_day = $this->utc('2026-11-04 17:00:00');
+
+        uamswp_fad_gbp_after_run($this->quotaSync(['now' => $morning], 2, false), [], $morning);
+        uamswp_fad_gbp_after_run($this->quotaSync(['now' => $evening], 3, false), [], $evening);
+        uamswp_fad_gbp_after_run($this->quotaSync(['now' => $next_day], 4, false), [], $next_day);
+        uamswp_fad_gbp_after_run($this->quotaSync(['now' => $next_day], 0, false), [], $next_day);
+
+        $this->assertSame(['2026-11-03' => 5, '2026-11-04' => 4], $this->options[UAMSWP_FAD_GBP_HISTORY_OPTION], 'a run that made no creates adds nothing');
+    }
+
     public function test_a_daily_refusal_in_other_words_is_still_daily(): void
     {
         foreach (["limit 'Create Location requests per day'", 'RequestsPerDay exceeded', 'Quota exceeded for limit per-day', 'The daily quota is exhausted'] as $message) {
