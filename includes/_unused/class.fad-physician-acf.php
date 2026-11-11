@@ -1477,6 +1477,9 @@ add_action('rwmb_enqueue_scripts', function (): void {
 });
 
 add_action('acf/save_post', 'physician_save_post', 5);
+/**
+ * @param  mixed  $post_id
+ */
 function physician_save_post($post_id): void
 {
 
@@ -1518,6 +1521,9 @@ function physician_save_post($post_id): void
 
 }
 
+/**
+ * @param  mixed  $post_id
+ */
 function physician_update_post_excerpt($post_id): void
 {
 

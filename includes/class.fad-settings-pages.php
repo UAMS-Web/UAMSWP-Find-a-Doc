@@ -100,6 +100,13 @@ add_action('acf/init', 'my_acf_google_key');
 
 // The MyChart options are written into script and iframe URLs on public location pages; accept only a hostname and a path segment.
 
+/**
+ * @param  mixed  $valid
+ * @param  mixed  $value
+ * @param  mixed  $field
+ * @param  mixed  $input
+ * @return mixed
+ */
 function uamswp_fad_validate_mychart_domain($valid, $value, $field, $input)
 {
     if ($valid !== true) {
@@ -116,6 +123,13 @@ function uamswp_fad_validate_mychart_domain($valid, $value, $field, $input)
 
 add_filter('acf/validate_value/name=mychart_scheduling_domain', 'uamswp_fad_validate_mychart_domain', 10, 4);
 
+/**
+ * @param  mixed  $valid
+ * @param  mixed  $value
+ * @param  mixed  $field
+ * @param  mixed  $input
+ * @return mixed
+ */
 function uamswp_fad_validate_mychart_instance($valid, $value, $field, $input)
 {
     if ($valid !== true) {

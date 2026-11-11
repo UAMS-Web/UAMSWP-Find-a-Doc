@@ -60,6 +60,9 @@ function uams_fad_cta_button_anchor($link, string $text, string $description, st
  * Editor placeholder for a newly inserted, still-empty ACF block (ACF Blocks V3
  * always render a preview). Returns true after printing the placeholder.
  * Returns false outside block previews ($block / $is_preview not set).
+ *
+ * @param  mixed  $block
+ * @param  mixed  $is_preview
  */
 function uams_fad_block_placeholder($block = null, $is_preview = false): bool
 {

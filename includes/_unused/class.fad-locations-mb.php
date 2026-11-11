@@ -107,6 +107,10 @@ if ($wpdb->get_var("SHOW TABLES LIKE '{$wpdb->prefix}uams_locations'") != "{$wpd
 
 add_filter('rwmb_meta_boxes', 'uams_locations_register_meta_boxes');
 
+/**
+ * @param  mixed  $meta_boxes
+ * @return mixed
+ */
 function uams_locations_register_meta_boxes($meta_boxes)
 {
 

@@ -22,6 +22,7 @@ class UAMSWP_FAD_GBP_Logic
      * @param  mixed  $brand_query  The `schema_brandorg_query` value. '1' replaces the default brand.
      * @param  mixed  $brand_org  The `schema_brandorg` value, a `brand_organization` term slug.
      * @param  array<string, array>  $silos  Silo definitions keyed by silo name, each with a `brand` slug or null.
+     * @param  array<mixed>  $silos
      * @return string|null The silo name, or null when the brand has no silo (default-deny).
      */
     public static function resolve_silo($brand_query, $brand_org, array $silos): null|int|string
@@ -136,9 +137,9 @@ class UAMSWP_FAD_GBP_Logic
      *
      * Column numbers match the shared table builders (0 store code through 17 description).
      *
-     * @param  array  $row  A row from uamswp_fad_gmb_provider_table() or the location builder.
+     * @param  array<mixed>  $row  A row from uamswp_fad_gmb_provider_table() or the location builder.
      * @param  array<string,string>  $category_ids  Category display name => `categories/gcid:...` resource name.
-     * @return array The desired fields. A field with no value in the row is left out.
+     * @return array<mixed> The desired fields. A field with no value in the row is left out.
      */
     public static function fields_from_row(array $row, array $category_ids): array
     {
@@ -255,9 +256,9 @@ class UAMSWP_FAD_GBP_Logic
      * Values are compared after normalization (phone digits only, coordinates to five places,
      * categories by resource name), so formatting differences do not count as changes.
      *
-     * @param  array  $desired  Fields from self::fields_from_row().
-     * @param  array  $live  The live listing as the API returns it.
-     * @return array The subset of $desired that differs. Empty when nothing needs writing.
+     * @param  array<mixed>  $desired  Fields from self::fields_from_row().
+     * @param  array<mixed>  $live  The live listing as the API returns it.
+     * @return array<mixed> The subset of $desired that differs. Empty when nothing needs writing.
      */
     public static function changed_fields(array $desired, array $live): array
     {
@@ -284,7 +285,7 @@ class UAMSWP_FAD_GBP_Logic
     /**
      * The `updateMask` for a set of changed fields.
      *
-     * @param  array  $changed  Fields from self::changed_fields().
+     * @param  array<mixed>  $changed  Fields from self::changed_fields().
      * @return string Comma-separated field names, restricted to the fields the sync owns.
      */
     public static function update_mask(array $changed): string
@@ -371,7 +372,7 @@ class UAMSWP_FAD_GBP_Logic
      * Column 20 holds the other photos' addresses joined by commas. A photo with no address is left out. A provider's
      * column 20 is not photos, so a provider row is read without them.
      *
-     * @param  array  $row  A row from uamswp_fad_gmb_provider_table() or the location builder.
+     * @param  array<mixed>  $row  A row from uamswp_fad_gmb_provider_table() or the location builder.
      * @return array<int, array{category: string, url: string}>
      */
     public static function photos_from_row(array $row, bool $with_others = true): array

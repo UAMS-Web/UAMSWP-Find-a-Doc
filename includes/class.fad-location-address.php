@@ -24,7 +24,7 @@ declare(strict_types=1);
  *
  * @param  bool  $has_building  Whether the location has a building other than the '_none' term.
  * @param  string  $building_name  Name of the building. Read only when $has_building is true.
- * @param  array|false  $floor  The floor field object, or a falsy value when there is none.
+ * @param  array<string, mixed>|false  $floor  The floor field object, or a falsy value when there is none.
  * @param  mixed  $floor_value  The selected floor value ('' when there is none).
  * @param  string  $floor_label  The label of the selected floor ('' when there is none).
  * @param  string|false  $suite  The suite text, or a falsy value when there is none.
@@ -57,7 +57,7 @@ function uamswp_location_address_2(
  *
  * @param  bool  $has_building  Whether the location has a building other than the '_none' term.
  * @param  string  $building_name  Name of the building. Read only when $has_building is true.
- * @param  array|false  $floor  The floor field object, or a falsy value when there is none.
+ * @param  array<string, mixed>|false  $floor  The floor field object, or a falsy value when there is none.
  * @param  mixed  $floor_value  The selected floor value ('' when there is none).
  * @param  string  $floor_label  The label of the selected floor ('' when there is none).
  * @param  string|false  $suite  The suite text, or a falsy value when there is none.

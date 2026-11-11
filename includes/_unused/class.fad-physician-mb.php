@@ -77,6 +77,10 @@ if ($wpdb->get_var("SHOW TABLES LIKE '{$wpdb->prefix}uams_physicians'") != "{$wp
 
 add_filter('rwmb_meta_boxes', 'uams_physicians_register_meta_boxes');
 
+/**
+ * @param  mixed  $meta_boxes
+ * @return mixed
+ */
 function uams_physicians_register_meta_boxes($meta_boxes)
 {
 

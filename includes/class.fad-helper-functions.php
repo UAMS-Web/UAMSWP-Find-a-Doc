@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 // AP Style for Dates
 if (! function_exists('apStyleDate')) {
+    /**
+     * @param  mixed  $date
+     */
     function apStyleDate($date): string
     {
 
@@ -28,6 +31,13 @@ if (! function_exists('apStyleDate')) {
  * @return string
  */
 if (! function_exists('ap_date')) {
+    /**
+     * @param  mixed  $date
+     * @param  mixed  $today
+     * @param  mixed  $captoday
+     * @param  mixed  $useyear
+     * @param  mixed  $useweekdaynames
+     */
     function ap_date($date, $today = true, $captoday = true, $useyear = true, $useweekdaynames = true): string
     {
 
@@ -96,6 +106,10 @@ if (! function_exists('ap_date')) {
  * @return string
  */
 if (! function_exists('ap_time')) {
+    /**
+     * @param  mixed  $time
+     * @param  mixed  $capnoon
+     */
     function ap_time($time, $capnoon = true): string
     {
 
@@ -145,6 +159,10 @@ if (! function_exists('ap_time')) {
  * @return string
  */
 if (! function_exists('ap_time_span')) {
+    /**
+     * @param  mixed  $start
+     * @param  mixed  $end
+     */
     function ap_time_span($start, $end): string
     {
 
@@ -160,6 +178,9 @@ if (! function_exists('ap_time_span')) {
 }
 
 if (! function_exists('isDate')) {
+    /**
+     * @param  mixed  $value
+     */
     function isDate($value): bool
     {
         if (! $value) {
@@ -176,6 +197,10 @@ if (! function_exists('isDate')) {
 }
 
 if (! function_exists('apStyleTime')) {
+    /**
+     * @param  mixed  $time
+     * @param  mixed  $capnoon
+     */
     function apStyleTime($time, $capnoon = true): string
     {
 
@@ -218,6 +243,8 @@ if (! function_exists('apStyleTime')) {
 // Partition / Split Col function
 if (! function_exists('partition')) {
     /**
+     * @param  mixed  $list
+     * @param  mixed  $p
      * @return mixed[][]
      */
     function partition($list, $p): array
@@ -307,7 +334,7 @@ if (! function_exists('partition')) {
  * Pass in a taxonomy value that is supported by WP's `get_taxonomy`
  * and you will get back the url to the archive view.
  *
- * @param  $taxonomy  string|int
+ * @param  string|int  $taxonomy
  */
 function get_taxonomy_archive_link($taxonomy): string
 {
@@ -325,6 +352,10 @@ function get_taxonomy_archive_link($taxonomy): string
 // add_filter( 'genesis_single_crumb', 'uamswp_add_blog_crumb', 10, 2 );
 // add_filter( 'genesis_archive_crumb', 'uamswp_add_blog_crumb', 10, 2 );
 // add_filter('seopress_pro_breadcrumbs_crumbs', 'uamswp_fad_taxonomy_breadcrumbs_crumbs');
+/**
+ * @param  mixed  $crumbs
+ * @return mixed
+ */
 function uamswp_fad_taxonomy_breadcrumbs_crumbs($crumbs)
 {
     if (is_singular('condition') || is_singular('treatment') || is_tax('condition') || is_tax('treatment')) {
@@ -336,6 +367,12 @@ function uamswp_fad_taxonomy_breadcrumbs_crumbs($crumbs)
 }
 
 // Query custom table values
+/**
+ * @param  mixed  $table_name
+ * @param  mixed  $field_name
+ * @param  mixed  $query_values
+ * @return mixed
+ */
 function uamswp_custom_table_query($table_name, $field_name, $query_values)
 {
     // Declare the global wpdb variable
@@ -419,8 +456,8 @@ if (! function_exists('uamswp_provider_names')) {
 
     /**
      * @param  int  $provider_id  Provider post ID.
-     * @return array prefix ("Dr." for an M.D. or D.O., otherwise empty), short, medium, medium_no_prefix, full,
-     *               short_possessive, sort, sort_param, and _attr variants.
+     * @return array<mixed> prefix ("Dr." for an M.D. or D.O., otherwise empty), short, medium, medium_no_prefix, full,
+     *                      short_possessive, sort, sort_param, and _attr variants.
      */
     function uamswp_provider_names($provider_id): array
     {
@@ -670,7 +707,7 @@ if (! function_exists('uamswp_provider_pronouns')) {
      * build prose should branch on the 'plural' key for verb agreement.
      *
      * @param  int  $provider_id  Provider post ID.
-     * @return array subject, object, possessive, possessive_pronoun, reflexive, plural.
+     * @return array<mixed> subject, object, possessive, possessive_pronoun, reflexive, plural.
      */
     function uamswp_provider_pronouns($provider_id): array
     {
@@ -862,7 +899,7 @@ if (! function_exists('uamswp_spotlight_default_questions')) {
      * reorder, edit, add, or remove rows afterwards. This list is expected to
      * grow, so it lives in one place and is filterable.
      *
-     * @return array List of question strings.
+     * @return array<mixed> List of question strings.
      */
     function uamswp_spotlight_default_questions()
     {

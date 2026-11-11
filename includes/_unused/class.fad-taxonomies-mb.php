@@ -11,6 +11,10 @@ declare(strict_types=1);
 global $wpdb;
 add_filter('rwmb_meta_boxes', 'uams_taxonomies_register_meta_boxes');
 
+/**
+ * @param  mixed  $meta_boxes
+ * @return mixed
+ */
 function uams_taxonomies_register_meta_boxes($meta_boxes)
 {
 
