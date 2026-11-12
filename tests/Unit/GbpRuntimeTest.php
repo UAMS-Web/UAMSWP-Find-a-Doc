@@ -261,6 +261,9 @@ final class GbpRuntimeTest extends UnitTestCase
         $row[0] = 'parent_child';
         $row[1] = 'Child Clinic';
         $row[15] = 'Medical Clinic';
+        // Load the real builder first, so the stub below is a redefinition the test undoes rather than a function that outlives it.
+        require_once __DIR__.'/../Support/gmb-page.php';
+        \uamswp_test_gmb_page();
         Functions\when('uamswp_fad_gmb_location_table')->alias(function (array $ids) use ($row) {
             return ['head' => [], 'body' => $ids === [55] ? [$row, []] : []];
         });
