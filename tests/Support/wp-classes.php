@@ -70,7 +70,8 @@ if (! class_exists('WP_Query')) {
 
         public function the_post(): void
         {
-            self::$current = (int) $this->posts[$this->index];
+            $post = $this->posts[$this->index];
+            self::$current = is_object($post) ? (int) $post->ID : (int) $post;
             $this->index++;
         }
     }
