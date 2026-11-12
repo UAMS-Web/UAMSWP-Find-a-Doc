@@ -11,6 +11,14 @@
  *      $treatment_heading_related_name
  *      $treatment_disclaimer = 'true', 'false'
  */
+
+/**
+ * Set by the file that includes this partial, which runs in that file's scope (#1232).
+ *
+ * @var WP_Query $treatments_cpt_query
+ * @var string $treatment_context
+ * @var string $treatment_heading_related_name
+ */
 $treatment_heading = 'Medical Treatments and Procedures';
 $treatment_disclaimer = false;
 $treatment_disclaimer_text = 'UAMS Health providers perform and prescribe a broad range of treatments and procedures, some of which may not be listed below.';

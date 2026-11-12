@@ -3,6 +3,13 @@
  *  Template Name: Appointments loop / text block
  *  Designed for UAMS Find-a-Doc
  */
+
+/**
+ * Set by the file that includes this partial, which runs in that file's scope (#1232).
+ *
+ * @var mixed $locations From `get_field()`.
+ * @var bool $location_valid
+ */
 if ($locations && $location_valid) {
     $appointment_location_url = '#locations';
     // $appointment_location_label = 'Go to the list of relevant locations';

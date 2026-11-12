@@ -13,6 +13,13 @@
  *          )
  */
 
+/**
+ * Set by the file that includes this partial, which runs in that file's scope (#1232).
+ *
+ * @var mixed $phone_output_id From `get_the_ID()`, or one item of a `get_field()` list.
+ * @var 'location_profile'|'associated_locations' $phone_output
+ */
+
 // Check if this is an Arkansas Children's location
 $location_ac_query = get_field('location_ac_query', $phone_output_id);
 

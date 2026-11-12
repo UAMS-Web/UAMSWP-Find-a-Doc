@@ -9,6 +9,12 @@
  *  Optional var:
  *      $resource_page = 'single' or 'archive' (default to 'single')
  */
+
+/**
+ * Set by the file that includes this partial, which runs in that file's scope (#1232).
+ *
+ * @var int|false $id From `get_the_ID()`.
+ */
 $resource_page = (isset($resource_page) && ! empty($resource_page)) ? $resource_page : 'single';
 
 // Cards and lists prefer the optional Short Title, falling back to the full

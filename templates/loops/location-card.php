@@ -7,6 +7,12 @@
  *  Required var: $id
  */
 
+/**
+ * Set by the file that includes this partial, which runs in that file's scope (#1232).
+ *
+ * @var mixed $id From `get_the_ID()`, or one item of a `get_field()` list.
+ */
+
 // Reset variables
 $featured_image = '';
 

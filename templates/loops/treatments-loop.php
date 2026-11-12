@@ -6,6 +6,12 @@
  *  Must be used inside a loop
  *  Required var: $treatments
  */
+
+/**
+ * Set by the file that includes this partial, which runs in that file's scope (#1232).
+ *
+ * @var WP_Term_Query $treatments_query
+ */
 ?>
 <section class="uams-module conditions-treatments bg-auto" id="treatments">
     <div class="container-fluid">

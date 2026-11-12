@@ -3,11 +3,27 @@
  *  Template Name: Appointments loop / text block on provider profiles
  *  Designed for UAMS Find-a-Doc
  */
+
+/**
+ * Set by the file that includes this partial, which runs in that file's scope (#1232).
+ *
+ * @var mixed $accept_new From `get_field()`.
+ * @var mixed $refer_req From `get_field()`.
+ * @var mixed $physician_portal From `get_field()`.
+ * @var int $appointment_block_instance
+ * @var int $location_count
+ * @var bool $location_valid
+ * @var string $primary_appointment_title
+ * @var string|false $primary_appointment_url
+ * @var string $short_name
+ */
 $appointment_show_main_line_sys = get_field('provider_mainline', 'option');
 
 $appointment_phone_name = 'the UAMS&nbsp;Health appointment line'; // default (UAMS)
 $appointment_phone = '5016868000'; // default (UAMS)
 $show_portal = false;
+$portal_name = '';
+$portal_name_attr = '';
 // Portal
 if ($physician_portal) {
     $portal = get_term($physician_portal, 'portal');
