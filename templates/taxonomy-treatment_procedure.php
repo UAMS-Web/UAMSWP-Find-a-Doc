@@ -24,34 +24,8 @@ if (
     $syndication = false;
 }
 
-function uamswp_keyword_hook_header_taxonomy_treatment_procedure(): void
-{
-    $keyword_text = '';
-    if ($keywords) {
-        $i = 1;
-        foreach ($keywords as $keyword) {
-            if ($i > 1) {
-                $keyword_text .= ', ';
-            }
-            $keyword_text .= str_replace(',', '', $keyword['text']);
-            $i++;
-        }
-        echo '<meta name="keywords" content="'.$keyword_text.'" />';
-    }
-}
 add_action('wp_head', 'uamswp_keyword_hook_header_taxonomy_treatment_procedure');
 
-// Override theme's method of defining the page title
-function uamswp_fad_title_taxonomy_treatment_procedure($html): string
-{
-    // global $treatment_title;
-    // you can add here all your conditions as if is_page(), is_category() etc..
-    if (strlen(single_cat_title('', false)) < 21) {
-        return single_cat_title('', false).' | Treatments & Procedures | '.get_bloginfo('name');
-    }
-
-    return single_cat_title('', false).' | '.get_bloginfo('name');
-}
 add_filter('seopress_titles_title', 'uamswp_fad_title_taxonomy_treatment_procedure', 15, 2);
 
 if (empty($excerpt)) {

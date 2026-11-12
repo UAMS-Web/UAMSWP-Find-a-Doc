@@ -141,3 +141,96 @@ function uamswp_keyword_hook_header(): void
         echo '<meta name="keywords" content="'.$keyword_text.'" />';
     }
 }
+
+/**
+ * The text of an ACF field as a trimmed excerpt, for the provider archive cards.
+ *
+ * @param  string  $title  The ACF field name.
+ * @return mixed The excerpt after the `the_excerpt` filters.
+ */
+function custom_field_excerpt($title)
+{
+    global $post;
+    /** @var string $text */
+    $text = get_field($title);
+    if ($text != '') {
+        $text = strip_shortcodes($text);
+        $text = uamswp_fad_str(apply_filters('the_content', $text));
+        $text = str_replace(']]>', ']]>', $text);
+        $excerpt_length = 35; // 35 words
+        $excerpt_more = uamswp_fad_str(apply_filters('excerpt_more', ' '.'[...]'));
+        $text = wp_trim_words($text, $excerpt_length, $excerpt_more);
+    }
+
+    return apply_filters('the_excerpt', $text);
+}
+
+/**
+ * The excerpt length the provider archive uses, in words.
+ *
+ * @param  int  $length  The length WordPress would use; not used.
+ */
+function wpdocs_custom_excerpt_length($length): int
+{
+    return 35; // 35 words
+}
+
+/**
+ * Replace the last breadcrumb of a provider page with the provider's name.
+ *
+ * @param  string  $crumb  The breadcrumb Genesis built.
+ * @param  array<string, mixed>  $args  The breadcrumb arguments.
+ */
+function be_remove_title_from_single_crumb($crumb, $args): string // Because BE is the man
+{
+    /** @var string $full_name */
+    global $full_name;
+
+    // Genesis outputs the filtered crumb as raw HTML, so escape the provider
+    // name (a plain-text ACF field, not kses-filtered).
+    return substr($crumb, 0, (int) strrpos($crumb, (string) uamswp_fad_str($args['sep']))).uamswp_fad_str($args['sep']).uamswp_provider_name_html($full_name);
+}
+
+/**
+ * Replace the last SEOPress breadcrumb of a provider page with the provider's name and permalink.
+ *
+ * @param  array<int, mixed>  $crumbs  The breadcrumbs SEOPress built.
+ * @return array<int, mixed>
+ */
+// SEOPress Breadcrumbs Fix
+function sp_change_title_from_provider_crumb($crumbs) // SEOPress
+{
+    /** @var string $full_name */
+    global $full_name;
+    array_pop($crumbs);
+    $provider_name = [$full_name, get_permalink()];
+    $crumbs[] = $provider_name;
+
+    return $crumbs;
+}
+
+/**
+ * Print the meta keywords tag for the treatment procedure taxonomy template.
+ *
+ * Kept as it was: the function never reads the `$keywords` global, so it prints nothing (#1266).
+ */
+function uamswp_keyword_hook_header_taxonomy_treatment_procedure(): void
+{
+    $keyword_text = '';
+    // @phpstan-ignore variable.undefined (kept as it was; the function never reads the $keywords global, see #1266)
+    if ($keywords) {
+        $i = 1;
+        // @phpstan-ignore variable.undefined, foreach.nonIterable (same: $keywords is never set in this function, see #1266)
+        foreach ($keywords as $keyword) {
+            if ($i > 1) {
+                $keyword_text .= ', ';
+            }
+
+            // @phpstan-ignore offsetAccess.nonOffsetAccessible, argument.type (same: $keyword comes from the never-set $keywords, see #1266)
+            $keyword_text .= str_replace(',', '', $keyword['text']);
+            $i++;
+        }
+
+        echo '<meta name="keywords" content="'.$keyword_text.'" />';
+    }
+}

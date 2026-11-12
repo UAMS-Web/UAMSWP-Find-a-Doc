@@ -1,13 +1,5 @@
 <?php
 
-// Override theme's method of defining the page title
-function uamswp_fad_title_archive_physicians($html): string
-{
-    // you can add here all your conditions as if is_page(), is_category() etc..
-    $html = 'Providers | '.get_bloginfo('name');
-
-    return $html;
-}
 // add_filter('seopress_titles_title', 'uamswp_fad_title_archive_physicians', 15, 2);
 
 // Region Cookie
@@ -20,25 +12,6 @@ if (isset($_COOKIE['wp_filter_region']) && ! isset($_GET['_provider_region'])) {
 }
 get_header();
 
-function custom_field_excerpt($title)
-{
-    global $post;
-    $text = get_field($title);
-    if ($text != '') {
-        $text = strip_shortcodes($text);
-        $text = apply_filters('the_content', $text);
-        $text = str_replace(']]>', ']]>', $text);
-        $excerpt_length = 35; // 35 words
-        $excerpt_more = apply_filters('excerpt_more', ' '.'[...]');
-        $text = wp_trim_words($text, $excerpt_length, $excerpt_more);
-    }
-
-    return apply_filters('the_excerpt', $text);
-}
-function wpdocs_custom_excerpt_length($length): int
-{
-    return 35; // 35 words
-}
 add_filter('excerpt_length', 'wpdocs_custom_excerpt_length', 999);
 
 add_filter('facetwp_template_use_archive', '__return_true');

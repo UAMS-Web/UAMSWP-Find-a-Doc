@@ -268,6 +268,7 @@ test('each listing template shows its images with a function named for the templ
 test('the treatment procedure keywords function keeps its own name and its registration', function (): void {
     $source = template_sources()['taxonomy-treatment_procedure'];
 
-    expect(preg_match('/^function uamswp_keyword_hook_header_taxonomy_treatment_procedure\(\): void/m', $source))->toBe(1)
+    expect(function_exists('uamswp_keyword_hook_header_taxonomy_treatment_procedure'))->toBeTrue()
+        ->and(preg_match('/^function uamswp_keyword_hook_header_taxonomy_treatment_procedure\(/m', $source))->toBe(0)
         ->and(substr_count($source, "add_action('wp_head', 'uamswp_keyword_hook_header_taxonomy_treatment_procedure');"))->toBe(1);
 });
