@@ -297,10 +297,11 @@ test('the fallback description names a health care provider when there is no tit
         ->and($vars['provider_occupation_title_indef_article'])->toBe('a');
 });
 
-test('a provider with no clinical title raises an uninitialized string offset warning', function (): void {
+test('a provider with no clinical title raises no warning and takes the article a', function (): void {
     $vars = single_physician(['physician_title' => null, 'physician_short_clinical_bio' => 'Bio.']);
 
-    expect($vars['single_physician_warnings'])->toContain('Uninitialized string offset 0');
+    expect($vars['single_physician_warnings'])->toBe([])
+        ->and($vars['provider_occupation_title_indef_article'])->toBe('a');
 });
 
 test('the fallback description is cut at the limit', function (): void {
@@ -321,15 +322,22 @@ test('the template overrides the theme titles and breadcrumbs', function (): voi
     ]);
 });
 
-test('a provider with no bio and no published location raises an undefined variable warning in the fallback description', function (): void {
+test('a provider with no bio and no published location raises no warning and the description leaves out the location', function (): void {
     $vars = single_physician(['physician_first_name' => 'Ann', 'physician_last_name' => 'Adams']);
 
-    expect($vars['single_physician_warnings'])->toContain('Undefined variable $primary_appointment_title_attr');
+    expect($vars['single_physician_warnings'])->toBe([])
+        ->and($vars['excerpt'])->toBe('Ann Adams is a cardiologist employed by UAMS Health.');
 });
 
 test('a provider with a bio or a published location raises no warning', function (): void {
-    expect(single_physician(['physician_short_clinical_bio' => 'Bio.'])['single_physician_warnings'])->not->toContain('Undefined variable $primary_appointment_title_attr')
-        ->and(single_physician(['physician_locations' => [21]], ['status' => [21 => 'publish']])['single_physician_warnings'])->not->toContain('Undefined variable $primary_appointment_title_attr');
+    expect(single_physician(['physician_short_clinical_bio' => 'Bio.'])['single_physician_warnings'])->toBe([])
+        ->and(single_physician(['physician_locations' => [21]], ['status' => [21 => 'publish']])['single_physician_warnings'])->not->toContain('Undefined variable $primary_appointment_title_attr', 'Undefined variable $location_schema', 'Uninitialized string offset 0');
+});
+
+test('the primary location block prints no map comment', function (): void {
+    $vars = single_physician(['physician_locations' => [21]], ['status' => [21 => 'publish']]);
+
+    expect($vars['single_physician_output'])->not->toContain('google.com/maps/dir');
 });
 
 test('the page classes name each part of the profile that has content', function (array $fields, array $options, string $classes): void {
