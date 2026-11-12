@@ -17,6 +17,9 @@ use Brain\Monkey\Functions;
 use PHPUnit\Framework\Attributes\DataProvider;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
 
+use function Brain\Monkey\Functions\expect;
+use function Brain\Monkey\Functions\when;
+
 require_once __DIR__.'/../Support/acf-functions.php';
 require_once __DIR__.'/../Support/functions-file.php';
 require_once __DIR__.'/../Support/wp-classes.php';
@@ -39,17 +42,17 @@ final class FunctionsFiltersTest extends UnitTestCase
         \WP_Query::$queries = [];
         \WP_Query::$current = 0;
 
-        Functions\when('esc_attr')->returnArg();
-        Functions\when('esc_html')->returnArg();
-        Functions\when('esc_url')->returnArg();
-        Functions\when('wp_kses_post')->returnArg();
-        Functions\when('wp_unslash')->returnArg();
-        Functions\when('sanitize_text_field')->returnArg();
-        Functions\when('absint')->alias(static fn (mixed $value): int => abs((int) (is_scalar($value) ? $value : 0)));
-        Functions\when('is_wp_error')->alias(static fn (mixed $thing): bool => $thing instanceof \WP_Error);
-        Functions\when('wp_json_encode')->alias(static fn (mixed $value): string|false => json_encode($value));
-        Functions\when('shortcode_atts')->alias(static fn (array $defaults, array $atts): array => array_merge($defaults, $atts));
-        Functions\when('get_the_ID')->alias(static fn (): int => \WP_Query::$current);
+        when('esc_attr')->returnArg();
+        when('esc_html')->returnArg();
+        when('esc_url')->returnArg();
+        when('wp_kses_post')->returnArg();
+        when('wp_unslash')->returnArg();
+        when('sanitize_text_field')->returnArg();
+        when('absint')->alias(static fn (mixed $value): int => abs((int) (is_scalar($value) ? $value : 0)));
+        when('is_wp_error')->alias(static fn (mixed $thing): bool => $thing instanceof \WP_Error);
+        when('wp_json_encode')->alias(static fn (mixed $value): string|false => json_encode($value));
+        when('shortcode_atts')->alias(static fn (array $defaults, array $atts): array => array_merge($defaults, $atts));
+        when('get_the_ID')->alias(static fn (): int => \WP_Query::$current);
     }
 
     protected function tearDown(): void
@@ -104,7 +107,7 @@ final class FunctionsFiltersTest extends UnitTestCase
     public function test_the_load_more_callback_queries_the_published_providers_by_id(): void
     {
         $_POST = ['page' => '1', 'postid' => '4,5'];
-        Functions\expect('wp_die')->once();
+        expect('wp_die')->once();
 
         \uamswp_load_by_ajax_callback();
 
@@ -121,7 +124,7 @@ final class FunctionsFiltersTest extends UnitTestCase
     public function test_the_load_more_callback_without_ids_asks_for_an_empty_id(): void
     {
         $_POST = ['page' => '1'];
-        Functions\expect('wp_die')->once();
+        expect('wp_die')->once();
 
         \uamswp_load_by_ajax_callback();
 
@@ -137,13 +140,13 @@ final class FunctionsFiltersTest extends UnitTestCase
     private function medline(array $transients, string $body = ''): \ArrayObject
     {
         $urls = new \ArrayObject;
-        Functions\when('get_transient')->alias(static fn (string $key): mixed => $transients[$key] ?? false);
-        Functions\when('wp_remote_get')->alias(static function (string $url) use ($urls, $body): array {
+        when('get_transient')->alias(static fn (string $key): mixed => $transients[$key] ?? false);
+        when('wp_remote_get')->alias(static function (string $url) use ($urls, $body): array {
             $urls[] = $url;
 
             return ['body' => $body];
         });
-        Functions\when('wp_remote_retrieve_body')->alias(static fn (array $response): string => $response['body']);
+        when('wp_remote_retrieve_body')->alias(static fn (array $response): string => $response['body']);
 
         return $urls;
     }
@@ -165,7 +168,7 @@ final class FunctionsFiltersTest extends UnitTestCase
     public function test_the_feed_url_follows_the_code_type(string $type, string $url): void
     {
         $urls = $this->medline([], '{}');
-        Functions\when('set_transient')->justReturn(true);
+        when('set_transient')->justReturn(true);
 
         \get_medline_api_data('A00', $type);
 
@@ -175,7 +178,7 @@ final class FunctionsFiltersTest extends UnitTestCase
     public function test_the_feed_wrapper_is_stripped_and_the_decoded_feed_is_kept_for_a_day(): void
     {
         $this->medline([], 'None({"feed":{"n":1}});');
-        Functions\expect('set_transient')->once()->with('medline-api-icd-A00', \Mockery::on(static fn (mixed $json): bool => $json instanceof \stdClass && $json->feed->n === 1), 86400);
+        expect('set_transient')->once()->with('medline-api-icd-A00', \Mockery::on(static fn (mixed $json): bool => $json instanceof \stdClass && $json->feed->n === 1), 86400);
 
         $json = \get_medline_api_data('A00', 'icd');
 
@@ -185,7 +188,7 @@ final class FunctionsFiltersTest extends UnitTestCase
     public function test_a_feed_that_is_not_json_is_kept_as_null(): void
     {
         $this->medline([], 'not json');
-        Functions\expect('set_transient')->once()->with('medline-api-icd-A00', null, 86400);
+        expect('set_transient')->once()->with('medline-api-icd-A00', null, 86400);
 
         $this->assertNull(\get_medline_api_data('A00', 'icd'));
     }
@@ -193,7 +196,7 @@ final class FunctionsFiltersTest extends UnitTestCase
     public function test_a_kept_feed_is_returned_without_a_request(): void
     {
         $urls = $this->medline(['medline-api-icd-A00' => 'kept']);
-        Functions\expect('set_transient')->never();
+        expect('set_transient')->never();
 
         $this->assertSame('kept', \get_medline_api_data('A00', 'icd'));
         $this->assertSame([], $urls->getArrayCopy());
@@ -202,7 +205,7 @@ final class FunctionsFiltersTest extends UnitTestCase
     public function test_an_empty_kept_feed_is_fetched_again(): void
     {
         $urls = $this->medline(['medline-api-icd-A00' => []], '{"a":1}');
-        Functions\when('set_transient')->justReturn(true);
+        when('set_transient')->justReturn(true);
 
         $this->assertEquals((object) ['a' => 1], \get_medline_api_data('A00', 'icd'));
         $this->assertCount(1, $urls);
@@ -293,10 +296,10 @@ final class FunctionsFiltersTest extends UnitTestCase
      */
     private function providers(array $status, array $fields, array $titleTerms = [], array $termFields = [], array|\WP_Error $regions = []): void
     {
-        Functions\when('get_post_status')->alias(static fn (int $id): string => $status[$id] ?? 'draft');
-        Functions\when('get_field')->alias(static fn (string $field, mixed $id = null): mixed => is_object($id) ? ($termFields[$field] ?? '') : ($fields[$id.':'.$field] ?? ''));
-        Functions\when('get_term')->alias(static fn (int $id, string $taxonomy): ?object => $titleTerms[$id] ?? null);
-        Functions\when('get_terms')->justReturn($regions);
+        when('get_post_status')->alias(static fn (int $id): string => $status[$id] ?? 'draft');
+        when('get_field')->alias(static fn (string $field, mixed $id = null): mixed => is_object($id) ? ($termFields[$field] ?? '') : ($fields[$id.':'.$field] ?? ''));
+        when('get_term')->alias(static fn (int $id, string $taxonomy): ?object => $titleTerms[$id] ?? null);
+        when('get_terms')->justReturn($regions);
     }
 
     /**
@@ -461,10 +464,10 @@ final class FunctionsFiltersTest extends UnitTestCase
      */
     private function callbackStubs(array $fields, array $terms = [], bool $die = true): void
     {
-        Functions\when('get_field')->alias(static fn (string $field, mixed $id = null): mixed => $fields[$field.':'.$id] ?? '');
-        Functions\when('get_term_by')->alias(static fn (string $by, mixed $id, string $taxonomy): object|false => $terms[$id] ?? false);
+        when('get_field')->alias(static fn (string $field, mixed $id = null): mixed => $fields[$field.':'.$id] ?? '');
+        when('get_term_by')->alias(static fn (string $by, mixed $id, string $taxonomy): object|false => $terms[$id] ?? false);
         if ($die) {
-            Functions\when('wp_die')->justReturn(null);
+            when('wp_die')->justReturn();
         }
     }
 
@@ -511,7 +514,7 @@ final class FunctionsFiltersTest extends UnitTestCase
     public function test_the_provider_callback_with_nothing_posted_prints_the_empty_result(): void
     {
         $this->callbackStubs([], [], false);
-        Functions\expect('wp_die')->once();
+        expect('wp_die')->once();
         $this->expectOutputString(
             '<span class="no-results">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>'
             .'<data id="provider_ids" data-postids="" data-regions="," data-titles=","></data>'
@@ -536,7 +539,7 @@ final class FunctionsFiltersTest extends UnitTestCase
     public function test_the_title_callback_builds_its_query_from_the_title(): void
     {
         $_POST = ['provider_title' => '7', 'providers' => '1,2'];
-        Functions\expect('wp_die')->once();
+        expect('wp_die')->once();
         $this->expectOutputString('<span class="no-results">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>');
 
         \provider_title_ajax_filter_callback();
@@ -555,7 +558,7 @@ final class FunctionsFiltersTest extends UnitTestCase
 
     public function test_the_title_callback_with_nothing_posted_filters_nothing(): void
     {
-        Functions\when('wp_die')->justReturn(null);
+        when('wp_die')->justReturn();
         $this->expectOutputRegex('/no-results/');
 
         \provider_title_ajax_filter_callback();
@@ -573,9 +576,9 @@ final class FunctionsFiltersTest extends UnitTestCase
      */
     private function locations(array $status, array $fields, array|\WP_Error $regions): void
     {
-        Functions\when('get_post_status')->alias(static fn (int $id): string => $status[$id] ?? 'draft');
-        Functions\when('get_field')->alias(static fn (string $field, mixed $id = null): mixed => $fields[$id.':'.$field] ?? '');
-        Functions\when('get_terms')->justReturn($regions);
+        when('get_post_status')->alias(static fn (int $id): string => $status[$id] ?? 'draft');
+        when('get_field')->alias(static fn (string $field, mixed $id = null): mixed => $fields[$id.':'.$field] ?? '');
+        when('get_terms')->justReturn($regions);
     }
 
     /**
@@ -642,9 +645,10 @@ final class FunctionsFiltersTest extends UnitTestCase
     {
         $_POST = ['location_region' => 'north', 'locations' => '1,2'];
         \WP_Query::$queue = [[1, 2], []];
-        Functions\when('get_field')->alias(static fn (string $field, mixed $id = null): mixed => $id === 1 ? 10 : 11);
-        Functions\when('get_term_by')->alias(static fn (string $by, mixed $id, string $taxonomy): object|false => (string) $id === '10' ? (object) ['slug' => 'north'] : false);
-        Functions\expect('wp_die')->once();
+        when('get_field')->alias(static fn (string $field, mixed $id = null): mixed => $id === 1 ? 10 : 11);
+        when('get_term_by')->alias(static fn (string $by, mixed $id, string $taxonomy): object|false => (string) $id === '10' ? (object) ['slug' => 'north'] : false);
+
+        expect('wp_die')->once();
         $this->expectOutputString('<span class="no-results">Sorry, there are no locations matching your filter criteria. Please adjust your filter options or reset the filters.</span>');
 
         \location_ajax_filter_callback();
@@ -658,7 +662,7 @@ final class FunctionsFiltersTest extends UnitTestCase
 
     public function test_the_location_callback_prefers_the_cookie_and_with_nothing_posted_filters_nothing(): void
     {
-        Functions\when('wp_die')->justReturn(null);
+        when('wp_die')->justReturn();
         $this->expectOutputRegex('/no-results/');
         $_COOKIE = ['wp_filter_region' => 'south'];
 
@@ -680,8 +684,9 @@ final class FunctionsFiltersTest extends UnitTestCase
     {
         $term = new \WP_Term;
         $term->slug = 'north';
-        Functions\when('is_page')->justReturn(true);
-        Functions\when('get_field')->justReturn($term);
+
+        when('is_page')->justReturn(true);
+        when('get_field')->justReturn($term);
         $this->expectOutputRegex('#<script type="text/javascript">\s*// Set cookie to expire at end of session\s*document\.cookie = "wp_filter_region=north; path=/; domain="\+window\.location\.hostname;\s*</script>#');
 
         \uamswp_add_trench();
@@ -689,8 +694,9 @@ final class FunctionsFiltersTest extends UnitTestCase
 
     public function test_the_query_string_region_is_escaped_into_the_cookie_script(): void
     {
-        Functions\when('is_page')->justReturn(true);
-        Functions\when('get_field')->justReturn(false);
+        when('is_page')->justReturn(true);
+        when('get_field')->justReturn(false);
+
         $_GET = ['_filter_region' => 'a"b'];
         $this->expectOutputRegex('/wp_filter_region=a&quot;b; path=\//');
 
@@ -699,8 +705,9 @@ final class FunctionsFiltersTest extends UnitTestCase
 
     public function test_a_region_that_is_not_a_term_falls_back_to_the_query_string(): void
     {
-        Functions\when('is_page')->justReturn(true);
-        Functions\when('get_field')->justReturn(5);
+        when('is_page')->justReturn(true);
+        when('get_field')->justReturn(5);
+
         $_GET = ['_filter_region' => 'east'];
         $this->expectOutputRegex('/wp_filter_region=east; path=\//');
 
@@ -709,8 +716,8 @@ final class FunctionsFiltersTest extends UnitTestCase
 
     public function test_a_region_that_is_not_a_term_and_no_query_string_sets_an_empty_cookie(): void
     {
-        Functions\when('is_page')->justReturn(true);
-        Functions\when('get_field')->justReturn(5);
+        when('is_page')->justReturn(true);
+        when('get_field')->justReturn(5);
         $this->expectOutputRegex('/wp_filter_region=; path=\//');
 
         \uamswp_add_trench();
@@ -718,14 +725,14 @@ final class FunctionsFiltersTest extends UnitTestCase
 
     public function test_nothing_is_printed_without_a_region_or_off_a_page(): void
     {
-        Functions\when('is_page')->justReturn(true);
-        Functions\when('get_field')->justReturn(false);
+        when('is_page')->justReturn(true);
+        when('get_field')->justReturn(false);
         $this->expectOutputString('');
 
         \uamswp_add_trench();
 
         $_GET = ['_filter_region' => 'east'];
-        Functions\when('is_page')->justReturn(false);
+        when('is_page')->justReturn(false);
         \uamswp_add_trench();
     }
 
@@ -737,12 +744,13 @@ final class FunctionsFiltersTest extends UnitTestCase
     private function scheduleStubs(array $fields, string $type = 'location', string $status = 'publish', bool $referer = true): void
     {
         if ($referer) {
-            Functions\when('check_ajax_referer')->justReturn(1);
+            when('check_ajax_referer')->justReturn(1);
         }
-        Functions\when('get_post_type')->justReturn($type);
-        Functions\when('get_post_status')->justReturn($status);
-        Functions\when('get_field')->alias(static fn (string $field, mixed $id = null): mixed => $fields[$id.':'.$field] ?? '');
-        Functions\when('wp_send_json_error')->alias(static function (string $message, int $status): never {
+
+        when('get_post_type')->justReturn($type);
+        when('get_post_status')->justReturn($status);
+        when('get_field')->alias(static fn (string $field, mixed $id = null): mixed => $fields[$id.':'.$field] ?? '');
+        when('wp_send_json_error')->alias(static function (string $message, int $status): never {
             throw new \RuntimeException($message.'|'.$status);
         });
     }
@@ -752,8 +760,8 @@ final class FunctionsFiltersTest extends UnitTestCase
         try {
             \schedule_ajax_filter_callback();
             $this->fail('the callback answered');
-        } catch (\RuntimeException $exception) {
-            $this->assertSame('not found|404', $exception->getMessage());
+        } catch (\RuntimeException $runtimeException) {
+            $this->assertSame('not found|404', $runtimeException->getMessage());
         }
     }
 
@@ -761,8 +769,8 @@ final class FunctionsFiltersTest extends UnitTestCase
     {
         $_POST = ['pid' => '12', 'schedule_options' => '0'];
         $this->scheduleStubs(['12:location_scheduling_options' => [['location_scheduling_ser' => 'S']]], 'location', 'publish', false);
-        Functions\expect('check_ajax_referer')->once()->with('load_more_posts', 'security')->andReturn(1);
-        Functions\when('wp_die')->justReturn(null);
+        expect('check_ajax_referer')->once()->with('load_more_posts', 'security')->andReturn(1);
+        when('wp_die')->justReturn();
         $this->expectOutputRegex('/EmbeddedSchedule/');
 
         \schedule_ajax_filter_callback();
@@ -796,7 +804,7 @@ final class FunctionsFiltersTest extends UnitTestCase
     {
         $_POST = $post;
         $this->scheduleStubs($fields, $type, $status);
-        Functions\expect('wp_die')->never();
+        expect('wp_die')->never();
 
         $this->assertScheduleError();
     }
@@ -817,7 +825,7 @@ final class FunctionsFiltersTest extends UnitTestCase
             'option:mychart_scheduling_instance' => 'MyChart',
             'option:mychart_scheduling_linksource' => 'partner',
         ]);
-        Functions\expect('wp_die')->once();
+        expect('wp_die')->once();
         ob_start();
 
         \schedule_ajax_filter_callback();
@@ -839,7 +847,7 @@ final class FunctionsFiltersTest extends UnitTestCase
             'option:mychart_scheduling_domain' => 'mychart.example.org',
             'option:mychart_scheduling_instance' => 'MyChart',
         ]);
-        Functions\when('wp_die')->justReturn(null);
+        when('wp_die')->justReturn();
         ob_start();
 
         \schedule_ajax_filter_callback();
@@ -873,9 +881,9 @@ final class FunctionsFiltersTest extends UnitTestCase
     #[DataProvider('archives')]
     public function test_the_search_scripts_are_removed_everywhere_but_the_search_archives(array $archives, bool $removed): void
     {
-        Functions\when('is_post_type_archive')->alias(static fn (string $type): bool => in_array($type, $archives, true));
+        when('is_post_type_archive')->alias(static fn (string $type): bool => in_array($type, $archives, true));
         $dequeued = [];
-        Functions\when('wp_dequeue_script')->alias(static function (string $handle) use (&$dequeued): void {
+        when('wp_dequeue_script')->alias(static function (string $handle) use (&$dequeued): void {
             $dequeued[] = $handle;
         });
 
@@ -932,15 +940,15 @@ final class FunctionsFiltersTest extends UnitTestCase
      */
     private function sourceStubs(array $fields, array $posts = [], int $current = 0): void
     {
-        Functions\when('get_the_ID')->justReturn($current);
-        Functions\when('get_field')->alias(static fn (string $field, mixed $id = null): mixed => $fields[$id.':'.$field] ?? false);
-        Functions\when('get_post')->alias(static fn (int $id): ?\WP_Post => $posts[$id] ?? null);
+        when('get_the_ID')->justReturn($current);
+        when('get_field')->alias(static fn (string $field, mixed $id = null): mixed => $fields[$id.':'.$field] ?? false);
+        when('get_post')->alias(static fn (int $id): ?\WP_Post => $posts[$id] ?? null);
     }
 
     public function test_no_location_means_zero_everywhere(): void
     {
         $this->sourceStubs([]);
-        Functions\expect('get_field')->never();
+        expect('get_field')->never();
 
         $this->assertSame(
             ['self' => 0, 'parent' => 0, 'street' => 0, 'facility' => 0, 'unit' => 0, 'map' => 0, 'parking' => 0, 'directions' => 0],
@@ -1033,7 +1041,7 @@ final class FunctionsFiltersTest extends UnitTestCase
     public function test_a_parent_given_as_a_post_object_is_used_without_a_lookup(): void
     {
         $this->sourceStubs(['9151:location_parent' => true, '9151:location_parent_id' => $this->location(9150)]);
-        Functions\expect('get_post')->never();
+        expect('get_post')->never();
 
         $this->assertSame(9150, \uamswp_fad_location_source_ids(9151)['parent']);
     }
@@ -1062,6 +1070,7 @@ final class FunctionsFiltersTest extends UnitTestCase
         foreach ($fields as $field => $value) {
             $keyed[$id.':'.$field] = $value === 'self' ? $id : $value;
         }
+
         $this->sourceStubs($keyed, [$id => $this->location($id)]);
 
         $this->assertSame(
@@ -1075,7 +1084,7 @@ final class FunctionsFiltersTest extends UnitTestCase
         $this->sourceStubs(['9171:location_parent' => true, '9171:location_parent_id' => 9170], [9170 => $this->location(9170)]);
         $first = \uamswp_fad_location_source_ids(9171);
 
-        Functions\when('get_field')->alias(static function (): never {
+        when('get_field')->alias(static function (): never {
             throw new \LogicException('the location was read again');
         });
 

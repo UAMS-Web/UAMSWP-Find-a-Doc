@@ -30,8 +30,6 @@ final class LocationAddressCallSitesTest extends TestCase
         ];
     }
 
-    /**
-     */
     #[DataProvider('callers')]
     public function test_file_calls_the_helper(string $file, string $call): void
     {
@@ -55,7 +53,6 @@ final class LocationAddressCallSitesTest extends TestCase
     /**
      * No file outside the helper tests the floor value inline. The pattern
      * allows a space after the "!", as the settings page spells it.
-     *
      */
     #[DataProvider('allFiles')]
     public function test_file_has_no_inline_floor_test(string $file, string $prefix): void
@@ -76,8 +73,6 @@ final class LocationAddressCallSitesTest extends TestCase
         $source = (string) file_get_contents(\dirname(__DIR__, 2).'/'.$file);
         $lines = preg_split('/\R/', $source) ?: [];
 
-        return implode("\n", array_filter($lines, static function (string $line): bool {
-            return 0 !== strpos(ltrim($line), '//');
-        }));
+        return implode("\n", array_filter($lines, static fn (string $line): bool => ! str_starts_with(ltrim($line), '//')));
     }
 }

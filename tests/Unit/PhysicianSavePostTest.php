@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 use Brain\Monkey\Functions;
 
+use function Brain\Monkey\Functions\when;
+
 require_once __DIR__.'/../Support/acf-functions.php';
 
 /**
@@ -46,7 +48,7 @@ function uamswp_test_run_save(array $acf, string $post_type = 'provider'): array
 {
     uamswp_test_acf_functions();
 
-    Functions\when('get_post_type')->justReturn($post_type);
+    when('get_post_type')->justReturn($post_type);
 
     $_POST = ['acf' => $acf];
 
@@ -61,12 +63,12 @@ beforeEach(function (): void {
     $this->post_backup = $_POST;
 
     // One location with a region and a portal, unless a test says otherwise.
-    Functions\when('get_field')->alias(fn (string $name, $post_id) => match ($name) {
+    when('get_field')->alias(fn (string $name, $post_id) => match ($name) {
         'location_region' => 'Central Arkansas',
         'location_portal' => 'UAMS Health',
         default => null,
     });
-    Functions\when('get_the_title')->alias(fn ($id) => 'Title '.$id);
+    when('get_the_title')->alias(fn ($id) => 'Title '.$id);
 });
 
 afterEach(function (): void {
@@ -79,7 +81,7 @@ test('it is hooked to acf/save_post at priority 5', function (): void {
 
 test('it leaves the data alone when no ACF data was posted', function (): void {
     uamswp_test_acf_functions();
-    Functions\when('get_post_type')->justReturn('provider');
+    when('get_post_type')->justReturn('provider');
     $_POST = ['acf' => []];
 
     physician_save_post(123);
@@ -102,7 +104,7 @@ test('it builds the full name from first and last name', function (): void {
 });
 
 test('it adds the middle name, the pedigree after a non-breaking space entity, and the degrees', function (): void {
-    Functions\when('get_term')->alias(fn ($id, $taxonomy) => (object) ['name' => ['1' => 'M.D.', '2' => 'Ph.D.'][(string) $id]]);
+    when('get_term')->alias(fn ($id, $taxonomy) => (object) ['name' => ['1' => 'M.D.', '2' => 'Ph.D.'][(string) $id]]);
 
     [$acf, $warnings] = uamswp_test_run_save(uamswp_test_save_input([
         'field_physician_middle_name' => 'H.',
@@ -115,7 +117,7 @@ test('it adds the middle name, the pedigree after a non-breaking space entity, a
 });
 
 test('it joins the degree names in posted order and leaves a trailing separator off', function (): void {
-    Functions\when('get_term')->alias(fn ($id, $taxonomy) => (object) ['name' => 'Degree '.$id]);
+    when('get_term')->alias(fn ($id, $taxonomy) => (object) ['name' => 'Degree '.$id]);
 
     [$acf] = uamswp_test_run_save(uamswp_test_save_input(['field_physician_degree' => [3, 1, 2]]));
 
@@ -123,8 +125,8 @@ test('it joins the degree names in posted order and leaves a trailing separator 
 });
 
 test('it skips a degree term that does not exist without a warning and still builds the name', function (mixed $term): void {
-    Functions\when('get_term')->justReturn($term);
-    Functions\when('is_wp_error')->alias(fn ($value): bool => $value instanceof stdClass && isset($value->errors));
+    when('get_term')->justReturn($term);
+    when('is_wp_error')->alias(fn ($value): bool => $value instanceof stdClass && isset($value->errors));
 
     [$acf, $warnings] = uamswp_test_run_save(uamswp_test_save_input(['field_physician_degree' => [9]]));
 
@@ -156,7 +158,7 @@ test('it keeps both separators in the filter list when a group is empty', functi
 });
 
 test('it stores the region of every location and the portal of the first location only', function (): void {
-    Functions\when('get_field')->alias(fn (string $name, $post_id) => match ($name) {
+    when('get_field')->alias(fn (string $name, $post_id) => match ($name) {
         'location_region' => 'Region '.$post_id,
         'location_portal' => 'Portal '.$post_id,
         default => null,
@@ -170,7 +172,7 @@ test('it stores the region of every location and the portal of the first locatio
 });
 
 test('it stores a region once when several locations share it', function (): void {
-    Functions\when('get_field')->alias(fn (string $name, $post_id) => match ($name) {
+    when('get_field')->alias(fn (string $name, $post_id) => match ($name) {
         'location_region' => 65,
         'location_portal' => 'Portal '.$post_id,
         default => null,
@@ -183,7 +185,7 @@ test('it stores a region once when several locations share it', function (): voi
 });
 
 test('it keeps each region once, in first-seen order, when locations repeat and mix regions', function (): void {
-    Functions\when('get_field')->alias(fn (string $name, $post_id) => match ($name) {
+    when('get_field')->alias(fn (string $name, $post_id) => match ($name) {
         'location_region' => [10 => 66, 20 => 65, 30 => 66][$post_id],
         default => null,
     });
@@ -194,7 +196,7 @@ test('it keeps each region once, in first-seen order, when locations repeat and 
 });
 
 test('it skips a location with no region or portal value', function (): void {
-    Functions\when('get_field')->alias(fn (string $name, $post_id) => $post_id === 20 ? 'Value '.$post_id : null);
+    when('get_field')->alias(fn (string $name, $post_id) => $post_id === 20 ? 'Value '.$post_id : null);
 
     [$acf] = uamswp_test_run_save(uamswp_test_save_input(['field_physician_locations' => [10, 20]]));
 
@@ -203,7 +205,7 @@ test('it skips a location with no region or portal value', function (): void {
 });
 
 test('it raises no warning and stores null for the portal when no location has one', function (): void {
-    Functions\when('get_field')->alias(fn (string $name, $post_id) => $name === 'location_region' ? 'Central Arkansas' : null);
+    when('get_field')->alias(fn (string $name, $post_id) => $name === 'location_region' ? 'Central Arkansas' : null);
 
     [$acf, $warnings] = uamswp_test_run_save(uamswp_test_save_input());
 

@@ -20,10 +20,9 @@ final class GbpSyncTest extends UnitTestCase
     ];
 
     /** @var array<int, array<string, mixed>> */
-    private $log = [];
+    private array $log = [];
 
-    /** @var object */
-    private $client;
+    private object $client;
 
     protected function setUp(): void
     {
@@ -581,9 +580,7 @@ final class GbpSyncTest extends UnitTestCase
 
     private function calls_of(string $kind): array
     {
-        return array_values(array_filter($this->client->calls, function (array $call) use ($kind): bool {
-            return $call[0] === $kind;
-        }));
+        return array_values(array_filter($this->client->calls, fn (array $call): bool => $call[0] === $kind));
     }
 
     public function test_only_the_attributes_that_differ_are_written_when_the_fields_already_match(): void

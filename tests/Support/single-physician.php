@@ -69,7 +69,7 @@ function single_physician(array $fields = [], array $options = []): array
         $row->name = $name;
         $row->cursor[$name] ??= -1;
 
-        if ($row->cursor[$name] + 1 < count($rows[$name] ?? [])) {
+        if (count($rows[$name] ?? []) > $row->cursor[$name] + 1) {
             return true;
         }
 
@@ -94,13 +94,13 @@ function single_physician(array $fields = [], array $options = []): array
     when('lyte_parse')->alias(static fn (string $url): string => 'lyte:'.$url);
     when('do_shortcode')->alias(static fn (string $code): string => 'shortcode:'.$code);
     when('esc_js')->returnArg();
-    when('wp_reset_postdata')->justReturn(null);
+    when('wp_reset_postdata')->justReturn();
     // Other tests define these functions for the rest of the process, so they are always defined here to keep the branches the same in any order.
     when('bis_get_attachment_image')->justReturn('');
-    when('lyte_preparse')->justReturn(null);
+    when('lyte_preparse')->justReturn();
     when('image_sizer')->alias(static fn (mixed $id, int $width, int $height): string => 'https://example.test/photo-'.$width.'x'.$height.'.jpg');
-    when('get_header')->justReturn(null);
-    when('get_footer')->justReturn(null);
+    when('get_header')->justReturn();
+    when('get_footer')->justReturn();
     uamswp_test_main_loop([5]);
     when('has_post_thumbnail')->justReturn($options['thumbnail'] ?? false);
     when('get_post_thumbnail_id')->justReturn(77);

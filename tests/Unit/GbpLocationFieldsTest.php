@@ -46,7 +46,8 @@ final class GbpLocationFieldsTest extends UnitTestCase
         foreach (['type', 'choices', 'default_value', 'layout', 'return_format', 'required'] as $property) {
             $this->assertSame($location[$property], $providers[$property], $property);
         }
-        $this->assertSame('0', $providers['default_value'], 'existing locations must keep today\'s behavior');
+
+        $this->assertSame('0', $providers['default_value'], "existing locations must keep today's behavior");
     }
 
     public function test_the_provider_exclusion_field_sits_right_after_the_location_one(): void

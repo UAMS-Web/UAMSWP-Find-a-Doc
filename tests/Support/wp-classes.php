@@ -5,6 +5,10 @@
  *
  * WordPress is not loaded in the unit process, so each class is declared here with only the properties the
  * code under test reads. A class is declared only when it does not exist yet.
+ *
+ * The properties carry no native type, as in WordPress, and their types live in the docblocks. Rector reads
+ * these classes for every file it analyzes, `includes/` and `templates/` too, so a native type here would be
+ * read as WordPress' own and could rewrite production code from it.
  */
 
 declare(strict_types=1);
@@ -12,16 +16,19 @@ declare(strict_types=1);
 if (! class_exists('WP_Post')) {
     class WP_Post
     {
-        public int $ID = 0;
+        /** @var int */
+        public $ID = 0;
     }
 }
 
 if (! class_exists('WP_Term')) {
     class WP_Term
     {
-        public int $term_id = 0;
+        /** @var int */
+        public $term_id = 0;
 
-        public string $slug = '';
+        /** @var string */
+        public $slug = '';
     }
 }
 
@@ -29,9 +36,10 @@ if (! class_exists('WP_Taxonomy')) {
     class WP_Taxonomy
     {
         /** @var array<string, mixed>|false */
-        public array|false $rewrite = false;
+        public $rewrite = false;
 
-        public object $labels;
+        /** @var object */
+        public $labels;
     }
 }
 
@@ -39,7 +47,7 @@ if (! class_exists('WP_Query')) {
     class WP_Query
     {
         /** @var array<int, mixed> */
-        public array $posts = [];
+        public $posts = [];
 
         /** @var list<array<int, mixed>> The post ids each query built with arguments will find, in order. */
         public static array $queue = [];

@@ -18,6 +18,9 @@ use Mockery;
 use PHPUnit\Framework\Attributes\DataProvider;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
 
+use function Brain\Monkey\Functions\expect;
+use function Brain\Monkey\Functions\when;
+
 require_once __DIR__.'/../Support/acf-functions.php';
 require_once __DIR__.'/../Support/functions-file.php';
 require_once __DIR__.'/../Support/wp-classes.php';
@@ -48,14 +51,14 @@ final class FunctionsTest extends UnitTestCase
         date_default_timezone_set('UTC');
         $this->previous_error_log = (string) ini_get('error_log');
 
-        Functions\when('__')->returnArg();
-        Functions\when('esc_html__')->returnArg();
-        Functions\when('esc_html')->returnArg();
-        Functions\when('esc_attr')->returnArg();
-        Functions\when('wp_unslash')->returnArg();
-        Functions\when('absint')->alias(static fn (mixed $value): int => abs((int) (is_scalar($value) ? $value : 0)));
-        Functions\when('is_wp_error')->alias(static fn (mixed $thing): bool => $thing instanceof \WP_Error);
-        Functions\when('add_query_arg')->alias(static fn (array $args, string $url): string => $url.'?'.http_build_query($args));
+        when('__')->returnArg();
+        when('esc_html__')->returnArg();
+        when('esc_html')->returnArg();
+        when('esc_attr')->returnArg();
+        when('wp_unslash')->returnArg();
+        when('absint')->alias(static fn (mixed $value): int => abs((int) (is_scalar($value) ? $value : 0)));
+        when('is_wp_error')->alias(static fn (mixed $thing): bool => $thing instanceof \WP_Error);
+        when('add_query_arg')->alias(static fn (array $args, string $url): string => $url.'?'.http_build_query($args));
 
         $registered = \uamswp_test_functions_file();
         self::$hooks = $registered['hooks'];
@@ -142,8 +145,8 @@ final class FunctionsTest extends UnitTestCase
         $this->assertCount(1, self::$deactivation);
         $this->assertSame(UAMS_FAD_PATH.'uamswp-find-a-doc.php', self::$deactivation[0][0]);
 
-        Functions\expect('wp_clear_scheduled_hook')->once()->with('uamswp_provider_pg_sync_hook');
-        Functions\expect('delete_transient')->once()->with('uamswp_pg_sync_lock');
+        expect('wp_clear_scheduled_hook')->once()->with('uamswp_provider_pg_sync_hook');
+        expect('delete_transient')->once()->with('uamswp_pg_sync_lock');
 
         $callback = self::$deactivation[0][1];
         $this->assertInstanceOf(\Closure::class, $callback);
@@ -170,11 +173,9 @@ final class FunctionsTest extends UnitTestCase
      */
     private function searchStubs(array $fields, array $types, array $terms = []): void
     {
-        Functions\when('get_post_type')->alias(static fn (int $id): string => $types[$id] ?? 'page');
-        Functions\when('get_field')->alias(static fn (string $field, int $id): mixed => $fields[$id.':'.$field] ?? '');
-        Functions\when('get_term')->alias(static function (int $id, string $taxonomy) use ($terms): ?object {
-            return isset($terms[$id]) ? (object) ['name' => $terms[$id]] : null;
-        });
+        when('get_post_type')->alias(static fn (int $id): string => $types[$id] ?? 'page');
+        when('get_field')->alias(static fn (string $field, int $id): mixed => $fields[$id.':'.$field] ?? '');
+        when('get_term')->alias(static fn (int $id, string $taxonomy): ?object => isset($terms[$id]) ? (object) ['name' => $terms[$id]] : null);
     }
 
     public function test_a_provider_result_shows_the_full_name_with_degrees_and_the_short_bio(): void
@@ -256,7 +257,7 @@ final class FunctionsTest extends UnitTestCase
     {
         $calls = new \ArrayObject;
         foreach (['wp_register_script', 'wp_enqueue_script', 'wp_enqueue_style'] as $function) {
-            Functions\when($function)->alias(static function (string $handle, string $src = '', array $deps = [], mixed $version = null) use ($calls, $function): void {
+            when($function)->alias(static function (string $handle, string $src = '', array $deps = [], mixed $version = null) use ($calls, $function): void {
                 $calls[] = [$function, $handle, $src, $deps, $version];
             });
         }
@@ -324,9 +325,9 @@ final class FunctionsTest extends UnitTestCase
     public function test_the_front_end_scripts_follow_the_page_type(bool $admin, bool $single, bool $archive, ?string $type, array $expected): void
     {
         $calls = $this->recordAssets();
-        Functions\when('is_admin')->justReturn($admin);
-        Functions\when('is_single')->justReturn($single);
-        Functions\when('is_archive')->justReturn($archive);
+        when('is_admin')->justReturn($admin);
+        when('is_single')->justReturn($single);
+        when('is_archive')->justReturn($archive);
         $GLOBALS['post_type'] = $type;
 
         \fad_script_register();
@@ -337,9 +338,9 @@ final class FunctionsTest extends UnitTestCase
     public function test_the_front_end_assets_come_from_the_plugin_with_its_version(): void
     {
         $calls = $this->recordAssets();
-        Functions\when('is_admin')->justReturn(false);
-        Functions\when('is_single')->justReturn(true);
-        Functions\when('is_archive')->justReturn(false);
+        when('is_admin')->justReturn(false);
+        when('is_single')->justReturn(true);
+        when('is_archive')->justReturn(false);
         $GLOBALS['post_type'] = 'location';
 
         \fad_script_register();
@@ -354,8 +355,8 @@ final class FunctionsTest extends UnitTestCase
 
         $calls->exchangeArray([]);
         $GLOBALS['post_type'] = 'provider';
-        Functions\when('is_single')->justReturn(false);
-        Functions\when('is_archive')->justReturn(true);
+        when('is_single')->justReturn(false);
+        when('is_archive')->justReturn(true);
 
         \fad_script_register();
 
@@ -383,12 +384,12 @@ final class FunctionsTest extends UnitTestCase
     {
         $_POST['pmid'] = '22703441abc';
         $requested = [];
-        Functions\when('wp_remote_get')->alias(static function (string $url) use (&$requested): \WP_Error {
+        when('wp_remote_get')->alias(static function (string $url) use (&$requested): \WP_Error {
             $requested[] = $url;
 
             return new \WP_Error('http_request_failed', 'down');
         });
-        Functions\when('wp_remote_retrieve_body')->justReturn('');
+        when('wp_remote_retrieve_body')->justReturn('');
 
         $this->assertFalse((new \pubmed_field_on_change)->load_content_from_pubmed());
         $this->assertSame(['http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&retmode=json&id=22703441'], $requested);
@@ -396,8 +397,8 @@ final class FunctionsTest extends UnitTestCase
 
     public function test_the_pubmed_shortcode_prints_its_list_with_the_terms_and_count(): void
     {
-        Functions\when('shortcode_atts')->alias(static fn (array $defaults, array $atts, string $tag): array => array_merge($defaults, $atts));
-        Functions\expect('wp_enqueue_script')->twice()->with('pubmed-api');
+        when('shortcode_atts')->alias(static fn (array $defaults, array $atts, string $tag): array => array_merge($defaults, $atts));
+        expect('wp_enqueue_script')->twice()->with('pubmed-api');
 
         $this->assertSame(
             '<ul class="pubmed-list" data-terms="Chernoff%20R%5BAuthor%5D" data-count="10"></ul>',
@@ -424,7 +425,7 @@ final class FunctionsTest extends UnitTestCase
 
     public function test_the_headshot_cell_prints_the_thumbnail_at_eighty_pixels(): void
     {
-        Functions\expect('get_the_post_thumbnail')->once()->with(12, [80, 80])->andReturn('<img src="a.jpg">');
+        expect('get_the_post_thumbnail')->once()->with(12, [80, 80])->andReturn('<img src="a.jpg">');
         $this->expectOutputString('<img src="a.jpg">');
 
         \posts_provider_custom_columns('provider_post_thumbs', '12');
@@ -432,7 +433,7 @@ final class FunctionsTest extends UnitTestCase
 
     public function test_other_cells_print_nothing(): void
     {
-        Functions\expect('get_the_post_thumbnail')->never();
+        expect('get_the_post_thumbnail')->never();
         $this->expectOutputString('');
 
         \posts_provider_custom_columns('title', 12);
@@ -453,7 +454,7 @@ final class FunctionsTest extends UnitTestCase
      */
     private function transients(array $transients): void
     {
-        Functions\when('get_transient')->alias(static fn (string $key): mixed => $transients[$key] ?? false);
+        when('get_transient')->alias(static fn (string $key): mixed => $transients[$key] ?? false);
     }
 
     /**
@@ -463,13 +464,13 @@ final class FunctionsTest extends UnitTestCase
     private function responses(array $responses): \ArrayObject
     {
         $requests = new \ArrayObject;
-        Functions\when('wp_remote_get')->alias(static function (string $url, array $args = []) use (&$responses, $requests): mixed {
+        when('wp_remote_get')->alias(static function (string $url, array $args = []) use (&$responses, $requests): mixed {
             $requests[] = [$url, $args];
 
             return array_shift($responses);
         });
-        Functions\when('wp_remote_retrieve_response_code')->alias(static fn (mixed $response): int => (int) $response['code']);
-        Functions\when('wp_remote_retrieve_body')->alias(static fn (mixed $response): string => (string) $response['body']);
+        when('wp_remote_retrieve_response_code')->alias(static fn (mixed $response): int => (int) $response['code']);
+        when('wp_remote_retrieve_body')->alias(static fn (mixed $response): string => (string) $response['body']);
 
         return $requests;
     }
@@ -581,27 +582,27 @@ final class FunctionsTest extends UnitTestCase
 
     public function test_the_sync_is_scheduled_every_two_hours_when_it_is_missing_in_the_admin(): void
     {
-        Functions\when('is_admin')->justReturn(true);
-        Functions\expect('wp_next_scheduled')->once()->with('uamswp_provider_pg_sync_hook')->andReturn(false);
-        Functions\expect('wp_schedule_event')->once()->with(Mockery::type('int'), 'every_two_hours', 'uamswp_provider_pg_sync_hook');
+        when('is_admin')->justReturn(true);
+        expect('wp_next_scheduled')->once()->with('uamswp_provider_pg_sync_hook')->andReturn(false);
+        expect('wp_schedule_event')->once()->with(Mockery::type('int'), 'every_two_hours', 'uamswp_provider_pg_sync_hook');
 
         \uamswp_fad_check_and_schedule_cron();
     }
 
     public function test_a_sync_that_is_already_scheduled_is_left_alone(): void
     {
-        Functions\when('is_admin')->justReturn(true);
-        Functions\expect('wp_next_scheduled')->once()->andReturn(1700000000);
-        Functions\expect('wp_schedule_event')->never();
+        when('is_admin')->justReturn(true);
+        expect('wp_next_scheduled')->once()->andReturn(1700000000);
+        expect('wp_schedule_event')->never();
 
         \uamswp_fad_check_and_schedule_cron();
     }
 
     public function test_the_front_end_never_checks_the_schedule(): void
     {
-        Functions\when('is_admin')->justReturn(false);
-        Functions\expect('wp_next_scheduled')->never();
-        Functions\expect('wp_schedule_event')->never();
+        when('is_admin')->justReturn(false);
+        expect('wp_next_scheduled')->never();
+        expect('wp_schedule_event')->never();
 
         \uamswp_fad_check_and_schedule_cron();
     }
@@ -609,8 +610,8 @@ final class FunctionsTest extends UnitTestCase
     public function test_a_running_sync_blocks_a_second_one(): void
     {
         $this->transients(['uamswp_pg_sync_lock' => 1700000000]);
-        Functions\expect('get_posts')->never();
-        Functions\expect('set_transient')->never();
+        expect('get_posts')->never();
+        expect('set_transient')->never();
 
         \sync_provider_pg_data();
     }
@@ -618,14 +619,14 @@ final class FunctionsTest extends UnitTestCase
     public function test_no_published_providers_means_nothing_to_sync_and_no_lock(): void
     {
         $this->transients([]);
-        Functions\expect('get_posts')->once()->with([
+        expect('get_posts')->once()->with([
             'post_type' => 'provider',
             'post_status' => 'publish',
             'posts_per_page' => -1,
             'fields' => 'ids',
         ])->andReturn([]);
-        Functions\expect('set_transient')->never();
-        Functions\expect('delete_transient')->never();
+        expect('set_transient')->never();
+        expect('delete_transient')->never();
 
         \sync_provider_pg_data();
     }
@@ -633,12 +634,12 @@ final class FunctionsTest extends UnitTestCase
     public function test_a_provider_without_an_npi_is_skipped_and_the_lock_is_set_then_cleared(): void
     {
         $this->transients([]);
-        Functions\when('get_posts')->justReturn([5, 6]);
-        Functions\when('get_field')->alias(static fn (string $field, int $id): mixed => $id === 6 ? '0' : '');
-        Functions\expect('set_transient')->once()->with('uamswp_pg_sync_lock', Mockery::type('int'), 7200);
-        Functions\expect('delete_transient')->once()->with('uamswp_pg_sync_lock');
-        Functions\expect('wp_remote_get')->never();
-        Functions\expect('update_post_meta')->never();
+        when('get_posts')->justReturn([5, 6]);
+        when('get_field')->alias(static fn (string $field, int $id): mixed => $id === 6 ? '0' : '');
+        expect('set_transient')->once()->with('uamswp_pg_sync_lock', Mockery::type('int'), 7200);
+        expect('delete_transient')->once()->with('uamswp_pg_sync_lock');
+        expect('wp_remote_get')->never();
+        expect('update_post_meta')->never();
 
         \sync_provider_pg_data();
     }
@@ -646,12 +647,13 @@ final class FunctionsTest extends UnitTestCase
     public function test_each_provider_with_an_npi_is_fetched_and_its_payload_kept(): void
     {
         $this->transients(['pg_api_token' => 'tok']);
-        Functions\when('get_posts')->justReturn(['5']);
-        Functions\when('get_field')->justReturn('1234567890');
-        Functions\when('set_transient')->justReturn(true);
-        Functions\when('delete_transient')->justReturn(true);
+        when('get_posts')->justReturn(['5']);
+        when('get_field')->justReturn('1234567890');
+        when('set_transient')->justReturn(true);
+        when('delete_transient')->justReturn(true);
+
         $requests = $this->responses([['code' => 200, 'body' => '{"status":{"code":"200"},"n":1}']]);
-        Functions\expect('update_post_meta')->once()->with(5, '_syndicated_api_data', ['status' => ['code' => '200'], 'n' => 1]);
+        expect('update_post_meta')->once()->with(5, '_syndicated_api_data', ['status' => ['code' => '200'], 'n' => 1]);
 
         \sync_provider_pg_data();
 
@@ -664,12 +666,12 @@ final class FunctionsTest extends UnitTestCase
     public function test_an_empty_payload_is_not_stored(): void
     {
         $this->transients(['pg_api_token' => 'tok']);
-        Functions\when('get_posts')->justReturn([5]);
-        Functions\when('get_field')->justReturn('1234567890');
-        Functions\when('set_transient')->justReturn(true);
-        Functions\when('delete_transient')->justReturn(true);
+        when('get_posts')->justReturn([5]);
+        when('get_field')->justReturn('1234567890');
+        when('set_transient')->justReturn(true);
+        when('delete_transient')->justReturn(true);
         $this->responses([['code' => 200, 'body' => '[]']]);
-        Functions\expect('update_post_meta')->never();
+        expect('update_post_meta')->never();
 
         \sync_provider_pg_data();
     }
@@ -680,12 +682,12 @@ final class FunctionsTest extends UnitTestCase
         $this->assertIsString($log);
         ini_set('error_log', $log);
         $this->transients(['pg_api_token' => 'tok']);
-        Functions\when('get_posts')->justReturn([5, 6]);
-        Functions\when('get_field')->justReturn('1234567890');
-        Functions\when('set_transient')->justReturn(true);
-        Functions\when('delete_transient')->justReturn(true);
+        when('get_posts')->justReturn([5, 6]);
+        when('get_field')->justReturn('1234567890');
+        when('set_transient')->justReturn(true);
+        when('delete_transient')->justReturn(true);
         $this->responses([new \WP_Error('http_request_failed', 'down'), ['code' => 200, 'body' => '{"n":2}']]);
-        Functions\expect('update_post_meta')->once()->with(6, '_syndicated_api_data', ['n' => 2]);
+        expect('update_post_meta')->once()->with(6, '_syndicated_api_data', ['n' => 2]);
 
         \sync_provider_pg_data();
 
@@ -699,13 +701,13 @@ final class FunctionsTest extends UnitTestCase
         $this->assertIsString($log);
         ini_set('error_log', $log);
         $this->transients(['pg_api_token' => 'tok']);
-        Functions\when('get_posts')->justReturn([5, 6]);
-        Functions\when('get_field')->justReturn('1234567890');
-        Functions\when('set_transient')->justReturn(true);
+        when('get_posts')->justReturn([5, 6]);
+        when('get_field')->justReturn('1234567890');
+        when('set_transient')->justReturn(true);
         // The sync uses the fetcher's default pause, so the three limited attempts take about six seconds.
         $requests = $this->responses(array_fill(0, 6, ['code' => 429, 'body' => '{}']));
-        Functions\expect('delete_transient')->once()->with('uamswp_pg_sync_lock');
-        Functions\expect('update_post_meta')->never();
+        expect('delete_transient')->once()->with('uamswp_pg_sync_lock');
+        expect('update_post_meta')->never();
 
         \sync_provider_pg_data();
 
@@ -719,7 +721,7 @@ final class FunctionsTest extends UnitTestCase
     public function test_a_cached_token_is_returned_without_asking_for_credentials(): void
     {
         $this->transients(['pg_api_token' => 'cached']);
-        Functions\expect('wp_remote_post')->never();
+        expect('wp_remote_post')->never();
 
         $this->assertSame('cached', \wp_pg_get_token());
     }
@@ -727,7 +729,7 @@ final class FunctionsTest extends UnitTestCase
     public function test_without_both_credentials_no_token_is_requested(): void
     {
         $this->transients([]);
-        Functions\expect('wp_remote_post')->never();
+        expect('wp_remote_post')->never();
 
         $this->assertFalse(\wp_pg_get_token());
 
@@ -745,14 +747,14 @@ final class FunctionsTest extends UnitTestCase
         putenv('UAMSWP_PG_APP_SECRET=the-secret');
         $this->transients([]);
         $posted = [];
-        Functions\when('wp_remote_post')->alias(static function (string $url, array $args) use (&$posted): array {
+        when('wp_remote_post')->alias(static function (string $url, array $args) use (&$posted): array {
             $posted = [$url, $args];
 
             return ['code' => 200, 'body' => '{"accessToken":"abc"}'];
         });
-        Functions\when('wp_remote_retrieve_response_code')->alias(static fn (mixed $response): int => (int) $response['code']);
-        Functions\when('wp_remote_retrieve_body')->alias(static fn (mixed $response): string => (string) $response['body']);
-        Functions\expect('set_transient')->once()->with('pg_api_token', 'abc', 1500);
+        when('wp_remote_retrieve_response_code')->alias(static fn (mixed $response): int => (int) $response['code']);
+        when('wp_remote_retrieve_body')->alias(static fn (mixed $response): string => (string) $response['body']);
+        expect('set_transient')->once()->with('pg_api_token', 'abc', 1500);
 
         $this->assertSame('abc', \wp_pg_get_token());
         $this->assertSame(
@@ -781,10 +783,11 @@ final class FunctionsTest extends UnitTestCase
         putenv('UAMSWP_PG_APP_ID=the-id');
         putenv('UAMSWP_PG_APP_SECRET=the-secret');
         $this->transients([]);
-        Functions\when('wp_remote_post')->justReturn(['code' => $code, 'body' => $body]);
-        Functions\when('wp_remote_retrieve_response_code')->alias(static fn (mixed $response): int => (int) $response['code']);
-        Functions\when('wp_remote_retrieve_body')->alias(static fn (mixed $response): string => (string) $response['body']);
-        Functions\expect('set_transient')->never();
+        when('wp_remote_post')->justReturn(['code' => $code, 'body' => $body]);
+        when('wp_remote_retrieve_response_code')->alias(static fn (mixed $response): int => (int) $response['code']);
+        when('wp_remote_retrieve_body')->alias(static fn (mixed $response): string => (string) $response['body']);
+
+        expect('set_transient')->never();
 
         $this->assertFalse(\wp_pg_get_token());
     }
@@ -796,7 +799,7 @@ final class FunctionsTest extends UnitTestCase
         $this->transients(['pg_api_token' => 'tok']);
         $body = '{"status":{"code":"200"}}';
         $requests = $this->responses([['code' => 200, 'body' => $body]]);
-        Functions\expect('set_transient')->once()->with('pg_123', $body, 900);
+        expect('set_transient')->once()->with('pg_123', $body, 900);
 
         $this->assertSame($body, \wp_pg_cached_api('123'));
         $this->assertSame(
@@ -812,7 +815,7 @@ final class FunctionsTest extends UnitTestCase
     {
         $this->transients([]);
         $requests = $this->responses([['code' => 200, 'body' => '{}']]);
-        Functions\when('set_transient')->justReturn(true);
+        when('set_transient')->justReturn(true);
 
         \wp_pg_cached_api(7, 3);
 
@@ -823,7 +826,7 @@ final class FunctionsTest extends UnitTestCase
     {
         $this->transients([]);
         $this->responses([new \WP_Error('http_request_failed', 'down')]);
-        Functions\expect('set_transient')->never();
+        expect('set_transient')->never();
 
         $this->assertFalse(\wp_pg_cached_api(123));
     }
@@ -847,7 +850,7 @@ final class FunctionsTest extends UnitTestCase
     {
         $this->transients([]);
         $this->responses([$limited]);
-        Functions\expect('set_transient')->never();
+        expect('set_transient')->never();
 
         $this->assertFalse(\wp_pg_cached_api(123));
     }
@@ -856,7 +859,7 @@ final class FunctionsTest extends UnitTestCase
     {
         $cached = ['status' => ['code' => '200']];
         $this->transients(['pg_api_token' => 'tok', 'pg_123' => $cached]);
-        Functions\expect('wp_remote_get')->never();
+        expect('wp_remote_get')->never();
 
         $this->assertSame($cached, \wp_pg_cached_api(123));
     }
@@ -864,7 +867,7 @@ final class FunctionsTest extends UnitTestCase
     public function test_a_cached_string_is_returned_without_a_request(): void
     {
         $this->transients(['pg_api_token' => 'tok', 'pg_123' => '{"cached":true}']);
-        Functions\expect('wp_remote_get')->never();
+        expect('wp_remote_get')->never();
 
         $this->assertSame('{"cached":true}', \wp_pg_cached_api(123));
     }
@@ -873,7 +876,7 @@ final class FunctionsTest extends UnitTestCase
     {
         $this->transients(['pg_api_token' => 'tok', 'pg_123' => ['status' => ['code' => '500']]]);
         $this->responses([['code' => 200, 'body' => '{"fresh":true}']]);
-        Functions\when('set_transient')->justReturn(true);
+        when('set_transient')->justReturn(true);
 
         $this->assertSame('{"fresh":true}', \wp_pg_cached_api(123));
     }
@@ -887,11 +890,11 @@ final class FunctionsTest extends UnitTestCase
     private function pager(array $post = ['post_id' => '12'], string $type = 'provider', string $status = 'publish', mixed $npi = '1234567890'): void
     {
         $_POST = $post;
-        Functions\when('check_ajax_referer')->justReturn(1);
-        Functions\when('get_post_type')->justReturn($type);
-        Functions\when('get_post_status')->justReturn($status);
-        Functions\when('get_field')->justReturn($npi);
-        Functions\when('wp_send_json_error')->alias(static function (string $message, int $status): never {
+        when('check_ajax_referer')->justReturn(1);
+        when('get_post_type')->justReturn($type);
+        when('get_post_status')->justReturn($status);
+        when('get_field')->justReturn($npi);
+        when('wp_send_json_error')->alias(static function (string $message, int $status): never {
             throw new \RuntimeException($message.'|'.$status);
         });
     }
@@ -901,8 +904,8 @@ final class FunctionsTest extends UnitTestCase
         try {
             \pg_ajax_api();
             $this->fail('the pager answered');
-        } catch (\RuntimeException $exception) {
-            $this->assertSame($expected, $exception->getMessage());
+        } catch (\RuntimeException $runtimeException) {
+            $this->assertSame($expected, $runtimeException->getMessage());
         }
     }
 
@@ -927,7 +930,7 @@ final class FunctionsTest extends UnitTestCase
     public function test_an_invalid_request_is_refused_with_400(array $post, string $type, string $status, mixed $npi): void
     {
         $this->pager($post, $type, $status, $npi);
-        Functions\expect('wp_remote_get')->never();
+        expect('wp_remote_get')->never();
 
         $this->assertPagerError('invalid request|400');
     }
@@ -936,7 +939,7 @@ final class FunctionsTest extends UnitTestCase
     {
         $this->pager();
         $this->transients([]);
-        Functions\expect('wp_remote_get')->never();
+        expect('wp_remote_get')->never();
 
         $this->assertPagerError('upstream unavailable|502');
     }
@@ -962,7 +965,7 @@ final class FunctionsTest extends UnitTestCase
         ]]]]]);
         $this->assertIsString($body);
         $requests = $this->responses([['code' => 200, 'body' => $body]]);
-        Functions\expect('wp_die')->once();
+        expect('wp_die')->once();
 
         ob_start();
         \pg_ajax_api();
@@ -1004,7 +1007,7 @@ final class FunctionsTest extends UnitTestCase
         $this->pager($post);
         $this->transients(['pg_api_token' => 'tok']);
         $requests = $this->responses([['code' => 200, 'body' => '{}']]);
-        Functions\when('wp_die')->justReturn(null);
+        when('wp_die')->justReturn();
         $this->expectOutputString('');
 
         \pg_ajax_api();
@@ -1017,7 +1020,7 @@ final class FunctionsTest extends UnitTestCase
         $this->pager();
         $this->transients(['pg_api_token' => 'tok']);
         $this->responses([['code' => 200, 'body' => '{"data":{"entities":[]}}']]);
-        Functions\expect('wp_die')->once();
+        expect('wp_die')->once();
         $this->expectOutputString('');
 
         \pg_ajax_api();
@@ -1037,10 +1040,10 @@ final class FunctionsTest extends UnitTestCase
     {
         $removed = [];
         $added = [];
-        Functions\when('remove_action')->alias(static function (string $hook, string $callback, int $priority) use (&$removed): void {
+        when('remove_action')->alias(static function (string $hook, string $callback, int $priority) use (&$removed): void {
             $removed[] = [$hook, $callback, $priority];
         });
-        Functions\when('add_action')->alias(static function (string $hook, string $callback) use (&$added): void {
+        when('add_action')->alias(static function (string $hook, string $callback) use (&$added): void {
             $added[] = [$hook, $callback];
         });
 
@@ -1052,9 +1055,11 @@ final class FunctionsTest extends UnitTestCase
             foreach (['genesis_taxonomy_archive_options', 'genesis_taxonomy_seo_options', 'genesis_taxonomy_layout_options'] as $callback) {
                 $expected_removed[] = ["{$taxonomy}_edit_form", $callback, 10];
             }
+
             $expected_added[] = ["{$taxonomy}_edit_form", 'remove_description_form'];
             $expected_added[] = ["{$taxonomy}_add_form", 'remove_description_form'];
         }
+
         $this->assertSame($expected_removed, $removed);
         $this->assertSame($expected_added, $added);
     }
@@ -1093,12 +1098,12 @@ final class FunctionsTest extends UnitTestCase
      */
     private function termFields(array $fields): void
     {
-        Functions\when('get_field')->alias(static fn (string $field, string $post_id): mixed => $fields[$post_id.':'.$field] ?? '');
+        when('get_field')->alias(static fn (string $field, string $post_id): mixed => $fields[$post_id.':'.$field] ?? '');
     }
 
     public function test_a_post_is_not_a_term_and_keeps_its_content(): void
     {
-        Functions\expect('get_field')->never();
+        expect('get_field')->never();
 
         $this->assertSame('body', \rlv_tax_excerpt_term_fields('body', new \stdClass));
     }
@@ -1161,16 +1166,16 @@ final class FunctionsTest extends UnitTestCase
     private function ajaxPage(array $singular): \ArrayObject
     {
         $calls = new \ArrayObject;
-        Functions\when('is_singular')->alias(static fn (string $type): bool => in_array($type, $singular, true));
-        Functions\when('admin_url')->alias(static fn (string $path): string => 'https://example.test/wp-admin/'.$path);
-        Functions\when('wp_create_nonce')->alias(static fn (string $action): string => 'nonce:'.$action);
-        Functions\when('wp_register_script')->alias(static function (string $handle, string $src, array $deps, mixed $version, bool $footer) use ($calls): void {
+        when('is_singular')->alias(static fn (string $type): bool => in_array($type, $singular, true));
+        when('admin_url')->alias(static fn (string $path): string => 'https://example.test/wp-admin/'.$path);
+        when('wp_create_nonce')->alias(static fn (string $action): string => 'nonce:'.$action);
+        when('wp_register_script')->alias(static function (string $handle, string $src, array $deps, mixed $version, bool $footer) use ($calls): void {
             $calls[] = ['register', $handle, $src, $deps, $version, $footer];
         });
-        Functions\when('wp_localize_script')->alias(static function (string $handle, string $name, array $data) use ($calls): void {
+        when('wp_localize_script')->alias(static function (string $handle, string $name, array $data) use ($calls): void {
             $calls[] = ['localize', $handle, $name, $data];
         });
-        Functions\when('wp_enqueue_script')->alias(static function (string $handle) use ($calls): void {
+        when('wp_enqueue_script')->alias(static function (string $handle) use ($calls): void {
             $calls[] = ['enqueue', $handle];
         });
 

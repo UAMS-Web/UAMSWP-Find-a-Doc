@@ -8,25 +8,27 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
-use Brain\Monkey\Functions;
 use UAMSWP_FAD_GBP_Client;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
+
+use function Brain\Monkey\Functions\expect;
+use function Brain\Monkey\Functions\when;
 
 final class GbpCliTest extends UnitTestCase
 {
     private const PROVIDER_GROUP = 'accounts/112667655000425532878';
 
     /** @var array<int, array{method: string, url: string}> */
-    private $calls = [];
+    private array $calls = [];
 
     /** @var array<string, mixed> */
     private $transients = [];
 
     /** @var array<int, string> */
-    private $lines = [];
+    private array $lines = [];
 
     /** @var array<int, string> */
-    private $deleted = [];
+    private array $deleted = [];
 
     /**
      * @param  array<string, string>  $modes
@@ -37,35 +39,25 @@ final class GbpCliTest extends UnitTestCase
         $this->transients = [];
         $this->deleted = [];
 
-        Functions\when('get_option')->alias(function (string $name, $default = false) use ($modes) {
-            return $name === 'uamswp_fad_gbp_modes' ? $modes : $default;
-        });
-        Functions\when('apply_filters')->alias(function (string $hook, $value) {
-            return $value;
-        });
-        Functions\when('home_url')->justReturn('https://'.$host);
-        Functions\when('wp_parse_url')->alias('parse_url');
-        Functions\when('get_post_status')->alias(function (int $id) use ($post_types) {
-            return isset($post_types[$id]) ? 'publish' : false;
-        });
-        Functions\when('get_post_type')->alias(function (int $id) use ($post_types) {
-            return $post_types[$id] ?? false;
-        });
-        Functions\when('get_transient')->alias(function (string $key) {
-            return $this->transients[$key] ?? false;
-        });
-        Functions\when('set_transient')->alias(function (string $key, $value): bool {
+        when('get_option')->alias(fn (string $name, $default = false) => $name === 'uamswp_fad_gbp_modes' ? $modes : $default);
+        when('apply_filters')->alias(fn (string $hook, $value) => $value);
+        when('home_url')->justReturn('https://'.$host);
+        when('wp_parse_url')->alias('parse_url');
+        when('get_post_status')->alias(fn (int $id) => isset($post_types[$id]) ? 'publish' : false);
+        when('get_post_type')->alias(fn (int $id) => $post_types[$id] ?? false);
+        when('get_transient')->alias(fn (string $key) => $this->transients[$key] ?? false);
+        when('set_transient')->alias(function (string $key, $value): bool {
             $this->transients[$key] = $value;
 
             return true;
         });
-        Functions\when('delete_transient')->alias(function (string $key): bool {
+        when('delete_transient')->alias(function (string $key): bool {
             $this->deleted[] = $key;
             unset($this->transients[$key]);
 
             return true;
         });
-        Functions\when('update_option')->justReturn(true);
+        when('update_option')->justReturn(true);
 
         // The index and the category map are cached, so a run makes no listing or category call.
         $this->transients['uamswp_fad_gbp_categories'] = [];
@@ -80,9 +72,9 @@ final class GbpCliTest extends UnitTestCase
         $this->calls = [];
 
         return new UAMSWP_FAD_GBP_Client(['client_id' => 'a', 'client_secret' => 'b', 'refresh_token' => 'c'], function (string $method, string $url): array {
-            $this->calls[] = compact('method', 'url');
+            $this->calls[] = ['method' => $method, 'url' => $url];
 
-            return strpos($url, 'oauth2.googleapis.com') !== false
+            return str_contains($url, 'oauth2.googleapis.com')
                 ? [200, json_encode(['access_token' => 't', 'expires_in' => 3600])]
                 : [200, '{}'];
         });
@@ -101,9 +93,7 @@ final class GbpCliTest extends UnitTestCase
      */
     private function itemsFor(array $items): callable
     {
-        return function (int $post_id) use ($items): array {
-            return $items[$post_id] ?? [];
-        };
+        return fn (int $post_id): array => $items[$post_id] ?? [];
     }
 
     private function out(): callable
@@ -117,9 +107,7 @@ final class GbpCliTest extends UnitTestCase
 
     private function writes(): int
     {
-        return count(array_filter($this->calls, function (array $call): bool {
-            return $call['method'] === 'PATCH';
-        }));
+        return count(array_filter($this->calls, fn (array $call): bool => $call['method'] === 'PATCH'));
     }
 
     public function test_a_dry_run_prints_the_decision_and_writes_nothing(): void
@@ -230,9 +218,9 @@ final class GbpCliTest extends UnitTestCase
     public function test_it_never_touches_the_fingerprint(): void
     {
         $this->wordpress(['uams' => 'dry-run']);
-        Functions\expect('get_post_meta')->never();
-        Functions\expect('update_post_meta')->never();
-        Functions\expect('delete_post_meta')->never();
+        expect('get_post_meta')->never();
+        expect('update_post_meta')->never();
+        expect('delete_post_meta')->never();
 
         uamswp_fad_gbp_manual_sync([100], null, false, $this->out(), $this->client(), $this->itemsFor([100 => [$this->item('a_clinic', 'uams')]]));
 
@@ -243,7 +231,7 @@ final class GbpCliTest extends UnitTestCase
     {
         $this->wordpress(['uams' => 'live'], 'uamshealth.com');
         $limited = new UAMSWP_FAD_GBP_Client(['client_id' => 'a', 'client_secret' => 'b', 'refresh_token' => 'c'], function (string $method, string $url): array {
-            if (strpos($url, 'oauth2.googleapis.com') !== false) {
+            if (str_contains($url, 'oauth2.googleapis.com')) {
                 return [200, json_encode(['access_token' => 't', 'expires_in' => 3600])];
             }
 
@@ -262,7 +250,7 @@ final class GbpCliTest extends UnitTestCase
     {
         $this->wordpress(['uams' => 'live'], 'uamshealth.com');
         $until = time() + 7200;
-        Functions\when('get_option')->alias(fn (string $name, $default = false) => match ($name) {
+        when('get_option')->alias(fn (string $name, $default = false) => match ($name) {
             'uamswp_fad_gbp_modes' => ['uams' => 'live'],
             'uamswp_fad_gbp_creates_paused_until' => $until,
             default => $default,
@@ -275,7 +263,7 @@ final class GbpCliTest extends UnitTestCase
         $this->assertStringStartsWith('new_clinic  uams  live  create  Creates paused until', $this->lines[0]);
         $this->assertStringStartsWith('a_clinic  uams  live  update', $this->lines[1]);
         $this->assertSame('Creates were held back and resume '.\UAMSWP_FAD_GBP_Logic::reset_label($until).'. Run again after that.', $this->lines[2]);
-        $this->assertSame(0, count(array_filter($this->calls, fn (array $call): bool => $call['method'] === 'POST' && strpos($call['url'], 'oauth2') === false)), 'no create reached Google');
+        $this->assertSame(0, count(array_filter($this->calls, fn (array $call): bool => $call['method'] === 'POST' && ! str_contains($call['url'], 'oauth2'))), 'no create reached Google');
         $this->assertSame(1, $this->writes(), 'the update after the held create still ran');
     }
 

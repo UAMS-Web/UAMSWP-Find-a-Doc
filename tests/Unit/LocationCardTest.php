@@ -61,7 +61,7 @@ function location_card_world(array $fields, array $options = []): void
     when('esc_attr')->alias(static fn (mixed $text): string => htmlspecialchars((string) $text));
     when('esc_html')->alias(static fn (mixed $text): string => htmlspecialchars((string) $text));
     when('sanitize_title_with_dashes')->alias(static fn (string $text): string => strtolower(str_replace(' ', '-', $text)));
-    when('wp_reset_postdata')->justReturn(null);
+    when('wp_reset_postdata')->justReturn();
     when('format_phone_dash')->alias(static fn (mixed $phone): string => $phone ? 'dash:'.$phone : '');
     when('uamswp_custom_table_query')->alias(static fn (string $table, string $field, mixed $values): array => $fields['__table:'.$field] ?? []);
 
@@ -136,7 +136,7 @@ test('the location card prints its own featured image', function (): void {
 
     expect($output)->not->toContain('[thumbnail');
 
-    $output = (function () use (&$id): string {
+    $output = (function (): string {
         $next = location_card_next_id();
         // The card reads the thumbnail of the id it renders, so the id is allowed in before the render.
         location_card_world(['location_hours_group' => location_card_hours()], ['thumbnails' => [$next + 1], 'titles' => [$next + 1 => 'Clinic A']]);
@@ -351,7 +351,7 @@ test('the location card starts the modified hours at the earlier of the clinic a
     // The same day written two ways is not earlier, so the clinic date is kept.
     $sameDay = location_card(['location_hours_group' => location_card_hours([
         'location_modified_hours' => true, 'location_modified_hours_start_date' => location_card_date('+5 days'),
-        'location_telemed_modified_hours_query' => true, 'location_telemed_modified_hours_start_date' => date('Y-m-d', (int) strtotime('+5 days')),
+        'location_telemed_modified_hours_query' => true, 'location_telemed_modified_hours_start_date' => date('Y-m-d', strtotime('+5 days')),
     ])]);
 
     expect($sameDay)->toContain('beginning on '.location_card_date('+5 days').'.');

@@ -11,10 +11,12 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
-use Brain\Monkey\Filters;
-use Brain\Monkey\Functions;
 use PHPUnit\Framework\Attributes\DataProvider;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
+
+use function Brain\Monkey\Filters\expectApplied;
+use function Brain\Monkey\Functions\expect;
+use function Brain\Monkey\Functions\when;
 
 require_once __DIR__.'/../Support/wp-classes.php';
 
@@ -211,7 +213,7 @@ final class HelperFunctionsTest extends UnitTestCase
     {
         $taxonomy = new \WP_Taxonomy;
         $taxonomy->rewrite = ['slug' => 'conditions'];
-        Functions\expect('get_taxonomy')->once()->with('condition')->andReturn($taxonomy);
+        expect('get_taxonomy')->once()->with('condition')->andReturn($taxonomy);
 
         $this->assertSame('/conditions', \get_taxonomy_archive_link('condition'));
     }
@@ -220,8 +222,9 @@ final class HelperFunctionsTest extends UnitTestCase
     {
         $no_slug = new \WP_Taxonomy;
         $no_slug->rewrite = ['with_front' => true];
+
         $no_rewrite = new \WP_Taxonomy;
-        Functions\expect('get_taxonomy')->times(4)->andReturn($no_slug, $no_rewrite, false, null);
+        expect('get_taxonomy')->times(4)->andReturn($no_slug, $no_rewrite, false, null);
 
         $this->assertSame('/', \get_taxonomy_archive_link('a'));
         $this->assertSame('/', \get_taxonomy_archive_link('b'));
@@ -235,7 +238,7 @@ final class HelperFunctionsTest extends UnitTestCase
     private function conditions(array $true): void
     {
         foreach (['is_singular', 'is_tax'] as $tag) {
-            Functions\when($tag)->alias(static fn (string $type): bool => in_array($tag.':'.$type, $true, true));
+            when($tag)->alias(static fn (string $type): bool => in_array($tag.':'.$type, $true, true));
         }
     }
 
@@ -256,11 +259,11 @@ final class HelperFunctionsTest extends UnitTestCase
     public function test_the_taxonomy_crumb_is_added_before_the_last_crumb(string $view): void
     {
         $this->conditions([$view]);
-        Functions\when('get_queried_object')->justReturn((object) ['taxonomy' => 'condition']);
+        when('get_queried_object')->justReturn((object) ['taxonomy' => 'condition']);
         $taxonomy = new \WP_Taxonomy;
         $taxonomy->labels = (object) ['name' => 'Conditions'];
         $taxonomy->rewrite = ['slug' => 'conditions'];
-        Functions\expect('get_taxonomy')->twice()->with('condition')->andReturn($taxonomy);
+        expect('get_taxonomy')->twice()->with('condition')->andReturn($taxonomy);
 
         $this->assertSame(
             [['Home', '/'], ['Conditions', '/conditions'], ['Asthma', '/asthma']],
@@ -273,7 +276,7 @@ final class HelperFunctionsTest extends UnitTestCase
         $crumbs = [['Home', '/'], ['Page', '/page']];
 
         $this->conditions([]);
-        Functions\expect('get_taxonomy')->never();
+        expect('get_taxonomy')->never();
 
         $this->assertSame($crumbs, \uamswp_fad_taxonomy_breadcrumbs_crumbs($crumbs));
     }
@@ -283,8 +286,8 @@ final class HelperFunctionsTest extends UnitTestCase
         $crumbs = [['Home', '/'], ['Page', '/page']];
 
         $this->conditions(['is_tax:condition']);
-        Functions\when('get_queried_object')->justReturn(null);
-        Functions\expect('get_taxonomy')->once()->with('')->andReturn(false);
+        when('get_queried_object')->justReturn();
+        expect('get_taxonomy')->once()->with('')->andReturn(false);
 
         $this->assertSame($crumbs, \uamswp_fad_taxonomy_breadcrumbs_crumbs($crumbs));
     }
@@ -347,7 +350,7 @@ final class HelperFunctionsTest extends UnitTestCase
 
     public function test_a_provider_name_is_escaped_but_keeps_its_non_breaking_space(): void
     {
-        Functions\when('esc_html')->alias(static fn (string $text): string => htmlspecialchars($text, ENT_QUOTES));
+        when('esc_html')->alias(static fn (string $text): string => htmlspecialchars($text, ENT_QUOTES));
 
         $this->assertSame('Dr.&nbsp;McCoy &lt;b&gt;', \uamswp_provider_name_html('Dr.&nbsp;McCoy <b>'));
         $this->assertSame('&lt;script&gt;', \uamswp_provider_name_html('<script>'));
@@ -385,7 +388,7 @@ final class HelperFunctionsTest extends UnitTestCase
 
     public function test_the_exception_list_can_be_filtered_and_the_last_matching_key_wins(): void
     {
-        Filters\expectApplied('uamswp_indefinite_article_exceptions')->times(4)->andReturn(
+        expectApplied('uamswp_indefinite_article_exceptions')->times(4)->andReturn(
             ['Hon' => 'an'],
             ['Ab' => 'a', 'Abc' => 'an'],
             [],
@@ -442,6 +445,7 @@ final class HelperFunctionsTest extends UnitTestCase
     {
         $post = new \WP_Post;
         $post->ID = 11;
+
         $term = new \WP_Term;
         $term->term_id = 22;
 
@@ -453,8 +457,10 @@ final class HelperFunctionsTest extends UnitTestCase
     {
         $first = new \WP_Post;
         $first->ID = 1;
+
         $second = new \WP_Post;
         $second->ID = 2;
+
         $query = new \WP_Query;
         $query->posts = [3 => $first, 5, new \stdClass, 9 => $second];
 
@@ -463,8 +469,8 @@ final class HelperFunctionsTest extends UnitTestCase
 
     public function test_the_post_type_of_a_numeric_id_is_read_and_a_non_id_is_not(): void
     {
-        Functions\expect('get_post_type')->once()->with(12)->andReturn('provider');
-        Functions\expect('get_post_type')->once()->with(0)->andReturn(false);
+        expect('get_post_type')->once()->with(12)->andReturn('provider');
+        expect('get_post_type')->once()->with(0)->andReturn(false);
 
         $this->assertSame('provider', \uamswp_fad_post_type_of('12'));
         $this->assertFalse(\uamswp_fad_post_type_of(0));

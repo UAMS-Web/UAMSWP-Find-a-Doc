@@ -8,10 +8,11 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
-use Brain\Monkey\Functions;
 use RuntimeException;
 use UAMSWP_FAD_GBP_Client;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
+
+use function Brain\Monkey\Functions\when;
 
 final class GbpClientTest extends UnitTestCase
 {
@@ -22,7 +23,7 @@ final class GbpClientTest extends UnitTestCase
     ];
 
     /** @var array<int, array{method: string, url: string, headers: array<string, string>, body: ?string}> */
-    private $calls = [];
+    private array $calls = [];
 
     /**
      * A client whose transport answers from a queue of [status, body] pairs, after the token exchange.
@@ -34,9 +35,9 @@ final class GbpClientTest extends UnitTestCase
         $this->calls = [];
 
         return new UAMSWP_FAD_GBP_Client(self::CREDENTIALS, function (string $method, string $url, array $headers, ?string $body) use (&$responses): array {
-            $this->calls[] = compact('method', 'url', 'headers', 'body');
+            $this->calls[] = ['method' => $method, 'url' => $url, 'headers' => $headers, 'body' => $body];
 
-            if (strpos($url, 'oauth2.googleapis.com') !== false) {
+            if (str_contains($url, 'oauth2.googleapis.com')) {
                 return [200, json_encode(['access_token' => 'tok-1', 'expires_in' => 3600])];
             }
 
@@ -64,9 +65,7 @@ final class GbpClientTest extends UnitTestCase
         $client->location_groups();
         $client->location_groups();
 
-        $exchanges = array_filter($this->calls, function (array $call): bool {
-            return strpos($call['url'], 'oauth2.googleapis.com') !== false;
-        });
+        $exchanges = array_filter($this->calls, fn (array $call): bool => str_contains($call['url'], 'oauth2.googleapis.com'));
         $this->assertCount(1, $exchanges);
     }
 
@@ -83,17 +82,15 @@ final class GbpClientTest extends UnitTestCase
 
     public function test_a_failed_token_exchange_names_the_reason_and_leaks_no_credential(): void
     {
-        $client = new UAMSWP_FAD_GBP_Client(self::CREDENTIALS, function (): array {
-            return [400, json_encode(['error' => 'invalid_grant'])];
-        });
+        $client = new UAMSWP_FAD_GBP_Client(self::CREDENTIALS, fn (): array => [400, json_encode(['error' => 'invalid_grant'])]);
 
         try {
             $client->access_token();
             $this->fail('Expected the exchange to fail.');
-        } catch (RuntimeException $e) {
-            $this->assertStringContainsString('invalid_grant', $e->getMessage());
+        } catch (RuntimeException $runtimeException) {
+            $this->assertStringContainsString('invalid_grant', $runtimeException->getMessage());
             foreach (self::CREDENTIALS as $secret) {
-                $this->assertStringNotContainsString($secret, $e->getMessage());
+                $this->assertStringNotContainsString($secret, $runtimeException->getMessage());
             }
         }
     }
@@ -118,8 +115,8 @@ final class GbpClientTest extends UnitTestCase
             }
         };
 
-        Functions\when('wp_remote_request')->justReturn($error);
-        Functions\when('is_wp_error')->alias(static fn ($value): bool => $value === $error);
+        when('wp_remote_request')->justReturn($error);
+        when('is_wp_error')->alias(static fn ($value): bool => $value === $error);
 
         return new UAMSWP_FAD_GBP_Client(self::CREDENTIALS, 'uamswp_fad_gbp_transport');
     }
@@ -131,22 +128,21 @@ final class GbpClientTest extends UnitTestCase
         try {
             $client->access_token();
             $this->fail('Expected the exchange to fail.');
-        } catch (RuntimeException $e) {
-            $this->assertSame('Google token exchange failed (0): http_request_failed: cURL error 6: Could not resolve host: oauth2.googleapis.com', $e->getMessage());
+        } catch (RuntimeException $runtimeException) {
+            $this->assertSame('Google token exchange failed (0): http_request_failed: cURL error 6: Could not resolve host: oauth2.googleapis.com', $runtimeException->getMessage());
             foreach (self::CREDENTIALS as $secret) {
-                $this->assertStringNotContainsString($secret, $e->getMessage());
+                $this->assertStringNotContainsString($secret, $runtimeException->getMessage());
             }
-            $this->assertStringNotContainsString('grant_type', $e->getMessage());
+
+            $this->assertStringNotContainsString('grant_type', $runtimeException->getMessage());
         }
     }
 
     public function test_an_api_call_that_cannot_be_made_names_the_wordpress_error_code_and_message(): void
     {
-        $client = new UAMSWP_FAD_GBP_Client(self::CREDENTIALS, function (string $method, string $url, array $headers, ?string $body): array {
-            return strpos($url, 'oauth2.googleapis.com') !== false
-                ? [200, json_encode(['access_token' => 'tok-1', 'expires_in' => 3600])]
-                : uamswp_fad_gbp_transport($method, $url, $headers, $body);
-        });
+        $client = new UAMSWP_FAD_GBP_Client(self::CREDENTIALS, fn (string $method, string $url, array $headers, ?string $body): array => str_contains($url, 'oauth2.googleapis.com')
+            ? [200, json_encode(['access_token' => 'tok-1', 'expires_in' => 3600])]
+            : uamswp_fad_gbp_transport($method, $url, $headers, $body));
         $error = new class
         {
             public function get_error_code(): string
@@ -159,15 +155,15 @@ final class GbpClientTest extends UnitTestCase
                 return 'cURL error 28: Connection timed out';
             }
         };
-        Functions\when('wp_remote_request')->justReturn($error);
-        Functions\when('is_wp_error')->alias(static fn ($value): bool => $value === $error);
+        when('wp_remote_request')->justReturn($error);
+        when('is_wp_error')->alias(static fn ($value): bool => $value === $error);
 
         try {
             $client->location_groups();
             $this->fail('Expected the call to fail.');
-        } catch (RuntimeException $e) {
-            $this->assertStringContainsString('(0): http_request_failed: cURL error 28: Connection timed out', $e->getMessage());
-            $this->assertStringNotContainsString('tok-1', $e->getMessage());
+        } catch (RuntimeException $runtimeException) {
+            $this->assertStringContainsString('(0): http_request_failed: cURL error 28: Connection timed out', $runtimeException->getMessage());
+            $this->assertStringNotContainsString('tok-1', $runtimeException->getMessage());
         }
     }
 

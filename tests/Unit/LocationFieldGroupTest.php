@@ -31,8 +31,6 @@ final class LocationFieldGroupTest extends TestCase
         ];
     }
 
-    /**
-     */
     #[DataProvider('fields')]
     public function test_field_keeps_its_key_and_type(string $name, string $key, string $type): void
     {
@@ -43,9 +41,6 @@ final class LocationFieldGroupTest extends TestCase
         $this->assertSame($type, $found[0]['type']);
     }
 
-    /**
-     * @return void
-     */
     public function test_group_loads(): void
     {
         $group = $this->group();
@@ -78,6 +73,7 @@ final class LocationFieldGroupTest extends TestCase
             if (($node['name'] ?? null) === $name && isset($node['key'], $node['type'])) {
                 $found[] = $node;
             }
+
             foreach ($node as $child) {
                 if (\is_array($child)) {
                     $walk($child);

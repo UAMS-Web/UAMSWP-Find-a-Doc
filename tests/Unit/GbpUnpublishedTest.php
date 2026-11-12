@@ -12,16 +12,18 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
-use Brain\Monkey\Functions;
 use PHPUnit\Framework\Attributes\DataProvider;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
+
+use function Brain\Monkey\Functions\expect;
+use function Brain\Monkey\Functions\when;
 
 final class GbpUnpublishedTest extends UnitTestCase
 {
     private const CREDENTIAL_NAMES = ['GOOGLE_BUSINESS_PROFILE_CLIENT_ID', 'GOOGLE_BUSINESS_PROFILE_CLIENT_SECRET', 'GOOGLE_BUSINESS_PROFILE_REFRESH_TOKEN'];
 
     /** @var array<string, string|false> */
-    private $saved_env = [];
+    private array $saved_env = [];
 
     protected function setUp(): void
     {
@@ -61,13 +63,13 @@ final class GbpUnpublishedTest extends UnitTestCase
     #[DataProvider('not_published')]
     public function test_a_post_that_is_not_published_is_skipped_with_no_lock_no_write_and_no_log_entry(string $status): void
     {
-        Functions\when('get_post_status')->justReturn($status === '' ? false : $status);
-        Functions\expect('get_transient')->never();
-        Functions\expect('set_transient')->never();
-        Functions\expect('wp_schedule_single_event')->never();
-        Functions\expect('update_option')->never();
-        Functions\expect('update_post_meta')->never();
-        Functions\expect('get_posts')->never();
+        when('get_post_status')->justReturn($status === '' ? false : $status);
+        expect('get_transient')->never();
+        expect('set_transient')->never();
+        expect('wp_schedule_single_event')->never();
+        expect('update_option')->never();
+        expect('update_post_meta')->never();
+        expect('get_posts')->never();
 
         uamswp_fad_gbp_run_post(100);
 
@@ -77,9 +79,9 @@ final class GbpUnpublishedTest extends UnitTestCase
     public function test_a_published_post_gets_past_the_status_check(): void
     {
         // The control for the tests above: the same stubs with a published post do reach the lock.
-        Functions\when('get_post_status')->justReturn('publish');
-        Functions\expect('get_transient')->once()->with('uamswp_fad_gbp_lock')->andReturn(1);
-        Functions\expect('wp_schedule_single_event')->once()->andReturn(true);
+        when('get_post_status')->justReturn('publish');
+        expect('get_transient')->once()->with('uamswp_fad_gbp_lock')->andReturn(1);
+        expect('wp_schedule_single_event')->once()->andReturn(true);
 
         uamswp_fad_gbp_run_post(100);
 

@@ -16,6 +16,9 @@ namespace UamswpFindADoc\Tests\Unit;
 use Brain\Monkey\Functions;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
 
+use function Brain\Monkey\Functions\expect;
+use function Brain\Monkey\Functions\when;
+
 require_once __DIR__.'/../Support/acf-functions.php';
 
 final class EditorGroupsTest extends UnitTestCase
@@ -34,12 +37,12 @@ final class EditorGroupsTest extends UnitTestCase
 
         $this->get_before = $_GET;
 
-        Functions\when('add_action')->justReturn(true);
-        Functions\when('add_filter')->justReturn(true);
+        when('add_action')->justReturn(true);
+        when('add_filter')->justReturn(true);
         require_once dirname(__DIR__, 2).'/includes/class.fad-editor-groups.php';
 
         // A marker string stands in for a WP_Error, which the unit process does not load.
-        Functions\when('is_wp_error')->alias(static fn (mixed $value): bool => $value === 'WP_ERROR');
+        when('is_wp_error')->alias(static fn (mixed $value): bool => $value === 'WP_ERROR');
     }
 
     protected function tearDown(): void
@@ -54,7 +57,7 @@ final class EditorGroupsTest extends UnitTestCase
      */
     private function term_meta(array $values): void
     {
-        Functions\when('get_term_meta')->alias(static fn (int $term, string $key): mixed => $values[$key] ?? '');
+        when('get_term_meta')->alias(static fn (int $term, string $key): mixed => $values[$key] ?? '');
     }
 
     public function test_the_post_types_map_to_their_service_line_fields(): void
@@ -69,7 +72,7 @@ final class EditorGroupsTest extends UnitTestCase
     public function test_the_taxonomy_is_a_private_hierarchical_one_for_providers_and_locations(): void
     {
         $captured = [];
-        Functions\when('register_taxonomy')->alias(static function (string $taxonomy, mixed $types, array $args) use (&$captured): void {
+        when('register_taxonomy')->alias(static function (string $taxonomy, mixed $types, array $args) use (&$captured): void {
             $captured = [$taxonomy, $types, $args];
         });
 
@@ -117,7 +120,7 @@ final class EditorGroupsTest extends UnitTestCase
         }
 
         $groups = [];
-        Functions\when('acf_add_local_field_group')->alias(static function (array $group) use (&$groups): void {
+        when('acf_add_local_field_group')->alias(static function (array $group) use (&$groups): void {
             $groups[] = $group;
         });
 
@@ -137,6 +140,7 @@ final class EditorGroupsTest extends UnitTestCase
             $this->assertSame('id', $field['return_format']);
             $this->assertSame(1, $field['allow_null']);
         }
+
         $this->assertSame([[['param' => 'taxonomy', 'operator' => '==', 'value' => 'editor_group']]], $members['location']);
         $this->assertSame('normal', $members['position']);
 
@@ -167,7 +171,7 @@ final class EditorGroupsTest extends UnitTestCase
 
     public function test_a_groups_members_are_read_once(): void
     {
-        Functions\expect('get_term_meta')->twice()->andReturn(7);
+        expect('get_term_meta')->twice()->andReturn(7);
 
         $this->assertSame([7], \uamswp_fad_editor_group_members(703));
         $this->assertSame([7], \uamswp_fad_editor_group_members(703));
@@ -175,7 +179,7 @@ final class EditorGroupsTest extends UnitTestCase
 
     public function test_a_user_of_zero_belongs_to_no_group(): void
     {
-        Functions\expect('get_terms')->never();
+        expect('get_terms')->never();
 
         $this->assertSame([], \uamswp_fad_user_editor_groups(0));
         $this->assertSame([], \uamswp_fad_user_editor_groups('0'));
@@ -183,12 +187,12 @@ final class EditorGroupsTest extends UnitTestCase
 
     public function test_a_user_belongs_to_the_groups_that_list_them(): void
     {
-        Functions\expect('get_terms')->twice()->with([
+        expect('get_terms')->twice()->with([
             'taxonomy' => 'editor_group',
             'hide_empty' => false,
             'fields' => 'ids',
         ])->andReturn([711, '712', 713]);
-        Functions\when('get_term_meta')->alias(static fn (int $term, string $key): mixed => match (true) {
+        when('get_term_meta')->alias(static fn (int $term, string $key): mixed => match (true) {
             $term === 711 && $key === 'editor_group_editors' => [801, 802],
             $term === 712 && $key === 'editor_group_primary_editor' => 802,
             default => '',
@@ -201,52 +205,52 @@ final class EditorGroupsTest extends UnitTestCase
 
     public function test_a_failed_group_lookup_leaves_the_user_in_no_group(): void
     {
-        Functions\when('get_terms')->justReturn('WP_ERROR');
+        when('get_terms')->justReturn('WP_ERROR');
 
         $this->assertSame([], \uamswp_fad_user_editor_groups(803));
     }
 
     public function test_a_user_in_no_group_is_not_in_a_posts_group_and_the_post_is_not_read(): void
     {
-        Functions\when('get_terms')->justReturn([]);
-        Functions\expect('wp_get_object_terms')->never();
+        when('get_terms')->justReturn([]);
+        expect('wp_get_object_terms')->never();
 
         $this->assertFalse(\uamswp_fad_user_in_post_editor_group(804, 900));
     }
 
     public function test_a_post_in_none_of_the_groups_or_a_failed_read_is_not_in_the_users_group(): void
     {
-        Functions\when('get_terms')->justReturn([721]);
+        when('get_terms')->justReturn([721]);
         $this->term_meta(['editor_group_editors' => [805]]);
 
-        Functions\when('wp_get_object_terms')->justReturn('WP_ERROR');
+        when('wp_get_object_terms')->justReturn('WP_ERROR');
         $this->assertFalse(\uamswp_fad_user_in_post_editor_group(805, 900));
 
-        Functions\when('wp_get_object_terms')->justReturn([]);
+        when('wp_get_object_terms')->justReturn([]);
         $this->assertFalse(\uamswp_fad_user_in_post_editor_group(805, 900));
 
-        Functions\when('wp_get_object_terms')->justReturn([722]);
+        when('wp_get_object_terms')->justReturn([722]);
         $this->assertFalse(\uamswp_fad_user_in_post_editor_group(805, 900));
     }
 
     public function test_a_post_in_one_of_the_users_groups_is_in_the_users_group(): void
     {
-        Functions\when('get_terms')->justReturn([731]);
+        when('get_terms')->justReturn([731]);
         $this->term_meta(['editor_group_editors' => [806]]);
-        Functions\expect('wp_get_object_terms')->once()->with(900, 'editor_group', ['fields' => 'ids'])->andReturn(['731', 99]);
+        expect('wp_get_object_terms')->once()->with(900, 'editor_group', ['fields' => 'ids'])->andReturn(['731', 99]);
 
         $this->assertTrue(\uamswp_fad_user_in_post_editor_group(806, '900'));
     }
 
     private function map_world(string $post_type = 'provider', bool $has_type = true, bool $in_group = true): void
     {
-        Functions\when('get_post')->justReturn((object) ['ID' => 900, 'post_type' => $post_type]);
-        Functions\when('get_post_type_object')->justReturn($has_type ? (object) ['cap' => (object) ['edit_posts' => 'edit_physicians', 'edit_others_posts' => 'edit_others_physicians']] : null);
+        when('get_post')->justReturn((object) ['ID' => 900, 'post_type' => $post_type]);
+        when('get_post_type_object')->justReturn($has_type ? (object) ['cap' => (object) ['edit_posts' => 'edit_physicians', 'edit_others_posts' => 'edit_others_physicians']] : null);
         // The member lists are cached per group, so a group that excludes the user is a different group.
         $group = $in_group ? 741 : 742;
-        Functions\when('get_terms')->justReturn([$group]);
+        when('get_terms')->justReturn([$group]);
         $this->term_meta(['editor_group_editors' => $in_group ? [807] : [808]]);
-        Functions\when('wp_get_object_terms')->justReturn([$group]);
+        when('wp_get_object_terms')->justReturn([$group]);
     }
 
     public function test_the_capability_map_leaves_other_capabilities_and_missing_posts_alone(): void
@@ -258,7 +262,7 @@ final class EditorGroupsTest extends UnitTestCase
         $this->assertSame($caps, \uamswp_fad_editor_group_map_meta_cap($caps, 'edit_post', 807, []));
         $this->assertSame($caps, \uamswp_fad_editor_group_map_meta_cap($caps, 'edit_post', 807, [0]));
 
-        Functions\when('get_post')->justReturn(null);
+        when('get_post')->justReturn();
         $this->assertSame($caps, \uamswp_fad_editor_group_map_meta_cap($caps, 'edit_post', 807, [900]));
     }
 
@@ -326,12 +330,12 @@ final class EditorGroupsTest extends UnitTestCase
 
     private function list_world(bool $can_edit_others = false, mixed $tt_ids = [51, '52'], int $user = 809): void
     {
-        Functions\when('is_admin')->justReturn(true);
-        Functions\when('get_post_type_object')->justReturn((object) ['cap' => (object) ['edit_others_posts' => 'edit_others_physicians']]);
-        Functions\when('current_user_can')->justReturn($can_edit_others);
-        Functions\when('get_current_user_id')->justReturn($user);
-        Functions\when('get_terms')->alias(static fn (array $args): mixed => ($args['fields'] ?? '') === 'tt_ids' ? $tt_ids : [751]);
-        Functions\when('get_term_meta')->alias(static fn (int $term, string $key): mixed => $key === 'editor_group_editors' ? [$user] : '');
+        when('is_admin')->justReturn(true);
+        when('get_post_type_object')->justReturn((object) ['cap' => (object) ['edit_others_posts' => 'edit_others_physicians']]);
+        when('current_user_can')->justReturn($can_edit_others);
+        when('get_current_user_id')->justReturn($user);
+        when('get_terms')->alias(static fn (array $args): mixed => ($args['fields'] ?? '') === 'tt_ids' ? $tt_ids : [751]);
+        when('get_term_meta')->alias(static fn (int $term, string $key): mixed => $key === 'editor_group_editors' ? [$user] : '');
     }
 
     public function test_the_admin_list_is_scoped_to_the_groups_of_an_editor_who_cannot_edit_others(): void
@@ -348,12 +352,12 @@ final class EditorGroupsTest extends UnitTestCase
     {
         $this->list_world();
 
-        Functions\when('is_admin')->justReturn(false);
+        when('is_admin')->justReturn(false);
         $query = $this->query(['post_type' => 'provider']);
         \uamswp_fad_editor_group_admin_list_scope($query);
         $this->assertSame([], $query->set);
 
-        Functions\when('is_admin')->justReturn(true);
+        when('is_admin')->justReturn(true);
         $query = $this->query(['post_type' => 'provider'], false);
         \uamswp_fad_editor_group_admin_list_scope($query);
         $this->assertSame([], $query->set);
@@ -373,15 +377,15 @@ final class EditorGroupsTest extends UnitTestCase
     public function test_the_admin_list_is_left_alone_for_a_missing_type_or_a_user_who_can_edit_others(): void
     {
         $this->list_world();
-        Functions\when('get_post_type_object')->justReturn(null);
+        when('get_post_type_object')->justReturn();
         $query = $this->query(['post_type' => 'provider']);
         \uamswp_fad_editor_group_admin_list_scope($query);
         $this->assertSame([], $query->set);
 
         $this->list_world(true);
-        Functions\expect('current_user_can')->never();
+        expect('current_user_can')->never();
         $query = $this->query(['post_type' => 'provider']);
-        Functions\when('current_user_can')->justReturn(true);
+        when('current_user_can')->justReturn(true);
         \uamswp_fad_editor_group_admin_list_scope($query);
         $this->assertSame([], $query->set);
     }
@@ -389,7 +393,7 @@ final class EditorGroupsTest extends UnitTestCase
     public function test_the_admin_list_is_left_alone_for_a_user_in_no_group_or_with_no_term_taxonomy_ids(): void
     {
         $this->list_world();
-        Functions\when('get_terms')->justReturn([]);
+        when('get_terms')->justReturn([]);
         $query = $this->query(['post_type' => 'provider']);
         \uamswp_fad_editor_group_admin_list_scope($query);
         $this->assertSame([], $query->set);
@@ -458,37 +462,37 @@ final class EditorGroupsTest extends UnitTestCase
 
     public function test_only_providers_and_locations_inherit_a_group_from_a_service_line(): void
     {
-        Functions\when('get_post_type')->justReturn('page');
-        Functions\expect('get_field')->never();
+        when('get_post_type')->justReturn('page');
+        expect('get_field')->never();
 
         $this->assertSame([], \uamswp_fad_editor_groups_from_service_line(900));
     }
 
     public function test_the_groups_come_from_each_service_line_that_maps_to_a_real_group(): void
     {
-        Functions\when('get_post_type')->justReturn('location');
-        Functions\expect('get_field')->once()->with('location_service_line', 900)->andReturn([
+        when('get_post_type')->justReturn('location');
+        expect('get_field')->once()->with('location_service_line', 900)->andReturn([
             (object) ['term_id' => 61],
             (object) [],
             '62',
             63,
             0,
         ]);
-        Functions\when('get_term_meta')->alias(static fn (int $term, string $key): mixed => match ($term) {
+        when('get_term_meta')->alias(static fn (int $term, string $key): mixed => match ($term) {
             61 => [71, '72', 0],
             62 => 71,
             63 => 73,
             default => '',
         });
-        Functions\when('term_exists')->alias(static fn (int $group, string $taxonomy): mixed => $taxonomy === 'editor_group' && $group !== 72 ? ['term_id' => $group] : null);
+        when('term_exists')->alias(static fn (int $group, string $taxonomy): mixed => $taxonomy === 'editor_group' && $group !== 72 ? ['term_id' => $group] : null);
 
         $this->assertSame([71, 73], \uamswp_fad_editor_groups_from_service_line(900));
     }
 
     public function test_a_post_with_no_service_line_inherits_nothing(): void
     {
-        Functions\when('get_post_type')->justReturn('provider');
-        Functions\when('get_field')->justReturn(false);
+        when('get_post_type')->justReturn('provider');
+        when('get_field')->justReturn(false);
 
         $this->assertSame([], \uamswp_fad_editor_groups_from_service_line(900));
     }
@@ -500,19 +504,19 @@ final class EditorGroupsTest extends UnitTestCase
      */
     private function inherit_world(mixed $current, mixed $previous, mixed $service_line_field): void
     {
-        Functions\when('wp_get_object_terms')->justReturn($current);
-        Functions\when('get_post_meta')->justReturn($previous);
-        Functions\when('get_post_type')->justReturn('provider');
-        Functions\when('get_field')->justReturn($service_line_field);
-        Functions\when('get_term_meta')->justReturn(81);
-        Functions\when('term_exists')->justReturn(['term_id' => 81]);
+        when('wp_get_object_terms')->justReturn($current);
+        when('get_post_meta')->justReturn($previous);
+        when('get_post_type')->justReturn('provider');
+        when('get_field')->justReturn($service_line_field);
+        when('get_term_meta')->justReturn(81);
+        when('term_exists')->justReturn(['term_id' => 81]);
     }
 
     public function test_a_failed_read_of_the_posts_groups_changes_nothing(): void
     {
         $this->inherit_world('WP_ERROR', [], [5]);
-        Functions\expect('wp_set_object_terms')->never();
-        Functions\expect('update_post_meta')->never();
+        expect('wp_set_object_terms')->never();
+        expect('update_post_meta')->never();
 
         $this->assertFalse(\uamswp_fad_inherit_editor_group(900));
     }
@@ -520,8 +524,8 @@ final class EditorGroupsTest extends UnitTestCase
     public function test_a_post_already_in_the_wanted_groups_is_left_alone(): void
     {
         $this->inherit_world(['81'], [81], [5]);
-        Functions\expect('wp_set_object_terms')->never();
-        Functions\expect('update_post_meta')->never();
+        expect('wp_set_object_terms')->never();
+        expect('update_post_meta')->never();
 
         $this->assertFalse(\uamswp_fad_inherit_editor_group('900'));
     }
@@ -529,8 +533,8 @@ final class EditorGroupsTest extends UnitTestCase
     public function test_the_remembered_groups_are_refreshed_when_only_they_are_stale(): void
     {
         $this->inherit_world([81], '', [5]);
-        Functions\expect('update_post_meta')->once()->with(900, '_uamswp_editor_groups_derived', [81]);
-        Functions\expect('wp_set_object_terms')->never();
+        expect('update_post_meta')->once()->with(900, '_uamswp_editor_groups_derived', [81]);
+        expect('wp_set_object_terms')->never();
 
         $this->assertFalse(\uamswp_fad_inherit_editor_group(900));
     }
@@ -538,8 +542,8 @@ final class EditorGroupsTest extends UnitTestCase
     public function test_a_moved_service_line_replaces_the_derived_group_and_keeps_a_manual_one(): void
     {
         $this->inherit_world([95, 40], [95], [5]);
-        Functions\expect('wp_set_object_terms')->once()->with(900, [40, 81], 'editor_group', false)->andReturn([40, 81]);
-        Functions\expect('update_post_meta')->once()->with(900, '_uamswp_editor_groups_derived', [81]);
+        expect('wp_set_object_terms')->once()->with(900, [40, 81], 'editor_group', false)->andReturn([40, 81]);
+        expect('update_post_meta')->once()->with(900, '_uamswp_editor_groups_derived', [81]);
 
         $this->assertTrue(\uamswp_fad_inherit_editor_group(900));
     }
@@ -547,25 +551,25 @@ final class EditorGroupsTest extends UnitTestCase
     public function test_a_failed_group_write_remembers_nothing_and_reports_no_change(): void
     {
         $this->inherit_world([], [], [5]);
-        Functions\when('wp_set_object_terms')->justReturn('WP_ERROR');
-        Functions\expect('update_post_meta')->never();
+        when('wp_set_object_terms')->justReturn('WP_ERROR');
+        expect('update_post_meta')->never();
 
         $this->assertFalse(\uamswp_fad_inherit_editor_group(900));
     }
 
     public function test_saving_skips_autosaves_revisions_and_other_post_types(): void
     {
-        Functions\expect('wp_get_object_terms')->never();
+        expect('wp_get_object_terms')->never();
 
-        Functions\when('wp_is_post_autosave')->justReturn(true);
-        Functions\when('wp_is_post_revision')->justReturn(false);
+        when('wp_is_post_autosave')->justReturn(true);
+        when('wp_is_post_revision')->justReturn(false);
         \uamswp_fad_inherit_editor_group_on_save(900, (object) ['post_type' => 'provider']);
 
-        Functions\when('wp_is_post_autosave')->justReturn(false);
-        Functions\when('wp_is_post_revision')->justReturn(true);
+        when('wp_is_post_autosave')->justReturn(false);
+        when('wp_is_post_revision')->justReturn(true);
         \uamswp_fad_inherit_editor_group_on_save(900, (object) ['post_type' => 'provider']);
 
-        Functions\when('wp_is_post_revision')->justReturn(false);
+        when('wp_is_post_revision')->justReturn(false);
         \uamswp_fad_inherit_editor_group_on_save(900, (object) ['post_type' => 'page']);
 
         $this->addToAssertionCount(1);
@@ -573,31 +577,31 @@ final class EditorGroupsTest extends UnitTestCase
 
     public function test_saving_a_provider_brings_its_groups_in_step_with_its_service_line(): void
     {
-        Functions\when('wp_is_post_autosave')->justReturn(false);
-        Functions\when('wp_is_post_revision')->justReturn(false);
+        when('wp_is_post_autosave')->justReturn(false);
+        when('wp_is_post_revision')->justReturn(false);
         $this->inherit_world([], [], [5]);
-        Functions\expect('wp_set_object_terms')->once()->with(901, [81], 'editor_group', false)->andReturn([81]);
-        Functions\when('update_post_meta')->justReturn(true);
+        expect('wp_set_object_terms')->once()->with(901, [81], 'editor_group', false)->andReturn([81]);
+        when('update_post_meta')->justReturn(true);
 
         \uamswp_fad_inherit_editor_group_on_save('901', (object) ['post_type' => 'provider']);
     }
 
     public function test_the_sync_link_is_a_nonce_link_to_the_admin_post_action(): void
     {
-        Functions\expect('admin_url')->once()->with('admin-post.php?action=uamswp_fad_sync_editor_groups')->andReturn('https://x/admin-post.php?action=uamswp_fad_sync_editor_groups');
-        Functions\expect('wp_nonce_url')->once()->with('https://x/admin-post.php?action=uamswp_fad_sync_editor_groups', 'uamswp_fad_sync_editor_groups')->andReturn('https://x/signed');
+        expect('admin_url')->once()->with('admin-post.php?action=uamswp_fad_sync_editor_groups')->andReturn('https://x/admin-post.php?action=uamswp_fad_sync_editor_groups');
+        expect('wp_nonce_url')->once()->with('https://x/admin-post.php?action=uamswp_fad_sync_editor_groups', 'uamswp_fad_sync_editor_groups')->andReturn('https://x/signed');
 
         $this->assertSame('https://x/signed', \uamswp_fad_editor_group_sync_url());
     }
 
     private function notice_world(bool $can): void
     {
-        Functions\when('current_user_can')->alias(static fn (string $cap): bool => $can && $cap === 'manage_options');
-        Functions\when('esc_html')->returnArg();
-        Functions\when('esc_url')->returnArg();
-        Functions\when('absint')->alias(static fn (mixed $value): int => abs((int) $value));
-        Functions\when('admin_url')->returnArg();
-        Functions\when('wp_nonce_url')->justReturn('https://x/signed');
+        when('current_user_can')->alias(static fn (string $cap): bool => $can && $cap === 'manage_options');
+        when('esc_html')->returnArg();
+        when('esc_url')->returnArg();
+        when('absint')->alias(static fn (mixed $value): int => abs((int) $value));
+        when('admin_url')->returnArg();
+        when('wp_nonce_url')->justReturn('https://x/signed');
     }
 
     public function test_the_sync_notice_offers_the_mapping_to_an_administrator(): void
@@ -636,10 +640,10 @@ final class EditorGroupsTest extends UnitTestCase
 
     public function test_the_sync_action_refuses_a_user_who_cannot_manage_options(): void
     {
-        Functions\when('current_user_can')->justReturn(false);
-        Functions\expect('wp_die')->once()->with('You are not allowed to do that.', '', ['response' => 403])->andThrow(new \RuntimeException('died'));
-        Functions\expect('check_admin_referer')->never();
-        Functions\expect('get_posts')->never();
+        when('current_user_can')->justReturn(false);
+        expect('wp_die')->once()->with('You are not allowed to do that.', '', ['response' => 403])->andThrow(new \RuntimeException('died'));
+        expect('check_admin_referer')->never();
+        expect('get_posts')->never();
 
         $this->expectExceptionMessage('died');
 

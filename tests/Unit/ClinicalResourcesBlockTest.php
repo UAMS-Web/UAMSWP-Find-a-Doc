@@ -21,6 +21,7 @@ function resources_block_query(array $ids): object
 {
     $current = new stdClass;
     $current->id = 0;
+
     when('get_the_ID')->alias(static fn (): int => $current->id);
 
     return new class($ids, $current)
@@ -54,7 +55,7 @@ function resources_block(array $ids, array $variables = [], array $drafts = []):
 {
     uamswp_test_acf_blocks_file();
 
-    when('wp_reset_postdata')->justReturn(null);
+    when('wp_reset_postdata')->justReturn();
     when('get_post_status')->alias(static fn (int $id): string => in_array($id, $drafts, true) ? 'draft' : 'publish');
     when('esc_url')->returnArg();
     when('esc_attr')->alias(static fn (string $text): string => htmlspecialchars($text));

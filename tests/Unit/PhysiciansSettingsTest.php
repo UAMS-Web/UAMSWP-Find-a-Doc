@@ -8,8 +8,10 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
-use Brain\Monkey\Functions;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
+
+use function Brain\Monkey\Functions\expect;
+use function Brain\Monkey\Functions\when;
 
 final class PhysiciansSettingsTest extends UnitTestCase
 {
@@ -27,7 +29,7 @@ final class PhysiciansSettingsTest extends UnitTestCase
         }
 
         // The file builds its object at file scope, so the hook function must exist while it loads.
-        Functions\when('add_action')->alias(static function (string $hook, array $callback): void {
+        when('add_action')->alias(static function (string $hook, array $callback): void {
             self::$actions[] = [$hook, $callback];
         });
 
@@ -54,8 +56,8 @@ final class PhysiciansSettingsTest extends UnitTestCase
 
     public function test_setting_up_the_options_registers_the_search_id_on_the_general_page(): void
     {
-        Functions\expect('register_setting')->once()->with('general', 'ajax_search_pro_id');
-        Functions\expect('add_settings_field')->once()->with(
+        expect('register_setting')->once()->with('general', 'ajax_search_pro_id');
+        expect('add_settings_field')->once()->with(
             'ajax_search_pro_id',
             'Ajax Search Pro ID for Providers:',
             [$this->settings(), 'ajax_search_pro_id_callback'],
@@ -67,8 +69,8 @@ final class PhysiciansSettingsTest extends UnitTestCase
 
     public function test_setting_up_the_sections_adds_no_page_and_no_section(): void
     {
-        Functions\expect('add_settings_section')->never();
-        Functions\expect('add_options_page')->never();
+        expect('add_settings_section')->never();
+        expect('add_options_page')->never();
 
         $this->settings()->setup_sections();
 
@@ -77,7 +79,7 @@ final class PhysiciansSettingsTest extends UnitTestCase
 
     public function test_the_field_shows_the_stored_id(): void
     {
-        Functions\when('get_option')->alias(static fn (string $name): string => $name === 'ajax_search_pro_id' ? '42' : '');
+        when('get_option')->alias(static fn (string $name): string => $name === 'ajax_search_pro_id' ? '42' : '');
 
         $this->expectOutputString("<input name='ajax_search_pro_id' type='text' size='20' value='42' />");
 
@@ -86,7 +88,7 @@ final class PhysiciansSettingsTest extends UnitTestCase
 
     public function test_the_field_is_empty_when_nothing_is_stored(): void
     {
-        Functions\when('get_option')->justReturn(false);
+        when('get_option')->justReturn(false);
 
         $this->expectOutputString("<input name='ajax_search_pro_id' type='text' size='20' value='' />");
 

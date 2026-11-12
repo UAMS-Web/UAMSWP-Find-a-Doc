@@ -10,6 +10,9 @@
 
 declare(strict_types=1);
 
+use function Brain\Monkey\setUp;
+use function Brain\Monkey\tearDown;
+
 require_once __DIR__.'/../vendor/autoload.php';
 
 /*
@@ -70,11 +73,11 @@ require_once dirname(__DIR__).'/includes/class.fad-gbp-orphans.php';
  * before the first test; loaded from inside a test, they would count as that test's
  * expectations. The tests call the registering function again to read what it registers.
  */
-Brain\Monkey\setUp();
+setUp();
 
 require_once dirname(__DIR__).'/includes/class.fad-delete-cleanup.php';
 require_once dirname(__DIR__).'/includes/class.fad-acf-table-map-notice.php';
 
-Brain\Monkey\tearDown();
+tearDown();
 
 // cspell:ignore ABSPATH autoloaded

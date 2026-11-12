@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 use Brain\Monkey\Functions;
 
+use function Brain\Monkey\Functions\when;
+
 /**
  * Load the functions file once and return what it registered.
  *
@@ -29,16 +31,16 @@ function uamswp_test_functions_file(): array
     $hooks = [];
     $deactivation = [];
 
-    Functions\when('add_filter')->alias(static function (string $hook, mixed $callback, int $priority = 10, int $accepted = 1) use (&$hooks): void {
+    when('add_filter')->alias(static function (string $hook, mixed $callback, int $priority = 10, int $accepted = 1) use (&$hooks): void {
         $hooks[] = ['filter', $hook, $callback, $priority, $accepted];
     });
-    Functions\when('add_action')->alias(static function (string $hook, mixed $callback, int $priority = 10, int $accepted = 1) use (&$hooks): void {
+    when('add_action')->alias(static function (string $hook, mixed $callback, int $priority = 10, int $accepted = 1) use (&$hooks): void {
         $hooks[] = ['action', $hook, $callback, $priority, $accepted];
     });
-    Functions\when('add_shortcode')->alias(static function (string $tag, mixed $callback) use (&$hooks): void {
+    when('add_shortcode')->alias(static function (string $tag, mixed $callback) use (&$hooks): void {
         $hooks[] = ['shortcode', $tag, $callback, 10, 1];
     });
-    Functions\when('register_deactivation_hook')->alias(static function (string $file, mixed $callback) use (&$deactivation): void {
+    when('register_deactivation_hook')->alias(static function (string $file, mixed $callback) use (&$deactivation): void {
         $deactivation[] = [$file, $callback];
     });
 
