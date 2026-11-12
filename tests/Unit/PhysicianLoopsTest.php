@@ -91,8 +91,8 @@ test('the provider loop names the provider with the middle name, pedigree and de
     ], ['terms' => ['degree:1' => 'M.D.', 'degree:2' => 'Ph.D.']]);
 
     expect($output)->toContain('<span class="name">Jo Q Smith&nbsp;Jr., M.D., Ph.D.</span>')
-        ->and($output)->toContain('aria-label="Full profile for Jo Q Smith&nbsp;Jr., M.D., Ph.D."')
-        ->and($output)->toContain('data-itemtitle="Jo Q Smith&nbsp;Jr., M.D., Ph.D."');
+        ->and($output)->toContain('aria-label="Full profile for Jo Q Smith Jr., M.D., Ph.D."')
+        ->and($output)->toContain('data-itemtitle="Jo Q Smith Jr., M.D., Ph.D."');
 });
 
 test('the provider loop cleans quotes and the right single quote entity in the name for the labels', function (): void {
@@ -324,4 +324,22 @@ test('the Meta Box provider loop lists the specialties and the clinics of the pr
 
 test('the Meta Box provider loop leaves out the specialties without any', function (): void {
     expect(physician_loop_mb([5]))->not->toContain('Specialties');
+});
+
+test('the provider loop stops looking for a published location at the first one', function (): void {
+    $reads = [];
+    $output = physician_loop([5], ['physician_locations' => [11, 12, 13]]);
+    physician_loops_world(['physician_first_name' => 'Jo', 'physician_last_name' => 'Smith', 'physician_locations' => [11, 12, 13]], ['rating_object' => true]);
+    when('get_post_status')->alias(static function (mixed $id) use (&$reads): string {
+        $reads[] = $id;
+
+        return 'publish';
+    });
+    uamswp_test_main_loop([5]);
+
+    $second = uamswp_test_include_partial('fwp/physician-loop', ['post' => (object) ['ID' => 99]]);
+
+    // One read to find the first published location, then one read for each location while it prints them.
+    expect(array_count_values($reads))->toBe([11 => 2, 12 => 1, 13 => 1])
+        ->and(trim((string) preg_replace('/\s+/', ' ', $second)))->toBe($output);
 });

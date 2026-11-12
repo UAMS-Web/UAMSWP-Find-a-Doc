@@ -8,6 +8,7 @@ $page_title = get_the_title();
 $page_title_attr = $page_title;
 $page_title_attr = str_replace('"', "'", $page_title_attr); // Replace double quotes with single quote
 $page_title_attr = str_replace('&#8217;', "'", $page_title_attr); // Replace right single quote with single quote
+$page_title_attr = str_replace('&nbsp;', ' ', $page_title_attr); // Convert non-breaking space entity text to a normal space before it is encoded
 $page_title_attr = htmlentities($page_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 $page_title_attr = str_replace('&nbsp;', ' ', $page_title_attr); // Convert non-breaking space with normal space
 $page_title_attr = html_entity_decode($page_title_attr); // Convert HTML entities to their corresponding characters
@@ -15,6 +16,7 @@ $treatment_archive_title = get_field('treatments_archive_headline', 'option') ?:
 $treatment_archive_title_attr = $treatment_archive_title;
 $treatment_archive_title_attr = str_replace('"', "'", $treatment_archive_title_attr); // Replace double quotes with single quote
 $treatment_archive_title_attr = str_replace('&#8217;', "'", $treatment_archive_title_attr); // Replace right single quote with single quote
+$treatment_archive_title_attr = str_replace('&nbsp;', ' ', $treatment_archive_title_attr); // Convert non-breaking space entity text to a normal space before it is encoded
 $treatment_archive_title_attr = htmlentities($treatment_archive_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 $treatment_archive_title_attr = str_replace('&nbsp;', ' ', $treatment_archive_title_attr); // Convert non-breaking space with normal space
 $treatment_archive_title_attr = html_entity_decode($treatment_archive_title_attr); // Convert HTML entities to their corresponding characters
@@ -22,6 +24,7 @@ $treatment_title = get_field('treatments_single_name', 'option') ?: 'Treatment/P
 $treatment_title_attr = $treatment_title;
 $treatment_title_attr = str_replace('"', "'", $treatment_title_attr); // Replace double quotes with single quote
 $treatment_title_attr = str_replace('&#8217;', "'", $treatment_title_attr); // Replace right single quote with single quote
+$treatment_title_attr = str_replace('&nbsp;', ' ', $treatment_title_attr); // Convert non-breaking space entity text to a normal space before it is encoded
 $treatment_title_attr = htmlentities($treatment_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 $treatment_title_attr = str_replace('&nbsp;', ' ', $treatment_title_attr); // Convert non-breaking space with normal space
 $treatment_title_attr = html_entity_decode($treatment_title_attr); // Convert HTML entities to their corresponding characters
@@ -98,7 +101,7 @@ if ($locations && $location_query->have_posts()) {
     foreach ($locations as $location) {
         if (get_post_status($location) == 'publish') {
             $location_valid = true;
-
+            break;
         }
     }
 }
@@ -582,6 +585,7 @@ if ($show_conditions_section) { ?>
 								    $condition_title_attr = $condition_title;
 								    $condition_title_attr = str_replace('"', "'", $condition_title_attr); // Replace double quotes with single quote
 								    $condition_title_attr = str_replace('&#8217;', "'", $condition_title_attr); // Replace right single quote with single quote
+								    $condition_title_attr = str_replace('&nbsp;', ' ', $condition_title_attr); // Convert non-breaking space entity text to a normal space before it is encoded
 								    $condition_title_attr = htmlentities($condition_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 								    $condition_title_attr = str_replace('&nbsp;', ' ', $condition_title_attr); // Convert non-breaking space with normal space
 								    $condition_title_attr = html_entity_decode($condition_title_attr); // Convert HTML entities to their corresponding characters

@@ -262,6 +262,7 @@ $provider_occupation_title_attr = $provider_occupation_title ? uamswp_attr_conve
 // Defines the indefinite article to precede the clinical occupation title (a or an, based on whether clinical occupation title starts with vowel)
 
 if (
+    $provider_occupation_title !== '' &&
     in_array(
         strtolower($provider_occupation_title)[0],
         ['a', 'e', 'i', 'o', 'u']
@@ -324,7 +325,7 @@ if (! empty($locations)) {
     foreach ($locations as $location) {
         if (get_post_status($location) == 'publish') {
             $location_valid = true;
-
+            break;
         }
     }
 }
@@ -338,6 +339,12 @@ if ($locations && $location_valid) {
     } // endforeach
 }
 // Get primary appointment location name
+$primary_appointment_title = '';
+$primary_appointment_title_attr = '';
+$primary_appointment_url = '';
+$primary_appointment_city = '';
+$primary_appointment_city_attr = '';
+$location_schema = '';
 $l = 1;
 if ($locations && $location_valid) {
     foreach ($locations as $location) {
@@ -884,8 +891,6 @@ while (have_posts()) {
                                 <?php echo $location_address_1; ?><br/>
                                 <?php echo $location_address_2 ? $location_address_2.'<br/>' : ''; ?>
                                 <?php echo $location_city.', '.$location_state.' '.$location_zip; ?>
-                                <?php $map = get_field('location_map', $location_source_ids['map']); ?>
-                                <!-- <br /><a class="uams-btn btn-red btn-sm btn-external" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Directions</a> -->
                                 </p>
                                 <?php
                                         // Phone values
@@ -918,7 +923,7 @@ while (have_posts()) {
         foreach ($expertises as $expertise) {
             if (get_post_status($expertise) == 'publish') {
                 $expertise_valid = true;
-
+                break;
             }
         }
         if ($expertise_valid) {
@@ -1201,22 +1206,6 @@ while (have_posts()) {
                                 <div class="col-xs-12 col-lg-5">
                                 <div class="content-width">
                             <?php } // endif?>
-                            <?php // Section for displaying clinical admin title
-        if (true == false) { // Remove this if statement if we decide to display clinical admin title later.
-            if (have_rows('physician_clinical_admin_title')) { ?>
-                                    <h3 class="h4">Administrative Roles</h3>
-                                    <dl>
-                                    <?php while (have_rows('physician_clinical_admin_title')) {
-                                        the_row();
-                                        $department = get_term(get_sub_field('physician_clinical_admin_area'), 'service_line');
-                                        $clinical_admin_title_tax = get_term(get_sub_field('clinical_admin_title_tax'), 'clinical_admin_title');
-                                        ?>
-                                        <dt><?php echo $department->name; ?></dt>
-                                        <dd><?php echo $clinical_admin_title_tax->name; ?></dd>
-                                    <?php } ?>
-                                    </dl>
-                                <?php }
-            } // endif?>
                             <?php if ($physician_clinical_focus) { ?>
                                 <h3 class="h4">Clinical Focus</h3>
                                 <?php echo $physician_clinical_focus; ?>

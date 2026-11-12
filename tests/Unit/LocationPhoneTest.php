@@ -256,7 +256,7 @@ test('the profile phone block builds the schema list of telephone numbers when t
 
     $collapsed = trim((string) preg_replace('/\s+/', ' ', $schema));
 
-    expect($collapsed)->toBe('"contactPoint": ["telephone": ["dash:501-1" , "dash:501-2" , "dash:501-3" , "dash:501-6" ],');
+    expect($collapsed)->toBe('"contactPoint": ["telephone": ["dash:501-1", "dash:501-2", "dash:501-3", "dash:501-6"],');
 });
 
 test("the profile phone block adds the children's hospital numbers to the schema list", function (): void {
@@ -270,7 +270,7 @@ test("the profile phone block adds the children's hospital numbers to the schema
         'location_ac_appointments_specialty' => '501-5',
     ], 'location_profile', ['phone_schema' => &$schema]);
 
-    expect(trim((string) preg_replace('/\s+/', ' ', $schema)))->toBe('"telephone": ["dash:501-1" , "dash:501-4" , "dash:501-5" ],');
+    expect(trim((string) preg_replace('/\s+/', ' ', $schema)))->toBe('"telephone": ["dash:501-1", "dash:501-4", "dash:501-5"],');
 });
 
 test('the profile phone block skips an additional number without a phone in the schema list', function (): void {
@@ -279,5 +279,14 @@ test('the profile phone block skips an additional number without a phone in the 
 
     location_phone(['field_location_phone_numbers' => $rows], 'location_profile', ['phone_schema' => &$schema], $rows);
 
-    expect(trim((string) preg_replace('/\s+/', ' ', $schema)))->toBe('],');
+    expect(trim((string) preg_replace('/\s+/', ' ', $schema)))->toBe('');
+});
+
+test('the profile phone block lists additional numbers in the schema when there is no general number', function (): void {
+    $schema = '';
+    $rows = [['location_appointments_text' => 'Billing', 'location_appointments_phone' => '501-6', 'location_appointments_additional_text' => '']];
+
+    location_phone(['field_location_phone_numbers' => $rows], 'location_profile', ['phone_schema' => &$schema], $rows);
+
+    expect(trim((string) preg_replace('/\s+/', ' ', $schema)))->toBe('"telephone": ["dash:501-6"],');
 });

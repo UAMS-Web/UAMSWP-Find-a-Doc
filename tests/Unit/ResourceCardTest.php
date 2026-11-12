@@ -17,7 +17,8 @@ require_once __DIR__.'/../Support/templates.php';
  * @param  array<string, mixed>  $fields  The ACF fields by name; `name:id` keys win for one post.
  * @param  array<string, mixed>  $options  `titles` (id => title), `statuses` (id => status), `thumbnail` (the
  *                                         featured image id, 0 for none), `alts` (image id => alt text),
- *                                         `excerpt`, `content`, `prefixes` (provider id => prefix), `page` and `partial` (the partial to include).
+ *                                         `excerpt`, `content`, `prefixes` (provider id => prefix), `page` and `partial` (the partial to include),
+ *                                         and `status_log` (an ArrayObject that collects the id of every status read).
  */
 function resource_card(array $fields = [], array $options = []): string
 {
@@ -26,11 +27,16 @@ function resource_card(array $fields = [], array $options = []): string
     $statuses = $options['statuses'] ?? [];
     $alts = $options['alts'] ?? [];
     $prefixes = $options['prefixes'] ?? [];
+    $status_log = $options['status_log'] ?? new ArrayObject;
 
     when('get_field')->alias(static fn (string $name, mixed $id = null): mixed => $fields[$name.':'.$id] ?? $fields[$name] ?? null);
     when('get_the_title')->alias(static fn (mixed $id = 0): string => $titles[$id] ?? 'Title '.$id);
     when('get_permalink')->alias(static fn (mixed $id = 0): string => 'https://example.test/p/'.$id.'/');
-    when('get_post_status')->alias(static fn (mixed $id): string => $statuses[$id] ?? 'publish');
+    when('get_post_status')->alias(static function (mixed $id) use ($statuses, $status_log): string {
+        $status_log[] = $id;
+
+        return $statuses[$id] ?? 'publish';
+    });
     when('get_the_excerpt')->justReturn($options['excerpt'] ?? 'An excerpt.');
     when('get_the_content')->justReturn($options['content'] ?? '');
     when('wp_strip_all_tags')->alias(static fn (string $text): string => strip_tags($text));
@@ -221,4 +227,27 @@ test('the resource loop prints an archive card for each post of the main loop, o
     uamswp_test_main_loop([]);
 
     expect(trim(resource_card([], ['partial' => 'fwp/clinical-resource-loop'])))->toBe('<p>Sorry, no resources matched your criteria.</p>');
+});
+
+test('the card stops looking for a published related post at the first one', function (string $field, array $ids): void {
+    $log = new ArrayObject;
+
+    resource_card([$field => $ids], ['status_log' => $log]);
+
+    // One read to find the first published post, then one read for each post to count them.
+    expect(array_count_values($log->getArrayCopy()))->toBe([$ids[0] => 2, $ids[1] => 1, $ids[2] => 1]);
+})->with([
+    'providers' => ['clinical_resource_providers', [21, 22, 23]],
+    'locations' => ['clinical_resource_locations', [31, 32, 33]],
+    'conditions' => ['clinical_resource_conditions', [41, 42, 43]],
+    'treatments' => ['clinical_resource_treatments', [51, 52, 53]],
+    'areas of expertise' => ['clinical_resource_aoe', [61, 62, 63]],
+]);
+
+test('the card reads past the unpublished related posts to find a published one', function (): void {
+    $log = new ArrayObject;
+
+    resource_card(['clinical_resource_conditions' => [41, 42, 43]], ['status_log' => $log, 'statuses' => [41 => 'draft', 42 => 'draft']]);
+
+    expect(array_count_values($log->getArrayCopy()))->toBe([41 => 2, 42 => 2, 43 => 2]);
 });

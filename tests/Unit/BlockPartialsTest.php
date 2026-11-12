@@ -100,7 +100,7 @@ test('the provider appointment block words each combination of location, referra
     $text = str_replace("\u{00A0}", ' ', $text);
 
     expect($text)->toContain($expected)
-        ->and(block_partials_warnings())->toBe($portal ? [] : ['Undefined variable $appointment_phone_name_attr']);
+        ->and(block_partials_warnings())->toBe([]);
 })->with([
     'referral, new patients, portal, main line' => [true, true, true, true, true, 'Appointments for new patients are by referral only. Existing patients can make an appointment by requesting an appointment online through MyChart, by contacting the clinic directly or by calling the UAMS Health appointment line at (501) 686-8000.'],
     'referral, new patients, portal, no main line' => [true, true, true, true, false, 'Existing patients can make an appointment by requesting an appointment online through MyChart or by contacting the clinic directly.'],
@@ -171,4 +171,13 @@ test('the provider appointment block labels the phone link with the line name fo
     $output = block_partials_appointment(['physician_portal' => 5]);
 
     expect($output)->toContain('class="no-break" data-categorytitle="Make an Appointment | Block 1" data-typetitle="Main Appointment Line | the main Arkansas Children\'s Hospital appointment line"');
+});
+
+test('the provider appointment block labels the main line link for a provider without a portal', function (): void {
+    block_partials_appointment_stubs(true, null);
+
+    $output = block_partials_appointment(['physician_portal' => 0]);
+
+    expect($output)->toContain('class="no-break" data-categorytitle="Make an Appointment | Block 1" data-typetitle="Main Appointment Line | the UAMS Health appointment line"')
+        ->and(block_partials_warnings())->toBe([]);
 });

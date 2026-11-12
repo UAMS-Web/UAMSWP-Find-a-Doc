@@ -234,7 +234,7 @@ test('the area of expertise card shows the post thumbnail and links to the page'
 
     expect($output)->toContain('<img data-size="aspect-16-9-small" data-class="card-img-top">')
         ->and($output)->not->toContain('no-image_16-9')
-        ->and($output)->toContain('<span class="name"><a href="https://example.test/e/1/" target="_self" aria-label="View Area of Expertise page forCardiology" data-categorytitle="Name" data-itemtitle="Cardiology">Cardiology</a></span>')
+        ->and($output)->toContain('<span class="name"><a href="https://example.test/e/1/" target="_self" aria-label="View Area of Expertise page for Cardiology" data-categorytitle="Name" data-itemtitle="Cardiology">Cardiology</a></span>')
         ->and($output)->toContain('<p class="card-text">Heart care.</p>')
         ->and($output)->not->toContain('Part of');
 });

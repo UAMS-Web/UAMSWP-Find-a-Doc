@@ -72,4 +72,7 @@ jobs:
           set -euo pipefail
           # shellcheck disable=SC2086
           vendor/bin/pest $MUTATE_TESTS --mutate --covered-only --path="$MUTATE_PATH" | tee mutation.log
-          grep -E '^ +Mutations: [0-9]+ tested' mutation.log || { echo "::error::The run reported no mutations tested"; exit 1; }
+          # The summary line lists only the outcomes that occurred, for example
+          # "Mutations: 456 untested, 6 timeout, 889 tested", and the log carries color codes.
+          sed -E 's/\x1b\[[0-9;]*m//g' mutation.log > mutation.plain.log
+          grep -E '^ *Mutations:.*[0-9]+ tested' mutation.plain.log || { echo "::error::The run reported no mutations tested"; exit 1; }

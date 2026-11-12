@@ -152,7 +152,7 @@ function display_provider_image_doximity_list(): void
                     foreach ($locations as $location) {
                         if (get_post_status($location) == 'publish') {
                             $location_valid = true;
-
+                            break;
                         }
                     }
                     // Create the table

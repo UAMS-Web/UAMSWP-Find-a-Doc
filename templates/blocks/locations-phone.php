@@ -30,6 +30,7 @@ if ($phone_output == 'associated_locations') {
     $location_title_attr = $location_title;
     $location_title_attr = str_replace('"', "'", $location_title_attr); // Replace double quotes with single quote
     $location_title_attr = str_replace('&#8217;', "'", $location_title_attr); // Replace right single quote with single quote
+    $location_title_attr = str_replace('&nbsp;', ' ', $location_title_attr); // Convert non-breaking space entity text to a normal space before it is encoded
     $location_title_attr = htmlentities($location_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
     $location_title_attr = str_replace('&nbsp;', ' ', $location_title_attr); // Convert non-breaking space with normal space
     $location_title_attr = html_entity_decode($location_title_attr); // Convert HTML entities to their corresponding characters
@@ -139,15 +140,18 @@ if ($phone_output == 'location_profile') {
 }
 
 // Display phone numbers on location profile's contact information section
-if ($phone_output == 'location_profile') { ?>
+if ($phone_output == 'location_profile') {
+    $profile_phone_schema = []; // The numbers for the structured data
+    ?>
     <dl <?php echo $location_phone_data_categorytitle ? 'data-categorytitle="'.$location_phone_data_categorytitle.'"' : '' ?>>
         <?php if (! empty($location_phone)) {
             // General Information
             ?>
             <dt>General Information<?php echo ($location_clinic_phone_query || ! $location_appointments_query) ? '' : ' and Appointments'; ?></dt>
             <dd><?php echo ! empty($location_phone_link) ? $location_phone_link : $location_phone; ?></dd>
-            <?php isset($phone_schema) ? $phone_schema .= '"telephone": ["'.$location_phone_format_dash.'"
-            ' : ''; ?>
+            <?php if (isset($phone_schema)) {
+                $profile_phone_schema[] = $location_phone_format_dash;
+            } ?>
         <?php } ?>
         <?php if ($location_clinic_phone_query && (! empty($location_new_appointments_phone) || (! empty($location_return_appointments_phone) && $location_appointment_phone_query))) {
             // Appointments
@@ -155,13 +159,15 @@ if ($phone_output == 'location_profile') { ?>
             <dt>Appointments</dt>
             <?php if (! empty($location_new_appointments_phone)) { ?>
                 <dd><?php echo ! empty($location_new_appointments_phone_link) ? $location_new_appointments_phone_link : $location_new_appointments_phone; ?><?php echo $location_appointment_phone_query ? '<br/><span class="subtitle">New Patients</span>' : ''; ?></dd>
-                <?php isset($phone_schema) ? $phone_schema .= ', "'.$location_new_appointments_phone_format_dash.'"
-                ' : ''; ?>
+                <?php if (isset($phone_schema)) {
+                    $profile_phone_schema[] = $location_new_appointments_phone_format_dash;
+                } ?>
             <?php } ?>
             <?php if (! empty($location_return_appointments_phone) && $location_appointment_phone_query) { ?>
                 <dd><?php echo ! empty($location_return_appointments_phone_link) ? $location_return_appointments_phone_link : $location_return_appointments_phone; ?><br/><span class="subtitle">Returning Patients</span></dd>
-                <?php isset($phone_schema) ? $phone_schema .= ', "'.$location_return_appointments_phone_format_dash.'"
-                ' : ''; ?>
+                <?php if (isset($phone_schema)) {
+                    $profile_phone_schema[] = $location_return_appointments_phone_format_dash;
+                } ?>
             <?php } ?>
         <?php } elseif ($location_ac_appointments_query && (! empty($location_ac_appointments_primary) || ! empty($location_ac_appointments_specialty))) {
             // Arkansas Children's Primary Care and Specialty Care Appointments
@@ -169,13 +175,15 @@ if ($phone_output == 'location_profile') { ?>
             <dt>Appointments</dt>
             <?php if (! empty($location_ac_appointments_primary)) { ?>
                 <dd><?php echo ! empty($location_ac_appointments_primary_link) ? $location_ac_appointments_primary_link : $location_ac_appointments_primary; ?><br/><span class="subtitle">Primary Care</span></dd>
-                <?php isset($phone_schema) ? $phone_schema .= ', "'.$location_ac_appointments_primary_format_dash.'"
-                ' : ''; ?>
+                <?php if (isset($phone_schema)) {
+                    $profile_phone_schema[] = $location_ac_appointments_primary_format_dash;
+                } ?>
             <?php } ?>
             <?php if (! empty($location_ac_appointments_specialty)) { ?>
                 <dd><?php echo ! empty($location_ac_appointments_specialty_link) ? $location_ac_appointments_specialty_link : $location_ac_appointments_specialty; ?><br/><span class="subtitle">Specialty Care</span></dd>
-                <?php isset($phone_schema) ? $phone_schema .= ', "'.$location_ac_appointments_specialty_format_dash.'"
-                ' : ''; ?>
+                <?php if (isset($phone_schema)) {
+                    $profile_phone_schema[] = $location_ac_appointments_specialty_format_dash;
+                } ?>
             <?php } ?>
         <?php } ?>
         <?php if (! empty($location_fax)) {
@@ -194,6 +202,7 @@ if ($phone_output == 'location_profile') { ?>
                 $title_attr = $title;
                 $title_attr = str_replace('"', "'", $title_attr); // Replace double quotes with single quote
                 $title_attr = str_replace('&#8217;', "'", $title_attr); // Replace right single quote with single quote
+                $title_attr = str_replace('&nbsp;', ' ', $title_attr); // Convert non-breaking space entity text to a normal space before it is encoded
                 $title_attr = htmlentities($title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
                 $title_attr = str_replace('&nbsp;', ' ', $title_attr); // Convert non-breaking space with normal space
                 $title_attr = html_entity_decode($title_attr); // Convert HTML entities to their corresponding characters
@@ -204,8 +213,9 @@ if ($phone_output == 'location_profile') { ?>
             <dt><?php echo $title; ?></dt>
             <dd><a href="tel:<?php echo $phone_format_dash; ?>" data-typetitle="Additional Phone Number: <?php echo $title_attr; ?>"><?php echo $phone_format_dash; ?></a><?php echo $text ? '<br/><span class="subtitle">'.$text.'</span>' : ''; ?></dd>
             <?php if ($phone != '') {
-                isset($phone_schema) ? $phone_schema .= ', "'.$phone_format_dash.'"
-                ' : '';
+                if (isset($phone_schema)) {
+                    $profile_phone_schema[] = $phone_format_dash;
+                }
             }?>
             <?php }
             } ?>
@@ -221,7 +231,9 @@ if ($phone_output == 'location_profile') { ?>
     }
     ?>
     </dl>
-    <?php isset($phone_schema) ? $phone_schema .= '],' : ''; ?>
+    <?php if (isset($phone_schema) && $profile_phone_schema) {
+        $phone_schema .= '"telephone": ["'.implode('", "', $profile_phone_schema).'"],';
+    } ?>
 <?php } // endif
 
 // Display phone numbers for associated locations
