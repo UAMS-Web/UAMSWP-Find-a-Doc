@@ -95,3 +95,30 @@ function uamswp_test_render_template(string $name): string
 
     return $render();
 }
+
+/**
+ * Include a partial under templates/ with the given variables in scope, and return what it printed.
+ *
+ * The blocks, loops and fwp partials are not page templates: they are included by one, and read the variables
+ * that template set. Each call runs the file again.
+ *
+ * @param  string  $path  The path under templates/, without the extension (for example `loops/expertise-card`).
+ * @param  array<string, mixed>  $variables  The variables the including template would have set.
+ */
+function uamswp_test_include_partial(string $path, array $variables = []): string
+{
+    $render = static function () use ($path, $variables): string {
+        extract($variables, EXTR_SKIP);
+        ob_start();
+
+        try {
+            include UAMS_FAD_PATH.'templates/'.$path.'.php';
+        } finally {
+            $output = (string) ob_get_clean();
+        }
+
+        return $output;
+    };
+
+    return $render();
+}
