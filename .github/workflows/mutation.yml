@@ -1,0 +1,75 @@
+name: Mutation
+
+# Runs Pest mutation testing on Linux for one file on demand, so a coverage slice can record a Linux score
+# next to its Windows one. Start it from the Actions tab (or `gh workflow run mutation.yml`) with the
+# first-party file to mutate and the test files that cover it.
+#
+# This workflow is not part of the `CI` aggregate and no ruleset requires it. The required form, run on
+# every pull request through the shared chain, is its own ticket (UAMS-Web/UAMSWP-Find-a-Doc#1171) and
+# waits for coverage to be complete.
+#
+# The run prints the plain test run first and the mutation run after it, with the duration of each, so a
+# mutation phase that did not execute its child processes shows as a score of 100% with a duration far
+# below the test run. Read the ratio before trusting the score.
+
+on:
+  workflow_dispatch:
+    inputs:
+      path:
+        description: 'The file to mutate, relative to the repository root (for example templates/single-locations.php).'
+        required: true
+        type: string
+      tests:
+        description: 'The test files that cover it, separated by spaces (for example tests/Unit/SingleLocationsTest.php).'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  mutate:
+    name: Mutation score (ubuntu-latest)
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: ./.github/actions/setup
+        with:
+          coverage: pcov
+
+      - name: Check the inputs
+        env:
+          MUTATE_PATH: ${{ inputs.path }}
+          MUTATE_TESTS: ${{ inputs.tests }}
+        run: |
+          set -eu
+          case "$MUTATE_PATH" in
+            *..*|/*|*[!A-Za-z0-9_./-]*) echo "::error::path must be a relative path of letters, digits, dots, dashes, underscores and slashes"; exit 1 ;;
+          esac
+          [ -f "$MUTATE_PATH" ] || { echo "::error::$MUTATE_PATH is not a file"; exit 1; }
+          for test in $MUTATE_TESTS; do
+            case "$test" in
+              *..*|/*|*[!A-Za-z0-9_./-]*) echo "::error::tests must be relative paths of letters, digits, dots, dashes, underscores and slashes"; exit 1 ;;
+            esac
+            [ -f "$test" ] || { echo "::error::$test is not a file"; exit 1; }
+          done
+
+      - name: Run the tests without mutation
+        env:
+          MUTATE_TESTS: ${{ inputs.tests }}
+        run: |
+          set -eu
+          # shellcheck disable=SC2086
+          vendor/bin/pest $MUTATE_TESTS
+
+      - name: Run mutation testing
+        env:
+          MUTATE_PATH: ${{ inputs.path }}
+          MUTATE_TESTS: ${{ inputs.tests }}
+        run: |
+          set -euo pipefail
+          # shellcheck disable=SC2086
+          vendor/bin/pest $MUTATE_TESTS --mutate --covered-only --path="$MUTATE_PATH" | tee mutation.log
+          grep -E '^ +Mutations: [0-9]+ tested' mutation.log || { echo "::error::The run reported no mutations tested"; exit 1; }
