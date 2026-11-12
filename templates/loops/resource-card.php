@@ -18,6 +18,7 @@ $resource_title = $resource_title_short ?: get_the_title($id);
 $resource_title_attr = $resource_title;
 $resource_title_attr = str_replace('"', "'", $resource_title_attr); // Replace double quotes with single quote
 $resource_title_attr = str_replace('&#8217;', "'", $resource_title_attr); // Replace right single quote with single quote
+$resource_title_attr = str_replace('&nbsp;', ' ', $resource_title_attr); // Convert non-breaking space entity text to a normal space before it is encoded
 $resource_title_attr = htmlentities($resource_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 $resource_title_attr = str_replace('&nbsp;', ' ', $resource_title_attr); // Convert non-breaking space with normal space
 $resource_title_attr = html_entity_decode($resource_title_attr); // Convert HTML entities to their corresponding characters
@@ -43,6 +44,7 @@ if (isset($resource_type) && isset($resource_button_text_arr[$resource_type_valu
 $resource_button_text_attr = $resource_button_text;
 $resource_button_text_attr = str_replace('"', "'", $resource_button_text_attr); // Replace double quotes with single quote
 $resource_button_text_attr = str_replace('&#8217;', "'", $resource_button_text_attr); // Replace right single quote with single quote
+$resource_button_text_attr = str_replace('&nbsp;', ' ', $resource_button_text_attr); // Convert non-breaking space entity text to a normal space before it is encoded
 $resource_button_text_attr = htmlentities($resource_button_text_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 $resource_button_text_attr = str_replace('&nbsp;', ' ', $resource_button_text_attr); // Convert non-breaking space with normal space
 $resource_button_text_attr = html_entity_decode($resource_button_text_attr); // Convert HTML entities to their corresponding characters
@@ -242,6 +244,7 @@ if ($resource_page == 'archive') { ?>
                                                     $associate_title_attr = $associate_title;
                                                     $associate_title_attr = str_replace('"', "'", $associate_title_attr); // Replace double quotes with single quote
                                                     $associate_title_attr = str_replace('&#8217;', "'", $associate_title_attr); // Replace right single quote with single quote
+                                                    $associate_title_attr = str_replace('&nbsp;', ' ', $associate_title_attr); // Convert non-breaking space entity text to a normal space before it is encoded
                                                     $associate_title_attr = htmlentities($associate_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
                                                     $associate_title_attr = str_replace('&nbsp;', ' ', $associate_title_attr); // Convert non-breaking space with normal space
                                                     $associate_title_attr = html_entity_decode($associate_title_attr); // Convert HTML entities to their corresponding characters
@@ -285,6 +288,7 @@ if ($resource_page == 'archive') { ?>
                                                     $associate_title_attr = $associate_title;
                                                     $associate_title_attr = str_replace('"', "'", $associate_title_attr); // Replace double quotes with single quote
                                                     $associate_title_attr = str_replace('&#8217;', "'", $associate_title_attr); // Replace right single quote with single quote
+                                                    $associate_title_attr = str_replace('&nbsp;', ' ', $associate_title_attr); // Convert non-breaking space entity text to a normal space before it is encoded
                                                     $associate_title_attr = htmlentities($associate_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
                                                     $associate_title_attr = str_replace('&nbsp;', ' ', $associate_title_attr); // Convert non-breaking space with normal space
                                                     $associate_title_attr = html_entity_decode($associate_title_attr); // Convert HTML entities to their corresponding characters
@@ -328,6 +332,7 @@ if ($resource_page == 'archive') { ?>
                                                     $associate_title_attr = $associate_title;
                                                     $associate_title_attr = str_replace('"', "'", $associate_title_attr); // Replace double quotes with single quote
                                                     $associate_title_attr = str_replace('&#8217;', "'", $associate_title_attr); // Replace right single quote with single quote
+                                                    $associate_title_attr = str_replace('&nbsp;', ' ', $associate_title_attr); // Convert non-breaking space entity text to a normal space before it is encoded
                                                     $associate_title_attr = htmlentities($associate_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
                                                     $associate_title_attr = str_replace('&nbsp;', ' ', $associate_title_attr); // Convert non-breaking space with normal space
                                                     $associate_title_attr = html_entity_decode($associate_title_attr); // Convert HTML entities to their corresponding characters
@@ -371,6 +376,7 @@ if ($resource_page == 'archive') { ?>
                                                     $associate_title_attr = $associate_title;
                                                     $associate_title_attr = str_replace('"', "'", $associate_title_attr); // Replace double quotes with single quote
                                                     $associate_title_attr = str_replace('&#8217;', "'", $associate_title_attr); // Replace right single quote with single quote
+                                                    $associate_title_attr = str_replace('&nbsp;', ' ', $associate_title_attr); // Convert non-breaking space entity text to a normal space before it is encoded
                                                     $associate_title_attr = htmlentities($associate_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
                                                     $associate_title_attr = str_replace('&nbsp;', ' ', $associate_title_attr); // Convert non-breaking space with normal space
                                                     $associate_title_attr = html_entity_decode($associate_title_attr); // Convert HTML entities to their corresponding characters
@@ -414,6 +420,7 @@ if ($resource_page == 'archive') { ?>
                                                     $associate_title_attr = $associate_title;
                                                     $associate_title_attr = str_replace('"', "'", $associate_title_attr); // Replace double quotes with single quote
                                                     $associate_title_attr = str_replace('&#8217;', "'", $associate_title_attr); // Replace right single quote with single quote
+                                                    $associate_title_attr = str_replace('&nbsp;', ' ', $associate_title_attr); // Convert non-breaking space entity text to a normal space before it is encoded
                                                     $associate_title_attr = htmlentities($associate_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
                                                     $associate_title_attr = str_replace('&nbsp;', ' ', $associate_title_attr); // Convert non-breaking space with normal space
                                                     $associate_title_attr = html_entity_decode($associate_title_attr); // Convert HTML entities to their corresponding characters

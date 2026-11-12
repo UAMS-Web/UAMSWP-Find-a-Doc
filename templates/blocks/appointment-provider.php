@@ -16,6 +16,7 @@ if ($physician_portal) {
     $portal_name_attr = $portal_name;
     $portal_name_attr = str_replace('"', "'", $portal_name_attr); // Replace double quotes with single quote
     $portal_name_attr = str_replace('&#8217;', "'", $portal_name_attr); // Replace right single quote with single quote
+    $portal_name_attr = str_replace('&nbsp;', ' ', $portal_name_attr); // Convert non-breaking space entity text to a normal space before it is encoded
     $portal_name_attr = htmlentities($portal_name_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
     $portal_name_attr = str_replace('&nbsp;', ' ', $portal_name_attr); // Convert non-breaking space with normal space
     $portal_name_attr = html_entity_decode($portal_name_attr); // Convert HTML entities to their corresponding characters
@@ -37,13 +38,15 @@ if ($physician_portal) {
         $appointment_phone_name = 'the main Central Arkansas Veterans Healthcare System appointment line';
         $appointment_phone = '5012573999';
     }
-    $appointment_phone_name_attr = $appointment_phone_name;
-    $appointment_phone_name_attr = str_replace('"', "'", $appointment_phone_name_attr); // Replace double quotes with single quote
-    $appointment_phone_name_attr = str_replace('&#8217;', "'", $appointment_phone_name_attr); // Replace right single quote with single quote
-    $appointment_phone_name_attr = htmlentities($appointment_phone_name_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
-    $appointment_phone_name_attr = str_replace('&nbsp;', ' ', $appointment_phone_name_attr); // Convert non-breaking space with normal space
-    $appointment_phone_name_attr = html_entity_decode($appointment_phone_name_attr); // Convert HTML entities to their corresponding characters
 }
+
+$appointment_phone_name_attr = $appointment_phone_name;
+$appointment_phone_name_attr = str_replace('"', "'", $appointment_phone_name_attr); // Replace double quotes with single quote
+$appointment_phone_name_attr = str_replace('&#8217;', "'", $appointment_phone_name_attr); // Replace right single quote with single quote
+$appointment_phone_name_attr = str_replace('&nbsp;', ' ', $appointment_phone_name_attr); // Convert non-breaking space entity text to a normal space before it is encoded
+$appointment_phone_name_attr = htmlentities($appointment_phone_name_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
+$appointment_phone_name_attr = str_replace('&nbsp;', ' ', $appointment_phone_name_attr); // Convert non-breaking space with normal space
+$appointment_phone_name_attr = html_entity_decode($appointment_phone_name_attr); // Convert HTML entities to their corresponding characters
 
 $appointment_phone_tel = preg_replace('/^(\+?\d)?(\d{3})(\d{3})(\d{4})$/', '$2-$3-$4', $appointment_phone);
 $appointment_phone_text = preg_replace('/^(\+?\d)?(\d{3})(\d{3})(\d{4})$/', '($2) $3-$4', $appointment_phone);

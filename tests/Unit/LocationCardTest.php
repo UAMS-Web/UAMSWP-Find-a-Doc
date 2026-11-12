@@ -154,8 +154,8 @@ test('the location card names the quotes and entities in the title safely in its
 
     expect($output)->toContain('aria-label="View location page for Mom\'s \'Clinic\'"');
 
-    // The ampersand of a literal entity is encoded before the replacement looks for it, so the entity text stays.
-    expect(location_card([], ['titles' => [location_card_next_id() + 1 => 'A&nbsp;B']]))->toContain('aria-label="View location page for A&nbsp;B"');
+    // The entity text is replaced before the title is encoded, so the label carries a plain space.
+    expect(location_card([], ['titles' => [location_card_next_id() + 1 => 'A&nbsp;B']]))->toContain('aria-label="View location page for A B"');
 });
 
 test('the location card shows the parent as the subtitle and uses its image', function (): void {

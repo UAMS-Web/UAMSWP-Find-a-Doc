@@ -128,12 +128,10 @@ test('the resource list item falls back to the full title and cleans it for the 
         ->and($output)->toContain('>Mom&amp;#8217;s &quot;best&quot; guide</a>');
 });
 
-test('the resource list item leaves a non-breaking space entity in the label because the title is encoded first', function (): void {
+test('the resource list item puts a plain space in the label for a non-breaking space entity in the title', function (): void {
     small_partials_resource(['clinical_resource_title_short' => '', 'clinical_resource_type' => ['value' => 'guide', 'label' => 'Guide']], 'A&nbsp;B', 'An excerpt.');
 
-    // htmlentities() turns the ampersand of `&nbsp;` into `&amp;` before the replacement looks for it, so the
-    // replacement never matches and the decode at the end brings the literal entity back (kept as it was).
-    expect(uamswp_test_include_partial('loops/resource-list-item', ['id' => 7]))->toContain('aria-label="View Clinical Resource page for A&amp;nbsp;B"');
+    expect(uamswp_test_include_partial('loops/resource-list-item', ['id' => 7]))->toContain('aria-label="View Clinical Resource page for A B"');
 });
 
 test('the resource list item takes the text of the content when there is no excerpt', function (): void {
