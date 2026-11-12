@@ -26,17 +26,6 @@ if (
 
 add_action('wp_head', 'uamswp_keyword_hook_header');
 
-// Override theme's method of defining the page title
-function uamswp_fad_title_taxonomy_condition($html): string
-{
-    // global $condition_title;
-    // you can add here all your conditions as if is_page(), is_category() etc..
-    if (strlen(single_cat_title('', false)) < 34) {
-        return single_cat_title('', false).' | Conditions | '.get_bloginfo('name');
-    }
-
-    return single_cat_title('', false).' | '.get_bloginfo('name');
-}
 add_filter('seopress_titles_title', 'uamswp_fad_title_taxonomy_condition', 15, 2);
 
 if (empty($excerpt)) {

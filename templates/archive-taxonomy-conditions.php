@@ -6,15 +6,6 @@ add_filter('terms_clauses', 'uamswp_terms_clauses', 10, 3);
 $condition_title = get_field('conditions_archive_headline', 'option');
 $condition_text = get_field('conditions_archive_intro_text', 'option');
 
-// Override theme's method of defining the page title
-function uamswp_fad_title_archive_taxonomy_conditions($html): string
-{
-    global $condition_title;
-    // you can add here all your conditions as if is_page(), is_category() etc..
-    $html = ($condition_title ?: 'Conditions').' | '.get_bloginfo('name');
-
-    return $html;
-}
 add_filter('seopress_titles_title', 'uamswp_fad_title_archive_taxonomy_conditions', 15, 2);
 
 get_header(); ?>

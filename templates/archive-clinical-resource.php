@@ -1,13 +1,5 @@
 <?php /* Template Name: Clinical Resources Archive */
 
-// Override theme's method of defining the page title
-function uamswp_fad_title_archive_clinical_resource($html): string
-{
-    // you can add here all your conditions as if is_page(), is_category() etc..
-    $html = 'Clinical Resources | '.get_bloginfo('name');
-
-    return $html;
-}
 // add_filter('seopress_titles_title', 'uamswp_fad_title_archive_clinical_resource', 15, 2);
 
 get_header();

@@ -1,13 +1,5 @@
 <?php
 
-// Override theme's method of defining the page title
-function uamswp_fad_title_archive_locations($html): string
-{
-    // you can add here all your conditions as if is_page(), is_category() etc..
-    $html = 'Locations | '.get_bloginfo('name');
-
-    return $html;
-}
 // add_filter('seopress_titles_title', 'uamswp_fad_title_archive_locations', 15, 2);
 
 if (isset($_COOKIE['wp_filter_region']) && ! isset($_GET['_location_region'])) {

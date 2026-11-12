@@ -26,24 +26,6 @@ $condition_title_attr = str_replace('&nbsp;', ' ', $condition_title_attr); // Co
 $condition_title_attr = html_entity_decode($condition_title_attr); // Convert HTML entities to their corresponding characters
 $condition_text = get_field('conditions_archive_intro_text', 'option');
 
-// Override theme's method of defining the page title
-function uamswp_fad_title_single_condition($html): string
-{
-    global $page_title_attr;
-    global $condition_title_attr;
-    // you can add here all your conditions as if is_page(), is_category() etc..
-    $meta_title_chars_max = 60;
-    $meta_title_base = $page_title_attr.' | '.get_bloginfo('name');
-    $meta_title_base_chars = strlen($meta_title_base);
-    $meta_title_enhanced_addition = ' | '.$condition_title_attr;
-    $meta_title_enhanced = $page_title_attr.$meta_title_enhanced_addition.' | '.get_bloginfo('name');
-    $meta_title_enhanced_chars = strlen($meta_title_enhanced);
-    if ($meta_title_enhanced_chars <= $meta_title_chars_max) {
-        return $meta_title_enhanced;
-    }
-
-    return $meta_title_base;
-}
 add_filter('seopress_titles_title', 'uamswp_fad_title_single_condition', 15, 2);
 
 $excerpt = get_the_excerpt(); // get_field( 'condition_short_desc' );

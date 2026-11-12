@@ -402,68 +402,11 @@ $schema_description = $excerpt;  // Used for Schema Data. Should ALWAYS have a v
 // Override theme's method of defining the meta description
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
-// Override theme's method of defining the page title
-function uamswp_fad_title_single_physicians($html): string
-{
-    global $full_name_attr;
-    global $provider_occupation_title_attr;
-    global $primary_appointment_city_attr;
-    global $expertise_primary_name;
-
-    $meta_title_chars_max = 60; // The recommended length for meta titles is 50-60 characters. Sets the max to 60.
-    $meta_title_separator = ' | '; // Characters separating components of the meta title
-
-    // Base meta title ("{Full display name} | UAMS Health")
-    $meta_title_base = $full_name_attr.$meta_title_separator.get_bloginfo('name'); // Construct the meta title
-    $meta_title_base_chars = strlen($meta_title_base); // Count the characters in the meta title
-
-    // Base meta title ("{Full display name} | {Clinical title} | UAMS Health")
-    $meta_title_enhanced = $full_name_attr.$meta_title_separator.$provider_occupation_title_attr.$meta_title_separator.get_bloginfo('name'); // Construct the meta title
-    $meta_title_enhanced_chars = strlen($meta_title_enhanced); // Count the characters in the meta title
-
-    // Enhanced meta title level 1 ("{Full display name} | {Clinical title} | {City of primary location} | UAMS Health")
-    $meta_title_enhanced_x2 = $full_name_attr.$meta_title_separator.$provider_occupation_title_attr.$meta_title_separator.$primary_appointment_city_attr.$meta_title_separator.get_bloginfo('name'); // Construct the meta title
-    $meta_title_enhanced_x2_chars = strlen($meta_title_enhanced_x2); // Count the characters in the meta title
-
-    // Enhanced meta title level 2 ("{Full display name} | {Clinical title} | {Primary area of expertise} | {City of primary location} | UAMS Health")
-    $meta_title_enhanced_x3 = $full_name_attr.$meta_title_separator.$provider_occupation_title_attr.$meta_title_separator.$expertise_primary_name.$meta_title_separator.$primary_appointment_city_attr.$meta_title_separator.get_bloginfo('name'); // Construct the meta title
-    $meta_title_enhanced_x3_chars = strlen($meta_title_enhanced_x3); // Count the characters in the meta title
-
-    if ($expertise_primary_name && ($meta_title_enhanced_x3_chars <= $meta_title_chars_max)) {
-        $html = $meta_title_enhanced_x3;
-    } elseif ($primary_appointment_city_attr && ($meta_title_enhanced_x2_chars <= $meta_title_chars_max)) {
-        $html = $meta_title_enhanced_x2;
-    } elseif ($meta_title_enhanced_chars <= $meta_title_chars_max) {
-        $html = $meta_title_enhanced;
-    } else {
-        $html = $meta_title_base;
-    }
-
-    return $html;
-}
 // add_filter('seopress_titles_title', 'uamswp_fad_title_single_physicians', 20, 2);
 add_filter('seopress_titles_title', 'uamswp_fad_title_single_physicians', 15, 2);
 
-function be_remove_title_from_single_crumb($crumb, $args): string // Because BE is the man
-{
-    global $full_name;
-
-    // Genesis outputs the filtered crumb as raw HTML, so escape the provider
-    // name (a plain-text ACF field, not kses-filtered).
-    return substr($crumb, 0, strrpos($crumb, (string) $args['sep'])).$args['sep'].uamswp_provider_name_html($full_name);
-}
 add_filter('genesis_single_crumb', 'be_remove_title_from_single_crumb', 10, 2);
 
-// SEOPress Breadcrumbs Fix
-function sp_change_title_from_provider_crumb($crumbs) // SEOPress
-{
-    global $full_name;
-    $crumb = array_pop($crumbs);
-    $provider_name = [$full_name, get_permalink()];
-    $crumbs[] = $provider_name;
-
-    return $crumbs;
-}
 add_filter('seopress_pro_breadcrumbs_crumbs', 'sp_change_title_from_provider_crumb', 20);
 
 get_header();
