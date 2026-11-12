@@ -17,7 +17,6 @@
 # and uncomment the `scanFiles` block below. wp-cli-stubs needs wordpress-stubs
 # 6.x as well, so the pin above covers both.
 includes:
-    - phpstan-baseline.neon
     - vendor/szepeviktor/phpstan-wordpress/extension.neon
     # PHPStan's opt-in preview channel: turns on rules and stricter analysis
     # that become default in the next major. Ships inside phpstan/phpstan (no
@@ -39,6 +38,7 @@ includes:
 parameters:
     scanFiles:
         - tgm/class-tgm-plugin-activation.php
+        - phpstan-stubs.php
         - vendor/php-stubs/wp-cli-stubs/wp-cli-stubs.php
         - vendor/php-stubs/wp-cli-stubs/wp-cli-commands-stubs.php
         - vendor/php-stubs/wp-cli-stubs/wp-cli-i18n-stubs.php
@@ -165,6 +165,12 @@ parameters:
         -
             identifier: return.void
             reportUnmatched: false
+        # The WordPress stubs mark `get_terms()` `@internal`, but it is core's documented function for
+        # reading terms and the plugin calls it as such.
+        -
+            identifier: function.internal
+            message: '#^Call to internal function get_terms\(\)\.$#'
+            path: includes
         # `wpdb::prepare()` is declared to take a literal string, so a query that interpolates a table
         # name, a column name from a fixed list, or a run of `%d` placeholders sized to its input is
         # reported even though every value still goes through a placeholder. The dead-link and

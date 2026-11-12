@@ -1,6 +1,6 @@
 <?php
 // Ajax Search Pro modifications
-add_filter('asp_results', 'asp_custom_link_meta_results', 1, 2);
+add_filter('asp_results', 'asp_custom_link_meta_results', 1);
 /**
  * @param  array<int|string, stdClass>  $results
  * @return array<int|string, stdClass>
