@@ -64,18 +64,28 @@ function uamswp_test_template(string $name): array
  * Unlike uamswp_test_template() this runs the file every time it is called, so a test can run one template more
  * than once in the process. The file-scope variables it sets are promoted to globals afterwards, because the
  * callbacks that moved into includes/ read them with `global`.
+ *
+ * @param  array<string, mixed>  $variables  Variables WordPress would have in scope for the template, such as `$post`.
  */
-function uamswp_test_render_template(string $name): string
+function uamswp_test_render_template(string $name, array $variables = []): string
 {
     uamswp_test_functions_file();
 
+    // The calls the template makes to the hook functions, read afterwards with uamswp_test_render_hooks().
+    $GLOBALS['uamswp_test_render_hooks'] = [];
+
     foreach (['add_action', 'add_filter', 'remove_action', 'remove_filter'] as $function) {
-        when($function)->justReturn(true);
+        when($function)->alias(static function (mixed ...$arguments) use ($function): bool {
+            $GLOBALS['uamswp_test_render_hooks'][$function][] = $arguments;
+
+            return true;
+        });
     }
 
     when('genesis')->justReturn(null);
 
-    $render = static function () use ($name): string {
+    $render = static function () use ($name, $variables): string {
+        extract($variables, EXTR_SKIP);
         ob_start();
 
         try {
@@ -85,7 +95,7 @@ function uamswp_test_render_template(string $name): string
         }
 
         foreach (get_defined_vars() as $variable => $value) {
-            if (! in_array($variable, ['name', 'output', 'render'], true)) {
+            if (! in_array($variable, ['name', 'output', 'render', 'variables'], true)) {
                 $GLOBALS[$variable] = $value;
             }
         }
@@ -94,6 +104,16 @@ function uamswp_test_render_template(string $name): string
     };
 
     return $render();
+}
+
+/**
+ * The hook calls the last uamswp_test_render_template() run made, by function name.
+ *
+ * @return array<string, list<array<int, mixed>>>
+ */
+function uamswp_test_render_hooks(): array
+{
+    return $GLOBALS['uamswp_test_render_hooks'] ?? [];
 }
 
 /**
