@@ -119,6 +119,32 @@ if (function_exists('bis_get_attachment_image') && ! empty($schema_image)) {
 // $telemed_modified_hours = get_field('field_location_telemed_modified_hours_group'); // modified telemedicine hours repeater
 // Hours Grouping
 $location_hours_group = get_field('location_hours_group');
+// A location with no hours group (or one missing a field) reads each field as empty
+$location_hours_group = array_merge(array_fill_keys([
+    'location_24_7',
+    'location_after_hours',
+    'location_hours',
+    'location_hours_variable',
+    'location_hours_variable_info',
+    'location_modified_hours',
+    'location_modified_hours_end',
+    'location_modified_hours_end_date',
+    'location_modified_hours_group',
+    'location_modified_hours_reason',
+    'location_modified_hours_start_date',
+    'location_telemed_24_7',
+    'location_telemed_hours',
+    'location_telemed_modified_hours_24_7',
+    'location_telemed_modified_hours_end',
+    'location_telemed_modified_hours_end_date',
+    'location_telemed_modified_hours_group',
+    'location_telemed_modified_hours_query',
+    'location_telemed_modified_hours_reason',
+    'location_telemed_modified_hours_start_date',
+    'location_telemed_modified_hours_times',
+    'location_telemed_patients',
+    'location_telemed_query',
+], null), is_array($location_hours_group) ? $location_hours_group : []);
 
 $telemed_query = $location_hours_group['location_telemed_query']; // Is there telemedicine?
 $telemed_patients = $location_hours_group['location_telemed_patients']; // New patients, existing or both?
@@ -452,6 +478,7 @@ while (have_posts()) {
 
     // Check if Portal Information section should be displayed
     $location_portal = get_field('location_portal');
+    $portal = null; // Set below for a location with a portal
 
     if ($location_portal) {
         $portal = get_term($location_portal, 'portal');
@@ -652,7 +679,9 @@ while (have_posts()) {
 					<?php echo $location_city; ?>, <?php echo $location_state; ?> <?php echo $location_zip; ?></p>
 						<div class="btn-container">
 							<div class="inner-container">
+								<?php if (isset($map['lat'], $map['lng'])) { ?>
 								<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo $page_title_phrase; ?>" data-typetitle="Get directions to the clinic">Get Directions</a>
+								<?php } // endif $map?>
 								<?php if ($show_parking_section) { ?>
 									<a class="btn btn-outline-primary" href="#parking-info" aria-label="Parking instructions for <?php echo $page_title_phrase; ?>" data-typetitle="Parking instructions for the clinic">Parking Instructions</a>
 								<?php } // endif $show_parking_section?>
@@ -676,7 +705,7 @@ while (have_posts()) {
 					<h2>Contact Information</h2>
 					<?php
     // Phone values
-    $phone_output_id = $id;
+    $phone_output_id = $current_id;
     $phone_output = 'location_profile';
     include UAMS_FAD_PATH.'/templates/blocks/locations-phone.php';
 
@@ -740,7 +769,11 @@ while (have_posts()) {
                         }
                         if ($modified_hours247) {
                             $modified_text .= '<strong>Open 24/7</strong>';
-                            $modified_hours_schema = '"dayOfWeek": [
+                            $modified_hours_schema = '{
+																		"@type": "OpeningHoursSpecification",
+																		"validFrom": "'.date('Y-m-d', strtotime($modified_start)).'",
+																		'.($modified_end && $modified_end_date ? '"validThrough": "'.date('Y-m-d', strtotime($modified_end_date)).'",
+																		' : '').'"dayOfWeek": [
 												"Monday",
 												"Tuesday",
 												"Wednesday",
@@ -833,7 +866,7 @@ while (have_posts()) {
         } else {
             $hours = $location_hours_group['location_hours'];
             $hours_schema = '';
-            if ($hours247 || $hours[0]['day']) { ?>
+            if ($hours247 || ! empty($hours[0]['day'])) { ?>
 							<h2><?php echo $modified_text ? 'Typical ' : ''; ?>Hours</h2>
 							<?php
                 if ($hours247) {
@@ -927,7 +960,8 @@ while (have_posts()) {
                             if ($row['closed']) {
                                 echo $row['closed'] ? 'Closed</dd>' : '';
                             } else {
-                                echo ($hour['open'] && $row['open'] != '00:00:00') ? ''.ap_time_span(strtotime($row['open']), strtotime($row['close'])).' ' : '';
+                                echo ($row['open'] && $row['open'] != '00:00:00') ? ap_time_span(strtotime($row['open']), strtotime($row['close'])) : '';
+                                echo '</dd>';
                             }
                         }
                     }
@@ -1615,7 +1649,7 @@ while (have_posts()) {
 									<?php echo $portal_content; ?>
 								</div>
 								<?php }
-								if ($portal_content) { ?>
+								if ($portal_link) { ?>
 								<div class="btn-container">
 									<a href="<?php echo esc_url($portal_url); ?>" aria-label="Log in to <?php echo esc_attr($portal_name_attr); ?> to view your patient information and medical records" class="btn btn-white" target="_blank" data-moduletitle="<?php echo esc_attr($portal_name_attr); ?>"><?php echo esc_html($portal_link_title ?: 'Log in to '.$portal_name); ?></a>
 								</div>
@@ -1771,54 +1805,6 @@ while (have_posts()) {
     }
     // End Clinical Resources Section
 
-    // Begin News Section
-    if (true == false) { ?>
-		<!-- Latest News -->
-		<!-- <section class="uams-module news-list bg-auto" id="news">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-12">
-						<h2 class="module-title"><span class="title">Latest News for <?php echo $page_title_phrase; ?></span></h2>
-						<div class="card-list-container">
-							<div class="card-list">
-								<div class="card">
-									<img srcset="https://picsum.photos/434/244?image=1066" src="https://picsum.photos/434/244?image=1066" class="card-img-top" alt="Image description or Story title">
-									<div class="card-body">
-										<h3 class="card-title">
-											<span class="name">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</span>
-										</h3>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.&nbsp;...</p>
-										<a href="javascript:void(0)" class="btn btn-primary stretched-link" aria-label="Story title">Read Full Story</a>
-									</div>
-								</div>
-								<div class="card">
-									<img srcset="https://picsum.photos/434/244?image=348" src="https://picsum.photos/434/244?image=348" class="card-img-top" alt="Image description or Story title">
-									<div class="card-body">
-										<h3 class="card-title">
-											<span class="name">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</span>
-										</h3>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.&nbsp;...</p>
-										<a href="javascript:void(0)" class="btn btn-primary stretched-link" aria-label="Story title">Read Full Story</a>
-									</div>
-								</div>
-								<div class="card">
-									<img srcset="https://picsum.photos/434/244?image=823" src="https://picsum.photos/434/244?image=823" class="card-img-top" alt="Image description or Story title">
-									<div class="card-body">
-										<h3 class="card-title">
-											<span class="name">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</span>
-										</h3>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.&nbsp;...</p>
-										<a href="javascript:void(0)" class="btn btn-primary stretched-link" aria-label="Story title">Read Full Story</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section> -->
-	<?php }
-    // End News Section
     ?>
 </main>
 </div>

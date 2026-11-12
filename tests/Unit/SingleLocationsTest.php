@@ -118,11 +118,12 @@ test('a location without an image has no photo address', function (): void {
 });
 
 test('the telemedicine values come from the hours group', function (): void {
+    $row = ['day' => 'Mon', 'closed' => false, 'open' => '08:00:00', 'close' => '17:00:00', 'comment' => ''];
     $group = [
         'location_telemed_query' => true,
         'location_telemed_patients' => 'both',
         'location_telemed_24_7' => false,
-        'location_telemed_hours' => [['day' => 'Mon']],
+        'location_telemed_hours' => [$row],
         'location_telemed_modified_hours_query' => true,
         'location_telemed_modified_hours_reason' => 'Holiday',
         'location_telemed_modified_hours_start_date' => 'May 1, 2026',
@@ -135,21 +136,40 @@ test('the telemedicine values come from the hours group', function (): void {
     expect($vars['telemed_query'])->toBeTrue()
         ->and($vars['telemed_patients'])->toBe('both')
         ->and($vars['telemed_hours247'])->toBeFalse()
-        ->and($vars['telemed_hours'])->toBe([['day' => 'Mon']])
+        ->and($vars['telemed_hours'])->toBe([$row])
         ->and($vars['telemed_modified'])->toBeTrue()
         ->and($vars['telemed_modified_reason'])->toBe('Holiday')
         ->and($vars['telemed_modified_start'])->toBe('May 1, 2026')
         ->and($vars['telemed_modified_end'])->toBeTrue()
         ->and($vars['telemed_modified_end_date'])->toBe('May 9, 2026')
         ->and($vars['telemed_modified_hours247'])->toBeTrue()
-        ->and(array_count_values($vars['single_location_warnings'])['Trying to access array offset on null'] ?? 0)->toBeLessThan(10);
+        ->and($vars['single_location_warnings'])->toBe([]);
 });
 
-test('a location with no hours group raises an array offset warning for each telemedicine value', function (): void {
+test('a location with no hours group raises no warnings and reads each hours value as empty', function (): void {
     $vars = single_location();
 
-    expect(array_count_values($vars['single_location_warnings'])['Trying to access array offset on null'])->toBeGreaterThanOrEqual(10)
-        ->and($vars['telemed_query'])->toBeNull();
+    expect($vars['single_location_warnings'])->toBe([])
+        ->and($vars['telemed_query'])->toBeNull()
+        ->and($vars['location_hours_group']['location_hours'])->toBeNull();
+});
+
+test('an hours group that lacks a field raises no warnings', function (): void {
+    $vars = single_location(['location_hours_group' => ['location_hours_variable' => true, 'location_hours_variable_info' => 'By appointment.']]);
+
+    expect($vars['single_location_warnings'])->toBe([])
+        ->and($vars['single_location_output'])->toContain('By appointment.');
+});
+
+test('the phone block reads the fields of the location being shown, not the parent', function (): void {
+    $vars = single_location(
+        ['location_phone' => '501-own', 'location_parent' => true, 'location_parent_id' => 90],
+        ['posts' => [90 => (object) ['ID' => 90, 'post_title' => 'Medical Center']], 'fields_by_id' => [90 => ['location_phone' => '501-parent']]],
+    );
+
+    expect($vars['phone_output_id'])->toBe($vars['single_location_id'])
+        ->and($vars['single_location_output'])->toContain('dash:501-own')
+        ->and($vars['single_location_output'])->not->toContain('dash:501-parent');
 });
 
 test('the system telemedicine text and the after hours text come from the options page', function (): void {

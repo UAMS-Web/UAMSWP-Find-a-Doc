@@ -236,8 +236,7 @@ test('holiday hours with times print the times', function (): void {
         ['date' => $date, 'label' => 'Half day', 'closed' => false, 'open' => '09:00:00', 'close' => '13:00:00'],
     ]]);
 
-    // The row has no closing tag for its description in the template.
-    expect($output)->toContain('<dt>Half day<br />'.$date.'<br/></dt><dd>9 a.m. &ndash; 1 p.m.</dl>');
+    expect($output)->toContain('<dt>Half day<br />'.$date.'<br/></dt><dd>9 a.m. &ndash; 1 p.m.</dd></dl>');
 });
 
 test('holiday hours that are all far away or past print no heading', function (): void {
@@ -310,10 +309,13 @@ test('modified hours without an end date stay in effect until further notice', f
 
 test('modified hours open around the clock print as 24/7', function (): void {
     $groups = [['location_modified_hours_title' => '', 'location_modified_hours_information' => '', 'location_modified_hours_24_7' => true, 'location_modified_hours_times' => []]];
-    $output = single_location_markup(single_location_modified($groups));
+    $group = single_location_modified($groups);
+    $output = single_location_markup($group);
+    $start = date('Y-m-d', strtotime($group['location_hours_group']['location_modified_hours_start_date']));
+    $end = date('Y-m-d', strtotime($group['location_hours_group']['location_modified_hours_end_date']));
 
     expect($output)->toContain('<strong>Open 24/7</strong>')
-        ->and($output)->toContain('"openingHoursSpecification": [ "dayOfWeek": [ "Monday",');
+        ->and($output)->toContain('"openingHoursSpecification": [ { "@type": "OpeningHoursSpecification", "validFrom": "'.$start.'", "validThrough": "'.$end.'", "dayOfWeek": [ "Monday",');
 });
 
 test('modified hours that start more than thirty days away are not printed', function (): void {
@@ -607,13 +609,14 @@ test('the portal button falls back to a title made from the portal name', functi
     expect(single_location_markup($fields, ['terms' => [60 => 'MyChart']]))->toContain('>Log in to MyChart</a>');
 });
 
-test('a portal with a link but no text prints no button', function (): void {
+test('a portal with a link but no text prints the button', function (): void {
     $fields = ['location_portal' => 60, 'portal_url' => ['url' => 'https://portal.test/', 'title' => 'Open']];
     $output = single_location_markup($fields, ['terms' => [60 => 'MyChart']]);
 
-    // The button is only printed when there is portal text, although the section needs only text or a link.
-    expect($output)->toContain('<div class="cta-heading"><h2>MyChart</h2></div><div class="cta-body"></div>')
-        ->and($output)->not->toContain('btn-white');
+    expect($output)->toContain('<div class="cta-heading"><h2>MyChart</h2></div><div class="cta-body"><div class="btn-container">')
+        ->and($output)->toContain('href="https://portal.test/"')
+        ->and($output)->toContain('btn-white')
+        ->and($output)->not->toContain('text-container');
 });
 
 test('a portal with neither text nor a link prints only its heading', function (): void {
@@ -637,4 +640,103 @@ test('a child location can use its own featured image for the schema', function 
 
     expect(single_location($fields, $options)['schema_image'])->toBe(900)
         ->and(single_location($fields, $options)['featured_image'])->toBe(900);
+});
+
+/**
+ * The structured data a render printed, decoded.
+ *
+ * @param  array<string, mixed>  $fields
+ * @param  array<string, mixed>  $options
+ * @return array<string, mixed>
+ */
+function single_location_schema(array $fields = [], array $options = []): array
+{
+    $output = single_location($fields, $options)['single_location_output'];
+
+    expect(preg_match("#<script type='application/ld\+json'>(.*?)</script>#s", $output, $match))->toBe(1);
+
+    $schema = json_decode($match[1], true);
+
+    expect(json_last_error_msg())->toBe('No error');
+
+    return $schema;
+}
+
+test('the structured data parses for a location with typical hours', function (): void {
+    $schema = single_location_schema(single_location_hours([single_location_day(), single_location_day('Sat', '09:00:00', '12:00:00')]));
+
+    expect($schema['@type'])->toBe('MedicalClinic')
+        ->and($schema['openingHours'])->toBe(['Mo-Fr 08:00-17:00', 'Sa 09:00-12:00'])
+        ->and($schema)->toHaveKey('logo');
+});
+
+test('the structured data parses with telephone numbers beside the hours', function (): void {
+    $fields = single_location_hours([single_location_day()]) + ['location_phone' => '501-1', 'location_clinic_phone_query' => true, 'location_new_appointments_phone' => '501-2'];
+    $schema = single_location_schema($fields);
+
+    expect($schema['telephone'])->toBe(['dash:501-1', 'dash:501-2'])
+        ->and($schema['openingHours'])->toBe(['Mo-Fr 08:00-17:00']);
+});
+
+test('the structured data parses with the modified hours beside the typical hours', function (): void {
+    $groups = [['location_modified_hours_title' => '', 'location_modified_hours_information' => '', 'location_modified_hours_24_7' => false, 'location_modified_hours_times' => [single_location_modified_time('Mon - Fri', '10:00:00', '14:00:00'), single_location_modified_time('Sat', '00:00:00', '00:00:00', true)]]];
+    $schema = single_location_schema(single_location_modified($groups));
+
+    expect($schema['openingHoursSpecification'])->toHaveCount(2)
+        ->and($schema['openingHoursSpecification'][0]['opens'])->toBe('10:00')
+        ->and($schema['openingHours'])->toBe(['Mo-Fr 08:00-17:00']);
+});
+
+test('the structured data parses with modified hours open around the clock', function (): void {
+    $groups = [['location_modified_hours_title' => '', 'location_modified_hours_information' => '', 'location_modified_hours_24_7' => true, 'location_modified_hours_times' => []]];
+    $schema = single_location_schema(single_location_modified($groups));
+
+    expect($schema['openingHoursSpecification'][0]['closes'])->toBe('23:59')
+        ->and($schema['openingHoursSpecification'][0]['dayOfWeek'])->toHaveCount(7);
+});
+
+test('the structured data parses without hours, with hours around the clock, and with no telephone', function (array $fields): void {
+    $schema = single_location_schema($fields);
+
+    expect($schema['@type'])->toBe('MedicalClinic');
+})->with([
+    'no hours' => [[]],
+    'around the clock' => [single_location_hours([], ['location_24_7' => true])],
+    'a general number only' => [['location_phone' => '501-1']],
+    'additional numbers only' => [['field_location_phone_numbers' => [['location_appointments_text' => 'Billing', 'location_appointments_phone' => '501-6', 'location_appointments_additional_text' => '']]]],
+]);
+
+test('a location has no directions button without coordinates and no warning for it', function (): void {
+    $without = single_location();
+    $with = single_location(['location_map' => ['lat' => 34.7, 'lng' => -92.3]]);
+
+    expect($without['single_location_output'])->not->toContain('Get Directions')
+        ->and($without['single_location_warnings'])->toBe([])
+        ->and($with['single_location_output'])->toContain('/dir/Current+Location/34.7,-92.3')
+        ->and($with['single_location_warnings'])->toBe([]);
+});
+
+test('the template no longer carries the news block that could never run', function (): void {
+    expect(file_get_contents(UAMS_FAD_PATH.'templates/single-locations.php'))->not->toContain('true == false');
+});
+
+test('a holiday row reads its own opening time, not the last row of typical hours', function (): void {
+    $date = date('m/d/Y', strtotime('+10 days'));
+    $output = single_location_markup(single_location_hours([single_location_day('Sun', '00:00:00', '00:00:00', true)]) + ['location_holiday_hours' => [
+        ['date' => $date, 'label' => 'Half day', 'closed' => false, 'open' => '09:00:00', 'close' => '13:00:00'],
+    ]]);
+
+    expect($output)->toContain('<dd>9 a.m. &ndash; 1 p.m.</dd>');
+});
+
+test('a closed holiday row and one that has no times each close their description', function (): void {
+    $date = date('m/d/Y', strtotime('+10 days'));
+    $output = single_location_markup(single_location_hours([single_location_day()]) + ['location_holiday_hours' => [
+        ['date' => $date, 'label' => 'Closed day', 'closed' => true, 'open' => '', 'close' => ''],
+        ['date' => $date, 'label' => 'Unknown day', 'closed' => false, 'open' => '', 'close' => ''],
+    ]]);
+
+    expect($output)->toContain('<dt>Closed day<br />'.$date.'<br/></dt><dd>Closed</dd>')
+        ->and($output)->toContain('<dt>Unknown day<br />'.$date.'<br/></dt><dd></dd>')
+        ->and($output)->toContain('</dd></dl>');
 });
