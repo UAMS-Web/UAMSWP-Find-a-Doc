@@ -189,19 +189,17 @@ function doximity_csv_export(): false
                 // Facility Name field
                 $affiliation_list = '';
                 $i = 1;
-                if ($affiliations) {
-                    foreach (uamswp_fad_arr($affiliations) as $affiliation) {
-                        $affiliation_object = get_term(uamswp_fad_int($affiliation), 'affiliation');
-                        $affiliation_aha_name = uamswp_fad_str(get_field('affiliation_name', $affiliation_object) ?: ($affiliation_object->name ?? ''));
+                foreach (uamswp_fad_arr($affiliations) as $affiliation) {
+                    $affiliation_object = get_term(uamswp_fad_int($affiliation), 'affiliation');
+                    $affiliation_aha_name = uamswp_fad_str(get_field('affiliation_name', $affiliation_object) ?: ($affiliation_object->name ?? ''));
 
-                        $affiliation_aha_id = uamswp_fad_str(get_field('affiliation_id', $affiliation_object));
+                    $affiliation_aha_id = uamswp_fad_str(get_field('affiliation_id', $affiliation_object));
 
-                        $affiliation_list .= $affiliation_aha_name.($affiliation_aha_id ? ' (AHA ID: '.$affiliation_aha_id.')' : '');
-                        if (count(uamswp_fad_arr($affiliations)) > $i) {
-                            $affiliation_list .= ', ';
-                        }
-                        $i++;
+                    $affiliation_list .= $affiliation_aha_name.($affiliation_aha_id ? ' (AHA ID: '.$affiliation_aha_id.')' : '');
+                    if (count(uamswp_fad_arr($affiliations)) > $i) {
+                        $affiliation_list .= ', ';
                     }
+                    $i++;
                 }
                 $row[5] = $affiliation_list ?: '';
 
@@ -1510,7 +1508,7 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
                 $row[2] = $location_address_1 ? html_entity_decode(uamswp_fad_str($location_address_1)) : '';
 
                 // Address line 2
-                $row[3] = ($location_address_2 && ! empty($location_address_2)) ? html_entity_decode(uamswp_fad_str($location_address_2)) : '';
+                $row[3] = ($location_address_2) ? html_entity_decode(uamswp_fad_str($location_address_2)) : '';
 
                 // Address line 3
                 $row[4] = $location_address_3 ? html_entity_decode($location_address_3) : '';
@@ -1656,11 +1654,11 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
                     // If featured image exists...
                     $location_images[] = $featured_image; // add it to the array for location images
                 }
-                if ($wayfinding_photo && ! empty($wayfinding_photo)) {
+                if ($wayfinding_photo) {
                     // If featured image exists...
                     $location_images[] = $wayfinding_photo; // add it to the array for location images
                 }
-                if ($photo_gallery && ! empty($photo_gallery)) {
+                if ($photo_gallery) {
                     // If image gallery values exist...
                     foreach (uamswp_fad_arr($photo_gallery) as $photo_gallery_image) {
                         $location_images[] = $photo_gallery_image; // add them to the array for location images

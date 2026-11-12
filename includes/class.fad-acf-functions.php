@@ -72,8 +72,8 @@ function uamswp_fad_json_load_point($paths)
  *
  * The slug for 'UAMS Health MyChart' must be set as 'uams-mychart'.
  */
-add_filter('acf/prepare_field/key=field_physician_portal', 'set_default_portal', 20, 3);
-add_filter('acf/prepare_field/key=field_location_portal', 'set_default_portal', 20, 3);
+add_filter('acf/prepare_field/key=field_physician_portal', 'set_default_portal', 20);
+add_filter('acf/prepare_field/key=field_location_portal', 'set_default_portal', 20);
 
 /**
  * @param  array<string, mixed>  $field
@@ -1675,7 +1675,7 @@ function limit_post_top_level($args, $field, $post)
 
 // Add new settings for aspect ratio to image field
 
-add_filter('acf/render_field_settings/type=image', 'acf_image_aspect_ratio_settings', 20);
+add_action('acf/render_field_settings/type=image', 'acf_image_aspect_ratio_settings', 20);
 
 /**
  * @param  array<string, mixed>  $field

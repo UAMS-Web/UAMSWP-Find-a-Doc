@@ -3674,9 +3674,9 @@ function get_provider_meta($object)
 
         $data['physician_locations'][$location]['location_phone_text'] = 'Appointment Phone Number'.($location_clinic_phone_query ? 's' : '');
         $data['physician_locations'][$location]['location_new_appointments_phone'] = $location_new_appointments_phone;
-        $data['physician_locations'][$location]['location_new_appointments_phonetext'] = ($location_new_appointments_phone && $location_clinic_phone_query) ? 'New Patients' : 'New and Returning Patients';
+        $data['physician_locations'][$location]['location_new_appointments_phonetext'] = $location_new_appointments_phone ? 'New Patients' : 'New and Returning Patients';
         $data['physician_locations'][$location]['location_return_appointments_phone'] = $location_return_appointments_phone;
-        $data['physician_locations'][$location]['location_return_appointments_phone_text'] = ($location_return_appointments_phone && $location_clinic_phone_query) ? 'Returning Patients' : '';
+        $data['physician_locations'][$location]['location_return_appointments_phone_text'] = $location_return_appointments_phone ? 'Returning Patients' : '';
         // $data['physician_locations'][$location]['location_fax'] = get_post_meta( $location, 'location_fax', true );
         // $data['physician_locations'][$location]['location_email'] = get_post_meta( $location, 'location_email', true );
         // $data['physician_locations'][$location]['location_web_name'] = get_post_meta( $location, 'location_web_name', true );
@@ -3714,8 +3714,6 @@ function get_provider_meta($object)
         $condition_cpt_query = new WP_Query($args);
 
         if (
-            $conditions_cpt
-            &&
             $condition_cpt_query->posts
         ) {
 
@@ -3759,8 +3757,6 @@ function get_provider_meta($object)
         $treatment_cpt_query = new WP_Query($args);
 
         if (
-            $treatments_cpt
-            &&
             $treatment_cpt_query->posts
         ) {
 
@@ -3804,8 +3800,6 @@ function get_provider_meta($object)
         $expertise_query = new WP_Query($args);
 
         if (
-            $expertises
-            &&
             $expertise_query->posts
         ) {
 
@@ -3968,8 +3962,6 @@ function get_location_meta($object)
     // @pest-mutate-ignore: BooleanAndToBooleanOr
     if (
         $wayfinding_photo
-        &&
-        ! empty($wayfinding_photo)
     ) {
 
         $location_images[] = $wayfinding_photo;
@@ -3980,8 +3972,6 @@ function get_location_meta($object)
     // @pest-mutate-ignore: BooleanAndToBooleanOr
     if (
         $photo_gallery
-        &&
-        ! empty($photo_gallery)
     ) {
 
         foreach (uamswp_fad_arr($photo_gallery) as $photo_gallery_image) {
@@ -4129,9 +4119,9 @@ function get_location_meta($object)
     $data['location_phone'] = $location_phone;
     $data['location_phone_text'] = 'Appointment Phone Number'.($location_clinic_phone_query ? 's' : '');
     $data['location_new_appointments_phone'] = $location_new_appointments_phone;
-    $data['location_new_appointments_phonetext'] = ($location_new_appointments_phone && $location_clinic_phone_query) ? 'New Patients' : 'New and Returning Patients';
+    $data['location_new_appointments_phonetext'] = $location_new_appointments_phone ? 'New Patients' : 'New and Returning Patients';
     $data['location_return_appointments_phone'] = $location_return_appointments_phone;
-    $data['location_return_appointments_phone_text'] = ($location_return_appointments_phone && $location_clinic_phone_query) ? 'Returning Patients' : '';
+    $data['location_return_appointments_phone_text'] = $location_return_appointments_phone ? 'Returning Patients' : '';
     $data['location_fax'] = get_field('location_fax', $postId);
     $additional_phones = get_field('location_phone_numbers', $postId);
 
@@ -4388,8 +4378,6 @@ function get_location_meta($object)
         $provider_query = new WP_Query($args);
 
         if (
-            $providers
-            &&
             $provider_query->posts
         ) {
 
@@ -4435,8 +4423,6 @@ function get_location_meta($object)
         $expertise_query = new WP_Query($args);
 
         if (
-            $expertises
-            &&
             $expertise_query->posts
         ) {
 
@@ -4482,8 +4468,6 @@ function get_location_meta($object)
         $condition_cpt_query = new WP_Query($args);
 
         if (
-            $conditions_cpt
-            &&
             $condition_cpt_query->posts
         ) {
 
@@ -4529,8 +4513,6 @@ function get_location_meta($object)
         $treatment_cpt_query = new WP_Query($args);
 
         if (
-            $treatments_cpt
-            &&
             $treatment_cpt_query->posts
         ) {
 
@@ -4618,8 +4600,6 @@ function get_expertise_meta($object)
         $condition_cpt_query = new WP_Query($args);
 
         if (
-            $conditions_cpt
-            &&
             $condition_cpt_query->posts
         ) {
 
@@ -4663,8 +4643,6 @@ function get_expertise_meta($object)
         $treatment_cpt_query = new WP_Query($args);
 
         if (
-            $treatments_cpt
-            &&
             $treatment_cpt_query->posts
         ) {
 
@@ -4708,8 +4686,6 @@ function get_expertise_meta($object)
         $provider_query = new WP_Query($args);
 
         if (
-            $providers
-            &&
             $provider_query->posts
         ) {
 
@@ -4753,8 +4729,6 @@ function get_expertise_meta($object)
         $location_query = new WP_Query($args);
 
         if (
-            $locations
-            &&
             $location_query->posts
         ) {
 
@@ -4815,8 +4789,6 @@ function get_condition_meta($object): array
         $expertise_query = new WP_Query($args);
 
         if (
-            $expertises
-            &&
             $expertise_query->posts
         ) {
 
@@ -4860,8 +4832,6 @@ function get_condition_meta($object): array
         $treatment_cpt_query = new WP_Query($args);
 
         if (
-            $treatments_cpt
-            &&
             $treatment_cpt_query->posts
         ) {
 
@@ -4905,8 +4875,6 @@ function get_condition_meta($object): array
         $provider_query = new WP_Query($args);
 
         if (
-            $providers
-            &&
             $provider_query->posts
         ) {
 
@@ -4950,8 +4918,6 @@ function get_condition_meta($object): array
         $location_query = new WP_Query($args);
 
         if (
-            $locations
-            &&
             $location_query->posts
         ) {
 
@@ -5012,8 +4978,6 @@ function get_treatment_meta($object): array
         $expertise_query = new WP_Query($args);
 
         if (
-            $expertises
-            &&
             $expertise_query->posts
         ) {
 
@@ -5057,8 +5021,6 @@ function get_treatment_meta($object): array
         $condition_cpt_query = new WP_Query($args);
 
         if (
-            $conditions_cpt
-            &&
             $condition_cpt_query->posts
         ) {
 
@@ -5102,8 +5064,6 @@ function get_treatment_meta($object): array
         $provider_query = new WP_Query($args);
 
         if (
-            $providers
-            &&
             $provider_query->posts
         ) {
 
@@ -5147,8 +5107,6 @@ function get_treatment_meta($object): array
         $location_query = new WP_Query($args);
 
         if (
-            $locations
-            &&
             $location_query->posts
         ) {
 
@@ -5424,8 +5382,6 @@ function get_resource_meta($object)
     if (
         $clinical_resources
         &&
-        $clinical_resource_query instanceof WP_Query
-        &&
         $clinical_resource_query->posts
     ) {
 
@@ -5444,8 +5400,6 @@ function get_resource_meta($object)
 
     if (
         $conditions_cpt
-        &&
-        $condition_cpt_query instanceof WP_Query
         &&
         $condition_cpt_query->posts
     ) {
@@ -5476,8 +5430,6 @@ function get_resource_meta($object)
     if (
         $treatments_cpt
         &&
-        $treatment_cpt_query instanceof WP_Query
-        &&
         $treatment_cpt_query->posts
     ) {
 
@@ -5506,8 +5458,6 @@ function get_resource_meta($object)
 
     if (
         $providers
-        &&
-        $provider_query instanceof WP_Query
         &&
         $provider_query->posts
     ) {
@@ -5538,8 +5488,6 @@ function get_resource_meta($object)
     if (
         $locations
         &&
-        $location_query instanceof WP_Query
-        &&
         $location_query->posts
     ) {
 
@@ -5568,8 +5516,6 @@ function get_resource_meta($object)
 
     if (
         $expertises
-        &&
-        $expertise_query instanceof WP_Query
         &&
         $expertise_query->posts
     ) {
