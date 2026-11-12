@@ -165,7 +165,7 @@ if ($candidates === []) {
 $started = [];
 
 foreach ($candidates as $candidate) {
-    $process = new Process([$candidate, '--version'], cwd: $root, timeout: 60);
+    $process = new Process([$candidate, '--version'], $root, null, null, 60);
     $process->run();
 
     $ok = $process->isSuccessful();
@@ -287,7 +287,7 @@ function probeDefaultInvocation(string $root, string $launcher, array $extra, ?s
     try {
         $command = [$launcher, ...$extra, '--list-tests'];
 
-        $control = new Process($command, cwd: $root, timeout: 120);
+        $control = new Process($command, $root, null, null, 120);
         $control->run();
 
         if (! $control->isSuccessful()) {
@@ -295,10 +295,10 @@ function probeDefaultInvocation(string $root, string $launcher, array $extra, ?s
                 .$control->getExitCode().' ('.firstLine($control->getOutput().$control->getErrorOutput()).'), so the probe measured nothing'];
         }
 
-        $child = new Process($command, cwd: $root, env: [
+        $child = new Process($command, $root, [
             'PEST_MUTATION_TESTING' => $source,
             'PEST_MUTATION_FILE' => $copy,
-        ], timeout: 120);
+        ], null, 120);
         $child->run();
 
         if ($child->isSuccessful()) {
