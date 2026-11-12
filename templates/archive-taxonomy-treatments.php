@@ -7,7 +7,7 @@ $treatment_title = get_field('treatments_archive_headline', 'option');
 $treatment_text = get_field('treatments_archive_intro_text', 'option');
 
 // Override theme's method of defining the page title
-function uamswp_fad_title($html): string
+function uamswp_fad_title_archive_taxonomy_treatments($html): string
 {
     global $treatment_title;
     // you can add here all your conditions as if is_page(), is_category() etc..
@@ -15,7 +15,7 @@ function uamswp_fad_title($html): string
 
     return $html;
 }
-add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+add_filter('seopress_titles_title', 'uamswp_fad_title_archive_taxonomy_treatments', 15, 2);
 
 get_header(); ?>
 

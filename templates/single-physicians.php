@@ -403,7 +403,7 @@ $schema_description = $excerpt;  // Used for Schema Data. Should ALWAYS have a v
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
 // Override theme's method of defining the page title
-function uamswp_fad_title($html): string
+function uamswp_fad_title_single_physicians($html): string
 {
     global $full_name_attr;
     global $provider_occupation_title_attr;
@@ -441,8 +441,8 @@ function uamswp_fad_title($html): string
 
     return $html;
 }
-// add_filter('seopress_titles_title', 'uamswp_fad_title', 20, 2);
-add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+// add_filter('seopress_titles_title', 'uamswp_fad_title_single_physicians', 20, 2);
+add_filter('seopress_titles_title', 'uamswp_fad_title_single_physicians', 15, 2);
 
 function be_remove_title_from_single_crumb($crumb, $args): string // Because BE is the man
 {

@@ -7,7 +7,7 @@ $condition_title = get_field('conditions_archive_headline', 'option');
 $condition_text = get_field('conditions_archive_intro_text', 'option');
 
 // Override theme's method of defining the page title
-function uamswp_fad_title($html): string
+function uamswp_fad_title_archive_taxonomy_conditions($html): string
 {
     global $condition_title;
     // you can add here all your conditions as if is_page(), is_category() etc..
@@ -15,7 +15,7 @@ function uamswp_fad_title($html): string
 
     return $html;
 }
-add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+add_filter('seopress_titles_title', 'uamswp_fad_title_archive_taxonomy_conditions', 15, 2);
 
 get_header(); ?>
 

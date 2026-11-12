@@ -128,6 +128,10 @@ function template_helper_registrations(): array
             'registration' => "add_filter('terms_clauses', 'uamswp_terms_clauses', 10, 3);",
             'templates' => ['archive-taxonomy-conditions', 'archive-taxonomy-treatments'],
         ],
+        'uamswp_keyword_hook_header' => [
+            'registration' => "add_action('wp_head', 'uamswp_keyword_hook_header');",
+            'templates' => ['single-condition', 'single-treatment', 'taxonomy-condition'],
+        ],
         'uamswp_add_entry_class' => [
             'registration' => "add_filter('genesis_attr_entry', 'uamswp_add_entry_class');",
             'templates' => ['single-clinical-resource', 'single-expertise'],
@@ -187,3 +191,83 @@ test('no template registers a shared helper under a hook the list does not name'
 
     expect($callers)->toBe($expected['templates']);
 })->with(array_keys(template_helper_registrations()));
+
+test('the keywords tag is printed from the alternate names with their commas dropped', function (): void {
+    $GLOBALS['keywords'] = [['text' => 'heart, attack'], ['text' => 'cardiac'], ['text' => 'MI']];
+
+    ob_start();
+    uamswp_keyword_hook_header();
+    $output = ob_get_clean();
+
+    unset($GLOBALS['keywords']);
+
+    expect($output)->toBe('<meta name="keywords" content="heart attack, cardiac, MI" />');
+});
+
+test('no keywords tag is printed without alternate names', function (mixed $keywords): void {
+    $GLOBALS['keywords'] = $keywords;
+
+    ob_start();
+    uamswp_keyword_hook_header();
+    $output = ob_get_clean();
+
+    unset($GLOBALS['keywords']);
+
+    expect($output)->toBe('');
+})->with([
+    'none set' => [null],
+    'false' => [false],
+    'an empty list' => [[]],
+]);
+
+test('no two templates declare a function with the same name', function (): void {
+    $declared = [];
+
+    foreach (template_sources() as $name => $source) {
+        preg_match_all('/^function\s+(\w+)\s*\(/m', $source, $matches);
+
+        foreach ($matches[1] as $function) {
+            $declared[strtolower($function)][] = $name;
+        }
+    }
+
+    $duplicates = array_filter($declared, static fn (array $templates): bool => count($templates) > 1);
+
+    expect($duplicates)->toBe([]);
+});
+
+test('each template that sets a page title registers its own function at priority 15', function (): void {
+    $registrations = [];
+
+    foreach (template_sources() as $name => $source) {
+        if (preg_match_all("/^add_filter\\('seopress_titles_title', '(\\w+)', (\\d+), (\\d+)\\);/m", $source, $matches, PREG_SET_ORDER) > 0) {
+            foreach ($matches as $match) {
+                $registrations[$name][] = [$match[1], $match[2], $match[3]];
+            }
+        }
+    }
+
+    $expected = [];
+
+    foreach (array_keys($registrations) as $name) {
+        $expected[$name] = [['uamswp_fad_title_'.str_replace('-', '_', $name), '15', '2']];
+    }
+
+    expect($registrations)->toBe($expected)
+        ->and(array_keys($registrations))->toBe(['archive-condition', 'archive-taxonomy-conditions', 'archive-taxonomy-treatments', 'archive-treatments', 'single-clinical-resource', 'single-condition', 'single-expertise', 'single-locations', 'single-physicians', 'single-treatment', 'taxonomy-condition', 'taxonomy-treatment_procedure']);
+});
+
+test('each listing template shows its images with a function named for the template', function (string $template): void {
+    $source = template_sources()[$template];
+    $function = 'display_provider_image_'.str_replace('-', '_', $template);
+
+    expect(substr_count($source, "add_action('genesis_loop', '".$function."');"))->toBe(1)
+        ->and(preg_match('/^function '.$function.'\(\): void/m', $source))->toBe(1);
+})->with(['doximity-list', 'mychart-list-provider', 'provider-image']);
+
+test('the treatment procedure keywords function keeps its own name and its registration', function (): void {
+    $source = template_sources()['taxonomy-treatment_procedure'];
+
+    expect(preg_match('/^function uamswp_keyword_hook_header_taxonomy_treatment_procedure\(\): void/m', $source))->toBe(1)
+        ->and(substr_count($source, "add_action('wp_head', 'uamswp_keyword_hook_header_taxonomy_treatment_procedure');"))->toBe(1);
+});

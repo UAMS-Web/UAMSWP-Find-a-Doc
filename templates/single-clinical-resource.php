@@ -22,7 +22,7 @@ $resource_archive_title_attr = str_replace('&nbsp;', ' ', $resource_archive_titl
 $resource_archive_title_attr = html_entity_decode($resource_archive_title_attr); // Convert HTML entities to their corresponding characters
 
 // Override theme's method of defining the page title
-function uamswp_fad_title($html): string
+function uamswp_fad_title_single_clinical_resource($html): string
 {
     global $page_title_attr;
     global $resource_archive_title_attr;
@@ -39,7 +39,7 @@ function uamswp_fad_title($html): string
 
     return $meta_title_base;
 }
-add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+add_filter('seopress_titles_title', 'uamswp_fad_title_single_clinical_resource', 15, 2);
 
 $syndicated = get_field('clinical_resource_syndicated');
 $syndication_url = get_field('clinical_resource_syndication_url');

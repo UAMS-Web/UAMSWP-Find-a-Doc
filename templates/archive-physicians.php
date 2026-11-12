@@ -1,14 +1,14 @@
 <?php
 
 // Override theme's method of defining the page title
-function uamswp_fad_title($html): string
+function uamswp_fad_title_archive_physicians($html): string
 {
     // you can add here all your conditions as if is_page(), is_category() etc..
     $html = 'Providers | '.get_bloginfo('name');
 
     return $html;
 }
-// add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+// add_filter('seopress_titles_title', 'uamswp_fad_title_archive_physicians', 15, 2);
 
 // Region Cookie
 if (isset($_COOKIE['wp_filter_region']) && ! isset($_GET['_provider_region'])) {

@@ -52,7 +52,7 @@ if ($parent_expertise) {
 }
 
 // Override theme's method of defining the page title
-function uamswp_fad_title($html): string
+function uamswp_fad_title_single_expertise($html): string
 {
     global $page_title_attr;
     global $expertise_single_name_attr;
@@ -69,7 +69,7 @@ function uamswp_fad_title($html): string
 
     return $meta_title_base;
 }
-add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+add_filter('seopress_titles_title', 'uamswp_fad_title_single_expertise', 15, 2);
 
 remove_action('genesis_entry_header', 'genesis_post_info', 12);
 remove_action('genesis_entry_footer', 'genesis_post_info', 9); // Added from uams-2020/page.php

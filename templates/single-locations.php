@@ -277,7 +277,7 @@ add_filter('seopress_titles_desc', 'sp_titles_desc');
 
 // Override theme's method of defining the page title
 $location_city = get_field('location_city', $location_source_ids['street']); // Get the location's city
-function uamswp_fad_title($html): string
+function uamswp_fad_title_single_locations($html): string
 {
     global $page_title_attr;
     global $location_city;
@@ -296,7 +296,7 @@ function uamswp_fad_title($html): string
 
     return $html;
 }
-add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+add_filter('seopress_titles_title', 'uamswp_fad_title_single_locations', 15, 2);
 
 get_header();
 
