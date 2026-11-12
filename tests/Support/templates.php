@@ -57,3 +57,41 @@ function uamswp_test_template(string $name): array
 
     return $calls;
 }
+
+/**
+ * Run a template as WordPress would for a request, and return what it printed.
+ *
+ * Unlike uamswp_test_template() this runs the file every time it is called, so a test can run one template more
+ * than once in the process. The file-scope variables it sets are promoted to globals afterwards, because the
+ * callbacks that moved into includes/ read them with `global`.
+ */
+function uamswp_test_render_template(string $name): string
+{
+    uamswp_test_functions_file();
+
+    foreach (['add_action', 'add_filter', 'remove_action', 'remove_filter'] as $function) {
+        when($function)->justReturn(true);
+    }
+
+    when('genesis')->justReturn(null);
+
+    $render = static function () use ($name): string {
+        ob_start();
+
+        try {
+            require UAMS_FAD_PATH.'templates/'.$name.'.php';
+        } finally {
+            $output = (string) ob_get_clean();
+        }
+
+        foreach (get_defined_vars() as $variable => $value) {
+            if (! in_array($variable, ['name', 'output', 'render'], true)) {
+                $GLOBALS[$variable] = $value;
+            }
+        }
+
+        return $output;
+    };
+
+    return $render();
+}
