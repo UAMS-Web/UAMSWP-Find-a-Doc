@@ -1206,22 +1206,6 @@ while (have_posts()) {
                                 <div class="col-xs-12 col-lg-5">
                                 <div class="content-width">
                             <?php } // endif?>
-                            <?php // Section for displaying clinical admin title
-        if (true == false) { // Remove this if statement if we decide to display clinical admin title later.
-            if (have_rows('physician_clinical_admin_title')) { ?>
-                                    <h3 class="h4">Administrative Roles</h3>
-                                    <dl>
-                                    <?php while (have_rows('physician_clinical_admin_title')) {
-                                        the_row();
-                                        $department = get_term(get_sub_field('physician_clinical_admin_area'), 'service_line');
-                                        $clinical_admin_title_tax = get_term(get_sub_field('clinical_admin_title_tax'), 'clinical_admin_title');
-                                        ?>
-                                        <dt><?php echo $department->name; ?></dt>
-                                        <dd><?php echo $clinical_admin_title_tax->name; ?></dd>
-                                    <?php } ?>
-                                    </dl>
-                                <?php }
-            } // endif?>
                             <?php if ($physician_clinical_focus) { ?>
                                 <h3 class="h4">Clinical Focus</h3>
                                 <?php echo $physician_clinical_focus; ?>

@@ -617,3 +617,9 @@ test('every section with content adds one jump link', function (): void {
     expect($vars['jump_link_count'])->toBe(10)
         ->and($vars['title_append'])->toBe(' by '.$vars['short_name']);
 });
+
+test('the template holds no condition that can never be true', function (): void {
+    $source = (string) file_get_contents(UAMS_FAD_PATH.'templates/single-physicians.php');
+
+    expect($source)->not->toContain('true == false');
+});
