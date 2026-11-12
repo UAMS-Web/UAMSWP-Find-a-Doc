@@ -86,7 +86,8 @@ repository decision made once in `pint.json`, which then adds it everywhere.
 
 The plugin's main file is the exception: it carries the WordPress plugin header comment and, where
 the plugin has one, the runtime PHP version guard that turns an unsupported PHP into an admin
-notice instead of a fatal error.
+notice instead of a fatal error. What its `Author` and `Author URI` fields hold is in
+[`php-documentation`](../php-documentation/SKILL.md) section 5.
 
 ## 3. Type hints (always required where the parent allows)
 

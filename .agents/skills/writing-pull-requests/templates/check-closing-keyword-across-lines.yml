@@ -21,6 +21,10 @@ name: Check closing keywords across lines
 # first. A link added in the Development panel after the last event is read at the next one
 # (an edit, a push, a reopen); adding a link alone is not known to start a run.
 #
+# That second step takes the pull request's base branch and the repository's default branch from the event
+# (UAMS-Web/uams-claude-skills#680). A Development link closes its issue only on a merge into the default
+# branch, so on any other base the same finding is a warning annotation and the step passes.
+#
 # A keyword inside a code span or a fence is reported too. The push-time scan reads the
 # squash commit message as plain text, so it is live there even where the pull request's own
 # closingIssuesReferences field does not list it.
@@ -75,10 +79,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
           NUMBER: ${{ github.event.pull_request.number }}
+          BASE: ${{ github.event.pull_request.base.ref }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         run: |
           owner="${REPO%%/*}"
           name="${REPO#*/}"
           gh api graphql \
             -f query='query($owner: String!, $name: String!, $number: Int!) { repository(owner: $owner, name: $name) { pullRequest(number: $number) { closingIssuesReferences(first: 50) { totalCount nodes { number repository { nameWithOwner } } } } } }' \
             -f owner="$owner" -f name="$name" -F number="$NUMBER" > "$RUNNER_TEMP/linked.json"
-          node .claude/skills/writing-pull-requests/scripts/check-development-links.mjs --repo "$REPO" --body-file "$RUNNER_TEMP/body.md" --graphql-file "$RUNNER_TEMP/linked.json"
+          node .claude/skills/writing-pull-requests/scripts/check-development-links.mjs --repo "$REPO" --base "$BASE" --default-branch "$DEFAULT_BRANCH" --body-file "$RUNNER_TEMP/body.md" --graphql-file "$RUNNER_TEMP/linked.json"

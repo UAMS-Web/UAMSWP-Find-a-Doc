@@ -885,7 +885,7 @@ function listCoveragePopulation(string $root, ?string $phpunitPath): ?array
         $includes[] = [
             'type' => 'directory',
             'path' => trim($node->textContent),
-            'suffix' => $node->attributes?->getNamedItem('suffix')?->nodeValue ?? '.php',
+            'suffix' => $node instanceof DOMElement && $node->hasAttribute('suffix') ? $node->getAttribute('suffix') : '.php',
         ];
     }
 
