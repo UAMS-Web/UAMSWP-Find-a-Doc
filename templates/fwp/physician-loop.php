@@ -3,6 +3,13 @@
  *  Template Name: Physician Loop
  *  Designed for physicians
  */
+
+/**
+ * WordPress' global `$post`, set by `the_post()` in the loop below (FacetWP runs this file from its
+ * stored template code, in global scope).
+ *
+ * @var WP_Post $post
+ */
 ?>
 	<?php if (have_posts()) {
 	    while (have_posts()) {

@@ -6,6 +6,12 @@
  *  Must be used inside a loop
  *  Required var: $id
  */
+
+/**
+ * Set by the file that includes this partial, which runs in that file's scope (#1232).
+ *
+ * @var int|false $id From `get_the_ID()`.
+ */
 ?>
 <?php
 $degrees = get_field('physician_degree', $id);

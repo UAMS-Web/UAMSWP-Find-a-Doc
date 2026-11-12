@@ -7,6 +7,12 @@
  *  Required var: $id
  */
 
+/**
+ * Set by the file that includes this partial, which runs in that file's scope (#1232).
+ *
+ * @var mixed $id From `get_the_ID()`, or one item of a `get_field()` list.
+ */
+
 // $child_expertise_list indicates whether this is a list of child Areas of Expertise within this Area of Expertise
 // Check if $child_expertise_list is set. Otherwise create the variable and set its value to false.
 $child_expertise_list ??= false;
@@ -32,6 +38,7 @@ if ($expertise_has_parent && $expertise_parent_id) {
     $parent_expertise = get_post($expertise_parent_id);
 }
 // Get attributes of parent Area of Expertise
+$parent_title_attr = '';
 if ($parent_expertise) {
     $parent_id = $parent_expertise->ID;
     $parent_title = $parent_expertise->post_title;

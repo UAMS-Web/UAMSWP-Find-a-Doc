@@ -6,6 +6,12 @@
  *  Required vars:
  *      $clinical_trial_title
  */
+
+/**
+ * Set by the file that includes this partial, which runs in that file's scope (#1232).
+ *
+ * @var string $clinical_trial_title
+ */
 ?>
 <section class="uams-module cta-bar cta-bar-1 bg-auto" id="clinical-trials">
     <div class="container-fluid">
