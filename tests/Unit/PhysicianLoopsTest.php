@@ -91,8 +91,8 @@ test('the provider loop names the provider with the middle name, pedigree and de
     ], ['terms' => ['degree:1' => 'M.D.', 'degree:2' => 'Ph.D.']]);
 
     expect($output)->toContain('<span class="name">Jo Q Smith&nbsp;Jr., M.D., Ph.D.</span>')
-        ->and($output)->toContain('aria-label="Full profile for Jo Q Smith&nbsp;Jr., M.D., Ph.D."')
-        ->and($output)->toContain('data-itemtitle="Jo Q Smith&nbsp;Jr., M.D., Ph.D."');
+        ->and($output)->toContain('aria-label="Full profile for Jo Q Smith Jr., M.D., Ph.D."')
+        ->and($output)->toContain('data-itemtitle="Jo Q Smith Jr., M.D., Ph.D."');
 });
 
 test('the provider loop cleans quotes and the right single quote entity in the name for the labels', function (): void {

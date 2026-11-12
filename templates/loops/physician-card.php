@@ -29,6 +29,7 @@ if ($degrees) {
 $full_name_attr = $full_name;
 $full_name_attr = str_replace('"', "'", $full_name_attr); // Replace double quotes with single quote
 $full_name_attr = str_replace('&#8217;', "'", $full_name_attr); // Replace right single quote with single quote
+$full_name_attr = str_replace('&nbsp;', ' ', $full_name_attr); // Convert non-breaking space entity text to a normal space before it is encoded
 $full_name_attr = htmlentities($full_name_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
 $full_name_attr = str_replace('&nbsp;', ' ', $full_name_attr); // Convert non-breaking space with normal space
 $full_name_attr = html_entity_decode($full_name_attr); // Convert HTML entities to their corresponding characters

@@ -23,7 +23,7 @@ $child_location_list ??= false;
 
 $location_title = get_the_title($id);
 $location_title_attr = str_replace('"', "'", $location_title);
-$location_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities($location_title_attr ?? '', ENT_HTML401, 'utf-8')));
+$location_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities(str_replace('&nbsp;', ' ', $location_title_attr ?? ''), ENT_HTML401, 'utf-8')));
 
 // Parent Location
 $location_has_parent = get_field('location_parent', $id);
@@ -48,6 +48,7 @@ if ($parent_location) {
     $parent_title_attr = $parent_title;
     $parent_title_attr = str_replace('"', "'", $parent_title_attr); // Replace double quotes with single quote
     $parent_title_attr = str_replace('&#8217;', "'", $parent_title_attr); // Replace right single quote with single quote
+    $parent_title_attr = str_replace('&nbsp;', ' ', $parent_title_attr); // Convert non-breaking space entity text to a normal space before it is encoded
     $parent_title_attr = htmlentities($parent_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
     $parent_title_attr = str_replace('&nbsp;', ' ', $parent_title_attr); // Convert non-breaking space with normal space
     $parent_title_attr = html_entity_decode($parent_title_attr); // Convert HTML entities to their corresponding characters
@@ -209,6 +210,7 @@ if ($location_closing_display || $location_modified_hours_display) {
     $alert_label_attr = $alert_label;
     $alert_label_attr = str_replace('"', "'", $alert_label_attr); // Replace double quotes with single quote
     $alert_label_attr = str_replace('&#8217;', "'", $alert_label_attr); // Replace right single quote with single quote
+    $alert_label_attr = str_replace('&nbsp;', ' ', $alert_label_attr); // Convert non-breaking space entity text to a normal space before it is encoded
     $alert_label_attr = htmlentities($alert_label_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
     $alert_label_attr = str_replace('&nbsp;', ' ', $alert_label_attr); // Convert non-breaking space with normal space
     $alert_label_attr = html_entity_decode($alert_label_attr); // Convert HTML entities to their corresponding characters

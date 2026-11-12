@@ -83,7 +83,7 @@ test('the provider card names the provider with the middle name, pedigree and de
     );
 
     expect($output)->toContain('<span class="name">Jo Q Smith&nbsp;Jr., M.D., Ph.D.</span>')
-        ->and($output)->toContain('aria-label="View profile for Jo Q Smith&nbsp;Jr., M.D., Ph.D." data-itemtitle="Jo Q Smith&nbsp;Jr., M.D., Ph.D."')
+        ->and($output)->toContain('aria-label="View profile for Jo Q Smith Jr., M.D., Ph.D." data-itemtitle="Jo Q Smith Jr., M.D., Ph.D."')
         ->and($output)->toContain('<a href="https://example.test/provider/12/" class="btn btn-primary stretched-link"');
 });
 
