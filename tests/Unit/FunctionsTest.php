@@ -19,6 +19,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
 
 require_once __DIR__.'/../Support/acf-functions.php';
+require_once __DIR__.'/../Support/functions-file.php';
 require_once __DIR__.'/../Support/wp-classes.php';
 
 final class FunctionsTest extends UnitTestCase
@@ -28,8 +29,6 @@ final class FunctionsTest extends UnitTestCase
 
     /** @var list<array{0: string, 1: mixed}> */
     private static array $deactivation = [];
-
-    private static bool $loaded = false;
 
     private string $previous_timezone = 'UTC';
 
@@ -58,25 +57,9 @@ final class FunctionsTest extends UnitTestCase
         Functions\when('is_wp_error')->alias(static fn (mixed $thing): bool => $thing instanceof \WP_Error);
         Functions\when('add_query_arg')->alias(static fn (array $args, string $url): string => $url.'?'.http_build_query($args));
 
-        if (self::$loaded) {
-            return;
-        }
-
-        Functions\when('add_filter')->alias(static function (string $hook, mixed $callback, int $priority = 10, int $accepted = 1): void {
-            self::$hooks[] = ['filter', $hook, $callback, $priority, $accepted];
-        });
-        Functions\when('add_action')->alias(static function (string $hook, mixed $callback, int $priority = 10, int $accepted = 1): void {
-            self::$hooks[] = ['action', $hook, $callback, $priority, $accepted];
-        });
-        Functions\when('add_shortcode')->alias(static function (string $tag, mixed $callback): void {
-            self::$hooks[] = ['shortcode', $tag, $callback, 10, 1];
-        });
-        Functions\when('register_deactivation_hook')->alias(static function (string $file, mixed $callback): void {
-            self::$deactivation[] = [$file, $callback];
-        });
-
-        require_once dirname(__DIR__, 2).'/includes/class.fad-functions.php';
-        self::$loaded = true;
+        $registered = \uamswp_test_functions_file();
+        self::$hooks = $registered['hooks'];
+        self::$deactivation = $registered['deactivation'];
     }
 
     protected function tearDown(): void

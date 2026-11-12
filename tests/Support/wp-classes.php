@@ -20,6 +20,8 @@ if (! class_exists('WP_Term')) {
     class WP_Term
     {
         public int $term_id = 0;
+
+        public string $slug = '';
     }
 }
 
@@ -38,6 +40,39 @@ if (! class_exists('WP_Query')) {
     {
         /** @var array<int, mixed> */
         public array $posts = [];
+
+        /** @var list<array<int, mixed>> The post ids each query built with arguments will find, in order. */
+        public static array $queue = [];
+
+        /** @var list<array<string, mixed>> The arguments of every query built with arguments. */
+        public static array $queries = [];
+
+        /** The id of the post `the_post()` last set up. */
+        public static int $current = 0;
+
+        private int $index = 0;
+
+        /**
+         * @param  array<string, mixed>  $args
+         */
+        public function __construct(array $args = [])
+        {
+            if ($args !== []) {
+                self::$queries[] = $args;
+                $this->posts = array_shift(self::$queue) ?? [];
+            }
+        }
+
+        public function have_posts(): bool
+        {
+            return $this->index < count($this->posts);
+        }
+
+        public function the_post(): void
+        {
+            self::$current = (int) $this->posts[$this->index];
+            $this->index++;
+        }
     }
 }
 
