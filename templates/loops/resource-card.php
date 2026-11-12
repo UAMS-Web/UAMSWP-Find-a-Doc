@@ -71,7 +71,7 @@ if (! empty($resource_providers)) {
     foreach ($resource_providers as $resource_provider) {
         if (get_post_status($resource_provider) == 'publish') {
             $resource_provider_valid = true;
-
+            break;
         } // endif
     } // endforeach;
     $resource_provider = '';
@@ -93,7 +93,7 @@ if (! empty($resource_locations)) {
     foreach ($resource_locations as $resource_location) {
         if (get_post_status($resource_location) == 'publish') {
             $resource_location_valid = true;
-
+            break;
         } // endif
     } // endforeach;
     $resource_location = '';
@@ -115,7 +115,7 @@ if (! empty($resource_conditions)) {
     foreach ($resource_conditions as $resource_condition) {
         if (get_post_status($resource_condition) == 'publish') {
             $resource_condition_valid = true;
-
+            break;
         } // endif
     } // endforeach;
     $resource_condition = '';
@@ -137,7 +137,7 @@ if (! empty($resource_treatments)) {
     foreach ($resource_treatments as $resource_treatment) {
         if (get_post_status($resource_treatment) == 'publish') {
             $resource_treatment_valid = true;
-
+            break;
         } // endif
     } // endforeach;
     $resource_treatment = '';
@@ -159,7 +159,7 @@ if (! empty($resource_expertises)) {
     foreach ($resource_expertises as $resource_expertise) {
         if (get_post_status($resource_expertise) == 'publish') {
             $resource_expertise_valid = true;
-
+            break;
         } // endif
     } // endforeach;
     $resource_expertise = '';

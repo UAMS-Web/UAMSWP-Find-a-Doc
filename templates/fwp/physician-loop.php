@@ -198,7 +198,7 @@
 	        foreach ($locations as $location) {
 	            if (get_post_status($location) == 'publish') {
 	                $location_valid = true;
-
+	                break;
 	            }
 	        }
 	        if ($locations && $location_valid) { ?>
