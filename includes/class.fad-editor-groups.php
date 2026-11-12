@@ -310,7 +310,7 @@ function uamswp_fad_editor_group_map_meta_cap($caps, $cap, $user_id, $args)
     // requirements core added (edit_published_*, edit_private_*) stay in place.
     $caps[$index] = $type->cap->edit_posts;
 
-    return array_values(array_unique($caps));
+    return array_values(array_unique(array_map(uamswp_fad_str(...), $caps)));
 }
 
 add_filter('map_meta_cap', 'uamswp_fad_editor_group_map_meta_cap', 10, 4);
@@ -333,7 +333,7 @@ function uamswp_fad_editor_group_admin_list_scope($query): void
     }
 
     $type = get_post_type_object($post_type);
-    if (! $type || current_user_can($type->cap->edit_others_posts)) {
+    if (! $type || current_user_can(uamswp_fad_str($type->cap->edit_others_posts))) {
         return;
     }
 
@@ -370,6 +370,7 @@ add_action('pre_get_posts', 'uamswp_fad_editor_group_admin_list_scope');
  */
 function uamswp_fad_editor_group_admin_list_where($where, $query)
 {
+    /** @var wpdb $wpdb */
     global $wpdb;
 
     $tt_ids = $query->get('uamswp_editor_group_tt_ids');
@@ -380,12 +381,10 @@ function uamswp_fad_editor_group_admin_list_where($where, $query)
 
     $in = implode(',', array_map(uamswp_fad_int(...), (array) $tt_ids));
 
-    $where .= $wpdb->prepare(
+    return uamswp_fad_str($where).uamswp_fad_str($wpdb->prepare(
         " AND ( {$wpdb->posts}.post_author = %d OR {$wpdb->posts}.ID IN ( SELECT object_id FROM {$wpdb->term_relationships} WHERE term_taxonomy_id IN ( {$in} ) ) )",
         $user_id
-    );
-
-    return $where;
+    ));
 }
 
 add_filter('posts_where', 'uamswp_fad_editor_group_admin_list_where', 10, 2);
@@ -410,7 +409,7 @@ function uamswp_fad_editor_groups_from_service_line($post_id): array
     $service_lines = get_field($fields[$post_type], $post_id);
     $groups = [];
     foreach ((array) $service_lines as $service_line) {
-        $service_line_id = is_object($service_line) ? (int) ($service_line->term_id ?? 0) : (int) $service_line;
+        $service_line_id = is_object($service_line) ? uamswp_fad_int(($service_line->term_id ?? 0)) : uamswp_fad_int($service_line);
         if (! $service_line_id) {
             continue;
         }

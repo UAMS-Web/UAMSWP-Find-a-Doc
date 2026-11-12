@@ -501,7 +501,9 @@ function physician_save_post($post_id): void
 
         // Store each region once, however many locations share it
 
-        $region = [...array_unique($region)];
+        /** @var list<int|string> $regions */
+        $regions = $region;
+        $region = [...array_unique($regions)];
 
     }
 
@@ -875,7 +877,7 @@ function location_save_post_after($post_id): void
         $location_parent_id
     ) {
 
-        $post_parent = (int) $location_parent_id;
+        $post_parent = uamswp_fad_int($location_parent_id);
 
     } else { // clear the parent data
 
@@ -941,7 +943,7 @@ function clinical_title_save_post($post_id): void
     // Get the term's parent
 
     $parent_term_id = ($term->parent ?? 0);
-    $parent_term = $parent_term_id ? (get_term_by('id', $parent_term_id, $taxonomy)) : null;
+    $parent_term = $parent_term_id ? (get_term_by('id', uamswp_fad_str($parent_term_id), $taxonomy)) : null;
     $parent_term = $parent_term ?: null;
 
     // If parent term exists, modify term's fields
@@ -1170,21 +1172,15 @@ function bidirectional_acf_update(
 
             // load existing related posts
 
-            $value2new = get_field($field_name, $post_id2new, false);
+            $value2new = uamswp_fad_arr(get_field($field_name, $post_id2new, false));
 
             // allow for selected posts to not contain a value
-
-            if (empty($value2new)) {
-
-                $value2new = [];
-
-            }
 
             // write_log('New Values for ' . $post_id2new . ': '. print_r($value2new, true));
 
             // bail early if the current $post_id is already found in selected post's $value2new
 
-            if (in_array($post_id, $value2new)) {
+            if (in_array($post_id, uamswp_fad_arr($value2new))) {
                 continue;
             }
 
@@ -1216,17 +1212,17 @@ function bidirectional_acf_update(
 
             // load existing related posts
 
-            $value2old = get_field($field_name, $post_id2old, false);
+            $value2old = uamswp_fad_arr(get_field($field_name, $post_id2old, false));
 
             // bail early if no value
 
-            if (empty($value2old)) {
+            if ($value2old === []) {
                 continue;
             }
 
             // find the position of $post_id within $value2old so we can remove it
 
-            $pos = array_search($post_id, $value2old, true);
+            $pos = array_search($post_id, uamswp_fad_arr($value2old), true);
 
             // remove
 
@@ -1253,6 +1249,7 @@ function custom_excerpt_acf(): void
 
     // Bring in variables from outside of the function
 
+    /** @var WP_Post $post */
     global $post; // WordPress-specific global variable
 
     // Get the current post ID
@@ -1305,7 +1302,7 @@ function custom_excerpt_acf(): void
 
             if ($post_excerpt) {
 
-                $post_excerpt = wp_strip_all_tags($post_excerpt);
+                $post_excerpt = wp_strip_all_tags(uamswp_fad_str($post_excerpt));
                 $post_excerpt = str_replace("\n", ' ', $post_excerpt); // Strip line breaks
                 $post_excerpt = strlen($post_excerpt) > 160 ? mb_strimwidth($post_excerpt, 0, 156, '...') : $post_excerpt; // Limit to 160 characters
 
@@ -1333,8 +1330,8 @@ function custom_excerpt_acf(): void
         // Define an array of elements that make up a post to update or insert.
 
         $post_array = [
-            'ID' => $post_id,
-            'post_excerpt' => $post_excerpt,
+            'ID' => uamswp_fad_int($post_id),
+            'post_excerpt' => uamswp_fad_str($post_excerpt),
         ];
 
         // Unhook this function so it doesn't loop infinitely
@@ -1452,12 +1449,12 @@ function fad_facetwp_cards_callback(
     $background_color = get_field('facetwp_background_color') ?: 'bg-white';
 
     ?>
-			<section class="uams-module container-fluid p-8 p-sm-10 <?php echo $className; ?> <?php echo $background_color; ?>">
+			<section class="uams-module container-fluid p-8 p-sm-10 <?php echo uamswp_fad_str($className); ?> <?php echo uamswp_fad_str($background_color); ?>">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="module-title"><?php echo $heading; ?></h2>
+						<h2 class="module-title"><?php echo uamswp_fad_str($heading); ?></h2>
 						<div class="card-list-container">
-							<?php echo facetwp_display('template', $template); ?>
+							<?php echo uamswp_fad_str(facetwp_display('template', $template)); ?>
 						</div>
 					</div>
 				</div>
@@ -1508,27 +1505,27 @@ function fad_facetwp_blocks_callback(
     $background_color = get_field('facetwp_block_background_color') ?: 'bg-white';
 
     ?>
-			<section class="uams-module <?php echo $className; ?> <?php echo $background_color; ?>">
+			<section class="uams-module <?php echo uamswp_fad_str($className); ?> <?php echo uamswp_fad_str($background_color); ?>">
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">
-							<h2 class="module-title<?php echo $hideheading == '1' ? ' sr-only' : ''; ?>" ><?php echo $heading; ?></h2>
+							<h2 class="module-title<?php echo $hideheading == '1' ? ' sr-only' : ''; ?>" ><?php echo uamswp_fad_str($heading); ?></h2>
 							<div class="">
 								<?php
                         if ($prefacets) {
-                            foreach ($prefacets as $prefacet) {
-                                echo '<div class="text-'.$prefacet['alignment'].'">'.facetwp_display('facet', $prefacet['facet_name']).'</div>';
+                            foreach (uamswp_fad_arr($prefacets) as $prefacet) {
+                                echo '<div class="text-'.uamswp_fad_str(uamswp_fad_arr($prefacet)['alignment']).'">'.uamswp_fad_str(facetwp_display('facet', uamswp_fad_arr($prefacet)['facet_name'])).'</div>';
                             }
                         }
     ?>
-								<?php echo facetwp_display('template', $template); ?>
+								<?php echo uamswp_fad_str(facetwp_display('template', $template)); ?>
 								<?php
     if ($postfacets) {
-        foreach ($postfacets as $postfacet) {
-            echo '<div class="text-'.$postfacet['alignment'].'">'.facetwp_display('facet', $postfacet['facet_name']).'</div>';
+        foreach (uamswp_fad_arr($postfacets) as $postfacet) {
+            echo '<div class="text-'.uamswp_fad_str(uamswp_fad_arr($postfacet)['alignment']).'">'.uamswp_fad_str(facetwp_display('facet', uamswp_fad_arr($postfacet)['facet_name'])).'</div>';
         }
     }
-    echo $pager ? facetwp_display('pager') : '';
+    echo $pager ? uamswp_fad_str(facetwp_display('pager')) : '';
     ?>
 							</div>
 						</div>
@@ -1548,7 +1545,8 @@ add_action('acf/render_field/name=location_current_alert', 'location_current_ale
 function location_current_alert_message(): void
 {
 
-    $alert_title = get_field('location_alert_heading_system', 'option');
+    $alert_title = uamswp_fad_str(get_field('location_alert_heading_system', 'option'));
+
     $alert_body = get_field('location_alert_body_system', 'option');
     $alert_color = get_field('location_alert_color_system', 'option');
 
@@ -1560,9 +1558,9 @@ function location_current_alert_message(): void
 
         $alert_txt = '<blockquote class="notice notice-warning">';
         $alert_txt .= '<h3 class="notice-title">'.$alert_title.'</h3>';
-        $alert_txt .= $alert_body;
+        $alert_txt .= uamswp_fad_str($alert_body);
         $alert_txt .= '<hr />';
-        $alert_txt .= '<p><strong>Alert color:</strong> '.ucfirst(str_replace('alert-', '', $alert_color)).'</p>';
+        $alert_txt .= '<p><strong>Alert color:</strong> '.ucfirst(str_replace('alert-', '', uamswp_fad_str($alert_color))).'</p>';
         $alert_txt .= '</blockquote>';
 
         echo $alert_txt;
@@ -1589,7 +1587,7 @@ function location_current_prescription_clinic_message(): void
     if (! empty($prescription_clinic_sys)) {
 
         $prescr_txt = '<blockquote class="notice notice-info">';
-        $prescr_txt .= $prescription_clinic_sys;
+        $prescr_txt .= uamswp_fad_str($prescription_clinic_sys);
         $prescr_txt .= '</blockquote>';
 
         echo $prescr_txt;
@@ -1614,7 +1612,7 @@ function location_current_prescription_pharm_message(): void
     if (! empty($prescription_pharm_sys)) {
 
         $prescr_txt = '<blockquote class="notice notice-info">';
-        $prescr_txt .= $prescription_pharm_sys;
+        $prescr_txt .= uamswp_fad_str($prescription_pharm_sys);
         $prescr_txt .= '</blockquote>';
 
         echo $prescr_txt;
@@ -2365,14 +2363,14 @@ function uamswp_spotlight_stored_type($post_id)
 
     $stored = get_field('clinical_resource_type', $post_id);
 
-    return is_array($stored) ? ($stored['value'] ?? '') : (string) $stored;
+    return is_array($stored) ? ($stored['value'] ?? '') : uamswp_fad_str($stored);
 
 }
 
 // Normalize a relationship / post_object value to an array of post IDs
 /**
  * @param  mixed  $value
- * @return int[]
+ * @return array<int, int>
  */
 function uamswp_spotlight_to_ids($value): array
 {
@@ -2447,7 +2445,7 @@ function uamswp_spotlight_reconcile_providers($post_id): void
 
     }
 
-    $old_provider = (int) get_field('clinical_resource_spotlight_provider', $post_id);
+    $old_provider = uamswp_fad_int(get_field('clinical_resource_spotlight_provider', $post_id));
 
     // Nothing to reconcile if this resource has never had a featured
     // provider and is not gaining one now
@@ -2563,7 +2561,7 @@ function uamswp_spotlight_sync_title($post_id): void
 
     }
 
-    $provider_id = (int) get_field('clinical_resource_spotlight_provider', $post_id);
+    $provider_id = uamswp_fad_int(get_field('clinical_resource_spotlight_provider', $post_id));
 
     if (! $provider_id) {
 
@@ -2678,7 +2676,7 @@ function uamswp_spotlight_resolve_image($post_id, $provider_id): int
 
     if ($override) {
 
-        return (int) $override;
+        return uamswp_fad_int($override);
 
     }
 
@@ -2686,7 +2684,7 @@ function uamswp_spotlight_resolve_image($post_id, $provider_id): int
 
     if ($wide) {
 
-        return (int) $wide;
+        return uamswp_fad_int($wide);
 
     }
 
@@ -2725,7 +2723,7 @@ function uamswp_spotlight_save($post_id): void
 
     }
 
-    $provider_id = (int) get_field('clinical_resource_spotlight_provider', $post_id);
+    $provider_id = uamswp_fad_int(get_field('clinical_resource_spotlight_provider', $post_id));
 
     if (! $provider_id) {
 
@@ -2947,7 +2945,7 @@ function uamswp_spotlight_status_sync($new_status, $old_status, $post): void
 
     }
 
-    $provider_id = (int) get_field('clinical_resource_spotlight_provider', $post->ID);
+    $provider_id = uamswp_fad_int(get_field('clinical_resource_spotlight_provider', $post->ID));
 
     if (! $provider_id) {
 
@@ -3002,7 +3000,7 @@ function uamswp_spotlight_delete_sync($post_id): void
 
     }
 
-    $provider_id = (int) get_field('clinical_resource_spotlight_provider', $post_id);
+    $provider_id = uamswp_fad_int(get_field('clinical_resource_spotlight_provider', $post_id));
 
     if (! $provider_id) {
 

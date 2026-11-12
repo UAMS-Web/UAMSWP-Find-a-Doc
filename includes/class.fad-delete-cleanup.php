@@ -111,6 +111,7 @@ function uamswp_delete_cleanup_ids($value): array
 function uamswp_delete_cleanup_meta_post_ids(string $post_type, string $meta_key, string $shape, int $id): array
 {
 
+    /** @var wpdb $wpdb */
     global $wpdb;
 
     if ($shape === 'single') {
@@ -134,7 +135,7 @@ function uamswp_delete_cleanup_meta_post_ids(string $post_type, string $meta_key
 
     }
 
-    return array_map(intval(...), (array) $wpdb->get_col($sql));
+    return array_values(array_map(uamswp_fad_int(...), (array) $wpdb->get_col($sql)));
 
 }
 
@@ -150,6 +151,7 @@ function uamswp_delete_cleanup_meta_post_ids(string $post_type, string $meta_key
 function uamswp_delete_cleanup_table_post_ids(string $table, string $field, int $id): array
 {
 
+    /** @var wpdb $wpdb */
     global $wpdb;
 
     $sql = $wpdb->prepare(
@@ -161,12 +163,12 @@ function uamswp_delete_cleanup_table_post_ids(string $table, string $field, int 
 
     foreach ((array) $wpdb->get_results($sql, ARRAY_A) as $row) {
 
-        $decoded = json_decode((string) ($row['links'] ?? ''), true);
+        $decoded = json_decode(uamswp_fad_str((uamswp_fad_arr($row)['links'] ?? '')), true);
         $ids = uamswp_delete_cleanup_ids(is_array($decoded) ? $decoded : []);
 
         if (in_array($id, $ids, true)) {
 
-            $found[] = (int) $row['post_id'];
+            $found[] = uamswp_fad_int(uamswp_fad_arr($row)['post_id']);
 
         }
 
@@ -333,6 +335,7 @@ function uamswp_delete_cleanup_after_delete($post_id): void
 
     }
 
+    /** @var wpdb $wpdb */
     global $wpdb;
 
     $wpdb->delete($wpdb->prefix.$pending[$id], ['post_id' => $id], ['%d']);

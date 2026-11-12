@@ -127,12 +127,6 @@ parameters:
 			path: includes/class.fad-functions.php
 
 		-
-			rawMessage: Function FWP not found.
-			identifier: function.notFound
-			count: 3
-			path: includes/class.fad-fwp-functions.php
-
-		-
 			rawMessage: Function get_field not found.
 			identifier: function.notFound
 			count: 4

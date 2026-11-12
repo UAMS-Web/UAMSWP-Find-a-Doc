@@ -1115,6 +1115,7 @@ add_action('rwmb_locations_after_save_post', function ($post_id): void {
     // Get the post ID
     $pid = get_the_ID();
 
+    /** @var wpdb $wpdb */
     global $wpdb;
     $wpdb->update(
         $wpdb->prefix.'posts',

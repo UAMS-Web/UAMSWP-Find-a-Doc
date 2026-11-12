@@ -112,6 +112,6 @@ final class GbpChildAddressTest extends UnitTestCase
         $this->assertStringContainsString('$location_addresses[] = UAMSWP_FAD_GBP_Logic::location_name_without_place($location_parent_title);', $table, 'the parent');
         $this->assertSame(2, substr_count($table, '$location_addresses[] = UAMSWP_FAD_GBP_Logic::location_name_without_place($location_title);'), 'a name with no parent, and a child');
         $this->assertStringNotContainsString('$location_addresses[] = $location_title;', $table, 'no location name goes in unshortened');
-        $this->assertStringContainsString('provider_listing_title(html_entity_decode($full_name), html_entity_decode(get_the_title($location)))', $table, 'the title is built from the full name');
+        $this->assertStringContainsString('provider_listing_title(html_entity_decode($full_name), html_entity_decode(get_the_title(uamswp_fad_int($location))))', $table, 'the title is built from the full name');
     }
 }

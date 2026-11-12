@@ -3114,7 +3114,7 @@ function add_theme_caps(): void
 
         foreach ((array) $type_object->cap as $cap) {
             if (empty($role->capabilities[$cap])) {
-                $role->add_cap($cap);
+                $role->add_cap(uamswp_fad_str($cap));
             }
         }
     }
@@ -3395,17 +3395,17 @@ function get_provider_meta($object)
 
     if ($degrees) {
 
-        foreach ($degrees as $degree) {
+        foreach (uamswp_fad_arr($degrees) as $degree) {
 
-            $degree_name = get_term($degree, 'degree');
+            $degree_name = get_term(uamswp_fad_int($degree), 'degree');
             $degree_list .= $degree_list !== '' ? ', ' : '';
-            $degree_list .= ($degree_name->name ?? '');
+            $degree_list .= uamswp_fad_str(($degree_name->name ?? ''));
 
         } // endforeach
 
     }
 
-    $full_name = get_field('physician_first_name', $postId).' '.(get_field('physician_middle_name', $postId) ? get_field('physician_middle_name', $postId).' ' : '').get_field('physician_last_name', $postId).(get_field('physician_pedigree', $postId) ? '&nbsp;'.get_field('physician_pedigree', $postId) : '').($degree_list ? ', '.$degree_list : '');
+    $full_name = uamswp_fad_str(get_field('physician_first_name', $postId)).' '.(uamswp_fad_str(get_field('physician_middle_name', $postId)) ? uamswp_fad_str(get_field('physician_middle_name', $postId)).' ' : '').uamswp_fad_str(get_field('physician_last_name', $postId)).(uamswp_fad_str(get_field('physician_pedigree', $postId)) ? '&nbsp;'.uamswp_fad_str(get_field('physician_pedigree', $postId)) : '').($degree_list ? ', '.$degree_list : '');
 
     // Get resident values
 
@@ -3438,7 +3438,7 @@ function get_provider_meta($object)
 
         if ($provider_specialty) {
 
-            $provider_specialty_term = get_term($provider_specialty, 'clinical_title');
+            $provider_specialty_term = get_term(uamswp_fad_int($provider_specialty), 'clinical_title');
 
             if (is_object($provider_specialty_term)) {
 
@@ -3466,24 +3466,24 @@ function get_provider_meta($object)
 
     $provider_service_line = get_field('physician_service_line', $postId);
     $resident_profile_group = get_field('physician_resident_profile_group', $postId);
-    $resident_academic_department = $resident_profile_group['physician_resident_academic_department'];
-    $resident_academic_department_term = get_term($resident_academic_department, 'academic_department');
+    $resident_academic_department = uamswp_fad_arr($resident_profile_group)['physician_resident_academic_department'];
+    $resident_academic_department_term = get_term(uamswp_fad_int($resident_academic_department), 'academic_department');
     $resident_academic_department_name = $resident_academic_department_term && ! is_wp_error($resident_academic_department_term) ? $resident_academic_department_term->name : '';
-    $resident_academic_chief = $resident_profile_group['physician_resident_academic_chief'];
+    $resident_academic_chief = uamswp_fad_arr($resident_profile_group)['physician_resident_academic_chief'];
     // The fallback is never selected by the subsequent chief-name guard.
     // @pest-mutate-ignore: EmptyStringToNotEmpty
     $resident_academic_chief_name = $resident_academic_chief ? 'Chief Resident' : '';
-    $resident_academic_year = $resident_profile_group['physician_resident_academic_year'];
-    $resident_academic_year_term = get_term($resident_academic_year, 'residency_year');
+    $resident_academic_year = uamswp_fad_arr($resident_profile_group)['physician_resident_academic_year'];
+    $resident_academic_year_term = get_term(uamswp_fad_int($resident_academic_year), 'residency_year');
     $resident_academic_year_name = $resident_academic_year_term && ! is_wp_error($resident_academic_year_term) ? $resident_academic_year_term->name : '';
 
     $resident_academic_name = $resident_academic_chief ? $resident_academic_chief_name : $resident_academic_year_name;
     $data['physician_full_name'] = $full_name;
     // Physician Data
     $data['physician_title'] = $provider_occupation_title; // (get_field( 'physician_title', $postId ) ? get_term( get_field( 'physician_title', $postId ), 'clinical_title' )->name : '');
-    $data['physician_service_line'] = $provider_service_line ? (get_term($provider_service_line, 'service_line')->name ?? '') : '';
+    $data['physician_service_line'] = $provider_service_line ? (get_term(uamswp_fad_int($provider_service_line), 'service_line')->name ?? '') : '';
     $data['physician_clinical_bio'] = get_field('physician_clinical_bio', $postId);
-    $data['physician_short_clinical_bio'] = get_field('physician_short_clinical_bio', $postId) ?: wp_trim_words(get_field('physician_clinical_bio', $postId), 30, ' &hellip;');
+    $data['physician_short_clinical_bio'] = get_field('physician_short_clinical_bio', $postId) ?: wp_trim_words(uamswp_fad_str(get_field('physician_clinical_bio', $postId)), 30, ' &hellip;');
     $data['physician_gender'] = get_field('physician_gender', $postId);
     $data['physician_accepting_new_patients'] = get_post_meta(uamswp_fad_int($postId), 'physician_accepting_patients', true);
     $data['physician_second_opinion'] = get_field('physician_second_opinion', $postId);
@@ -3492,11 +3492,11 @@ function get_provider_meta($object)
 
     if ($patients) {
 
-        foreach ($patients as $patient) {
+        foreach (uamswp_fad_arr($patients) as $patient) {
 
-            $patient_name = get_term($patient, 'patient_type');
+            $patient_name = get_term(uamswp_fad_int($patient), 'patient_type');
             $patient_list .= $patient_list !== '' ? ', ' : '';
-            $patient_list .= ($patient_name->name ?? '');
+            $patient_list .= uamswp_fad_str(($patient_name->name ?? ''));
 
         } // endforeach
 
@@ -3510,7 +3510,7 @@ function get_provider_meta($object)
     $data['provider_podcast'] = '<script type="text/javascript" src="https://radiomd.com/widget/easyXDM.js">
 			</script>
 			<script type="text/javascript">
-				radiomd_embedded_filtered_doctor("uams","radiomd-embedded-filtered-doctor",303,1837,"'.esc_js($podcast_name).'");
+				radiomd_embedded_filtered_doctor("uams","radiomd-embedded-filtered-doctor",303,1837,"'.esc_js(uamswp_fad_str($podcast_name)).'");
 			</script>
 			<style type="text/css">
 				#radiomd-embedded-filtered-tag iframe {
@@ -3524,11 +3524,11 @@ function get_provider_meta($object)
 
     if ($languages) {
 
-        foreach ($languages as $language) {
+        foreach (uamswp_fad_arr($languages) as $language) {
 
-            $language_name = get_term($language, 'language');
+            $language_name = get_term(uamswp_fad_int($language), 'language');
             $language_list .= $language_list !== '' ? ', ' : '';
-            $language_list .= ($language_name->name ?? '');
+            $language_list .= uamswp_fad_str(($language_name->name ?? ''));
 
         } // endforeach
 
@@ -3540,7 +3540,7 @@ function get_provider_meta($object)
     $data['physician_photo'] = image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center', 'portrait-3-4');
     $data['physician_referral_required'] = get_field('physician_referral_required', $postId);
     $provider_portal = get_field('physician_portal', $postId);
-    $portal = get_term($provider_portal, 'portal');
+    $portal = get_term(uamswp_fad_int($provider_portal), 'portal');
     $data['physician_portal']['name'] = $portal && ! is_wp_error($portal) ? $portal->name : '';
     $data['physician_portal']['content'] = get_field('portal_content', $portal);
     $data['physician_portal']['url'] = get_field('portal_url', $portal);
@@ -3557,10 +3557,10 @@ function get_provider_meta($object)
 
         $i = 0;
 
-        foreach ($educations as $education) {
+        foreach (uamswp_fad_arr($educations) as $education) {
 
-            $data['physician_education'][$i]['type'] = (get_term($education['education_type'], 'educationtype')->name ?? '');
-            $data['physician_education'][$i]['school'] = (get_term($education['school'], 'school')->name ?? '');
+            $data['physician_education'][$i]['type'] = (get_term(uamswp_fad_int(uamswp_fad_arr($education)['education_type']), 'educationtype')->name ?? '');
+            $data['physician_education'][$i]['school'] = (get_term(uamswp_fad_int($education['school']), 'school')->name ?? '');
             $data['physician_education'][$i]['description'] = $education['description'];
             $i++;
 
@@ -3574,10 +3574,10 @@ function get_provider_meta($object)
 
         $i = 0;
 
-        foreach ($academic_appointments as $academic_appointment) {
+        foreach (uamswp_fad_arr($academic_appointments) as $academic_appointment) {
 
-            $data['physician_faculty_appointment'][$i]['department'] = (get_term($academic_appointment['department'], 'academic_department')->name ?? '');
-            $data['physician_faculty_appointment'][$i]['title'] = (get_term($academic_appointment['academic_title_tax'], 'academic_title')->name ?? '');
+            $data['physician_faculty_appointment'][$i]['department'] = (get_term(uamswp_fad_int($academic_appointment['department']), 'academic_department')->name ?? '');
+            $data['physician_faculty_appointment'][$i]['title'] = (get_term(uamswp_fad_int(uamswp_fad_arr($academic_appointment)['academic_title_tax']), 'academic_title')->name ?? '');
             $i++;
 
         }
@@ -3590,10 +3590,10 @@ function get_provider_meta($object)
 
         $i = 0;
 
-        foreach ($academic_admin_titles as $academic_admin_title) {
+        foreach (uamswp_fad_arr($academic_admin_titles) as $academic_admin_title) {
 
-            $data['physician_academic_admin_role'][$i]['department'] = (get_term($academic_admin_title['department'], 'academic_department')->name ?? '');
-            $data['physician_academic_admin_role'][$i]['title'] = (get_term($academic_admin_title['academic_admin_title_tax'], 'academic_admin_title')->name ?? '');
+            $data['physician_academic_admin_role'][$i]['department'] = (get_term(uamswp_fad_int($academic_admin_title['department']), 'academic_department')->name ?? '');
+            $data['physician_academic_admin_role'][$i]['title'] = (get_term(uamswp_fad_int(uamswp_fad_arr($academic_admin_title)['academic_admin_title_tax']), 'academic_admin_title')->name ?? '');
             $i++;
 
         }
@@ -3606,11 +3606,11 @@ function get_provider_meta($object)
 
     if (! empty($boards)) {
 
-        foreach ($boards as $board) {
+        foreach (uamswp_fad_arr($boards) as $board) {
 
-            $board_name = get_term($board, 'board');
+            $board_name = get_term(uamswp_fad_int($board), 'board');
             $data['physician_boards'] .= $data['physician_boards'] != '' ? ',' : '';
-            $data['physician_boards'] .= ($board_name->name ?? '');
+            $data['physician_boards'] .= uamswp_fad_str(($board_name->name ?? ''));
 
         } // endforeach
 
@@ -3621,11 +3621,11 @@ function get_provider_meta($object)
 
     if (! empty($associations)) {
 
-        foreach ($associations as $association) {
+        foreach (uamswp_fad_arr($associations) as $association) {
 
-            $association_name = get_term($association, 'association');
+            $association_name = get_term(uamswp_fad_int($association), 'association');
             $data['physician_associations'] .= $data['physician_associations'] != '' ? ',' : '';
-            $data['physician_associations'] .= ($association_name->name ?? '');
+            $data['physician_associations'] .= uamswp_fad_str(($association_name->name ?? ''));
 
         } // endforeach
 
@@ -3636,11 +3636,11 @@ function get_provider_meta($object)
     // @pest-mutate-ignore: DecrementInteger,IncrementInteger
     $locations = get_field('physician_locations', $postId);
 
-    foreach ($locations as $location) {
+    foreach (uamswp_fad_arr($locations) as $location) {
 
-        $data['physician_locations'][$location]['link'] = get_permalink($location);
-        $data['physician_locations'][$location]['title'] = get_the_title($location);
-        $data['physician_locations'][$location]['slug'] = get_post_field('post_name', $location);
+        $data['physician_locations'][$location]['link'] = get_permalink(uamswp_fad_int($location));
+        $data['physician_locations'][$location]['title'] = get_the_title(uamswp_fad_int($location));
+        $data['physician_locations'][$location]['slug'] = get_post_field('post_name', uamswp_fad_int($location));
         // $data['physician_locations'][$location]['location_address_1'] = get_post_meta( $location, 'location_address_1', true );
         // $data['physician_locations'][$location]['location_address_2'] = get_post_meta( $location, 'location_address_2', true );
         // $data['physician_locations'][$location]['location_city'] = get_post_meta( $location, 'location_city', true );
@@ -3681,11 +3681,11 @@ function get_provider_meta($object)
         // $data['physician_locations'][$location]['location_email'] = get_post_meta( $location, 'location_email', true );
         // $data['physician_locations'][$location]['location_web_name'] = get_post_meta( $location, 'location_web_name', true );
         // $data['physician_locations'][$location]['location_url'] = get_post_meta( $location, 'location_url', true );
-        $map = get_post_meta($location, 'location_map', true);
+        $map = get_post_meta(uamswp_fad_int($location), 'location_map', true);
         if (is_array($map)) {
             $data['physician_locations'][$location]['location_lat'] = $map['lat'];
             $data['physician_locations'][$location]['location_lng'] = $map['lng'];
-            $data['physician_locations'][$location]['location_directions'] = '<a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/'.uamswp_fad_str($map['lat']).','.uamswp_fad_str($map['lng']).'" target="_blank" aria-label="Get Directions to '.get_the_title($location).'">Get Directions</a>';
+            $data['physician_locations'][$location]['location_directions'] = '<a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/'.uamswp_fad_str($map['lat']).','.uamswp_fad_str($map['lng']).'" target="_blank" aria-label="Get Directions to '.get_the_title(uamswp_fad_int($location)).'">Get Directions</a>';
             // $data['physician_locations'][$location]['map_marker'] = '<div class="marker" data-lat="'. $map['lat'] .'" data-lng="'. $map['lng'] .'" data-label="'. $i .'"></div>';
         }
 
@@ -3841,9 +3841,9 @@ function get_provider_meta($object)
 
     if (! empty($publications)) {
         $i = 1;
-        foreach ($publications as $publication) {
+        foreach (uamswp_fad_arr($publications) as $publication) {
 
-            $data['physician_pubmed'][$i]['information'] = $publication['pubmed_information'];
+            $data['physician_pubmed'][$i]['information'] = uamswp_fad_arr($publication)['pubmed_information'];
             $i++;
 
         }
@@ -3886,7 +3886,7 @@ function get_location_meta($object)
         $location_parent_id
     ) {
 
-        $parent_location = get_post($location_parent_id);
+        $parent_location = get_post(uamswp_fad_int($location_parent_id));
 
     }
 
@@ -3984,7 +3984,7 @@ function get_location_meta($object)
         ! empty($photo_gallery)
     ) {
 
-        foreach ($photo_gallery as $photo_gallery_image) {
+        foreach (uamswp_fad_arr($photo_gallery) as $photo_gallery_image) {
 
             $location_images[] = $photo_gallery_image;
 
@@ -4030,13 +4030,13 @@ function get_location_meta($object)
     }
 
     $data['location_address_1'] = get_field('location_address_1', $location_source_ids['street']);
-    $data['location_address_2'] = (get_field('location_address_2', $location_source_ids['street']) ? get_field('location_address_2', $location_source_ids['street']).'<br/>' : '');
+    $data['location_address_2'] = (uamswp_fad_str(get_field('location_address_2', $location_source_ids['street'])) ? uamswp_fad_str(get_field('location_address_2', $location_source_ids['street'])).'<br/>' : '');
     $location_building = get_field('location_building', $location_source_ids['facility']);
 
     $building_name = '';
     if ($location_building) {
 
-        $building = get_term($location_building, 'building');
+        $building = get_term(uamswp_fad_int($location_building), 'building');
         $building_name = ($building->name ?? '');
 
     }
@@ -4066,7 +4066,7 @@ function get_location_meta($object)
 
     // Either string fallback fails the following object guard.
     // @pest-mutate-ignore: EmptyStringToNotEmpty
-    $region_name = is_object(get_term($location_region, 'region')) ? get_term($location_region, 'region') : '';
+    $region_name = is_object(get_term(uamswp_fad_int($location_region), 'region')) ? get_term(uamswp_fad_int($location_region), 'region') : '';
     $data['location_region'] = is_object($region_name) ? ($region_name->slug ?? '') : '';
 
     // Location Type
@@ -4076,13 +4076,13 @@ function get_location_meta($object)
 
     if (! empty($types)) {
 
-        foreach ($types as $type) {
+        foreach (uamswp_fad_arr($types) as $type) {
 
-            $type_name = get_term($type, 'location_type');
+            $type_name = get_term(uamswp_fad_int($type), 'location_type');
             // Concatenation keeps this accumulator a string.
             // @pest-mutate-ignore: NotEqualToNotIdentical
             $data['location_types'] .= $data['location_types'] != '' ? ',' : '';
-            $data['location_types'] .= ($type_name->name ?? '');
+            $data['location_types'] .= uamswp_fad_str(($type_name->name ?? ''));
 
         } // endforeach
 
@@ -4139,11 +4139,11 @@ function get_location_meta($object)
 
         $i = 0;
 
-        foreach ($additional_phones as $additional_phone) {
+        foreach (uamswp_fad_arr($additional_phones) as $additional_phone) {
 
-            $data['location_additional_phone_numbers'][$i]['text'] = $additional_phone['location_appointments_text'];
-            $data['location_additional_phone_numbers'][$i]['phone'] = $additional_phone['location_appointments_phone'];
-            $data['location_additional_phone_numbers'][$i]['additional_text'] = $additional_phone['location_appointments_additional_text'];
+            $data['location_additional_phone_numbers'][$i]['text'] = uamswp_fad_arr($additional_phone)['location_appointments_text'];
+            $data['location_additional_phone_numbers'][$i]['phone'] = uamswp_fad_arr($additional_phone)['location_appointments_phone'];
+            $data['location_additional_phone_numbers'][$i]['additional_text'] = uamswp_fad_arr($additional_phone)['location_appointments_additional_text'];
             $i++;
 
         }
@@ -4156,36 +4156,36 @@ function get_location_meta($object)
     $data['location_hours_variable'] = $location_hours_group['location_hours_variable'];
     $data['location_hours_variable_info'] = $location_hours_group['location_hours_variable_info'];
     $data['location_24_7'] = $location_hours_group['location_24_7'];
-    $data['location_modified'] = $location_hours_group['location_modified_hours'];
-    $data['location_modified_reason'] = $location_hours_group['location_modified_hours_reason'];
-    $data['location_modified_start_date'] = $location_hours_group['location_modified_hours_start_date'];
-    $data['location_modified_end'] = $location_hours_group['location_modified_hours_end'];
-    $data['location_modified_end_date'] = $location_hours_group['location_modified_hours_end_date'];
-    $modified_hours = $location_hours_group['location_modified_hours_group'];
+    $data['location_modified'] = uamswp_fad_arr($location_hours_group)['location_modified_hours'];
+    $data['location_modified_reason'] = uamswp_fad_arr($location_hours_group)['location_modified_hours_reason'];
+    $data['location_modified_start_date'] = uamswp_fad_arr($location_hours_group)['location_modified_hours_start_date'];
+    $data['location_modified_end'] = uamswp_fad_arr($location_hours_group)['location_modified_hours_end'];
+    $data['location_modified_end_date'] = uamswp_fad_arr($location_hours_group)['location_modified_hours_end_date'];
+    $modified_hours = uamswp_fad_arr($location_hours_group)['location_modified_hours_group'];
 
     if (! empty($modified_hours)) {
 
         $i = 0;
 
-        foreach ($modified_hours as $modified_hour) {
+        foreach (uamswp_fad_arr($modified_hours) as $modified_hour) {
 
-            $data['location_modified_hours'][$i]['title'] = $modified_hour['location_modified_hours_title'];
-            $data['location_modified_hours'][$i]['information'] = $modified_hour['location_modified_hours_information'];
-            $data['location_modified_hours'][$i]['times'] = $modified_hour['location_modified_hours_times'];
-            $data['location_modified_hours'][$i]['24_7'] = $modified_hour['location_modified_hours_24_7'];
+            $data['location_modified_hours'][$i]['title'] = uamswp_fad_arr($modified_hour)['location_modified_hours_title'];
+            $data['location_modified_hours'][$i]['information'] = uamswp_fad_arr($modified_hour)['location_modified_hours_information'];
+            $data['location_modified_hours'][$i]['times'] = uamswp_fad_arr($modified_hour)['location_modified_hours_times'];
+            $data['location_modified_hours'][$i]['24_7'] = uamswp_fad_arr($modified_hour)['location_modified_hours_24_7'];
             $i++;
 
         }
 
     }
 
-    $hours = $location_hours_group['location_hours'];
+    $hours = uamswp_fad_arr($location_hours_group)['location_hours'];
 
     if (! empty($hours)) {
 
         $i = 0;
 
-        foreach ($hours as $hour) {
+        foreach (uamswp_fad_arr($hours) as $hour) {
 
             $data['location_hours'][$i]['day'] = $hour['day'];
             $data['location_hours'][$i]['closed'] = $hour['closed'];
@@ -4238,14 +4238,14 @@ function get_location_meta($object)
 
     $data['location_telemed_query'] = $location_hours_group['location_telemed_query']; // Is there telemedicine?
     $data['location_telemed_patients'] = $location_hours_group['location_telemed_patients']; // New patients, existing or both?
-    $data['location_telemed_hours247'] = $location_hours_group['location_telemed_24_7']; // typically 24/7?
+    $data['location_telemed_hours247'] = uamswp_fad_arr($location_hours_group)['location_telemed_24_7']; // typically 24/7?
     $data['location_telemed_hours'] = $location_hours_group['location_telemed_hours']; // telemedicine hours repeater
-    $data['location_telemed_modified'] = $location_hours_group['location_telemed_modified_hours_query']; // Are there modified hours for telemedicine?
-    $data['location_telemed_modified_reason'] = $location_hours_group['location_telemed_modified_hours_reason']; // Why are there modified hours for telemedicine?
-    $data['location_telemed_modified_start'] = $location_hours_group['location_telemed_modified_hours_start_date']; // When do the modified telemedicine hours start?
-    $data['location_telemed_modified_end'] = $location_hours_group['location_telemed_modified_hours_end']; // Do we know when the modified telemedicine hours end?
-    $data['location_telemed_modified_end_date'] = $location_hours_group['location_telemed_modified_hours_end_date']; // When do the modified telemedicine hours end?
-    $data['location_telemed_modified_hours247'] = $location_hours_group['location_telemed_modified_hours_24_7'];
+    $data['location_telemed_modified'] = uamswp_fad_arr($location_hours_group)['location_telemed_modified_hours_query']; // Are there modified hours for telemedicine?
+    $data['location_telemed_modified_reason'] = uamswp_fad_arr($location_hours_group)['location_telemed_modified_hours_reason']; // Why are there modified hours for telemedicine?
+    $data['location_telemed_modified_start'] = uamswp_fad_arr($location_hours_group)['location_telemed_modified_hours_start_date']; // When do the modified telemedicine hours start?
+    $data['location_telemed_modified_end'] = uamswp_fad_arr($location_hours_group)['location_telemed_modified_hours_end']; // Do we know when the modified telemedicine hours end?
+    $data['location_telemed_modified_end_date'] = uamswp_fad_arr($location_hours_group)['location_telemed_modified_hours_end_date']; // When do the modified telemedicine hours end?
+    $data['location_telemed_modified_hours247'] = uamswp_fad_arr($location_hours_group)['location_telemed_modified_hours_24_7'];
     $data['location_telemed_info'] = get_field('location_telemed_descr_system', 'option');
 
     // Closing
@@ -4276,7 +4276,7 @@ function get_location_meta($object)
     // Portal
 
     $location_portal = get_field('location_portal', $postId);
-    $portal = get_term($location_portal, 'portal');
+    $portal = get_term(uamswp_fad_int($location_portal), 'portal');
     $data['location_portal']['name'] = $portal && ! is_wp_error($portal) ? $portal->name : '';
     $data['location_portal']['content'] = get_field('portal_content', $portal);
     $data['location_portal']['url'] = get_field('portal_url', $portal);
@@ -4284,13 +4284,15 @@ function get_location_meta($object)
     // Alert with logic
 
     $location_alert_title_sys = get_field('location_alert_heading_system', 'option');
-    $location_alert_text_sys = get_field('location_alert_body_system', 'option');
+    $location_alert_text_sys = uamswp_fad_str(get_field('location_alert_body_system', 'option'));
+
     $location_alert_color_sys = get_field('location_alert_color_system', 'option');
 
     $location_alert_modification = get_field('location_alert_modification', $postId);
 
     $location_alert_title_local = get_field('location_alert_heading', $postId);
-    $location_alert_text_local = get_field('location_alert_body', $postId);
+    $location_alert_text_local = uamswp_fad_str(get_field('location_alert_body', $postId));
+
     $location_alert_color_local = get_field('location_alert_color', $postId);
 
     $location_alert_title = $location_alert_title_sys;
@@ -4396,7 +4398,7 @@ function get_location_meta($object)
                 $data['location_provider'][$provider->ID]['link'] = get_permalink($provider->ID);
                 $data['location_provider'][$provider->ID]['title'] = get_field('physician_full_name', $provider->ID);
                 $data['location_provider'][$provider->ID]['slug'] = $provider->post_name;
-                $provider_list .= get_field('physician_full_name', $provider->ID);
+                $provider_list .= uamswp_fad_str(get_field('physician_full_name', $provider->ID));
 
                 if (count($provider_query->posts) > $i) {
 
@@ -4584,7 +4586,8 @@ function get_expertise_meta($object)
     $postId = $object['id'];
     $data['expertise_title'] = get_the_title(uamswp_fad_int($postId));
     $data['expertise_link'] = get_permalink(uamswp_fad_int($postId));
-    $podcast_name = get_field('expertise_podcast_name', $postId);
+    $podcast_name = uamswp_fad_str(get_field('expertise_podcast_name', $postId));
+
     $data['expertise_podcast'] = '<script type="text/javascript" src="https://radiomd.com/widget/easyXDM.js">
 			</script>
 			<script type="text/javascript">
@@ -4715,7 +4718,7 @@ function get_expertise_meta($object)
                 $data['expertise_provider'][$provider->ID]['link'] = get_permalink($provider->ID);
                 $data['expertise_provider'][$provider->ID]['title'] = get_field('physician_full_name', $provider->ID);
                 $data['expertise_provider'][$provider->ID]['slug'] = $provider->post_name;
-                $provider_list .= get_field('physician_full_name', $provider->ID);
+                $provider_list .= uamswp_fad_str(get_field('physician_full_name', $provider->ID));
 
                 if (count($provider_query->posts) > $i) {
 
@@ -4912,7 +4915,7 @@ function get_condition_meta($object): array
                 $data['condition_provider'][$provider->ID]['link'] = get_permalink($provider->ID);
                 $data['condition_provider'][$provider->ID]['title'] = get_field('physician_full_name', $provider->ID);
                 $data['condition_provider'][$provider->ID]['slug'] = $provider->post_name;
-                $provider_list .= get_field('physician_full_name', $provider->ID);
+                $provider_list .= uamswp_fad_str(get_field('physician_full_name', $provider->ID));
 
                 if (count($provider_query->posts) > $i) {
 
@@ -5109,7 +5112,7 @@ function get_treatment_meta($object): array
                 $data['treatment_provider'][$provider->ID]['link'] = get_permalink($provider->ID);
                 $data['treatment_provider'][$provider->ID]['title'] = get_field('physician_full_name', $provider->ID);
                 $data['treatment_provider'][$provider->ID]['slug'] = $provider->post_name;
-                $provider_list .= get_field('physician_full_name', $provider->ID);
+                $provider_list .= uamswp_fad_str(get_field('physician_full_name', $provider->ID));
 
                 if (count($provider_query->posts) > $i) {
 
@@ -5195,8 +5198,8 @@ function get_resource_meta($object)
     $postId = $object['id'];
     $resource_image = get_the_post_thumbnail_url(uamswp_fad_int($postId), 'large');
     $resource_type = get_field('clinical_resource_type', $postId);
-    $resource_type_value = $resource_type['value'];
-    $resource_type_label = $resource_type['label'];
+    $resource_type_value = uamswp_fad_arr($resource_type)['value'];
+    $resource_type_label = uamswp_fad_arr($resource_type)['label'];
     // Conditions
     $conditions_cpt = get_field('clinical_resource_conditions', $postId);
 
@@ -5333,7 +5336,7 @@ function get_resource_meta($object)
     $data['clinical_resource_title_short'] = get_field('clinical_resource_title_short', $postId);
 
     // Provider Spotlight
-    $spotlight_provider = (int) get_field('clinical_resource_spotlight_provider', $postId);
+    $spotlight_provider = uamswp_fad_int(get_field('clinical_resource_spotlight_provider', $postId));
 
     // Require the featured provider to still be published. The
     // post_object query filter only restricts the admin dropdown at
@@ -5365,10 +5368,10 @@ function get_resource_meta($object)
 
         if ($spotlight_qa) {
 
-            foreach ($spotlight_qa as $spotlight_qa_row) {
+            foreach (uamswp_fad_arr($spotlight_qa) as $spotlight_qa_row) {
 
-                $spotlight_qa_question = $spotlight_qa_row['spotlight_qa_question'];
-                $spotlight_qa_answer = $spotlight_qa_row['spotlight_qa_answer'];
+                $spotlight_qa_question = uamswp_fad_arr($spotlight_qa_row)['spotlight_qa_question'];
+                $spotlight_qa_answer = uamswp_fad_arr($spotlight_qa_row)['spotlight_qa_answer'];
 
                 if ($spotlight_qa_question) {
 
@@ -5391,9 +5394,9 @@ function get_resource_meta($object)
 
     if ($documents) {
 
-        foreach ($documents as $document) {
-            $document_title = $document['document_title'];
-            $document_file = $document['document_file'];
+        foreach (uamswp_fad_arr($documents) as $document) {
+            $document_title = uamswp_fad_arr($document)['document_title'];
+            $document_file = uamswp_fad_arr($document)['document_file'];
             if ($document_title && is_array($document_file)) {
                 $document_url = user_trailingslashit(uamswp_fad_str($document_file['url']));
                 $data['clinical_resource_document'][$i]['title'] = $document_title;
@@ -5514,7 +5517,7 @@ function get_resource_meta($object)
             $data['clinical_resource_provider'][$provider->ID]['link'] = get_permalink($provider->ID);
             $data['clinical_resource_provider'][$provider->ID]['title'] = get_field('physician_full_name', $provider->ID);
             $data['clinical_resource_provider'][$provider->ID]['slug'] = $provider->post_name;
-            $provider_list .= get_field('physician_full_name', $provider->ID);
+            $provider_list .= uamswp_fad_str(get_field('physician_full_name', $provider->ID));
 
             if ($provider_query->found_posts > $i) {
 

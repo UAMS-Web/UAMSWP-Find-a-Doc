@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 // register_activation_hook( __FILE__, 'prefix_create_table' );
 
+/** @var wpdb $wpdb */
 global $wpdb;
 add_filter('rwmb_meta_boxes', 'uams_services_register_meta_boxes');
 
@@ -18,6 +19,7 @@ add_filter('rwmb_meta_boxes', 'uams_services_register_meta_boxes');
 function uams_services_register_meta_boxes($meta_boxes)
 {
 
+    /** @var wpdb $wpdb */
     global $wpdb;
     $meta_boxes[] = [
         'id' => 'services',

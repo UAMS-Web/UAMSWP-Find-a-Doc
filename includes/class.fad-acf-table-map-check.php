@@ -107,8 +107,10 @@ function uamswp_fad_acf_table_map_check(string $dir): array
             $problems[] = sprintf('table `%s`: JSON says post_type `%s`, cache says `%s`', $name, uamswp_fad_str($want['post_type'] ?? 'null'), uamswp_fad_str($have['post_type'] ?? 'null'));
         }
 
-        $missing = array_values(array_diff($want['columns'], $have['columns']));
-        $extra = array_values(array_diff($have['columns'], $want['columns']));
+        $want_columns = array_map(strval(...), array_values(array_filter((array) $want['columns'], is_scalar(...))));
+        $have_columns = array_map(strval(...), array_values(array_filter((array) $have['columns'], is_scalar(...))));
+        $missing = array_values(array_diff($want_columns, $have_columns));
+        $extra = array_values(array_diff($have_columns, $want_columns));
 
         if ($missing !== []) {
             $problems[] = sprintf('table `%s`: %d column(s) in JSON but not the cache (e.g. %s)', $name, count($missing), implode(', ', array_slice($missing, 0, 3)));

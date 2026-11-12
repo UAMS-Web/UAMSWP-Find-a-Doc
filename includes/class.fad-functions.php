@@ -18,9 +18,9 @@ function asp_custom_link_meta_results($results)
             $degree_list = '';
             $i = 1;
             if ($degrees) {
-                foreach ($degrees as $degree) {
-                    $degree_name = get_term($degree, 'degree');
-                    $degree_list .= ($degree_name->name ?? '');
+                foreach (uamswp_fad_arr($degrees) as $degree) {
+                    $degree_name = get_term(uamswp_fad_int($degree), 'degree');
+                    $degree_list .= uamswp_fad_str(($degree_name->name ?? ''));
                     if (count(uamswp_fad_arr($degrees)) > $i) {
                         $degree_list .= ', ';
                     }
@@ -28,7 +28,7 @@ function asp_custom_link_meta_results($results)
                 }
             }
             // $new_url = '/directory/physician/' . get_post_field( 'post_name', $v->id ) .'/';
-            $full_name = get_field('physician_first_name', $v_id).' '.(get_field('physician_middle_name', $v_id) ? get_field('physician_middle_name', $v_id).' ' : '').get_field('physician_last_name', $v_id).($degree_list ? ', '.$degree_list : '');
+            $full_name = uamswp_fad_str(get_field('physician_first_name', $v_id)).' '.(uamswp_fad_str(get_field('physician_middle_name', $v_id)) ? uamswp_fad_str(get_field('physician_middle_name', $v_id)).' ' : '').uamswp_fad_str(get_field('physician_last_name', $v_id)).($degree_list ? ', '.$degree_list : '');
             $new_desc = get_field('physician_short_clinical_bio', $v_id);
         }
         // Change only, if the meta is specified
@@ -421,7 +421,7 @@ function sync_provider_pg_data(): void
 
     foreach (uamswp_fad_ids($providers) as $provider_id) {
         // Using get_field assumes Advanced Custom Fields (ACF) is active
-        $npi = absint(get_field('physician_npi', $provider_id));
+        $npi = absint(uamswp_fad_str(get_field('physician_npi', $provider_id)));
         if (! $npi) {
             continue;
         }
@@ -578,7 +578,7 @@ function pg_ajax_api(): void
         wp_send_json_error('invalid request', 400);
     }
 
-    $npi = absint(get_field('physician_npi', $post_id));
+    $npi = absint(uamswp_fad_str(get_field('physician_npi', $post_id)));
     if (! $npi) {
         wp_send_json_error('invalid request', 400);
     }
@@ -680,14 +680,16 @@ function remove_description_form(): void
 }
 
 add_filter('manage_edit-condition_columns', function ($columns) {
-    if (isset($columns['description'])) {
+    if (isset(uamswp_fad_arr($columns)['description'])) {
+        /** @var array<string, mixed> $columns */
         unset($columns['description']);
     }
 
     return $columns;
 });
 add_filter('manage_edit-treatment_columns', function ($columns) {
-    if (isset($columns['description'])) {
+    if (isset(uamswp_fad_arr($columns)['description'])) {
+        /** @var array<string, mixed> $columns */
         unset($columns['description']);
     }
 
@@ -711,14 +713,15 @@ function rlv_tax_excerpt_term_fields($content, $term)
         // this is excerpt-building, where the taxonomy is in $term->post_type
         $term->taxonomy = $term->post_type;
     }
-    $post_id = $term->taxonomy.'_'.$term->term_id;
+    $content = uamswp_fad_str($content);
+    $post_id = uamswp_fad_str($term->taxonomy).'_'.uamswp_fad_str($term->term_id);
     if (get_field('condition_alternate', $post_id) || get_field('condition_content', $post_id)) {
-        $content .= get_field('condition_alternate', $post_id);
-        $content .= ' '.get_field('condition_content', $post_id);
+        $content .= uamswp_fad_str(get_field('condition_alternate', $post_id));
+        $content .= ' '.uamswp_fad_str(get_field('condition_content', $post_id));
     }
     if (get_field('treatment_procedure_alternate', $post_id) || get_field('treatment_procedure_content', $post_id)) {
-        $content .= get_field('treatment_procedure_alternate', $post_id);
-        $content .= ' '.get_field('treatment_procedure_content', $post_id);
+        $content .= uamswp_fad_str(get_field('treatment_procedure_alternate', $post_id));
+        $content .= ' '.uamswp_fad_str(get_field('treatment_procedure_content', $post_id));
     }
 
     return $content;
@@ -823,7 +826,7 @@ function uamswp_load_by_ajax_callback(): void
         while ($loop->have_posts()) {
             $loop->the_post();
             $id = get_the_ID();
-            $out .= include UAMS_FAD_PATH.'/templates/loops/physician-card.php';
+            $out .= uamswp_fad_str(include UAMS_FAD_PATH.'/templates/loops/physician-card.php');
         }
     }
     wp_die();
@@ -1128,7 +1131,7 @@ function uamswp_provider_ajax_filter_shortcode($atts): string|false
 
                 if ($provider_specialty) {
 
-                    $provider_specialty_term = get_term($provider_specialty, 'clinical_title');
+                    $provider_specialty_term = get_term(uamswp_fad_int($provider_specialty), 'clinical_title');
 
                     if (is_object($provider_specialty_term)) {
 
@@ -1161,7 +1164,7 @@ function uamswp_provider_ajax_filter_shortcode($atts): string|false
              */
             if ($provider_occupation_title) {
 
-                $provider_titles[$provider_specialty] = $provider_occupation_title;
+                $provider_titles[uamswp_fad_int($provider_specialty)] = uamswp_fad_str($provider_occupation_title);
 
             }
 
@@ -1386,7 +1389,7 @@ function provider_ajax_filter_callback(): void
             include UAMS_FAD_PATH.'/templates/loops/physician-card.php';
             // $z++;
         }
-        echo '<data id="provider_ids" data-postids="'.implode(',', $provider_ids).'," data-regions="'.implode(',', $region_list).'," data-titles="'.implode(',', array_unique($title_list)).',"></data>';
+        echo '<data id="provider_ids" data-postids="'.implode(',', array_map(uamswp_fad_str(...), $provider_ids)).'," data-regions="'.implode(',', array_map(uamswp_fad_str(...), $region_list)).'," data-titles="'.implode(',', array_unique(array_map(uamswp_fad_str(...), $title_list))).',"></data>';
         // var_dump($tax_query_title);
         // var_dump($tax_query_region);
         // var_dump($tax_query);
@@ -1394,7 +1397,7 @@ function provider_ajax_filter_callback(): void
         // var_dump($args);
         echo '<span class="no-results">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
         // Still output availability data so the UI can disable invalid options
-        echo '<data id="provider_ids" data-postids="" data-regions="'.implode(',', $region_list).'," data-titles="'.implode(',', array_unique($title_list)).',"></data>';
+        echo '<data id="provider_ids" data-postids="" data-regions="'.implode(',', array_map(uamswp_fad_str(...), $region_list)).'," data-titles="'.implode(',', array_unique(array_map(uamswp_fad_str(...), $title_list))).',"></data>';
     }
     wp_die();
 }
@@ -1447,7 +1450,7 @@ function uamswp_provider_title_ajax_filter_shortcode($atts): string|false
 
                 if ($provider_specialty) {
 
-                    $provider_specialty_term = get_term($provider_specialty, 'clinical_title');
+                    $provider_specialty_term = get_term(uamswp_fad_int($provider_specialty), 'clinical_title');
 
                     if (is_object($provider_specialty_term)) {
 
@@ -1477,7 +1480,7 @@ function uamswp_provider_title_ajax_filter_shortcode($atts): string|false
 
             if ($provider_occupation_title) {
 
-                $provider_titles[$provider_specialty] = $provider_occupation_title;
+                $provider_titles[uamswp_fad_int($provider_specialty)] = uamswp_fad_str($provider_occupation_title);
 
             }
 
@@ -1577,7 +1580,7 @@ function provider_title_ajax_filter_callback(): void
             $title_list[] = get_field('physician_title', $id);
             include UAMS_FAD_PATH.'/templates/loops/physician-card.php';
         }
-        echo '<data id="provider_ids" data-postids="'.implode(',', $provider_ids).'," data-titles="'.implode(',', array_unique($title_list)).',"></data>';
+        echo '<data id="provider_ids" data-postids="'.implode(',', array_map(uamswp_fad_str(...), $provider_ids)).'," data-titles="'.implode(',', array_unique(array_map(uamswp_fad_str(...), $title_list))).',"></data>';
     } else {
         // var_dump($args);
         echo '<span class="no-results">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
@@ -1609,7 +1612,7 @@ function uamswp_location_ajax_filter_shortcode($atts): string|false
             }
         }
     }
-    $location_regions_ids = array_unique($location_regions);
+    $location_regions_ids = array_unique(array_map(uamswp_fad_str(...), $location_regions));
     sort($location_regions_ids);
 
     $location_region = '';
@@ -1699,10 +1702,10 @@ function location_ajax_filter_callback(): void
         $id = get_the_ID();
         $region_IDs[] = get_field('location_region', $id);
     }
-    $region_IDs = array_unique($region_IDs);
+    $region_IDs = array_unique(array_map(uamswp_fad_str(...), $region_IDs));
     $region_list = [];
     foreach ($region_IDs as $region_ID) {
-        $region_list[] = (get_term_by('ID', $region_ID, 'region')->slug ?? '');
+        $region_list[] = (get_term_by('ID', uamswp_fad_str($region_ID), 'region')->slug ?? '');
     }
 
     // Build query for titles, based on regions
@@ -1737,7 +1740,7 @@ function location_ajax_filter_callback(): void
             $id = get_the_ID();
             include UAMS_FAD_PATH.'/templates/loops/location-card.php';
         }
-        echo '<data id="location_ids" data-postids="'.implode(',', $location_ids).'," data-regions="'.implode(',', $region_list).',"></data>';
+        echo '<data id="location_ids" data-postids="'.implode(',', array_map(uamswp_fad_str(...), $location_ids)).'," data-regions="'.implode(',', array_map(uamswp_fad_str(...), $region_list)).',"></data>';
     } else {
         echo '<span class="no-results">Sorry, there are no locations matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
     }
@@ -1753,11 +1756,11 @@ function uamswp_add_trench(): void
             $trenchQS = $_GET['_filter_region'];
         }
         if ((isset($trench) && $trench) || $trenchQS) {
-            $region = $trench->slug ?: htmlspecialchars(uamswp_fad_str($trenchQS));
+            $region = ($trench instanceof WP_Term ? uamswp_fad_str($trench->slug) : '') ?: htmlspecialchars(uamswp_fad_str($trenchQS));
             ?>
 			<script type="text/javascript">
 				// Set cookie to expire at end of session
-    			document.cookie = "wp_filter_region=<?php echo $region; ?>; path=/; domain="+window.location.hostname;
+    			document.cookie = "wp_filter_region=<?php echo uamswp_fad_str($region); ?>; path=/; domain="+window.location.hostname;
 			</script>
 		<?php
         }
@@ -1786,9 +1789,9 @@ function schedule_ajax_filter_callback(): void
     }
     $row = $schedules[$schedule_key];
 
-    $mychart_scheduling_domain = (string) get_field('mychart_scheduling_domain', 'option');
-    $mychart_scheduling_instance = (string) get_field('mychart_scheduling_instance', 'option');
-    $mychart_scheduling_linksource = (string) get_field('mychart_scheduling_linksource', 'option');
+    $mychart_scheduling_domain = uamswp_fad_str(get_field('mychart_scheduling_domain', 'option'));
+    $mychart_scheduling_instance = uamswp_fad_str(get_field('mychart_scheduling_instance', 'option'));
+    $mychart_scheduling_linksource = uamswp_fad_str(get_field('mychart_scheduling_linksource', 'option'));
     $mychart_scheduling_linksource = ($mychart_scheduling_linksource !== '') ? $mychart_scheduling_linksource : 'uamshealth.com';
 
     $location_scheduling_ser = isset($row['location_scheduling_ser']) ? uamswp_fad_str($row['location_scheduling_ser']) : '';
@@ -1961,7 +1964,7 @@ function uamswp_fad_location_source_ids($post_id = 0)
          * silently break this.
          */
         $parent = get_field('location_parent_id', $post_id);
-        $parent = $parent instanceof WP_Post ? $parent : get_post($parent);
+        $parent = $parent instanceof WP_Post ? $parent : get_post(uamswp_fad_int($parent));
 
         if ($parent && (int) $parent->ID !== $post_id) {
 

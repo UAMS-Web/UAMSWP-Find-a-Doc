@@ -84,7 +84,7 @@ test('location portal metadata resolves the term name without changing its field
         default => null,
     };
     when('is_wp_error')->alias(fn ($value): bool => $value === $error);
-    when('get_term')->alias(fn ($id, string $taxonomy) => [$id, $taxonomy] === [$selection, 'portal'] ? $portal : null);
+    when('get_term')->alias(fn ($id, string $taxonomy) => [$id, $taxonomy] === [(int) $selection, 'portal'] ? $portal : null);
     when('get_field')->alias(fn (string $field, $id): array|int|string|false => match (true) {
         $field === 'location_portal' && $id === 101 => $selection,
         $field === 'portal_content' && $id === $portal => 'Sign in to your account',

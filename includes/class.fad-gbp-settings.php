@@ -52,7 +52,7 @@ function uamswp_fad_gbp_save_modes(bool $exit = true): void
 
     $posted = isset($_POST['modes']) && is_array($_POST['modes']) ? wp_unslash($_POST['modes']) : [];
 
-    update_option('uamswp_fad_gbp_modes', uamswp_fad_gbp_sanitize_modes($posted), false);
+    update_option('uamswp_fad_gbp_modes', uamswp_fad_gbp_sanitize_modes(uamswp_fad_assoc($posted)), false);
 
     wp_safe_redirect(add_query_arg('saved', '1', admin_url('admin.php?page=uamswp-fad-gbp')));
 
@@ -158,7 +158,7 @@ function uamswp_fad_gbp_render_settings_page(): void
     $labels = ['uams' => 'UAMS', 'arkansas-childrens' => "Arkansas Children's", 'baptist-health' => 'Baptist Health'];
     $modes = uamswp_fad_gbp_modes();
     $production = uamswp_fad_gbp_is_production();
-    $filters = uamswp_fad_gbp_log_filters($_GET);
+    $filters = uamswp_fad_gbp_log_filters(uamswp_fad_assoc($_GET));
     $stored_log = get_option('uamswp_fad_gbp_log', []);
     /** @var array<int|string, array<string, mixed>> $log_entries */
     $log_entries = is_array($stored_log) ? $stored_log : [];
