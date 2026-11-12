@@ -64,16 +64,16 @@ test('the clinical resource handler stores one comma list of every related title
     when('get_the_title')->alias(static fn (int $id): string => 'T'.$id);
     $_POST = ['acf' => [
         'field_clinical_resource_providers' => ['1', '2'],
-        'field_clinical_resource_locations' => [3],
+        'field_clinical_resource_locations' => [3, 11],
         'field_clinical_resource_aoe' => [4, 5],
-        'field_clinical_resource_conditions' => [6],
-        'field_clinical_resource_treatments' => [7],
+        'field_clinical_resource_conditions' => [6, 12],
+        'field_clinical_resource_treatments' => [7, 13],
         'field_clinical_resource_related' => [8, 9, 10],
     ]];
 
     resources_save_post(5);
 
-    expect($_POST['acf']['field_clinical_resource_asp_filter'])->toBe('T1, T2, T3, T4, T5, T6, T7, T8, T9, T10');
+    expect($_POST['acf']['field_clinical_resource_asp_filter'])->toBe('T1, T2, T3, T11, T4, T5, T6, T12, T7, T13, T8, T9, T10');
 });
 
 test('the clinical resource handler leaves a gap for each empty relation', function (): void {
@@ -523,4 +523,19 @@ test('no excerpt is written when the global post has no id', function (): void {
     Functions\expect('wp_update_post')->never();
 
     custom_excerpt_acf();
+});
+
+test('the provider handler lists every related expertise, condition and treatment title in the search field', function (): void {
+    uamswp_test_acf_functions();
+    acf_save_type('provider');
+    when('get_the_title')->alias(static fn (int $id): string => 'T'.$id);
+    $_POST = ['acf' => [
+        'field_physician_expertise' => [5, 6],
+        'field_physician_conditions_cpt' => [1, 2],
+        'field_physician_treatments_cpt' => [3, 4],
+    ]];
+
+    physician_save_post(5);
+
+    expect($_POST['acf']['field_physician_asp_filter'])->toBe('T5, T6, T1, T2, T3, T4');
 });

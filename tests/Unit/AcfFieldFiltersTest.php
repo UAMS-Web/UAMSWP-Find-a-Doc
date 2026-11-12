@@ -316,3 +316,97 @@ test('the brand organization loaders keep the existing choices when the terms ca
     'uams' => ['uamswp_fad_acf_load_brandorg_uams'],
     'third party' => ['uamswp_fad_acf_load_brandorg_3p'],
 ]);
+
+/**
+ * Run a block callback and return the HTML it printed.
+ *
+ * @param  array<string, mixed>  $block
+ */
+function acf_block_html(string $callback, array $block = []): string
+{
+    ob_start();
+    $callback($block);
+
+    return (string) ob_get_clean();
+}
+
+test('the FacetWP cards block prints the heading, template and class names', function (): void {
+    uamswp_test_acf_functions();
+    acf_filters_options([
+        'facetwp_heading' => 'Our Clinics',
+        'facetwp_template_name' => 'clinic_cards',
+        'facetwp_background_color' => 'bg-light',
+    ]);
+    when('facetwp_display')->alias(static fn (string $type, string $name): string => "[$type:$name]");
+
+    $html = acf_block_html('fad_facetwp_cards_callback', ['className' => 'extra', 'align' => 'full']);
+
+    expect($html)->toContain('<section class="uams-module container-fluid p-8 p-sm-10 facetwp-cards extra alignfull bg-light">')
+        ->and($html)->toContain('<h2 class="module-title">Our Clinics</h2>')
+        ->and($html)->toContain('<div class="card-list-container">')
+        ->and($html)->toContain('[template:clinic_cards]');
+});
+
+test('the FacetWP cards block falls back to its default heading and background', function (): void {
+    uamswp_test_acf_functions();
+    acf_filters_options([]);
+    when('facetwp_display')->justReturn('');
+
+    $html = acf_block_html('fad_facetwp_cards_callback');
+
+    expect($html)->toContain('<section class="uams-module container-fluid p-8 p-sm-10 facetwp-cards bg-white">')
+        ->and($html)->toContain('<h2 class="module-title">Cards List</h2>');
+});
+
+test('the FacetWP block prints its facets around the template and an optional pager', function (): void {
+    uamswp_test_acf_functions();
+    acf_filters_options([
+        'facetwp_block_heading' => 'Find a Clinic',
+        'facetwp_block_hide_heading' => '1',
+        'facetwp_block_pre_template_facets' => [['alignment' => 'left', 'facet_name' => 'region']],
+        'facetwp_block_facet_template' => 'clinic_cards',
+        'facetwp_block_post_template_facets' => [['alignment' => 'right', 'facet_name' => 'pager_facet']],
+        'facetwp_block_include_pager' => true,
+        'facetwp_block_background_color' => 'bg-dark',
+    ]);
+    when('facetwp_display')->alias(static fn (string $type, ?string $name = null): string => '['.$type.($name === null ? '' : ':'.$name).']');
+
+    $html = acf_block_html('fad_facetwp_blocks_callback', ['className' => 'wide', 'align' => 'wide']);
+
+    expect($html)->toContain('<section class="uams-module facetwp-blocks wide alignwide bg-dark">')
+        ->and($html)->toContain('<h2 class="module-title sr-only" >Find a Clinic</h2>')
+        ->and($html)->toContain('<div class="text-left">[facet:region]</div>')
+        ->and($html)->toContain('[template:clinic_cards]')
+        ->and($html)->toContain('<div class="text-right">[facet:pager_facet]</div>')
+        ->and($html)->toContain('[pager]')
+        ->and(strpos($html, '[facet:region]'))->toBeLessThan(strpos($html, '[template:clinic_cards]'))
+        ->and(strpos($html, '[template:clinic_cards]'))->toBeLessThan(strpos($html, '[facet:pager_facet]'));
+});
+
+test('the FacetWP block shows its heading, and no facets or pager, by default', function (): void {
+    uamswp_test_acf_functions();
+    acf_filters_options(['facetwp_block_facet_template' => 'clinic_cards']);
+    when('facetwp_display')->alias(static fn (string $type, ?string $name = null): string => '['.$type.($name === null ? '' : ':'.$name).']');
+
+    $html = acf_block_html('fad_facetwp_blocks_callback');
+
+    expect($html)->toContain('<section class="uams-module facetwp-blocks bg-white">')
+        ->and($html)->toContain('<h2 class="module-title" >Cards List</h2>')
+        ->and($html)->not->toContain('[pager]')
+        ->and($html)->not->toContain('[facet:')
+        ->and($html)->toContain('[template:clinic_cards]');
+});
+
+test('the file registers the FacetWP cards and block blocks when ACF can register blocks', function (): void {
+    $blocks = uamswp_test_acf_functions()['blocks'];
+
+    expect(array_column($blocks, 'name'))->toBe(['uamswp_fad_facetwp_cards', 'uamswp_fad_facetwp_blocks'])
+        ->and(array_column($blocks, 'title'))->toBe(['FacetWP Cards', 'FacetWP Block'])
+        ->and(array_column($blocks, 'render_callback'))->toBe(['fad_facetwp_cards_callback', 'fad_facetwp_blocks_callback'])
+        ->and(array_column($blocks, 'icon'))->toBe(['id', 'list-view'])
+        ->and(array_column($blocks, 'acf_block_version'))->toBe([3, 3])
+        ->and($blocks[0]['keywords'])->toBe(['provider', 'location', 'facetwp'])
+        ->and($blocks[1]['keywords'])->toBe(['facetwp', 'shortcode'])
+        ->and($blocks[0]['supports'])->toBe(['align' => ['full'], 'mode' => true, 'multiple' => true])
+        ->and($blocks[1]['supports'])->toBe(['align' => true, 'mode' => true, 'multiple' => true]);
+});
