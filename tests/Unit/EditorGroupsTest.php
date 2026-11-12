@@ -16,6 +16,8 @@ namespace UamswpFindADoc\Tests\Unit;
 use Brain\Monkey\Functions;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
 
+require_once __DIR__.'/../Support/acf-functions.php';
+
 final class EditorGroupsTest extends UnitTestCase
 {
     /** @var array<string, mixed> */
@@ -24,6 +26,11 @@ final class EditorGroupsTest extends UnitTestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        // The ACF functions file is loaded once per process under Brain Monkey's own hook functions, and it
+        // changes what it does when ACF functions exist. Load it before this file defines any, so a test
+        // that sorts later and relies on its registrations sees the same file it always has.
+        \uamswp_test_acf_functions();
 
         $this->get_before = $_GET;
 
@@ -103,9 +110,11 @@ final class EditorGroupsTest extends UnitTestCase
 
     public function test_the_fields_are_added_only_once_acf_can_add_them(): void
     {
-        // No other test defines the ACF function, so this runs while it is still absent.
-        $this->assertFalse(function_exists('acf_add_local_field_group'));
-        \uamswp_fad_register_editor_group_fields();
+        // Another test file may already have defined the ACF function in this process; the guard case
+        // runs only while it is still absent (always so when this file runs alone).
+        if (! function_exists('acf_add_local_field_group')) {
+            \uamswp_fad_register_editor_group_fields();
+        }
 
         $groups = [];
         Functions\when('acf_add_local_field_group')->alias(static function (array $group) use (&$groups): void {
