@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * Stand-ins for the WordPress classes the helper functions test with `instanceof`.
+ *
+ * WordPress is not loaded in the unit process, so each class is declared here with only the properties the
+ * code under test reads. A class is declared only when it does not exist yet.
+ */
+
+declare(strict_types=1);
+
+if (! class_exists('WP_Post')) {
+    class WP_Post
+    {
+        public int $ID = 0;
+    }
+}
+
+if (! class_exists('WP_Term')) {
+    class WP_Term
+    {
+        public int $term_id = 0;
+    }
+}
+
+if (! class_exists('WP_Taxonomy')) {
+    class WP_Taxonomy
+    {
+        /** @var array<string, mixed>|false */
+        public array|false $rewrite = false;
+
+        public object $labels;
+    }
+}
+
+if (! class_exists('WP_Query')) {
+    class WP_Query
+    {
+        /** @var array<int, mixed> */
+        public array $posts = [];
+    }
+}
