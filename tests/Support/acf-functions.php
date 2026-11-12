@@ -14,11 +14,15 @@ declare(strict_types=1);
 
 use Brain\Monkey\Actions;
 use Brain\Monkey\Filters;
+use Brain\Monkey\Functions;
+
+use function Brain\Monkey\Filters\has;
+use function Brain\Monkey\Functions\when;
 
 /**
  * Load the ACF functions file once and return the hooks it registered.
  *
- * @return array{filters: array<string, array<int, array{0: string, 1: int}>>, actions: array<string, array<int, array{0: string, 1: int}>>}
+ * @return array{filters: array<string, array<int, array{0: string, 1: int}>>, actions: array<string, array<int, array{0: string, 1: int}>>, blocks: list<array<string, mixed>>}
  */
 function uamswp_test_acf_functions(): array
 {
@@ -32,6 +36,12 @@ function uamswp_test_acf_functions(): array
     if (! defined('WP_PLUGIN_DIR')) {
         define('WP_PLUGIN_DIR', dirname(UAMS_FAD_PATH));
     }
+
+    // The file registers its two blocks only when ACF's registration function exists, so it exists for the load.
+    $blocks = [];
+    when('acf_register_block_type')->alias(static function (array $block) use (&$blocks): void {
+        $blocks[] = $block;
+    });
 
     require_once UAMS_FAD_PATH.'includes/class.fad-acf-functions.php';
 
@@ -56,10 +66,10 @@ function uamswp_test_acf_functions(): array
         }
     }
 
-    $registered = ['filters' => [], 'actions' => []];
+    $registered = ['filters' => [], 'actions' => [], 'blocks' => $blocks];
 
     foreach ($filters as [$hook, $callback, $priority]) {
-        $registered['filters'][$hook.'|'.$callback.'|'.$priority] = Filters\has($hook, $callback, $priority);
+        $registered['filters'][$hook.'|'.$callback.'|'.$priority] = has($hook, $callback, $priority);
     }
 
     foreach ($actions as [$hook, $callback, $priority]) {

@@ -1099,3 +1099,62 @@ test('the request helper supplies the post id when no type was submitted', funct
 
     expect(uamswp_spotlight_current_type())->toBe('provider_spotlight');
 });
+
+test('an acting user skips an ontology post they cannot edit and still updates the next one', function (): void {
+    uamswp_test_acf_functions();
+    when('is_user_logged_in')->justReturn(true);
+    when('current_user_can')->alias(static fn (string $capability, int $id): bool => ! in_array($id, [30, 32], true));
+    spot_fields([
+        'physician_locations|7' => [30, 31],
+        'clinical_resource_locations|5' => [32, 33],
+        'field_location_clinical_resources|30' => [],
+        'field_location_clinical_resources|31' => [],
+        'field_location_clinical_resources|32' => [5],
+        'field_location_clinical_resources|33' => [5],
+    ]);
+    $writes = spot_writes();
+
+    uamswp_spotlight_sync_ontology(5, 7);
+
+    expect($writes->getArrayCopy())->toBe([
+        ['clinical_resource_locations', [30, 31], 5],
+        ['field_location_clinical_resources', [5], 31],
+        ['field_location_clinical_resources', [], 33],
+    ]);
+});
+
+test('deleting a spotlight releases its provider link and clears its ontology mirror', function (): void {
+    uamswp_test_acf_functions();
+    when('get_post_type')->justReturn('clinical-resource');
+    when('is_user_logged_in')->justReturn(false);
+    spot_fields([
+        'clinical_resource_type' => 'provider_spotlight',
+        'clinical_resource_spotlight_provider' => 7,
+        'clinical_resource_providers|5' => [7],
+        'physician_clinical_resources|7' => [5],
+        'clinical_resource_treatments|5' => [60],
+        'field_treatment_procedure_clinical_resources|60' => [5],
+    ]);
+    $writes = spot_writes();
+
+    uamswp_spotlight_delete_sync('5');
+
+    expect($writes->getArrayCopy())->toContain(['clinical_resource_providers', [], 5])
+        ->toContain(['physician_clinical_resources', [], 7])
+        ->toContain(['clinical_resource_treatments', [], 5])
+        ->toContain(['field_treatment_procedure_clinical_resources', [], 60]);
+});
+
+test('deleting something that is not a featured spotlight changes nothing', function (string $type, string $stored, int $provider, mixed $post): void {
+    uamswp_test_acf_functions();
+    when('get_post_type')->justReturn($type);
+    spot_fields(['clinical_resource_type' => $stored, 'clinical_resource_spotlight_provider' => $provider]);
+    Functions\expect('update_field')->never();
+
+    uamswp_spotlight_delete_sync($post);
+})->with([
+    'a term id' => ['clinical-resource', 'provider_spotlight', 7, 'term_5'],
+    'a provider post' => ['provider', 'provider_spotlight', 7, 5],
+    'another resource type' => ['clinical-resource', 'faq', 7, 5],
+    'no featured provider' => ['clinical-resource', 'provider_spotlight', 0, 5],
+]);
