@@ -1,0 +1,398 @@
+<?php
+
+/**
+ * The markup the location profile template (templates/single-locations.php) prints: the header, the hours, the
+ * photos and the jump links.
+ */
+
+declare(strict_types=1);
+
+require_once __DIR__.'/../Support/single-location.php';
+
+/**
+ * Render the location profile and return its output with the whitespace between tags removed.
+ *
+ * @param  array<string, mixed>  $fields
+ * @param  array<string, mixed>  $options
+ */
+function single_location_markup(array $fields = [], array $options = []): string
+{
+    $output = single_location($fields, $options)['single_location_output'];
+
+    return preg_replace('/\s*(<[^>]+>)\s*/', '$1', preg_replace('/\s+/', ' ', $output));
+}
+
+/**
+ * An hours group with the typical hours given.
+ *
+ * @param  list<array<string, mixed>>  $hours
+ * @param  array<string, mixed>  $group  More values of the hours group.
+ * @return array<string, mixed>
+ */
+function single_location_hours(array $hours, array $group = []): array
+{
+    return ['location_hours_group' => $group + ['location_hours' => $hours]];
+}
+
+/**
+ * One row of typical hours.
+ *
+ * @return array<string, mixed>
+ */
+function single_location_day(string $day = 'Mon - Fri', string $open = '08:00:00', string $close = '17:00:00', bool $closed = false, string $comment = ''): array
+{
+    return ['day' => $day, 'open' => $open, 'close' => $close, 'closed' => $closed, 'comment' => $comment];
+}
+
+test('the page opens with the title of the location', function (): void {
+    $output = single_location_markup([], ['titles' => [0 => 'Heart Clinic']]);
+
+    expect($output)->toStartWith('<div class="content-sidebar-wrap"><main class="location-item" id="genesis-content">')
+        ->and($output)->toContain('<h1 class="page-title">Heart Clinic</h1>');
+});
+
+test('a child location names its parent under the title', function (): void {
+    $options = ['posts' => [90 => (object) ['ID' => 90, 'post_title' => 'Medical Center']], 'fields_by_id' => [90 => ['location_prepend_the' => true]]];
+    $output = single_location_markup(['location_parent' => true, 'location_parent_id' => 90], $options);
+
+    expect($output)->toContain('<h1 class="page-title">Clinic<span class="subtitle"><span class="sr-only">(</span>Part of the<a href="https://example.test/p/90/">Medical Center</a><span class="sr-only">)</span></span></h1>');
+});
+
+test('a closing location warns about the closing date', function (): void {
+    $fields = ['location_closing' => true, 'location_closing_length' => 'permanent', 'location_closing_date' => 'January 1, 2099'];
+    $output = single_location_markup($fields);
+
+    expect($output)->toContain('<div class="alert alert-warning" role="alert"><p>This location will be closing permanently on January 1, 2099.</p></div>');
+});
+
+test('a location that has closed says so', function (string $length, string $word): void {
+    $output = single_location_markup(['location_closing' => true, 'location_closing_length' => $length, 'location_closing_date' => 'January 1, 2020']);
+
+    expect($output)->toContain('This location is '.$word.' closed.');
+})->with([
+    'permanently' => ['permanent', 'permanently'],
+    'temporarily' => ['temporary', 'temporarily'],
+]);
+
+test('a temporary closing says when it begins', function (): void {
+    $output = single_location_markup(['location_closing' => true, 'location_closing_length' => 'temporary', 'location_closing_date' => 'January 1, 2099']);
+
+    expect($output)->toContain('This location will be closing temporarily beginning on January 1, 2099.');
+});
+
+test('a temporary closing says when it reopens', function (): void {
+    $fields = ['location_closing' => true, 'location_closing_length' => 'temporary', 'location_closing_date' => 'January 1, 2020', 'location_reopen_known' => 'date'];
+
+    expect(single_location_markup($fields + ['location_reopen_date' => 'January 9, 2099']))->toContain('It is scheduled to reopen on January 9, 2099.')
+        ->and(single_location_markup($fields + ['location_reopen_date' => 'December 1, 2019']))->not->toContain('scheduled to reopen')
+        ->and(single_location_markup($fields))->not->toContain('scheduled to reopen');
+});
+
+test('a temporary closing with no date says it lasts until further notice', function (): void {
+    $fields = ['location_closing' => true, 'location_closing_length' => 'temporary', 'location_closing_date' => 'January 1, 2020'];
+
+    expect(single_location_markup($fields + ['location_reopen_known' => 'tbd']))->toContain('It will remain closed until further notice.')
+        ->and(single_location_markup($fields + ['location_reopen_known' => 'date', 'location_reopen_date' => 'January 9, 2099']))->not->toContain('until further notice');
+});
+
+test('a closing with information links to it', function (): void {
+    $fields = ['location_closing' => true, 'location_closing_length' => 'permanent', 'location_closing_date' => 'January 1, 2020'];
+
+    expect(single_location_markup($fields + ['location_closing_info' => 'Moving.']))->toContain('<a href="#closing-info" class="alert-link no-break" aria-label="Learn more information about the closure of this location">Learn more</a>.')
+        ->and(single_location_markup($fields))->not->toContain('href="#closing-info" class="alert-link');
+});
+
+test('a closing location that keeps telemedicine says so', function (): void {
+    // Only a temporary closing reads the telemedicine answer.
+    $fields = ['location_closing' => true, 'location_closing_length' => 'temporary', 'location_closing_date' => 'January 1, 2020', 'location_reopen_date' => 'January 1, 2099'];
+
+    expect(single_location_markup($fields + ['location_closing_telemed' => 'yes']))->toContain('<p>Telemedicine will still be available.<a href="#telemedicine-info" class="alert-link no-break" aria-label="Learn more information about telemedicine at this location">Learn more</a>.</p>')
+        ->and(single_location_markup($fields))->not->toContain('Telemedicine will still be available');
+});
+
+test('a location that is not closing has no closing warning', function (): void {
+    expect(single_location_markup())->not->toContain('alert-warning');
+});
+
+test('the address prints on lines with the city, state and zip', function (): void {
+    $output = single_location_markup(['location_address_1' => '1 Main St', 'location_city' => 'Little Rock', 'location_state' => 'AR', 'location_zip' => '72205']);
+
+    expect($output)->toContain('<h2 class="sr-only">Address</h2><p>1 Main St<br/>Little Rock, AR 72205</p>');
+});
+
+test('the old second address line prints when there is no building, floor or suite', function (): void {
+    $fields = ['location_address_1' => '1 Main St', 'location_address_2' => 'Room 5', 'location_city' => 'Little Rock', 'location_state' => 'AR', 'location_zip' => '72205'];
+
+    expect(single_location_markup($fields))->toContain('<p>1 Main St<br/>Room 5<br/>Little Rock, AR 72205</p>');
+});
+
+test('the directions button links to the map position', function (): void {
+    $output = single_location_markup(['location_map' => ['lat' => 34.7, 'lng' => -92.3]], ['titles' => [0 => 'Heart Clinic']]);
+
+    expect($output)->toContain('<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/34.7,-92.3" target="_blank" aria-label="Get directions to Heart Clinic" data-typetitle="Get directions to the clinic">Get Directions</a>');
+});
+
+test('the parking button shows only with parking information', function (): void {
+    expect(single_location_markup(['location_parking' => 'Garage.']))->toContain('<a class="btn btn-outline-primary" href="#parking-info" aria-label="Parking instructions for Clinic" data-typetitle="Parking instructions for the clinic">Parking Instructions</a>')
+        ->and(single_location_markup())->not->toContain('Parking Instructions');
+});
+
+test('the location website prints as a button with the name', function (): void {
+    $output = single_location_markup(['location_web_name' => 'Clinic site', 'location_url' => ['url' => 'https://clinic.test/']]);
+
+    expect($output)->toContain('<p><a class="btn btn-secondary" href="https://clinic.test/" target="_blank" data-categorytitle="External Link">Clinic site<span class="far fa-external-link-alt"></span></span></a></p>')
+        ->and(single_location_markup(['location_web_name' => 'Clinic site']))->not->toContain('btn-secondary');
+});
+
+test('hours that vary print the information instead of the hours', function (): void {
+    $output = single_location_markup(single_location_hours([single_location_day()], ['location_hours_variable' => true, 'location_hours_variable_info' => '<p>Call first.</p>']));
+
+    expect($output)->toContain('<h2>Hours Vary</h2><p>Call first.</p>')
+        ->and($output)->not->toContain('<dl class="hours">');
+});
+
+test('typical hours print each day with its times and comment', function (): void {
+    $hours = [single_location_day('Mon - Fri', '08:00:00', '17:00:00', false, 'By appointment'), single_location_day('Sat', '09:00:00', '12:00:00'), single_location_day('Sun', '00:00:00', '00:00:00', true)];
+    $output = single_location_markup(single_location_hours($hours));
+
+    expect($output)->toContain('<h2>Hours</h2><dl class="hours"><dt>Mon - Fri</dt><dd>8 a.m. &ndash; 5 p.m.<br /><span class="subtitle">By appointment</span></dd><dt>Sat</dt><dd>9 a.m. &ndash; Noon</dd><dt>Sun</dt><dd>Closed</dd></dl>');
+});
+
+test('a day with several rows prints its name once', function (): void {
+    $output = single_location_markup(single_location_hours([single_location_day('Mon', '08:00:00', '12:00:00'), single_location_day('Mon', '13:00:00', '17:00:00')]));
+
+    expect(substr_count($output, '<dt>Mon</dt>'))->toBe(1)
+        ->and($output)->toContain('<dd>8 a.m. &ndash; Noon</dd><dd>1 &ndash; 5 p.m.</dd>');
+});
+
+test('hours open around the clock print as 24/7', function (): void {
+    $output = single_location_markup(single_location_hours([], ['location_24_7' => true]));
+
+    expect($output)->toContain('<h2>Hours</h2><strong>Open 24/7</strong>')
+        ->and($output)->not->toContain('<h2>After Hours</h2>')
+        ->and($output)->toContain('"openingHours": "Mo-Su",');
+});
+
+test('a location with no hours prints no hours section', function (): void {
+    expect(single_location_markup())->not->toContain('<h2>Hours</h2>');
+});
+
+test('the after hours text is the location text or else the system text', function (): void {
+    $own = single_location_markup(single_location_hours([single_location_day()], ['location_after_hours' => '<p>Call us.</p>']));
+    $system = single_location_markup(single_location_hours([single_location_day()]), ['option' => ['location_afterhours_descr_system' => '<p>System.</p>']]);
+
+    expect($own)->toContain('<h2>After Hours</h2><p>Call us.</p>')
+        ->and($system)->toContain('<h2>After Hours</h2><p>System.</p>');
+});
+
+test('the structured data lists the typical hours', function (): void {
+    $output = single_location_markup(single_location_hours([single_location_day('Mon - Fri'), single_location_day('Sat', '09:00:00', '12:00:00'), single_location_day('Sun', '00:00:00', '00:00:00', true)]));
+
+    expect($output)->toContain('"openingHours": ["Mo-Fr 08:00-17:00", "Sa 09:00-12:00"],');
+});
+
+test('a single image prints at each size', function (): void {
+    $output = single_location_markup(['location_wayfinding_photo' => 501], ['meta' => ['_wp_attachment_image_alt' => 'The clinic']]);
+
+    expect($output)->toContain('<div class="col-12 col-md image"><div class="content-width"><picture>')
+        ->and($output)->toContain('<source srcset="https://example.test/photo-630x473.jpg" media="(min-width: 1350px)">')
+        ->and($output)->toContain('<source srcset="https://example.test/photo-576x324.jpg" media="(min-width: 1px)">')
+        ->and($output)->toContain('<img src="https://example.test/photo-630x473.jpg" alt="The clinic" class="single-image" />')
+        ->and($output)->not->toContain('carousel');
+});
+
+test('several images print as a carousel with thumbnails', function (): void {
+    $output = single_location_markup(['location_wayfinding_photo' => 501, 'location_photo_gallery' => [502, 503]]);
+
+    expect($output)->toContain('<div class="carousel slide carousel-thumbnails" id="location-info-carousel"')
+        ->and(substr_count($output, 'class="carousel-item'))->toBe(3)
+        ->and($output)->toContain('<div class="carousel-item active">')
+        ->and($output)->toContain('<li data-target="#location-info-carousel" data-slide-to="0" class="active"><img src="https://example.test/photo-60x45.jpg" alt="" /></li>')
+        ->and($output)->toContain('<li data-target="#location-info-carousel" data-slide-to="2" ><img');
+});
+
+test('a location with no images prints no image column', function (): void {
+    expect(single_location_markup())->not->toContain('class="col-12 col-md image"');
+});
+
+test('holiday hours within thirty days print after the typical hours', function (): void {
+    $date = date('m/d/Y', strtotime('+10 days'));
+    $far = date('m/d/Y', strtotime('+90 days'));
+    $past = date('m/d/Y', strtotime('-10 days'));
+    $output = single_location_markup(single_location_hours([single_location_day()]) + ['location_holiday_hours' => [
+        ['date' => $far, 'label' => 'Far', 'closed' => true, 'open' => '', 'close' => ''],
+        ['date' => $date, 'label' => 'Thanksgiving', 'closed' => true, 'open' => '', 'close' => ''],
+        ['date' => $past, 'label' => 'Past', 'closed' => true, 'open' => '', 'close' => ''],
+    ]]);
+
+    expect($output)->toContain('<h3>Upcoming Holiday Hours</h3><dl class="hours"><dt>Thanksgiving<br />'.$date.'<br/></dt><dd>Closed</dd></dl>')
+        ->and($output)->not->toContain('Far<br />')
+        ->and($output)->not->toContain('Past<br />');
+});
+
+test('holiday hours with times print the times', function (): void {
+    $date = date('m/d/Y', strtotime('+10 days'));
+    $output = single_location_markup(single_location_hours([single_location_day()]) + ['location_holiday_hours' => [
+        ['date' => $date, 'label' => 'Half day', 'closed' => false, 'open' => '09:00:00', 'close' => '13:00:00'],
+    ]]);
+
+    // The row has no closing tag for its description in the template.
+    expect($output)->toContain('<dt>Half day<br />'.$date.'<br/></dt><dd>9 a.m. &ndash; 1 p.m.</dl>');
+});
+
+test('holiday hours that are all far away or past print no heading', function (): void {
+    $output = single_location_markup(single_location_hours([single_location_day()]) + ['location_holiday_hours' => [
+        ['date' => date('m/d/Y', strtotime('+90 days')), 'label' => 'Far', 'closed' => true, 'open' => '', 'close' => ''],
+    ]]);
+
+    expect($output)->not->toContain('Upcoming Holiday Hours');
+});
+
+/**
+ * An hours group with modified hours that started yesterday.
+ *
+ * @param  list<array<string, mixed>>  $groups  The rows of modified hours.
+ * @param  array<string, mixed>  $group  More values of the hours group.
+ * @return array<string, mixed>
+ */
+function single_location_modified(array $groups, array $group = []): array
+{
+    return single_location_hours([single_location_day()], $group + [
+        'location_modified_hours' => true,
+        'location_modified_hours_reason' => '<p>Renovation.</p>',
+        'location_modified_hours_start_date' => date('F j, Y', strtotime('-1 day')),
+        'location_modified_hours_end' => true,
+        'location_modified_hours_end_date' => date('F j, Y', strtotime('+10 days')),
+        'location_modified_hours_group' => $groups,
+    ]);
+}
+
+/**
+ * One row of modified hours times.
+ *
+ * @return array<string, mixed>
+ */
+function single_location_modified_time(string $day = 'Mon', string $open = '10:00:00', string $close = '14:00:00', bool $closed = false, string $comment = ''): array
+{
+    return ['location_modified_hours_day' => $day, 'location_modified_hours_open' => $open, 'location_modified_hours_close' => $close, 'location_modified_hours_closed' => $closed, 'location_modified_hours_comment' => $comment];
+}
+
+test('modified hours print the reason, the dates and each group', function (): void {
+    $groups = [['location_modified_hours_title' => 'Main desk', 'location_modified_hours_information' => '<p>Use the side door.</p>', 'location_modified_hours_24_7' => false, 'location_modified_hours_times' => [single_location_modified_time('Mon', '10:00:00', '14:00:00', false, 'Walk-ins'), single_location_modified_time('Tue', '00:00:00', '00:00:00', true)]]];
+    $group = single_location_modified($groups);
+    $output = single_location_markup($group);
+    $start = $group['location_hours_group']['location_modified_hours_start_date'];
+    $end = $group['location_hours_group']['location_modified_hours_end_date'];
+
+    expect($output)->toContain('<h2>Modified Hours</h2><p>Renovation.</p><p class="small font-italic">These modified hours start on '.$start.', and are scheduled to end after '.$end.'.</p>')
+        ->and($output)->toContain('<h3 class="h4">Main desk</h3><p>Use the side door.</p><dl class="hours"><dt>Mon</dt><dd>10 a.m. &ndash; 2 p.m.<br /><span class="subtitle">Walk-ins</span></dd><dt>Tue</dt><dd>Closed</dd></dl>')
+        ->and($output)->toContain('<h2>Typical Hours</h2>');
+});
+
+test('modified hours in effect for more than thirty days replace the typical hours', function (): void {
+    // The window is only known from the groups of modified hours.
+    $groups = [['location_modified_hours_title' => '', 'location_modified_hours_information' => '', 'location_modified_hours_24_7' => false, 'location_modified_hours_times' => [single_location_modified_time()]]];
+    $far = single_location_markup(single_location_modified($groups, ['location_modified_hours_end_date' => date('F j, Y', strtotime('+90 days'))]));
+    $open = single_location_markup(single_location_modified($groups, ['location_modified_hours_end' => false, 'location_modified_hours_end_date' => '']));
+
+    expect($far)->toContain('<h2>Modified Hours</h2>')
+        ->and($far)->not->toContain('Typical Hours')
+        ->and($far)->not->toContain('<dt>Mon - Fri</dt>')
+        ->and($open)->toContain('<h2>Modified Hours</h2>')
+        ->and($open)->not->toContain('Typical Hours');
+});
+
+test('modified hours without an end date stay in effect until further notice', function (): void {
+    $output = single_location_markup(single_location_modified([], ['location_modified_hours_end' => false, 'location_modified_hours_end_date' => '']));
+
+    expect($output)->toContain('and will remain in effect until further notice.</p>');
+});
+
+test('modified hours open around the clock print as 24/7', function (): void {
+    $groups = [['location_modified_hours_title' => '', 'location_modified_hours_information' => '', 'location_modified_hours_24_7' => true, 'location_modified_hours_times' => []]];
+    $output = single_location_markup(single_location_modified($groups));
+
+    expect($output)->toContain('<strong>Open 24/7</strong>')
+        ->and($output)->toContain('"openingHoursSpecification": [ "dayOfWeek": [ "Monday",');
+});
+
+test('modified hours that start more than thirty days away are not printed', function (): void {
+    $output = single_location_markup(single_location_modified([], ['location_modified_hours_start_date' => date('F j, Y', strtotime('+60 days')), 'location_modified_hours_end_date' => date('F j, Y', strtotime('+70 days'))]));
+
+    expect($output)->not->toContain('Modified Hours')
+        ->and($output)->toContain('<h2>Hours</h2>');
+});
+
+test('modified hours that have ended are not printed', function (): void {
+    $output = single_location_markup(single_location_modified([], ['location_modified_hours_start_date' => date('F j, Y', strtotime('-20 days')), 'location_modified_hours_end_date' => date('F j, Y', strtotime('-10 days'))]));
+
+    expect($output)->not->toContain('Modified Hours');
+});
+
+test('upcoming modified hours are listed beside the typical hours', function (): void {
+    $groups = [['location_modified_hours_title' => '', 'location_modified_hours_information' => '', 'location_modified_hours_24_7' => false, 'location_modified_hours_times' => [single_location_modified_time()]]];
+    $output = single_location_markup(single_location_modified($groups, ['location_modified_hours_start_date' => date('F j, Y', strtotime('+10 days')), 'location_modified_hours_end_date' => date('F j, Y', strtotime('+20 days'))]));
+
+    expect($output)->toContain('<h2>Modified Hours</h2>')
+        ->and($output)->toContain('<h2>Typical Hours</h2>');
+});
+
+test('the structured data describes the modified hours', function (): void {
+    $groups = [['location_modified_hours_title' => '', 'location_modified_hours_information' => '', 'location_modified_hours_24_7' => false, 'location_modified_hours_times' => [single_location_modified_time('Mon - Fri', '10:00:00', '14:00:00'), single_location_modified_time('Sat', '00:00:00', '00:00:00', true)]]];
+    $group = single_location_modified($groups);
+    $output = single_location_markup($group);
+    $start = date('Y-m-d', strtotime($group['location_hours_group']['location_modified_hours_start_date']));
+    $end = date('Y-m-d', strtotime($group['location_hours_group']['location_modified_hours_end_date']));
+
+    expect($output)->toContain('"openingHoursSpecification": [ { "@type": "OpeningHoursSpecification", "validFrom": "'.$start.'", "validThrough": "'.$end.'", "dayOfWeek": [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" ], "opens": "10:00", "closes": "14:00" },')
+        ->and($output)->toContain('"dayOfWeek": "Sat", "opens": "00:00", "closes": "00:00" } ],');
+});
+
+test('the jump links list the sections that have content in page order', function (): void {
+    $fields = ['location_parking' => 'x', 'location_appointment' => 'y', 'location_about' => 'z', 'location_hours_group' => ['location_telemed_query' => true]];
+    $output = single_location_markup($fields, ['option' => ['location_alert_heading_system' => 'Notice']]);
+
+    expect($output)->toContain('<nav class="uams-module less-padding navbar navbar-dark navbar-expand-xs jump-links" id="jump-links"><h2>Contents</h2>')
+        ->and(preg_match_all('/<a class="nav-link" href="(#[^"]*)"/', $output, $matches))->toBeGreaterThan(0)
+        ->and($matches[1])->toBe(['#location-alert', '#description', '#parking-info', '#appointment-info', '#telemedicine-info']);
+});
+
+test('the alert link in the jump links is named by the alert title', function (): void {
+    $titled = single_location_markup(['location_parking' => 'x'], ['option' => ['location_alert_heading_system' => 'Road work']]);
+    $untitled = single_location_markup(['location_parking' => 'x'], ['option' => ['location_alert_body_system' => 'Text']]);
+
+    expect($titled)->toContain('title="Jump to the section of this page with the alert regarding this location">Road work</a>')
+        ->and($untitled)->toContain('title="Jump to the section of this page with the alert regarding this location">Alert</a>');
+});
+
+test('the closing information has a jump link', function (): void {
+    $fields = ['location_closing' => true, 'location_closing_length' => 'permanent', 'location_closing_date' => 'January 1, 2020', 'location_closing_info' => 'Moving.', 'location_parking' => 'x'];
+
+    expect(single_location_markup($fields))->toContain('<a class="nav-link" href="#closing-info" title="Jump to the section of this page with the closing information">Closing Information</a>');
+});
+
+test('the about link has a submenu for the affiliation and prescription sections', function (): void {
+    $fields = ['location_about' => 'x', 'location_affiliation' => 'UAMS', 'location_prescription_query' => true, 'location_prescription_type' => 'custom', 'location_prescription' => 'Rx', 'location_parking' => 'x'];
+    $output = single_location_markup($fields);
+
+    expect($output)->toContain('<li class="nav-item dropdown"><a class="nav-link" href="#description"')
+        ->and($output)->toContain('<ul class="dropdown-menu"><li class="nav-item"><a class="nav-link" href="#affiliation" title="Jump to the section of this page about Affiliation">Affiliation</a></li><li class="Prescription Information"><a class="nav-link" href="#prescription-info" title="Jump to the section of this page about Prescription Information">Prescription Information</a></li></ul>');
+});
+
+test('the jump links name the scheduling, portal and ontology sections', function (): void {
+    $fields = ['location_scheduling_query' => true, 'location_portal' => 60, 'physician_locations' => [7], 'location_conditions_cpt' => [1], 'location_treatments_cpt' => [2], 'location_expertise' => [3], 'location_clinical_resources' => [4]];
+    $options = ['option' => ['mychart_scheduling_query_system' => true], 'terms' => [60 => 'Portal'], 'pages' => [1], 'queries' => [[4], [7], [1], [2], [3], [11]], 'fields_by_id' => []];
+    $output = single_location_markup($fields, $options);
+    preg_match_all('/<a class="nav-link" href="(#[^"]*)"[^>]*>([^<]*)<\/a>/', $output, $matches);
+
+    expect(array_combine($matches[1], $matches[2]))->toBe([
+        '#scheduling' => 'Schedule an Appointment Online',
+        '#portal-info' => 'Patient Portal',
+        '#providers' => 'Providers',
+        '#conditions' => 'Conditions',
+        '#treatments' => 'Treatments &amp; Procedures',
+        '#expertise' => 'Areas of Expertise',
+        '#sub-clinics' => 'Clinics Within This Location',
+        '#related-resources' => 'Resources',
+    ]);
+});
