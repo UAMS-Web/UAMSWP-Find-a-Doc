@@ -81,6 +81,11 @@ parameters:
             # ACF, FacetWP, Meta Box and theme functions they call are invisible to analysis: 1,006
             # findings at level 1, 910 of them undefined variables or functions. Tracked in #1232.
             - templates
+            # Callbacks moved out of two templates unchanged (#1269). They read the template's variables and the ACF,
+            # FacetWP and theme functions it calls, so they report the same findings the templates did (128 at level 10).
+            # Analysing them goes with #1232.
+            - includes/class.fad-single-expertise.php
+            - includes/class.fad-single-clinical-resource.php
 
     # Filled: the directories and files holding first-party PHP, including
     # the plugin header file at the root. Include tests: test bugs are real

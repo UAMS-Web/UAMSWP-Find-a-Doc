@@ -22,6 +22,8 @@ function bootstrap(): void
     include_once __DIR__.'/class.fad-templates.php';
     include_once __DIR__.'/class.fad-template-helpers.php'; // Callbacks several page templates share
     include_once __DIR__.'/class.fad-template-titles.php'; // Page title filters of the page templates
+    include_once __DIR__.'/class.fad-single-expertise.php'; // Callbacks of the single-expertise template
+    include_once __DIR__.'/class.fad-single-clinical-resource.php'; // Callbacks of the single-clinical-resource template
     include_once __DIR__.'/class.fad-acf-functions.php'; // ACF specific functions
     include_once __DIR__.'/class.fad-acf-table-map-notice.php'; // Admin notice when the custom table cache disagrees with the table JSON
     include_once __DIR__.'/class.fad-provider-nullable-fields.php'; // Keep unanswered provider fields empty in the custom table
