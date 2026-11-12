@@ -1,37 +1,8 @@
 <?php /* Template Name: Treatments Archive */
 
-function uams_default_page_body_class($classes)
-{
-
-    $classes[] = 'page-template-default';
-
-    return $classes;
-}
 add_filter('body_class', 'uams_default_page_body_class');
 
 add_filter('posts_where', 'title_filter', 10, 2);
-function title_filter($where, $query)
-{
-    // Search for posts with the first letter
-    global $wpdb;
-
-    $starts_with = esc_sql($query->get('starts_with'));
-
-    if (! isset($starts_with)) {
-        return $where;
-    }
-
-    if (is_numeric($starts_with)) {
-        $where .= " AND $wpdb->posts.post_title REGEXP '^[0-9]'";
-        // $where .= ' AND ' . $wpdb->prepare( $wpdb->posts . ".post_title REGEXP %s", '^[0-9]' );
-    } else {
-        $where .= " AND $wpdb->posts.post_title LIKE '$starts_with%'";
-    }
-
-    return $where;
-
-}
-
 $treatment_title = get_field('treatments_archive_headline', 'option') ?: 'Treatments &amp; Procedures';
 $treatment_text = get_field('treatments_archive_intro_text', 'option');
 $treatment_link = get_post_type_archive_link(get_query_var('post_type'));

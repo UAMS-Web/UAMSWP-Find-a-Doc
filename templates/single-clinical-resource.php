@@ -61,22 +61,9 @@ remove_action('genesis_entry_footer', 'genesis_entry_footer_markup_open', 5);
 remove_action('genesis_entry_footer', 'genesis_post_meta');
 remove_action('genesis_entry_footer', 'genesis_entry_footer_markup_close', 15);
 
-function uams_default_page_body_class($classes)
-{
-
-    $classes[] = 'page-template-default';
-
-    return $classes;
-}
 add_filter('body_class', 'uams_default_page_body_class');
 
 // Add extra class to entry
-function uamswp_add_entry_class($attributes)
-{
-    $attributes['class'] .= ' bg-white';
-
-    return $attributes;
-}
 add_filter('genesis_attr_entry', 'uamswp_add_entry_class');
 
 // Modify Entry Title

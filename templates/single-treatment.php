@@ -73,21 +73,8 @@ if (empty($excerpt)) {
     }
 }
 // Use SeoPress hook for meta description
-function sp_titles_desc($html)
-{
-    global $excerpt;
-
-    return $excerpt;
-}
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
-function uams_default_page_body_class($classes)
-{
-
-    $classes[] = 'page-template-default';
-
-    return $classes;
-}
 add_filter('body_class', 'uams_default_page_body_class');
 
 get_header();
