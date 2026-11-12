@@ -49,8 +49,8 @@ remove_action('genesis_before', 'uamswp_gtm_2');
 add_filter('wp_nav_menu', '__return_false');
 
 remove_action('genesis_loop', 'genesis_do_loop');
-add_action('genesis_loop', 'display_provider_image');
-function display_provider_image(): void
+add_action('genesis_loop', 'display_provider_image_doximity_list');
+function display_provider_image_doximity_list(): void
 {
     // Custom WP_Query args
     $args = [

@@ -2,22 +2,6 @@
 // ACF Fields - get_fields
 $keywords = get_field('treatment_procedure_alternate');
 
-function uamswp_keyword_hook_header(): void
-{
-    global $keywords;
-    $keyword_text = '';
-    if ($keywords) {
-        $i = 1;
-        foreach ($keywords as $keyword) {
-            if ($i > 1) {
-                $keyword_text .= ', ';
-            }
-            $keyword_text .= str_replace(',', '', $keyword['text']);
-            $i++;
-        }
-        echo '<meta name="keywords" content="'.$keyword_text.'" />';
-    }
-}
 add_action('wp_head', 'uamswp_keyword_hook_header');
 
 $page_title = get_the_title();
@@ -44,7 +28,7 @@ $treatment_title_attr = html_entity_decode($treatment_title_attr); // Convert HT
 $treatment_text = get_field('treatments_archive_intro_text', 'option');
 
 // Override theme's method of defining the page title
-function uamswp_fad_title($html): string
+function uamswp_fad_title_single_treatment($html): string
 {
     global $page_title_attr;
     global $treatment_title_attr;
@@ -61,7 +45,7 @@ function uamswp_fad_title($html): string
 
     return $meta_title_base;
 }
-add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+add_filter('seopress_titles_title', 'uamswp_fad_title_single_treatment', 15, 2);
 
 $excerpt = get_the_excerpt(); // get_field( 'treatment_procedure_short_desc' );
 $content = get_the_content(); // get_field( 'treatment_procedure_content' );

@@ -1,14 +1,14 @@
 <?php
 
 // Override theme's method of defining the page title
-function uamswp_fad_title($html): string
+function uamswp_fad_title_archive_expertise($html): string
 {
     // you can add here all your conditions as if is_page(), is_category() etc..
     $html = 'Areas of Expertise | '.get_bloginfo('name');
 
     return $html;
 }
-// add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+// add_filter('seopress_titles_title', 'uamswp_fad_title_archive_expertise', 15, 2);
 
 get_header();
 

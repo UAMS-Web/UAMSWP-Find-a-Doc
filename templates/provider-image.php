@@ -48,8 +48,8 @@ remove_action('wp_enqueue_scripts', 'uamswp_theme_scripts');
 add_filter('wp_nav_menu', '__return_false');
 
 remove_action('genesis_loop', 'genesis_do_loop');
-add_action('genesis_loop', 'display_provider_image');
-function display_provider_image(): void
+add_action('genesis_loop', 'display_provider_image_provider_image');
+function display_provider_image_provider_image(): void
 {
     if (get_query_var('provid') && get_query_var('image')) {
         $provider = get_query_var('provid');

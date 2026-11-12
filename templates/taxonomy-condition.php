@@ -24,26 +24,10 @@ if (
     $syndication = false;
 }
 
-function uamswp_keyword_hook_header(): void
-{
-    global $keywords;
-    $keyword_text = '';
-    if ($keywords) {
-        $i = 1;
-        foreach ($keywords as $keyword) {
-            if ($i > 1) {
-                $keyword_text .= ', ';
-            }
-            $keyword_text .= str_replace(',', '', $keyword['text']);
-            $i++;
-        }
-        echo '<meta name="keywords" content="'.$keyword_text.'" />';
-    }
-}
 add_action('wp_head', 'uamswp_keyword_hook_header');
 
 // Override theme's method of defining the page title
-function uamswp_fad_title($html): string
+function uamswp_fad_title_taxonomy_condition($html): string
 {
     // global $condition_title;
     // you can add here all your conditions as if is_page(), is_category() etc..
@@ -53,7 +37,7 @@ function uamswp_fad_title($html): string
 
     return single_cat_title('', false).' | '.get_bloginfo('name');
 }
-add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+add_filter('seopress_titles_title', 'uamswp_fad_title_taxonomy_condition', 15, 2);
 
 if (empty($excerpt)) {
     $excerpt_user = false;

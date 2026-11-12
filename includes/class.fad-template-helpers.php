@@ -115,3 +115,29 @@ function child_dequeue_skip_links(): void
 {
     wp_dequeue_script('skip-links');
 }
+
+/**
+ * Print the meta keywords tag from the `$keywords` global the template sets.
+ *
+ * The alternate names are the repeater rows of the template's `condition_alternate` field; commas inside a
+ * name are dropped because the tag is comma separated.
+ */
+function uamswp_keyword_hook_header(): void
+{
+    /** @var array<int, array{text: string}>|false|null $keywords */
+    global $keywords;
+    $keyword_text = '';
+    if ($keywords) {
+        $i = 1;
+        foreach ($keywords as $keyword) {
+            if ($i > 1) {
+                $keyword_text .= ', ';
+            }
+
+            $keyword_text .= str_replace(',', '', $keyword['text']);
+            $i++;
+        }
+
+        echo '<meta name="keywords" content="'.$keyword_text.'" />';
+    }
+}
