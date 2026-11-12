@@ -262,6 +262,7 @@ $provider_occupation_title_attr = $provider_occupation_title ? uamswp_attr_conve
 // Defines the indefinite article to precede the clinical occupation title (a or an, based on whether clinical occupation title starts with vowel)
 
 if (
+    $provider_occupation_title !== '' &&
     in_array(
         strtolower($provider_occupation_title)[0],
         ['a', 'e', 'i', 'o', 'u']
@@ -338,6 +339,12 @@ if ($locations && $location_valid) {
     } // endforeach
 }
 // Get primary appointment location name
+$primary_appointment_title = '';
+$primary_appointment_title_attr = '';
+$primary_appointment_url = '';
+$primary_appointment_city = '';
+$primary_appointment_city_attr = '';
+$location_schema = '';
 $l = 1;
 if ($locations && $location_valid) {
     foreach ($locations as $location) {
@@ -884,8 +891,6 @@ while (have_posts()) {
                                 <?php echo $location_address_1; ?><br/>
                                 <?php echo $location_address_2 ? $location_address_2.'<br/>' : ''; ?>
                                 <?php echo $location_city.', '.$location_state.' '.$location_zip; ?>
-                                <?php $map = get_field('location_map', $location_source_ids['map']); ?>
-                                <!-- <br /><a class="uams-btn btn-red btn-sm btn-external" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Directions</a> -->
                                 </p>
                                 <?php
                                         // Phone values
