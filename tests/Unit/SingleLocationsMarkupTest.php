@@ -396,3 +396,245 @@ test('the jump links name the scheduling, portal and ontology sections', functio
         '#related-resources' => 'Resources',
     ]);
 });
+
+test('the appointment section prints the text with what to bring and what to expect', function (): void {
+    $output = single_location_markup(['location_appointment' => '<p>Call ahead.</p>', 'location_appointment_bring' => '<p>ID.</p>', 'location_appointment_expect' => '<p>Wait.</p>']);
+
+    expect($output)->toContain('<section class="uams-module bg-auto" id="appointment-info">')
+        ->and($output)->toContain('<h2 class="module-title"><span class="title">Appointment Information</span></h2><div class="module-body"><p>Call ahead.</p><h3>What to Bring to Your Appointment</h3><p>ID.</p><h3>What to Expect at Your Appointment</h3><p>Wait.</p></div>');
+});
+
+test('the appointment section prints only what is filled in', function (): void {
+    $text = single_location_markup(['location_appointment' => '<p>Call ahead.</p>']);
+    $both = single_location_markup(['location_appointment_bring' => '<p>ID.</p>', 'location_appointment_expect' => '<p>Wait.</p>']);
+    $bring = single_location_markup(['location_appointment_bring' => '<p>ID.</p>']);
+    $expect = single_location_markup(['location_appointment_expect' => '<p>Wait.</p>']);
+
+    expect($text)->toContain('<span class="title">Appointment Information</span></h2><div class="module-body"><p>Call ahead.</p></div>')
+        ->and($both)->toContain('<span class="title">Appointment Information</span></h2><div class="module-body"><h3>What to Bring to Your Appointment</h3><p>ID.</p><h3>What to Expect at Your Appointment</h3><p>Wait.</p></div>')
+        ->and($bring)->toContain('<span class="title">What to Bring to Your Appointment</span></h2><div class="module-body"><p>ID.</p></div>')
+        ->and($expect)->toContain('<span class="title">What to Expect at Your Appointment</span></h2><div class="module-body"><p>Wait.</p></div>');
+});
+
+test('the appointment text can come with only one of the other two', function (): void {
+    $bring = single_location_markup(['location_appointment' => '<p>Call.</p>', 'location_appointment_bring' => '<p>ID.</p>']);
+    $expect = single_location_markup(['location_appointment' => '<p>Call.</p>', 'location_appointment_expect' => '<p>Wait.</p>']);
+
+    expect($bring)->toContain('<p>Call.</p><h3>What to Bring to Your Appointment</h3><p>ID.</p></div>')
+        ->and($bring)->not->toContain('What to Expect')
+        ->and($expect)->toContain('<p>Call.</p><h3>What to Expect at Your Appointment</h3><p>Wait.</p></div>')
+        ->and($expect)->not->toContain('What to Bring');
+});
+
+test('one scheduling widget embeds the MyChart frame', function (): void {
+    $fields = ['location_scheduling_query' => true, 'location_scheduling_options' => [['location_scheduling_ser' => 'S1', 'location_scheduling_dep' => 'D2', 'location_scheduling_vt' => 'V3', 'location_scheduling_fallback' => '<p>Or call.</p>']]];
+    $option = ['option' => ['mychart_scheduling_query_system' => true, 'mychart_scheduling_domain' => 'chart.test', 'mychart_scheduling_instance' => 'prod']];
+    $output = single_location_markup($fields, $option);
+
+    expect($output)->toContain('<section class="uams-module mychart-scheduling-module bg-auto" id="scheduling">')
+        ->and($output)->toContain('<h2 class="module-title"><span class="title">Schedule an Appointment Online</span></h2><p class="note">Use your UAMS Health MyChart account')
+        ->and($output)->toContain('<iframe id="openSchedulingFrame" title="MyChart Scheduling" class="widgetframe" scrolling="no" src="https://chart.test/prod/SignupAndSchedule/EmbeddedSchedule?id=S1&dept=D2&vt=V3&linksource=uamshealth.com"></iframe>')
+        ->and($output)->toContain('<script src="https://chart.test/prod/Content/EmbeddedWidgetController.js" type="text/javascript"></script>')
+        ->and($output)->toContain("'hostname': \"https:\\/\\/chart.test\",")
+        ->and($output)->toContain('<div class="more"><p>Or call.</p></div>')
+        ->and($output)->not->toContain('mychart-scheduling-select');
+});
+
+test('a scheduling widget with no fallback text prints no extra block', function (): void {
+    $fields = ['location_scheduling_query' => true, 'location_scheduling_options' => [['location_scheduling_ser' => 'S1']]];
+    $output = single_location_markup($fields, ['option' => ['mychart_scheduling_query_system' => true]]);
+
+    expect($output)->toContain('id="openSchedulingFrame"')
+        ->and($output)->not->toContain('<div class="more">');
+});
+
+test('several scheduling widgets let the patient pick a service', function (): void {
+    $fields = ['location_scheduling_query' => true, 'location_scheduling_options' => [['location_scheduling_item_title_nested' => 'Primary care'], ['location_scheduling_item_title_nested' => '']]];
+    $output = single_location_markup($fields, ['option' => ['mychart_scheduling_query_system' => true]]);
+
+    expect($output)->toContain('<form action="" method="get" class="mychart-scheduling-select">')
+        ->and($output)->toContain('<option value="">Select an option</option><option value="0">Primary care</option><option value="1">Schedule an Appointment Online</option></select><input type="hidden" id="pid" name="pid" value="')
+        ->and($output)->toContain('<div class="mychart-scheduling"></div>')
+        ->and($output)->not->toContain('openSchedulingFrame');
+});
+
+test('a closing location says telemedicine is not available', function (): void {
+    $group = ['location_hours_group' => ['location_telemed_query' => true]];
+    $closed = single_location_markup($group + ['location_closing' => true, 'location_closing_length' => 'permanent', 'location_closing_date' => 'January 1, 2020']);
+    $closing = single_location_markup($group + ['location_closing' => true, 'location_closing_length' => 'permanent', 'location_closing_date' => 'January 1, 2099']);
+    $temporary = single_location_markup($group + ['location_closing' => true, 'location_closing_length' => 'temporary', 'location_closing_date' => 'January 1, 2020', 'location_reopen_date' => 'January 1, 2099']);
+    $future = single_location_markup($group + ['location_closing' => true, 'location_closing_length' => 'temporary', 'location_closing_date' => 'January 1, 2099', 'location_reopen_date' => 'January 2, 2099']);
+
+    expect($closed)->toContain('<p class="text-center"><strong>Telemedicine is not available while this location is permanently closed.</strong></p>')
+        ->and($closing)->toContain('Telemedicine will not be available after this location closes permanently on January 1, 2099.')
+        ->and($temporary)->toContain('Telemedicine is not available while this location is temporarily closed.')
+        ->and($future)->toContain('after this location closes temporarily beginning on January 1, 2099.');
+});
+
+test('a closing location that keeps telemedicine prints the telemedicine details', function (): void {
+    $fields = ['location_hours_group' => ['location_telemed_query' => true], 'location_closing' => true, 'location_closing_length' => 'temporary', 'location_closing_date' => 'January 1, 2020', 'location_reopen_date' => 'January 1, 2099', 'location_closing_telemed' => true];
+
+    expect(single_location_markup($fields))->toContain('<div class="row content-split-lg">')
+        ->and(single_location_markup($fields))->not->toContain('Telemedicine is not available');
+});
+
+test('the telemedicine section prints the system text and who can use the service', function (string $patients, string $sentence): void {
+    $fields = ['location_hours_group' => ['location_telemed_query' => true, 'location_telemed_patients' => $patients]];
+    $output = single_location_markup($fields, ['option' => ['location_telemed_descr_system' => '<p>About telemedicine.</p>']]);
+
+    expect($output)->toContain('<section class="uams-module bg-auto" aria-label="Telemedicine Information" id="telemedicine-info">')
+        ->and($output)->toContain('<span class="title">Telemedicine Information</span></h2><div class="row content-split-lg"><div class="col-xs-12 col-lg-7"><div class="content-width"><p>About telemedicine.</p><p>'.$sentence)
+        ->and($output)->toContain('Patients should call<a href="tel:');
+})->with([
+    'all patients' => ['all', 'This service is available to both new and existing patients.'],
+    'new patients' => ['new', 'This service is available to new patients only.'],
+    'existing patients' => ['existing', 'This service is available to existing patients only.'],
+]);
+
+test('the telemedicine section names the phone number to call', function (): void {
+    $group = ['location_telemed_query' => true, 'location_telemed_patients' => 'all'];
+    $general = single_location_markup(['location_hours_group' => $group, 'location_phone' => '501-1']);
+    $one = single_location_markup(['location_hours_group' => $group, 'location_phone' => '501-1', 'location_clinic_phone_query' => true, 'location_new_appointments_phone' => '501-2']);
+    $two = single_location_markup(['location_hours_group' => $group, 'location_phone' => '501-1', 'location_clinic_phone_query' => true, 'field_location_appointment_phone_query' => true, 'location_new_appointments_phone' => '501-2', 'location_return_appointments_phone' => '501-3']);
+
+    expect($general)->toContain('Patients should call<a href="tel:dash:501-1"')
+        ->and($one)->toContain('Patients should call<a href="tel:dash:501-2"')
+        ->and($two)->toContain('New patients should call<a href="tel:dash:501-2"')
+        ->and($two)->toContain('while existing patients should call<a href="tel:dash:501-3"');
+});
+
+test('with two appointment numbers each kind of patient gets its own number', function (): void {
+    $fields = ['location_clinic_phone_query' => true, 'field_location_appointment_phone_query' => true, 'location_new_appointments_phone' => '501-2', 'location_return_appointments_phone' => '501-3'];
+    $new = single_location_markup($fields + ['location_hours_group' => ['location_telemed_query' => true, 'location_telemed_patients' => 'new']]);
+    $existing = single_location_markup($fields + ['location_hours_group' => ['location_telemed_query' => true, 'location_telemed_patients' => 'existing']]);
+
+    expect($new)->toContain('Patients should call<a href="tel:dash:501-2"')
+        ->and($new)->not->toContain('existing patients should call')
+        ->and($existing)->toContain('Patients should call<a href="tel:dash:501-3"');
+});
+
+test('the telemedicine section prints typical telemedicine hours', function (): void {
+    $hours = [single_location_day('Mon - Fri', '08:00:00', '17:00:00', false, 'Online'), single_location_day('Sat', '09:00:00', '12:00:00'), single_location_day('Sun', '00:00:00', '00:00:00', true)];
+    $output = single_location_markup(['location_hours_group' => ['location_telemed_query' => true, 'location_telemed_hours' => $hours]]);
+
+    expect($output)->toContain('<h3>Hours</h3><dl class="hours"><dt>Mon - Fri</dt><dd>8 a.m. &ndash; 5 p.m.<br /><span class="subtitle">Online</span></dd><dt>Sat</dt><dd>9 a.m. &ndash; Noon</dd><dt>Sun</dt><dd>Closed</dd></dl>');
+});
+
+test('telemedicine hours open around the clock print as 24/7', function (): void {
+    $output = single_location_markup(['location_hours_group' => ['location_telemed_query' => true, 'location_telemed_24_7' => true]]);
+
+    expect($output)->toContain('<h3>Hours</h3><strong>Open 24/7</strong>');
+});
+
+test('a telemedicine section with no hours prints none', function (): void {
+    expect(single_location_markup(['location_hours_group' => ['location_telemed_query' => true]]))->not->toContain('<h3>Hours</h3>');
+});
+
+/**
+ * An hours group for telemedicine with modified hours that started yesterday.
+ *
+ * @param  list<array<string, mixed>>  $times  The rows of modified times.
+ * @param  array<string, mixed>  $group  More values of the hours group.
+ * @return array<string, mixed>
+ */
+function single_location_telemed_modified(array $times, array $group = []): array
+{
+    return ['location_hours_group' => $group + [
+        'location_telemed_query' => true,
+        'location_telemed_hours' => [single_location_day()],
+        'location_telemed_modified_hours_query' => true,
+        'location_telemed_modified_hours_reason' => '<p>Maintenance.</p>',
+        'location_telemed_modified_hours_start_date' => date('F j, Y', strtotime('-1 day')),
+        'location_telemed_modified_hours_end' => true,
+        'location_telemed_modified_hours_end_date' => date('F j, Y', strtotime('+10 days')),
+        'location_telemed_modified_hours_times' => $times,
+    ]];
+}
+
+/**
+ * One row of modified telemedicine times.
+ *
+ * @return array<string, mixed>
+ */
+function single_location_telemed_time(string $day = 'Mon', string $open = '10:00:00', string $close = '14:00:00', bool $closed = false, string $comment = ''): array
+{
+    return ['location_telemed_modified_hours_day' => $day, 'location_telemed_modified_hours_open' => $open, 'location_telemed_modified_hours_close' => $close, 'location_telemed_modified_hours_closed' => $closed, 'location_telemed_modified_hours_comment' => $comment];
+}
+
+test('modified telemedicine hours print the reason, the dates and the times', function (): void {
+    $fields = single_location_telemed_modified([single_location_telemed_time('Mon', '10:00:00', '14:00:00', false, 'Phone only'), single_location_telemed_time('Tue', '00:00:00', '00:00:00', true)]);
+    $output = single_location_markup($fields);
+    $start = $fields['location_hours_group']['location_telemed_modified_hours_start_date'];
+    $end = $fields['location_hours_group']['location_telemed_modified_hours_end_date'];
+
+    expect($output)->toContain('<h3>Modified Hours</h3><p>Maintenance.</p><p class="small font-italic">These modified hours start on '.$start.', and are scheduled to end after '.$end.'.</p><dl class="hours"><dt>Mon</dt><dd>10 a.m. &ndash; 2 p.m.<br /><span class="subtitle">Phone only</span></dd><dt>Tue</dt><dd>Closed</dd></dl>')
+        ->and($output)->toContain('<h3>Typical Hours</h3>');
+});
+
+test('modified telemedicine hours with no end date stay in effect until further notice', function (): void {
+    $output = single_location_markup(single_location_telemed_modified([single_location_telemed_time()], ['location_telemed_modified_hours_end' => false, 'location_telemed_modified_hours_end_date' => '']));
+
+    expect($output)->toContain('and will remain in effect until further notice.</p>')
+        ->and($output)->not->toContain('Typical Hours')
+        ->and($output)->not->toContain('<h3>Hours</h3>');
+});
+
+test('modified telemedicine hours open around the clock print as 24/7', function (): void {
+    $output = single_location_markup(single_location_telemed_modified([], ['location_telemed_modified_hours_24_7' => true]));
+
+    expect($output)->toContain('<h3>Modified Hours</h3><p>Maintenance.</p>')
+        ->and($output)->toContain('<strong>Open 24/7</strong>');
+});
+
+test('modified telemedicine hours that start more than thirty days away are not printed', function (): void {
+    $output = single_location_markup(single_location_telemed_modified([single_location_telemed_time()], ['location_telemed_modified_hours_start_date' => date('F j, Y', strtotime('+60 days')), 'location_telemed_modified_hours_end_date' => date('F j, Y', strtotime('+70 days'))]));
+
+    expect($output)->not->toContain('<h3>Modified Hours</h3>')
+        ->and($output)->toContain('<h3>Hours</h3>');
+});
+
+test('the portal section prints the text and a login button', function (): void {
+    $fields = ['location_portal' => 60, 'portal_content' => '<p>Manage your care.</p>', 'portal_url' => ['url' => 'https://portal.test/', 'title' => 'Open the portal']];
+    $output = single_location_markup($fields, ['terms' => [60 => 'MyChart']]);
+
+    expect($output)->toContain('<section class="uams-module cta-bar cta-bar-weighted bg-blue" aria-label="Patient Portal" id="portal-info">')
+        ->and($output)->toContain('<div class="cta-heading"><h2>MyChart</h2></div><div class="cta-body"><div class="text-container"><p>Manage your care.</p></div><div class="btn-container"><a href="https://portal.test/" aria-label="Log in to MyChart to view your patient information and medical records" class="btn btn-white" target="_blank" data-moduletitle="MyChart">Open the portal</a></div></div>');
+});
+
+test('the portal button falls back to a title made from the portal name', function (): void {
+    $fields = ['location_portal' => 60, 'portal_content' => '<p>Manage.</p>', 'portal_url' => ['url' => 'https://portal.test/', 'title' => '']];
+
+    expect(single_location_markup($fields, ['terms' => [60 => 'MyChart']]))->toContain('>Log in to MyChart</a>');
+});
+
+test('a portal with a link but no text prints no button', function (): void {
+    $fields = ['location_portal' => 60, 'portal_url' => ['url' => 'https://portal.test/', 'title' => 'Open']];
+    $output = single_location_markup($fields, ['terms' => [60 => 'MyChart']]);
+
+    // The button is only printed when there is portal text, although the section needs only text or a link.
+    expect($output)->toContain('<div class="cta-heading"><h2>MyChart</h2></div><div class="cta-body"></div>')
+        ->and($output)->not->toContain('btn-white');
+});
+
+test('a portal with neither text nor a link prints only its heading', function (): void {
+    $output = single_location_markup(['location_portal' => 60], ['terms' => [60 => 'MyChart']]);
+
+    expect($output)->toContain('<div class="cta-heading"><h2>MyChart</h2></div></div>')
+        ->and($output)->not->toContain('cta-body');
+});
+
+test('the address names the building, floor and suite', function (): void {
+    $fields = ['location_address_1' => '1 Main St', 'location_building' => 70, 'location_suite' => 'Suite 5', 'location_city' => 'Little Rock', 'location_state' => 'AR', 'location_zip' => '72205'];
+    $objects = ['location_building_floor' => ['value' => '2', 'choices' => ['2' => 'Second Floor']]];
+    $output = single_location_markup($fields, ['terms' => [70 => 'Tower'], 'objects' => $objects]);
+
+    expect($output)->toContain('<p>1 Main St<br/>Tower<br />Second Floor, Suite 5<br/>Little Rock, AR 72205</p>');
+});
+
+test('a child location can use its own featured image for the schema', function (): void {
+    $fields = ['location_parent' => true, 'location_parent_id' => 90, 'location_image_override_parent' => true, 'location_image_override_parent_featured' => true, 'location_wayfinding_photo' => 501];
+    $options = ['posts' => [90 => (object) ['ID' => 90, 'post_title' => 'Parent']], 'thumbnail' => 900];
+
+    expect(single_location($fields, $options)['schema_image'])->toBe(900)
+        ->and(single_location($fields, $options)['featured_image'])->toBe(900);
+});
