@@ -319,3 +319,242 @@ test('the template overrides the theme titles', function (): void {
         ['seopress_titles_title', 'uamswp_fad_title_single_locations', 15, 2],
     ]);
 });
+
+test('the alert section shows when the alert has a title or text and the location is not closing', function (): void {
+    expect(single_location([], ['option' => ['location_alert_heading_system' => 'Heads up']])['show_location_alert_section'])->toBeTrue()
+        ->and(single_location([], ['option' => ['location_alert_body_system' => 'Text']])['show_location_alert_section'])->toBeTrue()
+        ->and(single_location()['show_location_alert_section'])->toBeFalse();
+});
+
+test('the alert section follows the closing dates of the location', function (): void {
+    $option = ['option' => ['location_alert_heading_system' => 'Heads up']];
+    $closing = ['location_closing' => true, 'location_closing_length' => 'temporary', 'location_reopen_known' => true];
+
+    $future = single_location($closing + ['location_closing_date' => 'January 1, 2099', 'location_reopen_date' => 'January 2, 2099'], $option);
+    $closed = single_location($closing + ['location_closing_date' => 'January 1, 2020', 'location_reopen_date' => 'January 2, 2099'], $option);
+    $reopened = single_location($closing + ['location_closing_date' => 'January 1, 2020', 'location_reopen_date' => 'January 2, 2020'], $option);
+
+    expect($future['show_location_alert_section'])->toBeTrue()
+        ->and($closed['show_location_alert_section'])->toBeFalse()
+        ->and($reopened['show_location_alert_section'])->toBeTrue();
+});
+
+test('the closing section needs a closing notice with information', function (): void {
+    $fields = ['location_closing' => true, 'location_closing_length' => 'permanent', 'location_closing_date' => 'January 1, 2020'];
+
+    expect(single_location($fields + ['location_closing_info' => 'Moving.'])['show_closing_section'])->toBeTrue()
+        ->and(single_location($fields)['show_closing_section'])->toBeFalse()
+        ->and(single_location(['location_closing_info' => 'Moving.'])['show_closing_section'])->toBeFalse();
+});
+
+test('the about section is titled for the location when it has a description', function (): void {
+    $vars = single_location(['location_about' => '<p>About.</p>', 'location_prepend_the' => true], ['titles' => [0 => 'Heart Clinic']]);
+
+    expect($vars['show_about_section'])->toBeTrue()
+        ->and($vars['page_title_phrase'])->toBe('the Heart Clinic')
+        ->and($vars['about_section_title'])->toBe('About the Heart Clinic')
+        ->and($vars['about_section_title_short'])->toBe('About')
+        ->and($vars['about_section_submenu'])->toBeFalse()
+        ->and($vars['about_section_label'])->toBe('Jump to the section of this page with the location description');
+});
+
+test('a video also gives the about section the location title', function (): void {
+    $vars = single_location(['location_affiliation' => 'UAMS', 'location_youtube_link' => 'https://youtu.be/abc']);
+
+    expect($vars['about_section_title'])->toBe('About Clinic')
+        ->and($vars['about_section_submenu'])->toBeTrue();
+});
+
+test('the about section has a submenu when the description comes with an affiliation or prescription text', function (): void {
+    expect(single_location(['location_about' => 'x', 'location_affiliation' => 'UAMS'])['about_section_submenu'])->toBeTrue()
+        ->and(single_location(['location_about' => 'x', 'location_prescription_query' => true, 'location_prescription_type' => 'custom', 'location_prescription' => 'Rx'])['about_section_submenu'])->toBeTrue();
+});
+
+test('an affiliation alone gives the about section its own title and jump label', function (): void {
+    $vars = single_location(['location_affiliation' => 'UAMS']);
+
+    expect($vars['show_about_section'])->toBeTrue()
+        ->and($vars['about_section_title'])->toBe('Affiliation')
+        ->and($vars['about_section_title_short'])->toBe('Affiliation')
+        ->and($vars['about_section_label'])->toBe('Jump to the section of this page about Affiliation');
+});
+
+test('prescription text alone gives the about section its own title and jump label', function (): void {
+    $vars = single_location(['location_prescription_query' => true, 'location_prescription_type' => 'custom', 'location_prescription' => 'Rx']);
+
+    expect($vars['about_section_title'])->toBe('Prescription Information')
+        ->and($vars['about_section_title_short'])->toBe('Prescription Information')
+        ->and($vars['about_section_label'])->toBe('Jump to the section of this page about Prescription Information');
+});
+
+test('a location with no description, affiliation or prescription has no about section', function (): void {
+    $vars = single_location();
+
+    expect($vars['show_about_section'])->toBeFalse()
+        ->and($vars['about_section_title'])->toBe('');
+});
+
+test('the parking section shows for parking text, directions or a parking map', function (string $field, mixed $value): void {
+    expect(single_location([$field => $value])['show_parking_section'])->toBeTrue();
+})->with([
+    'parking text' => ['location_parking', 'x'],
+    'directions' => ['location_direction', 'x'],
+    'a parking map' => ['location_parking_map', ['lat' => 1.5, 'lng' => 2.5]],
+]);
+
+test('a location with nothing about parking has no parking section', function (): void {
+    expect(single_location()['show_parking_section'])->toBeFalse();
+});
+
+test('the appointment section shows for appointment text, what to bring or what to expect', function (string $field): void {
+    expect(single_location([$field => 'x'])['show_appointment_section'])->toBeTrue();
+})->with(['location_appointment', 'location_appointment_bring', 'location_appointment_expect']);
+
+test('a location with no appointment information has no appointment section', function (): void {
+    expect(single_location()['show_appointment_section'])->toBeFalse();
+});
+
+test('the scheduling section needs MyChart scheduling on for the system and the location', function (): void {
+    $on = ['option' => ['mychart_scheduling_query_system' => true]];
+
+    expect(single_location(['location_scheduling_query' => true], $on)['show_mychart_scheduling_section'])->toBeTrue()
+        ->and(single_location(['location_scheduling_query' => true])['show_mychart_scheduling_section'])->toBeFalse()
+        ->and(single_location([], $on)['show_mychart_scheduling_section'])->toBeFalse();
+});
+
+test('the scheduling section has a default title, intro and link source', function (): void {
+    $vars = single_location();
+
+    expect($vars['location_scheduling_title'])->toBe('Schedule an Appointment Online')
+        ->and($vars['location_scheduling_intro'])->toBe('Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.')
+        ->and($vars['mychart_scheduling_linksource'])->toBe('uamshealth.com');
+});
+
+test('the scheduling section takes the general title and intro and the system link source', function (): void {
+    $vars = single_location(
+        ['location_scheduling_title_general' => 'Book online', 'location_scheduling_intro_general' => 'Pick a time.'],
+        ['option' => ['mychart_scheduling_linksource' => 'example.test', 'mychart_scheduling_domain' => 'chart.test', 'mychart_scheduling_instance' => 'prod']],
+    );
+
+    expect($vars['location_scheduling_title'])->toBe('Book online')
+        ->and($vars['location_scheduling_intro'])->toBe('Pick a time.')
+        ->and($vars['mychart_scheduling_linksource'])->toBe('example.test')
+        ->and($vars['mychart_scheduling_domain'])->toBe('chart.test')
+        ->and($vars['mychart_scheduling_instance'])->toBe('prod');
+});
+
+test('one scheduling widget takes over the title and intro of the section', function (): void {
+    $fields = ['location_scheduling_query' => true, 'location_scheduling_title_general' => 'Book online', 'location_scheduling_intro_general' => 'Pick a time.'];
+    $one = single_location($fields + ['location_scheduling_options' => [['location_scheduling_title' => 'Visit', 'location_scheduling_intro' => 'Choose a visit.']]]);
+    $blank = single_location($fields + ['location_scheduling_options' => [['location_scheduling_title' => '', 'location_scheduling_intro' => '']]]);
+    $two = single_location($fields + ['location_scheduling_options' => [['location_scheduling_title' => 'A', 'location_scheduling_intro' => 'a'], ['location_scheduling_title' => 'B', 'location_scheduling_intro' => 'b']]]);
+
+    expect($one['location_scheduling_title'])->toBe('Visit')
+        ->and($one['location_scheduling_intro'])->toBe('Choose a visit.')
+        ->and($blank['location_scheduling_title'])->toBe('Book online')
+        ->and($blank['location_scheduling_intro'])->toBe('Pick a time.')
+        ->and($two['location_scheduling_title'])->toBe('Book online')
+        ->and($two['location_scheduling_intro'])->toBe('Pick a time.');
+});
+
+test('the telemedicine section shows when the location offers it', function (): void {
+    expect(single_location(['location_hours_group' => ['location_telemed_query' => true]])['show_telemed_section'])->toBeTrue()
+        ->and(single_location(['location_hours_group' => ['location_telemed_query' => false]])['show_telemed_section'])->toBeFalse();
+});
+
+test('the portal section shows for a portal with a link', function (): void {
+    $vars = single_location(['location_portal' => 60], ['terms' => [60 => 'Patient "Portal"&#8217;s']]);
+
+    expect($vars['portal_slug'])->toBe('slug-60')
+        ->and($vars['portal_name'])->toBe('Patient "Portal"&#8217;s')
+        ->and($vars['portal_name_attr'])->toBe("Patient 'Portal''s")
+        ->and($vars['show_portal_section'])->toBeTrue();
+});
+
+test('a location without a portal has no portal section', function (): void {
+    expect(single_location()['show_portal_section'])->toBeFalse();
+});
+
+test('the providers section lists the published providers of the location', function (): void {
+    $vars = single_location(['physician_locations' => [7, 8]], ['queries' => [[], [7, 8]]]);
+
+    expect($vars['show_providers_section'])->toBeTrue()
+        ->and($vars['provider_ids'])->toBe([7, 8])
+        ->and(WP_Query::$queries[1])->toBe(['post_type' => 'provider', 'post_status' => 'publish', 'posts_per_page' => -1, 'orderby' => 'title', 'order' => 'ASC', 'fields' => 'ids', 'post__in' => [7, 8]]);
+});
+
+test('the providers section is off when no provider is published', function (): void {
+    expect(single_location(['physician_locations' => [7]], ['queries' => [[], []]])['show_providers_section'])->toBeFalse()
+        ->and(single_location()['show_providers_section'])->toBeFalse();
+});
+
+test('the conditions, treatments and areas of expertise sections need posts', function (): void {
+    $fields = ['location_conditions_cpt' => [1], 'location_treatments_cpt' => [2], 'location_expertise' => [3]];
+    $on = single_location($fields, ['queries' => [[], [1], [2], [3]]]);
+    $off = single_location($fields, ['queries' => [[], [], [], []]]);
+    $none = single_location([], ['queries' => [[], [1], [2], [3]]]);
+
+    expect($on['show_conditions_section'])->toBeTrue()
+        ->and($on['show_treatments_section'])->toBeTrue()
+        ->and($on['show_aoe_section'])->toBeTrue()
+        ->and($off['show_conditions_section'])->toBeFalse()
+        ->and($off['show_treatments_section'])->toBeFalse()
+        ->and($off['show_aoe_section'])->toBeFalse()
+        ->and($none['show_conditions_section'])->toBeFalse()
+        ->and($none['show_treatments_section'])->toBeFalse()
+        ->and($none['show_aoe_section'])->toBeFalse();
+});
+
+test('the ontology rules hide the conditions, treatments and areas of expertise', function (): void {
+    $fields = ['location_conditions_cpt' => [1], 'location_treatments_cpt' => [2], 'location_expertise' => [3], 'location_region' => 'north', 'location_service_line' => [7]];
+    $rules = ['remove_ontology_criteria' => [['remove_regions' => ['north'], 'remove_service_lines' => null]]];
+    $vars = single_location($fields, ['queries' => [[], [1], [2], [3]], 'rows' => $rules]);
+
+    expect($vars['show_conditions_section'])->toBeFalse()
+        ->and($vars['show_treatments_section'])->toBeFalse()
+        ->and($vars['show_aoe_section'])->toBeFalse();
+});
+
+test('the queries for the ontology sections ask for published posts by title', function (): void {
+    single_location(['location_conditions_cpt' => [1], 'location_treatments_cpt' => [2], 'location_expertise' => [3]]);
+
+    expect(WP_Query::$queries[1])->toBe(['post_type' => 'condition', 'post_status' => 'publish', 'orderby' => 'title', 'order' => 'ASC', 'posts_per_page' => -1, 'post__in' => [1]])
+        ->and(WP_Query::$queries[2])->toBe(['post_type' => 'treatment', 'post_status' => 'publish', 'orderby' => 'title', 'order' => 'ASC', 'posts_per_page' => -1, 'post__in' => [2]])
+        ->and(WP_Query::$queries[3])->toBe(['post_type' => 'expertise', 'order' => 'ASC', 'orderby' => 'title', 'posts_per_page' => -1, 'post_status' => 'publish', 'post__in' => [3]]);
+});
+
+test('the child locations section lists the visible child locations', function (): void {
+    $vars = single_location([], ['pages' => [1], 'queries' => [[], [], [], [], [11, 12]]]);
+
+    expect($vars['show_child_locations_section'])->toBeTrue()
+        ->and(WP_Query::$queries[4])->toBe([
+            'post_type' => 'location',
+            'post_status' => 'publish',
+            'post_parent' => $vars['current_id'],
+            'order' => 'ASC',
+            'orderby' => 'title',
+            'posts_per_page' => -1,
+            'meta_query' => [['key' => 'location_hidden', 'value' => '1', 'compare' => '!=']],
+        ]);
+});
+
+test('the child locations section is off with no child pages or no visible children', function (): void {
+    expect(single_location()['show_child_locations_section'])->toBeFalse()
+        ->and(single_location([], ['pages' => [1]])['show_child_locations_section'])->toBeFalse();
+});
+
+test('the related resources section needs resources that are published', function (): void {
+    expect(single_location(['location_clinical_resources' => [4]], ['queries' => [[4]]])['show_related_resource_section'])->toBeTrue()
+        ->and(single_location(['location_clinical_resources' => [4]], ['queries' => [[]]])['show_related_resource_section'])->toBeFalse()
+        ->and(single_location([], ['queries' => [[4]]])['show_related_resource_section'])->toBeFalse();
+});
+
+test('the jump links show once two sections have links', function (): void {
+    $one = single_location(['location_parking' => 'x']);
+    $two = single_location(['location_parking' => 'x', 'location_appointment' => 'y']);
+
+    expect($one['jump_link_count'])->toBe(1)
+        ->and($one['show_jump_links_section'])->toBeFalse()
+        ->and($two['jump_link_count'])->toBe(2)
+        ->and($two['show_jump_links_section'])->toBeTrue();
+});

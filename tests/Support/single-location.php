@@ -63,6 +63,11 @@ function single_location(array $fields = [], array $options = []): array
     when('get_term')->alias(static fn (mixed $id, string $taxonomy = ''): ?object => isset($terms[$id]) ? (object) ['name' => $terms[$id], 'term_id' => $id, 'slug' => 'slug-'.$id] : null);
     when('get_post')->alias(static fn (mixed $id): ?object => $options['posts'][$id] ?? null);
     when('get_the_title')->alias(static fn (mixed $id = 0): string => $titles[$id] ?? 'Clinic');
+    when('the_permalink')->alias(static function (): void {
+        echo 'https://example.test/p/current/';
+    });
+    when('has_post_thumbnail')->justReturn(false);
+    when('get_post_status')->justReturn('publish');
     when('get_the_ID')->justReturn($location_id);
     when('get_the_id')->justReturn($location_id);
     when('get_the_permalink')->alias(static fn (mixed $id = 0): string => 'https://example.test/p/'.$id.'/');
