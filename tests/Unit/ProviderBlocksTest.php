@@ -30,9 +30,7 @@ function provider_blocks_world(array $fields = [], array $terms = [], array $opt
 
         return $fields[$name.':'.$id] ?? $fields[$name] ?? null;
     });
-    when('get_term')->alias(static function (mixed $id, string $taxonomy) use ($terms): object|false {
-        return isset($terms[$taxonomy.':'.$id]) ? (object) ['name' => $terms[$taxonomy.':'.$id], 'term_id' => $id] : false;
-    });
+    when('get_term')->alias(static fn (mixed $id, string $taxonomy): object|false => isset($terms[$taxonomy.':'.$id]) ? (object) ['name' => $terms[$taxonomy.':'.$id], 'term_id' => $id] : false);
     when('get_the_ID')->alias(static fn (): int => WP_Query::$current);
     when('get_permalink')->alias(static fn (mixed $id = null): string => 'https://example.test/provider/'.($id ?? WP_Query::$current).'/');
     when('the_permalink')->alias(static function (mixed $id = null): void {
@@ -48,7 +46,7 @@ function provider_blocks_world(array $fields = [], array $terms = [], array $opt
     when('esc_attr')->alias(static fn (mixed $text): string => htmlspecialchars((string) $text));
     when('esc_html')->alias(static fn (mixed $text): string => htmlspecialchars((string) $text));
     when('sanitize_title_with_dashes')->alias(static fn (string $text): string => strtolower(str_replace(' ', '-', $text)));
-    when('wp_reset_postdata')->justReturn(null);
+    when('wp_reset_postdata')->justReturn();
     when('uamswp_custom_table_query')->alias(static fn (string $table, string $field, mixed $values): array => $fields['__table:'.$field] ?? []);
 
     WP_Query::$queue = [];

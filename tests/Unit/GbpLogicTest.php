@@ -41,12 +41,8 @@ final class GbpLogicTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @param  mixed  $query
-     * @param  mixed  $org
-     */
     #[DataProvider('silo_cases')]
-    public function test_resolve_silo($query, $org, ?string $expected): void
+    public function test_resolve_silo(string|int $query, string $org, ?string $expected): void
     {
         $this->assertSame($expected, UAMSWP_FAD_GBP_Logic::resolve_silo($query, $org, self::SILOS));
     }
@@ -315,11 +311,8 @@ final class GbpLogicTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @param  mixed  $value
-     */
     #[DataProvider('yes_no_cases')]
-    public function test_a_yes_no_field_is_yes_only_for_its_stored_yes($value, bool $expected): void
+    public function test_a_yes_no_field_is_yes_only_for_its_stored_yes(string|int|bool|null $value, bool $expected): void
     {
         $this->assertSame($expected, UAMSWP_FAD_GBP_Logic::is_yes($value));
     }

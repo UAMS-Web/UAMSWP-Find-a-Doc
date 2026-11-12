@@ -17,6 +17,9 @@ use Mockery;
 use PHPUnit\Framework\Attributes\DataProvider;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
 
+use function Brain\Monkey\Functions\expect;
+use function Brain\Monkey\Functions\when;
+
 require_once __DIR__.'/../Support/acf-functions.php';
 require_once __DIR__.'/../Support/facetwp.php';
 
@@ -40,14 +43,15 @@ final class FacetwpAlphaTest extends UnitTestCase
         // See AcfBlocksTest: the ACF functions file loads first, under Brain Monkey's own hook functions.
         \uamswp_test_acf_functions();
 
-        Functions\when('__')->returnArg();
-        Functions\when('remove_accents')->alias(static fn (string $text): string => strtr($text, ['É' => 'E', 'Ö' => 'O']));
+        when('__')->returnArg();
+        when('remove_accents')->alias(static fn (string $text): string => strtr($text, ['É' => 'E', 'Ö' => 'O']));
 
         $this->facetwp = new \stdClass;
         $this->facetwp->unfiltered_post_ids = [1, 2, 3];
         $this->facetwp->display = new \stdClass;
         $this->facetwp->display->assets = [];
-        Functions\when('FWP')->justReturn($this->facetwp);
+
+        when('FWP')->justReturn($this->facetwp);
 
         $this->database = new class
         {
@@ -89,8 +93,8 @@ final class FacetwpAlphaTest extends UnitTestCase
         $this->previous_wpdb = $wpdb;
         $wpdb = $this->database;
 
-        if (self::$facet === null) {
-            Functions\when('add_filter')->alias(static function (string $hook, mixed $callback): void {
+        if (! self::$facet instanceof \FacetWP_Facet) {
+            when('add_filter')->alias(static function (string $hook, mixed $callback): void {
                 self::$filters[] = [$hook, $callback];
             });
             require_once dirname(__DIR__, 2).'/plugins/facetwp-alpha-uams/index.php';
@@ -234,9 +238,9 @@ final class FacetwpAlphaTest extends UnitTestCase
             'the first of several' => [['C', 'D'], ['C']],
             'a digit' => [['7'], ['7']],
             // The pattern's $ also matches before a final newline, so this value is bound as it is.
-            'a letter and a final newline' => [["a
-"], ["a
-"]],
+            'a letter and a final newline' => [['a
+'], ['a
+']],
             'the hash alias' => [['#'], ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']],
             'the hash alias as a string' => ['#', ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']],
         ];
@@ -287,7 +291,7 @@ final class FacetwpAlphaTest extends UnitTestCase
 
     public function test_the_front_end_assets_are_the_add_ons_stylesheet_and_script(): void
     {
-        Functions\expect('plugins_url')->twice()->with('', Mockery::type('string'))->andReturn('https://example.test/wp-content/plugins/facetwp-alpha-uams');
+        expect('plugins_url')->twice()->with('', Mockery::type('string'))->andReturn('https://example.test/wp-content/plugins/facetwp-alpha-uams');
 
         $this->facet()->front_scripts();
 

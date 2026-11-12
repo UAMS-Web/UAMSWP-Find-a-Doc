@@ -8,8 +8,9 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
-use Brain\Monkey\Functions;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
+
+use function Brain\Monkey\Functions\when;
 
 /**
  * Two readers build a provider's medium name from the stored `physician_prefix` field, while the provider
@@ -43,10 +44,10 @@ final class ProviderPrefixReadersTest extends UnitTestCase
         // A provider with an M.D. and no stored prefix.
         $this->fields[2] = ['physician_prefix' => '', 'physician_first_name' => 'Bob', 'physician_middle_name' => '', 'physician_last_name' => 'Ray', 'physician_pedigree' => '', 'physician_degree' => [12]];
 
-        Functions\when('get_field')->alias(fn (string $name, $id = 0) => $this->fields[(int) $id][$name] ?? false);
-        Functions\when('get_term')->alias(fn ($id) => (object) ['name' => [11 => 'D.D.S.', 12 => 'M.D.', 13 => 'D.O.'][(int) $id] ?? '']);
-        Functions\when('uamswp_attr_conversion')->returnArg();
-        Functions\when('sanitize_title_with_dashes')->returnArg();
+        when('get_field')->alias(fn (string $name, $id = 0) => $this->fields[(int) $id][$name] ?? false);
+        when('get_term')->alias(fn ($id) => (object) ['name' => [11 => 'D.D.S.', 12 => 'M.D.', 13 => 'D.O.'][(int) $id] ?? '']);
+        when('uamswp_attr_conversion')->returnArg();
+        when('sanitize_title_with_dashes')->returnArg();
     }
 
     private function source(string $path): string
@@ -81,7 +82,7 @@ final class ProviderPrefixReadersTest extends UnitTestCase
             extract($variables, EXTR_SKIP);
             eval($code);
 
-            return (string) $$result;
+            return (string) ${$result};
         };
 
         return $run($variables, $code, $result);

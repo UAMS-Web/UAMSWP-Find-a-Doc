@@ -8,14 +8,15 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
-use Brain\Monkey\Actions;
-use Brain\Monkey\Functions;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
+
+use function Brain\Monkey\Actions\expectAdded;
+use function Brain\Monkey\Functions\expect;
+use function Brain\Monkey\Functions\when;
 
 final class DeleteCleanupTest extends UnitTestCase
 {
-    /** @var object */
-    private $db;
+    private object $db;
 
     protected function setUp(): void
     {
@@ -41,7 +42,7 @@ final class DeleteCleanupTest extends UnitTestCase
             /** @var array<int, array{0: string, 1: array<string, int>, 2: array<int, string>}> */
             public $deleted = [];
 
-            public function esc_like($text)
+            public function esc_like($text): string
             {
                 return addcslashes((string) $text, '_%\\');
             }
@@ -69,7 +70,7 @@ final class DeleteCleanupTest extends UnitTestCase
                 return $this->rows;
             }
 
-            public function delete($table, $where, $format)
+            public function delete($table, $where, $format): int
             {
                 $this->deleted[] = [$table, $where, $format];
 
@@ -100,63 +101,57 @@ final class DeleteCleanupTest extends UnitTestCase
      */
     private function links(array $meta, array $tables = []): void
     {
-        Functions\when('uamswp_delete_cleanup_meta_post_ids')->alias(function (string $type, string $key) use ($meta): array {
-            return $meta[$key] ?? [];
-        });
-        Functions\when('uamswp_delete_cleanup_table_post_ids')->alias(function (string $table) use ($tables): array {
-            return $tables[$table] ?? [];
-        });
+        when('uamswp_delete_cleanup_meta_post_ids')->alias(fn (string $type, string $key): array => $meta[$key] ?? []);
+        when('uamswp_delete_cleanup_table_post_ids')->alias(fn (string $table): array => $tables[$table] ?? []);
     }
 
     public function test_the_hooks_fire_on_a_permanent_delete_and_never_on_the_trash(): void
     {
-        Actions\expectAdded('before_delete_post')->once()->with('uamswp_delete_cleanup_before_delete');
-        Actions\expectAdded('deleted_post')->once()->with('uamswp_delete_cleanup_after_delete');
-        Actions\expectAdded('wp_trash_post')->never();
-        Actions\expectAdded('trashed_post')->never();
-        Actions\expectAdded('transition_post_status')->never();
+        expectAdded('before_delete_post')->once()->with('uamswp_delete_cleanup_before_delete');
+        expectAdded('deleted_post')->once()->with('uamswp_delete_cleanup_after_delete');
+        expectAdded('wp_trash_post')->never();
+        expectAdded('trashed_post')->never();
+        expectAdded('transition_post_status')->never();
 
         uamswp_delete_cleanup_register();
     }
 
     public function test_a_deleted_provider_leaves_the_lists_that_named_it(): void
     {
-        Functions\when('get_post_type')->justReturn('provider');
+        when('get_post_type')->justReturn('provider');
         $this->links(['condition_physicians' => [10, 11]]);
-        Functions\when('get_field')->alias(function (string $field, int $post_id) {
-            return $post_id === 10 ? ['5', '12', '7'] : ['5', '7'];
-        });
-        Functions\expect('update_field')->once()->with('condition_physicians', [5, 7], 10);
+        when('get_field')->alias(fn (string $field, int $post_id) => $post_id === 10 ? ['5', '12', '7'] : ['5', '7']);
+        expect('update_field')->once()->with('condition_physicians', [5, 7], 10);
 
         uamswp_delete_cleanup_before_delete(12);
     }
 
     public function test_a_deleted_provider_is_cleared_from_a_single_post_object_field(): void
     {
-        Functions\when('get_post_type')->justReturn('provider');
+        when('get_post_type')->justReturn('provider');
         $this->links(['clinical_resource_spotlight_provider' => [20]]);
-        Functions\when('get_field')->justReturn('12');
-        Functions\expect('update_field')->once()->with('clinical_resource_spotlight_provider', '', 20);
+        when('get_field')->justReturn('12');
+        expect('update_field')->once()->with('clinical_resource_spotlight_provider', '', 20);
 
         uamswp_delete_cleanup_before_delete(12);
     }
 
     public function test_a_deleted_location_leaves_provider_lists_kept_in_the_custom_table(): void
     {
-        Functions\when('get_post_type')->justReturn('location');
+        when('get_post_type')->justReturn('location');
         $this->links([], ['uamswp_physicians' => [30]]);
-        Functions\when('get_field')->justReturn([12, 40]);
-        Functions\expect('update_field')->once()->with('physician_locations', [40], 30);
+        when('get_field')->justReturn([12, 40]);
+        expect('update_field')->once()->with('physician_locations', [40], 30);
 
         uamswp_delete_cleanup_before_delete(12);
     }
 
     public function test_a_post_type_that_is_not_a_provider_or_location_touches_nothing(): void
     {
-        Functions\when('get_post_type')->justReturn('condition');
-        Functions\expect('uamswp_delete_cleanup_meta_post_ids')->never();
-        Functions\expect('uamswp_delete_cleanup_table_post_ids')->never();
-        Functions\expect('update_field')->never();
+        when('get_post_type')->justReturn('condition');
+        expect('uamswp_delete_cleanup_meta_post_ids')->never();
+        expect('uamswp_delete_cleanup_table_post_ids')->never();
+        expect('update_field')->never();
 
         uamswp_delete_cleanup_before_delete(12);
 
@@ -165,37 +160,37 @@ final class DeleteCleanupTest extends UnitTestCase
 
     public function test_a_record_that_nothing_links_to_completes_without_a_write(): void
     {
-        Functions\when('get_post_type')->justReturn('provider');
+        when('get_post_type')->justReturn('provider');
         $this->links([]);
-        Functions\expect('update_field')->never();
-        Functions\expect('uamswp_delete_cleanup_log')->never();
+        expect('update_field')->never();
+        expect('uamswp_delete_cleanup_log')->never();
 
         uamswp_delete_cleanup_before_delete(12);
     }
 
     public function test_a_field_that_no_longer_holds_the_id_is_not_rewritten(): void
     {
-        Functions\when('get_post_type')->justReturn('provider');
+        when('get_post_type')->justReturn('provider');
         $this->links(['condition_physicians' => [10]]);
-        Functions\when('get_field')->justReturn(['5', '7']);
-        Functions\expect('update_field')->never();
+        when('get_field')->justReturn(['5', '7']);
+        expect('update_field')->never();
 
         uamswp_delete_cleanup_before_delete(12);
     }
 
     public function test_one_failing_record_is_logged_and_the_others_are_still_cleaned(): void
     {
-        Functions\when('get_post_type')->justReturn('provider');
+        when('get_post_type')->justReturn('provider');
         $this->links(['condition_physicians' => [10, 11]]);
-        Functions\when('get_field')->justReturn(['12', '7']);
-        Functions\when('update_field')->alias(function (string $field, $value, int $post_id) {
+        when('get_field')->justReturn(['12', '7']);
+        when('update_field')->alias(function (string $field, $value, int $post_id) {
             if ($post_id === 10) {
                 throw new \RuntimeException('write failed');
             }
 
             return true;
         });
-        Functions\expect('uamswp_delete_cleanup_log')->once()->with(\Mockery::pattern('/post 10: write failed/'));
+        expect('uamswp_delete_cleanup_log')->once()->with(\Mockery::pattern('/post 10: write failed/'));
 
         uamswp_delete_cleanup_before_delete(12);
 
@@ -204,7 +199,7 @@ final class DeleteCleanupTest extends UnitTestCase
 
     public function test_the_post_s_own_row_is_deleted_after_it_is_gone_and_not_before(): void
     {
-        Functions\when('get_post_type')->justReturn('provider');
+        when('get_post_type')->justReturn('provider');
         $this->links([]);
 
         uamswp_delete_cleanup_before_delete(12);
@@ -218,7 +213,7 @@ final class DeleteCleanupTest extends UnitTestCase
 
     public function test_a_location_s_own_row_is_in_the_locations_table(): void
     {
-        Functions\when('get_post_type')->justReturn('location');
+        when('get_post_type')->justReturn('location');
         $this->links([]);
 
         uamswp_delete_cleanup_before_delete(13);

@@ -11,10 +11,11 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
-use Brain\Monkey\Filters;
-use Brain\Monkey\Functions;
 use PHPUnit\Framework\Attributes\DataProvider;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
+
+use function Brain\Monkey\Filters\expectApplied;
+use function Brain\Monkey\Functions\when;
 
 final class SpotlightCtaTest extends UnitTestCase
 {
@@ -43,27 +44,27 @@ final class SpotlightCtaTest extends UnitTestCase
         ];
         $this->titles = [7 => 'Cardiologist'];
 
-        Functions\when('get_field')->alias(function ($name, $id = null) {
+        when('get_field')->alias(function ($name, $id = null) {
             if ($name === 'clinical_specialization_title') {
                 return is_object($id) ? ($id->override ?? null) : null;
             }
 
             return $this->fields[$name] ?? null;
         });
-        Functions\when('get_term')->alias(function ($id, $taxonomy) {
+        when('get_term')->alias(function ($id, $taxonomy) {
             if ($taxonomy === 'degree') {
                 return (object) ['name' => 'M.D.'];
             }
 
             return isset($this->titles[$id]) ? (object) ['name' => $this->titles[$id], 'override' => $this->fields['title_override'] ?? null] : null;
         });
-        Functions\when('get_permalink')->justReturn(self::URL);
-        Functions\when('esc_url')->returnArg();
-        Functions\when('esc_attr')->alias(fn ($v) => htmlspecialchars((string) $v, ENT_QUOTES));
-        Functions\when('esc_html')->alias(fn ($v) => htmlspecialchars((string) $v, ENT_QUOTES));
-        Functions\when('uamswp_attr_conversion')->returnArg();
-        Functions\when('sanitize_title_with_dashes')->alias(fn ($v) => strtolower(str_replace(' ', '-', (string) $v)));
-        Functions\when('format_phone_dash')->alias(fn ($p) => preg_replace('/^(\d{3})(\d{3})(\d{4})$/', '$1-$2-$3', (string) $p));
+        when('get_permalink')->justReturn(self::URL);
+        when('esc_url')->returnArg();
+        when('esc_attr')->alias(fn ($v) => htmlspecialchars((string) $v, ENT_QUOTES));
+        when('esc_html')->alias(fn ($v) => htmlspecialchars((string) $v, ENT_QUOTES));
+        when('uamswp_attr_conversion')->returnArg();
+        when('sanitize_title_with_dashes')->alias(fn ($v) => strtolower(str_replace(' ', '-', (string) $v)));
+        when('format_phone_dash')->alias(fn ($p) => preg_replace('/^(\d{3})(\d{3})(\d{4})$/', '$1-$2-$3', (string) $p));
 
         require_once dirname(__DIR__, 2).'/includes/class.fad-helper-functions.php';
     }
@@ -136,7 +137,7 @@ final class SpotlightCtaTest extends UnitTestCase
 
     public function test_a_phone_that_cannot_be_formatted_is_treated_as_no_phone(): void
     {
-        Functions\when('format_phone_dash')->justReturn('');
+        when('format_phone_dash')->justReturn('');
 
         [, $body] = $this->render();
 
@@ -254,11 +255,11 @@ final class SpotlightCtaTest extends UnitTestCase
 
     public function test_the_filter_receives_the_band_the_id_the_phone_and_the_names(): void
     {
-        Filters\expectApplied('uamswp_spotlight_cta')->once()->with(
-            \Mockery::on(fn ($cta) => is_string($cta) && strpos($cta, 'Make an Appointment') !== false),
+        expectApplied('uamswp_spotlight_cta')->once()->with(
+            \Mockery::on(fn ($cta) => is_string($cta) && str_contains($cta, 'Make an Appointment')),
             5,
             '5016868000',
-            \Mockery::on(fn ($names) => is_array($names) && $names['medium'] === 'Dr. Jane Doe' && $names['short_possessive'] === 'Dr.&nbsp;Doe\'s')
+            \Mockery::on(fn ($names) => is_array($names) && $names['medium'] === 'Dr. Jane Doe' && $names['short_possessive'] === "Dr.&nbsp;Doe's")
         );
 
         \uamswp_spotlight_appointment_cta(5);
@@ -268,8 +269,8 @@ final class SpotlightCtaTest extends UnitTestCase
     {
         $this->fields['physician_accepting_patients'] = '0';
 
-        Filters\expectApplied('uamswp_spotlight_cta')->once()->with(
-            \Mockery::on(fn ($cta) => is_string($cta) && strpos($cta, 'Learn More') !== false),
+        expectApplied('uamswp_spotlight_cta')->once()->with(
+            \Mockery::on(fn ($cta) => is_string($cta) && str_contains($cta, 'Learn More')),
             5,
             '',
             \Mockery::type('array')
@@ -280,7 +281,7 @@ final class SpotlightCtaTest extends UnitTestCase
 
     public function test_the_filter_can_replace_the_band(): void
     {
-        Filters\expectApplied('uamswp_spotlight_cta')->once()->andReturn('<section>replaced</section>');
+        expectApplied('uamswp_spotlight_cta')->once()->andReturn('<section>replaced</section>');
 
         $this->assertSame('<section>replaced</section>', \uamswp_spotlight_appointment_cta(5));
     }

@@ -9,31 +9,32 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
-use Brain\Monkey\Functions;
 use UAMSWP_FAD_GBP_Logic;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
+
+use function Brain\Monkey\Functions\when;
 
 final class GbpStoredIdTest extends UnitTestCase
 {
     /** @var array<int, array<string, mixed>> */
-    private $meta = [];
+    private array $meta = [];
 
     /** @var array<string, array<int, int>> Listing name => other posts that store it. */
-    private $holders = [];
+    private array $holders = [];
 
     protected function setUp(): void
     {
         parent::setUp();
         $this->meta = [];
         $this->holders = [];
-        Functions\when('get_posts')->alias(fn (array $args): array => $this->holders[$args['meta_query'][0]['value']] ?? []);
-        Functions\when('get_post_meta')->alias(fn (int $id, string $key) => $this->meta[$id][$key] ?? '');
-        Functions\when('update_post_meta')->alias(function (int $id, string $key, $value): bool {
+        when('get_posts')->alias(fn (array $args): array => $this->holders[$args['meta_query'][0]['value']] ?? []);
+        when('get_post_meta')->alias(fn (int $id, string $key) => $this->meta[$id][$key] ?? '');
+        when('update_post_meta')->alias(function (int $id, string $key, $value): bool {
             $this->meta[$id][$key] = $value;
 
             return true;
         });
-        Functions\when('delete_post_meta')->alias(function (int $id, string $key): bool {
+        when('delete_post_meta')->alias(function (int $id, string $key): bool {
             unset($this->meta[$id][$key]);
 
             return true;
@@ -88,12 +89,12 @@ final class GbpStoredIdTest extends UnitTestCase
 
     public function test_removing_a_provider_from_one_location_dates_that_entry_only_and_keeps_the_first_date(): void
     {
-        Functions\when('get_post_type')->justReturn('provider');
+        when('get_post_type')->justReturn('provider');
         $this->meta[3][UAMSWP_FAD_GBP_LISTING_MAP_META] = [
             10 => ['id' => 'locations/1', 'orphaned_since' => null],
             11 => ['id' => 'locations/2', 'orphaned_since' => null],
         ];
-        $now = (int) strtotime('2026-11-03 12:00:00 UTC');
+        $now = strtotime('2026-11-03 12:00:00 UTC');
 
         uamswp_fad_gbp_mark_orphans(3, [$this->provider_item(3, 10)], $now);
         uamswp_fad_gbp_mark_orphans(3, [$this->provider_item(3, 10)], $now + 86400 * 5);
@@ -113,7 +114,7 @@ final class GbpStoredIdTest extends UnitTestCase
 
     public function test_a_location_post_is_never_given_an_orphan_map(): void
     {
-        Functions\when('get_post_type')->justReturn('location');
+        when('get_post_type')->justReturn('location');
 
         uamswp_fad_gbp_mark_orphans(7, [], 1);
 
@@ -176,12 +177,12 @@ final class GbpStoredIdTest extends UnitTestCase
 
     public function test_the_backfill_writes_only_with_apply_and_never_touches_the_public_cid_fields(): void
     {
-        Functions\when('uamswp_fad_gbp_credentials')->justReturn(['client_id' => 'x']);
-        Functions\when('get_post_type')->justReturn('provider');
-        Functions\when('get_field')->justReturn('');
-        Functions\when('delete_transient')->justReturn(true);
-        Functions\when('get_transient')->justReturn([$this->listing('locations/1', 'jane_clinic')]);
-        Functions\when('update_field')->alias(function (): never {
+        when('uamswp_fad_gbp_credentials')->justReturn(['client_id' => 'x']);
+        when('get_post_type')->justReturn('provider');
+        when('get_field')->justReturn('');
+        when('delete_transient')->justReturn(true);
+        when('get_transient')->justReturn([$this->listing('locations/1', 'jane_clinic')]);
+        when('update_field')->alias(function (): never {
             throw new \LogicException('the public CID field must not be written');
         });
         $client = (new \ReflectionClass(\UAMSWP_FAD_GBP_Client::class))->newInstanceWithoutConstructor();

@@ -12,6 +12,8 @@ namespace UamswpFindADoc\Tests\Unit;
 use Brain\Monkey\Functions;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
 
+use function Brain\Monkey\Functions\when;
+
 final class EditorGroupCapabilityTest extends UnitTestCase
 {
     protected function setUp(): void
@@ -20,8 +22,8 @@ final class EditorGroupCapabilityTest extends UnitTestCase
 
         // The file registers its hooks at file scope, so the hook functions must exist while it loads; Brain
         // Monkey provides them only inside a test. It loads once per process (require_once).
-        Functions\when('add_action')->justReturn(true);
-        Functions\when('add_filter')->justReturn(true);
+        when('add_action')->justReturn(true);
+        when('add_filter')->justReturn(true);
         require_once dirname(__DIR__, 2).'/includes/class.fad-editor-groups.php';
         require_once dirname(__DIR__, 2).'/includes/class.fad-helper-functions.php';
     }
@@ -35,17 +37,17 @@ final class EditorGroupCapabilityTest extends UnitTestCase
      */
     private function stub_world(string $post_type, int $group_id, array $group_members, array $post_groups): void
     {
-        Functions\when('get_post')->justReturn((object) ['ID' => 900, 'post_type' => $post_type]);
-        Functions\when('get_post_type_object')->justReturn((object) [
+        when('get_post')->justReturn((object) ['ID' => 900, 'post_type' => $post_type]);
+        when('get_post_type_object')->justReturn((object) [
             'cap' => (object) [
                 'edit_posts' => $post_type === 'provider' ? 'edit_physicians' : 'edit_locations',
                 'edit_others_posts' => $post_type === 'provider' ? 'edit_others_physicians' : 'edit_others_locations',
             ],
         ]);
-        Functions\when('get_terms')->justReturn([$group_id]);
-        Functions\when('get_term_meta')->alias(fn ($term, $key) => $key === 'editor_group_editors' ? $group_members : []);
-        Functions\when('wp_get_object_terms')->justReturn($post_groups);
-        Functions\when('is_wp_error')->justReturn(false);
+        when('get_terms')->justReturn([$group_id]);
+        when('get_term_meta')->alias(fn ($term, $key) => $key === 'editor_group_editors' ? $group_members : []);
+        when('wp_get_object_terms')->justReturn($post_groups);
+        when('is_wp_error')->justReturn(false);
     }
 
     public function test_a_group_member_needs_edit_physicians_instead_of_edit_others_on_a_provider(): void

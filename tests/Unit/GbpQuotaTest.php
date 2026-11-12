@@ -9,29 +9,30 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
-use Brain\Monkey\Functions;
 use UAMSWP_FAD_GBP_Client;
 use UAMSWP_FAD_GBP_Logic;
 use UAMSWP_FAD_GBP_Rate_Limited;
 use UAMSWP_FAD_GBP_Sync;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
 
+use function Brain\Monkey\Functions\when;
+
 final class GbpQuotaTest extends UnitTestCase
 {
     /** @var array<string, mixed> */
-    private $options = [];
+    private array $options = [];
 
     /** @var array<string, mixed> */
-    private $transients = [];
+    private array $transients = [];
 
     /** @var array<int, array<int, mixed>> */
-    private $scheduled = [];
+    private array $scheduled = [];
 
     /** @var array<int, int> */
-    private $transientTtls = [];
+    private array $transientTtls = [];
 
     /** @var array<int, array<int, mixed>> */
-    private $postMeta = [];
+    private array $postMeta = [];
 
     protected function setUp(): void
     {
@@ -42,15 +43,15 @@ final class GbpQuotaTest extends UnitTestCase
         $this->transientTtls = [];
         $this->postMeta = [];
 
-        Functions\when('apply_filters')->alias(fn (string $hook, $value) => $value);
-        Functions\when('get_option')->alias(fn (string $name, $default = false) => $this->options[$name] ?? $default);
-        Functions\when('update_option')->alias(function (string $name, $value): bool {
+        when('apply_filters')->alias(fn (string $hook, $value) => $value);
+        when('get_option')->alias(fn (string $name, $default = false) => $this->options[$name] ?? $default);
+        when('update_option')->alias(function (string $name, $value): bool {
             $this->options[$name] = $value;
 
             return true;
         });
-        Functions\when('get_transient')->alias(fn (string $key) => $this->transients[$key] ?? false);
-        Functions\when('set_transient')->alias(function (string $key, $value, int $ttl = 0): bool {
+        when('get_transient')->alias(fn (string $key) => $this->transients[$key] ?? false);
+        when('set_transient')->alias(function (string $key, $value, int $ttl = 0): bool {
             $this->transients[$key] = $value;
 
             if ($key === 'uamswp_fad_gbp_index') {
@@ -59,18 +60,18 @@ final class GbpQuotaTest extends UnitTestCase
 
             return true;
         });
-        Functions\when('update_post_meta')->alias(function (int $post_id, string $key, $value): bool {
+        when('update_post_meta')->alias(function (int $post_id, string $key, $value): bool {
             $this->postMeta[$post_id][] = $value;
 
             return true;
         });
-        Functions\when('get_post_type')->justReturn('provider');
-        Functions\when('delete_transient')->alias(function (string $key): bool {
+        when('get_post_type')->justReturn('provider');
+        when('delete_transient')->alias(function (string $key): bool {
             unset($this->transients[$key]);
 
             return true;
         });
-        Functions\when('wp_next_scheduled')->alias(function (string $hook, array $args) {
+        when('wp_next_scheduled')->alias(function (string $hook, array $args) {
             foreach ($this->scheduled as $call) {
                 if ($call[1] === $hook && $call[2] === $args) {
                     return $call[0];
@@ -79,7 +80,7 @@ final class GbpQuotaTest extends UnitTestCase
 
             return false;
         });
-        Functions\when('wp_schedule_single_event')->alias(function (int $time, string $hook, array $args): bool {
+        when('wp_schedule_single_event')->alias(function (int $time, string $hook, array $args): bool {
             $this->scheduled[] = [$time, $hook, $args];
 
             return true;
@@ -97,7 +98,7 @@ final class GbpQuotaTest extends UnitTestCase
     private function client(array $responses): UAMSWP_FAD_GBP_Client
     {
         return new UAMSWP_FAD_GBP_Client(['client_id' => 'a', 'client_secret' => 'b', 'refresh_token' => 'c'], function (string $method, string $url) use (&$responses): array {
-            if (strpos($url, 'oauth2.googleapis.com') !== false) {
+            if (str_contains($url, 'oauth2.googleapis.com')) {
                 return [200, json_encode(['access_token' => 't', 'expires_in' => 3600])];
             }
 
@@ -114,8 +115,8 @@ final class GbpQuotaTest extends UnitTestCase
         try {
             $this->client([[429, ['error' => ['message' => $message]]]])->location_groups();
             $this->fail('Expected a rate limit');
-        } catch (UAMSWP_FAD_GBP_Rate_Limited $rateLimited) {
-            $this->assertTrue($rateLimited->daily);
+        } catch (UAMSWP_FAD_GBP_Rate_Limited $uAMSWPFADGBPRateLimited) {
+            $this->assertTrue($uAMSWPFADGBPRateLimited->daily);
         }
     }
 
@@ -183,7 +184,7 @@ final class GbpQuotaTest extends UnitTestCase
         $this->assertSame(0, $gate['creates_left']);
         $this->assertSame($now + 99, $gate['creates_paused_until']);
 
-        Functions\when('apply_filters')->alias(fn (string $hook, $value) => $hook === 'uamswp_fad_gbp_daily_create_budget' ? 700 : $value);
+        when('apply_filters')->alias(fn (string $hook, $value) => $hook === 'uamswp_fad_gbp_daily_create_budget' ? 700 : $value);
 
         $this->assertSame(200, uamswp_fad_gbp_create_gate($now)['creates_left']);
     }
@@ -259,15 +260,15 @@ final class GbpQuotaTest extends UnitTestCase
     public function test_a_budget_filter_returning_junk_falls_back_to_the_default(): void
     {
         foreach (['', null, 'abc', []] as $junk) {
-            Functions\when('apply_filters')->alias(fn (string $hook, $value) => $hook === 'uamswp_fad_gbp_daily_create_budget' ? $junk : $value);
+            when('apply_filters')->alias(fn (string $hook, $value) => $hook === 'uamswp_fad_gbp_daily_create_budget' ? $junk : $value);
 
             $this->assertSame(UAMSWP_FAD_GBP_DEFAULT_CREATE_BUDGET, uamswp_fad_gbp_create_budget(), var_export($junk, true));
         }
 
-        Functions\when('apply_filters')->alias(fn (string $hook, $value) => $hook === 'uamswp_fad_gbp_daily_create_budget' ? 0 : $value);
+        when('apply_filters')->alias(fn (string $hook, $value) => $hook === 'uamswp_fad_gbp_daily_create_budget' ? 0 : $value);
         $this->assertSame(0, uamswp_fad_gbp_create_budget(), 'a deliberate 0 stays 0');
 
-        Functions\when('apply_filters')->alias(fn (string $hook, $value) => $hook === 'uamswp_fad_gbp_daily_create_budget' ? -5 : $value);
+        when('apply_filters')->alias(fn (string $hook, $value) => $hook === 'uamswp_fad_gbp_daily_create_budget' ? -5 : $value);
         $this->assertSame(0, uamswp_fad_gbp_create_budget(), 'a negative budget is 0');
     }
 

@@ -12,6 +12,9 @@ use Brain\Monkey;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;
 
+use function Brain\Monkey\setUp;
+use function Brain\Monkey\tearDown;
+
 /**
  * PHPUnit TestCase with Brain Monkey around each test.
  *
@@ -23,21 +26,15 @@ abstract class UnitTestCase extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         parent::setUp();
-        Monkey\setUp();
+        setUp();
     }
 
-    /**
-     * @return void
-     */
     protected function tearDown(): void
     {
-        Monkey\tearDown();
+        tearDown();
         parent::tearDown();
     }
 }

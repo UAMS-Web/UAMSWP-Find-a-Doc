@@ -8,18 +8,20 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
-use Brain\Monkey\Actions;
-use Brain\Monkey\Functions;
 use PHPUnit\Framework\Attributes\DataProvider;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
+
+use function Brain\Monkey\Actions\expectAdded;
+use function Brain\Monkey\Functions\expect;
+use function Brain\Monkey\Functions\when;
 
 final class GbpRuntimeTest extends UnitTestCase
 {
     /** @var array<int, array<int, mixed>> */
-    private $scheduled = [];
+    private array $scheduled = [];
 
     /** @var array<string, array<int|string, array<string, mixed>>> */
-    private $options = [];
+    private array $options = [];
 
     protected function setUp(): void
     {
@@ -32,17 +34,13 @@ final class GbpRuntimeTest extends UnitTestCase
      */
     private function enable(array $modes = []): void
     {
-        Functions\when('get_option')->alias(function (string $name, $default = false) use ($modes) {
-            return $name === 'uamswp_fad_gbp_modes' ? $modes : $default;
-        });
-        Functions\when('apply_filters')->alias(function (string $hook, $value) {
-            return $value;
-        });
+        when('get_option')->alias(fn (string $name, $default = false) => $name === 'uamswp_fad_gbp_modes' ? $modes : $default);
+        when('apply_filters')->alias(fn (string $hook, $value) => $value);
     }
 
     private function recordSchedule(): void
     {
-        Functions\when('wp_next_scheduled')->alias(function (string $hook, array $args) {
+        when('wp_next_scheduled')->alias(function (string $hook, array $args) {
             foreach ($this->scheduled as $call) {
                 if ($call[1] === $hook && $call[2] === $args) {
                     return $call[0];
@@ -51,7 +49,7 @@ final class GbpRuntimeTest extends UnitTestCase
 
             return false;
         });
-        Functions\when('wp_schedule_single_event')->alias(function (int $time, string $hook, array $args) {
+        when('wp_schedule_single_event')->alias(function (int $time, string $hook, array $args) {
             $this->scheduled[] = [$time, $hook, $args];
 
             return true;
@@ -60,9 +58,7 @@ final class GbpRuntimeTest extends UnitTestCase
 
     private function creds(): callable
     {
-        return function (string $name): string {
-            return 'value-of-'.$name;
-        };
+        return fn (string $name): string => 'value-of-'.$name;
     }
 
     public function test_credentials_come_from_the_lookup_and_are_all_required(): void
@@ -75,12 +71,8 @@ final class GbpRuntimeTest extends UnitTestCase
             'refresh_token' => 'value-of-GOOGLE_BUSINESS_PROFILE_REFRESH_TOKEN',
         ], $credentials);
 
-        $this->assertNull(uamswp_fad_gbp_credentials(function (string $name): string {
-            return $name === 'GOOGLE_BUSINESS_PROFILE_REFRESH_TOKEN' ? '' : 'x';
-        }));
-        $this->assertNull(uamswp_fad_gbp_credentials(function (): string {
-            return '';
-        }));
+        $this->assertNull(uamswp_fad_gbp_credentials(fn (string $name): string => $name === 'GOOGLE_BUSINESS_PROFILE_REFRESH_TOKEN' ? '' : 'x'));
+        $this->assertNull(uamswp_fad_gbp_credentials(fn (): string => ''));
     }
 
     public function test_every_silo_defaults_to_dry_run(): void
@@ -102,15 +94,15 @@ final class GbpRuntimeTest extends UnitTestCase
     public function test_production_is_decided_by_the_host(): void
     {
         $this->enable();
-        Functions\when('wp_parse_url')->alias('parse_url');
+        when('wp_parse_url')->alias('parse_url');
 
-        Functions\when('home_url')->justReturn('https://uamshealth.com');
+        when('home_url')->justReturn('https://uamshealth.com');
         $this->assertTrue(uamswp_fad_gbp_is_production());
 
-        Functions\when('home_url')->justReturn('https://uamshealth.dev');
+        when('home_url')->justReturn('https://uamshealth.dev');
         $this->assertFalse(uamswp_fad_gbp_is_production());
 
-        Functions\when('home_url')->justReturn('https://uamshealth.com.evil.test');
+        when('home_url')->justReturn('https://uamshealth.com.evil.test');
         $this->assertFalse(uamswp_fad_gbp_is_production());
     }
 
@@ -136,13 +128,9 @@ final class GbpRuntimeTest extends UnitTestCase
     public function test_location_info_reads_the_silo_and_the_provider_exclusion(array $stored, array $expected): void
     {
         $this->enable();
-        Functions\when('get_posts')->justReturn([321]);
-        Functions\when('get_post_meta')->alias(function (int $id, string $key) use ($stored) {
-            return $key === 'schema_brandorg_query' ? $stored['query'] : $stored['org'];
-        });
-        Functions\when('get_field')->alias(function (string $name, int $id) use ($stored) {
-            return $name === 'location_gmb_exclude_providers' ? $stored['exclude_providers'] : null;
-        });
+        when('get_posts')->justReturn([321]);
+        when('get_post_meta')->alias(fn (int $id, string $key) => $key === 'schema_brandorg_query' ? $stored['query'] : $stored['org']);
+        when('get_field')->alias(fn (string $name, int $id) => $name === 'location_gmb_exclude_providers' ? $stored['exclude_providers'] : null);
 
         $this->assertSame($expected, uamswp_fad_gbp_location_info('some-clinic'));
     }
@@ -150,7 +138,7 @@ final class GbpRuntimeTest extends UnitTestCase
     public function test_an_unknown_location_has_no_silo_and_is_not_excluded(): void
     {
         $this->enable();
-        Functions\when('get_posts')->justReturn([]);
+        when('get_posts')->justReturn([]);
 
         $this->assertSame(['silo' => null, 'providers_excluded' => false, 'id' => 0], uamswp_fad_gbp_location_info('gone'));
     }
@@ -159,8 +147,8 @@ final class GbpRuntimeTest extends UnitTestCase
     {
         $this->enable();
         $this->recordSchedule();
-        Functions\when('get_post_type')->justReturn('provider');
-        Functions\when('get_post_status')->justReturn('publish');
+        when('get_post_type')->justReturn('provider');
+        when('get_post_status')->justReturn('publish');
 
         uamswp_fad_gbp_queue_on_save(100, $this->creds());
         uamswp_fad_gbp_queue_on_save(100, $this->creds());
@@ -174,11 +162,9 @@ final class GbpRuntimeTest extends UnitTestCase
     {
         $this->enable();
         $this->recordSchedule();
-        Functions\when('get_posts')->alias(function (array $args) {
-            return $args['post_type'] === 'provider' ? ['7', 8, 9] : [55];
-        });
+        when('get_posts')->alias(fn (array $args) => $args['post_type'] === 'provider' ? ['7', 8, 9] : [55]);
 
-        Functions\expect('delete_post_meta')->times(4)->with(\Mockery::anyOf(7, 8, 9, 55), UAMSWP_FAD_GBP_HASH_META);
+        expect('delete_post_meta')->times(4)->with(\Mockery::anyOf(7, 8, 9, 55), UAMSWP_FAD_GBP_HASH_META);
 
         $first = uamswp_fad_gbp_queue_all($this->creds());
         $second = uamswp_fad_gbp_queue_all($this->creds());
@@ -193,12 +179,10 @@ final class GbpRuntimeTest extends UnitTestCase
     public function test_queue_all_does_nothing_without_credentials_or_when_every_silo_is_off(): void
     {
         $this->recordSchedule();
-        Functions\when('get_posts')->justReturn([7]);
+        when('get_posts')->justReturn([7]);
 
         $this->enable();
-        $this->assertSame(0, uamswp_fad_gbp_queue_all(function (): string {
-            return '';
-        }));
+        $this->assertSame(0, uamswp_fad_gbp_queue_all(fn (): string => ''));
 
         $this->enable(['uams' => 'off', 'arkansas-childrens' => 'off', 'baptist-health' => 'off']);
         $this->assertSame(0, uamswp_fad_gbp_queue_all($this->creds()));
@@ -210,8 +194,8 @@ final class GbpRuntimeTest extends UnitTestCase
     {
         $this->enable();
         $this->recordSchedule();
-        Functions\when('get_post_type')->justReturn('provider');
-        Functions\when('get_post_status')->justReturn('publish');
+        when('get_post_type')->justReturn('provider');
+        when('get_post_status')->justReturn('publish');
 
         uamswp_fad_gbp_queue_on_publish('publish', 'future', (object) ['ID' => 100], $this->creds());
 
@@ -222,8 +206,8 @@ final class GbpRuntimeTest extends UnitTestCase
     {
         $this->enable();
         $this->recordSchedule();
-        Functions\when('get_post_type')->justReturn('provider');
-        Functions\when('get_post_status')->justReturn('publish');
+        when('get_post_type')->justReturn('provider');
+        when('get_post_status')->justReturn('publish');
 
         uamswp_fad_gbp_queue_on_publish('publish', 'publish', (object) ['ID' => 100], $this->creds());
         uamswp_fad_gbp_queue_on_publish('draft', 'publish', (object) ['ID' => 101], $this->creds());
@@ -236,8 +220,8 @@ final class GbpRuntimeTest extends UnitTestCase
     {
         $this->enable();
         $this->recordSchedule();
-        Functions\when('get_post_type')->justReturn('provider');
-        Functions\when('get_post_status')->justReturn('publish');
+        when('get_post_type')->justReturn('provider');
+        when('get_post_status')->justReturn('publish');
 
         uamswp_fad_gbp_queue_on_publish('publish', 'draft', (object) ['ID' => 100], $this->creds());
         uamswp_fad_gbp_queue_on_save(100, $this->creds());
@@ -247,9 +231,9 @@ final class GbpRuntimeTest extends UnitTestCase
 
     public function test_the_hooks_are_registered(): void
     {
-        Actions\expectAdded('acf/save_post')->once()->with('uamswp_fad_gbp_queue_on_save', 30);
-        Actions\expectAdded('transition_post_status')->once()->with('uamswp_fad_gbp_queue_on_publish', 10, 3);
-        Actions\expectAdded(UAMSWP_FAD_GBP_SYNC_HOOK)->once()->with('uamswp_fad_gbp_run_post');
+        expectAdded('acf/save_post')->once()->with('uamswp_fad_gbp_queue_on_save', 30);
+        expectAdded('transition_post_status')->once()->with('uamswp_fad_gbp_queue_on_publish', 10, 3);
+        expectAdded(UAMSWP_FAD_GBP_SYNC_HOOK)->once()->with('uamswp_fad_gbp_run_post');
 
         uamswp_fad_gbp_register_hooks();
     }
@@ -264,12 +248,8 @@ final class GbpRuntimeTest extends UnitTestCase
         // Load the real builder first, so the stub below is a redefinition the test undoes rather than a function that outlives it.
         require_once __DIR__.'/../Support/gmb-page.php';
         \uamswp_test_gmb_page();
-        Functions\when('uamswp_fad_gmb_location_table')->alias(function (array $ids) use ($row) {
-            return ['head' => [], 'body' => $ids === [55] ? [$row, []] : []];
-        });
-        Functions\when('get_post_meta')->alias(function (int $id, string $key) {
-            return $key === 'schema_brandorg_query' ? '1' : 'baptist-health';
-        });
+        when('uamswp_fad_gmb_location_table')->alias(fn (array $ids) => ['head' => [], 'body' => $ids === [55] ? [$row, []] : []]);
+        when('get_post_meta')->alias(fn (int $id, string $key) => $key === 'schema_brandorg_query' ? '1' : 'baptist-health');
 
         $items = uamswp_fad_gbp_items_for_location(55, ['Medical Clinic' => 'categories/gcid:medical_clinic']);
 
@@ -279,37 +259,37 @@ final class GbpRuntimeTest extends UnitTestCase
 
     public function test_items_for_a_post_depend_on_its_type(): void
     {
-        Functions\when('uamswp_fad_gbp_items_for_location')->justReturn([['kind' => 'location']]);
-        Functions\when('uamswp_fad_gbp_items_for_provider')->justReturn([['kind' => 'provider']]);
+        when('uamswp_fad_gbp_items_for_location')->justReturn([['kind' => 'location']]);
+        when('uamswp_fad_gbp_items_for_provider')->justReturn([['kind' => 'provider']]);
 
-        Functions\when('get_post_type')->justReturn('location');
+        when('get_post_type')->justReturn('location');
         $this->assertSame('location', uamswp_fad_gbp_items_for_post(1, [])[0]['kind']);
 
-        Functions\when('get_post_type')->justReturn('provider');
+        when('get_post_type')->justReturn('provider');
         $this->assertSame('provider', uamswp_fad_gbp_items_for_post(1, [])[0]['kind']);
     }
 
     public function test_the_retry_delay_doubles_from_a_minute_to_an_hour(): void
     {
-        $this->assertSame([60, 120, 240, 480, 960, 1920, 3600, 3600], array_map('uamswp_fad_gbp_retry_delay', [1, 2, 3, 4, 5, 6, 7, 20]));
+        $this->assertSame([60, 120, 240, 480, 960, 1920, 3600, 3600], array_map(uamswp_fad_gbp_retry_delay(...), [1, 2, 3, 4, 5, 6, 7, 20]));
     }
 
     public function test_a_rate_limited_provider_is_retried_later_with_a_growing_delay(): void
     {
         $attempts = [];
-        Functions\when('get_transient')->alias(function (string $key) use (&$attempts) {
+        when('get_transient')->alias(function (string $key) use (&$attempts) {
             return $attempts[$key] ?? false;
         });
-        Functions\when('set_transient')->alias(function (string $key, $value) use (&$attempts): bool {
+        when('set_transient')->alias(function (string $key, $value) use (&$attempts): bool {
             $attempts[$key] = $value;
 
             return true;
         });
         $stored = [];
-        Functions\when('get_option')->alias(function (string $name, $default = false) use (&$stored) {
+        when('get_option')->alias(function (string $name, $default = false) use (&$stored) {
             return $stored[$name] ?? $default;
         });
-        Functions\when('update_option')->alias(function (string $name, $value) use (&$stored): bool {
+        when('update_option')->alias(function (string $name, $value) use (&$stored): bool {
             $stored[$name] = $value;
 
             return true;
@@ -336,11 +316,11 @@ final class GbpRuntimeTest extends UnitTestCase
     public function test_a_provider_is_given_up_on_after_the_attempt_limit(): void
     {
         $logged = [];
-        Functions\when('get_transient')->justReturn(UAMSWP_FAD_GBP_MAX_ATTEMPTS);
-        Functions\when('get_post_type')->justReturn('provider');
-        Functions\when('delete_transient')->justReturn(true);
-        Functions\when('get_option')->justReturn([]);
-        Functions\when('update_option')->alias(function (string $name, $value) use (&$logged): bool {
+        when('get_transient')->justReturn(UAMSWP_FAD_GBP_MAX_ATTEMPTS);
+        when('get_post_type')->justReturn('provider');
+        when('delete_transient')->justReturn(true);
+        when('get_option')->justReturn([]);
+        when('update_option')->alias(function (string $name, $value) use (&$logged): bool {
             $logged = $value;
 
             return true;
@@ -357,12 +337,10 @@ final class GbpRuntimeTest extends UnitTestCase
     {
         $this->enable();
         $this->recordSchedule();
-        Functions\when('get_post_type')->justReturn('provider');
-        Functions\when('get_post_status')->justReturn('publish');
+        when('get_post_type')->justReturn('provider');
+        when('get_post_status')->justReturn('publish');
 
-        uamswp_fad_gbp_queue_on_save(100, function (): string {
-            return '';
-        });
+        uamswp_fad_gbp_queue_on_save(100, fn (): string => '');
 
         $this->assertSame([], $this->scheduled);
     }
@@ -371,8 +349,8 @@ final class GbpRuntimeTest extends UnitTestCase
     {
         $this->enable(['uams' => 'off', 'arkansas-childrens' => 'off', 'baptist-health' => 'off']);
         $this->recordSchedule();
-        Functions\when('get_post_type')->justReturn('provider');
-        Functions\when('get_post_status')->justReturn('publish');
+        when('get_post_type')->justReturn('provider');
+        when('get_post_status')->justReturn('publish');
 
         uamswp_fad_gbp_queue_on_save(100, $this->creds());
 
@@ -383,12 +361,12 @@ final class GbpRuntimeTest extends UnitTestCase
     {
         $this->enable();
         $this->recordSchedule();
-        Functions\when('get_post_type')->justReturn('provider');
-        Functions\when('get_post_status')->justReturn('draft');
+        when('get_post_type')->justReturn('provider');
+        when('get_post_status')->justReturn('draft');
         uamswp_fad_gbp_queue_on_save(100, $this->creds());
 
-        Functions\when('get_post_type')->justReturn('page');
-        Functions\when('get_post_status')->justReturn('publish');
+        when('get_post_type')->justReturn('page');
+        when('get_post_status')->justReturn('publish');
         uamswp_fad_gbp_queue_on_save(101, $this->creds());
 
         uamswp_fad_gbp_queue_on_save('options', $this->creds());
@@ -400,12 +378,10 @@ final class GbpRuntimeTest extends UnitTestCase
     {
         $this->enable();
         $this->recordSchedule();
-        Functions\when('get_post_type')->justReturn('location');
-        Functions\when('get_post_status')->justReturn('publish');
-        Functions\when('uamswp_fad_gbp_provider_ids_for_locations')->alias(function (array $location_ids) {
-            return $location_ids === [55, 56] ? [7, 8] : [];
-        });
-        Functions\when('uamswp_fad_gbp_child_location_ids')->justReturn([56]);
+        when('get_post_type')->justReturn('location');
+        when('get_post_status')->justReturn('publish');
+        when('uamswp_fad_gbp_provider_ids_for_locations')->alias(fn (array $location_ids) => $location_ids === [55, 56] ? [7, 8] : []);
+        when('uamswp_fad_gbp_child_location_ids')->justReturn([56]);
 
         uamswp_fad_gbp_queue_on_save(55, $this->creds());
 
@@ -420,10 +396,10 @@ final class GbpRuntimeTest extends UnitTestCase
     {
         $store = ['uamswp_fad_gbp_log' => [], 'uamswp_fad_gbp_attention' => []];
         $this->options = &$store;
-        Functions\when('get_option')->alias(function (string $name, $default = false) use (&$store) {
+        when('get_option')->alias(function (string $name, $default = false) use (&$store) {
             return $store[$name] ?? $default;
         });
-        Functions\when('update_option')->alias(function (string $name, $value) use (&$store): bool {
+        when('update_option')->alias(function (string $name, $value) use (&$store): bool {
             $store[$name] = $value;
 
             return true;

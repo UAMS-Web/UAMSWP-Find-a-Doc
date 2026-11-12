@@ -12,11 +12,14 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
-use Brain\Monkey\Filters;
 use Brain\Monkey\Functions;
 use Mockery;
 use PHPUnit\Framework\Attributes\DataProvider;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
+
+use function Brain\Monkey\Filters\expectApplied;
+use function Brain\Monkey\Functions\expect;
+use function Brain\Monkey\Functions\when;
 
 require_once __DIR__.'/../Support/acf-functions.php';
 require_once __DIR__.'/../Support/functions-file.php';
@@ -32,9 +35,9 @@ final class ProviderHelpersTest extends UnitTestCase
         \uamswp_test_acf_functions();
         \uamswp_test_functions_file();
 
-        Functions\when('esc_html')->alias(static fn (string $text): string => htmlspecialchars($text, ENT_QUOTES));
-        Functions\when('wp_strip_all_tags')->alias(static fn (string $text): string => strip_tags($text));
-        Functions\when('sanitize_title_with_dashes')->alias(static fn (string $title): string => trim((string) preg_replace('/[^a-z0-9]+/', '-', strtolower($title)), '-'));
+        when('esc_html')->alias(static fn (string $text): string => htmlspecialchars($text, ENT_QUOTES));
+        when('wp_strip_all_tags')->alias(static fn (string $text): string => strip_tags($text));
+        when('sanitize_title_with_dashes')->alias(static fn (string $title): string => trim((string) preg_replace('/[^a-z0-9]+/', '-', strtolower($title)), '-'));
     }
 
     /**
@@ -46,8 +49,8 @@ final class ProviderHelpersTest extends UnitTestCase
      */
     private function provider(array $fields, array $terms = [], array $termFields = []): void
     {
-        Functions\when('get_field')->alias(static fn (string $field, mixed $id = null): mixed => is_object($id) ? ($termFields[$field] ?? '') : ($fields[$field] ?? ''));
-        Functions\when('get_term')->alias(static fn (int $id, string $taxonomy): ?object => $terms[$id] ?? null);
+        when('get_field')->alias(static fn (string $field, mixed $id = null): mixed => is_object($id) ? ($termFields[$field] ?? '') : ($fields[$field] ?? ''));
+        when('get_term')->alias(static fn (int $id, string $taxonomy): ?object => $terms[$id] ?? null);
     }
 
     /**
@@ -205,7 +208,7 @@ final class ProviderHelpersTest extends UnitTestCase
 
     public function test_no_provider_has_no_occupation_title(): void
     {
-        Functions\expect('get_field')->never();
+        expect('get_field')->never();
 
         $this->assertSame('', \uamswp_provider_occupation_title(0));
     }
@@ -287,7 +290,7 @@ final class ProviderHelpersTest extends UnitTestCase
 
     public function test_no_provider_gets_the_singular_they_without_reading_a_field(): void
     {
-        Functions\expect('get_field')->never();
+        expect('get_field')->never();
 
         $this->assertSame('they', \uamswp_provider_pronouns(0)['subject']);
     }
@@ -329,7 +332,7 @@ final class ProviderHelpersTest extends UnitTestCase
     public function test_the_excerpt_filter_receives_the_parts_and_its_markup_is_stripped(): void
     {
         $this->provider(['physician_first_name' => 'Ann', 'physician_last_name' => 'Lee', 'physician_title' => 7], [7 => (object) ['name' => 'Optometrist']]);
-        Filters\expectApplied('uamswp_spotlight_default_excerpt')
+        expectApplied('uamswp_spotlight_default_excerpt')
             ->once()
             ->with('Meet Ann Lee, optometrist at UAMS Health, in this provider spotlight Q&A.', 5, Mockery::type('array'), 'optometrist')
             ->andReturn('<b>Custom</b> excerpt');
@@ -340,7 +343,7 @@ final class ProviderHelpersTest extends UnitTestCase
     public function test_an_excerpt_over_160_characters_is_cut_to_156_ending_in_an_ellipsis(): void
     {
         $this->provider(['physician_first_name' => 'Ann', 'physician_last_name' => 'Lee']);
-        Filters\expectApplied('uamswp_spotlight_default_excerpt')->andReturn(str_repeat('a', 161));
+        expectApplied('uamswp_spotlight_default_excerpt')->andReturn(str_repeat('a', 161));
 
         $this->assertSame(str_repeat('a', 153).'...', \uamswp_spotlight_default_excerpt(5));
     }
@@ -348,7 +351,7 @@ final class ProviderHelpersTest extends UnitTestCase
     public function test_an_excerpt_of_exactly_160_characters_is_kept(): void
     {
         $this->provider(['physician_first_name' => 'Ann', 'physician_last_name' => 'Lee']);
-        Filters\expectApplied('uamswp_spotlight_default_excerpt')->andReturn(str_repeat('a', 160));
+        expectApplied('uamswp_spotlight_default_excerpt')->andReturn(str_repeat('a', 160));
 
         $this->assertSame(str_repeat('a', 160), \uamswp_spotlight_default_excerpt(5));
     }
@@ -399,7 +402,7 @@ final class ProviderHelpersTest extends UnitTestCase
     public function test_the_introduction_filter_receives_the_parts_and_its_result_is_used(): void
     {
         $this->provider(['physician_first_name' => 'Ann', 'physician_last_name' => 'Lee', 'physician_title' => 7, 'physician_gender' => 'female'], [7 => (object) ['name' => 'Optometrist']]);
-        Filters\expectApplied('uamswp_spotlight_intro')
+        expectApplied('uamswp_spotlight_intro')
             ->once()
             ->with(Mockery::type('string'), 5, Mockery::type('array'), 'optometrist', Mockery::on(static fn (mixed $pronouns): bool => is_array($pronouns) && $pronouns['subject'] === 'she'))
             ->andReturn('<p>Custom</p>');
@@ -423,10 +426,10 @@ final class ProviderHelpersTest extends UnitTestCase
 
     public function test_the_questions_can_be_filtered_and_a_non_list_result_is_empty(): void
     {
-        Filters\expectApplied('uamswp_spotlight_default_questions')->once()->andReturn(['Only one?']);
+        expectApplied('uamswp_spotlight_default_questions')->once()->andReturn(['Only one?']);
         $this->assertSame(['Only one?'], \uamswp_spotlight_default_questions());
 
-        Filters\expectApplied('uamswp_spotlight_default_questions')->once()->andReturn('not a list');
+        expectApplied('uamswp_spotlight_default_questions')->once()->andReturn('not a list');
         $this->assertSame([], \uamswp_spotlight_default_questions());
     }
 }

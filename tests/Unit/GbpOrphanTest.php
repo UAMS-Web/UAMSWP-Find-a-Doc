@@ -8,10 +8,11 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
-use Brain\Monkey\Functions;
 use UAMSWP_FAD_GBP_Client;
 use UAMSWP_FAD_GBP_Logic;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
+
+use function Brain\Monkey\Functions\when;
 
 final class GbpOrphanTest extends UnitTestCase
 {
@@ -21,25 +22,25 @@ final class GbpOrphanTest extends UnitTestCase
     private const NOW = 1794916800;
 
     /** @var array<int, array<string, mixed>> */
-    private $meta = [];
+    private array $meta = [];
 
     /** @var array<string, mixed> */
-    private $options = [];
+    private array $options = [];
 
     /** @var array<int, array<string, mixed>> */
-    private $unpublished = [];
+    private array $unpublished = [];
 
     /** @var array<int, array<string, mixed>> */
-    private $providers = [];
+    private array $providers = [];
 
     /** @var array<int, array<string, mixed>> */
-    private $locations = [];
+    private array $locations = [];
 
     /** @var array<string, string> Post ID => type. */
-    private $types = [];
+    private array $types = [];
 
     /** @var array<int, array{string, array<string, mixed>, string, string}> */
-    private $patches = [];
+    private array $patches = [];
 
     protected function setUp(): void
     {
@@ -52,30 +53,30 @@ final class GbpOrphanTest extends UnitTestCase
         $this->types = [];
         $this->patches = [];
 
-        Functions\when('apply_filters')->alias(fn (string $hook, $value) => $value);
-        Functions\when('home_url')->justReturn('https://uamshealth.com');
-        Functions\when('wp_parse_url')->alias(fn (string $url, int $component) => parse_url($url, $component));
-        Functions\when('get_option')->alias(fn (string $name, $default = false) => $this->options[$name] ?? $default);
-        Functions\when('update_option')->alias(function (string $name, $value): bool {
+        when('apply_filters')->alias(fn (string $hook, $value) => $value);
+        when('home_url')->justReturn('https://uamshealth.com');
+        when('wp_parse_url')->alias(fn (string $url, int $component) => parse_url($url, $component));
+        when('get_option')->alias(fn (string $name, $default = false) => $this->options[$name] ?? $default);
+        when('update_option')->alias(function (string $name, $value): bool {
             $this->options[$name] = $value;
 
             return true;
         });
-        Functions\when('delete_transient')->justReturn(true);
-        Functions\when('get_the_title')->alias(fn (int $id): string => 'Post '.$id);
-        Functions\when('get_post_type')->alias(fn (int $id): string => $this->types[$id] ?? 'provider');
-        Functions\when('get_post_meta')->alias(fn (int $id, string $key) => $this->meta[$id][$key] ?? '');
-        Functions\when('update_post_meta')->alias(function (int $id, string $key, $value): bool {
+        when('delete_transient')->justReturn(true);
+        when('get_the_title')->alias(fn (int $id): string => 'Post '.$id);
+        when('get_post_type')->alias(fn (int $id): string => $this->types[$id] ?? 'provider');
+        when('get_post_meta')->alias(fn (int $id, string $key) => $this->meta[$id][$key] ?? '');
+        when('update_post_meta')->alias(function (int $id, string $key, $value): bool {
             $this->meta[$id][$key] = $value;
 
             return true;
         });
-        Functions\when('delete_post_meta')->alias(function (int $id, string $key): bool {
+        when('delete_post_meta')->alias(function (int $id, string $key): bool {
             unset($this->meta[$id][$key]);
 
             return true;
         });
-        Functions\when('get_posts')->alias(function (array $args): array {
+        when('get_posts')->alias(function (array $args): array {
             if ($args['post_status'] !== 'publish') {
                 return array_keys($this->unpublished);
             }
@@ -99,7 +100,7 @@ final class GbpOrphanTest extends UnitTestCase
      */
     private function client(array $listings, int $patch_status = 200): UAMSWP_FAD_GBP_Client
     {
-        Functions\when('get_transient')->justReturn($listings);
+        when('get_transient')->justReturn($listings);
 
         return new UAMSWP_FAD_GBP_Client(['client_id' => 'a', 'client_secret' => 'b', 'refresh_token' => 'c'], function (string $method, string $url, array $headers, ?string $body) use ($patch_status): array {
             if (str_contains($url, 'oauth2.googleapis.com')) {
@@ -207,7 +208,7 @@ final class GbpOrphanTest extends UnitTestCase
         $post = (object) ['ID' => 3, 'post_type' => 'provider'];
         $this->meta[3] = [UAMSWP_FAD_GBP_LISTING_MAP_META => [10 => ['id' => 'locations/1', 'orphaned_since' => null]]];
 
-        uamswp_fad_gbp_track_unpublish('draft', 'publish', $post, (int) strtotime('2026-11-04 12:00:00 UTC'));
+        uamswp_fad_gbp_track_unpublish('draft', 'publish', $post, strtotime('2026-11-04 12:00:00 UTC'));
         $this->assertSame('2026-11-04', $this->meta[3][UAMSWP_FAD_GBP_UNPUBLISHED_META]);
 
         uamswp_fad_gbp_track_unpublish('publish', 'draft', $post);
@@ -361,10 +362,10 @@ final class GbpOrphanTest extends UnitTestCase
     {
         $this->options['uamswp_fad_gbp_modes'] = ['uams' => 'live'];
         $locks = [];
-        Functions\when('get_transient')->alias(function (string $key) use (&$locks) {
+        when('get_transient')->alias(function (string $key) use (&$locks) {
             return $key === 'uamswp_fad_gbp_lock' ? ($locks['held'] ?? false) : [];
         });
-        Functions\when('set_transient')->alias(function (string $key) use (&$locks): bool {
+        when('set_transient')->alias(function (string $key) use (&$locks): bool {
             $locks['set'] = true;
 
             return true;

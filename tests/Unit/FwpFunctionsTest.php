@@ -17,6 +17,9 @@ use Mockery;
 use PHPUnit\Framework\Attributes\DataProvider;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
 
+use function Brain\Monkey\Functions\expect;
+use function Brain\Monkey\Functions\when;
+
 require_once __DIR__.'/../Support/acf-functions.php';
 
 final class FwpFunctionsTest extends UnitTestCase
@@ -40,16 +43,16 @@ final class FwpFunctionsTest extends UnitTestCase
             define('FACETWP_URL', 'https://example.test/wp-content/plugins/facetwp');
         }
 
-        Functions\when('__')->returnArg();
+        when('__')->returnArg();
 
         if (self::$loaded) {
             return;
         }
 
-        Functions\when('add_filter')->alias(static function (string $hook, mixed $callback, int $priority = 10, int $accepted = 1): void {
+        when('add_filter')->alias(static function (string $hook, mixed $callback, int $priority = 10, int $accepted = 1): void {
             self::$filters[] = [$hook, $callback, $priority, $accepted];
         });
-        Functions\when('add_action')->alias(static function (string $hook, mixed $callback, int $priority = 10): void {
+        when('add_action')->alias(static function (string $hook, mixed $callback, int $priority = 10): void {
             self::$actions[] = [$hook, $callback, $priority];
         });
 
@@ -75,7 +78,7 @@ final class FwpFunctionsTest extends UnitTestCase
     private function conditions(array $true): void
     {
         foreach (['is_post_type_archive', 'is_singular'] as $tag) {
-            Functions\when($tag)->alias(static fn (string $type): bool => in_array($tag.':'.$type, $true, true));
+            when($tag)->alias(static fn (string $type): bool => in_array($tag.':'.$type, $true, true));
         }
     }
 
@@ -148,8 +151,8 @@ final class FwpFunctionsTest extends UnitTestCase
     public function test_the_facet_scripts_on_a_provider_archive_include_the_taxonomy_slug_and_provider_region(): void
     {
         $this->conditions(['is_post_type_archive:provider']);
-        Functions\expect('get_body_class')->once();
-        Functions\when('get_queried_object')->justReturn((object) ['slug' => 'cardiology']);
+        expect('get_body_class')->once();
+        when('get_queried_object')->justReturn((object) ['slug' => 'cardiology']);
 
         ob_start();
         \fwp_facet_scripts();
@@ -165,8 +168,8 @@ final class FwpFunctionsTest extends UnitTestCase
     public function test_the_facet_scripts_on_a_location_archive_use_the_location_region(): void
     {
         $this->conditions(['is_post_type_archive:location']);
-        Functions\when('get_body_class')->justReturn([]);
-        Functions\when('get_queried_object')->justReturn(null);
+        when('get_body_class')->justReturn([]);
+        when('get_queried_object')->justReturn();
 
         ob_start();
         \fwp_facet_scripts();
@@ -180,7 +183,7 @@ final class FwpFunctionsTest extends UnitTestCase
     public function test_the_facet_scripts_on_a_clinical_resource_archive_only_label_the_facets(): void
     {
         $this->conditions(['is_post_type_archive:clinical-resource']);
-        Functions\when('get_body_class')->justReturn([]);
+        when('get_body_class')->justReturn([]);
 
         ob_start();
         \fwp_facet_scripts();
@@ -194,7 +197,7 @@ final class FwpFunctionsTest extends UnitTestCase
     public function test_the_facet_scripts_print_nothing_elsewhere(): void
     {
         $this->conditions([]);
-        Functions\when('get_body_class')->justReturn([]);
+        when('get_body_class')->justReturn([]);
         $this->expectOutputString('');
 
         \fwp_facet_scripts();
@@ -202,7 +205,7 @@ final class FwpFunctionsTest extends UnitTestCase
 
     private function facetwp(string $uri): void
     {
-        Functions\when('FWP')->justReturn(new class($uri)
+        when('FWP')->justReturn(new class($uri)
         {
             public object $helper;
 
@@ -407,14 +410,14 @@ final class FwpFunctionsTest extends UnitTestCase
 
     public function test_a_resource_provider_facet_is_indexed_by_name_slug_and_full_name(): void
     {
-        Functions\when('get_post')->justReturn((object) ['ID' => 55]);
-        Functions\when('get_field')->alias(static fn (string $field, int $id): string => $id === 55 ? [
+        when('get_post')->justReturn((object) ['ID' => 55]);
+        when('get_field')->alias(static fn (string $field, int $id): string => $id === 55 ? [
             'physician_last_name' => 'McCoy',
             'physician_first_name' => 'Leonard',
             'physician_middle_name' => 'H',
             'physician_full_name' => 'Leonard H McCoy, MD',
         ][$field] : '');
-        Functions\when('sanitize_title_with_dashes')->alias(static fn (string $title): string => strtolower(str_replace(' ', '-', trim($title))));
+        when('sanitize_title_with_dashes')->alias(static fn (string $title): string => strtolower(str_replace(' ', '-', trim($title))));
 
         $this->assertSame(
             ['facet_name' => 'resource_provider', 'facet_value' => 'mccoy-leonard-h', 'facet_display_value' => 'Leonard H McCoy, MD'],
@@ -424,9 +427,9 @@ final class FwpFunctionsTest extends UnitTestCase
 
     public function test_a_resource_provider_facet_with_a_missing_post_reads_the_fields_of_post_zero(): void
     {
-        Functions\when('get_post')->justReturn(null);
-        Functions\expect('get_field')->times(4)->andReturnUsing(static fn (string $field, int $id): string => $id === 0 ? 'x' : 'wrong');
-        Functions\when('sanitize_title_with_dashes')->returnArg();
+        when('get_post')->justReturn();
+        expect('get_field')->times(4)->andReturnUsing(static fn (string $field, int $id): string => $id === 0 ? 'x' : 'wrong');
+        when('sanitize_title_with_dashes')->returnArg();
 
         $this->assertSame(
             ['facet_name' => 'resource_provider', 'facet_value' => 'x x x', 'facet_display_value' => 'x'],
@@ -436,7 +439,7 @@ final class FwpFunctionsTest extends UnitTestCase
 
     public function test_the_other_resource_facets_are_indexed_by_post_slug(): void
     {
-        Functions\expect('get_post')->times(4)->with(12)->andReturn((object) ['post_name' => 'main-clinic']);
+        expect('get_post')->times(4)->with(12)->andReturn((object) ['post_name' => 'main-clinic']);
 
         foreach (['resource_locations', 'resource_aoe', 'resource_conditions', 'resource_treatments'] as $facet) {
             $this->assertSame(
@@ -449,7 +452,7 @@ final class FwpFunctionsTest extends UnitTestCase
 
     public function test_a_resource_facet_with_a_missing_post_is_indexed_with_an_empty_slug(): void
     {
-        Functions\when('get_post')->justReturn(null);
+        when('get_post')->justReturn();
 
         $this->assertSame(
             ['facet_name' => 'resource_aoe', 'facet_value' => ''],
@@ -459,7 +462,7 @@ final class FwpFunctionsTest extends UnitTestCase
 
     public function test_rows_without_a_value_other_facets_and_empty_rows_pass_through_untouched(): void
     {
-        Functions\expect('get_post')->never();
+        expect('get_post')->never();
         $row = $this->filter('facetwp_index_row', 1);
 
         $this->assertSame(['facet_name' => 'resource_provider', 'facet_value' => ''], $row(['facet_name' => 'resource_provider', 'facet_value' => ''], null));
@@ -480,16 +483,16 @@ final class FwpFunctionsTest extends UnitTestCase
 
     public function test_the_hourly_event_is_scheduled_when_it_is_missing(): void
     {
-        Functions\expect('wp_next_scheduled')->once()->with('fwp_indexer')->andReturn(false);
-        Functions\expect('wp_schedule_event')->once()->with(Mockery::type('int'), 'hourly', 'fwp_indexer');
+        expect('wp_next_scheduled')->once()->with('fwp_indexer')->andReturn(false);
+        expect('wp_schedule_event')->once()->with(Mockery::type('int'), 'hourly', 'fwp_indexer');
 
         \register_hourly_fwp_indexer();
     }
 
     public function test_an_event_that_is_already_scheduled_is_not_scheduled_again(): void
     {
-        Functions\expect('wp_next_scheduled')->once()->with('fwp_indexer')->andReturn(1700000000);
-        Functions\expect('wp_schedule_event')->never();
+        expect('wp_next_scheduled')->once()->with('fwp_indexer')->andReturn(1700000000);
+        expect('wp_schedule_event')->never();
 
         \register_hourly_fwp_indexer();
 

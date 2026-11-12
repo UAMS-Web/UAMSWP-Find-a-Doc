@@ -8,9 +8,12 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
-use Brain\Monkey\Functions;
 use UAMSWP_FAD_GBP_Logic;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
+
+use function Brain\Monkey\Functions\expect;
+use function Brain\Monkey\Functions\stubEscapeFunctions;
+use function Brain\Monkey\Functions\when;
 
 final class GbpDashboardTest extends UnitTestCase
 {
@@ -18,16 +21,16 @@ final class GbpDashboardTest extends UnitTestCase
     private const NOW = 1793732400;
 
     /** @var array<string, mixed> */
-    private $options = [];
+    private array $options = [];
 
     /** @var array<string, mixed> */
-    private $transients = [];
+    private array $transients = [];
 
     /** @var array<int, array<string, array<string, mixed>>> */
-    private $cron = [];
+    private array $cron = [];
 
     /** @var array<string, string|false> */
-    private $saved_env = [];
+    private array $saved_env = [];
 
     protected function tearDown(): void
     {
@@ -52,15 +55,15 @@ final class GbpDashboardTest extends UnitTestCase
         $this->transients = [];
         $this->cron = [];
 
-        Functions\stubEscapeFunctions();
-        Functions\when('apply_filters')->alias(fn (string $hook, $value) => $value);
-        Functions\when('get_option')->alias(fn (string $name, $default = false) => $this->options[$name] ?? $default);
-        Functions\when('get_transient')->alias(fn (string $key) => $this->transients[$key] ?? false);
-        Functions\when('_get_cron_array')->alias(fn () => $this->cron);
-        Functions\when('home_url')->justReturn('https://uamshealth.com');
-        Functions\when('wp_parse_url')->alias('parse_url');
-        Functions\when('admin_url')->alias(fn (string $path = '') => 'https://example.test/wp-admin/'.$path);
-        Functions\when('add_query_arg')->alias(fn (string $key, string $value, string $url) => $url.'&'.$key.'='.$value);
+        stubEscapeFunctions();
+        when('apply_filters')->alias(fn (string $hook, $value) => $value);
+        when('get_option')->alias(fn (string $name, $default = false) => $this->options[$name] ?? $default);
+        when('get_transient')->alias(fn (string $key) => $this->transients[$key] ?? false);
+        when('_get_cron_array')->alias(fn () => $this->cron);
+        when('home_url')->justReturn('https://uamshealth.com');
+        when('wp_parse_url')->alias('parse_url');
+        when('admin_url')->alias(fn (string $path = '') => 'https://example.test/wp-admin/'.$path);
+        when('add_query_arg')->alias(fn (string $key, string $value, string $url) => $url.'&'.$key.'='.$value);
     }
 
     /**
@@ -141,8 +144,8 @@ final class GbpDashboardTest extends UnitTestCase
 
     public function test_a_budget_of_zero_says_creates_are_disabled_and_draws_no_bar(): void
     {
-        Functions\when('current_user_can')->justReturn(true);
-        Functions\when('apply_filters')->alias(fn (string $hook, $value) => $hook === 'uamswp_fad_gbp_daily_create_budget' ? 0 : $value);
+        when('current_user_can')->justReturn(true);
+        when('apply_filters')->alias(fn (string $hook, $value) => $hook === 'uamswp_fad_gbp_daily_create_budget' ? 0 : $value);
         $this->options['uamswp_fad_gbp_modes'] = ['uams' => 'live'];
 
         ob_start();
@@ -156,7 +159,7 @@ final class GbpDashboardTest extends UnitTestCase
 
     public function test_the_hour_chart_and_the_log_counts_say_what_they_leave_out(): void
     {
-        Functions\when('current_user_can')->justReturn(true);
+        when('current_user_can')->justReturn(true);
         $this->options['uamswp_fad_gbp_modes'] = ['uams' => 'live'];
 
         ob_start();
@@ -236,8 +239,8 @@ final class GbpDashboardTest extends UnitTestCase
     public function test_the_last_seven_days_are_right_across_both_daylight_saving_changes(): void
     {
         // 2026-03-08 has 23 hours and 2026-11-01 has 25 in Los Angeles.
-        $spring = UAMSWP_FAD_GBP_Logic::last_days([], (int) strtotime('2026-03-09 08:00:00 UTC'));
-        $fall = UAMSWP_FAD_GBP_Logic::last_days([], (int) strtotime('2026-11-02 08:00:00 UTC'));
+        $spring = UAMSWP_FAD_GBP_Logic::last_days([], strtotime('2026-03-09 08:00:00 UTC'));
+        $fall = UAMSWP_FAD_GBP_Logic::last_days([], strtotime('2026-11-02 08:00:00 UTC'));
 
         $this->assertSame(['2026-03-03', '2026-03-04', '2026-03-05', '2026-03-06', '2026-03-07', '2026-03-08', '2026-03-09'], array_column($spring, 'day'));
         $this->assertSame(['2026-10-27', '2026-10-28', '2026-10-29', '2026-10-30', '2026-10-31', '2026-11-01', '2026-11-02'], array_column($fall, 'day'));
@@ -246,7 +249,7 @@ final class GbpDashboardTest extends UnitTestCase
     public function test_the_last_day_is_the_pacific_day_not_the_utc_day(): void
     {
         // 06:00 UTC on 2026-11-04 is still the evening of 2026-11-03 in Los Angeles.
-        $days = UAMSWP_FAD_GBP_Logic::last_days(['2026-11-03' => 9], (int) strtotime('2026-11-04 06:00:00 UTC'));
+        $days = UAMSWP_FAD_GBP_Logic::last_days(['2026-11-03' => 9], strtotime('2026-11-04 06:00:00 UTC'));
 
         $this->assertSame('2026-11-03', $days[6]['day']);
         $this->assertSame(9, $days[6]['count']);
@@ -321,7 +324,7 @@ final class GbpDashboardTest extends UnitTestCase
         $this->assertSame([80, 17], array_slice(array_column($data['days'], 'count'), -2));
 
         $this->options['uamswp_fad_gbp_create_count'] = ['day' => '2026-11-02', 'count' => 80];
-        $this->assertSame(0, uamswp_fad_gbp_dashboard_data(self::NOW)['used'], 'yesterday\'s counter is not today\'s');
+        $this->assertSame(0, uamswp_fad_gbp_dashboard_data(self::NOW)['used'], "yesterday's counter is not today's");
     }
 
     public function test_with_the_queue_empty_and_every_silo_off_the_widget_says_off_not_idle(): void
@@ -336,7 +339,7 @@ final class GbpDashboardTest extends UnitTestCase
 
     public function test_the_widget_shows_the_pause_the_bar_and_a_text_figure_for_each_graphic(): void
     {
-        Functions\when('current_user_can')->justReturn(true);
+        when('current_user_can')->justReturn(true);
         $this->options['uamswp_fad_gbp_modes'] = ['uams' => 'live'];
         $this->options['uamswp_fad_gbp_creates_paused_until'] = time() + 7200;
         $this->options['uamswp_fad_gbp_create_count'] = ['day' => UAMSWP_FAD_GBP_Logic::pacific_day(time()), 'count' => 20];
@@ -358,8 +361,8 @@ final class GbpDashboardTest extends UnitTestCase
 
     public function test_a_user_without_the_settings_capability_gets_no_widget_and_no_output(): void
     {
-        Functions\when('current_user_can')->justReturn(false);
-        Functions\expect('wp_add_dashboard_widget')->never();
+        when('current_user_can')->justReturn(false);
+        expect('wp_add_dashboard_widget')->never();
 
         uamswp_fad_gbp_register_dashboard_widget();
 
@@ -371,19 +374,19 @@ final class GbpDashboardTest extends UnitTestCase
 
     public function test_a_user_with_the_capability_gets_the_widget_registered(): void
     {
-        Functions\when('current_user_can')->justReturn(true);
-        Functions\expect('wp_add_dashboard_widget')->once()->with('uamswp_fad_gbp_status', 'Business Profile Sync', 'uamswp_fad_gbp_render_dashboard_widget');
+        when('current_user_can')->justReturn(true);
+        expect('wp_add_dashboard_widget')->once()->with('uamswp_fad_gbp_status', 'Business Profile Sync', 'uamswp_fad_gbp_render_dashboard_widget');
 
         uamswp_fad_gbp_register_dashboard_widget();
     }
 
     public function test_loading_the_dashboard_makes_no_request_to_google(): void
     {
-        Functions\when('current_user_can')->justReturn(true);
-        Functions\expect('wp_remote_request')->never();
-        Functions\expect('wp_remote_get')->never();
-        Functions\expect('wp_remote_post')->never();
-        Functions\expect('uamswp_fad_gbp_transport')->never();
+        when('current_user_can')->justReturn(true);
+        expect('wp_remote_request')->never();
+        expect('wp_remote_get')->never();
+        expect('wp_remote_post')->never();
+        expect('uamswp_fad_gbp_transport')->never();
 
         ob_start();
         uamswp_fad_gbp_render_dashboard_widget();

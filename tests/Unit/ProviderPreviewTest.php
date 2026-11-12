@@ -11,6 +11,9 @@ namespace UamswpFindADoc\Tests\Unit;
 use Brain\Monkey\Functions;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
 
+use function Brain\Monkey\Functions\expect;
+use function Brain\Monkey\Functions\when;
+
 /**
  * ACF swaps the post ID for the latest revision's ID during a preview, and a revision has no row in the
  * provider custom table (class.fad-acf-functions.php turns off the copy into core post meta). The filter
@@ -39,8 +42,8 @@ final class ProviderPreviewTest extends UnitTestCase
 
     public function test_a_providers_revision_id_becomes_the_saved_providers_id(): void
     {
-        Functions\when('wp_is_post_revision')->justReturn(89);
-        Functions\when('get_post_type')->justReturn('provider');
+        when('wp_is_post_revision')->justReturn(89);
+        when('get_post_type')->justReturn('provider');
 
         $this->assertSame(89, uamswp_fad_preview_keep_saved_post_id(412, 89));
         $this->assertSame(89, uamswp_fad_preview_keep_saved_post_id('412', 89), 'ACF can hand the ID over as a string');
@@ -49,8 +52,8 @@ final class ProviderPreviewTest extends UnitTestCase
 
     public function test_the_previewed_post_is_named_by_preview_id_then_p_then_page_id(): void
     {
-        Functions\when('wp_is_post_revision')->justReturn(89);
-        Functions\when('get_post_type')->justReturn('provider');
+        when('wp_is_post_revision')->justReturn(89);
+        when('get_post_type')->justReturn('provider');
 
         $_GET['preview_id'] = '89';
         unset($_GET['p']);
@@ -63,31 +66,31 @@ final class ProviderPreviewTest extends UnitTestCase
 
     public function test_a_revision_of_another_post_is_not_remapped_even_on_a_preview_request(): void
     {
-        Functions\when('wp_is_post_revision')->justReturn(55);
-        Functions\when('get_post_type')->justReturn('provider');
+        when('wp_is_post_revision')->justReturn(55);
+        when('get_post_type')->justReturn('provider');
 
         $this->assertSame(412, uamswp_fad_preview_keep_saved_post_id(412, 55), 'the previewed post is 89, not 55');
     }
 
     public function test_the_saved_post_is_left_alone(): void
     {
-        Functions\when('wp_is_post_revision')->justReturn(false);
-        Functions\expect('get_post_type')->never();
+        when('wp_is_post_revision')->justReturn(false);
+        expect('get_post_type')->never();
 
         $this->assertSame(89, uamswp_fad_preview_keep_saved_post_id(89, 89));
     }
 
     public function test_another_post_types_revision_is_left_to_acf(): void
     {
-        Functions\when('wp_is_post_revision')->justReturn(55);
-        Functions\when('get_post_type')->justReturn('page');
+        when('wp_is_post_revision')->justReturn(55);
+        when('get_post_type')->justReturn('page');
 
         $this->assertSame(412, uamswp_fad_preview_keep_saved_post_id(412, 55));
     }
 
     public function test_an_id_that_is_not_a_post_id_passes_through(): void
     {
-        Functions\expect('wp_is_post_revision')->never();
+        expect('wp_is_post_revision')->never();
 
         $this->assertSame('option', uamswp_fad_preview_keep_saved_post_id('option', 'option'));
         $this->assertSame('term_3', uamswp_fad_preview_keep_saved_post_id('term_3', 'term_3'));
@@ -96,7 +99,7 @@ final class ProviderPreviewTest extends UnitTestCase
     public function test_a_request_that_is_not_a_preview_is_not_looked_up(): void
     {
         unset($_GET['preview']);
-        Functions\expect('wp_is_post_revision')->never();
+        expect('wp_is_post_revision')->never();
 
         $this->assertSame(412, uamswp_fad_preview_keep_saved_post_id(412, 89));
     }

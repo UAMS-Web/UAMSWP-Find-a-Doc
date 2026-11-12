@@ -82,7 +82,7 @@ function uamswp_test_render_template(string $name, array $variables = []): strin
         });
     }
 
-    when('genesis')->justReturn(null);
+    when('genesis')->justReturn();
 
     $render = static function () use ($name, $variables): string {
         extract($variables, EXTR_SKIP);

@@ -31,6 +31,7 @@ function listing_removals(string $variant): array
     if ($variant === 'list') {
         $removals[] = ['genesis_after_header', 'custom_nav_menu', 5];
     }
+
     $removals[] = ['genesis_before_footer', 'genesis_footer_widget_areas'];
     $removals[] = ['genesis_footer', 'genesis_do_footer'];
     $removals[] = ['genesis_footer', 'genesis_footer_markup_open', 5];

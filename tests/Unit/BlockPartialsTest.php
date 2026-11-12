@@ -24,12 +24,10 @@ function block_partials_appointment_stubs(bool $mainLine, ?array $portal): void
     when('esc_url')->returnArg();
     when('esc_attr')->returnArg();
     when('get_term')->alias(static fn (): object => (object) ['slug' => $portal['slug'] ?? '', 'name' => $portal['name'] ?? '']);
-    when('get_field')->alias(static function (string $name) use ($mainLine, $portal): mixed {
-        return match ($name) {
-            'provider_mainline' => $mainLine,
-            'portal_url' => isset($portal['url']) ? ['url' => $portal['url'], 'title' => 'Portal'] : null,
-            default => null,
-        };
+    when('get_field')->alias(static fn (string $name): mixed => match ($name) {
+        'provider_mainline' => $mainLine,
+        'portal_url' => isset($portal['url']) ? ['url' => $portal['url'], 'title' => 'Portal'] : null,
+        default => null,
     });
 }
 

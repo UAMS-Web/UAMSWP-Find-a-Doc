@@ -11,9 +11,11 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
-use Brain\Monkey\Functions;
 use PHPUnit\Framework\Attributes\DataProvider;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
+
+use function Brain\Monkey\Functions\expect;
+use function Brain\Monkey\Functions\when;
 
 final class SettingsPagesTest extends UnitTestCase
 {
@@ -39,16 +41,16 @@ final class SettingsPagesTest extends UnitTestCase
             return;
         }
 
-        Functions\when('acf_add_options_page')->alias(static function (array $page): void {
+        when('acf_add_options_page')->alias(static function (array $page): void {
             self::$pages[] = $page;
         });
-        Functions\when('acf_add_options_sub_page')->alias(static function (array $page): void {
+        when('acf_add_options_sub_page')->alias(static function (array $page): void {
             self::$sub_pages[] = $page;
         });
-        Functions\when('add_action')->alias(static function (string $hook, string $callback): void {
+        when('add_action')->alias(static function (string $hook, string $callback): void {
             self::$actions[] = [$hook, $callback];
         });
-        Functions\when('add_filter')->alias(static function (string $hook, string $callback, int $priority, int $accepted): void {
+        when('add_filter')->alias(static function (string $hook, string $callback, int $priority, int $accepted): void {
             self::$filters[] = [$hook, $callback, $priority, $accepted];
         });
 
@@ -114,16 +116,16 @@ final class SettingsPagesTest extends UnitTestCase
 
     public function test_a_saved_google_key_is_handed_to_acf(): void
     {
-        Functions\when('get_field')->alias(static fn (string $field, string $id): string => $field === 'fad_google_key' && $id === 'option' ? 'KEY-123' : '');
-        Functions\expect('acf_update_setting')->once()->with('google_api_key', 'KEY-123');
+        when('get_field')->alias(static fn (string $field, string $id): string => $field === 'fad_google_key' && $id === 'option' ? 'KEY-123' : '');
+        expect('acf_update_setting')->once()->with('google_api_key', 'KEY-123');
 
         \my_acf_google_key();
     }
 
     public function test_no_google_key_leaves_the_acf_setting_alone(): void
     {
-        Functions\when('get_field')->justReturn('');
-        Functions\expect('acf_update_setting')->never();
+        when('get_field')->justReturn('');
+        expect('acf_update_setting')->never();
 
         \my_acf_google_key();
 

@@ -11,8 +11,10 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
-use Brain\Monkey\Functions;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
+
+use function Brain\Monkey\Functions\expect;
+use function Brain\Monkey\Functions\when;
 
 final class ExpertiseAttributesMetaBoxTest extends UnitTestCase
 {
@@ -31,7 +33,7 @@ final class ExpertiseAttributesMetaBoxTest extends UnitTestCase
         $this->post_before = $_POST;
 
         if (! self::$loaded) {
-            Functions\when('add_action')->alias(static function (string $hook, array $callback): void {
+            when('add_action')->alias(static function (string $hook, array $callback): void {
                 self::$actions[] = [$hook, $callback];
             });
 
@@ -39,12 +41,12 @@ final class ExpertiseAttributesMetaBoxTest extends UnitTestCase
             self::$loaded = true;
         }
 
-        Functions\when('_e')->alias(static function (string $text): void {
+        when('_e')->alias(static function (string $text): void {
             echo $text;
         });
-        Functions\when('__')->returnArg();
-        Functions\when('esc_attr')->returnArg();
-        Functions\when('wp_nonce_field')->alias(static function (string $action, string $name): void {
+        when('__')->returnArg();
+        when('esc_attr')->returnArg();
+        when('wp_nonce_field')->alias(static function (string $action, string $name): void {
             echo '[nonce '.$action.' '.$name.']';
         });
     }
@@ -92,8 +94,8 @@ final class ExpertiseAttributesMetaBoxTest extends UnitTestCase
 
     public function test_replacing_the_box_removes_the_page_attributes_box_and_adds_its_own(): void
     {
-        Functions\expect('remove_meta_box')->once()->with('pageparentdiv', 'expertise', 'side');
-        Functions\expect('add_meta_box')->once()->with(
+        expect('remove_meta_box')->once()->with('pageparentdiv', 'expertise', 'side');
+        expect('add_meta_box')->once()->with(
             'uamsexpertiseparentdiv',
             'Area of Expertise Attributes',
             [$this->box(), 'expertise_attributes_meta_box'],
@@ -107,9 +109,10 @@ final class ExpertiseAttributesMetaBoxTest extends UnitTestCase
 
     public function test_a_flat_post_type_shows_the_sidebar_and_order_fields_only(): void
     {
-        Functions\when('get_post_type_object')->justReturn((object) ['hierarchical' => false]);
-        Functions\when('get_post_meta')->justReturn('');
-        Functions\expect('wp_dropdown_pages')->never();
+        when('get_post_type_object')->justReturn((object) ['hierarchical' => false]);
+        when('get_post_meta')->justReturn('');
+
+        expect('wp_dropdown_pages')->never();
 
         $html = $this->render((object) ['ID' => 5, 'post_type' => 'expertise', 'post_parent' => 0, 'menu_order' => 3]);
 
@@ -124,8 +127,8 @@ final class ExpertiseAttributesMetaBoxTest extends UnitTestCase
 
     public function test_a_stored_sidebar_flag_checks_the_box_and_is_echoed(): void
     {
-        Functions\when('get_post_type_object')->justReturn(null);
-        Functions\expect('get_post_meta')->once()->with(5, 'sidebar', true)->andReturn('on');
+        when('get_post_type_object')->justReturn();
+        expect('get_post_meta')->once()->with(5, 'sidebar', true)->andReturn('on');
 
         $html = $this->render((object) ['ID' => 5, 'post_type' => 'expertise', 'post_parent' => 0, 'menu_order' => 0]);
 
@@ -135,9 +138,9 @@ final class ExpertiseAttributesMetaBoxTest extends UnitTestCase
 
     public function test_a_hierarchical_post_type_shows_the_parent_dropdown(): void
     {
-        Functions\when('get_post_type_object')->justReturn((object) ['hierarchical' => true]);
-        Functions\when('get_post_meta')->justReturn('');
-        Functions\expect('wp_dropdown_pages')->once()->with([
+        when('get_post_type_object')->justReturn((object) ['hierarchical' => true]);
+        when('get_post_meta')->justReturn('');
+        expect('wp_dropdown_pages')->once()->with([
             'post_type' => 'expertise',
             'exclude_tree' => 5,
             'selected' => 9,
@@ -156,9 +159,9 @@ final class ExpertiseAttributesMetaBoxTest extends UnitTestCase
 
     public function test_a_hierarchical_post_type_with_no_pages_shows_no_parent_dropdown(): void
     {
-        Functions\when('get_post_type_object')->justReturn((object) ['hierarchical' => true]);
-        Functions\when('get_post_meta')->justReturn('');
-        Functions\when('wp_dropdown_pages')->justReturn('');
+        when('get_post_type_object')->justReturn((object) ['hierarchical' => true]);
+        when('get_post_meta')->justReturn('');
+        when('wp_dropdown_pages')->justReturn('');
 
         $html = $this->render((object) ['ID' => 5, 'post_type' => 'expertise', 'post_parent' => 0, 'menu_order' => 0]);
 
@@ -168,8 +171,8 @@ final class ExpertiseAttributesMetaBoxTest extends UnitTestCase
 
     public function test_a_page_gets_the_help_hint(): void
     {
-        Functions\when('get_post_type_object')->justReturn(null);
-        Functions\when('get_post_meta')->justReturn('');
+        when('get_post_type_object')->justReturn();
+        when('get_post_meta')->justReturn('');
 
         $html = $this->render((object) ['ID' => 5, 'post_type' => 'page', 'post_parent' => 0, 'menu_order' => 0]);
 
@@ -178,9 +181,10 @@ final class ExpertiseAttributesMetaBoxTest extends UnitTestCase
 
     public function test_saving_another_post_type_changes_nothing_and_returns_the_id(): void
     {
-        Functions\when('get_post_type')->justReturn('page');
-        Functions\when('get_post_status')->justReturn('publish');
-        Functions\expect('update_post_meta')->never();
+        when('get_post_type')->justReturn('page');
+        when('get_post_status')->justReturn('publish');
+
+        expect('update_post_meta')->never();
         $_POST = ['sidebar_name' => 'n', 'sidebarcheck' => 'on'];
 
         $this->assertSame(12, $this->box()->save_postdata(12));
@@ -188,20 +192,20 @@ final class ExpertiseAttributesMetaBoxTest extends UnitTestCase
 
     public function test_the_id_defaults_to_zero_and_a_numeric_string_is_cast(): void
     {
-        Functions\expect('get_post_type')->once()->with(0)->andReturn('page');
-        Functions\when('get_post_status')->justReturn(false);
+        expect('get_post_type')->once()->with(0)->andReturn('page');
+        when('get_post_status')->justReturn(false);
         $this->assertSame(0, $this->box()->save_postdata());
 
-        Functions\expect('get_post_type')->once()->with(15)->andReturn('page');
+        expect('get_post_type')->once()->with(15)->andReturn('page');
         $this->assertSame(15, $this->box()->save_postdata('15'));
     }
 
     public function test_a_checked_sidebar_box_is_stored(): void
     {
-        Functions\when('get_post_type')->justReturn('expertise');
-        Functions\when('get_post_status')->justReturn('publish');
-        Functions\expect('check_admin_referer')->once()->with('sidebar_nonce', 'sidebar_name')->andReturn(true);
-        Functions\expect('update_post_meta')->once()->with(12, 'sidebar', 'on');
+        when('get_post_type')->justReturn('expertise');
+        when('get_post_status')->justReturn('publish');
+        expect('check_admin_referer')->once()->with('sidebar_nonce', 'sidebar_name')->andReturn(true);
+        expect('update_post_meta')->once()->with(12, 'sidebar', 'on');
         $_POST = ['sidebar_name' => 'n', 'sidebarcheck' => 'on'];
 
         $this->assertSame(12, $this->box()->save_postdata(12));
@@ -209,10 +213,10 @@ final class ExpertiseAttributesMetaBoxTest extends UnitTestCase
 
     public function test_an_unchecked_sidebar_box_clears_the_flag(): void
     {
-        Functions\when('get_post_type')->justReturn('expertise');
-        Functions\when('get_post_status')->justReturn('publish');
-        Functions\when('check_admin_referer')->justReturn(true);
-        Functions\expect('update_post_meta')->once()->with(12, 'sidebar', null);
+        when('get_post_type')->justReturn('expertise');
+        when('get_post_status')->justReturn('publish');
+        when('check_admin_referer')->justReturn(true);
+        expect('update_post_meta')->once()->with(12, 'sidebar', null);
         $_POST = ['sidebar_name' => 'n'];
 
         $this->box()->save_postdata(12);
@@ -220,10 +224,11 @@ final class ExpertiseAttributesMetaBoxTest extends UnitTestCase
 
     public function test_a_failed_sidebar_nonce_stores_nothing(): void
     {
-        Functions\when('get_post_type')->justReturn('expertise');
-        Functions\when('get_post_status')->justReturn('publish');
-        Functions\when('check_admin_referer')->justReturn(false);
-        Functions\expect('update_post_meta')->never();
+        when('get_post_type')->justReturn('expertise');
+        when('get_post_status')->justReturn('publish');
+        when('check_admin_referer')->justReturn(false);
+
+        expect('update_post_meta')->never();
         $_POST = ['sidebar_name' => 'n', 'sidebarcheck' => 'on'];
 
         $this->box()->save_postdata(12);
@@ -233,10 +238,12 @@ final class ExpertiseAttributesMetaBoxTest extends UnitTestCase
 
     public function test_a_save_without_the_sidebar_nonce_field_checks_nothing(): void
     {
-        Functions\when('get_post_type')->justReturn('expertise');
-        Functions\when('get_post_status')->justReturn('publish');
-        Functions\expect('check_admin_referer')->never();
-        Functions\expect('update_post_meta')->never();
+        when('get_post_type')->justReturn('expertise');
+        when('get_post_status')->justReturn('publish');
+
+        expect('check_admin_referer')->never();
+        expect('update_post_meta')->never();
+
         $_POST = ['sidebarcheck' => 'on'];
 
         $this->box()->save_postdata(12);
@@ -246,10 +253,10 @@ final class ExpertiseAttributesMetaBoxTest extends UnitTestCase
 
     public function test_a_checked_parent_box_is_stored(): void
     {
-        Functions\when('get_post_type')->justReturn('expertise');
-        Functions\when('get_post_status')->justReturn('publish');
-        Functions\expect('check_admin_referer')->once()->with('parent_nonce', 'parent_name')->andReturn(true);
-        Functions\expect('update_post_meta')->once()->with(12, 'parent', 'yes');
+        when('get_post_type')->justReturn('expertise');
+        when('get_post_status')->justReturn('publish');
+        expect('check_admin_referer')->once()->with('parent_nonce', 'parent_name')->andReturn(true);
+        expect('update_post_meta')->once()->with(12, 'parent', 'yes');
         $_POST = ['parent_name' => 'n', 'parentcheck' => 'yes'];
 
         $this->box()->save_postdata(12);
@@ -257,10 +264,10 @@ final class ExpertiseAttributesMetaBoxTest extends UnitTestCase
 
     public function test_an_unchecked_parent_box_clears_the_value(): void
     {
-        Functions\when('get_post_type')->justReturn('expertise');
-        Functions\when('get_post_status')->justReturn('publish');
-        Functions\when('check_admin_referer')->justReturn(true);
-        Functions\expect('update_post_meta')->once()->with(12, 'parent', null);
+        when('get_post_type')->justReturn('expertise');
+        when('get_post_status')->justReturn('publish');
+        when('check_admin_referer')->justReturn(true);
+        expect('update_post_meta')->once()->with(12, 'parent', null);
         $_POST = ['parent_name' => 'n'];
 
         $this->box()->save_postdata(12);
@@ -268,10 +275,11 @@ final class ExpertiseAttributesMetaBoxTest extends UnitTestCase
 
     public function test_a_failed_parent_nonce_stores_nothing(): void
     {
-        Functions\when('get_post_type')->justReturn('expertise');
-        Functions\when('get_post_status')->justReturn('publish');
-        Functions\when('check_admin_referer')->justReturn(false);
-        Functions\expect('update_post_meta')->never();
+        when('get_post_type')->justReturn('expertise');
+        when('get_post_status')->justReturn('publish');
+        when('check_admin_referer')->justReturn(false);
+
+        expect('update_post_meta')->never();
         $_POST = ['parent_name' => 'n', 'parentcheck' => 'yes'];
 
         $this->box()->save_postdata(12);

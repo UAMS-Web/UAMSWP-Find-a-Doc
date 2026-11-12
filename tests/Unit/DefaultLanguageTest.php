@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 use Brain\Monkey\Functions;
 
+use function Brain\Monkey\Functions\when;
+
 require_once __DIR__.'/../Support/acf-functions.php';
 
 test('it is hooked to the provider languages load_value filter at priority 20 with three arguments', function (): void {
@@ -18,7 +20,7 @@ test('it is hooked to the provider languages load_value filter at priority 20 wi
 
 test('it returns the value untouched unless the post is an auto-draft', function (mixed $stored, string|false $status): void {
     uamswp_test_acf_functions();
-    Functions\when('get_post_status')->justReturn($status);
+    when('get_post_status')->justReturn($status);
     Functions\expect('get_term_by')->never();
 
     expect(set_default_language($stored, 123, ['key' => 'field_physician_languages']))->toBe($stored);
@@ -32,7 +34,7 @@ test('it returns the value untouched unless the post is an auto-draft', function
 
 test('it returns a non-empty value untouched even on an auto-draft', function (mixed $stored): void {
     uamswp_test_acf_functions();
-    Functions\when('get_post_status')->justReturn('auto-draft');
+    when('get_post_status')->justReturn('auto-draft');
     Functions\expect('get_term_by')->never();
 
     expect(set_default_language($stored, 123, []))->toBe($stored);
@@ -56,9 +58,9 @@ test('it seeds the English term ID, as an integer, in a list on an auto-draft wi
 
 test('it leaves the value as it is, with no warning, when there is no english term', function (mixed $term): void {
     uamswp_test_acf_functions();
-    Functions\when('get_post_status')->justReturn('auto-draft');
-    Functions\when('get_term_by')->justReturn($term);
-    Functions\when('is_wp_error')->alias(fn ($value): bool => $value instanceof stdClass && isset($value->errors));
+    when('get_post_status')->justReturn('auto-draft');
+    when('get_term_by')->justReturn($term);
+    when('is_wp_error')->alias(fn ($value): bool => $value instanceof stdClass && isset($value->errors));
 
     $result = 'unset';
     $warnings = uamswp_test_capture_warnings(function () use (&$result): void {
