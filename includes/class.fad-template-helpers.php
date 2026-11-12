@@ -188,7 +188,7 @@ function be_remove_title_from_single_crumb($crumb, $args): string // Because BE 
 
     // Genesis outputs the filtered crumb as raw HTML, so escape the provider
     // name (a plain-text ACF field, not kses-filtered).
-    return substr($crumb, 0, (int) strrpos($crumb, (string) uamswp_fad_str($args['sep']))).uamswp_fad_str($args['sep']).uamswp_provider_name_html($full_name);
+    return substr($crumb, 0, (int) strrpos($crumb, uamswp_fad_str($args['sep']))).uamswp_fad_str($args['sep']).uamswp_provider_name_html($full_name);
 }
 
 /**
