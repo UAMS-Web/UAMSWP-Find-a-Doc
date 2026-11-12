@@ -73,10 +73,10 @@ if ($override_parent_photo && $parent_location && $override_parent_photo_gallery
 }
 
 $location_images = [];
-if ($wayfinding_photo && ! empty($wayfinding_photo)) {
+if ($wayfinding_photo) {
     $location_images[] = $wayfinding_photo;
 }
-if ($photo_gallery && ! empty($photo_gallery)) {
+if ($photo_gallery) {
     foreach ($photo_gallery as $photo_gallery_image) {
         $location_images[] = $photo_gallery_image;
     }
@@ -100,7 +100,7 @@ if (function_exists('bis_get_attachment_image') && ! empty($schema_image)) {
     $locationphoto = image_sizer($schema_image, 640, 480, 'center', 'center', 'aspect-4-3');
 } else {
     $locationphoto = wp_get_attachment_image_src($schema_image, 'large');
-    if ($locationphoto && is_array($locationphoto)) {
+    if (is_array($locationphoto)) {
         $locationphoto = $locationphoto[0];
     }
 }
@@ -160,7 +160,7 @@ $telemed_modified_hours247 = $location_hours_group['location_telemed_modified_ho
 $telemed_info = get_field('location_telemed_descr_system', 'option'); // System-wide information about telemedicine at locations
 
 $afterhours_system = get_field('location_afterhours_descr_system', 'option'); // System-wide information about telemedicine at locations
-$afterhours_system = (isset($afterhours_system) && ! empty($afterhours_system)) ? $afterhours_system : '<p>If you are in need of urgent or emergency care, call 911 or go to your nearest emergency department at your local hospital.</p>'; // System-wide information about telemedicine at locations
+$afterhours_system = empty($afterhours_system) ? '<p>If you are in need of urgent or emergency care, call 911 or go to your nearest emergency department at your local hospital.</p>' : $afterhours_system; // System-wide information about telemedicine at locations
 
 // Set alert values
 
@@ -177,27 +177,27 @@ $location_alert_color_local = get_field('location_alert_color');
 
 $location_alert_title = $location_alert_title_sys;
 
-if (! empty($location_alert_title_local) && $location_alert_modification == 'override') {
+if (! empty($location_alert_title_local) && $location_alert_modification === 'override') {
     $location_alert_title = $location_alert_title_local;
 }
 
 $location_alert_color = $location_alert_color_sys;
 
-if ($location_alert_modification == 'override' && $location_alert_color_local != 'inherit') {
+if ($location_alert_modification === 'override' && $location_alert_color_local !== 'inherit') {
     $location_alert_color = $location_alert_color_local;
 }
 
 $location_alert_text = $location_alert_text_sys;
 
-if ($location_alert_modification == 'override' && ! empty($location_alert_text_local)) {
+if ($location_alert_modification === 'override' && ! empty($location_alert_text_local)) {
     $location_alert_text = $location_alert_text_local;
-} elseif ($location_alert_modification == 'prepend' && ! empty($location_alert_text_local)) {
+} elseif ($location_alert_modification === 'prepend' && ! empty($location_alert_text_local)) {
     $location_alert_text = $location_alert_text_local.$location_alert_text_sys;
-} elseif ($location_alert_modification == 'append' && ! empty($location_alert_text_local)) {
+} elseif ($location_alert_modification === 'append' && ! empty($location_alert_text_local)) {
     $location_alert_text = $location_alert_text_sys.$location_alert_text_local;
 }
 
-if ($location_alert_modification == 'suppress') {
+if ($location_alert_modification === 'suppress') {
     $location_alert_suppress = true;
     $location_alert_title = '';
     $location_alert_text = '';

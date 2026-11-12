@@ -18,7 +18,7 @@ require_once __DIR__.'/templates.php';
  * @param  array<string, mixed>  $options  The stubs: `fields_by_id` (post id => its ACF fields), `terms` (id => name),
  *                                         `titles` (id => title), `posts` (id => post object), `rows` (repeater
  *                                         name => rows), `queries` (the post lists the template's queries find, in
- *                                         order), `objects` (field name => field object), `thumbnail`, `pages`
+ *                                         order), `objects` (field name => field object), `thumbnail` (and `parent_thumbnail`, read through the source id), `pages`
  *                                         (the child pages found), `option` (the ACF fields of the options page) and
  *                                         `meta` (the post meta by key).
  * @return array<string, mixed>
@@ -73,7 +73,8 @@ function single_location(array $fields = [], array $options = []): array
     when('get_the_permalink')->alias(static fn (mixed $id = 0): string => 'https://example.test/p/'.$id.'/');
     when('get_permalink')->alias(static fn (mixed $id = 0): string => 'https://example.test/p/'.$id.'/');
     when('get_post_meta')->alias(static fn (mixed $id, string $key = '', bool $single = false): mixed => $meta[$key] ?? '');
-    when('get_post_thumbnail_id')->justReturn($options['thumbnail'] ?? 0);
+    // Called with no id it is the featured image of the location itself; called with the source id it is the parent's.
+    when('get_post_thumbnail_id')->alias(static fn (mixed $id = null): mixed => $id === null ? ($options['thumbnail'] ?? 0) : ($options['parent_thumbnail'] ?? $options['thumbnail'] ?? 0));
     when('wp_get_attachment_image_src')->alias(static fn (mixed $id, string $size = ''): array|false => $id ? ['https://example.test/img-'.$id.'.jpg', 640, 480] : false);
     when('wp_get_attachment_image_url')->alias(static fn (mixed $id, string $size = ''): string => 'https://example.test/img-'.$id.'-'.$size.'.jpg');
     when('image_sizer')->alias(static fn (mixed $id, int $width, int $height): string => 'https://example.test/photo-'.$width.'x'.$height.'.jpg');
