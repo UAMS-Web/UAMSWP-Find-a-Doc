@@ -62,12 +62,6 @@ if (empty($excerpt)) {
     }
 }
 // Use SeoPress hook for meta description
-function sp_titles_desc($html)
-{
-    global $excerpt;
-
-    return $excerpt;
-}
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
 get_header();

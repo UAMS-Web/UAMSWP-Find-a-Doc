@@ -1,34 +1,8 @@
 <?php /* Template Name: Conditions Archive */
 
-function uams_default_page_body_class($classes)
-{
-
-    $classes[] = 'page-template-default';
-
-    return $classes;
-}
 add_filter('body_class', 'uams_default_page_body_class');
 
 add_filter('terms_clauses', 'uamswp_terms_clauses', 10, 3);
-function uamswp_terms_clauses($clauses, $taxonomies, $args)
-{
-    // Search for terms with the first letter
-    global $wpdb;
-
-    if (! isset($args['__first_letter'])) {
-        return $clauses;
-    }
-
-    if (is_numeric($args['__first_letter'])) {
-        $clauses['where'] .= ' AND '.$wpdb->prepare('t.name REGEXP %s', '^[0-9]');
-    } else {
-        $clauses['where'] .= ' AND '.$wpdb->prepare('t.name LIKE %s', $wpdb->esc_like($args['__first_letter']).'%');
-    }
-
-    return $clauses;
-
-}
-
 $condition_title = get_field('conditions_archive_headline', 'option');
 $condition_text = get_field('conditions_archive_intro_text', 'option');
 

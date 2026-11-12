@@ -20,6 +20,7 @@ function bootstrap(): void
     include_once __DIR__.'/class.fad-settings.php';
     // include_once (__DIR__ . '/class.fad-expertise-attributes-meta-box.php' ); // Not used in 2020
     include_once __DIR__.'/class.fad-templates.php';
+    include_once __DIR__.'/class.fad-template-helpers.php'; // Callbacks several page templates share
     include_once __DIR__.'/class.fad-acf-functions.php'; // ACF specific functions
     include_once __DIR__.'/class.fad-acf-table-map-notice.php'; // Admin notice when the custom table cache disagrees with the table JSON
     include_once __DIR__.'/class.fad-provider-nullable-fields.php'; // Keep unanswered provider fields empty in the custom table

@@ -43,11 +43,6 @@ remove_action('genesis_before_header', 'uamswp_skip_links', 5);
 
 // Dequeue Skip Links Script
 add_action('wp_enqueue_scripts', 'child_dequeue_skip_links');
-function child_dequeue_skip_links(): void
-{
-    wp_dequeue_script('skip-links');
-}
-
 remove_action('wp_enqueue_scripts', 'uamswp_theme_scripts');
 
 add_filter('wp_nav_menu', '__return_false');

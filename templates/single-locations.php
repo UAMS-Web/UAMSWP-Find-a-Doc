@@ -273,12 +273,6 @@ $args = ([
 $resource_query = new WP_Query($args);
 
 // Override theme's method of defining the meta description
-function sp_titles_desc($html)
-{
-    global $excerpt;
-
-    return $excerpt;
-}
 add_filter('seopress_titles_desc', 'sp_titles_desc');
 
 // Override theme's method of defining the page title
