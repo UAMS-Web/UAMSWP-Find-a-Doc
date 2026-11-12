@@ -30,6 +30,8 @@ function bootstrap(): void
     include_once __DIR__.'/class.fad-dead-link-cleanup.php'; // Admin screen: remove dead links and orphan custom-table rows left by earlier deletes
     include_once __DIR__.'/class.fad-fwp-functions.php'; // FacetWP specific functions
     include_once __DIR__.'/class.fad-functions.php';
+    include_once __DIR__.'/class.fad-single-expertise.php'; // Callbacks of the single-expertise template
+    include_once __DIR__.'/class.fad-single-clinical-resource.php'; // Callbacks of the single-clinical-resource template
     include_once __DIR__.'/class.fad-settings-pages.php';
     include_once __DIR__.'/class.fad-acf-blocks.php';
     include_once __DIR__.'/class.fad-gmb-settings-page.php';
