@@ -393,3 +393,18 @@ test('the providers block prints only the placeholder for a new block in the edi
     expect($output)->toContain('uams-block-placeholder')
         ->and($output)->not->toContain('provider-list');
 });
+
+test('the provider card loop prints a card for each post of the main loop, and nothing without posts', function (): void {
+    provider_blocks_world(['physician_first_name:81' => 'Jo', 'physician_last_name:81' => 'Smith', 'physician_first_name:82' => 'Al', 'physician_last_name:82' => 'Jones']);
+    uamswp_test_main_loop([81, 82]);
+
+    $output = uamswp_test_include_partial('fwp/physician-loop-card');
+
+    expect(substr_count($output, '<div class="card">'))->toBe(2)
+        ->and($output)->toContain('<span class="name">Jo Smith</span>')
+        ->and($output)->toContain('<span class="name">Al Jones</span>');
+
+    uamswp_test_main_loop([]);
+
+    expect(trim(uamswp_test_include_partial('fwp/physician-loop-card')))->toBe('');
+});

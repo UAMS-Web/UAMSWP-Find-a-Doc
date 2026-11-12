@@ -17,7 +17,7 @@ require_once __DIR__.'/../Support/templates.php';
  * @param  array<string, mixed>  $fields  The ACF fields by name; `name:id` keys win for one post.
  * @param  array<string, mixed>  $options  `titles` (id => title), `statuses` (id => status), `thumbnail` (the
  *                                         featured image id, 0 for none), `alts` (image id => alt text),
- *                                         `excerpt`, `content`, `prefixes` (provider id => prefix) and `page`.
+ *                                         `excerpt`, `content`, `prefixes` (provider id => prefix), `page` and `partial` (the partial to include).
  */
 function resource_card(array $fields = [], array $options = []): string
 {
@@ -47,7 +47,7 @@ function resource_card(array $fields = [], array $options = []): string
     when('image_sizer')->alias(static fn (mixed $image, int $width, int $height, string $x, string $y, string $class): string => 'sized-'.$image.'-'.$width.'x'.$height.'-'.$class);
     when('uamswp_provider_names')->alias(static fn (mixed $id): array => ['prefix' => $prefixes[$id] ?? '']);
 
-    return uamswp_test_include_partial('loops/resource-card', ['id' => 7] + (isset($options['page']) ? ['resource_page' => $options['page']] : []));
+    return uamswp_test_include_partial($options['partial'] ?? 'loops/resource-card', ['id' => 7] + (isset($options['page']) ? ['resource_page' => $options['page']] : []));
 }
 
 test('the single card uses the short title and prints the type beside it', function (): void {
@@ -202,4 +202,23 @@ test('the archive card says Provider for one published provider among several', 
 test('a page value other than archive gives the single card', function (): void {
     expect(resource_card([], ['page' => 'single']))->toContain('<div class="card">')
         ->and(resource_card([], ['page' => '']))->toContain('<div class="card">');
+});
+
+test('the resource loop prints an archive card for each post of the main loop, or a message', function (): void {
+    uamswp_test_main_loop([7, 8]);
+
+    $output = resource_card([], ['partial' => 'fwp/clinical-resource-loop']);
+
+    expect(substr_count($output, '<div class="col item-container">'))->toBe(2)
+        ->and($output)->toContain('<span class="name">Title 7</span>')
+        ->and($output)->toContain('<span class="name">Title 8</span>')
+        ->and($output)->not->toContain('Sorry');
+
+    when('__')->returnArg();
+    when('_e')->alias(static function (string $text): void {
+        echo $text;
+    });
+    uamswp_test_main_loop([]);
+
+    expect(trim(resource_card([], ['partial' => 'fwp/clinical-resource-loop'])))->toBe('<p>Sorry, no resources matched your criteria.</p>');
 });
