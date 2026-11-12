@@ -48,7 +48,8 @@ const UAMSWP_FAD_GBP_ATTENTION_CAP = 1000;
  */
 function uamswp_fad_gbp_silos(): array
 {
-    return apply_filters('uamswp_fad_gbp_silos', [
+    /** @var array<string, array{brand: ?string, accounts: array{provider: string, location: string}}> $silos */
+    $silos = apply_filters('uamswp_fad_gbp_silos', [
         'uams' => [
             'brand' => null,
             'accounts' => ['provider' => 'accounts/112667655000425532878', 'location' => 'accounts/105283038566196415769'],
@@ -62,6 +63,8 @@ function uamswp_fad_gbp_silos(): array
             'accounts' => ['provider' => 'accounts/114902564947343534669', 'location' => 'accounts/107080311706776481588'],
         ],
     ]);
+
+    return $silos;
 }
 
 /**
@@ -223,7 +226,7 @@ function uamswp_fad_gbp_queue_on_publish($new_status, $old_status, $post, ?calla
         return;
     }
 
-    uamswp_fad_gbp_queue_on_save((int) ($post->ID ?? 0), $lookup);
+    uamswp_fad_gbp_queue_on_save(uamswp_fad_int(($post->ID ?? 0)), $lookup);
 }
 
 /**

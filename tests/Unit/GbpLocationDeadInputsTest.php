@@ -110,6 +110,6 @@ final class GbpLocationDeadInputsTest extends UnitTestCase
     {
         $source = (string) file_get_contents($this->root().'/includes/class.fad-gmb-settings-page.php');
 
-        $this->assertStringContainsString("location_hours_group['location_telemed_query']", $source);
+        $this->assertStringContainsString("location_hours_group)['location_telemed_query']", $source);
     }
 }

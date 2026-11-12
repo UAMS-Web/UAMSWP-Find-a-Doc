@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 // register_activation_hook( __FILE__, 'prefix_create_table' );
 
+/** @var wpdb $wpdb */
 global $wpdb;
 // $table_name = $wpdb->prefix.'uams_locations';
 if ($wpdb->get_var("SHOW TABLES LIKE '{$wpdb->prefix}uams_locations'") != "{$wpdb->prefix}uams_locations") {
@@ -15,6 +16,7 @@ if ($wpdb->get_var("SHOW TABLES LIKE '{$wpdb->prefix}uams_locations'") != "{$wpd
     function location_create_table(): void
     {
 
+        /** @var wpdb $wpdb */
         global $wpdb;
 
         if (! class_exists('MB_Custom_Table_API')) {
@@ -114,6 +116,7 @@ add_filter('rwmb_meta_boxes', 'uams_locations_register_meta_boxes');
 function uams_locations_register_meta_boxes($meta_boxes)
 {
 
+    /** @var wpdb $wpdb */
     global $wpdb;
 
     $meta_boxes[] = [
@@ -808,6 +811,7 @@ add_action('rwmb_locations_after_save_post', function ($post_id): void {
     // Get the post ID
     $pid = get_the_ID();
 
+    /** @var wpdb $wpdb */
     global $wpdb;
     $wpdb->update(
         $wpdb->prefix.'posts',

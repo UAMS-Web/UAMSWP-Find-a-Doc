@@ -138,7 +138,7 @@ class UAMSWP_FAD_GBP_Logic
      *
      * @param  array<mixed>  $row  A row from uamswp_fad_gmb_provider_table() or the location builder.
      * @param  array<string,string>  $category_ids  Category display name => `categories/gcid:...` resource name.
-     * @return array<mixed> The desired fields. A field with no value in the row is left out.
+     * @return array<string, mixed> The desired fields. A field with no value in the row is left out.
      */
     public static function fields_from_row(array $row, array $category_ids): array
     {
@@ -255,9 +255,9 @@ class UAMSWP_FAD_GBP_Logic
      * Values are compared after normalization (phone digits only, coordinates to five places,
      * categories by resource name), so formatting differences do not count as changes.
      *
-     * @param  array<mixed>  $desired  Fields from self::fields_from_row().
-     * @param  array<mixed>  $live  The live listing as the API returns it.
-     * @return array<mixed> The subset of $desired that differs. Empty when nothing needs writing.
+     * @param  array<string, mixed>  $desired  Fields from self::fields_from_row().
+     * @param  array<string, mixed>  $live  The live listing as the API returns it.
+     * @return array<string, mixed> The subset of $desired that differs. Empty when nothing needs writing.
      */
     public static function changed_fields(array $desired, array $live): array
     {

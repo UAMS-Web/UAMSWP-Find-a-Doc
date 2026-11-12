@@ -69,7 +69,7 @@ parameters:
     # from 0 upward (see the code-quality skill), then raise it by one per
     # change as findings are fixed, until `max`. Lowering it is a deliberate,
     # argued change, not a quiet edit to get a red run green.
-    level: 9
+    level: 10
 
     excludePaths:
         analyseAndScan:
@@ -165,6 +165,24 @@ parameters:
         -
             identifier: return.void
             reportUnmatched: false
+        # `wpdb::prepare()` is declared to take a literal string, so a query that interpolates a table
+        # name, a column name from a fixed list, or a run of `%d` placeholders sized to its input is
+        # reported even though every value still goes through a placeholder. The dead-link and
+        # delete-cleanup queries are built that way.
+        -
+            identifier: argument.type
+            message: '#^Parameter \#1 \$query of method wpdb::prepare\(\) expects literal-string#'
+            path: includes
+        # The REST payload builders in class.fad-custom-post.php (`get_provider_meta()` and its
+        # siblings) assemble a nested array by assignment (`$data['key'][$i]['field'] = ...`) from ACF
+        # values, which are `mixed`. The shape is the REST response and is decided by ACF data at run
+        # time; a declared shape would only restate each assignment.
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: includes/class.fad-custom-post.php
+        -
+            identifier: offsetAccess.invalidOffset
+            path: includes/class.fad-custom-post.php
         # WordPress, ACF, FacetWP and WP-CLI call a hook callback with a fixed argument list, so a
         # callback that does not need an argument still declares it, and later arguments keep their
         # position. All 46 reports at level 4 are callbacks of that kind.

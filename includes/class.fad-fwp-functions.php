@@ -12,12 +12,12 @@ add_filter('facetwp_is_main_query', function ($is_main_query, $query): bool {
 }, 10, 2);
 
 add_filter('facetwp_shortcode_html', function ($output, $atts) {
-    if (! empty($atts['template']) && ($atts['template'] == 'physician' || $atts['template'] == 'clinical_resources')) { // replace 'example' with name of your template
+    if (! empty(uamswp_fad_arr($atts)['template']) && (uamswp_fad_arr($atts)['template'] == 'physician' || uamswp_fad_arr($atts)['template'] == 'clinical_resources')) { // replace 'example' with name of your template
         /** modify replacement as needed, make sure you keep the facetwp-template class **/
-        $output = str_replace('facetwp-template', 'facetwp-template row list', $output);
+        $output = str_replace('facetwp-template', 'facetwp-template row list', uamswp_fad_str($output));
     }
-    if (! empty($atts['template']) && ($atts['template'] == 'locations' || $atts['template'] == 'expertise')) {
-        return str_replace('facetwp-template', 'facetwp-template card-list', $output);
+    if (! empty(uamswp_fad_arr($atts)['template']) && (uamswp_fad_arr($atts)['template'] == 'locations' || uamswp_fad_arr($atts)['template'] == 'expertise')) {
+        return str_replace('facetwp-template', 'facetwp-template card-list', uamswp_fad_str($output));
     }
 
     return $output;
@@ -81,7 +81,7 @@ function fwp_facet_scripts(): void
 <?php }
 
     if (is_post_type_archive('provider') || is_post_type_archive('location')) {
-        $taxonomy_slug = get_queried_object()->slug ?? '';
+        $taxonomy_slug = uamswp_fad_str(get_queried_object()->slug ?? '');
         ?>
 <script>
 (function($) {
@@ -265,15 +265,16 @@ add_action('wp_footer', 'fwp_facet_scripts', 100);
 
 // fix facets for 'all'
 add_filter('facetwp_preload_url_vars', function ($url_vars) {
+    /** @var array<string, mixed> $url_vars */
     // Remove provider_region if 'all'
-    if (FWP()->helper->get_uri() == 'provider') {
-        if (! empty($url_vars['provider_region']) && ['all'] == $url_vars['provider_region']) {
+    if (FWP()->helper->get_uri() === 'provider') {
+        if (! empty(uamswp_fad_arr($url_vars)['provider_region']) && ['all'] == uamswp_fad_arr($url_vars)['provider_region']) {
             unset($url_vars['provider_region']);
         }
     }
     // Remove location_region if 'all'
-    if (FWP()->helper->get_uri() == 'provider') {
-        if (! empty($url_vars['location_region']) && ['all'] == $url_vars['location_region']) {
+    if (FWP()->helper->get_uri() === 'provider') {
+        if (! empty(uamswp_fad_arr($url_vars)['location_region']) && ['all'] == uamswp_fad_arr($url_vars)['location_region']) {
             unset($url_vars['location_region']);
         }
     }
@@ -283,6 +284,7 @@ add_filter('facetwp_preload_url_vars', function ($url_vars) {
 
 // FacetWP Sort
 add_filter('facetwp_sort_options', function ($options, $params) {
+    /** @var array<string, mixed> $options */
     unset($options['date_desc']);
     unset($options['date_asc']);
     if (is_post_type_archive('provider') || is_singular('provider')) {
@@ -388,8 +390,8 @@ add_filter('facetwp_sort_options', function ($options, $params) {
 
 add_filter('facetwp_pager_html', function ($output, $params): string {
     $output = '';
-    $page = $params['page'];
-    $total_pages = $params['total_pages'];
+    $page = uamswp_fad_int(uamswp_fad_arr($params)['page']);
+    $total_pages = uamswp_fad_int(uamswp_fad_arr($params)['total_pages']);
 
     if ($total_pages > 1) {
 
@@ -445,9 +447,9 @@ add_filter('facetwp_pager_html', function ($output, $params): string {
 
 // Show only Yes values
 add_filter('facetwp_index_row', function ($params, $class) {
-    if ($params['facet_name'] == 'primary_care') {
+    if (uamswp_fad_arr($params)['facet_name'] == 'primary_care') {
         $included_terms = ['Yes'];
-        if (! in_array($params['facet_display_value'], $included_terms)) {
+        if (! in_array(uamswp_fad_arr($params)['facet_display_value'], $included_terms)) {
             return false;
         }
     }
@@ -456,6 +458,7 @@ add_filter('facetwp_index_row', function ($params, $class) {
 }, 10, 2);
 // Turn on FWP Accessibility features
 add_filter('facetwp_assets', function ($assets) {
+    /** @var array<string, mixed> $assets */
     $assets['accessibility.js'] = FACETWP_URL.'/assets/js/src/accessibility.js';
     if (! is_post_type_archive('provider') && ! is_post_type_archive('location') && ! is_post_type_archive('clinical-resource')) {
         $assets['fwp-pager-scroll.js'] = UAMS_FAD_ROOT_URL.'assets/js/fwp-pager-scroll.js';
@@ -466,20 +469,24 @@ add_filter('facetwp_assets', function ($assets) {
 add_filter('facetwp_load_a11y', '__return_true');
 
 add_filter('facetwp_index_row', function ($params, $class) {
+    /** @var array<string, mixed> $params */
     if ($params) {
-        if ($params['facet_name'] == 'resource_provider') {
-            if (! empty($params['facet_value'])) {
-                $post = get_post((int) $params['facet_value']);
+        if (uamswp_fad_arr($params)['facet_name'] == 'resource_provider') {
+            if (! empty(uamswp_fad_arr($params)['facet_value'])) {
+                $post = get_post(uamswp_fad_int(uamswp_fad_arr($params)['facet_value']));
                 $post_id = $post->ID ?? 0;
-                $lastname = get_field('physician_last_name', $post_id);
-                $firstname = get_field('physician_first_name', $post_id);
-                $middlename = get_field('physician_middle_name', $post_id);
+                $lastname = uamswp_fad_str(get_field('physician_last_name', $post_id));
+
+                $firstname = uamswp_fad_str(get_field('physician_first_name', $post_id));
+
+                $middlename = uamswp_fad_str(get_field('physician_middle_name', $post_id));
+
                 $params['facet_value'] = sanitize_title_with_dashes($lastname.' '.$firstname.' '.$middlename); // $post->post_name;
                 $params['facet_display_value'] = get_field('physician_full_name', $post_id);
             }
-        } elseif (in_array($params['facet_name'], ['resource_locations', 'resource_aoe', 'resource_conditions', 'resource_treatments'])) {
-            if (! empty($params['facet_value'])) {
-                $post = get_post((int) $params['facet_value']);
+        } elseif (in_array(uamswp_fad_arr($params)['facet_name'], ['resource_locations', 'resource_aoe', 'resource_conditions', 'resource_treatments'])) {
+            if (! empty(uamswp_fad_arr($params)['facet_value'])) {
+                $post = get_post(uamswp_fad_int(uamswp_fad_arr($params)['facet_value']));
                 $params['facet_value'] = $post->post_name ?? '';
             }
         }

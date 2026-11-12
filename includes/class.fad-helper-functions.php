@@ -341,7 +341,7 @@ function get_taxonomy_archive_link($taxonomy): string
     $tax = get_taxonomy((string) $taxonomy);
     $rewrite = $tax instanceof WP_Taxonomy ? $tax->rewrite : false;
 
-    return '/'.(is_array($rewrite) ? (string) ($rewrite['slug'] ?? '') : '');
+    return '/'.(is_array($rewrite) ? uamswp_fad_str(($rewrite['slug'] ?? '')) : '');
 }
 
 // function uamswp_add_blog_crumb( $crumb, $args ) {
@@ -360,7 +360,7 @@ function get_taxonomy_archive_link($taxonomy): string
 function uamswp_fad_taxonomy_breadcrumbs_crumbs($crumbs)
 {
     if (is_singular('condition') || is_singular('treatment') || is_tax('condition') || is_tax('treatment')) {
-        $taxonomy_name = (string) (get_queried_object()->taxonomy ?? '');
+        $taxonomy_name = uamswp_fad_str((get_queried_object()->taxonomy ?? ''));
         $tax = get_taxonomy($taxonomy_name);
 
         if ($tax instanceof WP_Taxonomy) {
@@ -382,6 +382,7 @@ function uamswp_fad_taxonomy_breadcrumbs_crumbs($crumbs)
 function uamswp_custom_table_query($table_name, $field_name, $query_values)
 {
     // Declare the global wpdb variable
+    /** @var wpdb $wpdb */
     global $wpdb;
 
     $custom_table = $wpdb->prefix.$table_name;
@@ -490,12 +491,14 @@ if (! function_exists('uamswp_provider_names')) {
 
         // Get the elements of the provider's name
 
-        $first_name = get_field('physician_first_name', $provider_id);
-        $middle_name = get_field('physician_middle_name', $provider_id);
-        $last_name = get_field('physician_last_name', $provider_id);
+        $first_name = uamswp_fad_str(get_field('physician_first_name', $provider_id));
+
+        $middle_name = uamswp_fad_str(get_field('physician_middle_name', $provider_id));
+
+        $last_name = uamswp_fad_str(get_field('physician_last_name', $provider_id));
 
         // Generational suffix (e.g., Jr.)
-        $pedigree = get_field('physician_pedigree', $provider_id);
+        $pedigree = uamswp_fad_str(get_field('physician_pedigree', $provider_id));
 
         // Degrees and credentials (e.g., M.D., Ph.D.)
         $degrees = get_field('physician_degree', $provider_id);
@@ -514,21 +517,21 @@ if (! function_exists('uamswp_provider_names')) {
 
         }
 
-        $degree_count = $degrees ? count($degrees) : 0;
+        $degree_count = $degrees ? count(uamswp_fad_arr($degrees)) : 0;
         $degree_list = '';
         $degree_attr_array = [];
         $i = 1;
 
         if ($degrees) {
 
-            foreach ($degrees as $degree) {
+            foreach (uamswp_fad_arr($degrees) as $degree) {
 
-                $degree_term = get_term($degree, 'degree');
+                $degree_term = get_term(uamswp_fad_int($degree), 'degree');
 
                 if (is_object($degree_term)) {
 
                     $degree_name = ($degree_term->name ?? '');
-                    $degree_list .= $degree_name;
+                    $degree_list .= uamswp_fad_str($degree_name);
                     $degree_attr_array[] = uamswp_attr_conversion($degree_name);
 
                     if ($degree_count > $i) {
@@ -645,7 +648,7 @@ if (! function_exists('uamswp_provider_occupation_title')) {
      * @param  int  $provider_id  Provider post ID.
      * @return string Occupation title, or '' when none can be resolved.
      */
-    function uamswp_provider_occupation_title($provider_id)
+    function uamswp_provider_occupation_title($provider_id): string
     {
 
         if (! $provider_id) {
@@ -671,7 +674,7 @@ if (! function_exists('uamswp_provider_occupation_title')) {
 
             if ($provider_specialty) {
 
-                $provider_specialty_term = get_term($provider_specialty, 'clinical_title');
+                $provider_specialty_term = get_term(uamswp_fad_int($provider_specialty), 'clinical_title');
 
                 if (is_object($provider_specialty_term)) {
 
@@ -697,7 +700,7 @@ if (! function_exists('uamswp_provider_occupation_title')) {
 
         }
 
-        return $provider_occupation_title ?: '';
+        return uamswp_fad_str($provider_occupation_title) ?: '';
 
     }
 
@@ -812,7 +815,7 @@ if (! function_exists('uamswp_spotlight_default_excerpt')) {
 
         // Neutralize any markup a provider name might carry: the excerpt is stored
         // in post_excerpt and echoed as plain text in resource cards.
-        $excerpt = wp_strip_all_tags($excerpt);
+        $excerpt = wp_strip_all_tags(uamswp_fad_str($excerpt));
 
         // Match the truncation used by custom_excerpt_acf()
         $excerpt = strlen($excerpt) > 160 ? mb_strimwidth($excerpt, 0, 156, '...') : $excerpt;
@@ -837,7 +840,7 @@ if (! function_exists('uamswp_spotlight_default_intro')) {
      * @param  int  $provider_id  Provider post ID.
      * @return string HTML.
      */
-    function uamswp_spotlight_default_intro($provider_id)
+    function uamswp_spotlight_default_intro($provider_id): string
     {
 
         if (! $provider_id) {
@@ -891,7 +894,7 @@ if (! function_exists('uamswp_spotlight_default_intro')) {
             uamswp_fad_str($pronouns['possessive'])
         );
 
-        return apply_filters('uamswp_spotlight_intro', $intro, $provider_id, $names, $title, $pronouns);
+        return uamswp_fad_str(apply_filters('uamswp_spotlight_intro', $intro, $provider_id, $names, $title, $pronouns));
 
     }
 
@@ -907,10 +910,10 @@ if (! function_exists('uamswp_spotlight_default_questions')) {
      *
      * @return array<mixed> List of question strings.
      */
-    function uamswp_spotlight_default_questions()
+    function uamswp_spotlight_default_questions(): array
     {
 
-        return apply_filters(
+        return uamswp_fad_arr(apply_filters(
             'uamswp_spotlight_default_questions',
             [
                 'What inspired you to work in healthcare?',
@@ -920,7 +923,7 @@ if (! function_exists('uamswp_spotlight_default_questions')) {
                 'What book, podcast, TV show, or activity are you enjoying right now, and why?',
                 'What is one thing on your bucket list?',
             ]
-        );
+        ));
 
     }
 
@@ -947,7 +950,7 @@ if (! function_exists('uamswp_spotlight_appointment_cta')) {
      * @param  int  $provider_id  Published provider post ID.
      * @return string Section markup, filterable via 'uamswp_spotlight_cta'.
      */
-    function uamswp_spotlight_appointment_cta($provider_id)
+    function uamswp_spotlight_appointment_cta($provider_id): string
     {
 
         $names = uamswp_provider_names($provider_id);
@@ -1002,9 +1005,9 @@ if (! function_exists('uamswp_spotlight_appointment_cta')) {
 
                 $tel_link = sprintf(
                     '<a href="tel:%1$s" class="no-break" data-itemtitle="Call to schedule with %2$s">%3$s</a>',
-                    esc_attr($phone_dash),
+                    esc_attr(uamswp_fad_str($phone_dash)),
                     esc_attr(uamswp_fad_str($medium_name_attr)),
-                    esc_html($phone_dash)
+                    esc_html(uamswp_fad_str($phone_dash))
                 );
 
                 $cta_body = $referral.sprintf(
@@ -1063,7 +1066,7 @@ if (! function_exists('uamswp_spotlight_appointment_cta')) {
             $cta_body
         );
 
-        return apply_filters('uamswp_spotlight_cta', $cta, $provider_id, $phone, $names);
+        return uamswp_fad_str(apply_filters('uamswp_spotlight_cta', $cta, $provider_id, $phone, $names));
 
     }
 
@@ -1079,7 +1082,7 @@ if (! function_exists('uamswp_indefinite_article')) {
      * @param  string  $phrase  Phrase the article will precede (e.g. a clinical title).
      * @return string 'a' or 'an'.
      */
-    function uamswp_indefinite_article($phrase)
+    function uamswp_indefinite_article($phrase): string
     {
 
         // Guard the empty string: reading offset [0] of '' raises a PHP 8 warning.
@@ -1125,14 +1128,14 @@ if (! function_exists('uamswp_indefinite_article')) {
 
         if (! empty($indef_article_exceptions)) {
 
-            foreach ($indef_article_exceptions as $exception => $article) {
+            foreach (uamswp_fad_arr($indef_article_exceptions) as $exception => $article) {
 
                 if (
                     substr(
                         strtolower($phrase),
                         0,
-                        strlen($exception)
-                    ) === strtolower($exception)
+                        strlen(uamswp_fad_str($exception))
+                    ) === strtolower(uamswp_fad_str($exception))
                 ) {
 
                     // If the phrase begins with the exception key, use the key's value
@@ -1144,7 +1147,7 @@ if (! function_exists('uamswp_indefinite_article')) {
 
         }
 
-        return $indef_article;
+        return uamswp_fad_str($indef_article);
 
     }
 
@@ -1209,6 +1212,23 @@ function uamswp_fad_post_type_of(mixed $id): string|false
 function uamswp_fad_arr(mixed $value): array
 {
     return is_array($value) ? $value : [];
+}
+
+/**
+ * A value read from post meta, an ACF field, a request or an option, as an array keyed by string.
+ *
+ * An array comes back with its keys read as strings; anything else gives an empty array.
+ *
+ * @return array<string, mixed>
+ */
+function uamswp_fad_assoc(mixed $value): array
+{
+    $out = [];
+    foreach (uamswp_fad_arr($value) as $key => $item) {
+        $out[(string) $key] = $item;
+    }
+
+    return $out;
 }
 
 /**

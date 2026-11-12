@@ -115,6 +115,7 @@ final class UAMSWP_FAD_GBP_Client
         [$status, $raw] = ($this->transport)($method, $url, $headers, $body === null ? null : (string) json_encode($body));
 
         $data = $raw === '' ? [] : json_decode($raw, true);
+        /** @var array<string, mixed> $data */
         $data = is_array($data) ? $data : [];
 
         if ($status < 200 || $status > 299) {
@@ -179,7 +180,7 @@ final class UAMSWP_FAD_GBP_Client
             ]));
 
             foreach ((array) ($data['locations'] ?? []) as $location) {
-                $locations[] = uamswp_fad_arr($location);
+                $locations[] = uamswp_fad_assoc($location);
             }
 
             $page = uamswp_fad_str(($data['nextPageToken'] ?? ''));

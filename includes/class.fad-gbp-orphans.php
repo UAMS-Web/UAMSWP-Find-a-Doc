@@ -38,13 +38,13 @@ function uamswp_fad_gbp_track_unpublish($new_status, $old_status, $post, ?int $n
     }
 
     if ($new_status === 'publish') {
-        delete_post_meta((int) ($post->ID ?? 0), UAMSWP_FAD_GBP_UNPUBLISHED_META);
+        delete_post_meta(uamswp_fad_int(($post->ID ?? 0)), UAMSWP_FAD_GBP_UNPUBLISHED_META);
 
         return;
     }
 
-    if ($old_status === 'publish' && uamswp_fad_str(get_post_meta((int) ($post->ID ?? 0), UAMSWP_FAD_GBP_UNPUBLISHED_META, true)) === '') {
-        update_post_meta((int) ($post->ID ?? 0), UAMSWP_FAD_GBP_UNPUBLISHED_META, gmdate('Y-m-d', $now ?? time()));
+    if ($old_status === 'publish' && uamswp_fad_str(get_post_meta(uamswp_fad_int(($post->ID ?? 0)), UAMSWP_FAD_GBP_UNPUBLISHED_META, true)) === '') {
+        update_post_meta(uamswp_fad_int(($post->ID ?? 0)), UAMSWP_FAD_GBP_UNPUBLISHED_META, gmdate('Y-m-d', $now ?? time()));
     }
 }
 
@@ -127,7 +127,7 @@ function uamswp_fad_gbp_orphan_candidates(?int $now = null, ?callable $locations
             // The stored date is only as fresh as the last live run: check the provider's locations now.
             $current ??= $locations_for($post_id);
 
-            if (in_array((int) $location_id, $current, true)) {
+            if (in_array((int) $location_id, uamswp_fad_arr($current), true)) {
                 continue;
             }
 

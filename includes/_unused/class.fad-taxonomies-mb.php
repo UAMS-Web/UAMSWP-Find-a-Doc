@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 // register_activation_hook( __FILE__, 'prefix_create_table' );
 
+/** @var wpdb $wpdb */
 global $wpdb;
 add_filter('rwmb_meta_boxes', 'uams_taxonomies_register_meta_boxes');
 

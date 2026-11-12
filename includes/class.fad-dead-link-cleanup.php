@@ -89,6 +89,7 @@ function uamswp_dead_links_sources(): array
 function uamswp_dead_links_table_exists(string $table): bool
 {
 
+    /** @var wpdb $wpdb */
     global $wpdb;
 
     return $wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $wpdb->esc_like($wpdb->prefix.$table))) === $wpdb->prefix.$table;
@@ -106,6 +107,7 @@ function uamswp_dead_links_table_exists(string $table): bool
 function uamswp_dead_links_missing(array $ids): array
 {
 
+    /** @var wpdb $wpdb */
     global $wpdb;
 
     $ids = array_values(array_unique(array_filter($ids, fn (int $id): bool => $id > 0)));
@@ -115,7 +117,7 @@ function uamswp_dead_links_missing(array $ids): array
 
         $placeholders = implode(',', array_fill(0, count($chunk), '%d'));
         $found = $wpdb->get_col($wpdb->prepare("SELECT ID FROM {$wpdb->posts} WHERE ID IN ({$placeholders})", $chunk));
-        $existing = array_merge($existing, array_map(intval(...), (array) $found));
+        $existing = array_merge($existing, array_map(uamswp_fad_int(...), (array) $found));
 
     }
 
@@ -160,6 +162,7 @@ function uamswp_dead_links_stored_ids(string $value): array
 function uamswp_dead_links_scan(bool $store = true): array
 {
 
+    /** @var wpdb $wpdb */
     global $wpdb;
 
     $sources = uamswp_dead_links_sources();
@@ -180,7 +183,7 @@ function uamswp_dead_links_scan(bool $store = true): array
 
         foreach ((array) $rows as $row) {
 
-            $reads[] = [(int) $row['post_id'], $field, $shape, uamswp_dead_links_stored_ids((string) $row['meta_value'])];
+            $reads[] = [uamswp_fad_int(uamswp_fad_arr($row)['post_id']), $field, $shape, uamswp_dead_links_stored_ids(uamswp_fad_str(uamswp_fad_arr($row)['meta_value']))];
 
         }
 
@@ -199,7 +202,7 @@ function uamswp_dead_links_scan(bool $store = true): array
 
         foreach ((array) $rows as $row) {
 
-            $reads[] = [(int) $row['post_id'], $field, 'list', uamswp_dead_links_stored_ids((string) $row['links'])];
+            $reads[] = [uamswp_fad_int(uamswp_fad_arr($row)['post_id']), $field, 'list', uamswp_dead_links_stored_ids(uamswp_fad_str(uamswp_fad_arr($row)['links']))];
 
         }
 
@@ -257,8 +260,8 @@ function uamswp_dead_links_scan(bool $store = true): array
 
         foreach ((array) $orphans as $row) {
 
-            $items[] = ['kind' => 'row', 'table' => $table, 'post' => (int) $row['post_id'], 'state' => 'pending'];
-            $rows_backup[$table.'|'.(int) $row['post_id']] = $row;
+            $items[] = ['kind' => 'row', 'table' => $table, 'post' => uamswp_fad_int(uamswp_fad_arr($row)['post_id']), 'state' => 'pending'];
+            $rows_backup[$table.'|'.uamswp_fad_int(uamswp_fad_arr($row)['post_id'])] = $row;
 
         }
 
@@ -296,6 +299,7 @@ function uamswp_dead_links_scan(bool $store = true): array
 function uamswp_dead_links_save(string $option, array $value): bool
 {
 
+    /** @var wpdb $wpdb */
     global $wpdb;
 
     update_option($option, $value, false);
@@ -453,6 +457,7 @@ function uamswp_dead_links_post_exists(int $post_id): bool
 function uamswp_dead_links_apply_step(array $run, int $limit = UAMSWP_DEAD_LINKS_BATCH): array
 {
 
+    /** @var wpdb $wpdb */
     global $wpdb;
 
     $run['status'] = 'applying';
@@ -613,6 +618,7 @@ function uamswp_dead_links_apply_step(array $run, int $limit = UAMSWP_DEAD_LINKS
 function uamswp_dead_links_undo_step(array $run, int $limit = UAMSWP_DEAD_LINKS_BATCH): array
 {
 
+    /** @var wpdb $wpdb */
     global $wpdb;
 
     if ($run['status'] === 'applied') {
