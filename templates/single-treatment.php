@@ -98,7 +98,7 @@ if ($locations && $location_query->have_posts()) {
     foreach ($locations as $location) {
         if (get_post_status($location) == 'publish') {
             $location_valid = true;
-
+            break;
         }
     }
 }
