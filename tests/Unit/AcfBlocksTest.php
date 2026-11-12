@@ -15,7 +15,7 @@ use Brain\Monkey\Functions;
 use PHPUnit\Framework\Attributes\DataProvider;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
 
-require_once __DIR__.'/../Support/acf-functions.php';
+require_once __DIR__.'/../Support/acf-blocks.php';
 
 final class AcfBlocksTest extends UnitTestCase
 {
@@ -31,11 +31,6 @@ final class AcfBlocksTest extends UnitTestCase
     {
         parent::setUp();
 
-        // The ACF functions file is loaded once per process under Brain Monkey's own hook functions, and it
-        // changes what it does when ACF functions exist. Load it before this file defines any, so a test
-        // that sorts later and relies on its registrations sees the same file it always has.
-        \uamswp_test_acf_functions();
-
         Functions\when('__')->returnArg();
         Functions\when('esc_attr')->returnArg();
         Functions\when('esc_url')->returnArg();
@@ -46,14 +41,11 @@ final class AcfBlocksTest extends UnitTestCase
             return;
         }
 
-        Functions\when('acf_add_local_field_group')->alias(static function (array $group): void {
-            self::$groups[] = $group;
-        });
-        Functions\when('add_action')->alias(static function (string $hook, string $callback): void {
-            self::$actions[] = [$hook, $callback];
-        });
-
-        require_once dirname(__DIR__, 2).'/includes/class.fad-acf-blocks.php';
+        // The file loads once per process, from whichever test asks first, with its registrations kept. Other
+        // tests load it too, because the block templates call a helper it declares.
+        $registered = \uamswp_test_acf_blocks_file();
+        self::$groups = $registered['groups'];
+        self::$actions = $registered['actions'];
         self::$loaded = true;
     }
 
