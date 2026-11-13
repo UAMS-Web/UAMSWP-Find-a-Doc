@@ -85,7 +85,7 @@ class UAMS_Expertise_Attributes_Meta_Box
 
     <p><label class="screen-reader-text" for="menu_order"><?php _e('Order') ?></label><input name="menu_order" type="text" size="4" id="menu_order" value="<?php echo esc_attr((string) $post->menu_order) ?>" /></p>
 
-    <p><?php if ($post->post_type == 'page') {
+    <p><?php if ($post->post_type === 'page') {
         _e('Need help? Use the Help tab in the upper right of your screen.');
     } ?></p>
 
@@ -103,8 +103,7 @@ class UAMS_Expertise_Attributes_Meta_Box
     {
         $post_ID = uamswp_fad_int($post_ID);
         $post_type = get_post_type($post_ID);
-        get_post_status($post_ID);
-        if ($post_type != 'expertise') {
+        if ($post_type !== 'expertise') {
             return $post_ID;
         }
 
