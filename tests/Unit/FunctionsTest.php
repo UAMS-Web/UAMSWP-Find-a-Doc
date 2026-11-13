@@ -243,6 +243,16 @@ final class FunctionsTest extends UnitTestCase
         $this->assertSame(['Original content', 'Original content', 'Original content'], [$results[1]->content, $results[2]->content, $results[3]->content]);
     }
 
+    public function test_a_first_result_that_is_not_a_provider_starts_with_no_name_or_bio(): void
+    {
+        $this->searchStubs(['12:physician_first_name' => 'Ann', '12:physician_last_name' => 'Lee', '12:physician_short_clinical_bio' => 'Bio'], [12 => 'provider']);
+
+        $results = \asp_custom_link_meta_results([$this->searchResult(13), $this->searchResult(12)]);
+
+        $this->assertSame(['Original title', 'Original content'], [$results[0]->title, $results[0]->content]);
+        $this->assertSame(['Ann Lee', 'Bio'], [$results[1]->title, $results[1]->content]);
+    }
+
     public function test_no_results_come_back_unchanged(): void
     {
         $this->assertSame([], \asp_custom_link_meta_results([]));
@@ -257,8 +267,8 @@ final class FunctionsTest extends UnitTestCase
     {
         $calls = new \ArrayObject;
         foreach (['wp_register_script', 'wp_enqueue_script', 'wp_enqueue_style'] as $function) {
-            when($function)->alias(static function (string $handle, string $src = '', array $deps = [], mixed $version = null) use ($calls, $function): void {
-                $calls[] = [$function, $handle, $src, $deps, $version];
+            when($function)->alias(static function (string $handle, string $src = '', array $deps = [], mixed $version = null, mixed $extra = null) use ($calls, $function): void {
+                $calls[] = [$function, $handle, $src, $deps, $version, $extra];
             });
         }
 
@@ -285,8 +295,8 @@ final class FunctionsTest extends UnitTestCase
             array_merge(...array_fill(0, 3, ['wp_enqueue_script:acf-admin-js', 'wp_enqueue_script:medline-acf-js'])),
             $this->handles($calls)
         );
-        $this->assertSame([UAMS_FAD_ROOT_URL.'admin/js/acf-admin.js', ['jquery'], null], [$calls[0][2], $calls[0][3], $calls[0][4]]);
-        $this->assertSame(UAMS_FAD_ROOT_URL.'admin/js/acf-medline.js', $calls[1][2]);
+        $this->assertSame([UAMS_FAD_ROOT_URL.'admin/js/acf-admin.js', ['jquery'], null, true], [$calls[0][2], $calls[0][3], $calls[0][4], $calls[0][5]]);
+        $this->assertSame([UAMS_FAD_ROOT_URL.'admin/js/acf-medline.js', ['jquery'], null, true], [$calls[1][2], $calls[1][3], $calls[1][4], $calls[1][5]]);
     }
 
     public function test_the_admin_scripts_stay_off_other_screens(): void
@@ -346,11 +356,11 @@ final class FunctionsTest extends UnitTestCase
         \fad_script_register();
 
         $this->assertSame([
-            ['wp_register_script', 'pubmed-api', UAMS_FAD_ROOT_URL.'assets/js/pubmed-api-async.js', ['jquery'], null],
-            ['wp_enqueue_style', 'leaflet-css', UAMS_FAD_ROOT_URL.'assets/leaflet/leaflet.css', [], '1.1'],
-            ['wp_enqueue_script', 'leaflet-js', UAMS_FAD_ROOT_URL.'assets/leaflet/leaflet.js', [], null],
-            ['wp_enqueue_style', 'fad-app-css', UAMS_FAD_ROOT_URL.'assets/css/app.css', [], UAMS_FAD_VERSION],
-            ['wp_enqueue_style', 'fad-css', UAMS_FAD_ROOT_URL.'assets/css/style.css', [], UAMS_FAD_VERSION],
+            ['wp_register_script', 'pubmed-api', UAMS_FAD_ROOT_URL.'assets/js/pubmed-api-async.js', ['jquery'], null, true],
+            ['wp_enqueue_style', 'leaflet-css', UAMS_FAD_ROOT_URL.'assets/leaflet/leaflet.css', [], '1.1', 'all'],
+            ['wp_enqueue_script', 'leaflet-js', UAMS_FAD_ROOT_URL.'assets/leaflet/leaflet.js', [], null, false],
+            ['wp_enqueue_style', 'fad-app-css', UAMS_FAD_ROOT_URL.'assets/css/app.css', [], UAMS_FAD_VERSION, 'all'],
+            ['wp_enqueue_style', 'fad-css', UAMS_FAD_ROOT_URL.'assets/css/style.css', [], UAMS_FAD_VERSION, 'all'],
         ], $calls->getArrayCopy());
 
         $calls->exchangeArray([]);
@@ -361,7 +371,7 @@ final class FunctionsTest extends UnitTestCase
         \fad_script_register();
 
         $this->assertSame(
-            ['wp_enqueue_script', 'mobile-filter-toggle', UAMS_FAD_ROOT_URL.'assets/js/mobile-filter-toggle.js', ['jquery'], null],
+            ['wp_enqueue_script', 'mobile-filter-toggle', UAMS_FAD_ROOT_URL.'assets/js/mobile-filter-toggle.js', ['jquery'], null, false],
             $calls[1]
         );
     }
@@ -375,8 +385,8 @@ final class FunctionsTest extends UnitTestCase
         (new \pubmed_field_on_change)->enqueue_script();
 
         $this->assertSame([
-            ['wp_register_script', 'pubmed_field_on_change', UAMS_FAD_ROOT_URL.'/assets/js/acf-pubmed.js', ['acf-input'], null],
-            ['wp_enqueue_script', 'pubmed_field_on_change', '', [], null],
+            ['wp_register_script', 'pubmed_field_on_change', UAMS_FAD_ROOT_URL.'/assets/js/acf-pubmed.js', ['acf-input'], null, null],
+            ['wp_enqueue_script', 'pubmed_field_on_change', '', [], null, null],
         ], $calls->getArrayCopy());
     }
 
@@ -469,7 +479,8 @@ final class FunctionsTest extends UnitTestCase
 
             return array_shift($responses);
         });
-        when('wp_remote_retrieve_response_code')->alias(static fn (mixed $response): int => (int) $response['code']);
+        // The code is returned as given, so a test can hand back text the way a transport may.
+        when('wp_remote_retrieve_response_code')->alias(static fn (mixed $response): mixed => $response['code']);
         when('wp_remote_retrieve_body')->alias(static fn (mixed $response): string => (string) $response['body']);
 
         return $requests;
@@ -523,6 +534,18 @@ final class FunctionsTest extends UnitTestCase
 
         $this->assertSame(['ok' => true], \fetch_pg_api_with_retry('https://example.test/api', 3, 0));
         $this->assertCount(2, $requests);
+    }
+
+    public function test_each_retry_waits_the_delay_times_the_attempt_number(): void
+    {
+        $this->transients(['pg_api_token' => 'tok']);
+        $this->responses(array_fill(0, 5, ['code' => 429, 'body' => '{}']));
+        expect('sleep')->once()->with(6)->ordered();
+        expect('sleep')->once()->with(12)->ordered();
+
+        $result = \fetch_pg_api_with_retry('https://example.test/api', 3, 6);
+
+        $this->assertInstanceOf(\WP_Error::class, $result);
     }
 
     public function test_a_rate_limit_that_never_clears_stops_at_the_retry_limit(): void
@@ -644,6 +667,20 @@ final class FunctionsTest extends UnitTestCase
         \sync_provider_pg_data();
     }
 
+    public function test_a_provider_without_an_npi_does_not_stop_the_providers_after_it(): void
+    {
+        when('usleep')->justReturn();
+        $this->transients(['pg_api_token' => 'tok']);
+        when('get_posts')->justReturn([5, 6]);
+        when('get_field')->alias(static fn (string $field, int $id): mixed => $id === 6 ? '1234567890' : '');
+        when('set_transient')->justReturn(true);
+        when('delete_transient')->justReturn(true);
+        $this->responses([['code' => 200, 'body' => '{"n":2}']]);
+        expect('update_post_meta')->once()->with(6, '_syndicated_api_data', ['n' => 2]);
+
+        \sync_provider_pg_data();
+    }
+
     public function test_each_provider_with_an_npi_is_fetched_and_its_payload_kept(): void
     {
         $this->transients(['pg_api_token' => 'tok']);
@@ -654,6 +691,7 @@ final class FunctionsTest extends UnitTestCase
 
         $requests = $this->responses([['code' => 200, 'body' => '{"status":{"code":"200"},"n":1}']]);
         expect('update_post_meta')->once()->with(5, '_syndicated_api_data', ['status' => ['code' => '200'], 'n' => 1]);
+        expect('usleep')->once()->with(500000);
 
         \sync_provider_pg_data();
 
@@ -665,6 +703,7 @@ final class FunctionsTest extends UnitTestCase
 
     public function test_an_empty_payload_is_not_stored(): void
     {
+        when('usleep')->justReturn();
         $this->transients(['pg_api_token' => 'tok']);
         when('get_posts')->justReturn([5]);
         when('get_field')->justReturn('1234567890');
@@ -678,6 +717,7 @@ final class FunctionsTest extends UnitTestCase
 
     public function test_a_failed_fetch_is_logged_and_the_next_provider_still_runs(): void
     {
+        when('usleep')->justReturn();
         $log = tempnam(sys_get_temp_dir(), 'pglog');
         $this->assertIsString($log);
         ini_set('error_log', $log);
@@ -704,7 +744,8 @@ final class FunctionsTest extends UnitTestCase
         when('get_posts')->justReturn([5, 6]);
         when('get_field')->justReturn('1234567890');
         when('set_transient')->justReturn(true);
-        // The sync uses the fetcher's default pause, so the three limited attempts take about six seconds.
+        // The sync uses the fetcher's default pause of two seconds, grown by the attempt number.
+        expect('sleep')->twice();
         $requests = $this->responses(array_fill(0, 6, ['code' => 429, 'body' => '{}']));
         expect('delete_transient')->once()->with('uamswp_pg_sync_lock');
         expect('update_post_meta')->never();
@@ -750,9 +791,9 @@ final class FunctionsTest extends UnitTestCase
         when('wp_remote_post')->alias(static function (string $url, array $args) use (&$posted): array {
             $posted = [$url, $args];
 
-            return ['code' => 200, 'body' => '{"accessToken":"abc"}'];
+            return ['code' => '200', 'body' => '{"accessToken":"abc"}'];
         });
-        when('wp_remote_retrieve_response_code')->alias(static fn (mixed $response): int => (int) $response['code']);
+        when('wp_remote_retrieve_response_code')->alias(static fn (mixed $response): mixed => $response['code']);
         when('wp_remote_retrieve_body')->alias(static fn (mixed $response): string => (string) $response['body']);
         expect('set_transient')->once()->with('pg_api_token', 'abc', 1500);
 
@@ -839,6 +880,7 @@ final class FunctionsTest extends UnitTestCase
         return [
             'an http 429' => [['code' => 429, 'body' => '{}']],
             'a 429 in the status block' => [['code' => 200, 'body' => '{"status":{"code":429}}']],
+            'a 429 string in the status block' => [['code' => 200, 'body' => '{"status":{"code":"429"}}']],
         ];
     }
 
@@ -890,7 +932,7 @@ final class FunctionsTest extends UnitTestCase
     private function pager(array $post = ['post_id' => '12'], string $type = 'provider', string $status = 'publish', mixed $npi = '1234567890'): void
     {
         $_POST = $post;
-        when('check_ajax_referer')->justReturn(1);
+        expect('check_ajax_referer')->atLeast()->once()->with('pg_pagination_posts', 'nonce')->andReturn(1);
         when('get_post_type')->justReturn($type);
         when('get_post_status')->justReturn($status);
         when('get_field')->justReturn($npi);
@@ -953,6 +995,44 @@ final class FunctionsTest extends UnitTestCase
 
         $this->responses([['code' => 503, 'body' => '{}']]);
         $this->assertPagerError('upstream unavailable|502');
+    }
+
+    public function test_a_status_code_that_arrives_as_text_still_counts_as_ok(): void
+    {
+        $this->pager();
+        $this->transients(['pg_api_token' => 'tok']);
+        $this->responses([['code' => '200', 'body' => '{}']]);
+        expect('wp_die')->once();
+        $this->expectOutputString('');
+
+        \pg_ajax_api();
+    }
+
+    public function test_a_review_with_nothing_filled_in_prints_a_zero_rating_no_comment_and_no_date(): void
+    {
+        $this->pager();
+        $this->transients(['pg_api_token' => 'tok']);
+        // Escaping functions take text, so a rating that is not turned into text first fails here.
+        $text = static fn (mixed $value): string => is_string($value) ? $value : throw new \LogicException('not text');
+        when('esc_attr')->alias($text);
+        when('esc_html')->alias($text);
+
+        $body = json_encode(['data' => ['entities' => [['comments' => [[], ['overallRating' => ['value' => 4], 'comment' => 'Ok']]]]]]);
+        $this->assertIsString($body);
+        $this->responses([['code' => 200, 'body' => $body]]);
+        expect('wp_die')->once();
+
+        ob_start();
+        \pg_ajax_api();
+        $html = (string) ob_get_clean();
+
+        $this->assertStringContainsString('style="width: 0%;"', $html);
+        $this->assertStringContainsString('itemprop="ratingValue">0<span', $html);
+        $this->assertStringContainsString('<p class="card-text"></p>', $html);
+        $this->assertStringContainsString('style="width: 80%;"', $html);
+        $this->assertStringContainsString('itemprop="ratingValue">4<span', $html);
+        $this->assertSame(2, preg_match_all('#<h4 class="sr-only">Date</h4>\s*</div>#', $html), 'neither review has a date to print');
+        $this->assertStringNotContainsString('1970', $html);
     }
 
     public function test_the_reviews_of_the_requested_page_are_printed_as_cards(): void
@@ -1132,6 +1212,16 @@ final class FunctionsTest extends UnitTestCase
 
         $this->termFields(['condition_7:condition_alternate' => 'Alt']);
         $this->assertSame('baseAlt ', \rlv_tax_excerpt_term_fields('base', $term));
+    }
+
+    public function test_either_treatment_field_alone_is_enough(): void
+    {
+        $term = (object) ['term_id' => 9, 'taxonomy' => 'treatment'];
+        $this->termFields(['treatment_9:treatment_procedure_content' => 'Body']);
+        $this->assertSame('base Body', \rlv_tax_excerpt_term_fields('base', $term));
+
+        $this->termFields(['treatment_9:treatment_procedure_alternate' => 'Other']);
+        $this->assertSame('baseOther ', \rlv_tax_excerpt_term_fields('base', $term));
     }
 
     public function test_a_term_with_neither_set_of_fields_keeps_its_content(): void
