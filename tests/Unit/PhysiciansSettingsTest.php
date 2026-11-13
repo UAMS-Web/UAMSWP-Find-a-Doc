@@ -45,13 +45,12 @@ final class PhysiciansSettingsTest extends UnitTestCase
         return $object;
     }
 
-    public function test_the_sections_and_the_options_are_set_up_on_the_admin_hooks(): void
+    public function test_the_options_are_set_up_on_admin_init_and_nothing_is_hooked_to_admin_menu(): void
     {
         $this->assertSame(
-            [['admin_menu', 'setup_sections'], ['admin_init', 'setup_options']],
+            [['admin_init', 'setup_options']],
             array_map(static fn (array $action): array => [$action[0], $action[1][1]], self::$actions)
         );
-        $this->assertSame(self::$actions[0][1][0], self::$actions[1][1][0], 'both hooks call the same object');
     }
 
     public function test_setting_up_the_options_registers_the_search_id_on_the_general_page(): void
@@ -65,16 +64,6 @@ final class PhysiciansSettingsTest extends UnitTestCase
         );
 
         $this->settings()->setup_options();
-    }
-
-    public function test_setting_up_the_sections_adds_no_page_and_no_section(): void
-    {
-        expect('add_settings_section')->never();
-        expect('add_options_page')->never();
-
-        $this->settings()->setup_sections();
-
-        $this->addToAssertionCount(1);
     }
 
     public function test_the_field_shows_the_stored_id(): void
