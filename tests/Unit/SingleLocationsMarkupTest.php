@@ -1182,7 +1182,7 @@ test('the conditions and treatments each write their own structured data items',
 test('the structured data lists the conditions and the treatments under one medicalSpecialty key', function (): void {
     [$fields, $options] = single_location_lists();
     $schema = single_location_schema($fields, $options);
-    $names = array_column(array_filter($schema['medicalSpecialty'], 'is_array'), 'name');
+    $names = array_column(array_filter($schema['medicalSpecialty'], is_array(...)), 'name');
 
     expect($names)->toBe(['Asthma', 'Gout', 'Infusion']);
 });
