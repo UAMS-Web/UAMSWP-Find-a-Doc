@@ -397,14 +397,22 @@ test('the locations section lists the cards of the locations found', function ()
         ->and($output)->toContain('</div><!-- .card --><data id="location_ids" data-postids="21,22," data-regions=","></data></div></div></div></div></div></section>');
 });
 
-test('currently the region of each location is listed as an empty slug, once for each region', function (): void {
+test('the region slug of each location is listed once for each region', function (): void {
     $fields_by_id = [21 => ['location_region' => 5], 22 => ['location_region' => 6], 23 => ['location_region' => 5]];
-    $vars = single_condition(['condition_locations' => [21, 22, 23]], ['found' => ['location' => [21, 22, 23]], 'fields_by_id' => $fields_by_id]);
+    $vars = single_condition(['condition_locations' => [21, 22, 23]], ['found' => ['location' => [21, 22, 23]], 'fields_by_id' => $fields_by_id, 'regions' => [5 => 'north', 6 => 'south']]);
 
-    // get_term_by() returns an object, which the template reads only when it is an array.
+    // The slug used to be read only when the term was an array, which get_term_by() never returns (#1348).
     expect($vars['location_region_IDs'])->toBe([0 => 5, 1 => 6])
-        ->and($vars['location_region_list'])->toBe(['', ''])
-        ->and($vars['single_ontology_output'])->toContain('data-regions=",,"');
+        ->and($vars['location_region_list'])->toBe(['north', 'south'])
+        ->and($vars['single_ontology_output'])->toContain('data-regions="north,south,"');
+});
+
+test('a region term that no longer exists is listed as an empty slug', function (): void {
+    $fields_by_id = [21 => ['location_region' => 5], 22 => ['location_region' => 9]];
+    $vars = single_condition(['condition_locations' => [21, 22]], ['found' => ['location' => [21, 22]], 'fields_by_id' => $fields_by_id, 'regions' => [5 => 'north', 9 => false]]);
+
+    expect($vars['location_region_list'])->toBe(['north', ''])
+        ->and($vars['single_ontology_output'])->toContain('data-regions="north,,"');
 });
 
 test('a region filter in the cookie or the query lists only the locations in that region', function (array $get, array $cookie, string $region): void {

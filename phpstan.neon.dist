@@ -98,7 +98,6 @@ parameters:
             - templates/loops/resource-list-item.php
             - templates/loops/treatments-cpt-loop.php
             - templates/loops/treatments-loop.php
-            - templates/single-locations.php
 
     # Filled: the directories and files holding first-party PHP, including
     # the plugin header file at the root. Include tests: test bugs are real

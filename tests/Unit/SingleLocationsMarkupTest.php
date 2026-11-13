@@ -996,6 +996,43 @@ test('the parking section with a map prints the directions link and the map', fu
         ->and($mapOnly)->toContain('<div class="module-body"><h2>Directions From the Parking Area</h2>');
 });
 
+test('the parking map shows the clinic at the origin when the location has no map', function (): void {
+    $output = single_location_markup(['location_parking_map' => ['lat' => '34.75', 'lng' => '-92.29']]);
+
+    expect($output)->toContain('[ 0, 0, "9d2235"')
+        ->and($output)->toContain('[ 34.75, -92.29, "9d2235"')
+        ->and($output)->toContain('<li>Clinic (<a href="https://www.google.com/maps/dir/Current+Location/,"');
+});
+
+test('the clinic and the parking map each print their own coordinates', function (): void {
+    $output = single_location_markup(['location_map' => ['lat' => '34.7', 'lng' => '-92.3'], 'location_parking_map' => ['lat' => '34.75', 'lng' => '-92.29']]);
+
+    expect($output)->toContain('[ 34.7, -92.3, "9d2235"')
+        ->and($output)->toContain('<li>Clinic (<a href="https://www.google.com/maps/dir/Current+Location/34.7,-92.3"');
+});
+
+test('a building term lookup that returns an error object raises no warning and leaves the building out', function (): void {
+    $run = single_location(['location_address_1' => '1 Main St', 'location_building' => 70, 'location_suite' => 'Suite 5'], ['term_errors' => [70 => true]]);
+
+    expect($run['single_location_warnings'])->toBe([])
+        ->and($run['single_location_output'])->toContain('1 Main St');
+});
+
+test('a portal term lookup that returns an error object prints a portal section with no name and raises no warning', function (): void {
+    $run = single_location(['location_portal' => 60], ['term_errors' => [60 => true]]);
+
+    expect($run['single_location_warnings'])->toBe([])
+        ->and(preg_replace('/\s+/', '', $run['single_location_output']))->toContain('<h2></h2>');
+});
+
+test('the structured data has no typical opening hours when modified hours replace them', function (): void {
+    $groups = [['location_modified_hours_title' => '', 'location_modified_hours_information' => '', 'location_modified_hours_24_7' => false, 'location_modified_hours_times' => [single_location_modified_time()]]];
+    $schema = single_location_schema(single_location_modified($groups, ['location_modified_hours_end_date' => date('F j, Y', strtotime('+90 days'))]));
+
+    expect($schema)->not->toHaveKey('openingHours')
+        ->and($schema)->toHaveKey('openingHoursSpecification');
+});
+
 /**
  * The text of the telemedicine section of a render, without markup and with the whitespace collapsed.
  *
