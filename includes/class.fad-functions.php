@@ -13,7 +13,7 @@ function asp_custom_link_meta_results($results)
     $new_desc = '';
     foreach ($results as $k => $v) {
         $v_id = uamswp_fad_int($v->id);
-        if (($v->content_type == 'pagepost') && (get_post_type($v_id) == 'provider')) {
+        if (($v->content_type === 'pagepost') && (get_post_type($v_id) === 'provider')) {
             $degrees = get_field('physician_degree', $v_id);
             $degree_list = '';
             $i = 1;
@@ -111,6 +111,8 @@ class pubmed_field_on_change
         // make json api call
         $host = 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&retmode=json&id={IDS}';
         // insert the pmid
+        // The file declares no strict types, so the integer is turned into text by str_replace() itself.
+        // @pest-mutate-ignore: RemoveStringCast
         $url = str_replace('{IDS}', (string) $idstr, $host);
         // get json data
         $request = wp_remote_get($url);
@@ -214,11 +216,11 @@ function fad_script_register(): void
     if (! is_admin()) {
         wp_register_script('pubmed-api', UAMS_FAD_ROOT_URL.'assets/js/pubmed-api-async.js', ['jquery'], null, true);
     }
-    if ((is_single() && ($post_type == 'location'))) {
+    if ((is_single() && ($post_type === 'location'))) {
         wp_enqueue_style('leaflet-css', UAMS_FAD_ROOT_URL.'assets/leaflet/leaflet.css', [], '1.1', 'all');
         wp_enqueue_script('leaflet-js', UAMS_FAD_ROOT_URL.'assets/leaflet/leaflet.js', [], null, false);
     }
-    if ((is_archive() && (($post_type == 'provider') || ($post_type == 'location')))) {
+    if ((is_archive() && (($post_type === 'provider') || ($post_type === 'location')))) {
         wp_enqueue_script('mobile-filter-toggle', UAMS_FAD_ROOT_URL.'assets/js/mobile-filter-toggle.js', ['jquery'], null, false);
     }
     wp_enqueue_style('fad-app-css', UAMS_FAD_ROOT_URL.'assets/css/app.css', [], UAMS_FAD_VERSION, 'all');
@@ -256,7 +258,7 @@ function posts_provider_columns($columns): array
     $custom_columns = [];
     $title = 'title';
     foreach ($columns as $key => $value) {
-        if ($key == $title) {
+        if ($key === $title) {
             $custom_columns['provider_post_thumbs'] = __('Headshot');   // Move before title column
         }
         $custom_columns[$key] = $value;
@@ -821,13 +823,10 @@ function uamswp_load_by_ajax_callback(): void
     //     );
     // }
     $loop = new WP_Query($args);
-    $out = '';
-    if ($loop->have_posts()) {
-        while ($loop->have_posts()) {
-            $loop->the_post();
-            $id = get_the_ID();
-            $out .= uamswp_fad_str(include UAMS_FAD_PATH.'/templates/loops/physician-card.php');
-        }
+    while ($loop->have_posts()) {
+        $loop->the_post();
+        $id = get_the_ID();
+        include UAMS_FAD_PATH.'/templates/loops/physician-card.php';
     }
     wp_die();
 }
@@ -996,19 +995,19 @@ function get_medline_api_data($code, $type)
     }
     $url = 'https://connect.medlineplus.gov/service?';
     $arguments = [];
-    if ($type == 'icd') {
+    if ($type === 'icd') {
         $arguments = [
             'mainSearchCriteria.v.cs' => '2.16.840.1.113883.6.90',
             'knowledgeResponseType' => 'application/javascript',
             'mainSearchCriteria.v.c' => $code,
         ];
-    } elseif ($type == 'ndc') {
+    } elseif ($type === 'ndc') {
         $arguments = [
             'mainSearchCriteria.v.cs' => '2.16.840.1.113883.6.69',
             'knowledgeResponseType' => 'application%2Fjavascript',
             'mainSearchCriteria.v.c' => $code,
         ];
-    } elseif ($type == 'lonic') {
+    } elseif ($type === 'lonic') {
         $arguments = [
             'mainSearchCriteria.v.cs' => '2.16.840.1.113883.6.1',
             'knowledgeResponseType' => 'application%2Fjavascript',
@@ -1042,6 +1041,8 @@ function display_medline_api_data($code, $type): void
     $json = get_medline_api_data($code, $type);
 
     // The stored feed is an object tree; read it as arrays, which the code below can type.
+    // The file declares no strict types, so json_decode() reads the false of a failed encoding as empty text and decodes nothing, as the cast does.
+    // @pest-mutate-ignore: RemoveStringCast
     $feed = uamswp_fad_arr(uamswp_fad_arr(json_decode((string) wp_json_encode($json), true))['feed'] ?? null);
     $entry = uamswp_fad_arr($feed['entry'] ?? null);
     // echo (count($entry->title));
@@ -1058,11 +1059,15 @@ function display_medline_api_data($code, $type): void
         echo 'Source Agency: <a href="https://www.nlm.nih.gov/">National Library of Medicine</a></p>';
         echo '</div>';
     } else {
+        // Counting down never ends the loop, so a test can only see a timeout; starting one early or ending one late reads an entry that is not there, which has no link and prints nothing.
+        // @pest-mutate-ignore: PostIncrementToPostDecrement, SmallerToSmallerOrEqual, DecrementInteger
         for ($a = 0; $a < count($entry); $a++) {
             $item = uamswp_fad_arr($entry[$a] ?? null);
+            // Without a link the entry prints nothing, whatever text stands in for the address.
+            // @pest-mutate-ignore: EmptyStringToNotEmpty
             $href = uamswp_fad_str(uamswp_fad_arr($item['link'] ?? null)['href'] ?? '');
             if (str_contains($href, 'medlineplus.gov')) {
-                if ($a !== 0) {
+                if ($a) {
                     echo '<h2>'.uamswp_fad_str(uamswp_fad_arr($item['title'] ?? null)['_value'] ?? '').'</h2>'; // Add heading if there is more than one
                 }
                 echo '<p>'.uamswp_fad_str(uamswp_fad_arr($item['summary'] ?? null)['_value'] ?? '').'</p>';
@@ -1083,8 +1088,12 @@ function display_medline_api_data($code, $type): void
 function uamswp_provider_ajax_filter_shortcode($atts): string|false
 {
     $a = shortcode_atts([
+        // Text that is not a number reads as the provider id 0, as an empty value does.
+        // @pest-mutate-ignore: EmptyStringToNotEmpty
         'providers' => '',
         // 'ppp' => '',
+        // Only the value 'hide' changes the menu.
+        // @pest-mutate-ignore: EmptyStringToNotEmpty
         'region' => '',
     ], uamswp_fad_arr($atts));
     $providers = explode(',', $a['providers']);
@@ -1096,7 +1105,7 @@ function uamswp_provider_ajax_filter_shortcode($atts): string|false
     /** @var list<int> $provider_regions */
     $provider_regions = [];
     foreach ($providers as $provider) {
-        if (get_post_status((int) $provider) == 'publish') {
+        if (get_post_status((int) $provider) === 'publish') {
 
             // Clinical Title
 
@@ -1184,13 +1193,15 @@ function uamswp_provider_ajax_filter_shortcode($atts): string|false
     }
     $provider_titles_list = array_unique($provider_titles);
     asort($provider_titles_list);
-    $provider_regions_ids = array_unique($provider_regions);
-    sort($provider_regions_ids);
 
+    // No region has an empty slug, so the starting value never matches one.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $provider_region = '';
     if (isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region'])) {
         $provider_region = $_GET['_filter_region'] ?? $_COOKIE['wp_filter_region'];
     }
+    // PHP 8 finds a whole-number key unequal to text that is not a number, so the starting value never selects an option.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $provider_title = '';
     if (isset($_COOKIE['_provider_title'])) {
         $provider_title = $_COOKIE['_provider_title'];
@@ -1220,7 +1231,7 @@ function uamswp_provider_ajax_filter_shortcode($atts): string|false
 						<option value="">Any Region</option>
 						<?php $regions = get_terms(['taxonomy' => 'region', 'orderby' => 'name', 'hide_empty' => 0]);
 				    foreach ((is_wp_error($regions) ? [] : $regions) as $region) { ?>
-							<option value="<?php echo $region->slug; ?>"<?php echo in_array($region->term_id, $provider_regions_ids) ? '' : ' disabled'; ?><?php echo ($region->slug === $provider_region) ? ' selected' : ''; ?>><?php echo $region->name; ?></option>
+							<option value="<?php echo $region->slug; ?>"<?php echo in_array($region->term_id, $provider_regions, true) ? '' : ' disabled'; ?><?php echo ($region->slug === $provider_region) ? ' selected' : ''; ?>><?php echo $region->name; ?></option>
 						<?php } ?>
                     </select>
                 </div>
@@ -1319,7 +1330,7 @@ function provider_ajax_filter_callback(): void
     foreach ($region_IDs as $region_ID) {
         $region_term = get_term_by('ID', $region_ID, 'region');
         if (is_object($region_term) && ! empty($region_term->slug)) {
-            $region_list[] = $region_term->slug;
+            $region_list[] = uamswp_fad_str($region_term->slug);
         }
     }
 
@@ -1379,6 +1390,10 @@ function provider_ajax_filter_callback(): void
 
     $search_query = new WP_Query($args);
 
+    // implode() turns the values into text itself, so mapping them first changes nothing.
+    // @pest-mutate-ignore: UnwrapArrayMap
+    $titles = implode(',', array_unique(array_map(uamswp_fad_str(...), $title_list)));
+
     if ($search_query->have_posts() && $providers !== []) {
         $provider_ids = uamswp_fad_ids($search_query->posts);
         // echo $_POST['ppp'];
@@ -1389,7 +1404,7 @@ function provider_ajax_filter_callback(): void
             include UAMS_FAD_PATH.'/templates/loops/physician-card.php';
             // $z++;
         }
-        echo '<data id="provider_ids" data-postids="'.implode(',', array_map(uamswp_fad_str(...), $provider_ids)).'," data-regions="'.implode(',', array_map(uamswp_fad_str(...), $region_list)).'," data-titles="'.implode(',', array_unique(array_map(uamswp_fad_str(...), $title_list))).',"></data>';
+        echo '<data id="provider_ids" data-postids="'.implode(',', $provider_ids).'," data-regions="'.implode(',', $region_list).'," data-titles="'.$titles.',"></data>';
         // var_dump($tax_query_title);
         // var_dump($tax_query_region);
         // var_dump($tax_query);
@@ -1397,7 +1412,7 @@ function provider_ajax_filter_callback(): void
         // var_dump($args);
         echo '<span class="no-results">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
         // Still output availability data so the UI can disable invalid options
-        echo '<data id="provider_ids" data-postids="" data-regions="'.implode(',', array_map(uamswp_fad_str(...), $region_list)).'," data-titles="'.implode(',', array_unique(array_map(uamswp_fad_str(...), $title_list))).',"></data>';
+        echo '<data id="provider_ids" data-postids="" data-regions="'.implode(',', $region_list).'," data-titles="'.$titles.',"></data>';
     }
     wp_die();
 }
@@ -1408,6 +1423,8 @@ function provider_ajax_filter_callback(): void
 function uamswp_provider_title_ajax_filter_shortcode($atts): string|false
 {
     $a = shortcode_atts([
+        // Text that is not a number reads as the provider id 0, as an empty value does.
+        // @pest-mutate-ignore: EmptyStringToNotEmpty
         'providers' => '',
     ], uamswp_fad_arr($atts));
     $providers = explode(',', $a['providers']);
@@ -1415,7 +1432,7 @@ function uamswp_provider_title_ajax_filter_shortcode($atts): string|false
     $provider_titles = [];
     $provider_titles_list = [];
     foreach ($providers as $provider) {
-        if (get_post_status((int) $provider) == 'publish') {
+        if (get_post_status((int) $provider) === 'publish') {
 
             // Clinical Title
 
@@ -1489,6 +1506,8 @@ function uamswp_provider_title_ajax_filter_shortcode($atts): string|false
     $provider_titles_list = array_unique($provider_titles);
     asort($provider_titles_list);
 
+    // PHP 8 finds a whole-number key unequal to text that is not a number, so the starting value never selects an option.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $provider_title = '';
     if (isset($_COOKIE['_provider_title'])) {
         $provider_title = $_COOKIE['_provider_title'];
@@ -1580,7 +1599,7 @@ function provider_title_ajax_filter_callback(): void
             $title_list[] = get_field('physician_title', $id);
             include UAMS_FAD_PATH.'/templates/loops/physician-card.php';
         }
-        echo '<data id="provider_ids" data-postids="'.implode(',', array_map(uamswp_fad_str(...), $provider_ids)).'," data-titles="'.implode(',', array_unique(array_map(uamswp_fad_str(...), $title_list))).',"></data>';
+        echo '<data id="provider_ids" data-postids="'.implode(',', $provider_ids).'," data-titles="'.implode(',', array_unique(array_map(uamswp_fad_str(...), $title_list))).',"></data>';
     } else {
         // var_dump($args);
         echo '<span class="no-results">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
@@ -1595,26 +1614,30 @@ function provider_title_ajax_filter_callback(): void
 function uamswp_location_ajax_filter_shortcode($atts): string|false
 {
     $a = shortcode_atts([
+        // Text that is not a number reads as the location id 0, as an empty value does.
+        // @pest-mutate-ignore: EmptyStringToNotEmpty
         'locations' => '',
+        // Only the value 'hide' changes the menu.
+        // @pest-mutate-ignore: EmptyStringToNotEmpty
         'region' => '',
     ], uamswp_fad_arr($atts));
     $locations = explode(',', $a['locations']);
     $display_region = $a['region'];
     $location_regions = [];
     foreach ($locations as $location) {
-        if (get_post_status((int) $location) == 'publish') {
+        if (get_post_status((int) $location) === 'publish') {
             // Region
             $location_region = get_field('location_region', $location);
-            if (! in_array($location_region, [false, null, ''], true)) {
-                foreach ((array) $location_region as $region) {
-                    $location_regions[] = $region;
-                }
+            // A field with no region reads as nothing, or as one empty value that matches no region.
+            foreach ((array) $location_region as $region) {
+                $location_regions[] = $region;
             }
         }
     }
-    $location_regions_ids = array_unique(array_map(uamswp_fad_str(...), $location_regions));
-    sort($location_regions_ids);
+    $location_regions_ids = array_map(uamswp_fad_str(...), $location_regions);
 
+    // No region has an empty slug, so the starting value never matches one.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $location_region = '';
     if (isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region'])) {
         $location_region = $_GET['_filter_region'] ?? $_COOKIE['wp_filter_region'];
@@ -1626,15 +1649,14 @@ function uamswp_location_ajax_filter_shortcode($atts): string|false
 	<div class="ajax-filter" id="location-ajax-filter">
 		<h3 class="sr-only">Filter the Locations</h3>
         <form action="" method="get">
-            <!-- <?php print_r($locations); ?> -->
             <div class="form-row align-items-center justify-content-center">
-				<div class="col-12 mb-4 col-sm-auto mb-sm-0<?php echo $display_region == 'hide' ? ' d-none' : '' ?>">
+				<div class="col-12 mb-4 col-sm-auto mb-sm-0<?php echo $display_region === 'hide' ? ' d-none' : '' ?>">
                     <label class="sr-only" for="location_region">Region</label>
                     <select name="location_region" id="location_region" class="form-control">
 						<option value="">Any Region</option>
 						<?php $regions = get_terms(['taxonomy' => 'region', 'orderby' => 'name', 'hide_empty' => 0]);
     foreach ((is_wp_error($regions) ? [] : $regions) as $region) { ?>
-							<option value="<?php echo $region->slug; ?>"<?php echo in_array($region->term_id, $location_regions_ids) ? '' : ' disabled'; ?><?php echo ($region->slug === $location_region) ? ' selected' : ''; ?>><?php echo $region->name; ?></option>
+							<option value="<?php echo $region->slug; ?>"<?php echo in_array((string) $region->term_id, $location_regions_ids, true) ? '' : ' disabled'; ?><?php echo ($region->slug === $location_region) ? ' selected' : ''; ?>><?php echo $region->name; ?></option>
 						<?php } ?>
                     </select>
                 </div>
@@ -1705,7 +1727,7 @@ function location_ajax_filter_callback(): void
     $region_IDs = array_unique(array_map(uamswp_fad_str(...), $region_IDs));
     $region_list = [];
     foreach ($region_IDs as $region_ID) {
-        $region_list[] = (get_term_by('ID', uamswp_fad_str($region_ID), 'region')->slug ?? '');
+        $region_list[] = uamswp_fad_str(get_term_by('ID', uamswp_fad_str($region_ID), 'region')->slug ?? '');
     }
 
     // Build query for titles, based on regions
@@ -1740,7 +1762,7 @@ function location_ajax_filter_callback(): void
             $id = get_the_ID();
             include UAMS_FAD_PATH.'/templates/loops/location-card.php';
         }
-        echo '<data id="location_ids" data-postids="'.implode(',', array_map(uamswp_fad_str(...), $location_ids)).'," data-regions="'.implode(',', array_map(uamswp_fad_str(...), $region_list)).',"></data>';
+        echo '<data id="location_ids" data-postids="'.implode(',', $location_ids).'," data-regions="'.implode(',', $region_list).',"></data>';
     } else {
         echo '<span class="no-results">Sorry, there are no locations matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
     }
@@ -1879,6 +1901,8 @@ function uamswp_attr_conversion($input): string
     $input_attr = str_replace('&#8216;', "'", $input_attr); // Replace left single quotation mark with normal space
     $input_attr = str_replace('&#8217;', "'", $input_attr); // Replace right single quotation mark with normal space
     $input_attr = str_replace('"', "'", $input_attr); // Replace double quotes with single quote
+    // The entities are decoded again two lines down, so the flags only change how quotes travel between them.
+    // @pest-mutate-ignore: IncrementInteger
     $input_attr = htmlentities($input_attr, 0, 'UTF-8'); // Convert all applicable characters to HTML entities
     $input_attr = str_replace('&nbsp;', ' ', $input_attr); // Replace non-breaking space with normal space
     $input_attr = html_entity_decode($input_attr); // Convert HTML entities to their corresponding characters

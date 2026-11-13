@@ -432,4 +432,22 @@ final class ProviderHelpersTest extends UnitTestCase
         expectApplied('uamswp_spotlight_default_questions')->once()->andReturn('not a list');
         $this->assertSame([], \uamswp_spotlight_default_questions());
     }
+
+    public function test_an_excerpt_over_160_characters_keeps_its_own_first_characters(): void
+    {
+        $this->provider(['physician_first_name' => 'Ann', 'physician_last_name' => 'Lee']);
+        expectApplied('uamswp_spotlight_default_excerpt')->andReturn('b'.str_repeat('a', 160));
+
+        $this->assertSame('b'.str_repeat('a', 152).'...', \uamswp_spotlight_default_excerpt(5));
+    }
+
+    public function test_a_degree_with_no_name_adds_nothing_and_empty_degrees_are_dropped(): void
+    {
+        $this->provider(
+            ['physician_first_name' => 'Ann', 'physician_last_name' => 'Lee', 'physician_degree' => [4, 0, '', 9, 8]],
+            [4 => (object) ['name' => 'Ph.D.'], 8 => (object) ['name' => 'M.S.'], 9 => (object) []]
+        );
+
+        $this->assertSame('Ann Lee, Ph.D., , M.S.', \uamswp_provider_names(5)['full']);
+    }
 }
