@@ -1285,7 +1285,7 @@ function custom_excerpt_acf(): void
     if (
         ! empty($post_id) // If the post ID is not empty ...
         &&
-        $post_type !== false
+        is_string($post_type)
         &&
         array_key_exists($post_type, $excerpt_field_name)//  and if a key for the current post type exists in the array...
     ) {
@@ -2328,14 +2328,14 @@ function uamswp_spotlight_seed_questions($value, $post_id, $field)
 
     }
 
-    if (get_post_type((int) $post_id) !== 'clinical-resource') {
+    if (get_post_type(uamswp_fad_int($post_id)) !== 'clinical-resource') {
 
         return $value;
 
     }
 
     // Only a brand-new post
-    if (get_post_status((int) $post_id) !== 'auto-draft') {
+    if (get_post_status(uamswp_fad_int($post_id)) !== 'auto-draft') {
 
         return $value;
 
@@ -2427,7 +2427,7 @@ function uamswp_spotlight_reconcile_providers($post_id): void
         ||
         ! is_numeric($post_id)
         ||
-        get_post_type((int) $post_id) !== 'clinical-resource'
+        get_post_type(uamswp_fad_int($post_id)) !== 'clinical-resource'
     ) {
 
         return;
@@ -2556,7 +2556,7 @@ function uamswp_spotlight_sync_title($post_id): void
     if (
         ! is_numeric($post_id)
         ||
-        get_post_type((int) $post_id) !== 'clinical-resource'
+        get_post_type(uamswp_fad_int($post_id)) !== 'clinical-resource'
         ||
         uamswp_spotlight_stored_type($post_id) !== 'provider_spotlight'
     ) {
@@ -2592,7 +2592,7 @@ function uamswp_spotlight_sync_title($post_id): void
 
     }
 
-    $post = get_post((int) $post_id);
+    $post = get_post(uamswp_fad_int($post_id));
 
     if (! $post) {
 
@@ -2620,7 +2620,7 @@ function uamswp_spotlight_sync_title($post_id): void
     // leaving the permalink on a placeholder slug. Drafts keep tracking the
     // provider until the flag is set.
 
-    if (! get_post_meta((int) $post_id, '_uamswp_spotlight_slug_locked', true)) {
+    if (! get_post_meta(uamswp_fad_int($post_id), '_uamswp_spotlight_slug_locked', true)) {
 
         $slug_name = trim(str_replace('&nbsp;', ' ', uamswp_fad_str($names['medium_no_prefix'])));
 
@@ -2637,7 +2637,7 @@ function uamswp_spotlight_sync_title($post_id): void
             // Once published, freeze: the permalink is now live.
             if (in_array($post->post_status, ['publish', 'future', 'private'], true)) {
 
-                update_post_meta((int) $post_id, '_uamswp_spotlight_slug_locked', '1');
+                update_post_meta(uamswp_fad_int($post_id), '_uamswp_spotlight_slug_locked', '1');
 
             }
 
@@ -2651,7 +2651,7 @@ function uamswp_spotlight_sync_title($post_id): void
 
     }
 
-    $update['ID'] = (int) $post_id;
+    $update['ID'] = uamswp_fad_int($post_id);
 
     // Unhook around the nested save so this does not re-enter
 
@@ -2718,7 +2718,7 @@ function uamswp_spotlight_save($post_id): void
     if (
         ! is_numeric($post_id)
         ||
-        get_post_type((int) $post_id) !== 'clinical-resource'
+        get_post_type(uamswp_fad_int($post_id)) !== 'clinical-resource'
         ||
         uamswp_spotlight_stored_type($post_id) !== 'provider_spotlight'
     ) {
@@ -2742,10 +2742,10 @@ function uamswp_spotlight_save($post_id): void
     if (
         $image_id
         &&
-        $image_id != get_post_thumbnail_id((int) $post_id)
+        $image_id != get_post_thumbnail_id(uamswp_fad_int($post_id))
     ) {
 
-        set_post_thumbnail((int) $post_id, $image_id);
+        set_post_thumbnail(uamswp_fad_int($post_id), $image_id);
 
     }
 
@@ -2848,19 +2848,19 @@ function uamswp_spotlight_provider_guard($post_id): void
     if (
         ! is_numeric($post_id)
         ||
-        get_post_type((int) $post_id) !== 'provider'
+        get_post_type(uamswp_fad_int($post_id)) !== 'provider'
     ) {
 
         return;
 
     }
 
-    $spotlights = uamswp_spotlight_posts_for_provider((int) $post_id);
+    $spotlights = uamswp_spotlight_posts_for_provider(uamswp_fad_int($post_id));
 
     foreach ($spotlights as $spotlight_id) {
 
-        uamswp_spotlight_assert_link($spotlight_id, (int) $post_id);
-        uamswp_spotlight_sync_ontology($spotlight_id, (int) $post_id);
+        uamswp_spotlight_assert_link($spotlight_id, uamswp_fad_int($post_id));
+        uamswp_spotlight_sync_ontology($spotlight_id, uamswp_fad_int($post_id));
 
     }
 
@@ -2959,14 +2959,14 @@ function uamswp_spotlight_status_sync($new_status, $old_status, $post): void
 
     if ($new_status === 'publish') {
 
-        uamswp_spotlight_assert_link((int) $post->ID, $provider_id);
-        uamswp_spotlight_sync_ontology((int) $post->ID, $provider_id);
+        uamswp_spotlight_assert_link(uamswp_fad_int($post->ID), $provider_id);
+        uamswp_spotlight_sync_ontology(uamswp_fad_int($post->ID), $provider_id);
 
     } elseif ($old_status === 'publish') {
 
         // Unpublished, trashed, or otherwise taken out of publication
-        uamswp_spotlight_release_link((int) $post->ID, $provider_id);
-        uamswp_spotlight_sync_ontology((int) $post->ID, 0);
+        uamswp_spotlight_release_link(uamswp_fad_int($post->ID), $provider_id);
+        uamswp_spotlight_sync_ontology(uamswp_fad_int($post->ID), 0);
 
     }
 
@@ -2991,7 +2991,7 @@ function uamswp_spotlight_delete_sync($post_id): void
     if (
         ! is_numeric($post_id)
         ||
-        get_post_type((int) $post_id) !== 'clinical-resource'
+        get_post_type(uamswp_fad_int($post_id)) !== 'clinical-resource'
     ) {
 
         return;
@@ -3012,8 +3012,8 @@ function uamswp_spotlight_delete_sync($post_id): void
 
     }
 
-    uamswp_spotlight_release_link((int) $post_id, $provider_id);
-    uamswp_spotlight_sync_ontology((int) $post_id, 0);
+    uamswp_spotlight_release_link(uamswp_fad_int($post_id), $provider_id);
+    uamswp_spotlight_sync_ontology(uamswp_fad_int($post_id), 0);
 
 }
 
@@ -3086,7 +3086,10 @@ function uamswp_spotlight_sync_ontology($cr_id, $provider_id): void
         $target = $provider_id ? uamswp_spotlight_to_ids(get_field($spec['provider'], $provider_id)) : [];
         $current = uamswp_spotlight_to_ids(get_field($spec['name'], $cr_id));
 
+        // The keys are never read: both lists are only tested for emptiness and looped over.
+        // @pest-mutate-ignore: UnwrapArrayValues
         $added = array_values(array_diff($target, $current));
+        // @pest-mutate-ignore: UnwrapArrayValues
         $removed = array_values(array_diff($current, $target));
 
         if (! $added && ! $removed) {
@@ -3171,7 +3174,7 @@ function uamswp_spotlight_reconcile_ontology($post_id): void
         ||
         ! is_numeric($post_id)
         ||
-        get_post_type((int) $post_id) !== 'clinical-resource'
+        get_post_type(uamswp_fad_int($post_id)) !== 'clinical-resource'
     ) {
 
         return;
@@ -3288,7 +3291,7 @@ function uamswp_spotlight_capture_ontology_providers($post_id): void
 
     }
 
-    $field = uamswp_spotlight_ontology_provider_field(get_post_type((int) $post_id));
+    $field = uamswp_spotlight_ontology_provider_field(get_post_type(uamswp_fad_int($post_id)));
 
     if (! $field) {
 
@@ -3314,7 +3317,7 @@ function uamswp_spotlight_ontology_guard($post_id): void
 
     }
 
-    $field = uamswp_spotlight_ontology_provider_field(get_post_type((int) $post_id));
+    $field = uamswp_spotlight_ontology_provider_field(get_post_type(uamswp_fad_int($post_id)));
 
     if (! $field) {
 
@@ -3326,6 +3329,8 @@ function uamswp_spotlight_ontology_guard($post_id): void
     // since before it: every provider whose mirror could have changed.
     $after = uamswp_spotlight_to_ids(get_field($field, $post_id));
     $before = uamswp_spotlight_ontology_providers_before($post_id);
+    // The keys are never read: the list is only looped over.
+    // @pest-mutate-ignore: UnwrapArrayValues
     $affected = array_values(array_unique(array_merge($after, $before)));
 
     foreach ($affected as $provider_id) {
@@ -3461,6 +3466,8 @@ function uamswp_location_validate_epic_dep_ids($valid, $value, $field, $input_na
 
         }
 
+        // isset() is true for a false value too, so the check above cannot tell true from false.
+        // @pest-mutate-ignore: TrueToFalse
         $seen[$comparison_key] = true;
 
     }
@@ -3544,6 +3551,8 @@ function uamswp_workday_id_validate($valid, $value, $field, $input_name)
 
     $rules = uamswp_workday_id_validation_rules();
 
+    // Neither '' nor any other text that is not a rule key finds a rule, so the fallback text does not matter.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $key = uamswp_fad_str($field['key'] ?? '');
 
     if (! isset($rules[$key]) || ! is_string($value)) {

@@ -613,3 +613,47 @@ test('the relationship sync ignores a new value or a stored value that is not a 
     expect($warnings)->toBe([])
         ->and($updates->getArrayCopy())->toBe([]);
 });
+
+test('the clinical title handler inherits nothing from a term that has no parent property', function (): void {
+    uamswp_test_acf_functions();
+    Functions\expect('get_term_by')->once()->andReturn((object) []);
+    Functions\expect('get_field')->never();
+    $_POST = ['acf' => ['field_clinical_specialization_cms_code_inherit_query' => 1]];
+
+    clinical_title_save_post('term_5');
+
+    expect($_POST['acf'])->toBe(['field_clinical_specialization_cms_code_inherit_query' => 1]);
+});
+
+test('the excerpt handler unhooks itself at its own priority around the update and hooks itself back', function (): void {
+    uamswp_test_acf_functions();
+    $calls = [];
+    when('remove_action')->alias(static function (string $hook, string $callback, int $priority = 10) use (&$calls): bool {
+        $calls[] = ['remove_action', $hook, $callback, $priority];
+
+        return true;
+    });
+    when('add_action')->alias(static function (string $hook, string $callback, int $priority = 10) use (&$calls): bool {
+        $calls[] = ['add_action', $hook, $callback, $priority];
+
+        return true;
+    });
+    when('wp_update_post')->alias(static function (array $update) use (&$calls): int {
+        $calls[] = ['wp_update_post', $update['post_excerpt']];
+
+        return 5;
+    });
+    $post = new WP_Post;
+    $post->ID = 5;
+    $GLOBALS['post'] = $post;
+    acf_save_type('provider');
+    acf_save_fields(['physician_short_clinical_bio' => 'Short']);
+
+    custom_excerpt_acf();
+
+    expect($calls)->toBe([
+        ['remove_action', 'save_post', 'custom_excerpt_acf', 50],
+        ['wp_update_post', 'Short'],
+        ['add_action', 'save_post', 'custom_excerpt_acf', 50],
+    ]);
+});

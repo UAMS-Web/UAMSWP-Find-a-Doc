@@ -634,14 +634,14 @@ test('asserting a link that is already in place writes nothing', function (): vo
 
 test('releasing the link removes each side and re-indexes the lists', function (): void {
     uamswp_test_acf_functions();
-    spot_fields(['clinical_resource_providers|5' => [3, 7, 8], 'physician_clinical_resources|7' => [4, 5]]);
+    spot_fields(['clinical_resource_providers|5' => [3, 7, 8], 'physician_clinical_resources|7' => [4, 5, 6]]);
     $writes = spot_writes();
 
     uamswp_spotlight_release_link(5, 7);
 
     expect($writes->getArrayCopy())->toBe([
         ['clinical_resource_providers', [3, 8], 5],
-        ['physician_clinical_resources', [4], 7],
+        ['physician_clinical_resources', [4, 6], 7],
     ]);
 });
 
@@ -1158,3 +1158,155 @@ test('deleting something that is not a featured spotlight changes nothing', func
     'another resource type' => ['clinical-resource', 'faq', 7, 5],
     'no featured provider' => ['clinical-resource', 'provider_spotlight', 0, 5],
 ]);
+
+test('a generational suffix becomes a plain space in the title and does not enter the slug', function (): void {
+    uamswp_test_acf_functions();
+    spot_text_stubs();
+    when('get_post_type')->justReturn('clinical-resource');
+    spot_fields(['clinical_resource_type' => 'provider_spotlight', 'clinical_resource_spotlight_provider' => 7, 'physician_pedigree|7' => 'Jr.'] + spot_provider(7));
+    when('get_post')->justReturn((object) ['post_title' => 'Old', 'post_name' => 'old', 'post_status' => 'draft']);
+    when('get_post_meta')->justReturn('');
+    Functions\expect('wp_update_post')->once()->with(['post_title' => 'Get to Know Ann Lee Jr.', 'post_name' => 'get-to-know-ann-lee', 'ID' => 5]);
+
+    uamswp_spotlight_sync_title(5);
+});
+
+test('a non-breaking space inside a name becomes a plain space in the slug', function (): void {
+    uamswp_test_acf_functions();
+    spot_text_stubs();
+    when('get_post_type')->justReturn('clinical-resource');
+    spot_fields(['clinical_resource_type' => 'provider_spotlight', 'clinical_resource_spotlight_provider' => 7] + spot_provider(7, 'Ann&nbsp;Marie', 'Lee'));
+    when('get_post')->justReturn((object) ['post_title' => 'Old', 'post_name' => 'old', 'post_status' => 'draft']);
+    when('get_post_meta')->justReturn('');
+    Functions\expect('wp_update_post')->once()->with(['post_title' => 'Get to Know Ann Marie Lee', 'post_name' => 'get-to-know-ann-marie-lee', 'ID' => 5]);
+
+    uamswp_spotlight_sync_title(5);
+});
+
+test('a name that is only a non-breaking space leaves the slug alone', function (): void {
+    uamswp_test_acf_functions();
+    spot_text_stubs();
+    when('get_post_type')->justReturn('clinical-resource');
+    spot_fields(['clinical_resource_type' => 'provider_spotlight', 'clinical_resource_spotlight_provider' => 7, 'physician_pedigree|7' => 'Jr.'] + spot_provider(7, '&nbsp;', ''));
+    when('get_post')->justReturn((object) ['post_title' => 'Old', 'post_name' => 'old', 'post_status' => 'draft']);
+    when('get_post_meta')->justReturn('');
+    Functions\expect('wp_update_post')->once()->with(['post_title' => 'Get to Know Jr.', 'ID' => 5]);
+
+    uamswp_spotlight_sync_title(5);
+});
+
+test('a name with a leading space has it trimmed from the title', function (): void {
+    uamswp_test_acf_functions();
+    spot_text_stubs();
+    when('get_post_type')->justReturn('clinical-resource');
+    spot_fields(['clinical_resource_type' => 'provider_spotlight', 'clinical_resource_spotlight_provider' => 7] + spot_provider(7, '', 'Lee'));
+    when('get_post')->justReturn((object) ['post_title' => 'Old', 'post_name' => 'old', 'post_status' => 'draft']);
+    when('get_post_meta')->justReturn('');
+    Functions\expect('wp_update_post')->once()->with(['post_title' => 'Get to Know Lee', 'post_name' => 'get-to-know-lee', 'ID' => 5]);
+
+    uamswp_spotlight_sync_title(5);
+});
+
+test('the title sync reads the slug flag as a single value, writes it by integer ID, and unhooks itself around the update', function (): void {
+    uamswp_test_acf_functions();
+    spot_text_stubs();
+    when('get_post_type')->justReturn('clinical-resource');
+    spot_fields(['clinical_resource_type' => 'provider_spotlight', 'clinical_resource_spotlight_provider' => 7] + spot_provider(7));
+    when('get_post')->justReturn((object) ['post_title' => 'Old', 'post_name' => 'old', 'post_status' => 'publish']);
+
+    $calls = [];
+    when('get_post_meta')->alias(static function (mixed $id, string $key, bool $single) use (&$calls): string {
+        $calls[] = ['get_post_meta', $id, $key, $single];
+
+        return '';
+    });
+    when('update_post_meta')->alias(static function (mixed $id, string $key, mixed $value) use (&$calls): bool {
+        $calls[] = ['update_post_meta', $id, $key, $value];
+
+        return true;
+    });
+    when('remove_action')->alias(static function (string $hook, string $callback, int $priority = 10) use (&$calls): bool {
+        $calls[] = ['remove_action', $hook, $callback, $priority];
+
+        return true;
+    });
+    when('wp_update_post')->alias(static function (array $update) use (&$calls): int {
+        $calls[] = ['wp_update_post', $update['ID']];
+
+        return 5;
+    });
+    when('add_action')->alias(static function (string $hook, string $callback, int $priority = 10) use (&$calls): bool {
+        $calls[] = ['add_action', $hook, $callback, $priority];
+
+        return true;
+    });
+
+    uamswp_spotlight_sync_title('5');
+
+    expect($calls)->toBe([
+        ['get_post_meta', 5, '_uamswp_spotlight_slug_locked', true],
+        ['update_post_meta', 5, '_uamswp_spotlight_slug_locked', '1'],
+        ['remove_action', 'acf/save_post', 'uamswp_spotlight_sync_title', 20],
+        ['wp_update_post', 5],
+        ['add_action', 'acf/save_post', 'uamswp_spotlight_sync_title', 20],
+    ]);
+});
+
+test('the Epic DEP ID validation keeps checking after each kind of skipped or rejected row', function (): void {
+    uamswp_test_acf_functions();
+    $errors = spot_validation_errors();
+    $item = 'field_location_epic_dep_id_item';
+
+    uamswp_location_validate_epic_dep_ids(true, [
+        'acfcloneindex' => [$item => ''],
+        'row-1_deleted' => [$item => ''],
+        'row-2' => 'not a row',
+        'row-3' => [$item => ''],
+        'row-4' => [$item => 'A1'],
+        'row-5' => [$item => 'a1'],
+        'row-6' => [$item => 'A1'],
+    ], [], 'acf[field_x]');
+
+    expect($errors->getArrayCopy())->toBe([
+        'acf[field_x][row-3][field_location_epic_dep_id_item]' => 'A UAMS Health Epic DEP ID is required.',
+        'acf[field_x][row-5][field_location_epic_dep_id_item]' => 'UAMS Health Epic DEP ID "a1" is listed more than once. Each DEP ID may appear only once on a location.',
+        'acf[field_x][row-6][field_location_epic_dep_id_item]' => 'UAMS Health Epic DEP ID "A1" is listed more than once. Each DEP ID may appear only once on a location.',
+    ]);
+});
+
+test('an ontology save re-syncs each affected provider once, the current ones first and then the removed ones', function (): void {
+    uamswp_test_acf_functions();
+    when('get_post_type')->justReturn('condition');
+    when('is_user_logged_in')->justReturn(false);
+
+    $asked = [];
+    when('get_posts')->alias(static function (array $args) use (&$asked): array {
+        $asked[] = $args['meta_query'][1]['value'];
+
+        return [];
+    });
+
+    // Before the save the condition lists providers 7 and 8; the save leaves 7 and 9.
+    spot_fields(['field_condition_physicians|904' => [7, 8]]);
+    uamswp_spotlight_capture_ontology_providers(904);
+    spot_fields(['field_condition_physicians|904' => [7, 9]]);
+    spot_writes();
+
+    uamswp_spotlight_ontology_guard(904);
+
+    expect($asked)->toBe([7, 9, 8]);
+});
+
+test('the featured provider check reads the first id of a list', function (): void {
+    uamswp_test_acf_functions();
+    $_POST = ['acf' => []];
+    // Once any test has defined the request helper it stays defined, so this one answers from $_POST.
+    when('acf_maybe_get_POST')->alias(static fn (string $key): mixed => $_POST[$key] ?? null);
+    spot_fields(['physician_image_wide|9' => 33]);
+    when('get_post_thumbnail_id')->justReturn(0);
+
+    // The first id has no photo, the second does: only the first counts.
+    $result = uamswp_spotlight_validate_provider(true, [7, 9], [], 'acf[x]');
+
+    expect($result)->toStartWith('This provider has no wide portrait and no headshot');
+});
