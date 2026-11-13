@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Rector\CodeQuality\Rector\ClassMethod\LocallyCalledStaticMethodToNonStaticRector;
+use Rector\CodeQuality\Rector\Concat\DirnameDirConcatStringToDirectStringPathRector;
 use Rector\CodeQuality\Rector\Equal\UseIdenticalOverEqualWithSameTypeRector;
 use Rector\CodeQuality\Rector\Identical\SimplifyBoolIdenticalTrueRector;
 use Rector\CodingStyle\Rector\FuncCall\StrictArraySearchRector;
@@ -23,8 +24,10 @@ use Rector\DeadCode\Rector\Stmt\RemoveNextSameValueConditionRector;
 use Rector\Php81\Rector\Array_\ArrayToFirstClassCallableRector;
 use Rector\Php81\Rector\Property\ReadOnlyPropertyRector;
 use Rector\Php82\Rector\Class_\ReadOnlyClassRector;
+use Rector\TypeDeclaration\Rector\ArrowFunction\AddArrowFunctionReturnTypeRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddParamFromDimFetchKeyUseRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\StrictArrayParamDimFetchRector;
+use Rector\TypeDeclaration\Rector\Closure\ClosureReturnTypeRector;
 use Rector\ValueObject\PhpVersion;
 
 // Shared starting Rector configuration (UAMS-Web/uams-claude-skills#10). Copy it
@@ -148,6 +151,24 @@ $neverRules = [
     StrictArraySearchRector::class => $templatesDir,
 ];
 
+// With tests/ in withPaths(), Rector reads every class in tests/, including the WordPress stand-ins
+// in tests/Support/wp-classes.php, for every file it analyzes (a path skip does not change this).
+// Those stand-ins therefore keep WordPress' own untyped properties: see that file's docblock.
+
+// The tests stub WordPress functions with closures that read state the test fills in later
+// (`$this->transients[$key] ?? false`). These two rules type each closure from the empty array that
+// state starts as, so `get_transient` gets a `false` return type and throws once a value is stored:
+// 28 Unit tests failed with a TypeError when they were applied. Skipped under tests/ only.
+$testsDir = [__DIR__.'/tests'];
+$neverRules = [
+    ...$neverRules,
+    AddArrowFunctionReturnTypeRector::class => $testsDir,
+    ClosureReturnTypeRector::class => $testsDir,
+    // `dirname(__DIR__).'/'` becomes `__DIR__.'/../'`: the same directory, but a different string,
+    // and the tests compare `UAMS_FAD_PATH`, which this file defines, as a string.
+    DirnameDirConcatStringToDirectStringPathRector::class => [__DIR__.'/tests/bootstrap.php'],
+];
+
 return RectorConfig::configure()
     // Filled: the directories holding first-party PHP. Never a vendor
     // directory, and in a fork of a vendor plugin only the paths that hold our
@@ -157,11 +178,17 @@ return RectorConfig::configure()
         __DIR__.'/includes',
         __DIR__.'/admin',
         __DIR__.'/templates',
+        __DIR__.'/tests',
     ])
     // WordPress plugins: also analyze the PHP files at the repository root (the
     // plugin header file). Uncomment for those.
     ->withRootFiles()
     ->withSkip([
+        // WordPress repositories whose Integration suite has its own Composer
+        // setup (the tests skill): its vendor/ sits inside tests/, and Rector
+        // would otherwise rewrite PHPUnit 9 and its dependencies. `pint.json`
+        // excludes the same folder for the same reason (JSON holds no comment).
+        __DIR__.'/tests/Integration/vendor',
         ...$neverRules,
         ...($isSweepProfile ? [] : $sweepOnlyRules),
     ])

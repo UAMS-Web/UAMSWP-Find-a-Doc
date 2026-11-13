@@ -15,9 +15,6 @@ use PHPUnit\Framework\TestCase;
 
 final class ProviderNullableFieldsTest extends TestCase
 {
-    /**
-     * @return void
-     */
     public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
@@ -39,9 +36,7 @@ final class ProviderNullableFieldsTest extends TestCase
             'physician_npi',
         ];
 
-        return array_combine($names, array_map(static function (string $name): array {
-            return [$name];
-        }, $names));
+        return array_combine($names, array_map(static fn (string $name): array => [$name], $names));
     }
 
     #[DataProvider('nullableFields')]
@@ -70,8 +65,6 @@ final class ProviderNullableFieldsTest extends TestCase
 
     /**
      * Other fields keep an empty string, as before.
-     *
-     * @return void
      */
     public function test_other_fields_keep_an_empty_string(): void
     {
@@ -80,9 +73,6 @@ final class ProviderNullableFieldsTest extends TestCase
         }
     }
 
-    /**
-     * @return void
-     */
     public function test_a_field_with_no_name_is_left_alone(): void
     {
         $this->assertSame('', \uamswp_provider_null_empty_value('', 26, []));
@@ -95,8 +85,6 @@ final class ProviderNullableFieldsTest extends TestCase
     /**
      * The list is the seven fields of the ticket that are stored in an integer
      * column of the provider table.
-     *
-     * @return void
      */
     public function test_the_list_matches_the_integer_columns(): void
     {

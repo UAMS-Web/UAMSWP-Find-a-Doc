@@ -11,9 +11,11 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
-use Brain\Monkey\Functions;
 use PHPUnit\Framework\Attributes\DataProvider;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
+
+use function Brain\Monkey\Functions\expect;
+use function Brain\Monkey\Functions\when;
 
 final class TemplatesTest extends UnitTestCase
 {
@@ -30,17 +32,17 @@ final class TemplatesTest extends UnitTestCase
         parent::setUp();
 
         if (! defined('WP_PLUGIN_DIR')) {
-            define('WP_PLUGIN_DIR', dirname(dirname(__DIR__, 2)));
+            define('WP_PLUGIN_DIR', dirname(__DIR__, 3));
         }
 
         if (self::$loaded) {
             return;
         }
 
-        Functions\when('add_action')->alias(static function (string $hook, mixed $callback): void {
+        when('add_action')->alias(static function (string $hook, mixed $callback): void {
             self::$actions[] = [$hook, $callback];
         });
-        Functions\when('add_filter')->alias(static function (string $hook, mixed $callback): void {
+        when('add_filter')->alias(static function (string $hook, mixed $callback): void {
             self::$filters[] = [$hook, $callback];
         });
 
@@ -61,7 +63,7 @@ final class TemplatesTest extends UnitTestCase
     private function conditions(array $true): void
     {
         foreach (['is_post_type_archive', 'is_singular', 'is_tax'] as $tag) {
-            Functions\when($tag)->alias(static fn (string $type): bool => in_array($tag.':'.$type, $true, true));
+            when($tag)->alias(static fn (string $type): bool => in_array($tag.':'.$type, $true, true));
         }
     }
 
@@ -158,16 +160,16 @@ final class TemplatesTest extends UnitTestCase
     #[DataProvider('page_templates')]
     public function test_a_page_template_is_redirected_to_the_plugin_file(mixed $stored, ?string $file): void
     {
-        Functions\when('get_post')->justReturn((object) ['ID' => 7]);
-        Functions\expect('get_post_meta')->once()->with(7, '_wp_page_template', true)->andReturn($stored);
+        when('get_post')->justReturn((object) ['ID' => 7]);
+        expect('get_post_meta')->once()->with(7, '_wp_page_template', true)->andReturn($stored);
 
         $this->assertSame($file === null ? 'theme.php' : $this->template($file), \uamswp_redirect_page_template('theme.php'));
     }
 
     public function test_a_missing_post_reads_the_meta_of_id_zero(): void
     {
-        Functions\when('get_post')->justReturn(null);
-        Functions\expect('get_post_meta')->once()->with(0, '_wp_page_template', true)->andReturn('');
+        when('get_post')->justReturn();
+        expect('get_post_meta')->once()->with(0, '_wp_page_template', true)->andReturn('');
 
         $this->assertSame('theme.php', \uamswp_redirect_page_template('theme.php'));
     }
@@ -175,7 +177,7 @@ final class TemplatesTest extends UnitTestCase
     public function test_the_rewrite_rules_send_pagination_and_the_provider_image_to_their_queries(): void
     {
         $rules = [];
-        Functions\when('add_rewrite_rule')->alias(static function (string $regex, string $query, string $after) use (&$rules): void {
+        when('add_rewrite_rule')->alias(static function (string $regex, string $query, string $after) use (&$rules): void {
             $rules[] = [$regex, $query, $after];
         });
 
@@ -195,9 +197,9 @@ final class TemplatesTest extends UnitTestCase
 
     public function test_an_image_request_swaps_in_the_image_template(): void
     {
-        Functions\when('get_query_var')->alias(static fn (string $var): string => $var === 'image' ? 'yes' : '');
+        when('get_query_var')->alias(static fn (string $var): string => $var === 'image' ? 'yes' : '');
         $added = [];
-        Functions\when('add_filter')->alias(static function (string $hook, \Closure $callback) use (&$added): void {
+        when('add_filter')->alias(static function (string $hook, \Closure $callback) use (&$added): void {
             $added[] = [$hook, $callback];
         });
 
@@ -210,8 +212,8 @@ final class TemplatesTest extends UnitTestCase
 
     public function test_a_request_without_the_image_var_adds_no_filter(): void
     {
-        Functions\when('get_query_var')->justReturn('');
-        Functions\expect('add_filter')->never();
+        when('get_query_var')->justReturn('');
+        expect('add_filter')->never();
 
         \provider_image_rewrite_templates();
 
@@ -245,8 +247,8 @@ final class TemplatesTest extends UnitTestCase
                 return 'page';
             }
         };
-        Functions\when('is_404')->justReturn(true);
-        Functions\expect('wp_redirect')->never();
+        when('is_404')->justReturn(true);
+        expect('wp_redirect')->never();
 
         try {
             (self::$actions[3][1])();
@@ -268,8 +270,8 @@ final class TemplatesTest extends UnitTestCase
                 return 'provider';
             }
         };
-        Functions\when('is_404')->justReturn(false);
-        Functions\expect('wp_redirect')->never();
+        when('is_404')->justReturn(false);
+        expect('wp_redirect')->never();
 
         try {
             (self::$actions[3][1])();

@@ -183,7 +183,7 @@ final class DocumentationReferencesTest extends TestCase
 
             $candidates = [$root.'/'.$path, $root.'/'.($directory === '.' ? '' : $directory.'/').$path];
 
-            if (array_filter($candidates, 'file_exists') === []) {
+            if (array_filter($candidates, file_exists(...)) === []) {
                 $problems[] = sprintf('%s names the path "%s", which does not exist', $file, $path);
             }
         }

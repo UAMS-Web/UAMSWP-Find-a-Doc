@@ -8,8 +8,10 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
-use Brain\Monkey\Functions;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
+
+use function Brain\Monkey\Functions\expect;
+use function Brain\Monkey\Functions\when;
 
 final class PhysiciansThemeTest extends UnitTestCase
 {
@@ -26,7 +28,7 @@ final class PhysiciansThemeTest extends UnitTestCase
             return;
         }
 
-        Functions\when('add_action')->alias(static function (string $hook, array $callback): void {
+        when('add_action')->alias(static function (string $hook, array $callback): void {
             self::$actions[] = [$hook, $callback];
         });
 
@@ -52,7 +54,7 @@ final class PhysiciansThemeTest extends UnitTestCase
     public function test_the_script_and_style_callbacks_register_and_enqueue_nothing(): void
     {
         foreach (['wp_register_script', 'wp_enqueue_script', 'wp_register_style', 'wp_enqueue_style'] as $function) {
-            Functions\expect($function)->never();
+            expect($function)->never();
         }
 
         $object = self::$actions[0][1][0];

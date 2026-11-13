@@ -30,7 +30,7 @@ final class GbpChildAddressTest extends UnitTestCase
             'a street and a city' => ['Walk-in Clinic on Cottage in Little Rock', 'Walk-in Clinic'],
             'on a street' => ['Specialty Clinic on Cottage Street', 'Specialty Clinic'],
             'on the' => ['Pediatric Clinic on the Square', 'Pediatric Clinic'],
-            'a facility and a city, the first joiner wins' => ['Cardiology at Arkansas Children\'s in Little Rock', 'Cardiology'],
+            'a facility and a city, the first joiner wins' => ["Cardiology at Arkansas Children's in Little Rock", 'Cardiology'],
             'upper case' => ['SPECIALTY CLINIC IN THE ORTHOPAEDIC AND SPINE HOSPITAL', 'SPECIALTY CLINIC'],
             'lower case' => ['specialty clinic at orthopaedic and spine hospital', 'specialty clinic'],
             'mixed case' => ['Specialty Clinic In The orthopaedic AND spine Hospital', 'Specialty Clinic'],

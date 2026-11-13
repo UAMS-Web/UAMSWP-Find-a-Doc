@@ -8,9 +8,13 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
-use Brain\Monkey\Actions;
-use Brain\Monkey\Functions;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
+
+use function Brain\Monkey\Actions\expectAdded;
+use function Brain\Monkey\Functions\expect;
+use function Brain\Monkey\Functions\stubEscapeFunctions;
+use function Brain\Monkey\Functions\stubTranslationFunctions;
+use function Brain\Monkey\Functions\when;
 
 final class AcfTableMapCheckTest extends UnitTestCase
 {
@@ -293,7 +297,7 @@ final class AcfTableMapCheckTest extends UnitTestCase
 
     public function test_the_notice_registers_on_admin_notices(): void
     {
-        Actions\expectAdded('admin_notices')->once()->with('uamswp_fad_acf_table_map_notice');
+        expectAdded('admin_notices')->once()->with('uamswp_fad_acf_table_map_notice');
 
         uamswp_fad_acf_table_map_register();
     }
@@ -314,11 +318,11 @@ final class AcfTableMapCheckTest extends UnitTestCase
      */
     private function notice(string $dir, bool $can_manage): string
     {
-        Functions\stubEscapeFunctions();
-        Functions\stubTranslationFunctions();
-        Functions\when('uamswp_fad_acf_table_map_dir')->justReturn($dir);
-        Functions\when('admin_url')->alias(fn (string $path = '') => 'https://example.test/wp-admin/'.$path);
-        Functions\expect('current_user_can')->once()->with('manage_options')->andReturn($can_manage);
+        stubEscapeFunctions();
+        stubTranslationFunctions();
+        when('uamswp_fad_acf_table_map_dir')->justReturn($dir);
+        when('admin_url')->alias(fn (string $path = '') => 'https://example.test/wp-admin/'.$path);
+        expect('current_user_can')->once()->with('manage_options')->andReturn($can_manage);
 
         ob_start();
         uamswp_fad_acf_table_map_notice();

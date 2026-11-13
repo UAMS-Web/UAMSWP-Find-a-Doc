@@ -40,9 +40,9 @@ final class DownloadArchiveTest extends TestCase
         $output = [];
         $status = 0;
         exec('git -C '.escapeshellarg($checkout).' archive --worktree-attributes --format=tar -o '.escapeshellarg($tar).' HEAD 2>&1', $output, $status);
-        $this->assertSame(0, $status, "git archive exits 0, got:
-".implode("
-", $output));
+        $this->assertSame(0, $status, 'git archive exits 0, got:
+'.implode('
+', $output));
 
         $files = self::tarFileNames((string) file_get_contents($tar));
         unlink($tar);
@@ -86,6 +86,7 @@ final class DownloadArchiveTest extends TestCase
             if (trim($header, "\0") === '') {
                 break;
             }
+
             $name = rtrim(substr($header, 0, 100), "\0");
             $prefix = rtrim(substr($header, 345, 155), "\0");
             $size = (int) octdec(trim(substr($header, 124, 12), "\0 "));
@@ -101,6 +102,7 @@ final class DownloadArchiveTest extends TestCase
 
                 continue;
             }
+
             if ($type === 'g') {
                 continue;
             }
@@ -133,6 +135,7 @@ final class DownloadArchiveTest extends TestCase
             if (isset($seen[$file])) {
                 continue;
             }
+
             $seen[$file] = true;
 
             $source = file_get_contents(self::root().'/'.$file);
@@ -201,20 +204,20 @@ final class DownloadArchiveTest extends TestCase
         // file. An archive reader that ignored the attributes, or read no names, would fail this.
         $dir = sys_get_temp_dir().'/fad-archive-control-'.bin2hex(random_bytes(4));
         mkdir($dir.'/sub/deeper', 0777, true);
-        file_put_contents($dir.'/kept.php', "<?php
-");
-        file_put_contents($dir.'/dropped.php', "<?php
-");
-        file_put_contents($dir.'/sub/deeper/'.str_repeat('long-name-', 12).'.php', "<?php
-");
-        file_put_contents($dir.'/.gitattributes', "/dropped.php export-ignore
-");
+        file_put_contents($dir.'/kept.php', '<?php
+');
+        file_put_contents($dir.'/dropped.php', '<?php
+');
+        file_put_contents($dir.'/sub/deeper/'.str_repeat('long-name-', 12).'.php', '<?php
+');
+        file_put_contents($dir.'/.gitattributes', '/dropped.php export-ignore
+');
 
         $git = 'git -c user.name=control -c user.email=control@example.test -C '.escapeshellarg($dir);
         exec('git init -q '.escapeshellarg($dir).' 2>&1 && '.$git.' add -A 2>&1 && '.$git.' commit -q -m control 2>&1', $output, $status);
-        $this->assertSame(0, $status, "the control repository is built, got:
-".implode("
-", $output));
+        $this->assertSame(0, $status, 'the control repository is built, got:
+'.implode('
+', $output));
 
         $files = $this->archiveOf($dir);
 
@@ -223,6 +226,7 @@ final class DownloadArchiveTest extends TestCase
         foreach ($items as $item) {
             $item->isDir() ? rmdir($item->getPathname()) : (chmod($item->getPathname(), 0666) && unlink($item->getPathname()));
         }
+
         rmdir($dir);
 
         $this->assertContains('kept.php', $files);

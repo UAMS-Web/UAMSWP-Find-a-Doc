@@ -46,7 +46,7 @@ function physician_loops_world(array $fields, array $options = []): void
     when('_e')->alias(static function (string $text): void {
         echo $text;
     });
-    when('wp_reset_postdata')->justReturn(null);
+    when('wp_reset_postdata')->justReturn();
 
     WP_Query::$queue = [];
     WP_Query::$queries = [];

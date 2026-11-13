@@ -11,9 +11,10 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
-use Brain\Monkey\Functions;
 use PHPUnit\Framework\Attributes\DataProvider;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
+
+use function Brain\Monkey\Functions\when;
 
 require_once __DIR__.'/../Support/acf-blocks.php';
 
@@ -31,11 +32,11 @@ final class AcfBlocksTest extends UnitTestCase
     {
         parent::setUp();
 
-        Functions\when('__')->returnArg();
-        Functions\when('esc_attr')->returnArg();
-        Functions\when('esc_url')->returnArg();
-        Functions\when('esc_html')->returnArg();
-        Functions\when('esc_html__')->returnArg();
+        when('__')->returnArg();
+        when('esc_attr')->returnArg();
+        when('esc_url')->returnArg();
+        when('esc_html')->returnArg();
+        when('esc_html__')->returnArg();
 
         if (self::$loaded) {
             return;
@@ -183,7 +184,7 @@ final class AcfBlocksTest extends UnitTestCase
     public function test_the_three_blocks_are_registered_with_their_templates(): void
     {
         $blocks = [];
-        Functions\when('acf_register_block_type')->alias(static function (array $block) use (&$blocks): void {
+        when('acf_register_block_type')->alias(static function (array $block) use (&$blocks): void {
             $blocks[] = $block;
         });
 

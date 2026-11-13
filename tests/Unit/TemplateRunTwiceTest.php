@@ -12,8 +12,8 @@ use function Brain\Monkey\Functions\when;
 require_once __DIR__.'/../Support/templates.php';
 
 test('the clinical resources archive renders twice in one process with the same output', function (): void {
-    when('get_header')->justReturn(null);
-    when('get_footer')->justReturn(null);
+    when('get_header')->justReturn();
+    when('get_footer')->justReturn();
     when('get_field')->alias(static fn (string $field): string => $field === 'clinical_resource_archive_headline' ? 'Resource Library' : '');
     when('do_shortcode')->justReturn('[search]');
     when('facetwp_display')->alias(static fn (string $type, string $name = ''): string => '{'.$type.':'.$name.'}');

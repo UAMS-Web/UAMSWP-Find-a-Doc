@@ -5,6 +5,16 @@
  *
  */
 
+/**
+ * Optional: an including file may set these to override the block's fields. When `$more` is on, the
+ * partial reads each one it finds empty from the block, so each is set before it is printed.
+ *
+ * @var mixed $more_text
+ * @var mixed $more_button_text
+ * @var mixed $more_button_url
+ * @var mixed $more_button_color
+ */
+
 // Editor placeholder for a newly inserted, still-empty block (ACF Blocks V3).
 if (function_exists('uams_fad_block_placeholder') && uams_fad_block_placeholder($block ?? null, $is_preview ?? false)) {
     return;
@@ -42,6 +52,7 @@ if (empty($background_color)) {
 if (empty($more)) {
     $more = get_field('block_fad_providers_more');
 }
+$more_button_description_attr = '';
 if ($more) {
     if (empty($more_text)) {
         $more_text = get_field('block_fad_providers_more_text');

@@ -16,6 +16,20 @@
  *
  *  List layout intended to either display all items or display a set number with no link to more.
  */
+
+/**
+ * Set by the file that includes this partial, which runs in that file's scope (#1232).
+ *
+ * @var mixed $resources From `get_field()`.
+ * @var WP_Query $resource_query
+ * @var int $resource_postsPerPage
+ * @var bool $resource_more_suppress
+ * @var bool $resource_heading_related_pre
+ * @var bool $resource_heading_related_post
+ * @var string $resource_more_key
+ * @var string $resource_more_value
+ * @var string $resource_heading_related_name
+ */
 $resource_heading = 'Resources';
 if ($resource_heading_related_pre) {
     $resource_heading = 'Related '.$resource_heading;

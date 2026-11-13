@@ -17,9 +17,6 @@ use UamswpFindADoc\Tests\Support\UnitTestCase;
 
 final class LocationAddressTest extends UnitTestCase
 {
-    /**
-     * @return void
-     */
     public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
@@ -64,13 +61,8 @@ final class LocationAddressTest extends UnitTestCase
         ];
     }
 
-    /**
-     *
-     * @param bool  $has_building
-     * @param mixed $floor
-     */
     #[DataProvider('displayCases')]
-    public function test_display_line(bool $has_building, $floor, string $floor_value, string $floor_label, string $suite, string $expected): void
+    public function test_display_line(bool $has_building, bool|array $floor, string $floor_value, string $floor_label, string $suite, string $expected): void
     {
         $this->assertSame(
             $expected,
@@ -80,8 +72,6 @@ final class LocationAddressTest extends UnitTestCase
 
     /**
      * The schema markup separates with spaces.
-     *
-     * @return void
      */
     public function test_schema_line(): void
     {
@@ -96,8 +86,6 @@ final class LocationAddressTest extends UnitTestCase
     /**
      * Schema markup skips a floor field whose value is empty, as the display
      * does, so a suite after the building gets one space and not two.
-     *
-     * @return void
      */
     public function test_schema_line_skips_a_floor_field_with_no_value(): void
     {
@@ -109,8 +97,6 @@ final class LocationAddressTest extends UnitTestCase
 
     /**
      * Schema markup does not print floor "0" either.
-     *
-     * @return void
      */
     public function test_schema_line_skips_floor_zero(): void
     {
@@ -121,8 +107,6 @@ final class LocationAddressTest extends UnitTestCase
 
     /**
      * The Doximity export separates the building, floor and suite with line breaks.
-     *
-     * @return void
      */
     public function test_doximity_line(): void
     {
@@ -134,8 +118,6 @@ final class LocationAddressTest extends UnitTestCase
 
     /**
      * The separators default to the display values.
-     *
-     * @return void
      */
     public function test_defaults_are_the_display_values(): void
     {
@@ -145,9 +127,6 @@ final class LocationAddressTest extends UnitTestCase
         );
     }
 
-    /**
-     * @return void
-     */
     public function test_parts_in_order(): void
     {
         $this->assertSame(
@@ -156,9 +135,6 @@ final class LocationAddressTest extends UnitTestCase
         );
     }
 
-    /**
-     * @return void
-     */
     public function test_parts_leave_out_what_is_missing(): void
     {
         $ground = ['value' => '0', 'choices' => ['0' => 'Ground']];
@@ -174,8 +150,6 @@ final class LocationAddressTest extends UnitTestCase
     /**
      * A floor value with no label adds no entry, so there is no empty line
      * between the facility and the city.
-     *
-     * @return void
      */
     public function test_parts_skip_a_floor_with_no_label(): void
     {

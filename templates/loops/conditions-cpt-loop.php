@@ -11,6 +11,14 @@
  *      $condition_heading_related_name
  *      $condition_disclaimer = 'true', 'false'
  */
+
+/**
+ * Set by the file that includes this partial, which runs in that file's scope (#1232).
+ *
+ * @var WP_Query $conditions_cpt_query
+ * @var string $condition_context
+ * @var string $condition_heading_related_name
+ */
 $condition_heading = 'Conditions';
 $condition_disclaimer = false;
 $condition_disclaimer_text = 'UAMS Health providers care for a broad range of conditions, some of which may not be listed below.';

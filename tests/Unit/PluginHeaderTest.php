@@ -52,7 +52,7 @@ test('the README credits UAMS Web Services and lists the developers by surname',
     preg_match_all('/^- (.+)$/m', $section, $match);
     $names = $match[1];
 
-    $surnames = array_map(static fn (string $name): string => (string) substr(strrchr(' '.$name, ' '), 1), $names);
+    $surnames = array_map(static fn (string $name): string => substr(strrchr(' '.$name, ' '), 1), $names);
     $sorted = $surnames;
     sort($sorted);
 

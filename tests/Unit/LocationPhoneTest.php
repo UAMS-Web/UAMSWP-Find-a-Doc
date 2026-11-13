@@ -26,9 +26,7 @@ function location_phone(array $fields, string $output = 'associated_locations', 
     when('get_field')->alias(static fn (string $name, mixed $id = null): mixed => $fields[$name] ?? null);
     when('get_the_title')->justReturn($fields['__title'] ?? 'Clinic A');
     when('format_phone_dash')->alias(static fn (mixed $phone): string => $phone ? 'dash:'.$phone : '');
-    when('have_rows')->alias(static function () use ($position, $rows): bool {
-        return $position->index + 1 < count($rows);
-    });
+    when('have_rows')->alias(static fn (): bool => $position->index + 1 < count($rows));
     when('the_row')->alias(static function () use ($position): void {
         $position->index++;
     });
@@ -105,7 +103,7 @@ test('the card phone block falls back to the general number when the clinic quer
     expect($output)->toContain('<dd>'.location_phone_link('501-1', 'Appointment Phone Number for New and Returning Patients').'<br/><span class="subtitle">New and Returning Patients</span></dd>');
 });
 
-test('the card phone block prints the primary and specialty care numbers of a children\'s hospital location', function (): void {
+test("the card phone block prints the primary and specialty care numbers of a children's hospital location", function (): void {
     $output = location_phone([
         'location_phone' => '501-1',
         'location_ac_query' => true,
@@ -120,7 +118,7 @@ test('the card phone block prints the primary and specialty care numbers of a ch
         ->and($output)->toContain('<dd><a href="tel:dash:501-5" class="icon-phone" data-categorytitle="Telephone Number" data-itemtitle="Clinic A" data-typetitle="Arkansas Children\'s Specialty Care Appointments Phone Number">dash:501-5</a><br/><span class="subtitle">Specialty Care</span></dd>');
 });
 
-test('the card phone block uses the general number for a children\'s hospital location without separate numbers', function (): void {
+test("the card phone block uses the general number for a children's hospital location without separate numbers", function (): void {
     $output = location_phone(['location_phone' => '501-1', 'location_ac_query' => true, 'location_new_appointments_phone' => '501-2']);
 
     expect($output)->toContain('<dt>Appointment Phone Number</dt>')
@@ -128,7 +126,7 @@ test('the card phone block uses the general number for a children\'s hospital lo
         ->and($output)->toContain('New and Returning Patients</span></dd>');
 });
 
-test('the card phone block ignores the children\'s hospital numbers when the location cannot schedule', function (): void {
+test("the card phone block ignores the children's hospital numbers when the location cannot schedule", function (): void {
     $output = location_phone([
         'location_phone' => '501-1',
         'location_ac_query' => true,
@@ -183,7 +181,7 @@ test('the profile phone block leaves out an appointments heading with no appoint
     expect($output)->not->toContain('<dt>Appointments</dt>');
 });
 
-test('the profile phone block prints the children\'s hospital numbers under appointments', function (): void {
+test("the profile phone block prints the children's hospital numbers under appointments", function (): void {
     $output = location_phone([
         'location_phone' => '501-1',
         'location_ac_query' => true,
@@ -199,7 +197,7 @@ test('the profile phone block prints the children\'s hospital numbers under appo
         ->and($output)->not->toContain('Fax Number');
 });
 
-test('the profile phone block prints only the children\'s hospital number it has', function (): void {
+test("the profile phone block prints only the children's hospital number it has", function (): void {
     $primary = location_phone(['location_phone' => '501-1', 'location_ac_query' => true, 'location_ac_appointments_query' => true, 'location_ac_appointments_primary' => '501-4'], 'location_profile');
 
     expect($primary)->toContain('Primary Care</span>')->not->toContain('Specialty Care');
@@ -261,7 +259,7 @@ test('the profile phone block builds the schema list of telephone numbers when t
     expect($collapsed)->toBe('"contactPoint": ["telephone": ["dash:501-1", "dash:501-2", "dash:501-3", "dash:501-6"],');
 });
 
-test('the profile phone block adds the children\'s hospital numbers to the schema list', function (): void {
+test("the profile phone block adds the children's hospital numbers to the schema list", function (): void {
     $schema = '';
 
     location_phone([
