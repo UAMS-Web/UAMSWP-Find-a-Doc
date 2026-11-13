@@ -41,26 +41,33 @@ if (! empty($block['align'])) {
 
 // Load values.
 if (empty($heading)) {
+    /** @var string|false|null $heading */
     $heading = get_field('block_fad_providers_heading');
 }
 if (empty($content_block)) {
+    /** @var string|false|null $content_block */
     $content_block = get_field('block_fad_providers_description');
 }
 if (empty($background_color)) {
+    /** @var string|false|null $background_color */
     $background_color = get_field('block_fad_providers_background_color');
 }
 if (empty($more)) {
+    /** @var bool|null $more */
     $more = get_field('block_fad_providers_more');
 }
 $more_button_description_attr = '';
 if ($more) {
     if (empty($more_text)) {
+        /** @var string|false|null $more_text */
         $more_text = get_field('block_fad_providers_more_text');
     }
     if (empty($more_button_text)) {
+        /** @var string|false|null $more_button_text */
         $more_button_text = get_field('block_fad_providers_more_button_text');
     }
     if (empty($more_button_url)) {
+        /** @var array{title: string, url: string, target: string}|false|null $more_button_url */
         $more_button_url = get_field('block_fad_providers_more_button_url');
     }
     if (empty($more_button_target) && is_array($more_button_url)) {
@@ -70,6 +77,7 @@ if ($more) {
         $more_button_url = $more_button_url['url'];
     }
     if (empty($more_button_description)) {
+        /** @var string|false|null $more_button_description */
         $more_button_description = get_field('block_fad_providers_more_button_description');
     }
     $more_button_description_attr = $more_button_description;
@@ -86,6 +94,7 @@ if ($more) {
     }
 }
 if (empty($count)) {
+    /** @var string|false|null $count */
     $count = get_field('block_fad_providers_count');
 }
 
@@ -94,9 +103,13 @@ $post_ids = [];
 $location_ids = [];
 $aoe_ids = [];
 // Grab ACF values
+/** @var array<int, int|string> $filter_id */
 $filter_id = get_field('block_fad_providers_filter_ids') ?: [];
+/** @var array<int, int|string> $filter_aoe */
 $filter_aoe = get_field('block_fad_providers_filter_aoe') ?: [];
+/** @var array<int, int|string>|false|null $filter_region */
 $filter_region = get_field('block_fad_providers_filter_region');
+/** @var array<int, int|string>|false|null $filter_location */
 $filter_location = get_field('block_fad_providers_filter_location');
 
 // Build Taxonomy Query, if region is set

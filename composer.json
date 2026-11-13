@@ -55,6 +55,7 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "UamswpFindADoc\\PhpStan\\": "phpstan/",
             "UamswpFindADoc\\Tests\\": "tests/"
         }
     }
