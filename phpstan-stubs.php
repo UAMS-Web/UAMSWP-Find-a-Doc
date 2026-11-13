@@ -58,13 +58,16 @@ function facetwp_display(string $type, mixed $name = ''): mixed {}
 function rwmb_meta(string $key, array $args = [], mixed $post_id = null): mixed {}
 
 /** WP YouTube Lyte: `lyte_parse()` in `wp-youtube-lyte.php` of futtta/wp-youtube-lyte at 712b5e283951. */
-function lyte_parse(string $the_content, bool $doExcerpt = false): mixed {}
+function lyte_parse(string $the_content, bool $doExcerpt = false): string {}
 
 /** The Genesis framework, the parent theme of uams-2020 (`Template: genesis` in its `style.css`). */
 function genesis(): void {}
 
+/** `__genesis_return_full_width_content()` in `lib/functions/layout.php` of the Genesis framework. */
+function __genesis_return_full_width_content(): string {}
+
 /** The UAMS theme. */
-function image_sizer(mixed $image, int $width, int $height, string $x = 'center', string $y = 'center', string $class = ''): mixed {}
+function image_sizer(mixed $image, int $width, int $height, string $x = 'center', string $y = 'center', string $class = ''): ?string {}
 
 function format_phone_us(mixed $phone): mixed {}
 

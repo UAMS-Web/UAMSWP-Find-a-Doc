@@ -114,7 +114,7 @@ function template_helper_registrations(): array
         ],
         'sp_titles_desc' => [
             'registration' => "add_filter('seopress_titles_desc', 'sp_titles_desc');",
-            'templates' => ['single-condition', 'single-locations', 'single-physicians', 'single-treatment', 'taxonomy-condition', 'taxonomy-treatment_procedure'],
+            'templates' => ['single-condition', 'single-locations', 'single-physicians', 'single-treatment'],
         ],
         'child_dequeue_skip_links' => [
             'registration' => "add_action('wp_enqueue_scripts', 'child_dequeue_skip_links');",
@@ -130,7 +130,7 @@ function template_helper_registrations(): array
         ],
         'uamswp_keyword_hook_header' => [
             'registration' => "add_action('wp_head', 'uamswp_keyword_hook_header');",
-            'templates' => ['single-condition', 'single-treatment', 'taxonomy-condition'],
+            'templates' => ['single-condition', 'single-treatment'],
         ],
         'uamswp_add_entry_class' => [
             'registration' => "add_filter('genesis_attr_entry', 'uamswp_add_entry_class');",
@@ -247,14 +247,16 @@ test('each template that sets a page title registers its own function at priorit
         }
     }
 
+    // The functions take the title alone, so a template registered with one accepted argument matches its function; the rest still pass two.
+    $single_argument = ['single-locations'];
     $expected = [];
 
     foreach (array_keys($registrations) as $name) {
-        $expected[$name] = [['uamswp_fad_title_'.str_replace('-', '_', $name), '15', '2']];
+        $expected[$name] = [['uamswp_fad_title_'.str_replace('-', '_', $name), '15', in_array($name, $single_argument, true) ? '1' : '2']];
     }
 
     expect($registrations)->toBe($expected)
-        ->and(array_keys($registrations))->toBe(['archive-condition', 'archive-taxonomy-conditions', 'archive-taxonomy-treatments', 'archive-treatments', 'single-clinical-resource', 'single-condition', 'single-expertise', 'single-locations', 'single-physicians', 'single-treatment', 'taxonomy-condition', 'taxonomy-treatment_procedure']);
+        ->and(array_keys($registrations))->toBe(['archive-condition', 'archive-taxonomy-conditions', 'archive-taxonomy-treatments', 'archive-treatments', 'single-clinical-resource', 'single-condition', 'single-expertise', 'single-locations', 'single-physicians', 'single-treatment']);
 });
 
 test('each listing template shows its images with a function named for the template', function (string $template): void {
@@ -264,11 +266,3 @@ test('each listing template shows its images with a function named for the templ
     expect(substr_count($source, "add_action('genesis_loop', '".$function."');"))->toBe(1)
         ->and(preg_match('/^function '.$function.'\(\): void/m', $source))->toBe(1);
 })->with(['doximity-list', 'mychart-list-provider', 'provider-image']);
-
-test('the treatment procedure keywords function keeps its own name and its registration', function (): void {
-    $source = template_sources()['taxonomy-treatment_procedure'];
-
-    expect(function_exists('uamswp_keyword_hook_header_taxonomy_treatment_procedure'))->toBeTrue()
-        ->and(preg_match('/^function uamswp_keyword_hook_header_taxonomy_treatment_procedure\(/m', $source))->toBe(0)
-        ->and(substr_count($source, "add_action('wp_head', 'uamswp_keyword_hook_header_taxonomy_treatment_procedure');"))->toBe(1);
-});

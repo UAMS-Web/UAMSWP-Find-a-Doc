@@ -20,47 +20,47 @@ if (function_exists('uams_fad_block_placeholder') && uams_fad_block_placeholder(
     return;
 }
 
-// Create id attribute allowing for custom "anchor" value.
-$id = '';
-if (empty($id) && isset($block)) {
-    $id = $block['id'];
-}
-if (empty($id)) {
-    $id = ! empty($module['anchor_id']) ? sanitize_title_with_dashes($module['anchor_id']) : 'module-'.($i + 1);
-}
-
-$id = 'locations-'.$id;
+// Create the id attribute from the id ACF gives the block.
+$block_data = uamswp_fad_assoc($block ?? null);
+$id = 'locations-'.uamswp_fad_str($block_data['id'] ?? null);
 
 $className = '';
-if (! empty($block['className'])) {
-    $className .= ' '.$block['className'];
+if (! empty($block_data['className'])) {
+    $className .= ' '.uamswp_fad_str($block_data['className']);
 }
-if (! empty($block['align'])) {
-    $className .= ' align'.$block['align'];
+if (! empty($block_data['align'])) {
+    $className .= ' align'.uamswp_fad_str($block_data['align']);
 }
 
 // Load values.
 if (empty($heading)) {
+    /** @var string|false|null $heading */
     $heading = get_field('block_fad_locations_heading');
 }
 if (empty($content_block)) {
+    /** @var string|false|null $content_block */
     $content_block = get_field('block_fad_locations_description');
 }
 if (empty($background_color)) {
+    /** @var string|false|null $background_color */
     $background_color = get_field('block_fad_locations_background_color');
 }
 if (empty($more)) {
+    /** @var bool|null $more */
     $more = get_field('block_fad_locations_more');
 }
 $more_button_description_attr = '';
 if ($more) {
     if (empty($more_text)) {
+        /** @var string|false|null $more_text */
         $more_text = get_field('block_fad_locations_more_text');
     }
     if (empty($more_button_text)) {
+        /** @var string|false|null $more_button_text */
         $more_button_text = get_field('block_fad_locations_more_button_text');
     }
     if (empty($more_button_url)) {
+        /** @var array{title: string, url: string, target: string}|false|null $more_button_url */
         $more_button_url = get_field('block_fad_locations_more_button_url');
     }
     if (empty($more_button_target) && is_array($more_button_url)) {
@@ -70,9 +70,10 @@ if ($more) {
         $more_button_url = $more_button_url['url'];
     }
     if (empty($more_button_description)) {
+        /** @var string|false|null $more_button_description */
         $more_button_description = get_field('block_fad_locations_more_button_description');
     }
-    $more_button_description_attr = $more_button_description;
+    $more_button_description_attr = uamswp_fad_str($more_button_description);
     $more_button_description_attr = str_replace('"', "'", $more_button_description_attr); // Replace double quotes with single quote
     $more_button_description_attr = str_replace('&#8217;', "'", $more_button_description_attr); // Replace right single quote with single quote
     $more_button_description_attr = str_replace('&nbsp;', ' ', $more_button_description_attr); // Convert non-breaking space entity text to a normal space before it is encoded
@@ -86,9 +87,13 @@ if ($more) {
     }
 }
 
+/** @var array<int, int|string> $filter_ids */
 $filter_ids = get_field('block_fad_locations_filter_ids') ?: [];
+/** @var array<int, int|string>|false|null $filter_type */
 $filter_type = get_field('block_fad_locations_filter_type');
+/** @var array<int, int|string>|false|null $filter_region */
 $filter_region = get_field('block_fad_locations_filter_region');
+/** @var array<int, int|string> $filter_aoe */
 $filter_aoe = get_field('block_fad_locations_filter_aoe') ?: [];
 
 $post_ids = [];
@@ -130,7 +135,7 @@ if ($filter_type || $filter_region || $filter_aoe || $filter_ids) {
             'fields' => 'ids',
         ]);
         $filtered_query = new WP_Query($args);
-        $post_ids = array_unique(array_merge($filter_ids, $filtered_query->posts));
+        $post_ids = array_unique(array_merge($filter_ids, uamswp_fad_ids($filtered_query->posts)));
     } else {
         $post_ids = $filter_ids;
     }
@@ -147,12 +152,12 @@ if ($filter_type || $filter_region || $filter_aoe || $filter_ids) {
     $location_query = new WP_Query($args);
 
     if ($location_query->have_posts()) { ?>
-        <section class="uams-module location-list alignfull <?php echo $background_color ?: 'bg-auto'; ?>" id="<?php echo $id; ?>">
+        <section class="uams-module location-list alignfull <?php echo uamswp_fad_str($background_color) ?: 'bg-auto'; ?>" id="<?php echo $id; ?>">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="module-title"><span class="title"><?php echo $heading; ?></span></h2>
-                        <?php echo $content_block ? '<div class="module-description"><p>'.$content_block.'</p></div>' : ''; ?>
+                        <h2 class="module-title"><span class="title"><?php echo uamswp_fad_str($heading); ?></span></h2>
+                        <?php echo $content_block ? '<div class="module-description"><p>'.uamswp_fad_str($content_block).'</p></div>' : ''; ?>
                         <div class="card-list-container location-card-list-container">
                             <div class="card-list">
                             <?php while ($location_query->have_posts()) {
@@ -164,9 +169,9 @@ if ($filter_type || $filter_region || $filter_aoe || $filter_ids) {
                         </div>
                         <?php if ($more) { ?>
                             <div class="more">
-                                <p class="lead"><?php echo $more_text; ?></p>
+                                <p class="lead"><?php echo uamswp_fad_str($more_text); ?></p>
                                 <div class="cta-container">
-                                    <a href="<?php echo esc_url($more_button_url); ?>" class="btn btn-outline-<?php echo $more_button_color; ?>" aria-label="<?php echo esc_attr($more_button_description_attr); ?>"<?php echo uams_fad_link_target_attributes($more_button_target ?? null); ?>><?php echo esc_html($more_button_text); ?></a>
+                                    <a href="<?php echo esc_url(uamswp_fad_str($more_button_url)); ?>" class="btn btn-outline-<?php echo uamswp_fad_str($more_button_color); ?>" aria-label="<?php echo esc_attr($more_button_description_attr); ?>"<?php echo uams_fad_link_target_attributes($more_button_target ?? null); ?>><?php echo esc_html(uamswp_fad_str($more_button_text)); ?></a>
                                 </div>
                             </div>
                         <?php } // endif?>

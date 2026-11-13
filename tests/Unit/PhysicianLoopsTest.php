@@ -193,13 +193,13 @@ test('the provider loop prints no locations column without a published location'
         ->and(physician_loop([5], ['physician_locations' => []]))->not->toContain('Locations</h4>');
 });
 
-test('the provider loop warns about a provider with no locations value', function (): void {
+test('the provider loop prints no locations column for a provider with no locations value and raises no warning', function (): void {
     $output = '';
     $warnings = uamswp_test_capture_warnings(static function () use (&$output): void {
         $output = physician_loop([5], ['physician_locations' => null]);
     });
 
-    expect($warnings)->toBe(['foreach() argument must be of type array|object, null given'])
+    expect($warnings)->toBe([])
         ->and($output)->not->toContain('Locations</h4>');
 });
 
@@ -219,7 +219,7 @@ function physician_loop_mb(array $ids, array $fields = [], array $locations = []
 
     $output = '';
     $warnings = uamswp_test_capture_warnings(static function () use (&$output): void {
-        $output = uamswp_test_include_partial('fwp/_physician-loop-mb', ['post' => (object) ['ID' => 99], 'id' => 5]);
+        $output = uamswp_test_include_partial('fwp/_physician-loop-mb', ['post' => (object) ['ID' => 99]]);
     });
     physician_loops_warnings($warnings);
 
@@ -342,4 +342,11 @@ test('the provider loop stops looking for a published location at the first one'
     // One read to find the first published location, then one read for each location while it prints them.
     expect(array_count_values($reads))->toBe([11 => 2, 12 => 1, 13 => 1])
         ->and(trim((string) preg_replace('/\s+/', ' ', $second)))->toBe($output);
+});
+
+test('the Meta Box provider loop reads the pedigree of the current provider without an undefined variable', function (): void {
+    $output = physician_loop_mb([5], ['physician_pedigree' => 'III']);
+
+    expect($output)->toContain('Jo Smith&nbsp;III</h2>')
+        ->and(physician_loops_warnings())->toBe([]);
 });

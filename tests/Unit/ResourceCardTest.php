@@ -38,7 +38,11 @@ function resource_card(array $fields = [], array $options = []): string
         return $statuses[$id] ?? 'publish';
     });
     when('get_the_excerpt')->justReturn($options['excerpt'] ?? 'An excerpt.');
-    when('get_the_content')->justReturn($options['content'] ?? '');
+    when('get_the_content')->alias(static function (mixed ...$arguments) use ($options): string {
+        $GLOBALS['resource_card_content_arguments'] = $arguments;
+
+        return $options['content'] ?? '';
+    });
     when('wp_strip_all_tags')->alias(static fn (string $text): string => strip_tags($text));
     when('wp_trim_words')->alias(static fn (string $text, int $words, string $more): string => 'TRIMMED'.$more);
     when('esc_attr')->alias(static fn (string $text): string => htmlspecialchars($text));
@@ -250,4 +254,16 @@ test('the card reads past the unpublished related posts to find a published one'
     resource_card(['clinical_resource_conditions' => [41, 42, 43]], ['status_log' => $log, 'statuses' => [41 => 'draft', 42 => 'draft']]);
 
     expect(array_count_values($log->getArrayCopy()))->toBe([41 => 2, 42 => 2, 43 => 2]);
+});
+
+test('the card reads the content of its own resource when there is no excerpt', function (): void {
+    $GLOBALS['resource_card_content_arguments'] = null;
+
+    // The post is the third argument of get_the_content(); the card once passed it as the first, the "more" link text.
+    expect(resource_card([], ['excerpt' => '', 'content' => '<b>From content</b>']))->toContain('From content')
+        ->and($GLOBALS['resource_card_content_arguments'])->toBe([null, false, 7]);
+});
+
+test('the card prints no type label for a resource without a type', function (): void {
+    expect(resource_card(['clinical_resource_type' => null]))->toContain('<span class="sr-only">(</span><span class="sr-only">)</span>');
 });

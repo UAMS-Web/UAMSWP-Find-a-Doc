@@ -1987,6 +1987,7 @@ function uamswp_fad_location_source_ids($post_id = 0)
          * either that or a WP_Post, so a changed return format cannot
          * silently break this.
          */
+        /** @var mixed $parent */
         $parent = get_field('location_parent_id', $post_id);
         $parent = $parent instanceof WP_Post ? $parent : get_post(uamswp_fad_int($parent));
 

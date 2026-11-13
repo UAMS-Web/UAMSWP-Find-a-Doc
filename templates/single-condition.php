@@ -60,7 +60,7 @@ $embed_code = get_field('condition_embed_codes');
 // The MedlinePlus type is a string once it is truthy, so a loose and a strict comparison with a string agree.
 // @pest-mutate-ignore: NotEqualToNotIdentical
 if (
-    ($medline_type && $medline_type != 'none' && $medline_code && ! empty($medline_code)) // if the medline plus syndication option is filled in
+    ($medline_type && $medline_type != 'none' && $medline_code) // if the medline plus syndication option is filled in
     || $embed_code // or if the syndication embed field has a value
 ) {
     $syndication = true;
@@ -111,7 +111,7 @@ if ($locations && $location_query->have_posts()) {
     foreach ($locations as $location) {
         // get_post_status() returns a string or false, so a loose and a strict comparison with a string agree.
         // @pest-mutate-ignore: EqualToIdentical
-        if (get_post_status($location) == 'publish') {
+        if (get_post_status(uamswp_fad_int($location)) == 'publish') {
             $location_valid = true;
             break;
         }
@@ -119,7 +119,7 @@ if ($locations && $location_query->have_posts()) {
 }
 
 if ($location_valid) {
-    $location_ids = $location_query->posts;
+    $location_ids = uamswp_fad_ids($location_query->posts);
 
     $location_region_IDs = [];
     // while ($location_query->have_posts()) : $location_query->the_post();
@@ -131,8 +131,7 @@ if ($location_valid) {
     $location_region_IDs = array_unique($location_region_IDs);
     $location_region_list = [];
     foreach ($location_region_IDs as $location_region_ID) {
-        $location_slug = get_term_by('ID', $location_region_ID, 'region');
-        $location_region_list[] = is_array($location_slug) ? $location_slug->slug : '';
+        $location_region_list[] = uamswp_fad_term_slug($location_region_ID, 'region');
     }
 
     // if cookie is set, run modified physician query
@@ -187,7 +186,7 @@ if ($location_valid) {
             $id = get_the_ID();
             include UAMS_FAD_PATH.'/templates/loops/location-card.php';
         }
-        echo '<data id="location_ids" data-postids="'.implode(',', $location_query->posts).'," data-regions="'.implode(',', $location_region_list).',"></data>';
+        echo '<data id="location_ids" data-postids="'.implode(',', uamswp_fad_ids($location_query->posts)).'," data-regions="'.implode(',', $location_region_list).',"></data>';
     } else {
         echo '<span class="no-results">Sorry, there are no locations matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
     }
@@ -305,7 +304,7 @@ if ($physicians) {
 if ($physicians && $physicians_query->have_posts()) {
     $show_providers_section = true;
     $jump_link_count++;
-    $provider_ids = $physicians_query->posts;
+    $provider_ids = uamswp_fad_ids($physicians_query->posts);
     wp_reset_postdata();
 } else {
     $show_providers_section = false;
@@ -364,11 +363,11 @@ if ($jump_link_count >= $jump_link_count_min) {
                    $keyword_text = '';
 if ($keywords) {
     $i = 1;
-    foreach ($keywords as $keyword) {
+    foreach (uamswp_fad_arr($keywords) as $keyword) {
         if ($i > 1) {
             $keyword_text .= '; ';
         }
-        $keyword_text .= $keyword['text'];
+        $keyword_text .= uamswp_fad_str(uamswp_fad_assoc($keyword)['text'] ?? null);
         $i++;
     }
     echo '<p class="text-callout text-callout-info">Also called: '.$keyword_text.'</p>';
@@ -379,7 +378,7 @@ if ($keywords) {
     // The MedlinePlus type is a string once it is not empty, so a loose and a strict comparison with a string agree.
     // @pest-mutate-ignore: NotEqualToNotIdentical
     if (! empty($medline_type) && $medline_type != 'none' && ! empty($medline_code)) {
-        echo display_medline_api_data(trim($medline_code), $medline_type);
+        display_medline_api_data(trim(uamswp_fad_str($medline_code)), uamswp_fad_str($medline_type));
     }
 ?>
 				<?php
@@ -403,37 +402,34 @@ if ($keywords) {
     <?php // Begin CTA Bar(s)
             if ($cta_repeater) {
                 $i = 1;
-                foreach ($cta_repeater as $cta) {
-                    $cta_heading = $cta['cta_bar_heading'];
-                    $cta_body = $cta['cta_bar_body'];
-                    $cta_action_type = $cta['cta_bar_action_type'];
+                foreach (uamswp_fad_arr($cta_repeater) as $cta_row) {
+                    $cta = uamswp_fad_assoc($cta_row);
+                    $cta_heading = uamswp_fad_str($cta['cta_bar_heading'] ?? null);
+                    $cta_body = uamswp_fad_str($cta['cta_bar_body'] ?? null);
+                    $cta_action_type = uamswp_fad_str($cta['cta_bar_action_type'] ?? null);
 
                     $cta_button_text = '';
                     $cta_button_url = '';
                     $cta_button_desc = '';
-                    // The action type is a string or null, so a loose and a strict comparison with a string agree.
+                    // The action type is a string, so a loose and a strict comparison with a string agree.
                     // @pest-mutate-ignore: EqualToIdentical
                     if ($cta_action_type == 'url') {
-                        $cta_button_text = $cta['cta_bar_button_text'];
-                        $cta_button_url = $cta['cta_bar_button_url'];
-                        $cta_button_desc = $cta['cta_bar_button_description'];
+                        $cta_button_text = uamswp_fad_str($cta['cta_bar_button_text'] ?? null);
+                        $cta_button_url = $cta['cta_bar_button_url'] ?? null;
+                        $cta_button_desc = uamswp_fad_str($cta['cta_bar_button_description'] ?? null);
                     }
 
                     $cta_phone_prepend = '';
                     $cta_phone = '';
-                    $cta_phone_link = '';
-                    // The action type is a string or null, so a loose and a strict comparison with a string agree.
+                    // The action type is a string, so a loose and a strict comparison with a string agree.
                     // @pest-mutate-ignore: EqualToIdentical
                     if ($cta_action_type == 'phone') {
-                        $cta_phone_prepend = $cta['cta_bar_phone_prepend'] ?: 'Call';
-                        $cta_phone = $cta['cta_bar_phone'];
-                        $cta_phone_link = '<a href="tel:'.format_phone_dash($cta_phone).'">'.format_phone_us($cta_phone).'</a>';
+                        $cta_phone_prepend = uamswp_fad_str($cta['cta_bar_phone_prepend'] ?? null) ?: 'Call';
+                        $cta_phone = uamswp_fad_str($cta['cta_bar_phone'] ?? null);
                     }
 
                     $cta_layout = 'cta-bar-centered';
                     $cta_size = 'normal';
-                    $cta_use_image = false;
-                    $cta_image = '';
                     $cta_background_color = 'bg-auto';
                     $cta_btn_color = 'primary';
 
@@ -442,15 +438,7 @@ if ($keywords) {
                     // @pest-mutate-ignore: ConcatEqualToEqual
                     $cta_className .= ' '.$cta_layout;
                     $cta_className .= ' '.$cta_background_color;
-                    $cta_className .= $cta_use_image ? ' bg-image' : '';
-                    // Both sizes are a string or null, so a loose and a strict comparison with a string agree.
-                    // @pest-mutate-ignore: EqualToIdentical
-                    if ($cta_cta_size == 'small') {
-                        $cta_className .= ' cta-bar-sm';
-                    } elseif ($cta_size == 'large') {
-                        $cta_className .= ' extra-padding cta-bar-lg';
-                    }
-                    // The action type is a string or null, so a loose and a strict comparison with a string agree.
+                    // The action type is a string, so a loose and a strict comparison with a string agree.
                     // @pest-mutate-ignore: EqualToIdentical
                     if ($cta_action_type == 'none') {
                         $cta_className .= ' no-link';
@@ -468,14 +456,14 @@ if ($keywords) {
 											<div class="text-container">
 												'.$cta_body.'
 											</div>';
-                    // The action type is a string or null, so a loose and a strict comparison with a string agree.
+                    // The action type is a string, so a loose and a strict comparison with a string agree.
                     // @pest-mutate-ignore: EqualToIdentical
                     echo $cta_action_type == 'url' ?
                     '<div class="btn-container">
 												'.uams_fad_cta_button_anchor($cta_button_url, $cta_button_text, $cta_button_desc, $cta_btn_color, $cta_size, $cta_heading).'
 											</div>'
                     : '';
-                    // The action type is a string or null, so a loose and a strict comparison with a string agree.
+                    // The action type is a string, so a loose and a strict comparison with a string agree.
                     // @pest-mutate-ignore: EqualToIdentical
                     echo $cta_action_type == 'phone' ?
                     '<div class="btn-container">
@@ -537,11 +525,9 @@ if ($show_jump_links_section) { ?>
                                 <a class="nav-link" href="#expertise" title="Jump to the section of this page about Areas of Expertise">Areas of Expertise</a>
                             </li>
                         <?php } ?>
-                        <?php if ($show_appointment_section) { ?>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#appointment-info" title="Jump to the section of this page about making an appointment">Make an Appointment</a>
-                            </li>
-                        <?php } ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#appointment-info" title="Jump to the section of this page about making an appointment">Make an Appointment</a>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -590,10 +576,9 @@ if ($show_related_resource_section) {
     $resource_heading_related_name = $page_title; // To what is it related?
     $resource_more_suppress = false; // Force div.more to not display
     $resource_more_key = '_resource_conditions';
+    /** @var WP_Post $post */
     $resource_more_value = $post->post_name;
-    if ($show_related_resource_section) {
-        include UAMS_FAD_PATH.'/templates/blocks/clinical-resources.php';
-    }
+    include UAMS_FAD_PATH.'/templates/blocks/clinical-resources.php';
 }
 // End Clinical Resources Section
 
@@ -616,8 +601,8 @@ if ($show_treatments_section) { ?>
 								<ul class="list">
 								<?php while ($treatments_query_cpt->have_posts()) {
 								    $treatments_query_cpt->the_post();
-								    $treatment_id = get_the_ID();
-								    $treatment_permalink = get_permalink($treatment_id);
+								    $treatment_id = uamswp_fad_int(get_the_ID());
+								    $treatment_permalink = uamswp_fad_str(get_permalink($treatment_id));
 								    $treatment_title = get_the_title();
 								    $treatment_title_attr = str_replace('"', "'", $treatment_title);
 								    $treatment_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities(str_replace('&nbsp;', ' ', $treatment_title_attr), ENT_HTML401, 'utf-8')));
@@ -639,6 +624,8 @@ if ($show_treatments_section) { ?>
 // Begin Providers Section
 if ($show_providers_section) {
 
+    /** @var WP_Query $physicians_query */
+    /** @var list<int> $provider_ids */
     // Get available regions - All available, since no titles set on initial load
     $region_IDs = [];
     while ($physicians_query->have_posts()) {
@@ -652,7 +639,7 @@ if ($show_providers_section) {
     $region_IDs = array_unique($region_IDs);
     $region_list = [];
     foreach ($region_IDs as $region_ID) {
-        $region_list[] = get_term_by('ID', $region_ID, 'region')->slug;
+        $region_list[] = uamswp_fad_term_slug($region_ID, 'region');
     }
 
     // if cookie is set, run modified physician query
@@ -704,9 +691,9 @@ if ($show_providers_section) {
                                         $physicians_query->the_post();
                                         $id = get_the_ID();
                                         include UAMS_FAD_PATH.'/templates/loops/physician-card.php';
-                                        $title_list[] = get_field('physician_title', $id);
+                                        $title_list[] = uamswp_fad_str(get_field('physician_title', $id));
                                     }
-                                    echo '<data id="provider_ids" data-postids="'.implode(',', $physicians_query->posts).'," data-regions="'.implode(',', $region_list).'," data-titles="'.implode(',', array_unique($title_list)).',"></data>';
+                                    echo '<data id="provider_ids" data-postids="'.implode(',', uamswp_fad_ids($physicians_query->posts)).'," data-regions="'.implode(',', $region_list).'," data-titles="'.implode(',', array_unique($title_list)).',"></data>';
                                 } else {
                                     echo '<span class="no-results">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
                                 }
@@ -726,7 +713,7 @@ if ($show_providers_section) {
             <?php if (isset($_GET['_filter_region'])) { ?>
                 <script type="text/javascript">
 					// Set cookie to expire at end of session
-					document.cookie = "wp_filter_region=<?php echo htmlspecialchars($_GET['_filter_region']); ?>; path=/; domain="+window.location.hostname;
+					document.cookie = "wp_filter_region=<?php echo htmlspecialchars(uamswp_fad_str($_GET['_filter_region'])); ?>; path=/; domain="+window.location.hostname;
 				</script>
             <?php } ?>
         </section>
@@ -766,9 +753,7 @@ wp_reset_postdata();
 // End Areas of Expertise Section
 
 // Begin Appointment Information Section
-if ($show_appointment_section) {
-    include UAMS_FAD_PATH.'/templates/blocks/appointment.php';
-}
+include UAMS_FAD_PATH.'/templates/blocks/appointment.php';
 // End Appointment Information Section
 ?>
 	</main>

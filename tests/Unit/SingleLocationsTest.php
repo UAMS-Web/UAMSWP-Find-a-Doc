@@ -109,7 +109,7 @@ test('the schema image is the featured image, or else the first location image',
 });
 
 test('the location photo is sized for the schema image', function (): void {
-    expect(single_location(['location_wayfinding_photo' => 501])['locationphoto'])->toBe('https://example.test/photo-640x480.jpg');
+    expect(single_location(['location_wayfinding_photo' => 501])['locationphoto'])->toBe('https://example.test/photo-501-640x480.jpg');
 });
 
 test('a location without an image has no photo address', function (): void {
@@ -336,7 +336,7 @@ test('the template overrides the theme titles', function (): void {
 
     expect(uamswp_test_render_hooks()['add_filter'])->toBe([
         ['seopress_titles_desc', 'sp_titles_desc'],
-        ['seopress_titles_title', 'uamswp_fad_title_single_locations', 15, 2],
+        ['seopress_titles_title', 'uamswp_fad_title_single_locations', 15, 1],
     ]);
 });
 
@@ -661,6 +661,105 @@ test('a modification that only loosely equals a name does not change the alert',
     expect($vars['location_alert_title'])->toBe('System')
         ->and($vars['location_alert_text'])->toBe('System.')
         ->and($vars['location_alert_color'])->toBe('blue');
+});
+
+test('each section that has content adds one jump link', function (array $fields, array $options): void {
+    expect(single_location($fields, $options)['jump_link_count'])->toBe(1);
+})->with([
+    'telemedicine' => [['location_hours_group' => ['location_telemed_query' => true]], []],
+    'a portal' => [['location_portal' => 60], ['terms' => [60 => 'Portal']]],
+    'providers' => [['physician_locations' => [7]], ['queries' => [[], [7]]]],
+    'conditions' => [['location_conditions_cpt' => [1]], ['queries' => [[], [1]]]],
+    'treatments' => [['location_treatments_cpt' => [2]], ['queries' => [[], [], [2]]]],
+    'areas of expertise' => [['location_expertise' => [3]], ['queries' => [[], [], [], [3]]]],
+    'child locations' => [[], ['pages' => [1], 'queries' => [[], [], [], [], [11]]]],
+    'clinical resources' => [['location_clinical_resources' => [4]], ['queries' => [[4]]]],
+]);
+
+test('the providers section resets the post data once', function (): void {
+    $on = single_location(['physician_locations' => [7]], ['queries' => [[], [7]]]);
+    $off = single_location(['physician_locations' => [7]], ['queries' => [[], []]]);
+
+    // The section and the provider card it prints each reset the post data once.
+    expect(($on['single_location_resets'] ?? 0) - ($off['single_location_resets'] ?? 0))->toBe(2);
+});
+
+test('the title appendix names the location and the child page lookup asks for locations', function (): void {
+    $vars = single_location();
+
+    expect($vars['title_append'])->toBe(' at '.$vars['page_title_phrase'])
+        ->and($vars['single_location_pages_args'])->toBe(['child_of' => $vars['current_id'], 'post_type' => 'location'])
+        ->and($vars['show_child_locations_section'])->toBeFalse()
+        ->and(WP_Query::$queries)->toHaveCount(4);
+});
+
+test('the portal name is cleaned for attributes', function (string $name, string $expected): void {
+    expect(single_location(['location_portal' => 60], ['terms' => [60 => $name]])['portal_name_attr'])->toBe($expected);
+})->with([
+    'an entity written as text' => ['A&nbsp;B', 'A B'],
+    'an ampersand entity' => ['Fish &amp; Chips', 'Fish &amp; Chips'],
+    'a non-breaking space' => ["A\u{00A0}B", 'A B'],
+    'a bare ampersand' => ['x&y', 'x&y'],
+]);
+
+test('the scheduling text falls back to the default only when empty', function (): void {
+    $blank = single_location(['location_scheduling_title_general' => '', 'location_scheduling_intro_general' => '']);
+    $set = single_location(['location_scheduling_title_general' => 'Book', 'location_scheduling_intro_general' => 'Pick.']);
+
+    expect($blank['location_scheduling_title'])->toBe('Schedule an Appointment Online')
+        ->and($set['location_scheduling_title'])->toBe('Book')
+        ->and($set['location_scheduling_intro'])->toBe('Pick.');
+});
+
+test('the address block prints each address line with a line break', function (): void {
+    $suite = single_location(['location_address_1' => '1 Main St', 'location_suite' => 'Suite 4'])['single_location_output'];
+    $deprecated = single_location(['location_address_1' => '1 Main St', 'location_address_2' => 'Old line'])['single_location_output'];
+
+    expect(preg_replace('/\s+/', ' ', $suite))->toContain('1 Main St<br/> Suite 4<br/> ')
+        ->and(preg_replace('/\s+/', ' ', $deprecated))->toContain('1 Main St<br/> Old line<br/> ');
+});
+
+test('the structured data holds the street address, city, state and zip', function (): void {
+    $vars = single_location(['location_address_1' => '1 Main St', 'location_suite' => 'Suite 4', 'location_city' => 'Little Rock', 'location_state' => 'AR', 'location_zip' => '72205']);
+    $address = json_decode('{'.rtrim(trim($vars['location_schema']), ',').'}', true);
+
+    expect($address)->toBe(['address' => ['@type' => 'PostalAddress', 'streetAddress' => '1 Main St Suite 4', 'addressLocality' => 'Little Rock', 'addressRegion' => 'AR', 'postalCode' => '72205']]);
+});
+
+/**
+ * Render a closing location and return the closing alert text, with the whitespace collapsed.
+ *
+ * @param  array<string, mixed>  $fields
+ */
+function single_location_closing_alert(array $fields): string
+{
+    $output = single_location($fields + ['location_closing' => true, 'location_closing_date' => 'January 1, 2020'])['single_location_output'];
+
+    return preg_match('#<div class="alert alert-warning" role="alert">(.*?)</div>#s', $output, $match) === 1 ? trim((string) preg_replace('/\s+/', ' ', $match[1])) : '';
+}
+
+test('the closing alert says how the location closes and when it reopens', function (): void {
+    $permanent = single_location_closing_alert(['location_closing_length' => 'permanent', 'location_reopen_known' => 'date', 'location_reopen_date' => 'January 1, 2099']);
+    $temporary = single_location_closing_alert(['location_closing_length' => 'temporary', 'location_reopen_known' => 'date', 'location_reopen_date' => 'January 1, 2099']);
+    $same = single_location_closing_alert(['location_closing_date' => 'January 1, 2099', 'location_closing_length' => 'temporary', 'location_reopen_known' => 'date', 'location_reopen_date' => 'January 1, 2099']);
+    $unknown = single_location_closing_alert(['location_closing_length' => 'temporary', 'location_reopen_known' => 'tbd']);
+    $tbdPermanent = single_location_closing_alert(['location_closing_length' => 'permanent', 'location_reopen_known' => 'tbd']);
+    $noDate = single_location_closing_alert(['location_closing_length' => 'temporary', 'location_reopen_known' => 'date', 'location_reopen_date' => '']);
+
+    expect($permanent)->toContain('permanently closed.')->not->toContain('reopen')
+        ->and($temporary)->toContain('temporarily closed.')->toContain('It is scheduled to reopen on January 1, 2099.')
+        ->and($same)->toContain('It is scheduled to reopen on January 1, 2099.')
+        ->and($unknown)->toContain('It will remain closed until further notice.')
+        ->and($tbdPermanent)->not->toContain('until further notice')
+        ->and($noDate)->not->toContain('scheduled to reopen')->not->toContain('until further notice');
+});
+
+test('the closing alert announces a closing that has not started', function (): void {
+    $future = single_location_closing_alert(['location_closing_date' => 'January 1, 2099', 'location_closing_length' => 'temporary', 'location_reopen_known' => 'tbd']);
+    $permanent = single_location_closing_alert(['location_closing_date' => 'January 1, 2099', 'location_closing_length' => 'permanent']);
+
+    expect($future)->toContain('This location will be closing temporarily beginning on January 1, 2099.')
+        ->and($permanent)->toContain('This location will be closing permanently on January 1, 2099.');
 });
 
 test('a location that is not closing has empty closing text values', function (): void {

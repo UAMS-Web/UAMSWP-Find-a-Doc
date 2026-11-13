@@ -397,14 +397,22 @@ test('the locations section lists the cards of the locations found', function ()
         ->and($output)->toContain('</div><!-- .card --><data id="location_ids" data-postids="21,22," data-regions=","></data></div></div></div></div></div></section>');
 });
 
-test('currently the region of each location is listed as an empty slug, once for each region', function (): void {
+test('the region slug of each location is listed once for each region', function (): void {
     $fields_by_id = [21 => ['location_region' => 5], 22 => ['location_region' => 6], 23 => ['location_region' => 5]];
-    $vars = single_condition(['condition_locations' => [21, 22, 23]], ['found' => ['location' => [21, 22, 23]], 'fields_by_id' => $fields_by_id]);
+    $vars = single_condition(['condition_locations' => [21, 22, 23]], ['found' => ['location' => [21, 22, 23]], 'fields_by_id' => $fields_by_id, 'regions' => [5 => 'north', 6 => 'south']]);
 
-    // get_term_by() returns an object, which the template reads only when it is an array.
+    // The slug used to be read only when the term was an array, which get_term_by() never returns (#1348).
     expect($vars['location_region_IDs'])->toBe([0 => 5, 1 => 6])
-        ->and($vars['location_region_list'])->toBe(['', ''])
-        ->and($vars['single_ontology_output'])->toContain('data-regions=",,"');
+        ->and($vars['location_region_list'])->toBe(['north', 'south'])
+        ->and($vars['single_ontology_output'])->toContain('data-regions="north,south,"');
+});
+
+test('a region term that no longer exists is listed as an empty slug', function (): void {
+    $fields_by_id = [21 => ['location_region' => 5], 22 => ['location_region' => 9]];
+    $vars = single_condition(['condition_locations' => [21, 22]], ['found' => ['location' => [21, 22]], 'fields_by_id' => $fields_by_id, 'regions' => [5 => 'north', 9 => false]]);
+
+    expect($vars['location_region_list'])->toBe(['north', ''])
+        ->and($vars['single_ontology_output'])->toContain('data-regions="north,,"');
 });
 
 test('a region filter in the cookie or the query lists only the locations in that region', function (array $get, array $cookie, string $region): void {
@@ -698,7 +706,7 @@ test('a call to action bar with a link has a button', function (): void {
 
     expect($output)->toContain('<section class="uams-module cta-bar cta-bar-centered bg-auto" id="cta-bar-1" aria-label="Get Help"><div class="container-fluid"><div class="row"><div class="col-12"><div class="inner-container"><div class="cta-heading"><h2>Get Help</h2></div><div class="cta-body"><div class="text-container"><p>Body.</p></div><div class="btn-container"><a href="https://example.test/go/" aria-label="Go there" class=" btn btn-primary" data-moduletitle="Get Help">Go</a></div></div></div></div></div></div></section>')
         ->and([$vars['cta_button_text'], $vars['cta_button_url'], $vars['cta_button_desc']])->toBe(['Go', ['url' => 'https://example.test/go/', 'target' => ''], 'Go there'])
-        ->and([$vars['cta_phone_prepend'], $vars['cta_phone'], $vars['cta_phone_link']])->toBe(['', '', '']);
+        ->and([$vars['cta_phone_prepend'], $vars['cta_phone']])->toBe(['', '']);
 });
 
 test('a call to action bar with a phone number has a call link', function (): void {
@@ -706,7 +714,7 @@ test('a call to action bar with a phone number has a call link', function (): vo
     $output = uamswp_test_single_ontology_markup($vars['single_ontology_output']);
 
     expect($output)->toContain('<div class="cta-body"><div class="text-container"><p>Body.</p></div><div class="btn-container"><a href="tel:5015551234" data-moduletitle="Get Help">Dial<span class="no-break">5015551234</span></a></div></div>')
-        ->and([$vars['cta_phone_prepend'], $vars['cta_phone'], $vars['cta_phone_link']])->toBe(['Dial', '5015551234', '<a href="tel:dash:5015551234">us:5015551234</a>'])
+        ->and([$vars['cta_phone_prepend'], $vars['cta_phone']])->toBe(['Dial', '5015551234'])
         ->and([$vars['cta_button_text'], $vars['cta_button_url'], $vars['cta_button_desc']])->toBe(['', '', '']);
 });
 
@@ -721,13 +729,13 @@ test('each call to action bar is numbered in turn', function (): void {
 
     expect($vars['single_ontology_output'])->toContain('id="cta-bar-1" aria-label="Get Help"')
         ->and($vars['single_ontology_output'])->toContain('id="cta-bar-2" aria-label="More"')
-        ->and([$vars['cta_layout'], $vars['cta_size'], $vars['cta_use_image'], $vars['cta_image'], $vars['cta_background_color'], $vars['cta_btn_color']])->toBe(['cta-bar-centered', 'normal', false, '', 'bg-auto', 'primary']);
+        ->and([$vars['cta_layout'], $vars['cta_size'], $vars['cta_background_color'], $vars['cta_btn_color']])->toBe(['cta-bar-centered', 'normal', 'bg-auto', 'primary']);
 });
 
-test('currently a call to action bar reads a size variable that is never set', function (): void {
+test('call to action bars raise no warnings of their own', function (): void {
     $vars = single_condition(['condition_cta' => [single_condition_cta(), single_condition_cta()]]);
 
-    expect(uamswp_test_single_ontology_warnings($vars, 'single-condition.php'))->toBe(['Undefined variable $cta_cta_size', 'Undefined variable $cta_cta_size']);
+    expect(uamswp_test_single_ontology_warnings($vars, 'single-condition.php'))->toBe([]);
 });
 
 test('a page related to everything raises no warnings of its own', function (): void {

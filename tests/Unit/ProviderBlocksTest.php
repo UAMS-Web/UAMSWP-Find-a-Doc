@@ -151,7 +151,7 @@ function recognition_block(array $fields, array $terms, array $found, array $var
     provider_blocks_world($fields, $terms);
     WP_Query::$queue = [$found];
 
-    return uamswp_test_include_partial('blocks/recognitions', $variables + ['module' => [], 'i' => 0]);
+    return uamswp_test_include_partial('blocks/recognitions', $variables);
 }
 
 test('the recognition list prints a row of name and title for each provider found', function (): void {
@@ -179,6 +179,13 @@ test('the recognition list leaves the title cell empty without an occupation tit
     expect($output)->toContain('Jo Smith</a></td><td>&nbsp;</td></tr>');
 });
 
+test('the recognition list leaves the title cell empty, and skips the degree, when their terms no longer exist', function (): void {
+    // get_term() finds neither term 7 nor degree 3, as for a deleted term.
+    $output = recognition_block(['physician_first_name:21' => 'Jo', 'physician_last_name:21' => 'Smith', 'physician_title:21' => 7, 'physician_degree:21' => [3]], [], [21]);
+
+    expect($output)->toContain('title="Jo Smith">Jo Smith</a></td><td>&nbsp;</td></tr>');
+});
+
 test('the recognition list takes the list from the variable the block sets, before the field', function (): void {
     recognition_block(['field_select_recognition_list' => [5]], [], [], ['recognition_id' => [7]]);
 
@@ -196,7 +203,7 @@ test('the recognition list prints only the placeholder for a new block in the ed
         ->and($output)->not->toContain('<table');
 });
 
-test('the recognition list takes the anchor from the module when there is no block', function (): void {
+test('the recognition list reads no module or index variable for its anchor', function (): void {
     recognition_block([], [], [], ['module' => ['anchor_id' => 'My Anchor'], 'i' => 3]);
 
     expect(WP_Query::$queries)->toHaveCount(1);
@@ -219,7 +226,7 @@ function providers_block(array $fields, array $queries, array $variables = []): 
     ]);
     WP_Query::$queue = $queries;
 
-    return uamswp_test_include_partial('blocks/providers', $variables + ['module' => [], 'i' => 0]);
+    return uamswp_test_include_partial('blocks/providers', $variables);
 }
 
 test('the providers block prints nothing without a filter', function (): void {
@@ -247,14 +254,15 @@ test('the providers block prints a card for each provider of the ids it was give
         ->and(WP_Query::$queries[0])->toMatchArray(['post_type' => 'provider', 'order' => 'ASC', 'orderby' => 'title', 'posts_per_page' => -1, 'post_status' => 'publish']);
 });
 
-test('the providers block takes the section id from the module anchor without a block', function (): void {
-    $output = providers_block(['block_fad_providers_filter_ids' => [41]], [[41]], ['module' => ['anchor_id' => 'My Anchor']]);
+test('the providers block takes the section id from the block id and ignores the module and index variables', function (): void {
+    $fields = ['block_fad_providers_filter_ids' => [41]];
+    $withBlock = providers_block($fields, [[41]], ['block' => ['id' => 'block_abc']]);
+    $withoutBlock = providers_block($fields, [[41]], ['module' => ['anchor_id' => 'My Anchor'], 'i' => 4]);
 
-    expect($output)->toContain('id="providers-my-anchor"');
-
-    $numbered = providers_block(['block_fad_providers_filter_ids' => [41]], [[41]], ['i' => 4]);
-
-    expect($numbered)->toContain('id="providers-module-5"');
+    expect($withBlock)->toContain('id="providers-block_abc"')
+        ->and($withoutBlock)->toContain('id="providers-"')
+        ->and($withoutBlock)->not->toContain('my-anchor')
+        ->and($withoutBlock)->not->toContain('module-5');
 });
 
 test('the providers block adds the block classes to nothing it prints but keeps the background class', function (): void {

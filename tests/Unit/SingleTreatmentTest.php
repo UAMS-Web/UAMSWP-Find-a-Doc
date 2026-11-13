@@ -711,7 +711,7 @@ test('a call to action bar with a link has a button', function (): void {
 
     expect($output)->toContain('<section class="uams-module cta-bar cta-bar-centered bg-auto" id="cta-bar-1" aria-label="Get Help"><div class="container-fluid"><div class="row"><div class="col-12"><div class="inner-container"><div class="cta-heading"><h2>Get Help</h2></div><div class="cta-body"><div class="text-container"><p>Body.</p></div><div class="btn-container"><a href="https://example.test/go/" aria-label="Go there" class=" btn btn-primary" data-moduletitle="Get Help">Go</a></div></div></div></div></div></div></section>')
         ->and([$vars['cta_button_text'], $vars['cta_button_url'], $vars['cta_button_target'], $vars['cta_button_desc']])->toBe(['Go', ['url' => 'https://example.test/go/', 'target' => ''], '', 'Go there'])
-        ->and([$vars['cta_phone_prepend'], $vars['cta_phone'], $vars['cta_phone_link']])->toBe(['', '', '']);
+        ->and([$vars['cta_phone_prepend'], $vars['cta_phone']])->toBe(['', '']);
 });
 
 test('a call to action link with a target opens there', function (): void {
@@ -728,7 +728,7 @@ test('the target of a call to action link is only read from a link field that is
     expect($vars['cta_button_target'])->toBe('')
         ->and(uamswp_test_single_ontology_warnings($vars, 'single-treatment.php'))->toBe($warnings);
 })->with([
-    'an empty link field' => [[], ['Undefined array key "url"']],
+    'an empty link field' => [[], []],
 ]);
 
 test('the target of a call to action is not read for a bar with no link', function (): void {
@@ -743,8 +743,8 @@ test('a call to action bar with a phone number has a call link', function (): vo
     $output = uamswp_test_single_ontology_markup($vars['single_ontology_output']);
 
     expect($output)->toContain('<div class="cta-body"><div class="text-container"><p>Body.</p></div><div class="btn-container"><a href="tel:5015551234" data-moduletitle="Get Help">Dial<span class="no-break">5015551234</span></a></div></div>')
-        ->and([$vars['cta_phone_prepend'], $vars['cta_phone'], $vars['cta_phone_link']])->toBe(['Dial', '5015551234', '<a href="tel:dash:5015551234">us:5015551234</a>'])
-        ->and([$vars['cta_button_text'], $vars['cta_button_url'], $vars['cta_button_target'], $vars['cta_button_desc']])->toBe(['', '', '', '']);
+        ->and([$vars['cta_phone_prepend'], $vars['cta_phone']])->toBe(['Dial', '5015551234'])
+        ->and([$vars['cta_button_text'], $vars['cta_button_url'], $vars['cta_button_target'], $vars['cta_button_desc']])->toBe(['', [], '', '']);
 });
 
 test('a phone call to action says Call when it has no words of its own', function (): void {
@@ -758,7 +758,7 @@ test('each call to action bar is numbered in turn', function (): void {
 
     expect($vars['single_ontology_output'])->toContain('id="cta-bar-1" aria-label="Get Help"')
         ->and($vars['single_ontology_output'])->toContain('id="cta-bar-2" aria-label="More"')
-        ->and([$vars['cta_layout'], $vars['cta_size'], $vars['cta_use_image'], $vars['cta_image'], $vars['cta_background_color'], $vars['cta_btn_color']])->toBe(['cta-bar-centered', 'normal', false, '', 'bg-auto', 'primary']);
+        ->and([$vars['cta_layout'], $vars['cta_background_color'], $vars['cta_btn_color']])->toBe(['cta-bar-centered', 'bg-auto', 'primary']);
 });
 
 test('a page related to everything raises no warnings of its own', function (): void {

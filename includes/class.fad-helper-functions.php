@@ -381,9 +381,9 @@ function uamswp_fad_taxonomy_breadcrumbs_crumbs($crumbs)
  * @param  string  $table_name
  * @param  string  $field_name
  * @param  array<mixed>  $query_values
- * @return mixed
+ * @return array<string> The `post_id` column of the matching rows.
  */
-function uamswp_custom_table_query($table_name, $field_name, $query_values)
+function uamswp_custom_table_query($table_name, $field_name, $query_values): array
 {
     // Declare the global wpdb variable
     /** @var wpdb $wpdb */
@@ -418,7 +418,7 @@ function uamswp_custom_table_query($table_name, $field_name, $query_values)
     // here is an array of post_ids (provided we have a match)
     $post_ids = $wpdb->get_col($SQL);
 
-    return $post_ids;
+    return array_map(uamswp_fad_str(...), $post_ids);
 }
 
 // Escape a provider name variant for an HTML text context
@@ -505,6 +505,7 @@ if (! function_exists('uamswp_provider_names')) {
         $pedigree = uamswp_fad_str(get_field('physician_pedigree', $provider_id));
 
         // Degrees and credentials (e.g., M.D., Ph.D.)
+        /** @var mixed $degrees A list of IDs, or anything else when the field was never saved as one. */
         $degrees = get_field('physician_degree', $provider_id);
 
         // Clean up degrees value
@@ -1206,6 +1207,52 @@ function uamswp_fad_query_posts(WP_Query $query): array
 function uamswp_fad_post_type_of(mixed $id): string|false
 {
     return is_numeric($id) ? get_post_type((int) $id) : false;
+}
+
+/**
+ * The name of a term that ACF or WordPress may hand over as an ID, a numeric string or nothing.
+ *
+ * `get_term()` returns a term, an error or null, and a template that reads `->name` straight off the result
+ * reads a property of an error or of null whenever the ID is stale or empty. This gives an empty string then.
+ *
+ * @param  mixed  $term_id  The term ID, as ACF returns it.
+ * @param  string  $taxonomy  The taxonomy the term belongs to.
+ */
+function uamswp_fad_term_name(mixed $term_id, string $taxonomy): string
+{
+    $term = get_term(uamswp_fad_int($term_id), $taxonomy);
+
+    return (is_object($term) && ! is_wp_error($term)) ? uamswp_fad_str($term->name) : '';
+}
+
+/**
+ * The slug of a term that ACF or WordPress may hand over as an ID, a numeric string or nothing.
+ *
+ * `get_term_by()` returns a term, an error or `false`, and reading `->slug` off the result reads a property
+ * of `false` whenever the ID is stale or empty. This gives an empty string then.
+ *
+ * @param  mixed  $term_id  The term ID, as ACF returns it.
+ * @param  string  $taxonomy  The taxonomy the term belongs to.
+ */
+function uamswp_fad_term_slug(mixed $term_id, string $taxonomy): string
+{
+    $term = get_term_by('ID', uamswp_fad_int($term_id), $taxonomy);
+
+    return (is_object($term) && ! is_wp_error($term)) ? uamswp_fad_str($term->slug) : '';
+}
+
+/**
+ * A property of an object that ACF or Meta Box may hand over, as a string.
+ *
+ * A term field holds a term object, an ID or nothing, and a template that reads `->name` off it reads a property
+ * of a non-object whenever the field is empty. This gives an empty string then, or when the object lacks the property.
+ *
+ * @param  mixed  $value  The field value.
+ * @param  string  $property  The property to read.
+ */
+function uamswp_fad_object_str(mixed $value, string $property): string
+{
+    return is_object($value) ? uamswp_fad_str(get_object_vars($value)[$property] ?? null) : '';
 }
 
 /**

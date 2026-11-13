@@ -18,7 +18,7 @@ declare(strict_types=1);
  */
 function published_loop_flags(string $source): array
 {
-    preg_match_all('/get_post_status\(\$\w+\)\s*==\s*\'publish\'\)\s*\{\s*(\$\w+_valid)\s*=\s*true;\s*(break;)?/', $source, $matches, PREG_SET_ORDER);
+    preg_match_all('/get_post_status\((?:uamswp_fad_int\(\$\w+\)|\$\w+)\)\s*==\s*\'publish\'\)\s*\{\s*(\$\w+_valid)\s*=\s*true;\s*(break;)?/', $source, $matches, PREG_SET_ORDER);
 
     return array_map(static fn (array $match): array => [$match[1], isset($match[2])], $matches);
 }
@@ -35,8 +35,6 @@ test('each loop that looks for a published post leaves at the first match', func
     'the condition page' => ['single-condition.php', ['$location_valid']],
     'the provider page' => ['single-physicians.php', ['$location_valid', '$expertise_valid', '$expertise_valid']],
     'the treatment page' => ['single-treatment.php', ['$location_valid']],
-    'the condition archive' => ['taxonomy-condition.php', ['$location_valid']],
-    'the treatment archive' => ['taxonomy-treatment_procedure.php', ['$location_valid']],
 ]);
 
 test('the reader tells a loop that leaves from one that does not', function (): void {

@@ -85,7 +85,7 @@ class UAMS_Expertise_Attributes_Meta_Box
 
     <p><label class="screen-reader-text" for="menu_order"><?php _e('Order') ?></label><input name="menu_order" type="text" size="4" id="menu_order" value="<?php echo esc_attr((string) $post->menu_order) ?>" /></p>
 
-    <p><?php if ($post->post_type == 'page') {
+    <p><?php if ($post->post_type === 'page') {
         _e('Need help? Use the Help tab in the upper right of your screen.');
     } ?></p>
 
@@ -103,31 +103,26 @@ class UAMS_Expertise_Attributes_Meta_Box
     {
         $post_ID = uamswp_fad_int($post_ID);
         $post_type = get_post_type($post_ID);
-        get_post_status($post_ID);
-        if ($post_type != 'expertise') {
+        if ($post_type !== 'expertise') {
             return $post_ID;
         }
 
         if (isset($_POST['sidebar_name'])) {
-            if (check_admin_referer('sidebar_nonce', 'sidebar_name')) { // limit to only pages
-                if ($post_type) {
-                    if (isset($_POST['sidebarcheck'])) {
-                        update_post_meta($post_ID, 'sidebar', $_POST['sidebarcheck']);
-                    } else {
-                        update_post_meta($post_ID, 'sidebar', null);
-                    }
+            if (check_admin_referer('sidebar_nonce', 'sidebar_name')) {
+                if (isset($_POST['sidebarcheck'])) {
+                    update_post_meta($post_ID, 'sidebar', $_POST['sidebarcheck']);
+                } else {
+                    update_post_meta($post_ID, 'sidebar', null);
                 }
             }
         }
 
         if (isset($_POST['parent_name'])) {
-            if (check_admin_referer('parent_nonce', 'parent_name')) { // limit to only pages
-                if ($post_type) {
-                    if (isset($_POST['parentcheck'])) {
-                        update_post_meta($post_ID, 'parent', $_POST['parentcheck']);
-                    } else {
-                        update_post_meta($post_ID, 'parent', null);
-                    }
+            if (check_admin_referer('parent_nonce', 'parent_name')) {
+                if (isset($_POST['parentcheck'])) {
+                    update_post_meta($post_ID, 'parent', $_POST['parentcheck']);
+                } else {
+                    update_post_meta($post_ID, 'parent', null);
                 }
             }
         }

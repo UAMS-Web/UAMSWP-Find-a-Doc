@@ -95,7 +95,7 @@ function display_provider_image_doximity_list(): void
                 <?php
                 while ($query->have_posts()) {
                     $query->the_post();
-                    $post_id = get_the_ID();
+                    $post_id = uamswp_fad_int(get_the_ID());
 
                     // First, check if provider has desired degree
                     $degree_md = [ // list valid versions of MD
@@ -120,9 +120,8 @@ function display_provider_image_doximity_list(): void
                         $npi_valid = true;
                     }
                     if ($degrees) {
-                        foreach ($degrees as $degree) {
-                            $degree_term = get_term($degree, 'degree');
-                            $degree_name = $degree_term->name;
+                        foreach (uamswp_fad_arr($degrees) as $degree) {
+                            $degree_name = uamswp_fad_term_name($degree, 'degree');
                             if (($d < 2) && (in_array($degree_name, $degree_md) || in_array($degree_name, $degree_do) || in_array($degree_name, $degree_np) || in_array($degree_name, $degree_pa))) {
                                 $degree_valid = $degree_name;
                                 if (in_array($degree_valid, $degree_md)) {
@@ -131,9 +130,7 @@ function display_provider_image_doximity_list(): void
                                     $degree_valid = 'DO';
                                 } elseif (in_array($degree_valid, $degree_np)) {
                                     $degree_valid = 'NP';
-                                } elseif (in_array($degree_valid, $degree_pa)) {
-                                    $degree_valid = 'PA';
-                                } else {
+                                } elseif (! in_array($degree_valid, $degree_pa)) {
                                     $degree_valid = '';
                                 }
                                 $d++;
@@ -147,12 +144,12 @@ function display_provider_image_doximity_list(): void
                         $affiliation_valid = true;
                     }
                     // Check for valid locations
-                    $locations = get_field('physician_locations', $post_id);
+                    $locations = uamswp_fad_arr(get_field('physician_locations', $post_id));
                     $location_valid = false;
                     foreach ($locations as $location) {
                         // get_post_status() returns a status string or false, so loose and strict equality agree.
                         // @pest-mutate-ignore: EqualToIdentical
-                        if (get_post_status($location) == 'publish') {
+                        if (get_post_status(uamswp_fad_int($location)) == 'publish') {
                             $location_valid = true;
                             break;
                         }
@@ -163,38 +160,34 @@ function display_provider_image_doximity_list(): void
                         // NPI Number field
                         // $npi = get_field('physician_npi',$post_id); // Added above
                         echo '<td class="no-break">';
-                        echo $npi; // only display value if value is not empty or zero
+                        echo uamswp_fad_str($npi); // only display value if value is not empty or zero
                         echo '</td>';
 
                         // First Name field
                         $first_name = get_field('physician_first_name', $post_id);
-                        echo '<td class="no-break">'.$first_name.'</td>';
+                        echo '<td class="no-break">'.uamswp_fad_str($first_name).'</td>';
 
                         // Last Name field
                         $last_name = get_field('physician_last_name', $post_id);
-                        echo '<td class="no-break">'.$last_name.'</td>';
+                        echo '<td class="no-break">'.uamswp_fad_str($last_name).'</td>';
 
                         // Credentials (MD or DO) field
                         echo '<td class="no-break">'.$degree_valid.'</td>';
 
                         // Email Address field
                         $e = 1;
-                        // The loop assigns this before any read.
-                        // @pest-mutate-ignore: EmptyStringToNotEmpty
-                        $contact_type = '';
-                        // The loop assigns this before any read.
-                        // @pest-mutate-ignore: EmptyStringToNotEmpty
-                        $contact_info = '';
                         echo '<td class="no-break">';
                         if (have_rows('physician_contact_information', $post_id)) {
                             while (have_rows('physician_contact_information', $post_id)) {
                                 the_row();
+                                /** @var string|false|null $contact_type */
                                 $contact_type = get_sub_field('type');
+                                /** @var string|false|null $contact_info */
                                 $contact_info = get_sub_field('information');
                                 // The ACF select sub-field returns a string, so loose and strict equality agree.
                                 // @pest-mutate-ignore: EqualToIdentical
                                 if ($contact_type == 'email' && $e < 2) { // Only display the first instance of an email row
-                                    echo $contact_info;
+                                    echo uamswp_fad_str($contact_info);
                                     $e++;
                                 }
                             }
@@ -204,29 +197,22 @@ function display_provider_image_doximity_list(): void
                         // Facility Name field
                         $affiliation_list = '';
                         $i = 1;
-                        if ($affiliations) {
-                            foreach ($affiliations as $affiliation) {
-                                $affiliation_name = get_term($affiliation, 'affiliation');
-                                $affiliation_list .= '<span class="no-break">'.$affiliation_name->name.'</span>';
-                                if (count($affiliations) > $i) {
-                                    $affiliation_list .= ', ';
-                                }
-                                $i++;
+                        // A row needs an affiliation, so the list is never empty.
+                        foreach (uamswp_fad_arr($affiliations) as $affiliation) {
+                            $affiliation_list .= '<span class="no-break">'.uamswp_fad_term_name($affiliation, 'affiliation').'</span>';
+                            if (count(uamswp_fad_arr($affiliations)) > $i) {
+                                $affiliation_list .= ', ';
                             }
+                            $i++;
                         }
                         echo '<td>';
-                        // A row needs an affiliation, so the list always holds a span.
-                        // @pest-mutate-ignore: EmptyStringToNotEmpty
-                        echo $affiliation_list ?: '';
+                        echo $affiliation_list;
                         echo '</td>';
 
                         // Office Address 1 field
 
                         // Get primary appointment location name
                         $l = 1;
-                        // The first published location assigns this, and a row needs one.
-                        // @pest-mutate-ignore: EmptyStringToNotEmpty
-                        $primary_appointment_title = '';
                         // The first published location assigns this, and a row needs one.
                         // @pest-mutate-ignore: EmptyStringToNotEmpty
                         $primary_appointment_address_1 = '';
@@ -248,60 +234,59 @@ function display_provider_image_doximity_list(): void
                         // The first published location assigns this, and a row needs one.
                         // @pest-mutate-ignore: EmptyStringToNotEmpty
                         $primary_appointment_fax = '';
-                        // A valid location needs a non-empty list, so the list needs no check of its own.
-                        if ($location_valid) {
-                            foreach ($locations as $location) {
-                                if ($l < 2) {
-                                    // get_post_status() returns a status string or false, so loose and strict equality agree.
-                                    // @pest-mutate-ignore: EqualToIdentical
-                                    if (get_post_status($location) == 'publish') {
-                                        $primary_appointment_title = get_the_title($location);
+                        // A row needs a valid location, so the list is never empty.
+                        foreach ($locations as $location) {
+                            if ($l < 2) {
+                                // get_post_status() returns a status string or false, so loose and strict equality agree.
+                                // @pest-mutate-ignore: EqualToIdentical
+                                if (get_post_status(uamswp_fad_int($location)) == 'publish') {
 
-                                        /**
-                                         * Which location supplies each address component. This
-                                         * export read the location's own fields unconditionally
-                                         * before this change, so a child location -- whose
-                                         * Address tab was suppressed in the Control Panel --
-                                         * exported a blank office address.
-                                         */
-                                        $location_source_ids = uamswp_fad_location_source_ids($location);
+                                    /**
+                                     * Which location supplies each address component. This
+                                     * export read the location's own fields unconditionally
+                                     * before this change, so a child location -- whose
+                                     * Address tab was suppressed in the Control Panel --
+                                     * exported a blank office address.
+                                     */
+                                    $location_source_ids = uamswp_fad_location_source_ids(uamswp_fad_int($location));
 
-                                        $primary_appointment_address_1 = get_field('location_address_1', $location_source_ids['street']);
-                                        $primary_appointment_building = get_field('location_building', $location_source_ids['facility']);
-                                        if ($primary_appointment_building) {
-                                            $building = get_term($primary_appointment_building, 'building');
-                                            $building_slug = $building->slug;
-                                            $building_name = $building->name;
-                                        }
-                                        $primary_appointment_floor = get_field_object('location_building_floor', $location_source_ids['unit']);
-                                        // The initial value is read only when a floor field object exists, and that case assigns it again.
-                                        // @pest-mutate-ignore: EmptyStringToNotEmpty
-                                        $primary_appointment_floor_value = '';
-                                        // The initial value is read only when a floor field object exists, and that case assigns it again.
-                                        // @pest-mutate-ignore: EmptyStringToNotEmpty
-                                        $primary_appointment_floor_label = '';
-                                        if ($primary_appointment_floor) {
-                                            $primary_appointment_floor_value = $primary_appointment_floor['value'];
-                                            $primary_appointment_floor_label = $primary_appointment_floor['choices'][$primary_appointment_floor_value] ?? '';
-                                        }
-                                        $primary_appointment_suite = get_field('location_suite', $location_source_ids['unit']);
-                                        // The building slug is a string, so loose and strict inequality agree, and the building name is read only when a building exists, which sets it.
-                                        // @pest-mutate-ignore: NotEqualToNotIdentical,EmptyStringToNotEmpty
-                                        $primary_appointment_address_2 = uamswp_location_address_2(($primary_appointment_building && $building_slug != '_none'), $building_name ?? '', $primary_appointment_floor, $primary_appointment_floor_value, $primary_appointment_floor_label, $primary_appointment_suite, '<br />', '<br />');
-                                        $primary_appointment_address_2_deprecated = get_field('location_address_2', $location_source_ids['street']);
-                                        if (! $primary_appointment_address_2) {
-                                            $primary_appointment_address_2 = $primary_appointment_address_2_deprecated;
-                                        }
-                                        $primary_appointment_city = get_field('location_city', $location_source_ids['street']);
-                                        $primary_appointment_state = get_field('location_state', $location_source_ids['street']);
-                                        $primary_appointment_zip = get_field('location_zip', $location_source_ids['street']);
-                                        $primary_appointment_phone = get_field('location_phone', $location);
-                                        $primary_appointment_fax = get_field('location_fax', $location);
-                                        $l++;
+                                    $primary_appointment_address_1 = uamswp_fad_str(get_field('location_address_1', $location_source_ids['street']));
+                                    $primary_appointment_building = get_field('location_building', $location_source_ids['facility']);
+                                    if ($primary_appointment_building) {
+                                        $building = get_term(uamswp_fad_int($primary_appointment_building), 'building');
+                                        $building_found = is_object($building) && ! is_wp_error($building);
+                                        $building_slug = $building_found ? uamswp_fad_str($building->slug) : '';
+                                        $building_name = $building_found ? uamswp_fad_str($building->name) : '';
                                     }
+                                    /** @var array<string, mixed>|false $primary_appointment_floor */
+                                    $primary_appointment_floor = get_field_object('location_building_floor', $location_source_ids['unit']);
+                                    // The initial value is read only when a floor field object exists, and that case assigns it again.
+                                    // @pest-mutate-ignore: EmptyStringToNotEmpty
+                                    $primary_appointment_floor_value = '';
+                                    // The initial value is read only when a floor field object exists, and that case assigns it again.
+                                    // @pest-mutate-ignore: EmptyStringToNotEmpty
+                                    $primary_appointment_floor_label = '';
+                                    if ($primary_appointment_floor) {
+                                        $primary_appointment_floor_value = uamswp_fad_str($primary_appointment_floor['value'] ?? null);
+                                        $primary_appointment_floor_label = uamswp_fad_str(uamswp_fad_assoc($primary_appointment_floor['choices'] ?? null)[$primary_appointment_floor_value] ?? null);
+                                    }
+                                    $primary_appointment_suite = uamswp_fad_str(get_field('location_suite', $location_source_ids['unit'])) ?: false;
+                                    // The building slug is a string, so loose and strict inequality agree, and the building name is read only when a building exists, which sets it.
+                                    // @pest-mutate-ignore: NotEqualToNotIdentical,EmptyStringToNotEmpty
+                                    $primary_appointment_address_2 = uamswp_location_address_2(($primary_appointment_building && $building_slug != '_none'), $building_name ?? '', $primary_appointment_floor, $primary_appointment_floor_value, $primary_appointment_floor_label, $primary_appointment_suite, '<br />', '<br />');
+                                    $primary_appointment_address_2_deprecated = uamswp_fad_str(get_field('location_address_2', $location_source_ids['street']));
+                                    if (! $primary_appointment_address_2) {
+                                        $primary_appointment_address_2 = $primary_appointment_address_2_deprecated;
+                                    }
+                                    $primary_appointment_city = uamswp_fad_str(get_field('location_city', $location_source_ids['street']));
+                                    $primary_appointment_state = uamswp_fad_str(get_field('location_state', $location_source_ids['street']));
+                                    $primary_appointment_zip = uamswp_fad_str(get_field('location_zip', $location_source_ids['street']));
+                                    $primary_appointment_phone = uamswp_fad_str(get_field('location_phone', $location));
+                                    $primary_appointment_fax = uamswp_fad_str(get_field('location_fax', $location));
+                                    $l++;
                                 }
-                            } // endforeach
-                        }
+                            }
+                        } // endforeach
                         echo '<td class="no-break">';
                         echo $primary_appointment_address_1 ?: '';
                         echo '</td>';

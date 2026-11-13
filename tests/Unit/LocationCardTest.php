@@ -430,7 +430,7 @@ function locations_block(array $fields, array $queries, array $variables = []): 
     location_card_world($fields + ['location_hours_group' => location_card_hours()], ['titles' => [61 => 'Clinic One', 62 => 'Clinic Two']]);
     WP_Query::$queue = $queries;
 
-    return uamswp_test_include_partial('blocks/locations', $variables + ['module' => [], 'i' => 0]);
+    return uamswp_test_include_partial('blocks/locations', $variables);
 }
 
 test('the locations block prints nothing without a filter', function (): void {
@@ -456,9 +456,15 @@ test('the locations block prints a card for each location of the ids it was give
         ->and(WP_Query::$queries[0])->toMatchArray(['post_type' => 'location', 'order' => 'ASC', 'orderby' => 'title', 'posts_per_page' => -1, 'post_status' => 'publish', 'post__in' => [61, 62]]);
 });
 
-test('the locations block takes the section id from the module anchor without a block', function (): void {
-    expect(locations_block(['block_fad_locations_filter_ids' => [61]], [[61]], ['module' => ['anchor_id' => 'My Anchor']]))->toContain('id="locations-my-anchor"')
-        ->and(locations_block(['block_fad_locations_filter_ids' => [61]], [[61]], ['i' => 4]))->toContain('id="locations-module-5"');
+test('the locations block takes the section id from the block id and ignores the module and index variables', function (): void {
+    $fields = ['block_fad_locations_filter_ids' => [61]];
+    $withBlock = locations_block($fields, [[61]], ['block' => ['id' => 'block_abc']]);
+    $withoutBlock = locations_block($fields, [[61]], ['module' => ['anchor_id' => 'My Anchor'], 'i' => 4]);
+
+    expect($withBlock)->toContain('id="locations-block_abc"')
+        ->and($withoutBlock)->toContain('id="locations-"')
+        ->and($withoutBlock)->not->toContain('my-anchor')
+        ->and($withoutBlock)->not->toContain('module-5');
 });
 
 test('the locations block prints nothing when the query finds no location', function (): void {

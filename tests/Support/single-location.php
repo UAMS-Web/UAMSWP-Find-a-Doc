@@ -60,7 +60,22 @@ function single_location(array $fields = [], array $options = []): array
         return $fields[$name] ?? null;
     });
     when('get_field_object')->alias(static fn (string $name, mixed $id = null): mixed => $options['objects'][$name] ?? false);
-    when('get_term')->alias(static fn (mixed $id, string $taxonomy = ''): ?object => isset($terms[$id]) ? (object) ['name' => $terms[$id], 'term_id' => $id, 'slug' => $options['slugs'][$id] ?? 'slug-'.$id] : null);
+    when('get_term')->alias(static function (mixed $id, string $taxonomy = '') use ($terms, $options): ?object {
+        if (isset($options['term_errors'][$id])) {
+            return new WP_Error;
+        }
+
+        if (! isset($terms[$id])) {
+            return null;
+        }
+
+        $term = new WP_Term;
+        $term->name = $terms[$id];
+        $term->term_id = $id;
+        $term->slug = $options['slugs'][$id] ?? 'slug-'.$id;
+
+        return $term;
+    });
     when('get_post')->alias(static fn (mixed $id): ?object => $options['posts'][$id] ?? null);
     when('get_the_title')->alias(static fn (mixed $id = 0): string => $titles[$id] ?? 'Clinic');
     when('the_permalink')->alias(static function (): void {
@@ -72,17 +87,24 @@ function single_location(array $fields = [], array $options = []): array
     when('get_the_id')->justReturn($location_id);
     when('get_the_permalink')->alias(static fn (mixed $id = 0): string => 'https://example.test/p/'.$id.'/');
     when('get_permalink')->alias(static fn (mixed $id = 0): string => 'https://example.test/p/'.$id.'/');
-    when('get_post_meta')->alias(static fn (mixed $id, string $key = '', bool $single = false): mixed => $meta[$key] ?? '');
+    // Like WordPress, a read that is not single returns a list.
+    when('get_post_meta')->alias(static fn (mixed $id, string $key = '', bool $single = false): mixed => $id === null ? '' : ($single ? ($meta[$key] ?? '') : (isset($meta[$key]) ? [$meta[$key]] : [])));
     // Called with no id it is the featured image of the location itself; called with the source id it is the parent's.
     when('get_post_thumbnail_id')->alias(static fn (mixed $id = null): mixed => $id === null ? ($options['thumbnail'] ?? 0) : ($options['parent_thumbnail'] ?? $options['thumbnail'] ?? 0));
     when('wp_get_attachment_image_src')->alias(static fn (mixed $id, string $size = ''): array|false => $id ? ['https://example.test/img-'.$id.'.jpg', 640, 480] : false);
     when('wp_get_attachment_image_url')->alias(static fn (mixed $id, string $size = ''): string => 'https://example.test/img-'.$id.'-'.$size.'.jpg');
-    when('image_sizer')->alias(static fn (mixed $id, int $width, int $height): string => 'https://example.test/photo-'.$width.'x'.$height.'.jpg');
+    when('image_sizer')->alias(static fn (mixed $id, int $width, int $height): string => 'https://example.test/photo-'.$id.'-'.$width.'x'.$height.'.jpg');
     when('wp_strip_all_tags')->alias(static fn (string $text): string => strip_tags($text));
     when('wp_json_encode')->alias(static fn (mixed $value): string|false => json_encode($value));
     when('wp_oembed_get')->alias(static fn (string $url): string => '<iframe src="'.$url.'"></iframe>');
-    when('wp_reset_postdata')->justReturn();
-    when('get_pages')->justReturn($options['pages'] ?? []);
+    when('wp_reset_postdata')->alias(static function (): void {
+        $GLOBALS['single_location_resets'] = ($GLOBALS['single_location_resets'] ?? 0) + 1;
+    });
+    when('get_pages')->alias(static function (array $args) use ($options): array {
+        $GLOBALS['single_location_pages_args'] = $args;
+
+        return $options['pages'] ?? [];
+    });
     when('get_stylesheet_directory_uri')->justReturn('https://example.test/theme');
     when('format_phone_dash')->alias(static fn (mixed $phone): string => $phone ? 'dash:'.$phone : '');
     when('esc_url')->returnArg();
@@ -105,7 +127,9 @@ function single_location(array $fields = [], array $options = []): array
     when('get_header')->alias(static function (): void {
         $GLOBALS['single_location_headers'] = ($GLOBALS['single_location_headers'] ?? 0) + 1;
     });
-    when('get_footer')->justReturn();
+    when('get_footer')->alias(static function (): void {
+        $GLOBALS['single_location_footers'] = ($GLOBALS['single_location_footers'] ?? 0) + 1;
+    });
     when('have_rows')->alias(static function (string $name) use ($row, $rows): bool {
         $row->name = $name;
         $row->cursor[$name] ??= -1;
@@ -127,6 +151,7 @@ function single_location(array $fields = [], array $options = []): array
 
     $post = new WP_Post;
     $post->ID = $location_id;
+    $post->post_name = 'clinic-slug';
 
     // A render promotes its variables to globals, so the ones an earlier render left are cleared first.
     static $baseline = null;

@@ -90,3 +90,18 @@ test('the field group sets no default value on the languages field', function ()
         ->and($field['taxonomy'])->toBe('language')
         ->and($field['default_value'])->toBe([]);
 });
+
+test('it looks the post status up by integer ID, and never for an ID that is not a post', function (): void {
+    uamswp_test_acf_functions();
+
+    $asked = [];
+    when('get_post_status')->alias(function (mixed $id) use (&$asked): string {
+        $asked[] = $id;
+
+        return 'publish';
+    });
+
+    expect(set_default_language(null, '123', []))->toBeNull()
+        ->and(set_default_language(null, 'options', []))->toBeNull()
+        ->and($asked)->toBe([123]);
+});
