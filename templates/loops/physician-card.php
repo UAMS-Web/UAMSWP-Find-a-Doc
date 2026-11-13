@@ -12,17 +12,18 @@
  *
  * @var int|false $id From `get_the_ID()`.
  */
+$card_post_id = uamswp_fad_int($id);
 ?>
 <?php
 $degrees = get_field('physician_degree', $id);
 $degree_list = '';
 $i = 1;
 if ($degrees) {
-    foreach ($degrees as $degree) {
-        $degree_name = get_term($degree, 'degree');
-        if (is_object($degree_name)) {
-            $degree_list .= $degree_name->name;
-            if (count($degrees) > $i) {
+    foreach (uamswp_fad_arr($degrees) as $degree) {
+        $degree_name = uamswp_fad_term_name($degree, 'degree');
+        if ($degree_name !== '') {
+            $degree_list .= $degree_name;
+            if (count(uamswp_fad_arr($degrees)) > $i) {
                 $degree_list .= ', ';
             }
         }
@@ -70,17 +71,17 @@ if ($physician_resident) {
 
     if ($provider_specialty) {
 
-        $provider_specialty_term = get_term($provider_specialty, 'clinical_title');
+        $provider_specialty_term = get_term(uamswp_fad_int($provider_specialty), 'clinical_title');
 
-        if (is_object($provider_specialty_term)) {
+        if (is_object($provider_specialty_term) && ! is_wp_error($provider_specialty_term)) {
 
             // Get term name
 
-            $provider_specialty_name = $provider_specialty_term->name;
+            $provider_specialty_name = uamswp_fad_str($provider_specialty_term->name);
 
             // Get occupational title field from term
 
-            $provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term) ?? null;
+            $provider_occupation_title = uamswp_fad_str(get_field('clinical_specialization_title', $provider_specialty_term));
 
             // Set occupational title from term name as a fallback
 
@@ -100,11 +101,11 @@ if ($physician_resident) {
 	<div class="card">
 		<picture>
 			<?php if (has_post_thumbnail() && function_exists('bis_get_attachment_image')) { ?>
-				<source srcset="<?php echo image_sizer(get_post_thumbnail_id($id), 253, 337, 'center', 'center', 'portrait-3-4'); ?>"
+				<source srcset="<?php echo uamswp_fad_str(image_sizer(get_post_thumbnail_id($card_post_id), 253, 337, 'center', 'center', 'portrait-3-4')); ?>"
 					media="(min-width: 1px)">
-				<img src="<?php echo image_sizer(get_post_thumbnail_id(), 253, 337, 'center', 'center', 'portrait-3-4'); ?>" itemprop="image" class="card-img-top" alt="<?php echo $full_name_attr; ?>" loading="lazy" />
+				<img src="<?php echo uamswp_fad_str(image_sizer(get_post_thumbnail_id(), 253, 337, 'center', 'center', 'portrait-3-4')); ?>" itemprop="image" class="card-img-top" alt="<?php echo $full_name_attr; ?>" loading="lazy" />
 			<?php } elseif (has_post_thumbnail()) { ?>
-				<?php echo get_the_post_thumbnail($id, 'medium', ['itemprop' => 'image', 'class' => 'card-img-top', 'loading' => 'lazy']); ?>
+				<?php echo get_the_post_thumbnail($card_post_id, 'medium', ['itemprop' => 'image', 'class' => 'card-img-top', 'loading' => 'lazy']); ?>
 			<?php } else { ?>
 				<source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.svg" media="(min-width: 1px)">
 				<img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.jpg" alt="" role="presentation" loading="lazy" />
@@ -115,11 +116,7 @@ if ($physician_resident) {
 					<span class="name"><?php echo $full_name; ?></span>
 					<?php
 
-                if (
-                    $provider_occupation_title
-                    &&
-                    ! empty($provider_occupation_title)
-                ) {
+                if ($provider_occupation_title) {
                     ?>
 						<span class="subtitle"><?php echo $provider_occupation_title; ?></span>
 						<?php
@@ -131,7 +128,7 @@ if ($physician_resident) {
 		</div>
 		<div class="btn-container">
 			<div class="inner-container">
-				<a href="<?php the_permalink($id); ?>" class="btn btn-primary stretched-link" aria-label="View profile for <?php echo $full_name_attr; ?>" data-itemtitle="<?php echo $full_name_attr; ?>">View Profile</a>
+				<a href="<?php the_permalink($card_post_id); ?>" class="btn btn-primary stretched-link" aria-label="View profile for <?php echo $full_name_attr; ?>" data-itemtitle="<?php echo $full_name_attr; ?>">View Profile</a>
 			</div>
 		</div>
 	</div>

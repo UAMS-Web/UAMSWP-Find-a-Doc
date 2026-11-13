@@ -513,6 +513,19 @@ final class HelperFunctionsTest extends UnitTestCase
         $this->assertSame('', \uamswp_fad_term_slug(false, 'region'));
     }
 
+    public function test_a_property_of_a_field_object_is_read_as_a_string(): void
+    {
+        $term = new \stdClass;
+        $term->name = 'Cardiology';
+        $term->count = 4;
+
+        $this->assertSame('Cardiology', \uamswp_fad_object_str($term, 'name'));
+        $this->assertSame('4', \uamswp_fad_object_str($term, 'count'));
+        $this->assertSame('', \uamswp_fad_object_str($term, 'slug'));
+        $this->assertSame('', \uamswp_fad_object_str(12, 'name'));
+        $this->assertSame('', \uamswp_fad_object_str(null, 'name'));
+    }
+
     public function test_a_submitted_acf_value_is_read_by_field_key(): void
     {
         $_POST['acf'] = ['field_a' => 'x', 'field_b' => null, 'field_c' => ['y']];
