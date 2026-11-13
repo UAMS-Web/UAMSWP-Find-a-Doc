@@ -60,6 +60,8 @@ if (! class_exists('WP_Query')) {
 
         private int $index = 0;
 
+        private int $checks = 0;
+
         /**
          * @param  array<string, mixed>  $args
          */
@@ -73,7 +75,8 @@ if (! class_exists('WP_Query')) {
 
         public function have_posts(): bool
         {
-            return $this->index < count($this->posts);
+            // A loop whose the_post() call is gone would never advance; cap the checks so a mutant of it ends and fails a test.
+            return $this->index < count($this->posts) && $this->checks++ < 100;
         }
 
         public function the_post(): void
