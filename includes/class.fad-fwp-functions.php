@@ -430,6 +430,8 @@ add_filter('facetwp_pager_html', function ($output, $params): string {
         // Current page
         $output .= '<li class="page-item"><a class="facetwp-page page-link active" title="Page '.$page.'" data-page="'.$page.'">'.$page.'</a></li>';
 
+        // Counting down instead of up never ends the loop, so a test cannot observe it: the harness can only report a timeout, or an exhausted memory limit on another platform.
+        // @pest-mutate-ignore: PostIncrementToPostDecrement
         for ($i = 1; $i <= 2; $i++) {
             if ($total_pages >= ($page + $i)) {
                 $output .= '<li class="page-item"><a class="facetwp-page page-link" title="Page '.($page + $i).'" data-page="'.($page + $i).'">'.($page + $i).'</a></li>';
