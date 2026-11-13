@@ -89,6 +89,12 @@ if ($photo_gallery) {
 }
 /** @var list<int> $location_images */
 $location_images_count = count($location_images);
+$location_image_alt = static function (int $image_id): string {
+    /** @var string $alt */
+    $alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
+
+    return $alt;
+};
 
 // Set image for schema
 if ($override_parent_photo && $parent_location && $override_parent_photo_featured) { // If child location & override is true
@@ -438,6 +444,7 @@ while (have_posts()) {
     // Check if About section should be displayed
     $location_about = get_field('location_about');
     $location_affiliation = get_field('location_affiliation');
+    /** @var string $location_youtube_link */
     $location_youtube_link = get_field('location_youtube_link');
     $about_section_title = '';
     $about_section_title_short = '';
@@ -517,7 +524,9 @@ while (have_posts()) {
         $location_scheduling_intro = (! empty($location_scheduling_item_intro_main)) ? $location_scheduling_item_intro_main : $location_scheduling_intro; // If input for specific appointment section intro exists, use that. Otherwise, keep original value.
     }
 
+    /** @var string $mychart_scheduling_domain */
     $mychart_scheduling_domain = get_field('mychart_scheduling_domain', 'option');
+    /** @var string $mychart_scheduling_instance */
     $mychart_scheduling_instance = get_field('mychart_scheduling_instance', 'option');
     $mychart_scheduling_linksource = get_field('mychart_scheduling_linksource', 'option');
     $mychart_scheduling_linksource = (! empty($mychart_scheduling_linksource)) ? $mychart_scheduling_linksource : 'uamshealth.com';
@@ -579,10 +588,11 @@ while (have_posts()) {
         ];
         $physicians_query = new WP_Query($args);
     }
-    /** @var WP_Query|null $physicians_query */
+    /** @var WP_Query $physicians_query */
     if (isset($physicians_query) && $physicians_query->have_posts()) {
         $show_providers_section = true;
         $jump_link_count++;
+        /** @var list<int> $provider_ids */
         $provider_ids = $physicians_query->posts;
         wp_reset_postdata();
     } else {
@@ -742,7 +752,7 @@ while (have_posts()) {
 						<div class="btn-container">
 							<div class="inner-container">
 								<?php if (isset($map['lat'], $map['lng'])) { ?>
-								<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo $page_title_phrase; ?>" data-typetitle="Get directions to the clinic">Get Directions</a>
+								<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?? '' ?>,<?php echo $map['lng'] ?? '' ?>" target="_blank" aria-label="Get directions to <?php echo $page_title_phrase; ?>" data-typetitle="Get directions to the clinic">Get Directions</a>
 								<?php } // endif $map?>
 								<?php if ($show_parking_section) { ?>
 									<a class="btn btn-outline-primary" href="#parking-info" aria-label="Parking instructions for <?php echo $page_title_phrase; ?>" data-typetitle="Parking instructions for the clinic">Parking Instructions</a>
@@ -1073,7 +1083,7 @@ while (have_posts()) {
 									media="(min-width: 576px)">
 								<source srcset="<?php echo image_sizer($location_images[0], 576, 324, 'center', 'center', 'aspect-16-9-small'); ?>"
 									media="(min-width: 1px)">
-								<img src="<?php echo image_sizer($location_images[0], 630, 473, 'center', 'center', 'aspect-4-3'); ?>" alt="<?php echo get_post_meta($location_images[0], '_wp_attachment_image_alt', true); ?>" class="single-image" />
+								<img src="<?php echo image_sizer($location_images[0], 630, 473, 'center', 'center', 'aspect-4-3'); ?>" alt="<?php echo $location_image_alt($location_images[0]); ?>" class="single-image" />
 							<?php } else {  ?>
 								<img src="<?php echo wp_get_attachment_image_url($location_images[0], 'large'); ?>" class="single-image">
 							<?php } // endif?>
@@ -1097,7 +1107,7 @@ while (have_posts()) {
 													media="(min-width: 576px)">
 												<source srcset="<?php echo image_sizer($location_images_item, 576, 324, 'center', 'center', 'aspect-16-9-small'); ?>"
 													media="(min-width: 1px)">
-												<img src="<?php echo image_sizer($location_images_item, 630, 473, 'center', 'center', 'aspect-4-3'); ?>" alt="<?php echo get_post_meta($location_images_item, '_wp_attachment_image_alt', true); ?>" />
+												<img src="<?php echo image_sizer($location_images_item, 630, 473, 'center', 'center', 'aspect-4-3'); ?>" alt="<?php echo $location_image_alt($location_images_item); ?>" />
 											<?php } else {  ?>
 												<img src="<?php echo wp_get_attachment_image_url($location_images_item, 'large'); ?>">
 											<?php } // endif?>
@@ -1121,9 +1131,9 @@ while (have_posts()) {
 								<?php for ($i = 0; $i < $location_images_count; $i++) { ?>
 									<li data-target="#location-info-carousel" data-slide-to="<?php echo $i; ?>" <?php echo $i === 0 ? 'class="active"' : ''; ?>>
 										<?php if (function_exists('bis_get_attachment_image')) { ?>
-											<img src="<?php echo image_sizer($location_images[$i], 60, 45, 'center', 'center', 'thumbnail'); ?>" alt="<?php echo get_post_meta($location_images[$i], '_wp_attachment_image_alt', true); ?>" />
+											<img src="<?php echo image_sizer($location_images[$i], 60, 45, 'center', 'center', 'thumbnail'); ?>" alt="<?php echo $location_image_alt($location_images[$i]); ?>" />
 										<?php } else {  ?>
-											<img src="<?php echo wp_get_attachment_image_url($location_images[$i], 'small'); ?>" alt="<?php echo get_post_meta($location_images[$i], '_wp_attachment_image_alt', true); ?>">
+											<img src="<?php echo wp_get_attachment_image_url($location_images[$i], 'small'); ?>" alt="<?php echo $location_image_alt($location_images[$i]); ?>">
 										<?php } // endif?>
 									</li>
 								<?php } ?>
@@ -1367,7 +1377,7 @@ while (have_posts()) {
 								/* [lat, lon, fillColor, strokeColor, labelClass, iconText, popupText] */
 								var markers = [
 									// example [ 34.74376029995541, -92.31828863640054, "00F","000","white","A","I am a blue icon." ],
-									[ <?php echo floatval($map['lat']); ?>, <?php echo floatval($map['lng']); ?>, "9d2235","222", "transparentwhite", '1', 'Clinic<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo esc_js($page_title_phrase); ?>" data-typetitle="Get directions to the clinic">Get Directions</a>' ],
+									[ <?php echo floatval($map['lat'] ?? 0); ?>, <?php echo floatval($map['lng'] ?? 0); ?>, "9d2235","222", "transparentwhite", '1', 'Clinic<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?? '' ?>,<?php echo $map['lng'] ?? '' ?>" target="_blank" aria-label="Get directions to <?php echo esc_js($page_title_phrase); ?>" data-typetitle="Get directions to the clinic">Get Directions</a>' ],
 									[ <?php echo floatval($parking_map['lat']); ?>, <?php echo floatval($parking_map['lng']); ?>, "9d2235","222", "transparentwhite", '2', 'Parking<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank" aria-label="Get directions to the parking area" data-typetitle="Get directions to the parking area">Get Directions</a>' ]
 								]
 								//Loop through the markers array
@@ -1394,7 +1404,7 @@ while (have_posts()) {
 							</script>
 							<div class="map-legend bg-info" aria-label="Legend for map">
 								<ol data-categorytitle="Directions">
-									<li>Clinic (<a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo esc_attr($page_title_phrase); ?>" data-typetitle="Get directions to the clinic">Get Directions</a>)</li>
+									<li>Clinic (<a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?? '' ?>,<?php echo $map['lng'] ?? '' ?>" target="_blank" aria-label="Get directions to <?php echo esc_attr($page_title_phrase); ?>" data-typetitle="Get directions to the clinic">Get Directions</a>)</li>
 									<li>Parking (<a href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank" aria-label="Get directions to the parking area" data-typetitle="Get directions to the parking area">Get Directions</a>)</li>
 								</ol>
 							</div>
@@ -1653,28 +1663,24 @@ while (have_posts()) {
 						                echo '<strong>Open 24/7</strong>';
 						            } else {
 						                echo '<dl class="hours">';
-						                if ($telemed_hours) {
-						                    $telemed_hours_text = '';
-						                    $telemed_day = null; // Previous Day
-						                    foreach ($telemed_hours as $telemed_hour) {
-						                        $telemed_hours_text .= $telemed_day !== $telemed_hour['day'] ? '<dt>'.$telemed_hour['day'].'</dt> ' : '';
-						                        $telemed_hours_text .= '<dd>';
+						                $telemed_hours_text = '';
+						                $telemed_day = null; // Previous Day
+						                foreach ($telemed_hours as $telemed_hour) {
+						                    $telemed_hours_text .= $telemed_day !== $telemed_hour['day'] ? '<dt>'.$telemed_hour['day'].'</dt> ' : '';
+						                    $telemed_hours_text .= '<dd>';
 
-						                        if ($telemed_hour['closed']) {
-						                            $telemed_hours_text .= 'Closed ';
-						                        } else {
-						                            $telemed_hours_text .= ($telemed_hour['open'] && $telemed_hour['open'] !== '00:00:00') ? ap_time_span(strtotime($telemed_hour['open']), strtotime($telemed_hour['close'])) : '';
-						                        }
-						                        if ($telemed_hour['comment']) {
-						                            $telemed_hours_text .= ' <br /><span class="subtitle">'.$telemed_hour['comment'].'</span>';
-						                        }
-						                        $telemed_hours_text .= '</dd>';
-						                        $telemed_day = $telemed_hour['day']; // Reset the day
+						                    if ($telemed_hour['closed']) {
+						                        $telemed_hours_text .= 'Closed ';
+						                    } else {
+						                        $telemed_hours_text .= ($telemed_hour['open'] && $telemed_hour['open'] !== '00:00:00') ? ap_time_span(strtotime($telemed_hour['open']), strtotime($telemed_hour['close'])) : '';
 						                    }
-						                    echo $telemed_hours_text;
-						                } else {
-						                    echo '<dt>No information</dt>';
+						                    if ($telemed_hour['comment']) {
+						                        $telemed_hours_text .= ' <br /><span class="subtitle">'.$telemed_hour['comment'].'</span>';
+						                    }
+						                    $telemed_hours_text .= '</dd>';
+						                    $telemed_day = $telemed_hour['day']; // Reset the day
 						                }
+						                echo $telemed_hours_text;
 						                echo '</dl>';
 						            }
 						        }
@@ -1700,6 +1706,7 @@ while (have_posts()) {
      * @var string $portal_content
      * @var string $portal_link
      * @var string $portal_url
+     * @var string $portal_link_title
      */
     if ($show_portal_section) { ?>
 		<section class="uams-module cta-bar cta-bar-weighted bg-blue" aria-label="Patient Portal" id="portal-info">
@@ -1774,6 +1781,7 @@ while (have_posts()) {
 
         include UAMS_FAD_PATH.'/templates/loops/conditions-cpt-loop.php';
         $condition_schema = '"medicalSpecialty": [';
+        /** @var WP_Post $condition */
         foreach ($conditions_cpt_query->posts as $condition) {
             $condition_schema .= '{
 			"@type": "MedicalSpecialty",
@@ -1791,6 +1799,7 @@ while (have_posts()) {
         $treatment_heading_related_name = $page_title_phrase; // To what is it related?
         include UAMS_FAD_PATH.'/templates/loops/treatments-cpt-loop.php';
         $treatment_schema = '"medicalSpecialty": [';
+        /** @var WP_Post $treatment */
         foreach ($treatments_cpt_query->posts as $treatment) {
             $treatment_schema .= '{
 			"@type": "MedicalSpecialty",
