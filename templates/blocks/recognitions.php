@@ -12,9 +12,10 @@ if (function_exists('uams_fad_block_placeholder') && uams_fad_block_placeholder(
     return;
 }
 
+$block_data = uamswp_fad_assoc($block ?? null);
 $className = '';
-if (! empty($block['className'])) {
-    $className .= ' '.$block['className'];
+if (! empty($block_data['className'])) {
+    $className .= ' '.uamswp_fad_str($block_data['className']);
 }
 
 // Load Values
@@ -61,8 +62,7 @@ if ($recognition_query->have_posts()) {
         $i = 1;
         if ($degrees) {
             foreach ($degrees as $degree) {
-                $degree_name = get_term($degree, 'degree');
-                $degree_list .= $degree_name->name;
+                $degree_list .= uamswp_fad_term_name($degree, 'degree');
                 if (count($degrees) > $i) {
                     $degree_list .= ', ';
                 }
@@ -105,9 +105,9 @@ if ($recognition_query->have_posts()) {
 
             if ($provider_specialty) {
 
-                $provider_specialty_term = get_term($provider_specialty, 'clinical_title');
+                $provider_specialty_term = get_term(uamswp_fad_int($provider_specialty), 'clinical_title');
 
-                if (is_object($provider_specialty_term)) {
+                if (is_object($provider_specialty_term) && ! is_wp_error($provider_specialty_term)) {
 
                     // Get term name
 
@@ -115,7 +115,7 @@ if ($recognition_query->have_posts()) {
 
                     // Get occupational title field from term
 
-                    $provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term) ?? null;
+                    $provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term);
 
                     // Set occupational title from term name as a fallback
 
@@ -131,11 +131,7 @@ if ($recognition_query->have_posts()) {
 
         }
 
-        if (
-            $provider_occupation_title
-            &&
-            ! empty($provider_occupation_title)
-        ) {
+        if ($provider_occupation_title) {
 
             $recognition_list .= '<td>'.$provider_occupation_title.'</td>';
 

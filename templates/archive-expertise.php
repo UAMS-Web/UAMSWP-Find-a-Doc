@@ -26,13 +26,13 @@ $expertise_text = get_field('expertise_archive_intro_text', 'option');
                         <h2 class="module-title sr-only">List of Areas of Expertise</h2>
                         <div class="card-list-container">
                             <div class="card-list card-list-expertise">
-                                <?php echo facetwp_display('template', 'expertise'); ?>
+                                <?php echo uamswp_fad_str(facetwp_display('template', 'expertise')); ?>
                                 <?php // get_template_part( 'templates/physician-loop' );?>
                             </div>
                         </div>
                         <div class="row list-pagination">
                             <div class="col">
-                                <?php echo facetwp_display('pager'); ?>
+                                <?php echo uamswp_fad_str(facetwp_display('pager')); ?>
                             </div>
                         </div>
                     </div>

@@ -3,6 +3,11 @@
 /**
  * Administrator grants and synchronization of previously stored Doc roles.
  *
+ * Two approved equivalents are ignored: the Doc role map holds one role, so
+ * `continue` and `break` end the synchronization loop the same way when it is
+ * absent; and iterating a post type's capability object reads the same public
+ * properties as its array cast.
+ *
  * @command  vendor/bin/pest tests/Unit/AdminCapabilitiesTest.php
  */
 

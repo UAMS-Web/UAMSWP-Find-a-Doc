@@ -83,8 +83,8 @@ function taxonomy_archive(array $archive, array $query = [], array $names = [], 
     when('get_query_var')->alias(static fn (string $var): mixed => $var === 'paged' ? $paged : '');
     when('get_permalink')->justReturn('https://example.test/'.$archive['taxonomy'].'-list/');
     when('get_term_link')->alias(static fn (object $term, string $taxonomy): string => 'https://example.test/'.$taxonomy.'/'.$term->slug.'/');
-    when('wp_count_terms')->alias(static function (string $taxonomy, array $args) use ($count): mixed {
-        $GLOBALS['taxonomy_archive_counts'][] = [$taxonomy, $args];
+    when('wp_count_terms')->alias(static function (array $args) use ($count): mixed {
+        $GLOBALS['taxonomy_archive_counts'][] = [$args['taxonomy'], $args];
 
         return $count;
     });
@@ -138,7 +138,7 @@ test('the archive lists its terms between the header and the footer and register
         ->and(uamswp_test_render_hooks()['add_filter'])->toBe([
             ['body_class', 'uams_default_page_body_class'],
             ['terms_clauses', 'uamswp_terms_clauses', 10, 3],
-            ['seopress_titles_title', $archive['title_filter'], 15, 2],
+            ['seopress_titles_title', $archive['title_filter'], 15, 1],
         ])
         ->and($output)->toContain('<h2 class="module-title sr-only">'.$archive['list'].'</h2>')
         ->and($output)->toContain('<ul class="list"><li><a href="'.$base.'back-pain/" aria-label="Learn about Back Pain"  class="btn btn-outline-primary">Back Pain</a></li><li><a href="'.$base.'asthma/" aria-label="Learn about Asthma"  class="btn btn-outline-primary">Asthma</a></li></ul>')

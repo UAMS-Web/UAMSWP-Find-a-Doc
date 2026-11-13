@@ -248,7 +248,7 @@ test('each template that sets a page title registers its own function at priorit
     }
 
     // The functions take the title alone, so a template registered with one accepted argument matches its function; the rest still pass two.
-    $single_argument = ['single-locations'];
+    $single_argument = ['archive-condition', 'archive-taxonomy-conditions', 'archive-taxonomy-treatments', 'archive-treatments', 'single-locations'];
     $expected = [];
 
     foreach (array_keys($registrations) as $name) {

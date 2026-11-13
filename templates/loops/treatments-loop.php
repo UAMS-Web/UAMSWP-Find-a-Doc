@@ -21,9 +21,13 @@
                 <p class="note">UAMS Health providers perform and prescribe a broad range of treatments and procedures, some of which may not be listed below.</p>
                 <div class="list-container list-container-rows">
                     <ul class="list">
-                    <?php foreach ($treatments_query->get_terms() as $treatment) { ?>
+                    <?php /** @var list<WP_Term> $treatment_terms */
+                    $treatment_terms = $treatments_query->get_terms();
+foreach ($treatment_terms as $treatment) {
+    /** @var string $treatment_link */
+    $treatment_link = get_term_link($treatment->term_id); ?>
                         <li>
-                            <a href="<?php echo get_term_link($treatment->term_id); ?>" aria-label="Go to Treatment page for <?php echo $treatment->name; ?>" class="btn btn-outline-primary"><?php echo $treatment->name; ?></a>
+                            <a href="<?php echo $treatment_link; ?>" aria-label="Go to Treatment page for <?php echo $treatment->name; ?>" class="btn btn-outline-primary"><?php echo $treatment->name; ?></a>
                         </li>
                     <?php } ?>
                     </ul>

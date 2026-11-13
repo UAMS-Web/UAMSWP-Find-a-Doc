@@ -6,7 +6,7 @@ add_filter('terms_clauses', 'uamswp_terms_clauses', 10, 3);
 $condition_title = get_field('conditions_archive_headline', 'option');
 $condition_text = get_field('conditions_archive_intro_text', 'option');
 
-add_filter('seopress_titles_title', 'uamswp_fad_title_archive_taxonomy_conditions', 15, 2);
+add_filter('seopress_titles_title', 'uamswp_fad_title_archive_taxonomy_conditions', 15, 1);
 
 $alpha = uamswp_fad_str($_GET['alpha'] ?? '');
 
@@ -28,6 +28,9 @@ get_header(); ?>
                             <?php
                             // if show all is set
                             $taxonomy = 'condition';
+$paged = max(1, uamswp_fad_int(get_query_var('paged')));
+// number of tags to show per page
+$per_page = 40;
 if (isset($_GET['showall'])) {
 
     $args = ['taxonomy' => $taxonomy, 'hide_empty' => 0];
@@ -35,9 +38,6 @@ if (isset($_GET['showall'])) {
 } else {
     // else show paged
 
-    $paged = max(1, uamswp_fad_int(get_query_var('paged')));
-    // number of tags to show per page
-    $per_page = 40;
     $offset = ($paged - 1) * $per_page;
     $args = ['taxonomy' => $taxonomy, 'number' => $per_page, 'offset' => $offset, 'hide_empty' => 0];
     // `0` stands for every name that starts with a number (uamswp_terms_clauses()).
@@ -71,12 +71,16 @@ $tax_terms = new WP_Term_Query($args);
                             <div class="list-container list-container-rows">
                             <?php
 
-if (! empty($tax_terms->terms)) {
+/** @var list<WP_Term>|null $tax_term_list */
+$tax_term_list = $tax_terms->terms;
+if (! empty($tax_term_list)) {
 
     echo '<ul class="list">';
 
-    foreach ($tax_terms->terms as $tax_term) {
-        echo '<li>'.'<a href="'.esc_attr(get_term_link($tax_term, $taxonomy)).'" aria-label="'.sprintf(__('Learn about %s'), $tax_term->name).'" '.' class="btn btn-outline-primary">'.$tax_term->name.'</a></li>';
+    foreach ($tax_term_list as $tax_term) {
+        /** @var string $tax_term_link */
+        $tax_term_link = get_term_link($tax_term, $taxonomy);
+        echo '<li>'.'<a href="'.esc_attr($tax_term_link).'" aria-label="'.sprintf(__('Learn about %s'), $tax_term->name).'" '.' class="btn btn-outline-primary">'.$tax_term->name.'</a></li>';
     }
 
     echo '</ul>';
@@ -96,7 +100,7 @@ if (! isset($_GET['showall'])) {
         $page_query = '?alpha='.$alpha;
     }
 
-    $total_terms = uamswp_fad_int(wp_count_terms($taxonomy, $count_args));
+    $total_terms = uamswp_fad_int(wp_count_terms($count_args));
     $pages = intdiv($total_terms + $per_page - 1, $per_page);
     echo uamswp_fad_archive_page_links(uamswp_fad_str(get_permalink()), $paged, $pages, $page_query, 'Condition list pagination');
 } else {
