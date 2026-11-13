@@ -67,7 +67,7 @@ function genesis(): void {}
 function __genesis_return_full_width_content(): string {}
 
 /** The UAMS theme. */
-function image_sizer(mixed $image, int $width, int $height, string $x = 'center', string $y = 'center', string $class = ''): mixed {}
+function image_sizer(mixed $image, int $width, int $height, string $x = 'center', string $y = 'center', string $class = ''): ?string {}
 
 function format_phone_us(mixed $phone): mixed {}
 
