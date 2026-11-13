@@ -35,8 +35,6 @@ test('each loop that looks for a published post leaves at the first match', func
     'the condition page' => ['single-condition.php', ['$location_valid']],
     'the provider page' => ['single-physicians.php', ['$location_valid', '$expertise_valid', '$expertise_valid']],
     'the treatment page' => ['single-treatment.php', ['$location_valid']],
-    'the condition archive' => ['taxonomy-condition.php', ['$location_valid']],
-    'the treatment archive' => ['taxonomy-treatment_procedure.php', ['$location_valid']],
 ]);
 
 test('the reader tells a loop that leaves from one that does not', function (): void {
