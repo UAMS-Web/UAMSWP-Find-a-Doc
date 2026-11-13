@@ -21,12 +21,16 @@
                 <p class="note">UAMS Health providers care for a broad range of conditions, some of which may not be listed below.</p>
                 <div class="list-container list-container-rows">
                     <ul class="list">
-                    <?php foreach ($conditions_query->get_terms() as $condition) { ?>
+                    <?php /** @var list<WP_Term> $condition_terms */
+                    $condition_terms = $conditions_query->get_terms();
+foreach ($condition_terms as $condition) {
+    /** @var string $condition_link */
+    $condition_link = get_term_link($condition->term_id); ?>
                         <li>
-                            <a href="<?php echo get_term_link($condition->term_id); ?>" aria-label="Go to Condition page for <?php echo $condition->name; ?>" class="btn btn-outline-primary">
+                            <a href="<?php echo $condition_link; ?>" aria-label="Go to Condition page for <?php echo $condition->name; ?>" class="btn btn-outline-primary">
                                 <?php
-                                    echo $condition->name;
-                        ?>
+                echo $condition->name;
+    ?>
                             </a>
                         </li>
                     <?php } ?>

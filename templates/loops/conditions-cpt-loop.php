@@ -62,12 +62,14 @@ if ($condition_context == 'single-provider') {
                 <?php } ?>
                 <div class="list-container list-container-rows">
                     <ul class="list">
-                    <?php foreach ($conditions_cpt_query->posts as $condition) { ?>
+                    <?php /** @var list<WP_Post> $condition_posts */
+                    $condition_posts = $conditions_cpt_query->posts;
+foreach ($condition_posts as $condition) { ?>
                         <li>
                             <a href="<?php echo get_the_permalink($condition->ID); ?>" aria-label="Go to Condition page for <?php echo $condition->post_title; ?>" class="btn btn-outline-primary">
                                 <?php
-                                    echo $condition->post_title;
-                        ?>
+                echo $condition->post_title;
+    ?>
                             </a>
                         </li>
                     <?php } ?>

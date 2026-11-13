@@ -63,7 +63,9 @@ if ($treatment_context == 'single-provider') {
                 <?php } ?>
                 <div class="list-container list-container-rows">
                     <ul class="list">
-                    <?php foreach ($treatments_cpt_query->posts as $treatment) { ?>
+                    <?php /** @var list<WP_Post> $treatment_posts */
+                    $treatment_posts = $treatments_cpt_query->posts;
+foreach ($treatment_posts as $treatment) { ?>
                         <li>
                             <a href="<?php echo get_the_permalink($treatment->ID); ?>" aria-label="Go to Treatment page for <?php echo $treatment->post_title; ?>" class="btn btn-outline-primary"><?php echo $treatment->post_title; ?></a>
                         </li>

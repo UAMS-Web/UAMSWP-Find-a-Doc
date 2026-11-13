@@ -5,11 +5,11 @@ add_filter('body_class', 'uams_default_page_body_class');
 add_filter('posts_where', 'title_filter', 10, 2);
 $condition_title = get_field('conditions_archive_headline', 'option') ?: 'Conditions';
 $condition_text = get_field('conditions_archive_intro_text', 'option');
-$condition_link = uamswp_fad_str(get_post_type_archive_link(get_query_var('post_type')));
+$condition_link = uamswp_fad_str(get_post_type_archive_link(uamswp_fad_str(get_query_var('post_type'))));
 
 $alpha = uamswp_fad_str($_GET['alpha'] ?? '');
 
-add_filter('seopress_titles_title', 'uamswp_fad_title_archive_condition', 15, 2);
+add_filter('seopress_titles_title', 'uamswp_fad_title_archive_condition', 15, 1);
 
 get_header(); ?>
 
@@ -29,6 +29,9 @@ get_header(); ?>
                             <?php
                             // if show all is set
                             $post_type = 'condition';
+$paged = 1;
+// number of tags to show per page
+$per_page = 40;
 if (isset($_GET['showall'])) {
 
     $args = ['post_type' => $post_type, 'orderby' => 'title', 'order' => 'ASC', 'posts_per_page' => -1];
@@ -37,8 +40,6 @@ if (isset($_GET['showall'])) {
     // else show paged
 
     $paged = max(1, uamswp_fad_int(get_query_var('paged')));
-    // number of tags to show per page
-    $per_page = 40;
     $offset = ($paged - 1) * $per_page;
     $args = ['post_type' => $post_type, 'orderby' => 'title', 'order' => 'ASC', 'posts_per_page' => $per_page, 'offset' => $offset];
     // `0` stands for every title that starts with a number (title_filter()).
@@ -79,7 +80,7 @@ if ($the_query->have_posts()) {
 
     while ($the_query->have_posts()) {
         $the_query->the_post();
-        echo '<li>'.'<a href="'.esc_attr(get_the_permalink()).'" aria-label="'.sprintf(__('Learn about %s'), get_the_title()).'" '.' class="btn btn-outline-primary">'.get_the_title().'</a></li>';
+        echo '<li>'.'<a href="'.esc_attr(uamswp_fad_str(get_the_permalink())).'" aria-label="'.sprintf(__('Learn about %s'), get_the_title()).'" '.' class="btn btn-outline-primary">'.get_the_title().'</a></li>';
     }
 
     echo '</ul>';
