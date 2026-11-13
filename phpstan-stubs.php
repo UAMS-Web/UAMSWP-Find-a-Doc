@@ -64,7 +64,7 @@ function lyte_parse(string $the_content, bool $doExcerpt = false): string {}
 function genesis(): void {}
 
 /** The UAMS theme. */
-function image_sizer(mixed $image, int $width, int $height, string $x = 'center', string $y = 'center', string $class = ''): string|null {}
+function image_sizer(mixed $image, int $width, int $height, string $x = 'center', string $y = 'center', string $class = ''): ?string {}
 
 function format_phone_us(mixed $phone): mixed {}
 
