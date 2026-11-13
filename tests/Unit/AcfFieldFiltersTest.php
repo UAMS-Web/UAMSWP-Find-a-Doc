@@ -410,3 +410,88 @@ test('the file registers the FacetWP cards and block blocks when ACF can registe
         ->and($blocks[0]['supports'])->toBe(['align' => ['full'], 'mode' => true, 'multiple' => true])
         ->and($blocks[1]['supports'])->toBe(['align' => true, 'mode' => true, 'multiple' => true]);
 });
+
+test('the image field settings render the aspect ratio width, height and margin inputs', function (): void {
+    uamswp_test_acf_functions();
+    when('__')->returnArg();
+
+    $rendered = [];
+    when('acf_render_field_setting')->alias(function (array $field, array $args) use (&$rendered): void {
+        $rendered[] = [$field, $args];
+    });
+
+    $field = ['type' => 'image'];
+    acf_image_aspect_ratio_settings($field);
+
+    $wrapper = ['data-append' => 'ratio_width', 'width' => '', 'class' => '', 'id' => ''];
+
+    expect($rendered)->toBe([
+        [$field, [
+            'name' => 'ratio_width',
+            'type' => 'number',
+            'label' => 'Aspect Ratio',
+            'instructions' => 'Restrict which images can be uploaded',
+            'default_value' => 0,
+            'min' => 0,
+            'step' => 1,
+            'prepend' => 'Width',
+        ]],
+        [$field, [
+            'name' => 'ratio_height',
+            'type' => 'number',
+            'label' => '',
+            'default_value' => 0,
+            'min' => 0,
+            'step' => 1,
+            'prepend' => 'Height',
+            'wrapper' => $wrapper,
+        ]],
+        [$field, [
+            'name' => 'ratio_margin',
+            'type' => 'number',
+            'label' => '',
+            'default_value' => 0,
+            'min' => 0,
+            'step' => .5,
+            'prepend' => '&plusmn;',
+            'append' => '%',
+            'wrapper' => $wrapper,
+        ]],
+    ]);
+});
+
+test('the allowed image height is rounded to the nearest pixel at both ends', function (int $height, bool $fitsShort, bool $fitsTall): void {
+    uamswp_test_acf_functions();
+    when('__')->returnArg();
+
+    // A 100 pixel wide image at 3:1 may be 33.33 pixels tall, and at 3:2 66.67 pixels tall, with no margin.
+    $short = acf_image_aspect_ratio_validate([], ['width' => 100, 'height' => $height], [], ['ratio_width' => 3, 'ratio_height' => 1], '');
+    $tall = acf_image_aspect_ratio_validate([], ['width' => 100, 'height' => $height], [], ['ratio_width' => 3, 'ratio_height' => 2], '');
+
+    expect($short === [])->toBe($fitsShort)
+        ->and($tall === [])->toBe($fitsTall);
+})->with([
+    'one under the short ratio' => [32, false, false],
+    'the short ratio rounded down' => [33, true, false],
+    'one over the short ratio' => [34, false, false],
+    'one under the tall ratio' => [66, false, false],
+    'the tall ratio rounded up' => [67, false, true],
+    'one over the tall ratio' => [68, false, false],
+]);
+
+test('the FacetWP block hides its heading for any true value ACF stores, and prints nothing else without a pager', function (mixed $hide, string $heading_class): void {
+    uamswp_test_acf_functions();
+    acf_filters_options(['facetwp_block_hide_heading' => $hide, 'facetwp_block_facet_template' => 'clinic_cards']);
+    when('facetwp_display')->alias(static fn (string $type, ?string $name = null): string => '['.$type.($name === null ? '' : ':'.$name).']');
+
+    $html = acf_block_html('fad_facetwp_blocks_callback');
+
+    expect($html)->toContain('<h2 class="module-title'.$heading_class.'" >Cards List</h2>')
+        ->and(trim((string) preg_replace('/\s+/', ' ', strip_tags($html))))->toBe('Cards List [template:clinic_cards]');
+})->with([
+    'the string one' => ['1', ' sr-only'],
+    'the integer one' => [1, ' sr-only'],
+    'true' => [true, ' sr-only'],
+    'false' => [false, ''],
+    'the string zero' => ['0', ''],
+]);
