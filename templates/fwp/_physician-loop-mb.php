@@ -16,7 +16,7 @@
 	    while (have_posts()) {
 	        the_post(); ?>
 	<?php $class = ($i % 2 == 0) ? 'whiteBackground' : 'grayBackground'; ?>
-	<?php $full_name = rwmb_meta('physician_first_name').' '.(rwmb_meta('physician_middle_name') ? rwmb_meta('physician_middle_name').' ' : '').rwmb_meta('physician_last_name').(rwmb_meta('physician_pedigree') ? '&nbsp;'.rwmb_meta('physician_pedigree') : '').(rwmb_meta('physician_degree') ? ', '.rwmb_meta('physician_degree') : '');
+	<?php $full_name = uamswp_fad_str(rwmb_meta('physician_first_name')).' '.(rwmb_meta('physician_middle_name') ? uamswp_fad_str(rwmb_meta('physician_middle_name')).' ' : '').uamswp_fad_str(rwmb_meta('physician_last_name')).(rwmb_meta('physician_pedigree') ? '&nbsp;'.uamswp_fad_str(rwmb_meta('physician_pedigree')) : '').(rwmb_meta('physician_degree') ? ', '.uamswp_fad_str(rwmb_meta('physician_degree')) : '');
 	        // $profileurl = '/directory/physician/' . $post->post_name .'/';
 	        ?>
 	<div class="<?php echo $class; ?> archive-box">
@@ -26,9 +26,9 @@
 				<?php
 	                        if (! empty(rwmb_meta('physician_clinical_title')) || ! empty(rwmb_meta('physician_department'))) {
 	                            echo '<h4>';
-	                            echo rwmb_meta('physician_clinical_title') ? rwmb_meta('physician_clinical_title')->name : '';
+	                            echo uamswp_fad_object_str(rwmb_meta('physician_clinical_title'), 'name');
 	                            echo (! empty(rwmb_meta('physician_clinical_title'))) && (! empty(rwmb_meta('physician_department'))) ? ', ' : '';
-	                            echo rwmb_meta('physician_department') ? rwmb_meta('physician_department')->name : '';
+	                            echo uamswp_fad_object_str(rwmb_meta('physician_department'), 'name');
 	                            echo '</h4>';
 	                        }
 	        ?>
@@ -49,9 +49,10 @@
 	                $pg_rating_data = '';
 	                $pg_rating_valid = '';
 	                if ($npi) {
-	                    $pg_rating_request = get_post_meta(get_the_ID(), '_syndicated_api_data', true); // wp_pg_cached_api( $npi, 0 );
-	                    $pg_rating_data = json_decode($pg_rating_request);
-	                    if (! empty($pg_rating_data)) {
+	                    $pg_rating_request = get_post_meta(uamswp_fad_int(get_the_ID()), '_syndicated_api_data', true); // wp_pg_cached_api( $npi, 0 );
+	                    /** @var object{data: object{entities: list<object{totalRatingCount: int, totalCommentCount: int, overallRating: object{value: float|int|string}}>}}|null $pg_rating_data */
+	                    $pg_rating_data = json_decode(uamswp_fad_str($pg_rating_request));
+	                    if (is_object($pg_rating_data)) {
 	                        $pg_rating_valid = (($pg_rating_data->data->entities[0]->totalRatingCount) >= 30);
 	                    }
 	                }
@@ -98,11 +99,11 @@
 	                <div class="row" class="margin-top-none margin-bottom-none">
 	                    <div class="col-md-6">
 
-	                        <p><?php echo rwmb_meta('physician_short_clinical_bio') ?: wp_trim_words(rwmb_meta('physician_clinical_bio'), 30, ' &hellip;'); ?></p>
+	                        <p><?php echo uamswp_fad_str(rwmb_meta('physician_short_clinical_bio')) ?: wp_trim_words(uamswp_fad_str(rwmb_meta('physician_clinical_bio')), 30, ' &hellip;'); ?></p>
 
 	                         <a class="uams-btn btn-blue btn-sm" target="_self" title="View Profile" href="<?php echo get_permalink($post->ID); ?>">View Profile</a>
 							<?php if (rwmb_meta('physician_youtube_link')) { ?>
-								<a class="uams-btn btn-red btn-play btn-sm" target="_self" title="View Physician Video" href="<?php echo rwmb_meta('physician_youtube_link'); ?>&rel=0" data-lity>View Video</a>
+								<a class="uams-btn btn-red btn-play btn-sm" target="_self" title="View Physician Video" href="<?php echo uamswp_fad_str(rwmb_meta('physician_youtube_link')); ?>&rel=0" data-lity>View Video</a>
 							<?php } ?>
 	                    </div>
 	                    <div class="col-md-6">
@@ -114,12 +115,10 @@
 	        if ($specialties) { ?>
 								<h3>Specialties</h3>
 								<ul>
-									<?php foreach ($specialties as $specialty) { ?>
+									<?php foreach (uamswp_fad_arr($specialties) as $specialty) { ?>
 										<li>
-											<a href="<?php echo get_term_link($specialty); ?>">
-											<?php $specialty_name = get_term($specialty, 'specialty');
-									    echo $specialty_name->name;
-									    ?>
+											<a href="<?php echo uamswp_fad_str(get_term_link(uamswp_fad_int($specialty))); ?>">
+											<?php echo uamswp_fad_term_name($specialty, 'specialty'); ?>
 											</a>
 										</li>
 									<?php } ?>
@@ -127,16 +126,15 @@
 							<?php } ?>
 							<?php
 
-                            $locations = new WP_Query([
-                                'relationship' => [
-                                    'id' => 'physicians_to_locations',
-                                    'from' => get_the_ID(), // You can pass object ID or full object
-                                ],
-                                'nopaging' => true,
-                            ]);
+	                        $locations = new WP_Query([
+	                            'relationship' => [
+	                                'id' => 'physicians_to_locations',
+	                                'from' => get_the_ID(), // You can pass object ID or full object
+	                            ],
+	                            'nopaging' => true,
+	                        ]);
 
 	        ?>
-							<?php if ($locations) { ?>
 							<h3 data-fontsize="16" data-lineheight="24"><i class="fa fa-medkit"></i> Clinic(s)</h3>
 								<ul>
 								<?php while ($locations->have_posts()) {
@@ -149,7 +147,6 @@
 								<?php }
 								wp_reset_postdata(); ?>
 								</ul>
-							<?php } ?>
 
 	                    </div><!-- .col-6 -->
 	                </div><!-- .row -->
