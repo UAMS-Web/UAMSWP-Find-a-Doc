@@ -49,8 +49,14 @@ if (! class_exists('WP_Query')) {
         /** @var array<int, mixed> */
         public $posts = [];
 
+        /** @var int The number of posts the query matched over every page; the count of `$posts` unless queued. */
+        public $found_posts = 0;
+
         /** @var list<array<int, mixed>> The post ids each query built with arguments will find, in order. */
         public static array $queue = [];
+
+        /** @var list<int> The `found_posts` of each query built with arguments, in order. */
+        public static array $found = [];
 
         /** @var list<array<string, mixed>> The arguments of every query built with arguments. */
         public static array $queries = [];
@@ -70,6 +76,7 @@ if (! class_exists('WP_Query')) {
             if ($args !== []) {
                 self::$queries[] = $args;
                 $this->posts = array_shift(self::$queue) ?? [];
+                $this->found_posts = array_shift(self::$found) ?? count($this->posts);
             }
         }
 

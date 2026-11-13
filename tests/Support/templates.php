@@ -82,7 +82,11 @@ function uamswp_test_render_template(string $name, array $variables = []): strin
         });
     }
 
-    when('genesis')->justReturn();
+    // How many times the template handed the page to Genesis.
+    $GLOBALS['uamswp_test_genesis_calls'] = 0;
+    when('genesis')->alias(static function (): void {
+        $GLOBALS['uamswp_test_genesis_calls']++;
+    });
 
     $render = static function () use ($name, $variables): string {
         extract($variables, EXTR_SKIP);
