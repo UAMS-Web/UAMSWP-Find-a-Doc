@@ -5,12 +5,9 @@ add_filter('body_class', 'uams_default_page_body_class');
 add_filter('posts_where', 'title_filter', 10, 2);
 $treatment_title = get_field('treatments_archive_headline', 'option') ?: 'Treatments &amp; Procedures';
 $treatment_text = get_field('treatments_archive_intro_text', 'option');
-$treatment_link = get_post_type_archive_link(get_query_var('post_type'));
+$treatment_link = uamswp_fad_str(get_post_type_archive_link(get_query_var('post_type')));
 
-$alpha = '';
-if (isset($_GET['alpha'])) {
-    $alpha = $_GET['alpha'];
-}
+$alpha = uamswp_fad_str($_GET['alpha'] ?? '');
 
 add_filter('seopress_titles_title', 'uamswp_fad_title_archive_treatments', 15, 2);
 
@@ -39,12 +36,13 @@ if (isset($_GET['showall'])) {
 } else {
     // else show paged
 
-    $paged = get_query_var('paged') ?: 1;
+    $paged = max(1, uamswp_fad_int(get_query_var('paged')));
     // number of tags to show per page
     $per_page = 40;
     $offset = ($paged - 1) * $per_page;
     $args = ['post_type' => $post_type, 'orderby' => 'title', 'order' => 'ASC', 'posts_per_page' => $per_page, 'offset' => $offset];
-    if (! empty($alpha)) {
+    // `0` stands for every title that starts with a number (title_filter()).
+    if ($alpha !== '') {
         $alpha = substr($alpha, 0, 1);
         $args['starts_with'] = $alpha;
         $args['posts_per_page'] = -1;
@@ -69,90 +67,7 @@ $the_query = new WP_Query($args);
                                         If user checks "All"/"Any" checkbox input, remove "checked" attribute from checkbox input of other characters.
                                         After that, if user checks any other checkbox input, remove "checked" attribute from "Any"/"All" checkbox input.
                                     -->
-                                    <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>" <?php echo ($alpha != '') ? 'aria-selected="false"' : 'aria-selected="true"'; ?> aria-label="Remove any filter"><span aria-hidden="true">All</span></a>
-                                    </div>
-                                    <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>?alpha=0" <?php echo ($alpha == '0') ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with a number"><span aria-hidden="true">#</span></a>
-                                    </div>
-                                    <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>?alpha=a" <?php echo ($alpha == 'a') ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter A">A</a>
-                                    </div>
-                                    <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>?alpha=b" <?php echo ($alpha == 'b') ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter B">B</a>
-                                    </div>
-                                    <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>?alpha=c" <?php echo ($alpha == 'c') ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter C">C</a>
-                                    </div>
-                                    <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>?alpha=d" <?php echo ($alpha == 'd') ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter D">D</a>
-                                    </div>
-                                    <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>?alpha=e" <?php echo ($alpha == 'e') ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter E">E</a>
-                                    </div>
-                                    <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>?alpha=f" <?php echo ($alpha == 'f') ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter F">F</a>
-                                    </div>
-                                    <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>?alpha=g" <?php echo ($alpha == 'g') ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter G">G</a>
-                                    </div>
-                                    <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>?alpha=h" <?php echo ($alpha == 'h') ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter H">H</a>
-                                    </div>
-                                    <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>?alpha=i" <?php echo ($alpha == 'i') ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter I">I</a>
-                                    </div>
-                                    <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>?alpha=j" <?php echo ($alpha == 'j') ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter J">J</a>
-                                    </div>
-                                    <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>?alpha=k" <?php echo ($alpha == 'k') ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter K">K</a>
-                                    </div>
-                                    <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>?alpha=l" <?php echo ($alpha == 'l') ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter L">L</a>
-                                    </div>
-                                    <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>?alpha=m" <?php echo ($alpha == 'm') ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter M">M</a>
-                                    </div>
-                                    <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>?alpha=n" <?php echo ($alpha == 'n') ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter N">N</a>
-                                    </div>
-                                    <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>?alpha=o" <?php echo ($alpha == 'o') ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter O">O</a>
-                                    </div>
-                                    <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>?alpha=p" <?php echo ($alpha == 'p') ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter P">P</a>
-                                    </div>
-                                    <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>?alpha=q" <?php echo ($alpha == 'q') ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter Q">Q</a>
-                                    </div>
-                                    <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>?alpha=r" <?php echo ($alpha == 'r') ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter R">R</a>
-                                    </div>
-                                    <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>?alpha=s" <?php echo ($alpha == 's') ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter S">S</a>
-                                    </div>
-                                    <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>?alpha=t" <?php echo ($alpha == 't') ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter T">T</a>
-                                    </div>
-                                    <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>?alpha=u" <?php echo ($alpha == 'u') ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter U">U</a>
-                                    </div>
-                                    <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>?alpha=v" <?php echo ($alpha == 'v') ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter V">V</a>
-                                    </div>
-                                    <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>?alpha=w" <?php echo ($alpha == 'w') ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter W">W</a>
-                                    </div>
-                                    <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>?alpha=x" <?php echo ($alpha == 'x') ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter X">X</a>
-                                    </div>
-                                    <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>?alpha=y" <?php echo ($alpha == 'y') ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter Y">Y</a>
-                                    </div>
-                                    <div class="custom-control">
-                                        <a class="az-filter-label" href="<?php echo $treatment_link; ?>?alpha=z" <?php echo ($alpha == 'z') ? 'aria-selected="true"' : 'aria-selected="false"'; ?> aria-label="Show only the treatments and procedures that begin with the letter Z">Z</a>
-                                    </div>
+                                    <?php echo uamswp_fad_archive_alpha_links($treatment_link, $alpha, 'treatments and procedures'); ?>
                                 </div>
                             </div>
                             <div class="list-container list-container-rows">
@@ -177,73 +92,12 @@ if ($the_query->have_posts()) {
 
 }
 
-// pagination
-// if showall isn't set
+// The page links, unless every item is shown. A list filtered by a character is all on one page, so it has none.
 if (! isset($_GET['showall'])) {
-    $pages = '';
-    $args = ['post_type' => $post_type, 'orderby' => 'title', 'order' => 'ASC'];
-    if (! empty($alpha)) {
-        $alpha = substr($alpha, 0, 1);
-        $args['starts_with'] = $alpha;
-        $args['posts_per_page'] = -1;
-        $pages = 1;
+    if ($alpha === '') {
+        $pages = intdiv($the_query->found_posts + $per_page - 1, $per_page);
+        echo uamswp_fad_archive_page_links($treatment_link, $paged, $pages, '', 'Treatment list pagination');
     }
-
-    // $total_terms = $terms->count;
-    $total_terms = $the_query->found_posts;
-    if ($pages == '') {
-        $pages = ceil($total_terms / $per_page);
-    }
-
-    if (empty($paged)) {
-        $paged = 1;
-    }
-    $range = 1; // Number of items +/- current page
-    $showitems = ($range * 2) + 1;
-
-    if ($pages == '') {
-        // $total_terms = wp_count_terms( $taxonomy );
-        $pages = ceil($total_terms / $per_page);
-        if (! $pages) {
-            $pages = 1;
-        }
-    }
-
-    // if there's more than one page
-    if ($pages != 1) { ?>
-                                    <div class="list-pagination">
-                                    <nav aria-label="Condtion list pagination">
-                                        <ul class="pagination">
-                                        <?php
-            $alpha_url = isset($alpha) ? '?alpha='.$alpha : '';
-        if ($paged > 2 && $paged > $range + 1 && $showitems < $pages) {
-            echo '<li class="page-item"><a class="page-link" aria-label="First" href="'.$treatment_link.'page/1/'.$alpha_url.'"><span aria-hidden="true">&laquo;</span></a></li>';
-        }
-        if ($paged > 1 && $showitems < $pages) {
-            echo '<li class="page-item"><a class="page-link" aria-label="Previous" href="'.$treatment_link.'page/'.($paged - 1).'/'.$alpha_url.'"><span aria-hidden="true">&lsaquo;</span></a></li>';
-        }
-
-        for ($pagecount = 1; $pagecount <= $pages; $pagecount++) {
-            if ($pages != 1 && ($pagecount < $paged + $range + 1 && $pagecount > $paged - $range - 1 || $pages <= $showitems)) {
-                echo ($paged == $pagecount) ? '<li class="page-item current"><a class="page-link">'.$pagecount.'</a></li>' : '<li class="page-item"><a class="page-link" href="'.$treatment_link.'page/'.$pagecount.'/'.$alpha_url.'" class="inactive" >'.$pagecount.'</a></li>';
-            }
-        }
-
-        if ($paged < $pages && $showitems < $pages) {
-            echo '<li class="page-item"><a class="page-link" aria-label="Next" href="'.$treatment_link.'page/'.($paged + 1).'/'.$alpha_url.'"><span aria-hidden="true">&rsaquo;</span></a></li>';
-        }
-        if ($paged < $pages - 1 && $paged + $range - 1 < $pages && $showitems < $pages) {
-            echo '<li class="page-item"><a class="page-link" aria-label="Last" href="'.$treatment_link.'page/'.$pages.'/'.$alpha_url.'"><span aria-hidden="true">&raquo;</span></a></li>';
-        }
-        ?>
-                                        </ul>
-                                    </nav>
-                                </div>
-                                    <?php
-                                    // link to show all
-                                    echo '<div class="show-all"><p><a href="'.$treatment_link.'?showall=true">Show all items</a></p></div>';
-    }
-
 } else {
     // showall is set, show link to get back to paged mode
 

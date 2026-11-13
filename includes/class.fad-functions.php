@@ -13,7 +13,7 @@ function asp_custom_link_meta_results($results)
     $new_desc = '';
     foreach ($results as $k => $v) {
         $v_id = uamswp_fad_int($v->id);
-        if (($v->content_type == 'pagepost') && (get_post_type($v_id) == 'provider')) {
+        if (($v->content_type === 'pagepost') && (get_post_type($v_id) === 'provider')) {
             $degrees = get_field('physician_degree', $v_id);
             $degree_list = '';
             $i = 1;
@@ -111,6 +111,8 @@ class pubmed_field_on_change
         // make json api call
         $host = 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&retmode=json&id={IDS}';
         // insert the pmid
+        // The file declares no strict types, so the integer is turned into text by str_replace() itself.
+        // @pest-mutate-ignore: RemoveStringCast
         $url = str_replace('{IDS}', (string) $idstr, $host);
         // get json data
         $request = wp_remote_get($url);
@@ -214,11 +216,11 @@ function fad_script_register(): void
     if (! is_admin()) {
         wp_register_script('pubmed-api', UAMS_FAD_ROOT_URL.'assets/js/pubmed-api-async.js', ['jquery'], null, true);
     }
-    if ((is_single() && ($post_type == 'location'))) {
+    if ((is_single() && ($post_type === 'location'))) {
         wp_enqueue_style('leaflet-css', UAMS_FAD_ROOT_URL.'assets/leaflet/leaflet.css', [], '1.1', 'all');
         wp_enqueue_script('leaflet-js', UAMS_FAD_ROOT_URL.'assets/leaflet/leaflet.js', [], null, false);
     }
-    if ((is_archive() && (($post_type == 'provider') || ($post_type == 'location')))) {
+    if ((is_archive() && (($post_type === 'provider') || ($post_type === 'location')))) {
         wp_enqueue_script('mobile-filter-toggle', UAMS_FAD_ROOT_URL.'assets/js/mobile-filter-toggle.js', ['jquery'], null, false);
     }
     wp_enqueue_style('fad-app-css', UAMS_FAD_ROOT_URL.'assets/css/app.css', [], UAMS_FAD_VERSION, 'all');
@@ -256,7 +258,7 @@ function posts_provider_columns($columns): array
     $custom_columns = [];
     $title = 'title';
     foreach ($columns as $key => $value) {
-        if ($key == $title) {
+        if ($key === $title) {
             $custom_columns['provider_post_thumbs'] = __('Headshot');   // Move before title column
         }
         $custom_columns[$key] = $value;
@@ -821,13 +823,10 @@ function uamswp_load_by_ajax_callback(): void
     //     );
     // }
     $loop = new WP_Query($args);
-    $out = '';
-    if ($loop->have_posts()) {
-        while ($loop->have_posts()) {
-            $loop->the_post();
-            $id = get_the_ID();
-            $out .= uamswp_fad_str(include UAMS_FAD_PATH.'/templates/loops/physician-card.php');
-        }
+    while ($loop->have_posts()) {
+        $loop->the_post();
+        $id = get_the_ID();
+        include UAMS_FAD_PATH.'/templates/loops/physician-card.php';
     }
     wp_die();
 }

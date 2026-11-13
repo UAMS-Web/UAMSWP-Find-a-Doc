@@ -166,6 +166,105 @@ function custom_field_excerpt($title)
 }
 
 /**
+ * Where to send a provider or location archive request so that it is filtered by the visitor's saved region.
+ *
+ * The region filter keeps the chosen region in the `wp_filter_region` cookie. A request for the archive that does
+ * not yet carry the archive's own FacetWP region parameter is sent to the same address with that parameter added
+ * from the cookie. The two archives used to do this inline before their `header()` and `exit()`.
+ *
+ * @param  string  $parameter  The archive's region parameter: `_provider_region` or `_location_region`.
+ * @param  array<array-key, mixed>  $cookies  The request cookies (`$_COOKIE`).
+ * @param  array<array-key, mixed>  $query  The query string variables (`$_GET`).
+ * @param  array<array-key, mixed>  $server  The server variables (`$_SERVER`); `REQUEST_URI` is the path and query of the request.
+ * @return string|null The address to redirect to, or null when there is no saved region or the request already has the parameter.
+ */
+function uamswp_fad_region_redirect_url(string $parameter, array $cookies, array $query, array $server): ?string
+{
+    if (! isset($cookies['wp_filter_region']) || isset($query[$parameter])) {
+        return null;
+    }
+
+    $request_uri = uamswp_fad_str($server['REQUEST_URI'] ?? '');
+
+    return $request_uri.(parse_url($request_uri, PHP_URL_QUERY) ? '&' : '?').$parameter.'='.uamswp_fad_str($cookies['wp_filter_region']);
+}
+
+/**
+ * The A to Z filter above the condition and treatment lists: an All link, a # link and one link per letter.
+ *
+ * The link of the character the list is filtered by is marked selected, or the All link when it is not filtered.
+ *
+ * @param  string  $base_url  The address of the list, which each link adds `?alpha=` to.
+ * @param  string  $selected  The character the list is filtered by, or an empty string.
+ * @param  string  $noun  What the list holds, as its labels name it (`conditions and procedures`).
+ */
+function uamswp_fad_archive_alpha_links(string $base_url, string $selected, string $noun): string
+{
+    $html = '<div class="custom-control"><a class="az-filter-label" href="'.$base_url.'" aria-selected="'.($selected === '' ? 'true' : 'false').'" aria-label="Remove any filter"><span aria-hidden="true">All</span></a></div>';
+    $html .= '<div class="custom-control"><a class="az-filter-label" href="'.$base_url.'?alpha=0" aria-selected="'.($selected === '0' ? 'true' : 'false').'" aria-label="Show only the '.$noun.' that begin with a number"><span aria-hidden="true">#</span></a></div>';
+
+    foreach (range('a', 'z') as $letter) {
+        $html .= '<div class="custom-control"><a class="az-filter-label" href="'.$base_url.'?alpha='.$letter.'" aria-selected="'.($selected === $letter ? 'true' : 'false').'" aria-label="Show only the '.$noun.' that begin with the letter '.strtoupper($letter).'">'.strtoupper($letter).'</a></div>';
+    }
+
+    return $html;
+}
+
+/**
+ * The page links under the condition and treatment lists, and the link that shows every item on one page.
+ *
+ * The current page and one page on each side of it are linked, with links to the first, previous, next and last
+ * pages once there are more than three pages; with three pages or fewer every page is linked.
+ *
+ * @param  string  $base_url  The address of the list, which each page link adds `page/<n>/` to.
+ * @param  int  $paged  The page being shown, from 1.
+ * @param  int  $pages  The number of pages.
+ * @param  string  $query  The query string each page link ends with (`?alpha=b`), or an empty string.
+ * @param  string  $label  The accessible name of the navigation (`Condition list pagination`).
+ * @return string Nothing when there is only one page or none.
+ */
+function uamswp_fad_archive_page_links(string $base_url, int $paged, int $pages, string $query, string $label): string
+{
+    if ($pages <= 1) {
+        return '';
+    }
+
+    $range = 1; // Pages linked on each side of the current one
+    $show_items = ($range * 2) + 1;
+    $page_link = static fn (int $page): string => $base_url.'page/'.$page.'/'.$query;
+
+    $html = '<div class="list-pagination"><nav aria-label="'.$label.'"><ul class="pagination">';
+
+    if ($paged > $range + 1 && $show_items < $pages) {
+        $html .= '<li class="page-item"><a class="page-link" aria-label="First" href="'.$page_link(1).'"><span aria-hidden="true">&laquo;</span></a></li>';
+    }
+
+    if ($paged > 1 && $show_items < $pages) {
+        $html .= '<li class="page-item"><a class="page-link" aria-label="Previous" href="'.$page_link($paged - 1).'"><span aria-hidden="true">&lsaquo;</span></a></li>';
+    }
+
+    for ($page = 1; $page <= $pages; $page++) {
+        if ($pages <= $show_items || ($page <= $paged + $range && $page >= $paged - $range)) {
+            $html .= $page === $paged
+                ? '<li class="page-item current"><a class="page-link">'.$page.'</a></li>'
+                : '<li class="page-item"><a class="page-link" href="'.$page_link($page).'" class="inactive" >'.$page.'</a></li>';
+        }
+    }
+
+    if ($paged < $pages && $show_items < $pages) {
+        $html .= '<li class="page-item"><a class="page-link" aria-label="Next" href="'.$page_link($paged + 1).'"><span aria-hidden="true">&rsaquo;</span></a></li>';
+    }
+
+    if ($paged < $pages - 1 && $show_items < $pages) {
+        $html .= '<li class="page-item"><a class="page-link" aria-label="Last" href="'.$page_link($pages).'"><span aria-hidden="true">&raquo;</span></a></li>';
+    }
+
+    $html .= '</ul></nav></div>';
+
+    return $html.'<div class="show-all"><p><a href="'.$base_url.'?showall=true">Show all items</a></p></div>';
+}
+
+/**
  * The excerpt length the provider archive uses, in words.
  *
  * @param  int  $length  The length WordPress would use; not used.

@@ -717,6 +717,139 @@ test('the override toggles do nothing for a location without a parent', function
     expect([$row[19], $row[20]])->toBe(['https://img.test/100-large.jpg', 'https://img.test/101-large.jpg,https://img.test/102-large.jpg']);
 });
 
+test('the location table limits to a single id, and to ids given as strings', function (): void {
+    gmb_world([]);
+    WP_Query::$queue = [[]];
+    WP_Query::$queries = [];
+    uamswp_fad_gmb_location_table(14);
+    $single = WP_Query::$queries[0]['post__in'];
+    WP_Query::$queue = [[]];
+    WP_Query::$queries = [];
+    uamswp_fad_gmb_location_table(['15']);
+
+    expect($single)->toBe([14])
+        ->and(WP_Query::$queries[0]['post__in'])->toBe([15]);
+});
+
+test('the location table resets the post data once it is built', function (): void {
+    $id = gmb_next_id();
+    gmb_world(['posts' => [$id => ['slug' => 'main-clinic', 'title' => 'Main Clinic']], 'fields' => ['location_hours_group' => ['location_telemed_query' => 0]]]);
+    $resets = 0;
+    when('wp_reset_postdata')->alias(static function () use (&$resets): void {
+        $resets++;
+    });
+
+    gmb_build('uamswp_fad_gmb_location_table', [$id]);
+
+    expect($resets)->toBe(1);
+});
+
+test('a location with a parent id but no child flag is not keyed under the parent', function (): void {
+    $parent = gmb_next_id();
+    $id = gmb_next_id();
+
+    $row = gmb_locations(['location_parent_id|'.$id => $parent], [$parent => ['slug' => 'parent-clinic', 'title' => 'Parent Clinic']], id: $id)['result']['body'][0];
+
+    expect($row[0])->toBe('main-clinic');
+});
+
+test('a location building with no term adds an empty address line', function (): void {
+    $row = gmb_locations(['location_building' => 43])['result']['body'][0];
+
+    expect([$row[3], $row[4]])->toBe(['', '']);
+});
+
+test('a floor whose value has no label adds no address line', function (): void {
+    $id = gmb_next_id();
+    $row = gmb_locations(
+        fields: ['location_suite' => 'Suite 5'],
+        objects: ['location_building_floor|'.$id => ['value' => '3', 'choices' => ['2' => 'Floor 2']]],
+        id: $id,
+    )['result']['body'][0];
+
+    expect([$row[3], $row[4]])->toBe(['Suite 5', '']);
+});
+
+test('one or two address parts fill that many lines, with no warning, and the older line 2 is not used', function (): void {
+    $one = [];
+    $two = [];
+
+    $warnings = uamswp_test_capture_warnings(function () use (&$one, &$two): void {
+        $one = gmb_locations(['location_building' => 44, 'location_address_2' => 'Old Line'], terms: ['building:44' => 'Tower A'])['result']['body'][0];
+        $two = gmb_locations(['location_building' => 44, 'location_suite' => 'Suite 5'], terms: ['building:44' => 'Tower A'])['result']['body'][0];
+    });
+
+    expect([$one[3], $one[4], $one[5], $one[6]])->toBe(['Tower A', '', '', ''])
+        ->and([$two[3], $two[4], $two[5], $two[6]])->toBe(['Tower A', 'Suite 5', '', ''])
+        ->and($warnings)->toBe([]);
+});
+
+test('the business name and the building and floor lines are decoded', function (): void {
+    $id = gmb_next_id();
+    $row = gmb_locations(
+        fields: ['location_building' => 45],
+        terms: ['building:45' => 'Tower &amp; A'],
+        objects: ['location_building_floor|'.$id => ['value' => '2', 'choices' => ['2' => 'Floor &amp; 2']]],
+        id: $id,
+    )['result']['body'][0];
+    $titled = gmb_next_id();
+    gmb_world([
+        'posts' => [$titled => ['slug' => 'eye-ear', 'title' => 'Eye &amp; Ear']],
+        'fields' => ['location_hours_group' => ['location_telemed_query' => 0]],
+    ]);
+    $title = gmb_build('uamswp_fad_gmb_location_table', [$titled])['body'][0][1];
+
+    expect([$title, $row[3], $row[4]])->toBe(['Eye & Ear', 'Tower & A', 'Floor & 2']);
+});
+
+test('a location row with no street, city, state, zip or phone leaves those columns empty', function (): void {
+    $row = gmb_locations([
+        'location_address_1' => null,
+        'location_city' => null,
+        'location_state' => null,
+        'location_zip' => null,
+        'location_phone' => null,
+    ])['result']['body'][0];
+
+    expect([$row[2], $row[7], $row[8], $row[10], $row[13]])->toBe(['', '', '', '', '']);
+});
+
+test('a location category with no term leaves its name empty', function (): void {
+    $row = gmb_locations(['location_gmb_cat' => [211, 212, 213]])['result']['body'][0];
+
+    expect([$row[15], $row[16]])->toBe(['', ', ']);
+});
+
+test('a carriage return or newline alone becomes a space, and a short description is cut to 747 characters', function (): void {
+    $about = gmb_locations(['location_about' => "a\nb\rc"])['result']['body'][0][17];
+    $short = gmb_locations(['location_short_desc' => "d\re"])['result']['body'][0][17];
+    $long = gmb_locations(['location_short_desc' => str_repeat('s', 748)])['result']['body'][0][17];
+
+    expect($about)->toBe('a b c')
+        ->and($short)->toBe('d e')
+        ->and($long)->toBe(str_repeat('s', 744).'...');
+});
+
+test('a child location keeps the parent images when the override switch is off, whatever the toggles say', function (): void {
+    $parent = gmb_next_id();
+    $child = gmb_next_id();
+    $fields = [
+        'location_parent|'.$child => 1,
+        'location_parent_id|'.$child => $parent,
+        'location_wayfinding_photo|'.$parent => 201,
+        'location_wayfinding_photo|'.$child => 301,
+        'location_photo_gallery|'.$parent => [202],
+        'location_photo_gallery|'.$child => [302],
+        'location_image_override_parent_featured|'.$child => 1,
+        'location_image_override_parent_wayfinding|'.$child => 1,
+        'location_image_override_parent_gallery|'.$child => 1,
+    ];
+
+    $row = gmb_locations($fields, [$parent => ['slug' => 'parent-clinic', 'title' => 'Parent Clinic']], thumbs: [$parent => 200, $child => 300], id: $child)['result']['body'][0];
+
+    expect([$row[19], $row[20]])->toBe(['https://img.test/200-large.jpg', 'https://img.test/201-large.jpg,https://img.test/202-large.jpg']);
+});
+
 // These two define the theme's image functions, which then stay defined for the process, so they run last.
 test('the cover photo is sized by the theme when the theme provides it', function (): void {
     when('bis_get_attachment_image')->justReturn('');
@@ -746,4 +879,142 @@ test('the theme sizes the location photos when it provides the function', functi
 
     expect($row[19])->toBe('sized:100:2120:1192')
         ->and($row[20])->toBe('sized:101:2120:1192,sized:102:2120:1192');
+});
+
+test('the provider table limits to a single id given on its own', function (): void {
+    gmb_world([]);
+    WP_Query::$queue = [[]];
+    WP_Query::$queries = [];
+
+    uamswp_fad_gmb_provider_table(12);
+
+    expect(WP_Query::$queries[0]['post__in'])->toBe([12]);
+});
+
+test('the provider table resets the post data once it is built', function (): void {
+    $case = gmb_provider_case();
+    gmb_world($case['world']);
+    $resets = 0;
+    when('wp_reset_postdata')->alias(static function () use (&$resets): void {
+        $resets++;
+    });
+
+    gmb_build('uamswp_fad_gmb_provider_table', [$case['provider']]);
+
+    expect($resets)->toBe(1);
+});
+
+test('two degrees are joined with a comma, and a degree with no term adds nothing', function (): void {
+    $two = gmb_providers(gmb_provider_case(['physician_degree' => [5, 6]], terms: ['degree:5' => 'M.D.', 'degree:6' => 'Ph.D.']))['body'][0];
+    $missing = gmb_providers(gmb_provider_case(['physician_degree' => [9]]))['body'][0];
+
+    expect($two[1])->toBe('UAMS Health - Ann Lee, M.D., Ph.D. - Main Clinic')
+        ->and($missing[1])->toBe('UAMS Health - Ann Lee - Main Clinic');
+});
+
+test('a clinical title starting with any vowel takes an', function (string $title, string $description): void {
+    $row = gmb_providers(gmb_provider_case(['physician_title' => 57], terms: ['clinical_title:57' => $title]))['body'][0];
+
+    expect($row[17])->toBe($description);
+})->with([
+    'a' => ['Audiologist', 'Ann Lee is an audiologist at Main Clinic employed by UAMS Health.'],
+    'e' => ['Endocrinologist', 'Ann Lee is an endocrinologist at Main Clinic employed by UAMS Health.'],
+    'i' => ['Internist', 'Ann Lee is an internist at Main Clinic employed by UAMS Health.'],
+    'u' => ['Urologist', 'Ann Lee is an urologist at Main Clinic employed by UAMS Health.'],
+]);
+
+test('the fallback description names the provider with the prefix and the middle name', function (): void {
+    $with_prefix = gmb_providers(gmb_provider_case(['physician_degree' => [5], 'physician_middle_name' => 'Q.'], terms: ['degree:5' => 'M.D.']))['body'][0];
+    $without_prefix = gmb_providers(gmb_provider_case(['physician_middle_name' => 'Q.']))['body'][0];
+
+    expect($with_prefix[17])->toBe('Dr. Ann Q. Lee is an optometrist at Main Clinic employed by UAMS Health.')
+        ->and($without_prefix[17])->toBe('Ann Q. Lee is an optometrist at Main Clinic employed by UAMS Health.');
+});
+
+test('a long fallback description is cut to 747 characters with an ellipsis', function (): void {
+    $title = str_repeat('x', 800);
+    $row = gmb_providers(gmb_provider_case(['physician_title' => 58], terms: ['clinical_title:58' => $title]))['body'][0];
+
+    expect($row[17])->toBe(mb_substr('Ann Lee is a '.$title, 0, 744).'...');
+});
+
+test('a category with no term leaves its name empty', function (): void {
+    $row = gmb_providers(gmb_provider_case(['physician_gmb_cat' => [201, 202, 203]]))['body'][0];
+
+    expect([$row[15], $row[16]])->toBe(['', ', ']);
+});
+
+test('a service line with no term leaves the labels empty', function (): void {
+    $row = gmb_providers(gmb_provider_case(['physician_service_line' => 9]))['body'][0];
+
+    expect($row[20])->toBe('');
+});
+
+test('a short bio is cut to 747 characters, and a carriage return or newline alone becomes a space', function (): void {
+    $short = gmb_providers(gmb_provider_case(['physician_short_clinical_bio' => str_repeat('s', 748)]))['body'][0];
+    $bio = gmb_providers(gmb_provider_case(['physician_clinical_bio' => "a\rb\nc"]))['body'][0];
+
+    expect($short[17])->toBe(str_repeat('s', 744).'...')
+        ->and($bio[17])->toBe('a b c');
+});
+
+test('the location title is decoded in the business name and the address', function (): void {
+    $case = gmb_provider_case();
+    $case['world']['posts'][$case['location']]['title'] = 'Eye &amp; Ear Clinic';
+
+    $row = gmb_providers($case)['body'][0];
+
+    expect($row[1])->toBe('UAMS Health - Ann Lee - Eye & Ear Clinic')
+        ->and($row[3])->toBe('Eye & Ear Clinic');
+});
+
+test('a location flagged as a child with no parent id lists an empty parent name', function (): void {
+    $row = gmb_providers(gmb_provider_case(['location_parent' => 1]))['body'][0];
+
+    expect([$row[3], $row[4]])->toBe(['', 'Main Clinic']);
+});
+
+test('a parent id without the child flag is ignored', function (): void {
+    $parent = gmb_next_id();
+    $case = gmb_provider_case(posts: [$parent => ['slug' => 'parent-clinic', 'title' => 'Parent Clinic']]);
+    $case['world']['fields']['location_parent_id'] = $parent;
+    $case['world']['fields']['has_wheelchair_accessible_entrance|'.$parent] = 'No';
+
+    $row = gmb_providers($case)['body'][0];
+
+    expect($row[22])->toBe('Yes')
+        ->and([$row[3], $row[4]])->toBe(['Main Clinic', '']);
+});
+
+test('a child location in a building fills three address lines, decoded', function (): void {
+    $parent = gmb_next_id();
+    $case = gmb_provider_case(
+        fields: ['location_parent' => 1, 'location_building' => 34],
+        posts: [$parent => ['slug' => 'parent-clinic', 'title' => 'Parent &amp; Co']],
+        terms: ['building:34' => 'Tower A'],
+    );
+    $case['world']['fields']['location_parent_id'] = $parent;
+    $case['world']['posts'][$case['location']]['title'] = 'Eye &amp; Care';
+
+    $row = gmb_providers($case)['body'][0];
+
+    expect([$row[3], $row[4], $row[5], $row[6]])->toBe(['Tower A', 'Parent & Co', 'Eye & Care', '']);
+});
+
+test('a building with no term adds an empty address line', function (): void {
+    $row = gmb_providers(gmb_provider_case(['location_building' => 35]))['body'][0];
+
+    expect([$row[3], $row[4]])->toBe(['', 'Main Clinic']);
+});
+
+test('a location with no street, city, state, zip or phone leaves those columns empty', function (): void {
+    $row = gmb_providers(gmb_provider_case([
+        'location_address_1' => null,
+        'location_city' => null,
+        'location_state' => null,
+        'location_zip' => null,
+        'location_phone' => null,
+    ]))['body'][0];
+
+    expect([$row[2], $row[7], $row[8], $row[10], $row[13]])->toBe(['', '', '', '', '']);
 });

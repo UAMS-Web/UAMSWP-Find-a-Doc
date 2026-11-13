@@ -121,6 +121,28 @@ final class FunctionsFiltersTest extends UnitTestCase
         ]], \WP_Query::$queries);
     }
 
+    public function test_the_load_more_callback_prints_a_card_for_each_provider_found(): void
+    {
+        $_POST = ['page' => '1', 'postid' => '4,5'];
+        \WP_Query::$queue = [[4, 5]];
+        expect('header')->once()->with('Content-Type: text/html');
+        when('get_field')->alias(static fn (string $field, int $id): mixed => $field === 'physician_first_name' ? 'First'.$id : ($field === 'physician_last_name' ? 'Last' : ''));
+        when('has_post_thumbnail')->justReturn(false);
+        when('the_permalink')->alias(static function (int $id): void {
+            echo 'https://example.test/provider-'.$id;
+        });
+        expect('wp_die')->once();
+
+        ob_start();
+        \uamswp_load_by_ajax_callback();
+        $html = (string) ob_get_clean();
+
+        $this->assertSame(2, substr_count($html, '<div class="card">'));
+        $this->assertStringContainsString('<span class="name">First4 Last</span>', $html);
+        $this->assertStringContainsString('<span class="name">First5 Last</span>', $html);
+        $this->assertStringContainsString('href="https://example.test/provider-5"', $html);
+    }
+
     public function test_the_load_more_callback_without_ids_asks_for_an_empty_id(): void
     {
         $_POST = ['page' => '1'];

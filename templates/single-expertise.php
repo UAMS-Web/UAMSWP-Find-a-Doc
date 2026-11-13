@@ -39,7 +39,7 @@ $parent_id = '';
 $parent_title = '';
 $parent_url = '';
 
-if ($expertise_has_parent && $expertise_parent_id) {
+if ($expertise_parent_id) {
     $parent_expertise = get_post($expertise_parent_id);
 }
 
@@ -128,6 +128,8 @@ if ($resources && $resource_query->have_posts()) {
 }
 
 // Check if Child Areas of Expertise section should be displayed
+// The count and 0 are both ints, so a loose and a strict comparison agree.
+// @pest-mutate-ignore: NotEqualToNotIdentical
 if (
     ! (get_post_meta($page_id, 'hide_sub_areas_of_expertise', true))
     && (count(get_pages(['child_of' => $page_id, 'post_type' => 'expertise'])) != 0)
@@ -193,7 +195,7 @@ if ($physicians) {
         'post__in' => $physicians,
     ];
     $physicians_query = new WP_Query($args);
-    if ($physicians_query instanceof WP_Query && $physicians_query->have_posts()) {
+    if ($physicians_query->have_posts()) {
         $show_providers_section = true;
         $jump_link_count++;
         $provider_ids = $physicians_query->posts;
