@@ -515,6 +515,24 @@ final class FunctionsFiltersTest extends UnitTestCase
         $this->assertStringContainsString('name="providers-ids" value="0"', \uamswp_provider_title_ajax_filter_shortcode(null));
     }
 
+    public function test_the_title_filter_lists_equal_titles_once_in_order_and_skips_providers_without_a_name(): void
+    {
+        $this->providers(
+            [5 => 'publish', 6 => 'publish', 7 => 'publish', 8 => 'publish', 9 => 'publish', 10 => 'publish'],
+            ['5:physician_title' => '20', '6:physician_title' => '21', '8:physician_title' => '22', '9:physician_title' => '23', '10:physician_title' => '24'],
+            [20 => (object) ['name' => 'Same'], 21 => (object) ['name' => 'Same'], 22 => (object) [], 23 => (object) ['name' => 'Zeta'], 24 => (object) ['name' => 'Alpha']]
+        );
+
+        $html = \uamswp_provider_title_ajax_filter_shortcode(['providers' => '5,6,7,8,9,10']);
+
+        $this->assertSame(1, substr_count($html, '>Same<'));
+        $this->assertStringNotContainsString('value="21"', $html);
+        $this->assertStringNotContainsString('value="22"', $html);
+        $this->assertStringNotContainsString('<option value="0">', $html);
+        $this->assertLessThan(strpos($html, '>Same<'), strpos($html, '>Alpha<'), 'titles are sorted by name');
+        $this->assertLessThan(strpos($html, '>Zeta<'), strpos($html, '>Same<'));
+    }
+
     public function test_the_title_filter_uses_the_term_specialization_title_when_there_is_one(): void
     {
         [$status, $fields, $terms] = $this->sampleProviders();
@@ -782,12 +800,12 @@ final class FunctionsFiltersTest extends UnitTestCase
 
     public function test_the_location_callback_prints_a_card_and_the_ids_and_region_slugs_for_the_locations_found(): void
     {
-        $_POST = ['locations' => '1,2'];
-        \WP_Query::$queue = [[1, 2], [1, 2]];
+        $_POST = ['locations' => '1,2,3'];
+        \WP_Query::$queue = [[1, 2, 3], [1, 2]];
         $this->cardStubs();
         $asked = [];
         when('get_field')->alias(static fn (string $field, mixed $id = null): mixed => match ($field) {
-            'location_region' => $id === 1 ? 10 : [10, 11],
+            'location_region' => $id === 3 ? [10, 11] : 10,
             'location_hours_group' => ['location_modified_hours' => false, 'location_modified_hours_start_date' => '', 'location_modified_hours_end' => false, 'location_modified_hours_end_date' => '', 'location_telemed_modified_hours_query' => false, 'location_telemed_modified_hours_start_date' => '', 'location_telemed_modified_hours_end' => false, 'location_telemed_modified_hours_end_date' => ''],
             default => null,
         });

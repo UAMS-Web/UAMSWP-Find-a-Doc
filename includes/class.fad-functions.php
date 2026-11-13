@@ -1404,7 +1404,7 @@ function provider_ajax_filter_callback(): void
             include UAMS_FAD_PATH.'/templates/loops/physician-card.php';
             // $z++;
         }
-        echo '<data id="provider_ids" data-postids="'.implode(',', array_map(uamswp_fad_str(...), $provider_ids)).'," data-regions="'.implode(',', $region_list).'," data-titles="'.$titles.',"></data>';
+        echo '<data id="provider_ids" data-postids="'.implode(',', $provider_ids).'," data-regions="'.implode(',', $region_list).'," data-titles="'.$titles.',"></data>';
         // var_dump($tax_query_title);
         // var_dump($tax_query_region);
         // var_dump($tax_query);
@@ -1599,7 +1599,7 @@ function provider_title_ajax_filter_callback(): void
             $title_list[] = get_field('physician_title', $id);
             include UAMS_FAD_PATH.'/templates/loops/physician-card.php';
         }
-        echo '<data id="provider_ids" data-postids="'.implode(',', array_map(uamswp_fad_str(...), $provider_ids)).'," data-titles="'.implode(',', array_unique(array_map(uamswp_fad_str(...), $title_list))).',"></data>';
+        echo '<data id="provider_ids" data-postids="'.implode(',', $provider_ids).'," data-titles="'.implode(',', array_unique(array_map(uamswp_fad_str(...), $title_list))).',"></data>';
     } else {
         // var_dump($args);
         echo '<span class="no-results">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
@@ -1628,10 +1628,9 @@ function uamswp_location_ajax_filter_shortcode($atts): string|false
         if (get_post_status((int) $location) === 'publish') {
             // Region
             $location_region = get_field('location_region', $location);
-            if (! in_array($location_region, [false, null, ''], true)) {
-                foreach ((array) $location_region as $region) {
-                    $location_regions[] = $region;
-                }
+            // A field with no region reads as nothing, or as one empty value that matches no region.
+            foreach ((array) $location_region as $region) {
+                $location_regions[] = $region;
             }
         }
     }
@@ -1728,7 +1727,7 @@ function location_ajax_filter_callback(): void
     $region_IDs = array_unique(array_map(uamswp_fad_str(...), $region_IDs));
     $region_list = [];
     foreach ($region_IDs as $region_ID) {
-        $region_list[] = (get_term_by('ID', uamswp_fad_str($region_ID), 'region')->slug ?? '');
+        $region_list[] = uamswp_fad_str(get_term_by('ID', uamswp_fad_str($region_ID), 'region')->slug ?? '');
     }
 
     // Build query for titles, based on regions
@@ -1763,7 +1762,7 @@ function location_ajax_filter_callback(): void
             $id = get_the_ID();
             include UAMS_FAD_PATH.'/templates/loops/location-card.php';
         }
-        echo '<data id="location_ids" data-postids="'.implode(',', array_map(uamswp_fad_str(...), $location_ids)).'," data-regions="'.implode(',', array_map(uamswp_fad_str(...), $region_list)).',"></data>';
+        echo '<data id="location_ids" data-postids="'.implode(',', $location_ids).'," data-regions="'.implode(',', $region_list).',"></data>';
     } else {
         echo '<span class="no-results">Sorry, there are no locations matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
     }
