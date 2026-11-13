@@ -825,3 +825,20 @@ test('typical hours stay hidden only while modified hours cover today and run pa
         ->and($typical($fields($today, date('F j, Y', strtotime('+10 days')))))->toBeTrue()
         ->and($typical($fields(date('F j, Y', strtotime('-5 days')), $today)))->toBeTrue();
 });
+
+test('an end date is ignored while the end switch is off', function (): void {
+    $off = ['location_modified_hours_end' => false, 'location_modified_hours_end_date' => 'January 1, 2099'];
+    $rows = single_location_modified_golden([single_location_modified_time('Monday', '08:00:00', '17:00:00')], [], $off);
+    $always = single_location_modified_golden([], ['location_modified_hours_24_7' => true], $off);
+
+    expect($rows['text'])->toContain('and will remain in effect until further notice.')
+        ->and($rows['schema'])->not->toContain('validThrough')
+        ->and($always['schema'])->not->toContain('validThrough');
+});
+
+test('modified hours whose window has passed print nothing at all', function (): void {
+    $output = single_location_markup(single_location_modified([], ['location_modified_hours_start_date' => date('F j, Y', strtotime('-20 days')), 'location_modified_hours_end_date' => date('F j, Y', strtotime('-10 days'))]));
+
+    expect($output)->not->toContain('Modified Hours')
+        ->and($output)->not->toContain('openingHoursSpecification": [ {');
+});
