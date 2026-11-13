@@ -80,14 +80,6 @@ parameters:
             # Templates that still report findings at level 10 (1,267 across these files on
             # master at 2539922d). Each slice of #1232 removes its own entries once its files
             # are clean, so the rest of the templates directory is already enforced.
-            - templates/archive-condition.php
-            - templates/archive-taxonomy-conditions.php
-            - templates/archive-taxonomy-treatments.php
-            - templates/archive-treatments.php
-            - templates/loops/conditions-cpt-loop.php
-            - templates/loops/conditions-loop.php
-            - templates/loops/treatments-cpt-loop.php
-            - templates/loops/treatments-loop.php
 
     # Filled: the directories and files holding first-party PHP, including
     # the plugin header file at the root. Include tests: test bugs are real
@@ -179,6 +171,29 @@ parameters:
             identifier: function.internal
             message: '#^Call to internal function get_terms\(\)\.$#'
             path: includes
+        # The conditions and treatments archives list their terms by first letter through `__first_letter`,
+        # an argument of this plugin that `uamswp_terms_clauses()` reads, and count them with `wp_count_terms()`
+        # and its `count` argument. The WordPress stubs declare the argument array of `WP_Term_Query` and
+        # `wp_count_terms()` as a closed shape that has neither key, and mark `wp_count_terms()` `@internal`
+        # for its `$deprecated` parameter, which the archives do not pass.
+        -
+            identifier: argument.type
+            message: '#^Parameter \#1 \$query of class WP_Term_Query constructor expects array\{#'
+            paths:
+                - templates/archive-taxonomy-conditions.php
+                - templates/archive-taxonomy-treatments.php
+        -
+            identifier: argument.type
+            message: '#^Parameter \#1 \$args of function wp_count_terms expects array\{#'
+            paths:
+                - templates/archive-taxonomy-conditions.php
+                - templates/archive-taxonomy-treatments.php
+        -
+            identifier: function.internal
+            message: '#^Call to internal function wp_count_terms\(\)\.$#'
+            paths:
+                - templates/archive-taxonomy-conditions.php
+                - templates/archive-taxonomy-treatments.php
         # `wpdb::prepare()` is declared to take a literal string, so a query that interpolates a table
         # name, a column name from a fixed list, or a run of `%d` placeholders sized to its input is
         # reported even though every value still goes through a placeholder. The dead-link and

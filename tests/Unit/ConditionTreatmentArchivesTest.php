@@ -208,7 +208,7 @@ test('the archive prints its list between the header and the footer and register
         ->and(uamswp_test_render_hooks()['add_filter'])->toBe([
             ['body_class', 'uams_default_page_body_class'],
             ['posts_where', 'title_filter', 10, 2],
-            ['seopress_titles_title', $archive['title_filter'], 15, 2],
+            ['seopress_titles_title', $archive['title_filter'], 15, 1],
         ])
         ->and($output)->toContain('<ul class="list"><li><a href="https://example.test/'.$archive['post_type'].'/11/" aria-label="Learn about Item 11"  class="btn btn-outline-primary">Item 11</a></li><li><a href="https://example.test/'.$archive['post_type'].'/12/" aria-label="Learn about Item 12"  class="btn btn-outline-primary">Item 12</a></li></ul>[reset]')
         ->and($output)->not->toContain($archive['none']);
