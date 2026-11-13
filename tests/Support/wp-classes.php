@@ -82,6 +82,13 @@ if (! class_exists('WP_Query')) {
 
         public function have_posts(): bool
         {
+            // Like WordPress, a loop that has run to its end rewinds, so the next loop over the query starts again.
+            if ($this->index > 0 && $this->index >= count($this->posts)) {
+                $this->index = 0;
+
+                return false;
+            }
+
             // A loop whose the_post() call is gone would never advance; cap the checks so a mutant of it ends and fails a test.
             return $this->index < count($this->posts) && $this->checks++ < 100;
         }
