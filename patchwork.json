@@ -1,0 +1,4 @@
+{
+    "redefinable-internals": ["header", "sleep", "usleep"],
+    "blacklist": ["vendor/symfony", "vendor/pestphp", "vendor/nunomaduro", "vendor/phpunit", "vendor/sebastian", "vendor/nikic"]
+}
