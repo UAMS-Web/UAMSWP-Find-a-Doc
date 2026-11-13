@@ -43,17 +43,25 @@ declare(strict_types=1);
  *      mentions it, a string) is still honored by the plugin's line map, which keys on the
  *      text alone. Such a line is measured across every mutator and flagged when it removes
  *      any mutant; one that removes none is documentation and is not reported.
+ *   4. A bare marker that removes mutants: nothing after the marker, so it names no mutator
+ *      to measure against and suppresses every mutator on the node it annotates and that
+ *      node's whole subtree (UAMS-Web/uams-claude-skills#712). It is the opposite failure
+ *      to finding 2, which removes nothing; this one removes everything under its node,
+ *      including mutants nobody judged. It is measured across every mutator and reported
+ *      with its total. Where code shares the marker's line and an earlier named marker set
+ *      the line map, the plugin reads the marker on that line as the inherited names, so
+ *      the finding says that instead. A bare marker whose total is zero (on its own line
+ *      with a trailing space or a docblock delimiter after it, or a trailing marker that
+ *      inherits a name with nothing to remove) is finding 2 instead, since it suppresses
+ *      nothing. Both are counted in the annotation total like any other annotation.
  *
- * A bare marker removes every mutant in the node and its children, so it is reported with
- * its total and flagged only when that total is zero. `check-mutate-ignore.php` flags every
- * bare marker on its own account.
- *
- * CONTROLS. Before reading a project file the script measures six planted sources with the
+ * CONTROLS. Before reading a project file the script measures seven planted sources with the
  * installed plugin's `GreaterToGreaterOrEqual` and `PlusToMinus`: standalone annotations
  * that must remove one, two and no mutants (comment attachment), a trailing annotation that
  * must remove two (the line map), a bare trailing marker that must remove none because it
- * inherits the name above it (the generator's carried `$mutatorsToIgnore`), and a mention
- * that must remove one. If any reading differs, or either mutator does not resolve, it exits
+ * inherits the name above it (the generator's carried `$mutatorsToIgnore`), a mention
+ * that must remove one, and a standalone bare marker that must be flagged with a total of
+ * two, one mutant of each of the two mutators. If any reading differs, or either mutator does not resolve, it exits
  * 2 without reading the project, because a counter that cannot tell those apart reports
  * nothing about the files.
  *
@@ -384,7 +392,10 @@ function breadthNamedMutators(string $line): ?array
 {
     preg_match('/'.preg_quote(BREADTH_MARKER, '/').'(.*)/', $line, $matches);
 
-    $tail = trim($matches[1] ?? '', " \t\n\r*/:");
+    // The comment ends at its closing delimiter, so code after it on the line is not a name
+    $tail = $matches[1] ?? '';
+    $close = strpos($tail, '*/');
+    $tail = trim($close === false ? $tail : substr($tail, 0, $close), " \t\n\r*/:");
 
     if ($tail === '') {
         return null;
@@ -394,6 +405,24 @@ function breadthNamedMutators(string $line): ?array
         array_map(static fn (string $name): string => trim($name, ' */:'), explode(',', $tail)),
         static fn (string $name): bool => $name !== '',
     ));
+}
+
+/**
+ * Whether a source line holds code beside its comment: before a comment, or after a block
+ * comment's closing delimiter. A docblock's continuation line (` * ...`) holds none.
+ *
+ * @param  string  $line  The marker's line.
+ * @return bool True when the line carries code the plugin's line map can reach.
+ */
+function breadthCodeOnLine(string $line): bool
+{
+    if (str_starts_with(ltrim($line), '*')) {
+        return false;
+    }
+
+    $code = preg_replace('{/\*.*?\*/|//.*$|#.*$}', '', $line) ?? $line;
+
+    return trim($code) !== '';
 }
 
 /**
@@ -415,6 +444,7 @@ function breadthMeasure(Parser $parser, string $contents, string $path, array $m
 {
     ['lines' => $sourceLines, 'separators' => $separators] = breadthSplit($contents);
     $annotationLines = array_flip(breadthAnnotationLines($contents));
+    $ignoreMap = breadthIgnoreMap($contents);
     $unannotated = [];
     $annotations = 0;
     $findings = [];
@@ -464,7 +494,26 @@ function breadthMeasure(Parser $parser, string $contents, string $path, array $m
             continue;
         }
 
-        if ($named !== null && array_filter($removed, static fn (int $count): bool => $count > 1) !== []) {
+        // A bare marker names nothing to measure against, so it is reported on its own account
+        // rather than passing vacuously as "exactly one per named mutator"
+        if ($named === null) {
+            $inherited = $ignoreMap[$lineNumber] ?? ['all'];
+
+            // Code on the marker's own line is read through the line map, which carries an
+            // earlier marker's names to a bare one; a marker alone on its line reaches only
+            // the node it annotates, where the plugin skips every mutator
+            if (breadthCodeOnLine($line) && $inherited !== ['all']) {
+                $findings[] = ['where' => $where, 'why' => 'a BARE marker on a code line inherits the mutators an earlier marker named, and suppresses every mutator on any node it annotates', 'detail' => $detail.', inherits '.implode(',', $inherited), 'path' => $path, 'marker' => $marker];
+
+                continue;
+            }
+
+            $findings[] = ['where' => $where, 'why' => 'a BARE marker suppresses every mutator on the annotated node and its whole subtree', 'detail' => $detail, 'path' => $path, 'marker' => $marker];
+
+            continue;
+        }
+
+        if (array_filter($removed, static fn (int $count): bool => $count > 1) !== []) {
             $findings[] = ['where' => $where, 'why' => 'removes MORE than one mutant of a named mutator', 'detail' => $detail, 'path' => $path, 'marker' => $marker];
         }
     }
@@ -492,7 +541,8 @@ function breadthControlsFail(Parser $parser, array $mutators): ?string
     $subset = [$name => $mutators[$name], BREADTH_CONTROL_OTHER => $mutators[BREADTH_CONTROL_OTHER]];
     $marker = '// '.BREADTH_MARKER.": {$name}";
 
-    // Each case: the source's lines, the annotations it holds, and the finding expected.
+    // Each case: the source's lines, the annotations it holds, the finding expected, and
+    // where given, the detail that finding must carry.
     // The lines are joined with PHP_EOL so the plugin's line map is live on any runtime:
     // the trailing, inherited and mention cases are decided by that map alone.
     $cases = [
@@ -502,13 +552,17 @@ function breadthControlsFail(Parser $parser, array $mutators): ?string
         'two mutants through the line map' => [['<?php', "\$c = \$a > \$b && \$d > \$e; {$marker}"], 1, 'removes MORE than one mutant of a named mutator'],
         'no mutant through an inherited name' => [['<?php', $marker, '$x = $a > $b;', '$z = $a + $b; // '.BREADTH_MARKER], 2, 'removes NO mutant'],
         'one mutant through a mention' => [['<?php', '$c = $a > $b; // see '.BREADTH_MARKER], 0, 'a MENTION of the marker outside an annotation removes mutants'],
+        'every mutant through a bare marker' => [['<?php', '// '.BREADTH_MARKER, '$c = $a > $b + $d;'], 1, 'a BARE marker suppresses every mutator on the annotated node and its whole subtree', 'bare marker, removes 2 across all mutators'],
     ];
 
-    foreach ($cases as $label => [$lines, $annotations, $expected]) {
+    foreach ($cases as $label => $case) {
+        [$lines, $annotations, $expected] = $case;
+        $expectedDetail = $case[3] ?? null;
         $result = breadthMeasure($parser, implode(PHP_EOL, $lines).PHP_EOL, 'control', $subset);
         $found = $result['findings'][0]['why'] ?? null;
+        $foundDetail = $result['findings'][0]['detail'] ?? null;
 
-        if ($result['annotations'] !== $annotations || count($result['findings']) > 1 || $found !== $expected) {
+        if ($result['annotations'] !== $annotations || count($result['findings']) > 1 || $found !== $expected || ($expectedDetail !== null && $foundDetail !== $expectedDetail)) {
             return "the planted case of {$label} was read as ".($found ?? 'clean');
         }
     }

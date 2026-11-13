@@ -21,6 +21,14 @@
 //     template this skill's own copy cannot find (a profile that does not deliver its skill)
 //     is skipped as well.
 //
+// A REUSABLE WORKFLOW IS NOT A COPY
+//     A file whose name matches a template but which declares `workflow_call` is a reusable
+//     workflow the repository defines, not a copy of the template: UAMS-Web/uams-ci-workflows
+//     defines the reusable `pr-body-checks.yml` that the caller template of the same name calls.
+//     It is skipped, and the sync leaves it alone (UAMS-Web/uams-claude-skills#718), because a
+//     sync once replaced that definition with the caller (UAMS-Web/uams-ci-workflows#34). A
+//     required file that turns out to be a definition fails, since it is not the copy required.
+//
 // EXIT CODES
 //     0  every copy that exists matches its template (also when no copy exists at all, so a
 //        repository that has adopted none of the workflows passes)
@@ -52,6 +60,18 @@ export const WORKFLOWS = [
 const asLf = (text) => text.replace(/\r\n/g, '\n')
 const LINE_BREAK = String.fromCharCode(10)
 
+/**
+ * Whether a workflow file declares `workflow_call`, read from its non-comment text: a key line
+ * (`  workflow_call:`) or a flow form (`on: workflow_call`, `on: [pull_request, workflow_call]`).
+ * Comments are ignored, so a caller whose header mentions the word is still a copy.
+ */
+export function declaresWorkflowCall(text) {
+    return asLf(String(text))
+        .split(LINE_BREAK)
+        .map((line) => line.replace(/(^|\s)#.*$/, ''))
+        .some((line) => /(^|[\s[,{])workflow_call\s*(:|,|\]|\}|$)/.test(line))
+}
+
 /** Where a template lives, for a workflow file and its owning skill. */
 export function templatePath(file, skill, skillsDir = SKILLS_DIR) {
     return join(skillsDir, skill, 'templates', file)
@@ -78,6 +98,11 @@ export function compareCopy({ root, file, skill, skillsDir = SKILLS_DIR, require
         have = asLf(readFileSync(copy, 'utf8')).split(LINE_BREAK)
     } catch (failure) {
         return { status: 1, line: `${file}: could not be read: ${failure.message}` }
+    }
+
+    if (declaresWorkflowCall(have.join(LINE_BREAK))) {
+        const line = `${copy} declares workflow_call, so it is this repository's own reusable workflow, not a copy of the template ${template}`
+        return required ? { status: 1, line: `${line}; a copy is required here.` } : { status: 'skip', reason: 'definition', line: `${line}; skipped.` }
     }
 
     let index = 0

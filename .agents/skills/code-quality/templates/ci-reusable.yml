@@ -1,6 +1,6 @@
 name: CI chain
 
-# cspell:ignore vitest vite mktemp esac
+# cspell:ignore vitest vite mktemp esac phpcs
 # vitest and vite are the names of inputs and of the tools they switch on, and mktemp is the command a step runs, so none can be reworded.
 
 # Template: .claude/skills/code-quality/templates/ci-reusable.yml in UAMS-Web/uams-claude-skills,

@@ -44,7 +44,7 @@ disable-model-invocation: true
 ## What this does not cover
 
 - **Posts to repositories the organization owns.** Those are corrected in place, and [`adversarial-review`](../rule-adversarial-review/SKILL.md) and [`pre-merge-check`](../rule-pre-merge-check/SKILL.md) govern them.
-- **When the checks fall in a chain.** The lifecycle of a vendor patch, and the point at which these checks run in its tickets, belongs to the `upstream-patch-lifecycle` skill where a repository carries it. This rule owns the requirement and the skill owns only the timing.
+- **When the checks fall in a chain.** The lifecycle of a vendor patch belongs to the `upstream-patch-lifecycle` skill, and the point at which these checks run in its tickets to the `patch-package` skill, where a repository carries each. This rule owns the requirement and the skills own only the timing.
 
 ## The DRY line
 
