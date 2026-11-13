@@ -80,9 +80,6 @@ parameters:
             # Templates that still report findings at level 10 (1,267 across these files on
             # master at 2539922d). Each slice of #1232 removes its own entries once its files
             # are clean, so the rest of the templates directory is already enforced.
-            - templates/_unused/_taxonomy-medical_procedures.php
-            - templates/_unused/_taxonomy-medical_terms.php
-            - templates/_unused/taxonomy-specialty.php
             - templates/archive-clinical-resource.php
             - templates/archive-condition.php
             - templates/archive-expertise.php
