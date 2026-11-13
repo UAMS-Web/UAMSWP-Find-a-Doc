@@ -186,25 +186,22 @@ $telemed_modified = $telemed_modified && $telemed_modified_start;
 $location_modified_hours_start = '';
 $location_modified_hours_date_past = false;
 
-if (
-    ($modified && strtotime($modified_start) <= $today_30 && (strtotime($modified_end_date) >= $today || ! $modified_end)) ||
-    ($telemed_modified && strtotime($telemed_modified_start) <= $telemed_today_30 && (strtotime($telemed_modified_end_date) >= $telemed_today || ! $telemed_modified_end))
-) {
-    $location_modified_hours_display = true;
-} else {
-    $location_modified_hours_display = false;
-}
+// Each source counts only while it is in its own window: started or starting within 30 days, and not yet ended (#1305).
+$clinic_in_window = $modified && strtotime($modified_start) <= $today_30 && (strtotime($modified_end_date) >= $today || ! $modified_end);
+$telemed_in_window = $telemed_modified && strtotime($telemed_modified_start) <= $telemed_today_30 && (strtotime($telemed_modified_end_date) >= $telemed_today || ! $telemed_modified_end);
 
-// // Set start of modified hours based on the earliest of the two (clinic and telemedicine)
+$location_modified_hours_display = $clinic_in_window || $telemed_in_window;
+
+// Set start of modified hours based on the earliest of the sources that are in their window (clinic and telemedicine)
 
 if ($location_modified_hours_display) {
-    if ($modified && $telemed_modified) {
+    if ($clinic_in_window && $telemed_in_window) {
         if (strtotime($modified_start) <= strtotime($telemed_modified_start)) {
             $location_modified_hours_start = $modified_start;
         } else {
             $location_modified_hours_start = $telemed_modified_start;
         }
-    } elseif ($modified) {
+    } elseif ($clinic_in_window) {
         $location_modified_hours_start = $modified_start;
     } else {
         $location_modified_hours_start = $telemed_modified_start;
