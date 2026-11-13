@@ -254,6 +254,8 @@ if (! function_exists('partition')) {
         $partrem = $listlen % $p;
         $partition = [];
         $mark = 0;
+        // Counting down instead of up never ends the loop, so a test cannot observe it: the harness can only report a timeout.
+        // @pest-mutate-ignore: PostIncrementToPostDecrement
         for ($px = 0; $px < $p; $px++) {
             $incr = ($px < $partrem) ? $partlen + 1 : $partlen;
             $partition[$px] = array_slice(uamswp_fad_arr($list), $mark, $incr);
