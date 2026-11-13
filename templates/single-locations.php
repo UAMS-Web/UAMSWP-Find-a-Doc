@@ -1698,8 +1698,8 @@ while (have_posts()) {
 						        }
 
 						    } // End Modified Hours
-						    // Only a window with no end replaces the typical hours: an end is a time, and strtotime() reads a time as false.
-						    if ($telemed_active_end === 'TBD' && $telemed_active_start <= $telemed_today) {
+						    // The typical hours give way to a window that has started and has no end or ends more than 30 days out, as for the location hours.
+						    if ($telemed_active_start !== null && $telemed_active_start <= $telemed_today && ($telemed_active_end === 'TBD' || $telemed_active_end > $telemed_today_30)) {
 						        // Do Nothing;
 						        // Future Option
 						    } else {
@@ -1828,7 +1828,7 @@ while (have_posts()) {
         $condition_heading_related_name = $page_title_phrase; // To what is it related?
 
         include UAMS_FAD_PATH.'/templates/loops/conditions-cpt-loop.php';
-        $condition_schema = '"medicalSpecialty": [';
+        $condition_schema = '';
         /** @var WP_Post $condition */
         foreach ($conditions_cpt_query->posts as $condition) {
             $condition_schema .= '{
@@ -1837,7 +1837,6 @@ while (have_posts()) {
 			"url":"'.get_the_permalink($condition->ID).'"
 			},';
         } // endforeach
-        $condition_schema .= '"" ],';
     } // endif
     // End Conditions Section
 
@@ -1846,7 +1845,7 @@ while (have_posts()) {
         $treatment_context = 'single-location';
         $treatment_heading_related_name = $page_title_phrase; // To what is it related?
         include UAMS_FAD_PATH.'/templates/loops/treatments-cpt-loop.php';
-        $treatment_schema = '"medicalSpecialty": [';
+        $treatment_schema = '';
         /** @var WP_Post $treatment */
         foreach ($treatments_cpt_query->posts as $treatment) {
             $treatment_schema .= '{
@@ -1855,7 +1854,6 @@ while (have_posts()) {
 			"url":"'.get_the_permalink($treatment->ID).'"
 			},';
         } // endforeach
-        $treatment_schema .= '"" ],';
     } // endif
     // End Treatments and Procedures Section
 
@@ -1938,8 +1936,7 @@ if (! function_exists('uams_physician_schema')) { ?>
   "name": "<?php echo $page_title; ?>",
   "url": "<?php echo get_permalink(); ?>",
   "image": "<?php echo $locationphoto; ?>",
-  <?php echo $condition_schema; ?>
-  <?php echo $treatment_schema; ?>
+  <?php echo $condition_schema !== '' || $treatment_schema !== '' ? '"medicalSpecialty": ['.$condition_schema.$treatment_schema.'"" ],' : ''; ?>
   <?php echo $location_schema; ?>
   <?php echo $modified_hours_schema; ?>
   <?php echo $hoursvary ? '' : $hours_schema; ?>

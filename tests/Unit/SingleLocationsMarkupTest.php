@@ -1102,9 +1102,11 @@ test('typical telemedicine hours print every row and skip the times of an empty 
 
 test('modified telemedicine hours print every kind of row exactly', function (): void {
     $times = [single_location_telemed_time('Mon', '08:00:00', '17:00:00', false, 'Lunch'), single_location_telemed_time('Mon', '18:00:00', '20:00:00'), single_location_telemed_time('Tue', '', '17:00:00'), single_location_telemed_time('Wed', '00:00:00', '17:00:00'), single_location_telemed_time('Thu', '', '', true)];
-    $output = single_location_markup(single_location_telemed_modified($times, ['location_telemed_modified_hours_start_date' => 'January 1, 2020', 'location_telemed_modified_hours_end_date' => 'January 1, 2099']));
+    // An end within thirty days keeps the typical hours beside the modified ones.
+    $end = date('F j, Y', strtotime('+10 days'));
+    $output = single_location_markup(single_location_telemed_modified($times, ['location_telemed_modified_hours_start_date' => 'January 1, 2020', 'location_telemed_modified_hours_end_date' => $end]));
 
-    expect($output)->toContain('<h3>Modified Hours</h3><p>Maintenance.</p><p class="small font-italic">These modified hours start on January 1, 2020, and are scheduled to end after January 1, 2099.</p><dl class="hours"><dt>Mon</dt><dd>8 a.m. &ndash; 5 p.m.<br /><span class="subtitle">Lunch</span></dd><dd>6 &ndash; 8 p.m.</dd><dt>Tue</dt><dd></dd><dt>Wed</dt><dd></dd><dt>Thu</dt><dd>Closed</dd></dl><h3>Typical Hours</h3>');
+    expect($output)->toContain('<h3>Modified Hours</h3><p>Maintenance.</p><p class="small font-italic">These modified hours start on January 1, 2020, and are scheduled to end after '.$end.'.</p><dl class="hours"><dt>Mon</dt><dd>8 a.m. &ndash; 5 p.m.<br /><span class="subtitle">Lunch</span></dd><dd>6 &ndash; 8 p.m.</dd><dt>Tue</dt><dd></dd><dt>Wed</dt><dd></dd><dt>Thu</dt><dd>Closed</dd></dl><h3>Typical Hours</h3>');
 });
 
 test('an end date is ignored for modified telemedicine hours while the end switch is off', function (): void {
@@ -1134,6 +1136,16 @@ test('modified telemedicine hours starting today with no end replace the typical
         ->and($tomorrow)->toContain('<h3>Typical Hours</h3>');
 });
 
+test('typical telemedicine hours stay hidden only while modified hours cover today and run past thirty days', function (): void {
+    $today = date('F j, Y');
+    $typical = static fn (string $start, string $end): bool => str_contains(single_location_markup(single_location_telemed_modified([single_location_telemed_time()], ['location_telemed_modified_hours_start_date' => $start, 'location_telemed_modified_hours_end' => true, 'location_telemed_modified_hours_end_date' => $end])), 'Typical Hours');
+
+    expect($typical($today, date('F j, Y', strtotime('+60 days'))))->toBeFalse()
+        ->and($typical($today, date('F j, Y', strtotime('+10 days'))))->toBeTrue()
+        ->and($typical(date('F j, Y', strtotime('+1 day')), date('F j, Y', strtotime('+60 days'))))->toBeTrue()
+        ->and($typical(date('F j, Y', strtotime('-5 days')), $today))->toBeTrue();
+});
+
 /**
  * The fields and stubs of a location with providers, conditions, treatments, expertise and resources.
  *
@@ -1158,13 +1170,21 @@ test('the providers section lists every provider and their titles once', functio
         ->and($output)->toContain('<data id="provider_ids" data-postids="7,8," data-titles="Cardiology,"></data>');
 });
 
-test('the conditions and treatments each write their own structured data block', function (): void {
+test('the conditions and treatments each write their own structured data items', function (): void {
     [$fields, $options] = single_location_lists();
     $vars = single_location($fields, $options);
     $squash = static fn (string $text): string => (string) preg_replace('/\s+/', ' ', $text);
 
-    expect($squash($vars['condition_schema']))->toBe('"medicalSpecialty": [{ "@type": "MedicalSpecialty", "name": "Asthma", "url":"https://example.test/p/31/" },{ "@type": "MedicalSpecialty", "name": "Gout", "url":"https://example.test/p/32/" },"" ],')
-        ->and($squash($vars['treatment_schema']))->toBe('"medicalSpecialty": [{ "@type": "MedicalSpecialty", "name": "Infusion", "url":"https://example.test/p/41/" },"" ],');
+    expect($squash($vars['condition_schema']))->toBe('{ "@type": "MedicalSpecialty", "name": "Asthma", "url":"https://example.test/p/31/" },{ "@type": "MedicalSpecialty", "name": "Gout", "url":"https://example.test/p/32/" },')
+        ->and($squash($vars['treatment_schema']))->toBe('{ "@type": "MedicalSpecialty", "name": "Infusion", "url":"https://example.test/p/41/" },');
+});
+
+test('the structured data lists the conditions and the treatments under one medicalSpecialty key', function (): void {
+    [$fields, $options] = single_location_lists();
+    $schema = single_location_schema($fields, $options);
+    $names = array_column(array_filter($schema['medicalSpecialty'], 'is_array'), 'name');
+
+    expect($names)->toBe(['Asthma', 'Gout', 'Infusion']);
 });
 
 test('the condition and treatment lists print under their headings', function (): void {
