@@ -247,10 +247,12 @@ test('each template that sets a page title registers its own function at priorit
         }
     }
 
+    // The functions take the title alone, so a template registered with one accepted argument matches its function; the rest still pass two.
+    $single_argument = ['single-locations'];
     $expected = [];
 
     foreach (array_keys($registrations) as $name) {
-        $expected[$name] = [['uamswp_fad_title_'.str_replace('-', '_', $name), '15', '2']];
+        $expected[$name] = [['uamswp_fad_title_'.str_replace('-', '_', $name), '15', in_array($name, $single_argument, true) ? '1' : '2']];
     }
 
     expect($registrations)->toBe($expected)

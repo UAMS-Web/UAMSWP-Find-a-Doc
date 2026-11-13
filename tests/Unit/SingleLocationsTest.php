@@ -336,7 +336,7 @@ test('the template overrides the theme titles', function (): void {
 
     expect(uamswp_test_render_hooks()['add_filter'])->toBe([
         ['seopress_titles_desc', 'sp_titles_desc'],
-        ['seopress_titles_title', 'uamswp_fad_title_single_locations', 15, 2],
+        ['seopress_titles_title', 'uamswp_fad_title_single_locations', 15, 1],
     ]);
 });
 
