@@ -16,11 +16,12 @@
  * @var int|false $id From `get_the_ID()`.
  */
 $resource_page = (isset($resource_page) && ! empty($resource_page)) ? $resource_page : 'single';
+$resource_id = (int) $id;
 
 // Cards and lists prefer the optional Short Title, falling back to the full
 // title. The full title is still used for the page's own heading.
-$resource_title_short = get_field('clinical_resource_title_short', $id);
-$resource_title = $resource_title_short ?: get_the_title($id);
+$resource_title_short = get_field('clinical_resource_title_short', $resource_id);
+$resource_title = $resource_title_short ?: get_the_title($resource_id);
 $resource_title_attr = $resource_title;
 $resource_title_attr = str_replace('"', "'", $resource_title_attr); // Replace double quotes with single quote
 $resource_title_attr = str_replace('&#8217;', "'", $resource_title_attr); // Replace right single quote with single quote
@@ -29,9 +30,9 @@ $resource_title_attr = htmlentities($resource_title_attr, ENT_HTML401, 'UTF-8');
 $resource_title_attr = str_replace('&nbsp;', ' ', $resource_title_attr); // Convert non-breaking space with normal space
 $resource_title_attr = html_entity_decode($resource_title_attr); // Convert HTML entities to their corresponding characters
 
-$resource_type = get_field('clinical_resource_type', $id);
-$resource_type_value = $resource_type['value'];
-$resource_type_label = $resource_type['label'];
+$resource_type = get_field('clinical_resource_type', $resource_id);
+$resource_type_value = is_array($resource_type) ? $resource_type['value'] : '';
+$resource_type_label = is_array($resource_type) ? $resource_type['label'] : '';
 
 // Build an array of resource type values (keys) with the corresponding button text (values)
 $resource_button_text_arr = [
@@ -56,26 +57,28 @@ $resource_button_text_attr = str_replace('&nbsp;', ' ', $resource_button_text_at
 $resource_button_text_attr = html_entity_decode($resource_button_text_attr); // Convert HTML entities to their corresponding characters
 $resource_label = $resource_button_text_attr.', '.$resource_title_attr;
 
-$resource_excerpt = get_the_excerpt($id) ?: wp_strip_all_tags(get_the_content($id));
+// The post is the third argument of get_the_content(); the first is the "more" link text.
+$resource_excerpt = get_the_excerpt($resource_id) ?: wp_strip_all_tags(get_the_content(null, false, $resource_id));
 $resource_excerpt_len = strlen($resource_excerpt);
 if ($resource_excerpt_len > 160) {
     $resource_excerpt = wp_trim_words($resource_excerpt, 23, ' &hellip;');
 }
 
-$resource_image_wide = get_post_thumbnail_id($id);
-$resource_image_alt = get_post_meta($resource_image_wide, '_wp_attachment_image_alt', true);
-$resource_image_square = get_field('clinical_resource_image_square', $id);
+$resource_image_wide = get_post_thumbnail_id($resource_id);
+$resource_image_alt = get_post_meta((int) $resource_image_wide, '_wp_attachment_image_alt', true);
+$resource_image_square = get_field('clinical_resource_image_square', $resource_id);
 $resource_image_square = (isset($resource_image_square) && ! empty($resource_image_square)) ? $resource_image_square : $resource_image_wide;
 if (empty($resource_image_alt) && $resource_image_square) {
-    $resource_image_alt = get_post_meta($resource_image_square, '_wp_attachment_image_alt', true);
+    $resource_image_alt = get_post_meta((int) $resource_image_square, '_wp_attachment_image_alt', true);
 }
 
 $resource_related_max = 3; // Set how many of each related item type to display
 
 // Check for valid providers
 $resource_providers = get_field('clinical_resource_providers');
+$resource_providers = is_array($resource_providers) ? uamswp_fad_ids($resource_providers) : [];
 $resource_provider_valid = false;
-if (! empty($resource_providers)) {
+if ($resource_providers !== []) {
     foreach ($resource_providers as $resource_provider) {
         if (get_post_status($resource_provider) == 'publish') {
             $resource_provider_valid = true;
@@ -96,8 +99,9 @@ if (! empty($resource_providers)) {
 
 // Check for valid locations
 $resource_locations = get_field('clinical_resource_locations');
+$resource_locations = is_array($resource_locations) ? uamswp_fad_ids($resource_locations) : [];
 $resource_location_valid = false;
-if (! empty($resource_locations)) {
+if ($resource_locations !== []) {
     foreach ($resource_locations as $resource_location) {
         if (get_post_status($resource_location) == 'publish') {
             $resource_location_valid = true;
@@ -118,8 +122,9 @@ if (! empty($resource_locations)) {
 
 // Check for valid conditions
 $resource_conditions = get_field('clinical_resource_conditions');
+$resource_conditions = is_array($resource_conditions) ? uamswp_fad_ids($resource_conditions) : [];
 $resource_condition_valid = false;
-if (! empty($resource_conditions)) {
+if ($resource_conditions !== []) {
     foreach ($resource_conditions as $resource_condition) {
         if (get_post_status($resource_condition) == 'publish') {
             $resource_condition_valid = true;
@@ -140,8 +145,9 @@ if (! empty($resource_conditions)) {
 
 // Check for valid treatments
 $resource_treatments = get_field('clinical_resource_treatments');
+$resource_treatments = is_array($resource_treatments) ? uamswp_fad_ids($resource_treatments) : [];
 $resource_treatment_valid = false;
-if (! empty($resource_treatments)) {
+if ($resource_treatments !== []) {
     foreach ($resource_treatments as $resource_treatment) {
         if (get_post_status($resource_treatment) == 'publish') {
             $resource_treatment_valid = true;
@@ -162,8 +168,9 @@ if (! empty($resource_treatments)) {
 
 // Check for valid areas of expertise
 $resource_expertises = get_field('clinical_resource_aoe');
+$resource_expertises = is_array($resource_expertises) ? uamswp_fad_ids($resource_expertises) : [];
 $resource_expertise_valid = false;
-if (! empty($resource_expertises)) {
+if ($resource_expertises !== []) {
     foreach ($resource_expertises as $resource_expertise) {
         if (get_post_status($resource_expertise) == 'publish') {
             $resource_expertise_valid = true;
@@ -187,24 +194,24 @@ if ($resource_page == 'archive') { ?>
             <div class="item">
                 <div class="row">
                     <div class="col image">
-                        <a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo esc_attr($resource_label); ?>" data-categorytitle="Photo" data-itemtitle="<?php echo esc_attr($resource_title_attr); ?>">
+                        <a href="<?php echo get_permalink($resource_id); ?>" aria-label="<?php echo esc_attr($resource_label); ?>" data-categorytitle="Photo" data-itemtitle="<?php echo esc_attr($resource_title_attr); ?>">
                             <picture>
                                 <?php if (has_post_thumbnail() && function_exists('bis_get_attachment_image')) { ?>
-                                    <source srcset="<?php echo image_sizer($resource_image_square, 243, 243, 'center', 'center', 'aspect-1-1'); ?>"
+                                    <source srcset="<?php echo uamswp_fad_str(image_sizer($resource_image_square, 243, 243, 'center', 'center', 'aspect-1-1')); ?>"
                                         media="(min-width: 2054px)">
-                                    <source srcset="<?php echo image_sizer($resource_image_square, 184, 184, 'center', 'center', 'thumbnail'); ?>"
+                                    <source srcset="<?php echo uamswp_fad_str(image_sizer($resource_image_square, 184, 184, 'center', 'center', 'thumbnail')); ?>"
                                         media="(min-width: 1784px)">
-                                    <source srcset="<?php echo image_sizer($resource_image_square, 243, 243, 'center', 'center', 'aspect-1-1'); ?>"
+                                    <source srcset="<?php echo uamswp_fad_str(image_sizer($resource_image_square, 243, 243, 'center', 'center', 'aspect-1-1')); ?>"
                                         media="(min-width: 1200px)">
-                                    <source srcset="<?php echo image_sizer($resource_image_square, 184, 184, 'center', 'center', 'aspect-1-1'); ?>"
+                                    <source srcset="<?php echo uamswp_fad_str(image_sizer($resource_image_square, 184, 184, 'center', 'center', 'aspect-1-1')); ?>"
                                         media="(min-width: 930px)">
-                                    <source srcset="<?php echo image_sizer($resource_image_wide, 580, 326, 'center', 'center', 'aspect-16-9-small'); ?>"
+                                    <source srcset="<?php echo uamswp_fad_str(image_sizer($resource_image_wide, 580, 326, 'center', 'center', 'aspect-16-9-small')); ?>"
                                         media="(min-width: 768px)">
-                                    <source srcset="<?php echo image_sizer($resource_image_square, 95, 95, 'center', 'center', 'thumbnail'); ?>"
+                                    <source srcset="<?php echo uamswp_fad_str(image_sizer($resource_image_square, 95, 95, 'center', 'center', 'thumbnail')); ?>"
                                         media="(min-width: 576px)">
-                                    <source srcset="<?php echo image_sizer($resource_image_wide, 510, 286, 'center', 'center', 'aspect-16-9-small'); ?>"
+                                    <source srcset="<?php echo uamswp_fad_str(image_sizer($resource_image_wide, 510, 286, 'center', 'center', 'aspect-16-9-small')); ?>"
                                         media="(min-width: 1px)">
-                                    <img src="<?php echo image_sizer($resource_image_wide, 510, 286, 'center', 'center', 'aspect-16-9-small'); ?>" alt="<?php echo $resource_image_alt; ?>" role="presentation" />
+                                    <img src="<?php echo uamswp_fad_str(image_sizer($resource_image_wide, 510, 286, 'center', 'center', 'aspect-16-9-small')); ?>" alt="<?php echo uamswp_fad_str($resource_image_alt); ?>" role="presentation" />
                                 <?php } elseif (has_post_thumbnail()) { ?>
                                     <?php the_post_thumbnail('medium', ['itemprop' => 'image', 'alt' => '', 'role' => 'presentation']); ?>
                                 <?php } else { ?>
@@ -218,13 +225,13 @@ if ($resource_page == 'archive') { ?>
                         <div class="row">
                             <div class="col-12 primary">
                                 <h3 class="h4">
-                                    <a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo esc_attr($resource_label); ?>" data-categorytitle="Name" data-itemtitle="<?php echo esc_attr($resource_title_attr); ?>">
+                                    <a href="<?php echo get_permalink($resource_id); ?>" aria-label="<?php echo esc_attr($resource_label); ?>" data-categorytitle="Name" data-itemtitle="<?php echo esc_attr($resource_title_attr); ?>">
                                         <span class="name"><?php echo esc_html($resource_title); ?></span>
                                     </a>
                                     <span class="subtitle"><span class="sr-only"> (</span><?php echo esc_html($resource_type_label); ?><span class="sr-only">)</span></span>
                                 </h3>
                                 <p><?php echo $resource_excerpt; ?></p>
-                                <a class="btn btn-primary" href="<?php echo get_permalink($id); ?>" aria-label="<?php echo esc_attr($resource_label); ?>" data-categorytitle="View Clinical Resource" data-itemtitle="<?php echo esc_attr($resource_title_attr); ?>"><?php echo $resource_button_text; ?></a>
+                                <a class="btn btn-primary" href="<?php echo get_permalink($resource_id); ?>" aria-label="<?php echo esc_attr($resource_label); ?>" data-categorytitle="View Clinical Resource" data-itemtitle="<?php echo esc_attr($resource_title_attr); ?>"><?php echo $resource_button_text; ?></a>
                             </div>
                             <div class="col-12 secondary">
 								<h4 class="h5">Related Content</h4>
@@ -242,7 +249,7 @@ if ($resource_page == 'archive') { ?>
                                             $resource_provider_middle_name = get_field('physician_middle_name', $associate);
                                             $resource_provider_last_name = get_field('physician_last_name', $associate);
                                             $resource_provider_pedigree = get_field('physician_pedigree', $associate);
-                                            $resource_provider_medium_name = ($resource_provider_prefix ? $resource_provider_prefix.' ' : '').$resource_provider_first_name.' '.($resource_provider_middle_name ? $resource_provider_middle_name.' ' : '').$resource_provider_last_name.($resource_provider_pedigree ? ' '.$resource_provider_pedigree : '');
+                                            $resource_provider_medium_name = ($resource_provider_prefix ? uamswp_fad_str($resource_provider_prefix).' ' : '').$resource_provider_first_name.' '.($resource_provider_middle_name ? $resource_provider_middle_name.' ' : '').$resource_provider_last_name.($resource_provider_pedigree ? ' '.$resource_provider_pedigree : '');
 
                                             if (get_post_status($associate) == 'publish') {
                                                 if ($resource_i < $resource_related_max) {
@@ -457,7 +464,7 @@ if ($resource_page == 'archive') { ?>
     $associates = '';
     ?>
                                 </dl>
-								<a class="btn btn-primary" href="<?php echo get_permalink($id); ?>" aria-label="<?php echo esc_attr($resource_label); ?>" data-categorytitle="View Clinical Resource" data-itemtitle="<?php echo esc_attr($resource_title_attr); ?>"><?php echo $resource_button_text; ?></a>
+								<a class="btn btn-primary" href="<?php echo get_permalink($resource_id); ?>" aria-label="<?php echo esc_attr($resource_label); ?>" data-categorytitle="View Clinical Resource" data-itemtitle="<?php echo esc_attr($resource_title_attr); ?>"><?php echo $resource_button_text; ?></a>
 							</div>
                         </div>
                     </div>
@@ -469,20 +476,20 @@ if ($resource_page == 'archive') { ?>
             <div class="card">
                 <div class="card-img-top">
                     <picture>
-                        <?php if (has_post_thumbnail($id) && function_exists('bis_get_attachment_image')) { ?>
-                            <source srcset="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center', 'aspect-16-9-small'); ?>"
+                        <?php if (has_post_thumbnail($resource_id) && function_exists('bis_get_attachment_image')) { ?>
+                            <source srcset="<?php echo uamswp_fad_str(image_sizer($resource_image_wide, 455, 256, 'center', 'center', 'aspect-16-9-small')); ?>"
                                 media="(min-width: 1921px)">
-                            <source srcset="<?php echo image_sizer($resource_image_wide, 433, 244, 'center', 'center', 'aspect-16-9-small'); ?>"
+                            <source srcset="<?php echo uamswp_fad_str(image_sizer($resource_image_wide, 433, 244, 'center', 'center', 'aspect-16-9-small')); ?>"
                                 media="(min-width: 1500px)">
-                            <source srcset="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center', 'aspect-16-9-small'); ?>"
+                            <source srcset="<?php echo uamswp_fad_str(image_sizer($resource_image_wide, 455, 256, 'center', 'center', 'aspect-16-9-small')); ?>"
                                 media="(min-width: 992px)">
-                            <source srcset="<?php echo image_sizer($resource_image_wide, 433, 244, 'center', 'center', 'aspect-16-9-small'); ?>"
+                            <source srcset="<?php echo uamswp_fad_str(image_sizer($resource_image_wide, 433, 244, 'center', 'center', 'aspect-16-9-small')); ?>"
                                 media="(min-width: 768px)">
-                            <source srcset="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center', 'aspect-16-9-small'); ?>"
+                            <source srcset="<?php echo uamswp_fad_str(image_sizer($resource_image_wide, 455, 256, 'center', 'center', 'aspect-16-9-small')); ?>"
                                 media="(min-width: 1px)">
                             <!-- Fallback -->
-                            <img src="<?php echo image_sizer($resource_image_wide, 455, 256, 'center', 'center', 'aspect-16-9-small'); ?>" alt="<?php echo $resource_image_alt; ?>" role="presentation" />
-                        <?php } elseif (has_post_thumbnail($id)) { ?>
+                            <img src="<?php echo uamswp_fad_str(image_sizer($resource_image_wide, 455, 256, 'center', 'center', 'aspect-16-9-small')); ?>" alt="<?php echo uamswp_fad_str($resource_image_alt); ?>" role="presentation" />
+                        <?php } elseif (has_post_thumbnail($resource_id)) { ?>
                             <!-- Fallback -->
                             <?php the_post_thumbnail('aspect-16-9-small', ['alt' => '', 'role' => 'presentation']); ?>
                         <?php } else { ?>
@@ -494,7 +501,7 @@ if ($resource_page == 'archive') { ?>
                 <div class="card-body">
                     <h3 class="card-title h5"><?php echo esc_html($resource_title); ?> <span class="subtitle"><span class="sr-only">(</span><?php echo esc_html($resource_type_label); ?><span class="sr-only">)</span></span></h3>
                     <p class="card-text"><?php echo $resource_excerpt; ?></p>
-                    <a href="<?php echo get_permalink($id); ?>" class="btn btn-primary stretched-link" aria-label="<?php echo esc_attr($resource_label); ?>" data-itemtitle="<?php echo esc_attr($resource_title_attr); ?>"><?php echo $resource_button_text; ?></a>
+                    <a href="<?php echo get_permalink($resource_id); ?>" class="btn btn-primary stretched-link" aria-label="<?php echo esc_attr($resource_label); ?>" data-itemtitle="<?php echo esc_attr($resource_title_attr); ?>"><?php echo $resource_button_text; ?></a>
                 </div>
             </div>
         </div>

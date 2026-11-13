@@ -20,7 +20,7 @@
 /**
  * Set by the file that includes this partial, which runs in that file's scope (#1232).
  *
- * @var mixed $resources From `get_field()`.
+ * @var array<int, int|string>|false|null $resources The post IDs of a clinical resource relationship field.
  * @var WP_Query $resource_query
  * @var int $resource_postsPerPage
  * @var bool $resource_more_suppress
@@ -42,7 +42,7 @@ if ($resource_heading_related_post) {
 // $resource_count = count($resources);
 $resource_count = 0;
 if ($resources && $resource_query->have_posts()) {
-    foreach ($resources as $resource) {
+    foreach (uamswp_fad_ids($resources) as $resource) {
         if (get_post_status($resource) == 'publish') {
             $resource_count++;
         }
@@ -54,7 +54,7 @@ if ($resource_count > 4 && $resource_postsPerPage == -1) {
 } else {
     $resource_layout = 'card';
 }
-$resource_more = $resource_layout == 'card' && $resource_count > $resource_postsPerPage && ($resource_more_key && ! empty($resource_more_key) && $resource_more_value && ! empty($resource_more_value));
+$resource_more = $resource_layout == 'card' && $resource_count > $resource_postsPerPage && ($resource_more_key && $resource_more_value);
 if ($resource_more_suppress) {
     $resource_more = false;
 }
@@ -94,7 +94,7 @@ if ($resource_layout == 'card') { ?>
                         <div class="col-12 more">
                             <p class="lead"><?php echo $more_text; ?></p>
                             <div class="cta-container">
-                                <a href="<?php echo esc_url($more_button_url); ?>" class="btn btn-outline-primary" aria-label="<?php echo esc_attr($more_button_description_attr); ?>"<?php echo uams_fad_link_target_attributes($more_button_target ?? null); ?>><?php echo $more_button_text; ?></a>
+                                <a href="<?php echo esc_url($more_button_url); ?>" class="btn btn-outline-primary" aria-label="<?php echo esc_attr($more_button_description_attr); ?>"<?php echo uams_fad_link_target_attributes($more_button_target); ?>><?php echo $more_button_text; ?></a>
                             </div>
                         </div>
                     <?php } ?>

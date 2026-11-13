@@ -179,6 +179,13 @@ test('the recognition list leaves the title cell empty without an occupation tit
     expect($output)->toContain('Jo Smith</a></td><td>&nbsp;</td></tr>');
 });
 
+test('the recognition list leaves the title cell empty, and skips the degree, when their terms no longer exist', function (): void {
+    // get_term() finds neither term 7 nor degree 3, as for a deleted term.
+    $output = recognition_block(['physician_first_name:21' => 'Jo', 'physician_last_name:21' => 'Smith', 'physician_title:21' => 7, 'physician_degree:21' => [3]], [], [21]);
+
+    expect($output)->toContain('title="Jo Smith">Jo Smith</a></td><td>&nbsp;</td></tr>');
+});
+
 test('the recognition list takes the list from the variable the block sets, before the field', function (): void {
     recognition_block(['field_select_recognition_list' => [5]], [], [], ['recognition_id' => [7]]);
 

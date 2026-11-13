@@ -313,3 +313,26 @@ test('the area of expertise loop prints a card for each post, or says nothing ma
 
     expect(uamswp_test_include_partial('fwp/expertise-loop'))->toContain('<p>Sorry, no locations matched your criteria.</p>');
 });
+
+test('the area of expertise card reads the content of its own page when there is no excerpt', function (): void {
+    loop_partials_expertise('Cardiology', '');
+    $arguments = null;
+    when('get_the_content')->alias(static function (mixed ...$given) use (&$arguments): string {
+        $arguments = $given;
+
+        return '<i>Body text</i>';
+    });
+
+    // The post is the third argument of get_the_content(); the card once passed it as the first, the "more" link text.
+    expect(uamswp_test_include_partial('loops/expertise-card', ['id' => 1]))->toContain('<p class="card-text">Body text</p>')
+        ->and($arguments)->toBe([null, false, 1]);
+});
+
+test('the area of expertise card reads the id of a post object it is given', function (): void {
+    loop_partials_expertise('Cardiology', 'Heart care.');
+
+    $post = new WP_Post;
+    $post->ID = 1;
+
+    expect(uamswp_test_include_partial('loops/expertise-card', ['id' => $post]))->toContain('<span class="name"><a href="https://example.test/e/1/"');
+});
