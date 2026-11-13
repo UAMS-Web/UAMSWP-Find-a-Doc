@@ -56,6 +56,7 @@ function uamswp_test_single_ontology(string $template, array $fields = [], array
     $calls->headers = 0;
     $calls->footers = 0;
     $calls->resets = 0;
+    $calls->content = 0;
 
     when('get_field')->alias(static function (string $name, mixed $id = null) use ($fields, $fields_by_id, $option_fields): mixed {
         if ($id === 'option') {
@@ -91,7 +92,11 @@ function uamswp_test_single_ontology(string $template, array $fields = [], array
     when('get_the_post_thumbnail')->justReturn('');
     when('get_post_meta')->justReturn('');
     when('get_the_excerpt')->justReturn($options['excerpt'] ?? '');
-    when('get_the_content')->justReturn($content);
+    when('get_the_content')->alias(static function () use ($calls, $content): string {
+        $calls->content++;
+
+        return $content;
+    });
     when('the_content')->alias(static function () use ($content): void {
         echo $content;
     });
@@ -160,6 +165,7 @@ function uamswp_test_single_ontology(string $template, array $fields = [], array
     $GLOBALS['single_ontology_headers'] = $calls->headers;
     $GLOBALS['single_ontology_footers'] = $calls->footers;
     $GLOBALS['single_ontology_resets'] = $calls->resets;
+    $GLOBALS['single_ontology_content_calls'] = $calls->content;
     $GLOBALS['single_ontology_queries'] = WP_Query::$queries;
 
     return $GLOBALS;
