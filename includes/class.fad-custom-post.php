@@ -4096,11 +4096,9 @@ function get_location_meta($object)
 
     $location_phone = get_field('location_phone', $postId);
     // The result is discarded, and the theme formatter has no output, hooks, persistence or input change (#904).
-    // @pest-mutate-ignore: RemoveFunctionCall
-    format_phone_us($location_phone);
+    format_phone_us($location_phone); // @pest-mutate-ignore: RemoveFunctionCall
     // The result is discarded, and the theme formatter has no output, hooks, persistence or input change (#904).
-    // @pest-mutate-ignore: RemoveFunctionCall
-    format_phone_dash($location_phone);
+    format_phone_dash($location_phone); // @pest-mutate-ignore: RemoveFunctionCall
     $location_clinic_phone_query = get_field('location_clinic_phone_query', $postId); // separate number for (new) appointments?
 
     if ($location_clinic_phone_query) {
