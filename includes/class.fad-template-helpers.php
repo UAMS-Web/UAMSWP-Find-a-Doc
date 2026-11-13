@@ -166,6 +166,30 @@ function custom_field_excerpt($title)
 }
 
 /**
+ * Where to send a provider or location archive request so that it is filtered by the visitor's saved region.
+ *
+ * The region filter keeps the chosen region in the `wp_filter_region` cookie. A request for the archive that does
+ * not yet carry the archive's own FacetWP region parameter is sent to the same address with that parameter added
+ * from the cookie. The two archives used to do this inline before their `header()` and `exit()`.
+ *
+ * @param  string  $parameter  The archive's region parameter: `_provider_region` or `_location_region`.
+ * @param  array<array-key, mixed>  $cookies  The request cookies (`$_COOKIE`).
+ * @param  array<array-key, mixed>  $query  The query string variables (`$_GET`).
+ * @param  array<array-key, mixed>  $server  The server variables (`$_SERVER`); `REQUEST_URI` is the path and query of the request.
+ * @return string|null The address to redirect to, or null when there is no saved region or the request already has the parameter.
+ */
+function uamswp_fad_region_redirect_url(string $parameter, array $cookies, array $query, array $server): ?string
+{
+    if (! isset($cookies['wp_filter_region']) || isset($query[$parameter])) {
+        return null;
+    }
+
+    $request_uri = uamswp_fad_str($server['REQUEST_URI'] ?? '');
+
+    return $request_uri.(parse_url($request_uri, PHP_URL_QUERY) ? '&' : '?').$parameter.'='.uamswp_fad_str($cookies['wp_filter_region']);
+}
+
+/**
  * The excerpt length the provider archive uses, in words.
  *
  * @param  int  $length  The length WordPress would use; not used.
