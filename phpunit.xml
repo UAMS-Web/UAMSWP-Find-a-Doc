@@ -30,7 +30,6 @@
         </include>
         <exclude>
             <directory>./includes/_unused</directory>
-            <directory>./templates/_unused</directory>
         </exclude>
     </source>
 </phpunit>
