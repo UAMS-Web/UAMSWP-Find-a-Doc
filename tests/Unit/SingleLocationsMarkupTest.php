@@ -740,3 +740,88 @@ test('a closed holiday row and one that has no times each close their descriptio
         ->and($output)->toContain('<dt>Unknown day<br />'.$date.'<br/></dt><dd></dd>')
         ->and($output)->toContain('</dd></dl>');
 });
+
+/**
+ * The prepared modified hours text and structured data for one group, over a fixed window, with the whitespace collapsed.
+ *
+ * @param  list<array<string, mixed>>  $times  The rows of modified hours times.
+ * @param  array<string, mixed>  $row  More values of the group.
+ * @param  array<string, mixed>  $group  More values of the hours group.
+ * @return array{text: string, schema: string, start: mixed, end: mixed}
+ */
+function single_location_modified_golden(array $times, array $row = [], array $group = []): array
+{
+    $row += ['location_modified_hours_title' => '', 'location_modified_hours_information' => '', 'location_modified_hours_24_7' => false, 'location_modified_hours_times' => $times];
+    $fields = single_location_modified([$row], $group + ['location_modified_hours_reason' => '', 'location_modified_hours_start_date' => 'January 1, 2020', 'location_modified_hours_end_date' => 'January 1, 2099']);
+    $vars = single_location($fields);
+    $squash = static fn (mixed $value): string => trim((string) preg_replace('/\s+/', ' ', (string) $value));
+
+    return ['text' => $squash($vars['modified_text']), 'schema' => $squash($vars['modified_hours_schema']), 'start' => $vars['active_start'], 'end' => $vars['active_end']];
+}
+
+test('modified hours print every kind of row exactly', function (): void {
+    $times = [
+        single_location_modified_time('Mon - Fri', '08:00:00', '17:00:00', false, 'Lunch'),
+        single_location_modified_time('Mon - Fri', '18:00:00', '20:00:00'),
+        single_location_modified_time('Saturday', '', '', true),
+        single_location_modified_time('Sunday', '00:00:00', '00:00:00'),
+    ];
+    $golden = single_location_modified_golden($times, ['location_modified_hours_title' => 'Week', 'location_modified_hours_information' => '<p>Info</p>'], ['location_modified_hours_reason' => '<p>Why</p>']);
+
+    expect($golden['text'])->toBe('<p>Why</p><p class="small font-italic">These modified hours start on January 1, 2020, and are scheduled to end after January 1, 2099.</p><h3 class="h4">Week</h3><p>Info</p><dl class="hours"><dt>Mon - Fri</dt> <dd>8 a.m. &ndash; 5 p.m. <br /><span class="subtitle">Lunch</span></dd><dd>6 &ndash; 8 p.m.</dd><dt>Saturday</dt> <dd>Closed </dd><dt>Sunday</dt> <dd></dd></dl>')
+        ->and($golden['schema'])->toBe('"openingHoursSpecification": [ { "@type": "OpeningHoursSpecification", "validFrom": "2020-01-01", "validThrough": "2099-01-01", "dayOfWeek": [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" ], "opens": "08:00", "closes": "17:00" }, { "@type": "OpeningHoursSpecification", "validFrom": "2020-01-01", "validThrough": "2099-01-01", "dayOfWeek": [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" ], "opens": "18:00", "closes": "20:00" }, { "@type": "OpeningHoursSpecification", "validFrom": "2020-01-01", "validThrough": "2099-01-01", "dayOfWeek": "Saturday", "opens": "00:00", "closes": "00:00" }, { "@type": "OpeningHoursSpecification", "validFrom": "2020-01-01", "validThrough": "2099-01-01", "dayOfWeek": "Sunday", "opens": "00:00", "closes": "00:00" } ],')
+        ->and($golden['start'])->toBe(1577836800)
+        ->and($golden['end'])->toBe(4070908800);
+});
+
+test('a closed Monday to Friday row names the single day label in the structured data', function (): void {
+    $golden = single_location_modified_golden([single_location_modified_time('Mon - Fri', '', '', true)]);
+
+    expect($golden['schema'])->toBe('"openingHoursSpecification": [ { "@type": "OpeningHoursSpecification", "validFrom": "2020-01-01", "validThrough": "2099-01-01", "dayOfWeek": "Mon - Fri", "opens": "00:00", "closes": "00:00" } ],');
+});
+
+test('modified hours with no end run until further notice and have no end in the structured data', function (): void {
+    $golden = single_location_modified_golden([single_location_modified_time('Monday', '08:00:00', '17:00:00')], [], ['location_modified_hours_end' => false, 'location_modified_hours_end_date' => '']);
+
+    expect($golden['text'])->toBe('<p class="small font-italic">These modified hours start on January 1, 2020, and will remain in effect until further notice.</p><dl class="hours"><dt>Monday</dt> <dd>8 a.m. &ndash; 5 p.m.</dd></dl>')
+        ->and($golden['schema'])->toBe('"openingHoursSpecification": [ { "@type": "OpeningHoursSpecification", "validFrom": "2020-01-01", "dayOfWeek": "Monday", "opens": "08:00", "closes": "17:00" } ],')
+        ->and($golden['end'])->toBe('TBD');
+});
+
+test('an end date that is switched on but empty is treated as no end', function (): void {
+    $golden = single_location_modified_golden([single_location_modified_time('Monday', '08:00:00', '17:00:00')], [], ['location_modified_hours_end_date' => '']);
+
+    expect($golden['text'])->toBe('')
+        ->and($golden['schema'])->toBe('');
+});
+
+test('modified hours open around the clock print the group heading and the whole week', function (): void {
+    $golden = single_location_modified_golden([], ['location_modified_hours_24_7' => true, 'location_modified_hours_title' => 'Always', 'location_modified_hours_information' => '<p>I</p>']);
+    $open = single_location_modified_golden([], ['location_modified_hours_24_7' => true], ['location_modified_hours_end' => false, 'location_modified_hours_end_date' => '']);
+
+    expect($golden['text'])->toBe('<p class="small font-italic">These modified hours start on January 1, 2020, and are scheduled to end after January 1, 2099.</p><h3 class="h4">Always</h3><p>I</p><strong>Open 24/7</strong>')
+        ->and($golden['schema'])->toBe('"openingHoursSpecification": [ { "@type": "OpeningHoursSpecification", "validFrom": "2020-01-01", "validThrough": "2099-01-01", "dayOfWeek": [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" ], "opens": "00:00", "closes": "23:59" } ],')
+        ->and($open['text'])->toBe('<p class="small font-italic">These modified hours start on January 1, 2020, and will remain in effect until further notice.</p><strong>Open 24/7</strong>')
+        ->and($open['schema'])->toBe('"openingHoursSpecification": [ { "@type": "OpeningHoursSpecification", "validFrom": "2020-01-01", "dayOfWeek": [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" ], "opens": "00:00", "closes": "23:59" } ],');
+});
+
+test('a group whose times are not a list prints only the dates', function (): void {
+    $golden = single_location_modified_golden([], ['location_modified_hours_times' => 'x']);
+
+    expect($golden['text'])->toBe('<p class="small font-italic">These modified hours start on January 1, 2020, and are scheduled to end after January 1, 2099.</p>')
+        ->and($golden['schema'])->toBe('');
+});
+
+test('typical hours stay hidden only while modified hours cover today and run past thirty days', function (): void {
+    $times = [single_location_modified_time('Monday', '08:00:00', '17:00:00')];
+    $fields = static fn (string $start, string $end, bool $ends = true): array => single_location_modified([['location_modified_hours_title' => '', 'location_modified_hours_information' => '', 'location_modified_hours_24_7' => false, 'location_modified_hours_times' => $times]], ['location_modified_hours_start_date' => $start, 'location_modified_hours_end' => $ends, 'location_modified_hours_end_date' => $end]);
+    $today = date('F j, Y');
+    $typical = static fn (array $f): bool => str_contains(single_location_markup($f), 'Typical Hours');
+
+    // Starting today with no end hides them, as does an end far away; starting tomorrow or ending soon does not.
+    expect($typical($fields($today, '', false)))->toBeFalse()
+        ->and($typical($fields($today, date('F j, Y', strtotime('+60 days')))))->toBeFalse()
+        ->and($typical($fields(date('F j, Y', strtotime('+1 day')), '', false)))->toBeTrue()
+        ->and($typical($fields($today, date('F j, Y', strtotime('+10 days')))))->toBeTrue()
+        ->and($typical($fields(date('F j, Y', strtotime('-5 days')), $today)))->toBeTrue();
+});

@@ -739,8 +739,7 @@ while (have_posts()) {
             ?>
 						<?php
 
-                $modified_day = ''; // Previous Day
-            $modified_comment = ''; // Comment on previous day
+                $modified_day = null; // Previous Day
             // $modified_hours_schema .=
             $i = 1;
 
@@ -764,16 +763,9 @@ while (have_posts()) {
                         $modified_times = $modified_hour['location_modified_hours_times'];
                         $modified_hours247 = $modified_hour['location_modified_hours_24_7'];
 
-                        if ($active_start > strtotime($modified_start) || $active_start == '') {
-                            $active_start = strtotime($modified_start);
-                        }
-                        if ($active_end <= strtotime($modified_end_date) || ! $modified_end) {
-                            if (! $modified_end) {
-                                $active_end = 'TBD';
-                            } else {
-                                $active_end = strtotime($modified_end_date);
-                            }
-                        }
+                        // Every group shares the same dates, so the window is the one those dates give.
+                        $active_start = strtotime($modified_start);
+                        $active_end = $modified_end ? strtotime($modified_end_date) : 'TBD';
                         if ($modified_hours247) {
                             $modified_text .= '<strong>Open 24/7</strong>';
                             $modified_hours_schema = '{
@@ -800,7 +792,7 @@ while (have_posts()) {
                                     $modified_text .= $modified_day !== $modified_time['location_modified_hours_day'] ? '<dt>'.$modified_time['location_modified_hours_day'].'</dt> ' : '';
                                     $modified_text .= '<dd>';
 
-                                    if ($i != 1) {
+                                    if ($i !== 1) {
                                         $modified_hours_schema .= '},
 														';
                                     }
@@ -814,7 +806,7 @@ while (have_posts()) {
                                     $modified_hours_schema .= $modified_end && $modified_end_date ? '"validThrough": "'.date('Y-m-d', strtotime($modified_end_date)).'",
 														' : '';
 
-                                    if ($modified_time['location_modified_hours_day'] == 'Mon - Fri' && ! $modified_time['location_modified_hours_closed']) {
+                                    if ($modified_time['location_modified_hours_day'] === 'Mon - Fri' && ! $modified_time['location_modified_hours_closed']) {
                                         $modified_hours_schema .= '"dayOfWeek": [
 															"Monday",
 															"Tuesday",
@@ -834,7 +826,7 @@ while (have_posts()) {
 														"closes": "00:00"
 														';
                                     } else {
-                                        $modified_text .= (($modified_time['location_modified_hours_open'] && $modified_time['location_modified_hours_open'] != '00:00:00') ? ''.ap_time_span(strtotime($modified_time['location_modified_hours_open']), strtotime($modified_time['location_modified_hours_close'])).'' : '');
+                                        $modified_text .= (($modified_time['location_modified_hours_open'] && $modified_time['location_modified_hours_open'] !== '00:00:00') ? ''.ap_time_span(strtotime($modified_time['location_modified_hours_open']), strtotime($modified_time['location_modified_hours_close'])).'' : '');
                                         $modified_hours_schema .= '"opens": "'.date('H:i', strtotime($modified_time['location_modified_hours_open'])).'"';
                                         $modified_hours_schema .= ',
 														"closes": "'.date('H:i', strtotime($modified_time['location_modified_hours_close'])).'"
@@ -842,9 +834,6 @@ while (have_posts()) {
                                     }
                                     if ($modified_time['location_modified_hours_comment']) {
                                         $modified_text .= ' <br /><span class="subtitle">'.$modified_time['location_modified_hours_comment'].'</span>';
-                                        $modified_comment = $modified_time['location_modified_hours_comment'];
-                                    } else {
-                                        $modified_comment = '';
                                     }
                                     $modified_text .= '</dd>';
                                     $modified_day = $modified_time['location_modified_hours_day']; // Reset the day
