@@ -489,6 +489,14 @@ test('a rating response that is not a success is ignored', function (): void {
         ->and($vars['pg_total_comment_count'])->toBe('');
 });
 
+test('rating data stored as an array is ignored without a warning', function (): void {
+    $vars = single_physician([], ['ratings' => ['status' => ['code' => '200'], 'data' => ['entities' => [['totalRatingCount' => 99]]]]]);
+
+    expect($vars['pg_rating_valid'])->toBe('')
+        ->and($vars['pg_total_comment_count'])->toBe('')
+        ->and($vars['single_physician_warnings'])->toBe([]);
+});
+
 test('a provider without rating data has no rating', function (): void {
     $vars = single_physician();
 

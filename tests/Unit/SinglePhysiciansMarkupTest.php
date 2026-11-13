@@ -429,7 +429,13 @@ function single_physician_schema(string $output): array
  */
 function single_physician_posts(array $titles): array
 {
-    return array_map(static fn (int $id, string $title): object => (object) ['ID' => $id, 'post_title' => $title], array_keys($titles), $titles);
+    return array_map(static function (int $id, string $title): WP_Post {
+        $post = new WP_Post;
+        $post->ID = $id;
+        $post->post_title = $title;
+
+        return $post;
+    }, array_keys($titles), $titles);
 }
 
 test('the structured data names the provider and describes the profile', function (): void {

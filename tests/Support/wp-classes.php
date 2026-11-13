@@ -21,6 +21,9 @@ if (! class_exists('WP_Post')) {
 
         /** @var string */
         public $post_name = '';
+
+        /** @var string */
+        public $post_title = '';
     }
 }
 
