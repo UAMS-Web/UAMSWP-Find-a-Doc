@@ -45,20 +45,12 @@ function uamswp_force_template($template)
         $template = uamswp_fad_plugin_template('single-expertise.php');
     }
 
-    if (is_tax('condition')) {
-        $template = uamswp_fad_plugin_template('taxonomy-condition.php');
-    }
-
     if (is_singular('condition')) {
         $template = uamswp_fad_plugin_template('single-condition.php');
     }
 
     if (is_post_type_archive('condition')) {
         $template = uamswp_fad_plugin_template('archive-condition.php');
-    }
-
-    if (is_tax('treatment')) {
-        $template = uamswp_fad_plugin_template('taxonomy-treatment_procedure.php');
     }
 
     if (is_singular('treatment')) {

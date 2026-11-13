@@ -99,10 +99,8 @@ final class TemplatesTest extends UnitTestCase
             'location single' => ['is_singular:location', 'single-locations.php'],
             'expertise archive' => ['is_post_type_archive:expertise', 'archive-expertise.php'],
             'expertise single' => ['is_singular:expertise', 'single-expertise.php'],
-            'condition taxonomy' => ['is_tax:condition', 'taxonomy-condition.php'],
             'condition single' => ['is_singular:condition', 'single-condition.php'],
             'condition archive' => ['is_post_type_archive:condition', 'archive-condition.php'],
-            'treatment taxonomy' => ['is_tax:treatment', 'taxonomy-treatment_procedure.php'],
             'treatment single' => ['is_singular:treatment', 'single-treatment.php'],
             'treatment archive' => ['is_post_type_archive:treatment', 'archive-treatments.php'],
             'clinical resource single' => ['is_singular:clinical-resource', 'single-clinical-resource.php'],
@@ -121,6 +119,17 @@ final class TemplatesTest extends UnitTestCase
     public function test_any_other_view_keeps_the_theme_template(): void
     {
         $this->conditions([]);
+
+        $this->assertSame('theme.php', \uamswp_force_template('theme.php'));
+    }
+
+    /**
+     * The condition and treatment taxonomies have not been registered since conditions and treatments became post
+     * types (their `init` hooks are commented out), so their term views never occur, and their templates were removed.
+     */
+    public function test_a_condition_or_treatment_term_view_keeps_the_theme_template(): void
+    {
+        $this->conditions(['is_tax:condition', 'is_tax:treatment']);
 
         $this->assertSame('theme.php', \uamswp_force_template('theme.php'));
     }

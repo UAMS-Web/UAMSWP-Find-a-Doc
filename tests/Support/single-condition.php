@@ -29,7 +29,7 @@ require_once __DIR__.'/templates.php';
  *                                         `post_name`, `option` (the ACF fields of the options page),
  *                                         `fields_by_id` (post id => its ACF fields), `titles` (post id =>
  *                                         title), `status` (post id => status, default publish), `regions`
- *                                         (region term id => slug), `queries` (see above), `get` and `cookie`
+ *                                         (region term id => slug, or false for a term that no longer exists; term 0 never exists), `queries` (see above), `get` and `cookie`
  *                                         (the request's query and cookies), and `lyte` (whether the lite
  *                                         YouTube plugin is active).
  * @return array<string, mixed>
@@ -73,7 +73,8 @@ function uamswp_test_single_ontology(string $template, array $fields = [], array
     when('have_rows')->justReturn(false);
     when('get_sub_field')->justReturn();
     when('get_term')->justReturn();
-    when('get_term_by')->alias(static fn (string $field, mixed $id, string $taxonomy = ''): object => (object) ['term_id' => $id, 'slug' => $regions[$id] ?? 'region-'.$id]);
+    // WordPress has no term 0, so a location without a region finds none.
+    when('get_term_by')->alias(static fn (string $field, mixed $id, string $taxonomy = ''): object|false => $id === 0 || ($regions[$id] ?? null) === false ? false : (object) ['term_id' => $id, 'slug' => $regions[$id] ?? 'region-'.$id]);
     when('get_post')->justReturn();
     when('wp_get_post_parent_id')->justReturn(0);
     when('get_the_title')->alias(static fn (mixed $id = null): string => $titles[$id ?? WP_Query::$current] ?? 'Post '.$id);
