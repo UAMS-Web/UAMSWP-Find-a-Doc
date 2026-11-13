@@ -12,18 +12,6 @@ if (function_exists('uams_fad_block_placeholder') && uams_fad_block_placeholder(
     return;
 }
 
-// Create id attribute allowing for custom "anchor" value.
-$id = '';
-if (empty($id) && isset($block)) {
-    $id = $block['id'];
-}
-
-if (empty($id)) {
-    $id = ! empty($module['anchor_id']) ? sanitize_title_with_dashes($module['anchor_id']) : 'module-'.($i + 1);
-}
-
-$id = 'providers-'.$id;
-
 $className = '';
 if (! empty($block['className'])) {
     $className .= ' '.$block['className'];
