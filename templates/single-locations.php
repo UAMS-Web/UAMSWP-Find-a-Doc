@@ -481,10 +481,7 @@ while (have_posts()) {
     $parking_map = get_field('location_parking_map', $location_source_ids['parking']);
 
     // A location without a map still shows its parking map, with the clinic at the origin.
-    // The defaults only avoid a notice for a missing map: the output is the same without them.
-    // @pest-mutate-ignore: Coalesce
     $map_lat = $map['lat'] ?? '';
-    // @pest-mutate-ignore: Coalesce
     $map_lng = $map['lng'] ?? '';
     if ($location_parking || $location_direction || $parking_map) {
         $show_parking_section = true;
