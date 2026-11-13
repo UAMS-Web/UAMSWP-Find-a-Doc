@@ -1295,7 +1295,9 @@ while (have_posts()) {
 							<?php if ($location_youtube_link) { ?>
 								<?php if (function_exists('lyte_preparse')) {
 								    echo '<div class="alignwide">';
-								    echo lyte_parse(str_replace(['https:', 'http:'], 'httpv:', $location_youtube_link));
+								    /** @var string $youtube_embed */
+								    $youtube_embed = lyte_parse(str_replace(['https:', 'http:'], 'httpv:', $location_youtube_link));
+								    echo $youtube_embed;
 								    echo '</div>';
 								} else {
 								    echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
@@ -1490,7 +1492,7 @@ while (have_posts()) {
 											<option value="">Select an option</option>
 											<?php foreach ($location_scheduling_options as $key => $title) {
 											    $location_scheduling_item_title_nested = $title['location_scheduling_item_title_nested'];
-											    $location_scheduling_item_title_nested = (isset($location_scheduling_item_title_nested) && ! empty($location_scheduling_item_title_nested)) ? $location_scheduling_item_title_nested : 'Schedule an Appointment Online';
+											    $location_scheduling_item_title_nested = (! empty($location_scheduling_item_title_nested)) ? $location_scheduling_item_title_nested : 'Schedule an Appointment Online';
 											    ?>
 												<option value="<?= $key; ?>"<?php // echo ($key == $provider_title) ? ' selected' : '';?>><?php echo $location_scheduling_item_title_nested; ?></option>
 											<?php } ?>
