@@ -8,7 +8,6 @@ function uamswp_add_gmb_export_page(): void
 {
     add_submenu_page('fad-settings', 'UAMSWP CSV Export', 'CSV Export', 'manage_options', 'uamswp-gmb-export', 'uamswp_fad_gmb_export_page', 90);
 }
-add_action('admin_menu', 'uamswp_add_gmb_export_page', 105);
 
 function uamswp_fad_gmb_export_page(): void
 {
@@ -26,17 +25,31 @@ function uamswp_fad_gmb_export_page(): void
     <?php
 }
 
-// Add action hook only if action=download_doximity_csv
-if (isset($_GET['action']) && $_GET['action'] == 'download_doximity_csv') {
-    // Handle CSV Export
-    add_action('admin_init', 'doximity_csv_export');
-}
+/**
+ * Hook the export page, and the export a request asks for.
+ *
+ * Called once as the file loads. An export is hooked only when the request's `action` names it.
+ */
+function uamswp_fad_gmb_register_export_hooks(): void
+{
+    add_action('admin_menu', 'uamswp_add_gmb_export_page', 105);
 
-// Add action hook only if action=download_mychart_csv
-if (isset($_GET['action']) && $_GET['action'] == 'download_mychart_csv') {
-    // Handle CSV Export
-    add_action('admin_init', 'mychart_csv_export');
+    // Add action hook only if action=download_doximity_csv
+    // Both sides are strings (or the request value is an array), so a loose and a strict comparison agree.
+    // @pest-mutate-ignore: EqualToIdentical
+    if (isset($_GET['action']) && $_GET['action'] == 'download_doximity_csv') {
+        // Handle CSV Export
+        add_action('admin_init', 'doximity_csv_export');
+    }
+
+    // Add action hook only if action=download_mychart_csv
+    // @pest-mutate-ignore: EqualToIdentical
+    if (isset($_GET['action']) && $_GET['action'] == 'download_mychart_csv') {
+        // Handle CSV Export
+        add_action('admin_init', 'mychart_csv_export');
+    }
 }
+uamswp_fad_gmb_register_export_hooks();
 
 function doximity_csv_export(): false
 {
@@ -344,8 +357,10 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
 {
     $table_head = [];
     $table_body = [];
-    // Set per location, and carried from one provider to the next when a location has no building.
+    // Set per location. Read only after a location with a building sets them, so these values are never read.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $building_slug = '';
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $building_name = '';
 
     ob_start();
@@ -663,6 +678,8 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
 
         while ($wp_query->have_posts()) {
             $wp_query->the_post();
+            // get_the_ID() returns the loop post's id; the cast only turns a false outside the loop into 0.
+            // @pest-mutate-ignore: RemoveIntegerCast
             $post_id = (int) get_the_ID();
 
             // Get slug
@@ -683,17 +700,8 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
                 }
             }
 
-            // Check for valid locations
+            // The locations; each published one gets a row below
             $locations = get_field('physician_locations', $post_id);
-            $location_valid = false;
-            if ($locations) {
-                foreach (uamswp_fad_arr($locations) as $location) {
-                    if (get_post_status(uamswp_fad_int($location)) == 'publish') {
-                        $location_valid = true;
-
-                    }
-                }
-            }
 
             // Create location variables
 
@@ -732,11 +740,13 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
             }
 
             // Create the table
-            if ($locations && $location_valid && ! $resident && ! $provider_gmb_exclude) {
+            if ($locations && ! $resident && ! $provider_gmb_exclude) {
                 $row = [];
 
                 // Create row for each valid location
                 foreach (uamswp_fad_arr($locations) as $location) {
+                    // get_post_status() returns a string or false, so a loose and a strict comparison agree.
+                    // @pest-mutate-ignore: EqualToIdentical
                     if (get_post_status(uamswp_fad_int($location)) == 'publish') {
 
                         // Store code
@@ -779,6 +789,8 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
                         $location_building = get_field('location_building', $location_source_ids['facility']);
                         if ($location_building) {
                             $building = get_term(uamswp_fad_int($location_building), 'building');
+                            // A missing term's slug is never '_none' whatever it defaults to.
+                            // @pest-mutate-ignore: EmptyStringToNotEmpty
                             $building_slug = ($building->slug ?? '');
                             $building_name = ($building->name ?? '');
                         }
@@ -817,6 +829,8 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
                         //   Child Location Name
 
                         $location_addresses = [];
+                        // Both sides are strings, so a loose and a strict comparison agree.
+                        // @pest-mutate-ignore: NotEqualToNotIdentical
                         if ($location_building && $building_slug != '_none') {
                             $location_addresses[] = $building_name;
                         }
@@ -842,12 +856,20 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
                         $location_telemed_query = uamswp_fad_arr($location_hours_group)['location_telemed_query'];
 
                         $location_gmb_wheelchair_entrance = get_field('has_wheelchair_accessible_entrance', $location_post_id);
+                        // The button group returns a string, or null when unset, so a loose and a strict comparison agree.
+                        // @pest-mutate-ignore: EqualToIdentical
                         $location_gmb_wheelchair_entrance = ($location_gmb_wheelchair_entrance == 'Not Applicable') ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_entrance;
                         $location_gmb_wheelchair_restroom = get_field('has_wheelchair_accessible_restroom', $location_post_id);
+                        // The button group returns a string, or null when unset, so a loose and a strict comparison agree.
+                        // @pest-mutate-ignore: EqualToIdentical
                         $location_gmb_wheelchair_restroom = ($location_gmb_wheelchair_restroom == 'Not Applicable') ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_restroom;
                         $location_gmb_restroom = get_field('has_restroom', $location_post_id);
+                        // The button group returns a string, or null when unset, so a loose and a strict comparison agree.
+                        // @pest-mutate-ignore: EqualToIdentical
                         $location_gmb_restroom = ($location_gmb_restroom == 'Not Applicable') ? '[NOT APPLICABLE]' : $location_gmb_restroom;
                         $location_gmb_appointments = get_field('requires_appointments', $location_post_id);
+                        // The button group returns a string, or null when unset, so a loose and a strict comparison agree.
+                        // @pest-mutate-ignore: EqualToIdentical
                         $location_gmb_appointments = ($location_gmb_appointments == 'Not Applicable') ? '[NOT APPLICABLE]' : $location_gmb_appointments;
                         $location_map = get_field('location_map', $location_source_ids['map']);
                         $location_latitude = '';
