@@ -112,17 +112,8 @@ parameters:
             - templates/loops/treatments-loop.php
             - templates/mychart-list-provider.php
             - templates/provider-image.php
-            - templates/single-clinical-resource.php
-            - templates/single-condition.php
-            - templates/single-expertise.php
-            - templates/single-treatment.php
             - templates/taxonomy-condition.php
             - templates/taxonomy-treatment_procedure.php
-            # Callbacks moved out of two templates unchanged (#1269). They read the template's variables and the ACF,
-            # FacetWP and theme functions it calls, so they report the same findings the templates did (128 at level 10).
-            # Analysing them goes with #1232.
-            - includes/class.fad-single-expertise.php
-            - includes/class.fad-single-clinical-resource.php
 
     # Filled: the directories and files holding first-party PHP, including
     # the plugin header file at the root. Include tests: test bugs are real
