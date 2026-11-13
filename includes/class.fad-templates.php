@@ -171,8 +171,9 @@ function uamswp_fad_body_class($classes)
 add_action('template_redirect', function (): void {
     /** @var WP_Query $wp_query */
     global $wp_query;
-    if (($wp_query->get('post_type') == 'provider' || $wp_query->get('post_type') == 'location') && is_404()) {
-        $redirectLink = get_post_type_archive_link(uamswp_fad_str($wp_query->get('post_type')));
+    $post_type = $wp_query->get('post_type');
+    if (in_array($post_type, ['provider', 'location'], true) && is_404()) {
+        $redirectLink = get_post_type_archive_link(uamswp_fad_str($post_type));
         wp_redirect((string) $redirectLink, 301);
         exit;
     }
