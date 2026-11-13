@@ -63,3 +63,13 @@ Every entry heading is `## YYYY-MM-DD`, a space, and a short title. Leave exactl
 **Rejected.** All of the provider's regions must be listed: it keeps the current non-match for a provider in a listed and an unlisted region. Only the primary (first) location's region: it ignores every other location the provider has, so a provider in a listed region at a non-primary location would still show the ontology.
 
 **Companion.** [UAMS-Web/UAMSWP-Find-a-Doc#1132](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1132); build in [UAMS-Web/UAMSWP-Find-a-Doc#1185](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1185).
+
+## 2026-11-13 Annotate the two discarded phone formatter calls as equivalent (#904)
+
+**Decision.** The discarded `format_phone_us($location_phone)` and `format_phone_dash($location_phone)` calls in the location payload builder in `includes/class.fad-custom-post.php` are annotated with `@pest-mutate-ignore: RemoveFunctionCall`, citing the effect-free finding on #904. Production code is unchanged. The scope is those two calls only; the discarded `get_field('location_image_override_parent_featured', ...)` read stays a mutation candidate.
+
+**Why.** The audit on #904 found that the theme implementations of both formatters only transform a local value: no output, no application hooks, no persistence and no change to their input, across eleven controls on PHP 8.4. With the results discarded, removing either call cannot change what the payload holds. Those two calls were the last survivors in the file.
+
+**Rejected.** Deleting the two calls: a production deletion that #904's decisions did not authorize. Leaving them as recorded survivors in the closing record: the bar is no unexplained survivors, and the finding explains them.
+
+**Companion.** [UAMS-Web/UAMSWP-Find-a-Doc#904](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/904); [UAMS-Web/UAMSWP-Find-a-Doc#1355](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/pull/1355).

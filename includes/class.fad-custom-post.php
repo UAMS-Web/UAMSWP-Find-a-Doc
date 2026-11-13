@@ -4095,7 +4095,11 @@ function get_location_meta($object)
     // Phone numbers
 
     $location_phone = get_field('location_phone', $postId);
+    // The result is discarded, and the theme formatter has no output, hooks, persistence or input change (#904).
+    // @pest-mutate-ignore: RemoveFunctionCall
     format_phone_us($location_phone);
+    // The result is discarded, and the theme formatter has no output, hooks, persistence or input change (#904).
+    // @pest-mutate-ignore: RemoveFunctionCall
     format_phone_dash($location_phone);
     $location_clinic_phone_query = get_field('location_clinic_phone_query', $postId); // separate number for (new) appointments?
 
