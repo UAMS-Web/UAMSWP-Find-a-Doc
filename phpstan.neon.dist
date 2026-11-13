@@ -104,8 +104,6 @@ parameters:
             - templates/loops/treatments-cpt-loop.php
             - templates/loops/treatments-loop.php
             - templates/single-locations.php
-            - templates/taxonomy-condition.php
-            - templates/taxonomy-treatment_procedure.php
 
     # Filled: the directories and files holding first-party PHP, including
     # the plugin header file at the root. Include tests: test bugs are real
