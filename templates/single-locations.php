@@ -379,6 +379,8 @@ while (have_posts()) {
     $location_address_1 = get_field('location_address_1', $location_source_ids['street']);
     $location_building = get_field('location_building', $location_source_ids['facility']);
     if ($location_building) {
+        // The template runs without strict types, so PHP coerces the uncast value the same way.
+        // @pest-mutate-ignore: RemoveIntegerCast
         $building = get_term((int) $location_building, 'building');
         $building_slug = $building instanceof WP_Term ? $building->slug : null;
         $building_name = $building instanceof WP_Term ? $building->name : null;
@@ -565,6 +567,8 @@ while (have_posts()) {
     $portal = null; // Set below for a location with a portal
 
     if ($location_portal) {
+        // The template runs without strict types, so PHP coerces the uncast value the same way.
+        // @pest-mutate-ignore: RemoveIntegerCast
         $portal = get_term((int) $location_portal, 'portal');
         $portal_slug = $portal instanceof WP_Term ? $portal->slug : '';
         $portal_name = $portal instanceof WP_Term ? $portal->name : '';
