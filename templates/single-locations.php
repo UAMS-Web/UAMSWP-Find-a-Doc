@@ -37,6 +37,8 @@ $parent_title_prepend = ''; // Eliminate PHP errors
 $parent_title_phrase = ''; // Eliminate PHP errors
 
 if ($location_has_parent && $location_parent_id) {
+    // The template runs without strict types, so PHP coerces the uncast value the same way.
+    // @pest-mutate-ignore: RemoveIntegerCast
     $parent_location = get_post((int) $location_parent_id);
 }
 
@@ -44,11 +46,15 @@ if ($location_has_parent && $location_parent_id) {
 if ($parent_location) {
     $post_id = $parent_location->ID;
     $parent_title = $parent_location->post_title;
+    // The permalink is only passed to esc_url(), which reads the uncast value as the same string.
+    // @pest-mutate-ignore: RemoveStringCast
     $parent_url = (string) get_permalink($post_id);
     $parent_location_prepend_the = get_field('location_prepend_the', $post_id);
     $parent_title_prepend = $parent_location_prepend_the ? 'the ' : '';
     $parent_title_phrase = $parent_title_prepend.$parent_title;
 } else {
+    // The template runs without strict types, so PHP coerces the uncast value the same way.
+    // @pest-mutate-ignore: RemoveIntegerCast
     $post_id = (int) get_the_ID();
 }
 
@@ -59,6 +65,8 @@ if ($parent_location) {
  * and parking read through the resolver instead, because a child may
  * override any one of those groups independently.
  */
+// The template runs without strict types, so PHP coerces the uncast value the same way.
+// @pest-mutate-ignore: RemoveIntegerCast
 $location_source_ids = uamswp_fad_location_source_ids((int) get_the_ID());
 
 // Image values
@@ -669,6 +677,8 @@ while (have_posts()) {
     }
 
     // Check if Child Locations section should be displayed
+    // The template runs without strict types, so PHP coerces the uncast value the same way.
+    // @pest-mutate-ignore: RemoveIntegerCast
     $current_id = (int) get_the_ID();
     if ((count(get_pages(['child_of' => $current_id, 'post_type' => 'location']) ?: []) !== 0)) { // If none available, set to false
         $args = [
@@ -855,10 +865,15 @@ while (have_posts()) {
                         $active_end = $modified_end ? strtotime($modified_end_date) : 'TBD';
                         if ($modified_hours247) {
                             $modified_text .= '<strong>Open 24/7</strong>';
+                            // The template runs without strict types, so date() reads the false of an unreadable time as 0, the same as the cast.
+                            // @pest-mutate-ignore: RemoveIntegerCast
                             $modified_hours_schema = '{
 																		"@type": "OpeningHoursSpecification",
 																		"validFrom": "'.date('Y-m-d', (int) strtotime($modified_start)).'",
-																		'.($modified_end && $modified_end_date ? '"validThrough": "'.date('Y-m-d', (int) strtotime($modified_end_date)).'",
+																		';
+                            // The template runs without strict types, so date() reads the false of an unreadable time as 0, the same as the cast.
+                            // @pest-mutate-ignore: RemoveIntegerCast
+                            $modified_hours_schema .= ($modified_end && $modified_end_date ? '"validThrough": "'.date('Y-m-d', (int) strtotime($modified_end_date)).'",
 																		' : '').'"dayOfWeek": [
 												"Monday",
 												"Tuesday",
@@ -888,8 +903,12 @@ while (have_posts()) {
 														';
                                     $modified_hours_schema .= '"@type": "OpeningHoursSpecification",
 													';
+                                    // The template runs without strict types, so date() reads the false of an unreadable time as 0, the same as the cast.
+                                    // @pest-mutate-ignore: RemoveIntegerCast
                                     $modified_hours_schema .= '"validFrom": "'.date('Y-m-d', (int) strtotime($modified_start)).'",
 													';
+                                    // The template runs without strict types, so date() reads the false of an unreadable time as 0, the same as the cast.
+                                    // @pest-mutate-ignore: RemoveIntegerCast
                                     $modified_hours_schema .= $modified_end && $modified_end_date ? '"validThrough": "'.date('Y-m-d', (int) strtotime($modified_end_date)).'",
 														' : '';
 
@@ -914,7 +933,11 @@ while (have_posts()) {
 														';
                                     } else {
                                         $modified_text .= ($modified_time['location_modified_hours_open'] && $modified_time['location_modified_hours_open'] !== '00:00:00') ? ap_time_span(strtotime($modified_time['location_modified_hours_open']), strtotime($modified_time['location_modified_hours_close'])) : '';
+                                        // The template runs without strict types, so date() reads the false of an unreadable time as 0, the same as the cast.
+                                        // @pest-mutate-ignore: RemoveIntegerCast
                                         $modified_hours_schema .= '"opens": "'.date('H:i', (int) strtotime($modified_time['location_modified_hours_open'])).'"';
+                                        // The template runs without strict types, so date() reads the false of an unreadable time as 0, the same as the cast.
+                                        // @pest-mutate-ignore: RemoveIntegerCast
                                         $modified_hours_schema .= ',
 														"closes": "'.date('H:i', (int) strtotime($modified_time['location_modified_hours_close'])).'"
 														';
@@ -990,7 +1013,12 @@ while (have_posts()) {
                             $hours_text .= 'Closed ';
                         } else {
                             $hours_text .= ($hour['open'] && $hour['open'] !== '00:00:00') ? ap_time_span(strtotime($hour['open']), strtotime($hour['close'])) : '';
-                            $hours_schema .= ' '.date('H:i', (int) strtotime($hour['open'])).'-'.date('H:i', (int) strtotime($hour['close']));
+                            // The template runs without strict types, so date() reads the false of an unreadable time as 0, the same as the cast.
+                            // @pest-mutate-ignore: RemoveIntegerCast
+                            $hours_schema .= ' '.date('H:i', (int) strtotime($hour['open'])).'-';
+                            // The template runs without strict types, so date() reads the false of an unreadable time as 0, the same as the cast.
+                            // @pest-mutate-ignore: RemoveIntegerCast
+                            $hours_schema .= date('H:i', (int) strtotime($hour['close']));
                         }
                         if ($hour['comment']) {
                             $hours_text .= ' <br /><span class="subtitle">'.$hour['comment'].'</span>';

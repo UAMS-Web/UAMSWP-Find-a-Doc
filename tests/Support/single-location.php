@@ -61,6 +61,10 @@ function single_location(array $fields = [], array $options = []): array
     });
     when('get_field_object')->alias(static fn (string $name, mixed $id = null): mixed => $options['objects'][$name] ?? false);
     when('get_term')->alias(static function (mixed $id, string $taxonomy = '') use ($terms, $options): ?object {
+        if (isset($options['term_errors'][$id])) {
+            return new WP_Error;
+        }
+
         if (! isset($terms[$id])) {
             return null;
         }
