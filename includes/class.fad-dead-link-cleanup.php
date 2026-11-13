@@ -22,12 +22,16 @@ declare(strict_types=1);
  *    saved, nothing is written. One step runs at a time, and a step is tied to the dry run it
  *    was started from.
  * 3. Undo. Puts the removed IDs and rows back. A field is restored only when it still holds
- *    exactly what the removal wrote, so an edit made since is never overwritten.
+ *    exactly what the removal wrote, so an edit made since is never overwritten. The stored values
+ *    come back exactly as they were: the removal saves the post meta rows and custom-table cells
+ *    of the field as the database holds them, and the undo writes those back, so a renumbered
+ *    list, a blank entry, a JSON object, or a row that did not exist before are not left behind.
  *
  * The fields come from the delete cleanup's map, so both files cover the same links. Links are
  * read with direct SQL and written through ACF, so the custom-table plugin stores the value in
  * its own format. The backup is the run record in two options (the items, and the full custom-table
- * rows), kept until the next dry run replaces it; it is not a substitute for a database backup.
+ * rows and each link field's saved storage), kept until the next dry run replaces it; it is not a
+ * substitute for a database backup.
  */
 if (! defined('ABSPATH')) {
     exit;
@@ -433,6 +437,91 @@ function uamswp_dead_links_write(string $field, array|string $value, int $post_i
 }
 
 /**
+ * The storage of a link field as the database holds it: its post meta rows (the value and ACF's
+ * reference row) and the cell of each custom table that has the field, for the post.
+ *
+ * Read with direct SQL, so nothing is decoded: a serialized list keeps its keys and blank entries, and a
+ * JSON cell keeps its shape.
+ *
+ * @return array{meta: array<int, array{0: string, 1: string}>, cells: array<string, string|null>}
+ */
+function uamswp_dead_links_capture(string $field, int $post_id): array
+{
+
+    /** @var wpdb $wpdb */
+    global $wpdb;
+
+    $rows = $wpdb->get_results($wpdb->prepare("SELECT meta_key, meta_value FROM {$wpdb->postmeta} WHERE post_id = %d AND meta_key IN (%s, %s) ORDER BY meta_id", $post_id, $field, '_'.$field), ARRAY_A);
+    $meta = [];
+
+    foreach ((array) $rows as $row) {
+
+        $meta[] = [uamswp_fad_str(uamswp_fad_arr($row)['meta_key']), uamswp_fad_str(uamswp_fad_arr($row)['meta_value'])];
+
+    }
+
+    $cells = [];
+
+    foreach (uamswp_dead_links_sources()['tables'] as [$table, $column]) {
+
+        if ($column !== $field || ! uamswp_dead_links_table_exists($table)) {
+
+            continue;
+
+        }
+
+        $row = $wpdb->get_row($wpdb->prepare("SELECT `{$column}` AS cell FROM {$wpdb->prefix}{$table} WHERE post_id = %d", $post_id), ARRAY_A);
+
+        if (is_array($row)) {
+
+            $cell = $row['cell'];
+            $cells[$table] = $cell === null ? null : uamswp_fad_str($cell);
+
+        }
+
+    }
+
+    return ['meta' => $meta, 'cells' => $cells];
+
+}
+
+/**
+ * Put a link field's storage back exactly as `uamswp_dead_links_capture()` read it.
+ *
+ * Post meta rows the removal added are deleted, and the saved ones are written back as they were. A
+ * custom-table cell is set to its saved value; a row that is gone since is not made again.
+ *
+ * @param  array{meta: array<int, array{0: string, 1: string}>, cells: array<string, string|null>}  $storage
+ */
+function uamswp_dead_links_restore_storage(string $field, array $storage, int $post_id): void
+{
+
+    /** @var wpdb $wpdb */
+    global $wpdb;
+
+    foreach ([$field, '_'.$field] as $key) {
+
+        $wpdb->delete($wpdb->postmeta, ['post_id' => $post_id, 'meta_key' => $key], ['%d', '%s']);
+
+    }
+
+    foreach ($storage['meta'] as [$key, $value]) {
+
+        $wpdb->insert($wpdb->postmeta, ['post_id' => $post_id, 'meta_key' => $key, 'meta_value' => $value]);
+
+    }
+
+    wp_cache_delete($post_id, 'post_meta');
+
+    foreach ($storage['cells'] as $table => $cell) {
+
+        $wpdb->update($wpdb->prefix.$table, [$field => $cell], ['post_id' => $post_id]);
+
+    }
+
+}
+
+/**
  * Whether a post exists, in any status.
  */
 function uamswp_dead_links_post_exists(int $post_id): bool
@@ -504,6 +593,8 @@ function uamswp_dead_links_apply_step(array $run, int $limit = UAMSWP_DEAD_LINKS
 
                 }
 
+                $rows_backup['link|'.$item['post'].'|'.$item['field']] = uamswp_dead_links_capture($item['field'], $item['post']);
+                $run['items'][$i]['saved'] = true;
                 $writes[] = $i;
 
                 continue;
@@ -651,7 +742,20 @@ function uamswp_dead_links_undo_step(array $run, int $limit = UAMSWP_DEAD_LINKS_
 
             } elseif ($now === ($item['after'] ?? []) && ($item['before'] ?? []) !== ($item['after'] ?? [])) {
 
-                uamswp_dead_links_write($item['field'], $item['shape'] === 'single' ? uamswp_fad_str(($item['before'][0] ?? '')) : ($item['before'] ?? []), $item['post']);
+                $storage = $rows_backup['link|'.$item['post'].'|'.$item['field']] ?? null;
+
+                if (! empty($item['saved']) && is_array($storage)) {
+
+                    /** @var array{meta: array<int, array{0: string, 1: string}>, cells: array<string, string|null>} $storage */
+                    uamswp_dead_links_restore_storage($item['field'], $storage, $item['post']);
+
+                } else {
+
+                    // A run started before the storage was saved: put the IDs back through ACF.
+                    uamswp_dead_links_write($item['field'], $item['shape'] === 'single' ? uamswp_fad_str(($item['before'][0] ?? '')) : ($item['before'] ?? []), $item['post']);
+
+                }
+
                 $state = 'restored';
 
             } elseif ($now === ($item['before'] ?? [])) {
