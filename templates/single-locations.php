@@ -1,4 +1,10 @@
 <?php
+/**
+ * The template runs in the global scope of a page request, where WordPress has set the current post.
+ *
+ * @var WP_Post $post
+ */
+
 /*
  *  Get ACF fields to use for meta data
  *  Add description from location short description or full description *
@@ -31,19 +37,19 @@ $parent_title_prepend = ''; // Eliminate PHP errors
 $parent_title_phrase = ''; // Eliminate PHP errors
 
 if ($location_has_parent && $location_parent_id) {
-    $parent_location = get_post($location_parent_id);
+    $parent_location = get_post((int) $location_parent_id);
 }
 
 // Get Post ID for Address & Image fields
 if ($parent_location) {
     $post_id = $parent_location->ID;
     $parent_title = $parent_location->post_title;
-    $parent_url = get_permalink($post_id);
+    $parent_url = (string) get_permalink($post_id);
     $parent_location_prepend_the = get_field('location_prepend_the', $post_id);
     $parent_title_prepend = $parent_location_prepend_the ? 'the ' : '';
     $parent_title_phrase = $parent_title_prepend.$parent_title;
 } else {
-    $post_id = get_the_ID();
+    $post_id = (int) get_the_ID();
 }
 
 // Address and parking components, each resolved to the location that supplies it
@@ -53,7 +59,7 @@ if ($parent_location) {
  * and parking read through the resolver instead, because a child may
  * override any one of those groups independently.
  */
-$location_source_ids = uamswp_fad_location_source_ids(get_the_ID());
+$location_source_ids = uamswp_fad_location_source_ids((int) get_the_ID());
 
 // Image values
 $override_parent_photo = get_field('location_image_override_parent');
@@ -81,6 +87,7 @@ if ($photo_gallery) {
         $location_images[] = $photo_gallery_image;
     }
 }
+/** @var list<int> $location_images */
 $location_images_count = count($location_images);
 
 // Set image for schema
@@ -99,6 +106,7 @@ if ($featured_image) {
 if (function_exists('bis_get_attachment_image') && ! empty($schema_image)) {
     $locationphoto = image_sizer($schema_image, 640, 480, 'center', 'center', 'aspect-4-3');
 } else {
+    /** @var int $schema_image */
     $locationphoto = wp_get_attachment_image_src($schema_image, 'large');
     if (is_array($locationphoto)) {
         $locationphoto = $locationphoto[0];
@@ -120,6 +128,40 @@ if (function_exists('bis_get_attachment_image') && ! empty($schema_image)) {
 // Hours Grouping
 $location_hours_group = get_field('location_hours_group');
 // A location with no hours group (or one missing a field) reads each field as empty
+/**
+ * The hours group of the location field group, with each field present (null when it is not stored).
+ *
+ * @var array{
+ *     location_24_7: bool|string|null,
+ *     location_after_hours: string|null,
+ *     location_hours: list<array{day: string, closed: bool|string, open: string, close: string, comment: string}>|null,
+ *     location_hours_variable: bool|string|null,
+ *     location_hours_variable_info: string|null,
+ *     location_modified_hours: bool|string|null,
+ *     location_modified_hours_end: bool|string|null,
+ *     location_modified_hours_end_date: string,
+ *     location_modified_hours_group: list<array{
+ *         location_modified_hours_title: string,
+ *         location_modified_hours_information: string,
+ *         location_modified_hours_24_7: bool|string|null,
+ *         location_modified_hours_times: list<array{location_modified_hours_day: string, location_modified_hours_closed: bool|string, location_modified_hours_open: string, location_modified_hours_close: string, location_modified_hours_comment: string}>|null
+ *     }>|null,
+ *     location_modified_hours_reason: string,
+ *     location_modified_hours_start_date: string,
+ *     location_telemed_24_7: bool|string|null,
+ *     location_telemed_hours: list<array{day: string, closed: bool|string, open: string, close: string, comment: string}>|null,
+ *     location_telemed_modified_hours_24_7: bool|string|null,
+ *     location_telemed_modified_hours_end: bool|string|null,
+ *     location_telemed_modified_hours_end_date: string,
+ *     location_telemed_modified_hours_group: mixed,
+ *     location_telemed_modified_hours_query: bool|string|null,
+ *     location_telemed_modified_hours_reason: string,
+ *     location_telemed_modified_hours_start_date: string,
+ *     location_telemed_modified_hours_times: list<array{location_telemed_modified_hours_day: string, location_telemed_modified_hours_closed: bool|string, location_telemed_modified_hours_open: string, location_telemed_modified_hours_close: string, location_telemed_modified_hours_comment: string}>|null,
+ *     location_telemed_patients: string|null,
+ *     location_telemed_query: bool|string|null
+ * } $location_hours_group
+ */
 $location_hours_group = array_merge(array_fill_keys([
     'location_24_7',
     'location_after_hours',
@@ -215,6 +257,7 @@ $location_closing_telemed = '';
 $location_closing_display = false;
 
 if ($location_closing) {
+    /** @var string $location_closing_date */
     $location_closing_date = get_field('location_closing_date'); // F j, Y
     // Two DateTime objects built a moment apart never compare equal, so a date of exactly now cannot be tested.
     // @pest-mutate-ignore: GreaterOrEqualToGreater
@@ -223,6 +266,7 @@ if ($location_closing) {
     }
     $location_closing_length = get_field('location_closing_length');
     $location_reopen_known = get_field('location_reopen_known');
+    /** @var string $location_reopen_date */
     $location_reopen_date = get_field('location_reopen_date'); // F j, Y
     // Two DateTime objects built a moment apart never compare equal, so a date of exactly now cannot be tested.
     // @pest-mutate-ignore: GreaterOrEqualToGreater
@@ -257,7 +301,7 @@ if ($prescription_query) {
     } else {
         $prescription = get_field('location_prescription'); // Text from location (a.k.a. local)
     }
-    if ($prescription_query && ! $prescription) { // If no prescription text
+    if (! $prescription) { // If no prescription text
         $prescription_query = false; // Deactivate prescription section
     }
 }
@@ -270,8 +314,10 @@ $location_service_lines = get_field('location_service_line', $post->ID);
 if (have_rows('remove_ontology_criteria', 'option')) {
     while (have_rows('remove_ontology_criteria', 'option')) {
         the_row();
-        $remove_region = get_sub_field('remove_regions', 'option');
-        $remove_service_line = get_sub_field('remove_service_lines', 'option');
+        /** @var list<int|string> $remove_region */
+        $remove_region = get_sub_field('remove_regions');
+        /** @var list<int|string> $remove_service_line */
+        $remove_service_line = get_sub_field('remove_service_lines');
         if (! empty($location_service_lines)) {
             foreach ($location_service_lines as $location_service_line) {
                 if ((! empty($remove_region) && in_array($location_region, $remove_region)) && empty($remove_service_line)) {
@@ -307,21 +353,23 @@ add_filter('seopress_titles_desc', 'sp_titles_desc');
 
 // Override theme's method of defining the page title
 $location_city = get_field('location_city', $location_source_ids['street']); // Get the location's city
-add_filter('seopress_titles_title', 'uamswp_fad_title_single_locations', 15, 2);
+add_filter('seopress_titles_title', 'uamswp_fad_title_single_locations', 15, 1);
 
 get_header();
 
 while (have_posts()) {
     the_post(); ?>
 <?php
+    /** @var array{lat: float|int|string, lng: float|int|string}|false|null $map */
     $map = get_field('location_map', $location_source_ids['map']);
     $location_address_1 = get_field('location_address_1', $location_source_ids['street']);
     $location_building = get_field('location_building', $location_source_ids['facility']);
     if ($location_building) {
-        $building = get_term($location_building, 'building');
-        $building_slug = $building->slug;
-        $building_name = $building->name;
+        $building = get_term((int) $location_building, 'building');
+        $building_slug = $building instanceof WP_Term ? $building->slug : null;
+        $building_name = $building instanceof WP_Term ? $building->name : null;
     }
+    /** @var array{value: int|string, choices: array<int|string, string>}|false $location_floor */
     $location_floor = get_field_object('location_building_floor', $location_source_ids['unit']);
     $location_floor_value = '';
     $location_floor_label = '';
@@ -329,10 +377,13 @@ while (have_posts()) {
         $location_floor_value = $location_floor['value'];
         $location_floor_label = $location_floor['choices'][$location_floor_value] ?? '';
     }
+    /** @var string|false $location_suite */
     $location_suite = get_field('location_suite', $location_source_ids['unit']);
+    /** @var string|null $building_name */
     // The building name is read only when the location has a building, and then it is set, so its default is never used.
     // @pest-mutate-ignore: EmptyStringToNotEmpty
     $location_address_2 = uamswp_location_address_2(($location_building && $building_slug !== '_none'), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, '<br />', ', ');
+    /** @var string|null $building_name */
     // The building name is read only when the location has a building, and then it is set, so its default is never used.
     // @pest-mutate-ignore: EmptyStringToNotEmpty
     $location_address_2_schema = uamswp_location_address_2(($location_building && $building_slug !== '_none'), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, ' ', ' ');
@@ -419,6 +470,7 @@ while (have_posts()) {
     // Check if Parking and Directions section should be displayed
     $location_parking = get_field('location_parking', $location_source_ids['parking']);
     $location_direction = get_field('location_direction', $location_source_ids['directions']);
+    /** @var array{lat: float|int|string, lng: float|int|string}|false|null $parking_map */
     $parking_map = get_field('location_parking_map', $location_source_ids['parking']);
 
     if ($location_parking || $location_direction || $parking_map) {
@@ -443,6 +495,7 @@ while (have_posts()) {
     // Check if Appointment Scheduling section should be displayed
     $mychart_scheduling_query_system = get_field('mychart_scheduling_query_system', 'option');
     $location_scheduling_query = get_field('location_scheduling_query');
+    /** @var list<array<string, mixed>> $location_scheduling_options */
     $location_scheduling_options = get_field('location_scheduling_options');
 
     // Set main appointment scheduling section title
@@ -488,9 +541,9 @@ while (have_posts()) {
     $portal = null; // Set below for a location with a portal
 
     if ($location_portal) {
-        $portal = get_term($location_portal, 'portal');
-        $portal_slug = $portal->slug;
-        $portal_name = $portal->name;
+        $portal = get_term((int) $location_portal, 'portal');
+        $portal_slug = $portal instanceof WP_Term ? $portal->slug : '';
+        $portal_name = $portal instanceof WP_Term ? $portal->name : '';
         $portal_name_attr = $portal_name;
         $portal_name_attr = str_replace('"', "'", $portal_name_attr); // Replace double quotes with single quote
         $portal_name_attr = str_replace('&#8217;', "'", $portal_name_attr); // Replace right single quote with single quote
@@ -526,6 +579,7 @@ while (have_posts()) {
         ];
         $physicians_query = new WP_Query($args);
     }
+    /** @var WP_Query|null $physicians_query */
     if (isset($physicians_query) && $physicians_query->have_posts()) {
         $show_providers_section = true;
         $jump_link_count++;
@@ -598,8 +652,8 @@ while (have_posts()) {
     }
 
     // Check if Child Locations section should be displayed
-    $current_id = get_the_ID();
-    if ((count(get_pages(['child_of' => $current_id, 'post_type' => 'location'])) !== 0)) { // If none available, set to false
+    $current_id = (int) get_the_ID();
+    if ((count(get_pages(['child_of' => $current_id, 'post_type' => 'location']) ?: []) !== 0)) { // If none available, set to false
         $args = [
             'post_type' => 'location',
             'post_status' => 'publish',
@@ -617,6 +671,7 @@ while (have_posts()) {
         ];
         $children = new WP_Query($args);
     }
+    /** @var WP_Query|null $children */
     if (isset($children) && $children->have_posts()) {
         $show_child_locations_section = true;
         $jump_link_count++;
@@ -716,6 +771,16 @@ while (have_posts()) {
     $phone_output = 'location_profile';
     include UAMS_FAD_PATH.'/templates/blocks/locations-phone.php';
 
+    /**
+     * Defined by the phone partial above, which runs in this scope.
+     *
+     * @var bool $location_clinic_phone_query
+     * @var bool $location_appointment_phone_query
+     * @var string $location_phone_link
+     * @var string $location_new_appointments_phone_link
+     * @var string $location_return_appointments_phone_link
+     */
+
     // Hours values
     $hoursvary = $location_hours_group['location_hours_variable'];
     $hoursvary_info = $location_hours_group['location_hours_variable_info'];
@@ -774,8 +839,8 @@ while (have_posts()) {
                             $modified_text .= '<strong>Open 24/7</strong>';
                             $modified_hours_schema = '{
 																		"@type": "OpeningHoursSpecification",
-																		"validFrom": "'.date('Y-m-d', strtotime($modified_start)).'",
-																		'.($modified_end && $modified_end_date ? '"validThrough": "'.date('Y-m-d', strtotime($modified_end_date)).'",
+																		"validFrom": "'.date('Y-m-d', (int) strtotime($modified_start)).'",
+																		'.($modified_end && $modified_end_date ? '"validThrough": "'.date('Y-m-d', (int) strtotime($modified_end_date)).'",
 																		' : '').'"dayOfWeek": [
 												"Monday",
 												"Tuesday",
@@ -789,7 +854,7 @@ while (have_posts()) {
 											"closes": "23:59"
 											';
                         } else {
-                            if (is_array($modified_times) || is_object($modified_times)) {
+                            if (is_array($modified_times)) {
                                 $modified_text .= '<dl class="hours">';
                                 foreach ($modified_times as $modified_time) {
 
@@ -805,9 +870,9 @@ while (have_posts()) {
 														';
                                     $modified_hours_schema .= '"@type": "OpeningHoursSpecification",
 													';
-                                    $modified_hours_schema .= '"validFrom": "'.date('Y-m-d', strtotime($modified_start)).'",
+                                    $modified_hours_schema .= '"validFrom": "'.date('Y-m-d', (int) strtotime($modified_start)).'",
 													';
-                                    $modified_hours_schema .= $modified_end && $modified_end_date ? '"validThrough": "'.date('Y-m-d', strtotime($modified_end_date)).'",
+                                    $modified_hours_schema .= $modified_end && $modified_end_date ? '"validThrough": "'.date('Y-m-d', (int) strtotime($modified_end_date)).'",
 														' : '';
 
                                     if ($modified_time['location_modified_hours_day'] === 'Mon - Fri' && ! $modified_time['location_modified_hours_closed']) {
@@ -831,9 +896,9 @@ while (have_posts()) {
 														';
                                     } else {
                                         $modified_text .= ($modified_time['location_modified_hours_open'] && $modified_time['location_modified_hours_open'] !== '00:00:00') ? ap_time_span(strtotime($modified_time['location_modified_hours_open']), strtotime($modified_time['location_modified_hours_close'])) : '';
-                                        $modified_hours_schema .= '"opens": "'.date('H:i', strtotime($modified_time['location_modified_hours_open'])).'"';
+                                        $modified_hours_schema .= '"opens": "'.date('H:i', (int) strtotime($modified_time['location_modified_hours_open'])).'"';
                                         $modified_hours_schema .= ',
-														"closes": "'.date('H:i', strtotime($modified_time['location_modified_hours_close'])).'"
+														"closes": "'.date('H:i', (int) strtotime($modified_time['location_modified_hours_close'])).'"
 														';
                                     }
                                     if ($modified_time['location_modified_hours_comment']) {
@@ -881,58 +946,55 @@ while (have_posts()) {
                     $hours_schema = '"openingHours": "Mo-Su",';
                 } else {
                     echo '<dl class="hours">';
-                    if ($hours) {
-                        $hours_text = '';
-                        $day = null; // Previous Day
-                        $hours_schema = '"openingHours": [';
-                        $i = 1;
-                        foreach ($hours as $hour) {
-                            // if( $day !== $hour['day'] || $comment ) { // change for single day
-                            $hours_text .= $day !== $hour['day'] ? '<dt>'.$hour['day'].'</dt> ' : '';
-                            $hours_text .= '<dd>';
-                            if (! $hour['closed']) {
-                                if ($i !== 1) {
-                                    $hours_schema .= ', ';
-                                }
-                                $hours_schema .= '"';
+                    $hours_text = '';
+                    $day = null; // Previous Day
+                    $hours_schema = '"openingHours": [';
+                    $i = 1;
+                    foreach ($hours as $hour) {
+                        // if( $day !== $hour['day'] || $comment ) { // change for single day
+                        $hours_text .= $day !== $hour['day'] ? '<dt>'.$hour['day'].'</dt> ' : '';
+                        $hours_text .= '<dd>';
+                        if (! $hour['closed']) {
+                            if ($i !== 1) {
+                                $hours_schema .= ', ';
                             }
-                            if ($hour['day'] === 'Mon - Fri' && ! $hour['closed']) {
-                                $hours_schema .= 'Mo-Fr';
-                            } elseif (! $hour['closed']) {
-                                $hours_schema .= substr($hour['day'], 0, 2);
-                            }
-                            // } else { // Changed for single day
-                            // 	$hours_text .= ', ';
-                            // }
-                            if ($hour['closed']) {
-                                $hours_text .= 'Closed ';
-                            } else {
-                                $hours_text .= ($hour['open'] && $hour['open'] !== '00:00:00') ? ap_time_span(strtotime($hour['open']), strtotime($hour['close'])) : '';
-                                $hours_schema .= ' '.date('H:i', strtotime($hour['open'])).'-'.date('H:i', strtotime($hour['close']));
-                            }
-                            if ($hour['comment']) {
-                                $hours_text .= ' <br /><span class="subtitle">'.$hour['comment'].'</span>';
-                            }
-                            // if( $day !== $hour['day'] && $comment ) { // change for single day
-                            $hours_text .= '</dd>';
-                            // }
-                            $day = $hour['day']; // Reset the day
-                            if (! $hour['closed']) {
-                                $hours_schema .= '"';
-                            }
-                            if (! $hour['closed']) {
-                                // Only whether this is the first open row matters, and a count in either direction tells it apart.
-                                // @pest-mutate-ignore: PostIncrementToPostDecrement
-                                $i++;
-                            }
+                            $hours_schema .= '"';
                         }
-                        echo $hours_text;
-                        $hours_schema .= '],';
-                    } else {
-                        echo '<dt>No information</dt>';
+                        if ($hour['day'] === 'Mon - Fri' && ! $hour['closed']) {
+                            $hours_schema .= 'Mo-Fr';
+                        } elseif (! $hour['closed']) {
+                            $hours_schema .= substr($hour['day'], 0, 2);
+                        }
+                        // } else { // Changed for single day
+                        // 	$hours_text .= ', ';
+                        // }
+                        if ($hour['closed']) {
+                            $hours_text .= 'Closed ';
+                        } else {
+                            $hours_text .= ($hour['open'] && $hour['open'] !== '00:00:00') ? ap_time_span(strtotime($hour['open']), strtotime($hour['close'])) : '';
+                            $hours_schema .= ' '.date('H:i', (int) strtotime($hour['open'])).'-'.date('H:i', (int) strtotime($hour['close']));
+                        }
+                        if ($hour['comment']) {
+                            $hours_text .= ' <br /><span class="subtitle">'.$hour['comment'].'</span>';
+                        }
+                        // if( $day !== $hour['day'] && $comment ) { // change for single day
+                        $hours_text .= '</dd>';
+                        // }
+                        $day = $hour['day']; // Reset the day
+                        if (! $hour['closed']) {
+                            $hours_schema .= '"';
+                        }
+                        if (! $hour['closed']) {
+                            // Only whether this is the first open row matters, and a count in either direction tells it apart.
+                            // @pest-mutate-ignore: PostIncrementToPostDecrement
+                            $i++;
+                        }
                     }
+                    echo $hours_text;
+                    $hours_schema .= '],';
                     echo '</dl>';
                 }
+                /** @var list<array{date: string, label: string, closed: bool|string, open: string, close: string}>|false|null $holidayhours */
                 $holidayhours = get_field('location_holiday_hours');
                 if ($holidayhours) {
                     /**
@@ -952,6 +1014,7 @@ while (have_posts()) {
                     $i = 0;
                     foreach ($holidayhours as $row) {
                         $holidayDate = $row['date']; // Text
+                        /** @var DateTime $holidayDateTime */
                         $holidayDateTime = DateTime::createFromFormat('m/d/Y', $holidayDate); // Date for evaluation
                         $dateNow = new DateTime('now', new DateTimeZone('America/Chicago'));
                         // The date is made before the current time, so the two are never equal.
@@ -1504,7 +1567,7 @@ while (have_posts()) {
 
 						    if (! $location_clinic_phone_query) { // If there is only one phone number?>
 													Patients should call <?php echo $location_phone_link; ?> to schedule a telemedicine appointment.
-												<?php } elseif ($location_clinic_phone_query && ! $location_appointment_phone_query) { // If there is only one appointment number?>
+												<?php } elseif (! $location_appointment_phone_query) { // If there is only one appointment number?>
 													Patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment.
 												<?php } else { // If there are two appointment numbers (one for new, one for existing)
 												    if ($telemed_patients === 'all') { ?>
@@ -1548,7 +1611,7 @@ while (have_posts()) {
 						                $telemed_active_start = strtotime($telemed_modified_start);
 						                $telemed_active_end = $telemed_modified_end ? strtotime($telemed_modified_end_date) : 'TBD';
 
-						                if (is_array($telemed_modified_times) || is_object($telemed_modified_times)) {
+						                if (is_array($telemed_modified_times)) {
 						                    $telemed_modified_text .= '<dl class="hours">';
 						                    foreach ($telemed_modified_times as $telemed_modified_time) {
 
@@ -1583,7 +1646,7 @@ while (have_posts()) {
 						        // Do Nothing;
 						        // Future Option
 						    } else {
-						        if ($telemed_hours247 || $telemed_hours[0]['day']) { ?>
+						        if ($telemed_hours247 || ! empty($telemed_hours[0]['day'])) { ?>
 										<h3><?php echo $telemed_modified_text ? 'Typical ' : ''; ?>Hours</h3>
 										<?php
 						            if ($telemed_hours247) {
@@ -1629,6 +1692,15 @@ while (have_posts()) {
     // End Telemedicine Information Section
 
     // Begin Portal Section
+    /**
+     * Set above for a location with a portal.
+     *
+     * @var string $portal_name
+     * @var string $portal_name_attr
+     * @var string $portal_content
+     * @var string $portal_link
+     * @var string $portal_url
+     */
     if ($show_portal_section) { ?>
 		<section class="uams-module cta-bar cta-bar-weighted bg-blue" aria-label="Patient Portal" id="portal-info">
 			<div class="container-fluid">

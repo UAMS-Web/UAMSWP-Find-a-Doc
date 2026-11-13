@@ -31,6 +31,9 @@ if (! class_exists('WP_Term')) {
         public $term_id = 0;
 
         /** @var string */
+        public $name = '';
+
+        /** @var string */
         public $slug = '';
     }
 }

@@ -60,7 +60,18 @@ function single_location(array $fields = [], array $options = []): array
         return $fields[$name] ?? null;
     });
     when('get_field_object')->alias(static fn (string $name, mixed $id = null): mixed => $options['objects'][$name] ?? false);
-    when('get_term')->alias(static fn (mixed $id, string $taxonomy = ''): ?object => isset($terms[$id]) ? (object) ['name' => $terms[$id], 'term_id' => $id, 'slug' => $options['slugs'][$id] ?? 'slug-'.$id] : null);
+    when('get_term')->alias(static function (mixed $id, string $taxonomy = '') use ($terms, $options): ?object {
+        if (! isset($terms[$id])) {
+            return null;
+        }
+
+        $term = new WP_Term;
+        $term->name = $terms[$id];
+        $term->term_id = $id;
+        $term->slug = $options['slugs'][$id] ?? 'slug-'.$id;
+
+        return $term;
+    });
     when('get_post')->alias(static fn (mixed $id): ?object => $options['posts'][$id] ?? null);
     when('get_the_title')->alias(static fn (mixed $id = 0): string => $titles[$id] ?? 'Clinic');
     when('the_permalink')->alias(static function (): void {
