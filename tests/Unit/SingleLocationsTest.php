@@ -109,7 +109,7 @@ test('the schema image is the featured image, or else the first location image',
 });
 
 test('the location photo is sized for the schema image', function (): void {
-    expect(single_location(['location_wayfinding_photo' => 501])['locationphoto'])->toBe('https://example.test/photo-640x480.jpg');
+    expect(single_location(['location_wayfinding_photo' => 501])['locationphoto'])->toBe('https://example.test/photo-501-640x480.jpg');
 });
 
 test('a location without an image has no photo address', function (): void {
