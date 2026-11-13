@@ -18,7 +18,7 @@ require_once __DIR__.'/templates.php';
  * @param  array<string, mixed>  $options  The stubs: `fields_by_id` (post id => its ACF fields), `terms` (id => name),
  *                                         `titles` (id => title), `posts` (id => post object), `rows` (repeater
  *                                         name => rows), `queries` (the post lists the template's queries find, in
- *                                         order), `objects` (field name => field object), `thumbnail` (and `parent_thumbnail`, read through the source id), `pages`
+ *                                         order), `objects` (field name => field object), `slugs` (building id => slug), `thumbnail` (and `parent_thumbnail`, read through the source id), `pages`
  *                                         (the child pages found), `option` (the ACF fields of the options page) and
  *                                         `meta` (the post meta by key).
  * @return array<string, mixed>
@@ -60,7 +60,7 @@ function single_location(array $fields = [], array $options = []): array
         return $fields[$name] ?? null;
     });
     when('get_field_object')->alias(static fn (string $name, mixed $id = null): mixed => $options['objects'][$name] ?? false);
-    when('get_term')->alias(static fn (mixed $id, string $taxonomy = ''): ?object => isset($terms[$id]) ? (object) ['name' => $terms[$id], 'term_id' => $id, 'slug' => 'slug-'.$id] : null);
+    when('get_term')->alias(static fn (mixed $id, string $taxonomy = ''): ?object => isset($terms[$id]) ? (object) ['name' => $terms[$id], 'term_id' => $id, 'slug' => $options['slugs'][$id] ?? 'slug-'.$id] : null);
     when('get_post')->alias(static fn (mixed $id): ?object => $options['posts'][$id] ?? null);
     when('get_the_title')->alias(static fn (mixed $id = 0): string => $titles[$id] ?? 'Clinic');
     when('the_permalink')->alias(static function (): void {
@@ -102,7 +102,9 @@ function single_location(array $fields = [], array $options = []): array
     when('lyte_preparse')->justReturn();
     when('lyte_parse')->alias(static fn (string $url): string => 'lyte:'.$url);
     when('do_shortcode')->alias(static fn (string $code): string => 'shortcode:'.$code);
-    when('get_header')->justReturn();
+    when('get_header')->alias(static function (): void {
+        $GLOBALS['single_location_headers'] = ($GLOBALS['single_location_headers'] ?? 0) + 1;
+    });
     when('get_footer')->justReturn();
     when('have_rows')->alias(static function (string $name) use ($row, $rows): bool {
         $row->name = $name;
@@ -151,6 +153,7 @@ function single_location(array $fields = [], array $options = []): array
 
     $GLOBALS['single_location_output'] = $output;
     $GLOBALS['single_location_id'] = $location_id;
+    $GLOBALS['single_location_rows'] = $row->cursor;
 
     return $GLOBALS;
 }
