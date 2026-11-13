@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
+use Mockery;
 use PHPUnit\Framework\Attributes\DataProvider;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
 
@@ -280,5 +281,73 @@ final class TemplatesTest extends UnitTestCase
         }
 
         $this->addToAssertionCount(1);
+    }
+
+    /**
+     * @return array<string, array{0: string, 1: string}>
+     */
+    public static function missing_archive_types(): array
+    {
+        return [
+            'a provider' => ['provider', 'https://example.test/provider/'],
+            'a location' => ['location', 'https://example.test/location/'],
+        ];
+    }
+
+    #[DataProvider('missing_archive_types')]
+    public function test_a_provider_or_location_that_is_not_found_is_sent_to_its_archive_page(string $type, string $archive): void
+    {
+        global $wp_query;
+        $previous = $wp_query;
+        $wp_query = new class($type)
+        {
+            public function __construct(private readonly string $type) {}
+
+            public function get(string $name): string
+            {
+                return $this->type;
+            }
+        };
+        when('is_404')->justReturn(true);
+        when('uamswp_fad_str')->returnArg();
+        expect('get_post_type_archive_link')->once()->with($type)->andReturn($archive);
+        // wp_redirect() is followed by exit; the sentinel ends the callback where the exit would.
+        expect('wp_redirect')->once()->with($archive, 301)->andThrow(new \RuntimeException('redirected'));
+
+        try {
+            (self::$actions[3][1])();
+            $this->fail('The request was not redirected.');
+        } catch (\RuntimeException $runtimeException) {
+            $this->assertSame('redirected', $runtimeException->getMessage());
+        } finally {
+            $wp_query = $previous;
+        }
+    }
+
+    public function test_a_type_with_no_archive_page_is_redirected_to_an_empty_address(): void
+    {
+        global $wp_query;
+        $previous = $wp_query;
+        $wp_query = new class
+        {
+            public function get(string $name): string
+            {
+                return 'provider';
+            }
+        };
+        when('is_404')->justReturn(true);
+        when('uamswp_fad_str')->returnArg();
+        when('get_post_type_archive_link')->justReturn(false);
+        // The address is cast to a string, so a type without an archive reaches wp_redirect() as '' and not as false.
+        expect('wp_redirect')->once()->with(Mockery::mustBe(''), 301)->andThrow(new \RuntimeException('redirected'));
+
+        try {
+            (self::$actions[3][1])();
+            $this->fail('The request was not redirected.');
+        } catch (\RuntimeException $runtimeException) {
+            $this->assertSame('redirected', $runtimeException->getMessage());
+        } finally {
+            $wp_query = $previous;
+        }
     }
 }
