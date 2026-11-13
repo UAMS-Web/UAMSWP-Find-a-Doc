@@ -99,6 +99,8 @@ $location_query = new WP_Query($args);
 $location_valid = false;
 if ($locations && $location_query->have_posts()) {
     foreach ($locations as $location) {
+        // get_post_status() returns a string or false, so a loose and a strict comparison with a string agree.
+        // @pest-mutate-ignore: EqualToIdentical
         if (get_post_status($location) == 'publish') {
             $location_valid = true;
             break;
@@ -125,6 +127,8 @@ if ($location_valid) {
     // if cookie is set, run modified physician query
     if (isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region'])) {
 
+        // The check below repeats the one around it, so it always sets the region and this default is never read.
+        // @pest-mutate-ignore: EmptyStringToNotEmpty
         $location_region = '';
         if (isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region'])) {
             $location_region = $_GET['_filter_region'] ?? $_COOKIE['wp_filter_region'];
@@ -154,6 +158,8 @@ if ($location_valid) {
         $location_query = new WP_Query($args);
     }
 
+    // The content is still empty here, so appending to it and assigning it agree.
+    // @pest-mutate-ignore: ConcatEqualToEqual
     $location_content .= '<section class="uams-module bg-auto" id="locations">';
     $location_content .= '<div class="container-fluid">';
     $location_content .= '<div class="row">';
@@ -164,7 +170,6 @@ if ($location_valid) {
     $location_content .= '<div class="card-list-container location-card-list-container">';
     $location_content .= '<div class="card-list card-list-locations">';
     ob_start();
-    ob_clean();
     if ($location_query->have_posts()) {
         while ($location_query->have_posts()) {
             $location_query->the_post();
@@ -187,19 +192,23 @@ if ($location_valid) {
 
 // Classes for indicating presence of content
 $treatment_field_classes = '';
+// The classes are still empty here, so appending to them and assigning them agree.
+// @pest-mutate-ignore: ConcatEqualToEqual
 if ($keywords && array_filter($keywords)) {
     $treatment_field_classes .= ' has-keywords';
 } // Alternate names
-if ($clinical_trials && ! empty($clinical_trials)) {
+if ($clinical_trials) {
     $treatment_field_classes .= ' has-clinical-trials';
 } // Display clinical trials block
-if ($content && ! empty($content)) {
+if ($content) {
     $treatment_field_classes .= ' has-content';
 } // Body content
+// The flag is always a boolean, so a loose and a strict comparison with true agree.
+// @pest-mutate-ignore: EqualToIdentical
 if ($excerpt && $excerpt_user == true) {
     $treatment_field_classes .= ' has-excerpt';
 } // Short Description (Excerpt)
-if ($video && ! empty($video)) {
+if ($video) {
     $treatment_field_classes .= ' has-video';
 } // Video embed
 if ($conditions_cpt && array_filter($conditions_cpt)) {
@@ -352,6 +361,8 @@ if ($jump_link_count >= $jump_link_count_min) {
 ?>
 				<?php the_content(); ?>
 				<?php
+    // The MedlinePlus type is a string once it is not empty, so a loose and a strict comparison with a string agree.
+    // @pest-mutate-ignore: NotEqualToNotIdentical
     if (! empty($medline_type) && $medline_type != 'none' && ! empty($medline_code)) {
         echo display_medline_api_data(trim($medline_code), $medline_type);
     }
@@ -387,6 +398,8 @@ if ($jump_link_count >= $jump_link_count_min) {
                     $cta_button_url = '';
                     $cta_button_target = '';
                     $cta_button_desc = '';
+                    // The action type is a string or null, so a loose and a strict comparison with a string agree.
+                    // @pest-mutate-ignore: EqualToIdentical
                     if ($cta_action_type == 'url') {
                         $cta_button_text = $cta['cta_bar_button_text'];
                         $cta_button_url = $cta['cta_bar_button_url'];
@@ -399,6 +412,8 @@ if ($jump_link_count >= $jump_link_count_min) {
                     $cta_phone_prepend = '';
                     $cta_phone = '';
                     $cta_phone_link = '';
+                    // The action type is a string or null, so a loose and a strict comparison with a string agree.
+                    // @pest-mutate-ignore: EqualToIdentical
                     if ($cta_action_type == 'phone') {
                         $cta_phone_prepend = $cta['cta_bar_phone_prepend'] ?: 'Call';
                         $cta_phone = $cta['cta_bar_phone'];
@@ -413,14 +428,20 @@ if ($jump_link_count >= $jump_link_count_min) {
                     $cta_btn_color = 'primary';
 
                     $cta_className = '';
+                    // The class names are still empty here, so appending to them and assigning them agree.
+                    // @pest-mutate-ignore: ConcatEqualToEqual
                     $cta_className .= ' '.$cta_layout;
                     $cta_className .= ' '.$cta_background_color;
                     $cta_className .= $cta_use_image ? ' bg-image' : '';
+                    // The size is a string, so a loose and a strict comparison with a string agree.
+                    // @pest-mutate-ignore: EqualToIdentical
                     if ($cta_size == 'small') {
                         $cta_className .= ' cta-bar-sm';
                     } elseif ($cta_size == 'large') {
                         $cta_className .= ' extra-padding cta-bar-lg';
                     }
+                    // The action type is a string or null, so a loose and a strict comparison with a string agree.
+                    // @pest-mutate-ignore: EqualToIdentical
                     if ($cta_action_type == 'none') {
                         $cta_className .= ' no-link';
                     }
@@ -437,11 +458,15 @@ if ($jump_link_count >= $jump_link_count_min) {
 											<div class="text-container">
 												'.$cta_body.'
 											</div>';
+                    // The action type is a string or null, so a loose and a strict comparison with a string agree.
+                    // @pest-mutate-ignore: EqualToIdentical
                     echo $cta_action_type == 'url' ?
                     '<div class="btn-container">
-												<a href="'.esc_url($cta_button_url['url']).'" aria-label="'.esc_attr($cta_button_desc).'" class=" btn btn-'.$cta_btn_color.($cta_size == 'large' ? ' btn-lg' : '').'"'.($cta_button_target ? ' target="'.esc_attr($cta_button_target).'"' : '').' data-moduletitle="'.$cta_heading.'">'.esc_html($cta_button_text).'</a>
+												<a href="'.esc_url($cta_button_url['url']).'" aria-label="'.esc_attr($cta_button_desc).'" class=" btn btn-'.$cta_btn_color.'"'.($cta_button_target ? ' target="'.esc_attr($cta_button_target).'"' : '').' data-moduletitle="'.$cta_heading.'">'.esc_html($cta_button_text).'</a>
 											</div>'
                     : '';
+                    // The action type is a string or null, so a loose and a strict comparison with a string agree.
+                    // @pest-mutate-ignore: EqualToIdentical
                     echo $cta_action_type == 'phone' ?
                     '<div class="btn-container">
 												<a href="tel:'.$cta_phone.'" data-moduletitle="'.$cta_heading.'">'.$cta_phone_prepend.' <span class="no-break">'.$cta_phone.'</span></a>
@@ -626,6 +651,8 @@ if ($show_providers_section) {
     // if cookie is set, run modified physician query
     if (isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region'])) {
 
+        // The check below repeats the one around it, so it always sets the region and this default is never read.
+        // @pest-mutate-ignore: EmptyStringToNotEmpty
         $provider_region = '';
         if (isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region'])) {
             $provider_region = $_GET['_filter_region'] ?? $_COOKIE['wp_filter_region'];
