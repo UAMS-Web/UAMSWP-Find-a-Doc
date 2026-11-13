@@ -12,11 +12,8 @@
 
 declare(strict_types=1);
 
-use Brain\Monkey\Actions;
-use Brain\Monkey\Filters;
-use Brain\Monkey\Functions;
+use PHPUnit\Framework\Assert;
 
-use function Brain\Monkey\Filters\has;
 use function Brain\Monkey\Functions\when;
 
 /**
@@ -37,6 +34,19 @@ function uamswp_test_acf_functions(): array
         define('WP_PLUGIN_DIR', dirname(UAMS_FAD_PATH));
     }
 
+    // Every registration is captured as the file loads: Brain Monkey forgets them when the test ends.
+    $hooks = [];
+    when('add_filter')->alias(static function (string $hook, mixed $callback, int $priority = 10, int $args = 1) use (&$hooks): bool {
+        $hooks[] = ['filter', $hook, $callback, $priority, $args];
+
+        return true;
+    });
+    when('add_action')->alias(static function (string $hook, mixed $callback, int $priority = 10, int $args = 1) use (&$hooks): bool {
+        $hooks[] = ['action', $hook, $callback, $priority, $args];
+
+        return true;
+    });
+
     // The file registers its two blocks only when ACF's registration function exists, so it exists for the load.
     $blocks = [];
     when('acf_register_block_type')->alias(static function (array $block) use (&$blocks): void {
@@ -44,6 +54,10 @@ function uamswp_test_acf_functions(): array
     });
 
     require_once UAMS_FAD_PATH.'includes/class.fad-acf-functions.php';
+
+    // Whichever test loads the file first is the one a coverage run credits with the file scope lines.
+    Assert::assertSame(require __DIR__.'/acf-functions-hooks.php', $hooks, 'The ACF functions file registers the hooks it was pinned with.');
+    Assert::assertSame(WP_PLUGIN_DIR.'/'.basename(rtrim(UAMS_FAD_PATH, '/\\')).'/assets/json/acf-tables', ACFCDT_JSON_DIR);
 
     // [hook, callback, priority] for the registrations the tests pin.
     $filters = [
@@ -69,11 +83,11 @@ function uamswp_test_acf_functions(): array
     $registered = ['filters' => [], 'actions' => [], 'blocks' => $blocks];
 
     foreach ($filters as [$hook, $callback, $priority]) {
-        $registered['filters'][$hook.'|'.$callback.'|'.$priority] = has($hook, $callback, $priority);
+        $registered['filters'][$hook.'|'.$callback.'|'.$priority] = in_array(['filter', $hook, $callback, $priority], array_map(static fn (array $h): array => array_slice($h, 0, 4), $hooks), true);
     }
 
     foreach ($actions as [$hook, $callback, $priority]) {
-        $registered['actions'][$hook.'|'.$callback.'|'.$priority] = Actions\has($hook, $callback, $priority);
+        $registered['actions'][$hook.'|'.$callback.'|'.$priority] = in_array(['action', $hook, $callback, $priority], array_map(static fn (array $h): array => array_slice($h, 0, 4), $hooks), true);
     }
 
     return $registered;
