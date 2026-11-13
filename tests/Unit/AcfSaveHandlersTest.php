@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 use Brain\Monkey\Functions;
 
+use function Brain\Monkey\Filters\expectRemoved;
 use function Brain\Monkey\Functions\when;
 
 require_once __DIR__.'/../Support/acf-functions.php';
@@ -494,7 +495,10 @@ test('a fallback excerpt over 160 characters is cut to 156 with an ellipsis', fu
     uamswp_test_acf_functions();
     when('wp_strip_all_tags')->alias(static fn (string $text): string => $text);
 
-    acf_excerpt_run('provider', ['physician_clinical_bio' => str_repeat('a', 161)], str_repeat('a', 153).'...');
+    // Distinct characters, so a cut that starts anywhere but the first character is seen.
+    $long = substr(implode('', range('a', 'z')).str_repeat('0123456789', 16), 0, 161);
+
+    acf_excerpt_run('provider', ['physician_clinical_bio' => $long], substr($long, 0, 153).'...');
 });
 
 test('a fallback excerpt of exactly 160 characters is kept whole', function (): void {
@@ -538,4 +542,118 @@ test('the provider handler lists every related expertise, condition and treatmen
     physician_save_post(5);
 
     expect($_POST['acf']['field_physician_asp_filter'])->toBe('T5, T6, T1, T2, T3, T4');
+});
+
+test('after a location saves, the post is loaded by integer ID and the save hook is removed before the update', function (): void {
+    uamswp_test_acf_functions();
+    acf_save_type('location');
+    $post = new WP_Post;
+    $post->ID = 5;
+
+    $loaded = [];
+    when('get_post')->alias(function (mixed $id) use (&$loaded, $post): WP_Post {
+        $loaded[] = $id;
+
+        return $post;
+    });
+    acf_save_fields(['location_parent' => 1, 'location_parent_id' => '77']);
+    expectRemoved('acf/save_post')->once()->with('save_location_parent');
+    Functions\expect('wp_update_post')->once();
+
+    location_save_post_after('5');
+
+    expect($loaded)->toBe([5]);
+});
+
+test('the relationship sync reads every stored list unformatted', function (): void {
+    uamswp_test_acf_functions();
+
+    $formats = [];
+    when('get_field')->alias(static function (string $name, mixed $post = false, mixed $format = true) use (&$formats): mixed {
+        $formats[] = [$post, $format];
+
+        return $post === 123 ? [7] : [123];
+    });
+    when('update_field')->justReturn(true);
+
+    bidirectional_acf_update('physician_locations', 'field_location_physicians', [8], 123);
+
+    expect($formats)->toBe([[123, false], [8, false], [7, false]]);
+});
+
+test('the relationship sync keeps going after a related post that already lists the current post', function (): void {
+    uamswp_test_acf_functions();
+    $updates = acf_sync_stubs(['physician_locations|8' => [123], 'physician_locations|9' => [4]]);
+
+    bidirectional_acf_update('physician_locations', 'field_location_physicians', [8, 9], 123);
+
+    expect($updates->getArrayCopy())->toBe([['field_location_physicians', [4, 123], 9]]);
+});
+
+test('the relationship sync keeps going after a removed relation with no stored list', function (): void {
+    uamswp_test_acf_functions();
+    $updates = acf_sync_stubs([
+        'physician_locations|123' => [7, 8],
+        'physician_locations|8' => [123, 5],
+    ]);
+
+    bidirectional_acf_update('physician_locations', 'field_location_physicians', [], 123);
+
+    expect($updates->getArrayCopy())->toBe([['field_location_physicians', [1 => 5], 8]]);
+});
+
+test('the relationship sync ignores a new value or a stored value that is not a list, without a warning', function (): void {
+    uamswp_test_acf_functions();
+    $updates = acf_sync_stubs(['physician_locations|123' => 'not a list']);
+
+    $warnings = uamswp_test_capture_warnings(function (): void {
+        bidirectional_acf_update('physician_locations', 'field_location_physicians', 'also not a list', 123);
+    });
+
+    expect($warnings)->toBe([])
+        ->and($updates->getArrayCopy())->toBe([]);
+});
+
+test('the clinical title handler inherits nothing from a term that has no parent property', function (): void {
+    uamswp_test_acf_functions();
+    Functions\expect('get_term_by')->once()->andReturn((object) []);
+    Functions\expect('get_field')->never();
+    $_POST = ['acf' => ['field_clinical_specialization_cms_code_inherit_query' => 1]];
+
+    clinical_title_save_post('term_5');
+
+    expect($_POST['acf'])->toBe(['field_clinical_specialization_cms_code_inherit_query' => 1]);
+});
+
+test('the excerpt handler unhooks itself at its own priority around the update and hooks itself back', function (): void {
+    uamswp_test_acf_functions();
+    $calls = [];
+    when('remove_action')->alias(static function (string $hook, string $callback, int $priority = 10) use (&$calls): bool {
+        $calls[] = ['remove_action', $hook, $callback, $priority];
+
+        return true;
+    });
+    when('add_action')->alias(static function (string $hook, string $callback, int $priority = 10) use (&$calls): bool {
+        $calls[] = ['add_action', $hook, $callback, $priority];
+
+        return true;
+    });
+    when('wp_update_post')->alias(static function (array $update) use (&$calls): int {
+        $calls[] = ['wp_update_post', $update['post_excerpt']];
+
+        return 5;
+    });
+    $post = new WP_Post;
+    $post->ID = 5;
+    $GLOBALS['post'] = $post;
+    acf_save_type('provider');
+    acf_save_fields(['physician_short_clinical_bio' => 'Short']);
+
+    custom_excerpt_acf();
+
+    expect($calls)->toBe([
+        ['remove_action', 'save_post', 'custom_excerpt_acf', 50],
+        ['wp_update_post', 'Short'],
+        ['add_action', 'save_post', 'custom_excerpt_acf', 50],
+    ]);
 });
