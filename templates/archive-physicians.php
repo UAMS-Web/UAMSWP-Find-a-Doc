@@ -28,7 +28,7 @@ add_filter('facetwp_template_use_archive', '__return_true');
 					<legend class="sr-only">Filter by...</legend>
 					<h3 class="h6">Search Providers</h3>
 					<?php echo do_shortcode('[wpdreams_ajaxsearchpro id=1]'); ?>
-					<div class="fwp-filter"><?php echo facetwp_display('facet', 'alpha'); ?></div>
+					<div class="fwp-filter"><?php echo uamswp_fad_str(facetwp_display('facet', 'alpha')); ?></div>
 					<?php echo do_shortcode('		<div class="fwp-filter">[facetwp facet="primary_care"]</div>
 													<div class="fwp-filter">[facetwp facet="physician_areas_of_expertise"]</div>
 													<div class="fwp-filter">[facetwp facet="conditions"]</div>
@@ -50,21 +50,21 @@ add_filter('facetwp_template_use_archive', '__return_true');
 				</div>
 				<div class="row list-col-header">
                     <div class="col result-status">
-                        <span class="result-count"><?php echo facetwp_display('counts'); ?> Providers</span>
-                        <?php echo facetwp_display('selections'); ?>
+                        <span class="result-count"><?php echo uamswp_fad_str(facetwp_display('counts')); ?> Providers</span>
+                        <?php echo uamswp_fad_str(facetwp_display('selections')); ?>
                     </div>
 					<div class="col filter-toggle-container">
 						<!-- When button is active, add "active" class. -->
 						<button title="Toggle Filter Tray" class="filter-toggle"><span class="sr-only">Toggle Filter Tray</span><span class="fas fa-filter"></span></button>
 					</div>
 					<div class="col sort-select">
-						<?php echo facetwp_display('sort'); ?>
+						<?php echo uamswp_fad_str(facetwp_display('sort')); ?>
 					</div>
 				</div>
-				<?php echo facetwp_display('template', 'physician'); ?>
+				<?php echo uamswp_fad_str(facetwp_display('template', 'physician')); ?>
 				<div class="row list-pagination">
 					<div class="col">
-						<?php echo facetwp_display('pager'); ?>
+						<?php echo uamswp_fad_str(facetwp_display('pager')); ?>
 					</div>
 				</div>
 				<script>

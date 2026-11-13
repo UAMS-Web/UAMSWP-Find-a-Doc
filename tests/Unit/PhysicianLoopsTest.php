@@ -193,13 +193,13 @@ test('the provider loop prints no locations column without a published location'
         ->and(physician_loop([5], ['physician_locations' => []]))->not->toContain('Locations</h4>');
 });
 
-test('the provider loop warns about a provider with no locations value', function (): void {
+test('the provider loop prints no locations column for a provider with no locations value and raises no warning', function (): void {
     $output = '';
     $warnings = uamswp_test_capture_warnings(static function () use (&$output): void {
         $output = physician_loop([5], ['physician_locations' => null]);
     });
 
-    expect($warnings)->toBe(['foreach() argument must be of type array|object, null given'])
+    expect($warnings)->toBe([])
         ->and($output)->not->toContain('Locations</h4>');
 });
 

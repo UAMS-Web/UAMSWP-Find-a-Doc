@@ -66,8 +66,8 @@ $jump_link_count_min = 2; // How many links have to exist before displaying the 
 $jump_link_count = 0;
 
 $resource_type = get_field('clinical_resource_type');
-$resource_type_value = $resource_type['value'];
-$resource_type_label = $resource_type['label'];
+$resource_type_value = $resource_type['value'] ?? null;
+$resource_type_label = $resource_type['label'] ?? null;
 
 // Provider Spotlight
 // The select value is a string, or null when unset, so a loose and a strict comparison agree.
@@ -161,7 +161,7 @@ if ($locations) {
         'post__in' => $locations,
     ]);
     $location_query = new WP_Query($args);
-    if ($locations && $location_query->have_posts()) {
+    if ($location_query->have_posts()) {
         $show_locations_section = true;
         $jump_link_count++;
     } else {

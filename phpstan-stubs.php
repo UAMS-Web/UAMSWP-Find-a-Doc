@@ -63,6 +63,9 @@ function lyte_parse(string $the_content, bool $doExcerpt = false): string {}
 /** The Genesis framework, the parent theme of uams-2020 (`Template: genesis` in its `style.css`). */
 function genesis(): void {}
 
+/** `__genesis_return_full_width_content()` in `lib/functions/layout.php` of the Genesis framework. */
+function __genesis_return_full_width_content(): string {}
+
 /** The UAMS theme. */
 function image_sizer(mixed $image, int $width, int $height, string $x = 'center', string $y = 'center', string $class = ''): mixed {}
 

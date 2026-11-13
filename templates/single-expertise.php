@@ -8,7 +8,7 @@ declare(strict_types=1);
  *
  */
 // Set general variables
-$page_id = get_the_ID();
+$page_id = uamswp_fad_int(get_the_ID());
 $page_title = get_the_title();
 $page_title_attr = $page_title;
 $page_title_attr = str_replace('"', "'", $page_title_attr); // Replace double quotes with single quote
@@ -77,7 +77,7 @@ add_filter('genesis_attr_entry', 'uamswp_add_entry_class');
 remove_action('genesis_entry_header', 'genesis_do_post_title');
 add_action('genesis_entry_header', 'uamswp_expertise_post_title');
 
-add_filter('genesis_entry_content', 'uamswp_expertise_keywords', 8);
+add_action('genesis_entry_content', 'uamswp_expertise_keywords', 8);
 add_action('genesis_entry_content', 'uamswp_expertise_youtube', 12);
 add_action('genesis_after_entry', 'uamswp_expertise_cta', 6);
 add_action('genesis_after_entry', 'uamswp_expertise_jump_links', 8);
@@ -132,7 +132,7 @@ if ($resources && $resource_query->have_posts()) {
 // @pest-mutate-ignore: NotEqualToNotIdentical
 if (
     ! (get_post_meta($page_id, 'hide_sub_areas_of_expertise', true))
-    && (count(get_pages(['child_of' => $page_id, 'post_type' => 'expertise'])) != 0)
+    && (count(uamswp_fad_arr(get_pages(['child_of' => $page_id, 'post_type' => 'expertise']))) != 0)
 ) {
     $show_child_aoe_section = true;
     $jump_link_count++;
@@ -220,7 +220,7 @@ if ($locations) {
         'post__in' => $locations,
     ]);
     $location_query = new WP_Query($args);
-    if ($locations && $location_query->have_posts()) {
+    if ($location_query->have_posts()) {
         $show_locations_section = true;
         $jump_link_count++;
     } else {

@@ -203,7 +203,7 @@ test('the MyChart list prints the header and one row for each provider that is n
             '<tr><td class="no-break">4411</td><td class="no-break">Lee, Ann</td><td class="no-break">https://uamshealth.com/provider/ann-lee/'.$utm.'ann-lee</td></tr>'
             .'<tr><td class="no-break"></td><td class="no-break">Poe, Jo</td><td class="no-break">https://uamshealth.com/provider/jo-poe/'.$utm.'jo-poe</td></tr>',
         )
-        ->and($warnings)->toBe(['Undefined variable $l']);
+        ->and($warnings)->toBe([]);
 });
 
 /**
@@ -392,13 +392,13 @@ test('a provider whose only location is not published gets no row', function ():
     expect(listing_body_rows($case['html']))->toBe('');
 });
 
-test('a provider with no locations at all gets no row and a warning for the missing list', function (): void {
+test('a provider with no locations at all gets no row and raises no warning', function (): void {
     uamswp_test_template('doximity-list');
 
     $case = doximity_case(['physician_locations' => null]);
 
     expect(listing_body_rows($case['html']))->toBe('')
-        ->and($case['warnings'])->toBe(['foreach() argument must be of type array|object, null given']);
+        ->and($case['warnings'])->toBe([]);
 });
 
 test('the first email in the contact information is printed and the other rows are not', function (): void {

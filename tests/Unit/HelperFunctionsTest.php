@@ -496,6 +496,36 @@ final class HelperFunctionsTest extends UnitTestCase
         $this->assertSame('', \uamswp_fad_term_name(false, 'degree'));
     }
 
+    public function test_the_slug_of_a_term_is_read_and_a_missing_or_failed_lookup_gives_an_empty_string(): void
+    {
+        $term = new \stdClass;
+        $term->slug = 'north';
+
+        when('is_wp_error')->alias(static fn (mixed $thing): bool => $thing instanceof \WP_Error);
+        expect('get_term_by')->once()->with('ID', \Mockery::mustBe(7), 'region')->andReturn($term);
+        expect('get_term_by')->once()->with('ID', \Mockery::mustBe(8), 'region')->andReturn(false);
+        expect('get_term_by')->once()->with('ID', \Mockery::mustBe(9), 'region')->andReturn(new \WP_Error);
+        expect('get_term_by')->once()->with('ID', \Mockery::mustBe(0), 'region')->andReturn(false);
+
+        $this->assertSame('north', \uamswp_fad_term_slug('7', 'region'));
+        $this->assertSame('', \uamswp_fad_term_slug(8, 'region'));
+        $this->assertSame('', \uamswp_fad_term_slug(9, 'region'));
+        $this->assertSame('', \uamswp_fad_term_slug(false, 'region'));
+    }
+
+    public function test_a_property_of_a_field_object_is_read_as_a_string(): void
+    {
+        $term = new \stdClass;
+        $term->name = 'Cardiology';
+        $term->count = 4;
+
+        $this->assertSame('Cardiology', \uamswp_fad_object_str($term, 'name'));
+        $this->assertSame('4', \uamswp_fad_object_str($term, 'count'));
+        $this->assertSame('', \uamswp_fad_object_str($term, 'slug'));
+        $this->assertSame('', \uamswp_fad_object_str(12, 'name'));
+        $this->assertSame('', \uamswp_fad_object_str(null, 'name'));
+    }
+
     public function test_a_submitted_acf_value_is_read_by_field_key(): void
     {
         $_POST['acf'] = ['field_a' => 'x', 'field_b' => null, 'field_c' => ['y']];

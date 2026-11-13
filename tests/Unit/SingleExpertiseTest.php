@@ -159,7 +159,6 @@ test('the template adds the title, entry and section hooks and removes the Genes
             ['seopress_titles_title', 'uamswp_fad_title_single_expertise', 15, 2],
             ['body_class', 'uams_default_page_body_class'],
             ['genesis_attr_entry', 'uamswp_add_entry_class'],
-            ['genesis_entry_content', 'uamswp_expertise_keywords', 8],
         ],
         'remove_action' => [
             ['genesis_entry_header', 'genesis_post_info', 12],
@@ -171,6 +170,7 @@ test('the template adds the title, entry and section hooks and removes the Genes
         ],
         'add_action' => [
             ['genesis_entry_header', 'uamswp_expertise_post_title'],
+            ['genesis_entry_content', 'uamswp_expertise_keywords', 8],
             ['genesis_entry_content', 'uamswp_expertise_youtube', 12],
             ['genesis_after_entry', 'uamswp_expertise_cta', 6],
             ['genesis_after_entry', 'uamswp_expertise_jump_links', 8],

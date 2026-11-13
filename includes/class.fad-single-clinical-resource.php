@@ -10,12 +10,12 @@
 /**
  * The `uamswp_fad_canonical` callback of the single-clinical-resource template.
  */
-function uamswp_fad_canonical($html)
+function uamswp_fad_canonical(string $html): string
 {
     global $syndicated;
     global $syndication_url;
     if ($syndicated && ! empty($syndication_url)) {
-        $html = '<link rel="canonical" href="'.htmlspecialchars(urldecode($syndication_url)).'" />';
+        $html = '<link rel="canonical" href="'.htmlspecialchars(urldecode(uamswp_fad_str($syndication_url))).'" />';
     }
 
     return $html;
@@ -26,7 +26,9 @@ function uamswp_fad_canonical($html)
  */
 function uamswp_resource_post_title(): void
 {
+    /** @var string $resource_archive_title */
     global $resource_archive_title;
+    /** @var string|null $resource_type_label */
     global $resource_type_label;
     global $is_provider_spotlight;
 
@@ -80,7 +82,7 @@ function uamswp_resource_infographic(): void
 
         echo '<h2 class="sr-only">Infographic</h2>';
         echo '<div class="alignwide">';
-        echo wp_get_attachment_image($infographic, $size);
+        echo wp_get_attachment_image(uamswp_fad_int($infographic), $size);
         echo '</div>';
 
         if ($infographic_transcript) {
@@ -113,11 +115,11 @@ function uamswp_resource_document(): void
         echo '<ul class="attachments">';
         while (have_rows('clinical_resource_document')) {
             the_row();
-            $document_title = get_sub_field('document_title');
-            $document_file = get_sub_field('document_file');
-            $document_url = $document_file['url'];
+            $document_title = uamswp_fad_str(get_sub_field('document_title'));
+            $document_file = uamswp_fad_assoc(get_sub_field('document_file'));
+            $document_url = uamswp_fad_str($document_file['url'] ?? '');
             $document_url_path = pathinfo($document_url);
-            $document_url_extension = $document_url_path['extension'];
+            $document_url_extension = $document_url_path['extension'] ?? '';
 
             if ($document_url_extension == 'pdf') {
                 $icon_file = $icon_pdf;
@@ -144,8 +146,11 @@ function uamswp_resource_physicians(): void
 {
     global $show_providers_section;
     global $postsCountClass;
+    /** @var WP_Query $physicians_query */
     global $physicians_query;
+    /** @var int $postsPerPage */
     global $postsPerPage;
+    /** @var array<int, int|string> $physicians */
     global $physicians;
 
     if ($show_providers_section) {
@@ -188,7 +193,7 @@ function uamswp_resource_physicians(): void
 function uamswp_resource_video(): void
 {
     global $resource_type_value;
-    $video = get_field('clinical_resource_video');
+    $video = uamswp_fad_str(get_field('clinical_resource_video'));
     $video_descr = get_field('clinical_resource_video_descr');
     $video_transcript = get_field('clinical_resource_video_transcript');
 
@@ -257,6 +262,7 @@ function uamswp_resource_treatments_cpt(): void
 function uamswp_resource_locations(): void
 {
     global $show_locations_section;
+    /** @var WP_Query $location_query */
     global $location_query;
 
     if ($show_locations_section) { ?>
@@ -309,6 +315,7 @@ function uamswp_resource_associated(): void
 function uamswp_resource_expertise(): void
 {
     global $show_aoe_section;
+    /** @var WP_Query $expertise_query */
     global $expertise_query;
 
     if ($show_aoe_section) { ?>
@@ -408,6 +415,7 @@ function uamswp_resource_appointment(): void
 {
     global $show_appointment_section;
     global $is_provider_spotlight;
+    /** @var int|false|null $spotlight_provider */
     global $spotlight_provider;
 
     if ($show_appointment_section) {
@@ -442,6 +450,7 @@ function uamswp_resource_appointment(): void
 function uamswp_resource_provider_spotlight(): void
 {
     global $is_provider_spotlight;
+    /** @var int|false|null $spotlight_provider */
     global $spotlight_provider;
 
     if (! $is_provider_spotlight || ! $spotlight_provider) {
@@ -453,13 +462,7 @@ function uamswp_resource_provider_spotlight(): void
     // Provider-derived strings, resolved once
     $names = uamswp_provider_names($provider_id);
 
-    $medium_name_attr = $names['medium_attr'];
-
-    // Escaped for HTML text context. The name parts come from plain-text ACF
-    // fields with no kses filtering, so they must not be echoed raw.
-    uamswp_provider_name_html($names['medium']);
-    uamswp_provider_name_html($names['short']);
-    uamswp_provider_name_html($names['short_possessive']);
+    $medium_name_attr = uamswp_fad_str($names['medium_attr']);
 
     // Introduction: always generated from the provider. The manual field was
     // removed, so any value left in postmeta from before that is ignored.
@@ -484,18 +487,29 @@ function uamswp_resource_provider_spotlight(): void
             $portrait_id = get_post_thumbnail_id($provider_id);
 
         if ($portrait_id) {
-            $portrait_alt = $medium_name_attr;
+            // The stub types the attributes as a closed shape without itemprop,
+            // so itemprop is added through the attributes filter for this call
+            $add_itemprop = static function ($attr): array {
+                $attr = uamswp_fad_assoc($attr);
+                $attr['itemprop'] = 'image';
+
+                return $attr;
+            };
+            add_filter('wp_get_attachment_image_attributes', $add_itemprop);
             ?>
                 <figure class="alignright">
-                    <?php echo wp_get_attachment_image($portrait_id, 'content-image-side', false, ['alt' => $portrait_alt, 'itemprop' => 'image']); ?>
+                    <?php echo wp_get_attachment_image($portrait_id, 'content-image-side', false, ['alt' => $medium_name_attr]); ?>
                 </figure>
+                <?php
+            remove_filter('wp_get_attachment_image_attributes', $add_itemprop);
+            ?>
                 <?php
         }
 
         while (have_rows('clinical_resource_spotlight_qa')) {
             the_row();
-            $question = get_sub_field('spotlight_qa_question');
-            $answer = get_sub_field('spotlight_qa_answer');
+            $question = uamswp_fad_str(get_sub_field('spotlight_qa_question'));
+            $answer = uamswp_fad_str(get_sub_field('spotlight_qa_answer'));
 
             if (! $question) {
                 continue;

@@ -12,11 +12,16 @@
  */
 function uamswp_expertise_post_title(): void
 {
+    /** @var string $page_title */
     global $page_title;
+    /** @var string $expertise_single_name */
     global $expertise_single_name;
     global $parent_expertise;
+    /** @var string $parent_title */
     global $parent_title;
+    /** @var string $parent_title_attr */
     global $parent_title_attr;
+    /** @var string $parent_url */
     global $parent_url;
     echo '<h1 class="entry-title" itemprop="headline">';
     echo '<span class="supertitle">'.$expertise_single_name.'</span><span class="sr-only">:</span> ';
@@ -35,52 +40,27 @@ function uamswp_expertise_cta(): void
     $cta_repeater = get_field('expertise_cta');
     if ($cta_repeater) {
         $i = 1;
-        foreach ($cta_repeater as $cta) {
-            $cta_heading = $cta['cta_bar_heading'];
-            $cta_body = $cta['cta_bar_body'];
-            $cta_action_type = $cta['cta_bar_action_type'];
+        foreach (uamswp_fad_arr($cta_repeater) as $cta_row) {
+            $cta = uamswp_fad_assoc($cta_row);
+            $cta_heading = uamswp_fad_str($cta['cta_bar_heading'] ?? null);
+            $cta_body = uamswp_fad_str($cta['cta_bar_body'] ?? null);
+            $cta_action_type = uamswp_fad_str($cta['cta_bar_action_type'] ?? null);
 
-            $cta_button_text = '';
-            $cta_button_url = '';
-            $cta_button_target = '';
-            $cta_button_desc = '';
-            if ($cta_action_type == 'url') {
-                $cta_button_text = $cta['cta_bar_button_text'];
-                $cta_button_url = $cta['cta_bar_button_url'];
-                if ($cta_button_url) {
-                    $cta_button_target = $cta_button_url['target'];
-                }
-                $cta_button_desc = $cta['cta_bar_button_description'];
+            $cta_action_html = '';
+            if ($cta_action_type === 'url') {
+                $cta_button_url = uamswp_fad_assoc($cta['cta_bar_button_url'] ?? null);
+                $cta_button_target = uamswp_fad_str($cta_button_url['target'] ?? null);
+                $cta_action_html = '<div class="btn-container">
+                                        <a href="'.esc_url(uamswp_fad_str($cta_button_url['url'] ?? null)).'" aria-label="'.esc_attr(uamswp_fad_str($cta['cta_bar_button_description'] ?? null)).'" class=" btn btn-primary"'.($cta_button_target ? ' target="'.esc_attr($cta_button_target).'"' : '').' data-moduletitle="'.$cta_heading.'">'.esc_html(uamswp_fad_str($cta['cta_bar_button_text'] ?? null)).'</a>
+                                    </div>';
+            } elseif ($cta_action_type === 'phone') {
+                $cta_phone = uamswp_fad_str($cta['cta_bar_phone'] ?? null);
+                $cta_action_html = '<div class="btn-container">
+                                        <a href="tel:'.$cta_phone.'" data-moduletitle="'.$cta_heading.'">'.(uamswp_fad_str($cta['cta_bar_phone_prepend'] ?? null) ?: 'Call').' <span class="no-break">'.$cta_phone.'</span></a>
+                                    </div>';
             }
 
-            $cta_phone_prepend = '';
-            $cta_phone = '';
-            $cta_phone_link = '';
-            if ($cta_action_type == 'phone') {
-                $cta_phone_prepend = $cta['cta_bar_phone_prepend'] ?: 'Call';
-                $cta_phone = $cta['cta_bar_phone'];
-                $cta_phone_link = '<a href="tel:'.format_phone_dash($cta_phone).'">'.format_phone_us($cta_phone).'</a>';
-            }
-
-            $cta_layout = 'cta-bar-centered';
-            $cta_size = 'normal';
-            $cta_use_image = false;
-            $cta_image = '';
-            $cta_background_color = 'bg-auto';
-            $cta_btn_color = 'primary';
-
-            $cta_className = '';
-            $cta_className .= ' '.$cta_layout;
-            $cta_className .= ' '.$cta_background_color;
-            $cta_className .= $cta_use_image ? ' bg-image' : '';
-            if ($cta_size === 'small') {
-                $cta_className .= ' cta-bar-sm';
-            } elseif ($cta_size === 'large') {
-                $cta_className .= ' extra-padding cta-bar-lg';
-            }
-            if ($cta_action_type == 'none') {
-                $cta_className .= ' no-link';
-            }
+            $cta_className = ' cta-bar-centered bg-auto'.($cta_action_type === 'none' ? ' no-link' : '');
 
             echo '<section class="uams-module cta-bar'.$cta_className.'" id="cta-bar-'.$i.'" aria-label="'.$cta_heading.'">
                 <div class="container-fluid">
@@ -94,16 +74,7 @@ function uamswp_expertise_cta(): void
                                     <div class="text-container">
                                         '.$cta_body.'
                                     </div>';
-            echo $cta_action_type == 'url' ?
-            '<div class="btn-container">
-                                        <a href="'.esc_url($cta_button_url['url']).'" aria-label="'.esc_attr($cta_button_desc).'" class=" btn btn-'.$cta_btn_color.($cta_size === 'large' ? ' btn-lg' : '').'"'.($cta_button_target ? ' target="'.esc_attr($cta_button_target).'"' : '').' data-moduletitle="'.$cta_heading.'">'.esc_html($cta_button_text).'</a>
-                                    </div>'
-            : '';
-            echo $cta_action_type == 'phone' ?
-            '<div class="btn-container">
-                                        <a href="tel:'.$cta_phone.'" data-moduletitle="'.$cta_heading.'">'.$cta_phone_prepend.' <span class="no-break">'.$cta_phone.'</span></a>
-                                    </div>'
-            : '';
+            echo $cta_action_html;
             echo '</div>
                             </div>
                         </div>
@@ -122,9 +93,12 @@ function uamswp_expertise_physicians(): void
 {
     global $show_providers_section;
     // global $postsCountClass;
+    /** @var WP_Query $physicians_query */
     global $physicians_query;
     // global $postsPerPage;
+    /** @var array<int, int|string> $physicians */
     global $physicians;
+    /** @var array<int, int|string> $provider_ids */
     global $provider_ids;
 
     if ($show_providers_section) {
@@ -142,7 +116,7 @@ function uamswp_expertise_physicians(): void
         $region_IDs = array_unique($region_IDs);
         $region_list = [];
         foreach ($region_IDs as $region_ID) {
-            $region_list[] = get_term_by('ID', $region_ID, 'region')->slug;
+            $region_list[] = uamswp_fad_term_slug($region_ID, 'region');
         }
 
         // if cookie is set, run modified physician query
@@ -191,9 +165,9 @@ function uamswp_expertise_physicians(): void
                                             $physicians_query->the_post();
                                             $id = get_the_ID();
                                             include UAMS_FAD_PATH.'/templates/loops/physician-card.php';
-                                            $title_list[] = get_field('physician_title', $id);
+                                            $title_list[] = uamswp_fad_str(get_field('physician_title', $id));
                                         }
-                                        echo '<data id="provider_ids" data-postids="'.implode(',', $physicians_query->posts).'," data-regions="'.implode(',', $region_list).'," data-titles="'.implode(',', array_unique($title_list)).',"></data>';
+                                        echo '<data id="provider_ids" data-postids="'.implode(',', uamswp_fad_ids($physicians_query->posts)).'," data-regions="'.implode(',', $region_list).'," data-titles="'.implode(',', array_unique($title_list)).',"></data>';
                                     } else {
                                         echo '<span class="no-results">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
                                     }
@@ -213,7 +187,7 @@ function uamswp_expertise_physicians(): void
             <?php if (isset($_GET['_filter_region'])) { ?>
                 <script type="text/javascript">
                     // Set cookie to expire at end of session
-                    document.cookie = "wp_filter_region=<?php echo htmlspecialchars($_GET['_filter_region']); ?>; path=/; domain="+window.location.hostname;
+                    document.cookie = "wp_filter_region=<?php echo htmlspecialchars(uamswp_fad_str($_GET['_filter_region'])); ?>; path=/; domain="+window.location.hostname;
                 </script>
             <?php } ?>
         </section>
@@ -225,7 +199,7 @@ function uamswp_expertise_physicians(): void
  */
 function uamswp_expertise_youtube(): void
 {
-    $video = get_field('expertise_youtube_link');
+    $video = uamswp_fad_str(get_field('expertise_youtube_link'));
     if ($video) { ?>
         <?php if (function_exists('lyte_preparse')) {
             echo '<div class="alignwide">';
@@ -248,11 +222,11 @@ function uamswp_expertise_keywords(): void
     $keyword_text = '';
     if ($keywords) {
         $i = 1;
-        foreach ($keywords as $keyword) {
+        foreach (uamswp_fad_arr($keywords) as $keyword) {
             if ($i > 1) {
                 $keyword_text .= '; ';
             }
-            $keyword_text .= $keyword['text'];
+            $keyword_text .= uamswp_fad_str(uamswp_fad_assoc($keyword)['text'] ?? null);
             $i++;
         }
         echo '<p class="text-callout text-callout-info">Also called: '.$keyword_text.'</p>';
@@ -264,6 +238,7 @@ function uamswp_expertise_keywords(): void
  */
 function uamswp_expertise_conditions_cpt(): void
 {
+    /** @var string $page_title */
     global $page_title;
     global $show_conditions_section;
     global $conditions_cpt_query;
@@ -280,6 +255,7 @@ function uamswp_expertise_conditions_cpt(): void
  */
 function uamswp_expertise_treatments_cpt(): void
 {
+    /** @var string $page_title */
     global $page_title;
     global $show_treatments_section;
     global $treatments_cpt_query;
@@ -297,11 +273,13 @@ function uamswp_expertise_treatments_cpt(): void
 function uamswp_expertise_locations(): void
 {
     global $show_locations_section;
+    /** @var WP_Query $location_query */
     global $location_query;
+    /** @var array<int, int|string> $locations */
     global $locations;
 
     if ($show_locations_section) {
-        $location_ids = $location_query->posts;
+        $location_ids = uamswp_fad_ids($location_query->posts);
 
         $location_region_IDs = [];
         foreach ($location_ids as $location_id) {
@@ -311,7 +289,7 @@ function uamswp_expertise_locations(): void
         $location_region_IDs = array_unique($location_region_IDs);
         $location_region_list = [];
         foreach ($location_region_IDs as $location_region_ID) {
-            $location_region_list[] = get_term_by('ID', $location_region_ID, 'region')->slug;
+            $location_region_list[] = uamswp_fad_term_slug($location_region_ID, 'region');
         }
 
         // if cookie is set, run modified physician query
@@ -362,7 +340,7 @@ function uamswp_expertise_locations(): void
                                     $id = get_the_ID();
                                     include UAMS_FAD_PATH.'/templates/loops/location-card.php';
                                 }
-                                echo '<data id="location_ids" data-postids="'.implode(',', $location_query->posts).'," data-regions="'.implode(',', $location_region_list).',"></data>';
+                                echo '<data id="location_ids" data-postids="'.implode(',', uamswp_fad_ids($location_query->posts)).'," data-regions="'.implode(',', $location_region_list).',"></data>';
                             } else {
                                 echo '<span class="no-results">Sorry, there are no locations matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
                             }
@@ -382,6 +360,7 @@ function uamswp_expertise_locations(): void
 function uamswp_expertise_associated(): void
 {
     global $show_related_aoe_section;
+    /** @var WP_Query $expertise_query */
     global $expertise_query;
 
     if ($show_related_aoe_section) { ?>
@@ -423,11 +402,11 @@ function uamswp_expertise_header_metadata(): void
     if ($keywords) {
         $i = 1;
         $keyword_text = '';
-        foreach ($keywords as $keyword) {
+        foreach (uamswp_fad_arr($keywords) as $keyword) {
             if ($i > 1) {
                 $keyword_text .= ', ';
             }
-            $keyword_text .= str_replace(',', '', $keyword['text']);
+            $keyword_text .= str_replace(',', '', uamswp_fad_str(uamswp_fad_assoc($keyword)['text'] ?? null));
             $i++;
         }
 
@@ -440,8 +419,10 @@ function uamswp_expertise_header_metadata(): void
  */
 function uamswp_expertise_podcast(): void
 {
+    /** @var string $page_title */
     global $page_title;
     global $show_podcast_section;
+    /** @var string $podcast_name */
     global $podcast_name;
 
     if ($show_podcast_section) {
@@ -483,7 +464,9 @@ function uamswp_expertise_podcast(): void
  */
 function uamswp_expertise_resource(): void
 {
+    /** @var WP_Post $post */
     global $post;
+    /** @var string $page_title */
     global $page_title;
     global $show_related_resource_section;
     global $resources;
@@ -505,7 +488,9 @@ function uamswp_expertise_resource(): void
  */
 function uamswp_list_child_expertise(): void
 {
+    /** @var int $page_id */
     global $page_id;
+    /** @var string $page_title */
     global $page_title;
     global $show_child_aoe_section;
 
@@ -587,6 +572,7 @@ function uamswp_expertise_appointment(): void
  */
 function uamswp_expertise_jump_links(): void
 {
+    /** @var string $page_title */
     global $page_title;
     global $jump_link_count_min;
     global $jump_link_count;
