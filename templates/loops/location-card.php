@@ -21,15 +21,16 @@ $featured_image = '';
  * override any one of them, so this replaces the flat swap to the parent
  * ID that the address fields used to read through.
  */
-$location_source_ids = uamswp_fad_location_source_ids($id);
+$card_id = uamswp_fad_int($id);
+$location_source_ids = uamswp_fad_location_source_ids($card_id);
 
 // $child_location_list indicates whether this is a list of child locations within this location
 // Check if $child_location_list is set. Otherwise create the variable and set its value to false.
 $child_location_list ??= false;
 
-$location_title = get_the_title($id);
+$location_title = get_the_title($card_id);
 $location_title_attr = str_replace('"', "'", $location_title);
-$location_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities(str_replace('&nbsp;', ' ', $location_title_attr ?? ''), ENT_HTML401, 'utf-8')));
+$location_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentities(str_replace('&nbsp;', ' ', $location_title_attr), ENT_HTML401, 'utf-8')));
 
 // Parent Location
 $location_has_parent = get_field('location_parent', $id);
@@ -45,7 +46,7 @@ $override_parent_photo = ''; // Eliminate PHP errors
 $override_parent_photo_featured = ''; // Eliminate PHP errors
 
 if ($location_has_parent && $location_parent_id) {
-    $parent_location = get_post($location_parent_id);
+    $parent_location = get_post(uamswp_fad_int($location_parent_id));
 }
 // Get Post ID for Address & Image fields
 if ($parent_location) {
@@ -69,42 +70,46 @@ if ($parent_location) {
 
     // Set featured image
     if ($override_parent_photo && $override_parent_photo_featured) {
-        $featured_image = get_the_post_thumbnail($id, 'aspect-16-9-small', ['class' => 'card-img-top', 'data-categorytitle' => 'Photo', 'data-itemtitle' => $location_title_attr, 'loading' => 'lazy']);
+        $featured_image = get_the_post_thumbnail($card_id, 'aspect-16-9-small', ['class' => 'card-img-top', 'data-categorytitle' => 'Photo', 'data-itemtitle' => $location_title_attr, 'loading' => 'lazy']);
     }
 } else {
     // Set featured image
-    if (has_post_thumbnail($id)) {
-        $featured_image = get_the_post_thumbnail($id, 'aspect-16-9-small', ['class' => 'card-img-top', 'data-categorytitle' => 'Photo', 'data-itemtitle' => $location_title_attr, 'loading' => 'lazy']);
+    if (has_post_thumbnail($card_id)) {
+        $featured_image = get_the_post_thumbnail($card_id, 'aspect-16-9-small', ['class' => 'card-img-top', 'data-categorytitle' => 'Photo', 'data-itemtitle' => $location_title_attr, 'loading' => 'lazy']);
     }
 }
 
-$location_address_1 = get_field('location_address_1', $location_source_ids['street']);
+$location_address_1 = uamswp_fad_str(get_field('location_address_1', $location_source_ids['street']));
 $location_building = get_field('location_building', $location_source_ids['facility']);
+$building_slug = '';
+$building_name = '';
 if ($location_building) {
-    $building = get_term($location_building, 'building');
-    $building_slug = $building->slug;
-    $building_name = $building->name;
+    $building = get_term(uamswp_fad_int($location_building), 'building');
+    $building_found = is_object($building) && ! is_wp_error($building);
+    $building_slug = $building_found ? uamswp_fad_str($building->slug) : '';
+    $building_name = $building_found ? uamswp_fad_str($building->name) : '';
 }
+/** @var array<string, mixed>|false $location_floor */
 $location_floor = get_field_object('location_building_floor', $location_source_ids['unit']);
 $location_floor_value = '';
 $location_floor_label = '';
 if ($location_floor) {
-    $location_floor_value = $location_floor['value'];
-    $location_floor_label = $location_floor['choices'][$location_floor_value] ?? '';
+    $location_floor_value = uamswp_fad_str($location_floor['value'] ?? null);
+    $location_floor_label = uamswp_fad_str(uamswp_fad_assoc($location_floor['choices'] ?? null)[$location_floor_value] ?? null);
 }
-$location_suite = get_field('location_suite', $location_source_ids['unit']);
-$location_address_2 = uamswp_location_address_2(($location_building && $building_slug != '_none'), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, '<br />', ', ');
-$location_address_2_schema = uamswp_location_address_2(($location_building && $building_slug != '_none'), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, ' ', ' ');
+$location_suite = uamswp_fad_str(get_field('location_suite', $location_source_ids['unit'])) ?: false;
+$location_address_2 = uamswp_location_address_2(($location_building && $building_slug != '_none'), $building_name, $location_floor, $location_floor_value, $location_floor_label, $location_suite, '<br />', ', ');
+$location_address_2_schema = uamswp_location_address_2(($location_building && $building_slug != '_none'), $building_name, $location_floor, $location_floor_value, $location_floor_label, $location_suite, ' ', ' ');
 
-$location_address_2_deprecated = get_field('location_address_2', $location_source_ids['street']);
+$location_address_2_deprecated = uamswp_fad_str(get_field('location_address_2', $location_source_ids['street']));
 if (! $location_address_2) {
     $location_address_2 = $location_address_2_deprecated;
     $location_address_2_schema = $location_address_2_deprecated;
 }
 
-$location_city = get_field('location_city', $location_source_ids['street']);
-$location_state = get_field('location_state', $location_source_ids['street']);
-$location_zip = get_field('location_zip', $location_source_ids['street']);
+$location_city = uamswp_fad_str(get_field('location_city', $location_source_ids['street']));
+$location_state = uamswp_fad_str(get_field('location_state', $location_source_ids['street']));
+$location_zip = uamswp_fad_str(get_field('location_zip', $location_source_ids['street']));
 
 ?>
 <div class="card">
@@ -118,9 +123,9 @@ $location_zip = get_field('location_zip', $location_source_ids['street']);
     <?php } ?>
     <div class="card-body">
         <h3 class="card-title h5">
-            <span class="name"><a href="<?php echo get_permalink($id); ?>" target="_self" data-categorytitle="Name" data-itemtitle="<?php echo $location_title_attr; ?>"><?php echo $location_title; ?></a></span>
+            <span class="name"><a href="<?php echo get_permalink($card_id); ?>" target="_self" data-categorytitle="Name" data-itemtitle="<?php echo $location_title_attr; ?>"><?php echo $location_title; ?></a></span>
             <?php if ($parent_location && ! $child_location_list) { ?>
-                <span class="subtitle"><span class="sr-only">(</span>Part of <?php echo $parent_title_prepend; ?><a href="<?php echo esc_url($parent_url); ?>" data-categorytitle="Parent Name" data-itemtitle="<?php echo $location_title_attr; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
+                <span class="subtitle"><span class="sr-only">(</span>Part of <?php echo $parent_title_prepend; ?><a href="<?php echo esc_url(uamswp_fad_str($parent_url)); ?>" data-categorytitle="Parent Name" data-itemtitle="<?php echo $location_title_attr; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
             <?php } // endif?>
             <?php if (isset($l) && $l == 1) { ?>
                 <span class="subtitle"><span class="sr-only">, </span>Primary Location</span>
@@ -130,16 +135,16 @@ $location_zip = get_field('location_zip', $location_source_ids['street']);
         // Check for if we should display a closure alert
 
         $location_closing = get_field('location_closing', $id); // true or false
-$location_closing_date = get_field('location_closing_date', $id); // F j, Y
+$location_closing_date = uamswp_fad_str(get_field('location_closing_date', $id)); // F j, Y
 $location_closing_date_past = false;
-if (new DateTime >= new DateTime($location_closing_date ?? '')) {
+if (new DateTime >= new DateTime($location_closing_date)) {
     $location_closing_date_past = true;
 }
 $location_closing_length = get_field('location_closing_length', $id);
 $location_reopen_known = get_field('location_reopen_known', $id);
-$location_reopen_date = get_field('location_reopen_date', $id); // F j, Y
+$location_reopen_date = uamswp_fad_str(get_field('location_reopen_date', $id)); // F j, Y
 $location_reopen_date_past = false;
-if (new DateTime >= new DateTime($location_reopen_date ?? '')) {
+if (new DateTime >= new DateTime($location_reopen_date)) {
     $location_reopen_date_past = true;
 }
 $location_closing_info = get_field('location_closing_info', $id);
@@ -155,20 +160,20 @@ if (
 
 // Check for if we should display a modified hours alert
 
-$location_hours_group = get_field('location_hours_group', $id);
+$location_hours_group = uamswp_fad_assoc(get_field('location_hours_group', $id));
 
-$modified = $location_hours_group['location_modified_hours'];
-$modified_start = $location_hours_group['location_modified_hours_start_date'];
-$modified_end = $location_hours_group['location_modified_hours_end'];
-$modified_end_date = $location_hours_group['location_modified_hours_end_date'];
+$modified = $location_hours_group['location_modified_hours'] ?? null;
+$modified_start = uamswp_fad_str($location_hours_group['location_modified_hours_start_date'] ?? null);
+$modified_end = $location_hours_group['location_modified_hours_end'] ?? null;
+$modified_end_date = uamswp_fad_str($location_hours_group['location_modified_hours_end_date'] ?? null);
 
 $today = strtotime('today');
 $today_30 = strtotime('+30 days');
 
-$telemed_modified = $location_hours_group['location_telemed_modified_hours_query']; // Are there modified hours for telemedicine?
-$telemed_modified_start = $location_hours_group['location_telemed_modified_hours_start_date']; // When do the modified telemedicine hours start?
-$telemed_modified_end = $location_hours_group['location_telemed_modified_hours_end']; // Do we know when the modified telemedicine hours end?
-$telemed_modified_end_date = $location_hours_group['location_telemed_modified_hours_end_date']; // When do the modified telemedicine hours end?
+$telemed_modified = $location_hours_group['location_telemed_modified_hours_query'] ?? null; // Are there modified hours for telemedicine?
+$telemed_modified_start = uamswp_fad_str($location_hours_group['location_telemed_modified_hours_start_date'] ?? null); // When do the modified telemedicine hours start?
+$telemed_modified_end = $location_hours_group['location_telemed_modified_hours_end'] ?? null; // Do we know when the modified telemedicine hours end?
+$telemed_modified_end_date = uamswp_fad_str($location_hours_group['location_telemed_modified_hours_end_date'] ?? null); // When do the modified telemedicine hours end?
 
 $telemed_today = $today;
 $telemed_today_30 = $today_30;
@@ -243,10 +248,10 @@ if ($location_closing_display || $location_modified_hours_display) {
                         This location's hours will be temporarily modified beginning on <?php echo $location_modified_hours_start; ?>.
                     <?php } // endif
                 } // endif?>
-                <p><a href="<?php echo get_permalink($id); ?>" aria-label="<?php echo $alert_label_attr; ?>" class="alert-link" data-categorytitle="Alert" data-itemtitle="<?php echo $location_title_attr; ?>">Learn more</a></p>
+                <p><a href="<?php echo get_permalink($card_id); ?>" aria-label="<?php echo $alert_label_attr; ?>" class="alert-link" data-categorytitle="Alert" data-itemtitle="<?php echo $location_title_attr; ?>">Learn more</a></p>
             </div>
         <?php } // endif?>
-        <?php $map = get_field('location_map', $location_source_ids['map']); ?>
+        <?php $map = uamswp_fad_assoc(get_field('location_map', $location_source_ids['map'])); ?>
         <p class="card-text"><?php echo $location_address_1; ?><br/>
             <?php echo $location_address_2 ? $location_address_2.'<br/>' : ''; ?>
             <?php echo $location_city.', '.$location_state.' '.$location_zip; ?>
@@ -260,9 +265,9 @@ include UAMS_FAD_PATH.'/templates/blocks/locations-phone.php';
     </div><!-- .card-body -->
     <div class="btn-container">
         <div class="inner-container">
-            <a href="<?php echo get_permalink($id); ?>" class="btn btn-primary" aria-label="View location page for <?php echo $location_title_attr; ?>" data-categorytitle="View Location" data-itemtitle="<?php echo $location_title_attr; ?>">View Location</a>
-            <?php if ($map) { ?>
-            <a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get Directions to <?php echo $location_title; ?>" data-categorytitle="Get Directions" data-itemtitle="<?php echo $location_title_attr; ?>">Get Directions</a>
+            <a href="<?php echo get_permalink($card_id); ?>" class="btn btn-primary" aria-label="View location page for <?php echo $location_title_attr; ?>" data-categorytitle="View Location" data-itemtitle="<?php echo $location_title_attr; ?>">View Location</a>
+            <?php if ($map !== []) { ?>
+            <a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo uamswp_fad_str($map['lat'] ?? null); ?>,<?php echo uamswp_fad_str($map['lng'] ?? null); ?>" target="_blank" aria-label="Get Directions to <?php echo $location_title; ?>" data-categorytitle="Get Directions" data-itemtitle="<?php echo $location_title_attr; ?>">Get Directions</a>
             <?php } ?>
         </div>
     </div>
