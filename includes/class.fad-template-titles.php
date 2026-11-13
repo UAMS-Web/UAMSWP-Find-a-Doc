@@ -224,8 +224,9 @@ function uamswp_fad_title_single_locations($html): string
  * The page title for the single-physicians template.
  *
  * @param  string  $html  The title the theme built; replaced.
+ * @param  mixed  $context  The second argument the title filter passes; unused.
  */
-function uamswp_fad_title_single_physicians($html): string
+function uamswp_fad_title_single_physicians($html, $context = null): string
 {
     /** @var string $full_name_attr */
     global $full_name_attr;
