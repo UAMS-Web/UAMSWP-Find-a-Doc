@@ -881,6 +881,24 @@ test('holiday hours are listed in date order under one heading', function (): vo
         ->and($output)->toContain('<h3>Upcoming Holiday Hours</h3><dl class="hours"><dt>'.$labels[$ordered[0]].'<br />'.$ordered[0].'<br/></dt><dd>Closed</dd><dt>'.$labels[$ordered[1]].'<br />'.$ordered[1].'<br/></dt><dd>Closed</dd></dl>');
 });
 
+test('a holiday row with an empty or unparseable date is skipped and the other rows still print', function (): void {
+    $date = date('m/d/Y', strtotime('+10 days'));
+    $warnings = [];
+    $output = '';
+    $warnings = uamswp_test_capture_warnings(static function () use (&$output, $date): void {
+        $output = single_location_markup(single_location_hours([single_location_day()]) + ['location_holiday_hours' => [
+            ['date' => '', 'label' => 'Empty', 'closed' => true, 'open' => '', 'close' => ''],
+            ['date' => 'not a date', 'label' => 'Garbled', 'closed' => true, 'open' => '', 'close' => ''],
+            ['date' => $date, 'label' => 'Thanksgiving', 'closed' => true, 'open' => '', 'close' => ''],
+        ]]);
+    });
+
+    expect($warnings)->toBe([])
+        ->and($output)->toContain('<h3>Upcoming Holiday Hours</h3><dl class="hours"><dt>Thanksgiving<br />'.$date.'<br/></dt><dd>Closed</dd></dl>')
+        ->and($output)->not->toContain('Empty<br />')
+        ->and($output)->not->toContain('Garbled<br />');
+});
+
 test('a holiday is listed within the next month and not further ahead', function (): void {
     $edge = date('m/d/Y', strtotime('+25 days'));
     $beyond = date('m/d/Y', strtotime('+35 days'));

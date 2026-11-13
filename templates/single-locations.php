@@ -1066,8 +1066,11 @@ while (have_posts()) {
                     $i = 0;
                     foreach ($holidayhours as $row) {
                         $holidayDate = $row['date']; // Text
-                        /** @var DateTime $holidayDateTime */
                         $holidayDateTime = DateTime::createFromFormat('m/d/Y', $holidayDate); // Date for evaluation
+                        // A row whose date does not parse is skipped, so one bad row does not stop the page (#1349).
+                        if ($holidayDateTime === false) {
+                            continue;
+                        }
                         $dateNow = new DateTime('now', new DateTimeZone('America/Chicago'));
                         // The date is made before the current time, so the two are never equal.
                         // @pest-mutate-ignore: SmallerToSmallerOrEqual
