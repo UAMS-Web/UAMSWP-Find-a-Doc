@@ -151,3 +151,23 @@ test('the resource list item trims an excerpt longer than 160 characters only', 
 
     expect(uamswp_test_include_partial('loops/resource-list-item', ['id' => 7]))->toContain('<p>TRIMMED &hellip;</p>');
 });
+
+test('the resource list item reads the content of its own resource when there is no excerpt', function (): void {
+    small_partials_resource(['clinical_resource_type' => ['value' => 'guide', 'label' => 'Guide']], 'Title', '');
+    $arguments = null;
+    when('get_the_content')->alias(static function (mixed ...$given) use (&$arguments): string {
+        $arguments = $given;
+
+        return '<b>From content</b>';
+    });
+
+    // The post is the third argument of get_the_content(); the item once passed it as the first, the "more" link text.
+    expect(uamswp_test_include_partial('loops/resource-list-item', ['id' => 7]))->toContain('<p>From content</p>')
+        ->and($arguments)->toBe([null, false, 7]);
+});
+
+test('the resource list item prints no type label for a resource without a type', function (): void {
+    small_partials_resource([], 'Title', 'An excerpt.');
+
+    expect(uamswp_test_include_partial('loops/resource-list-item', ['id' => 7]))->toContain('<span class="subtitle"><span class="sr-only">(</span><span class="sr-only">)</span></span>');
+});

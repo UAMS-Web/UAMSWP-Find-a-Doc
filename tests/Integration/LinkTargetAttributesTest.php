@@ -54,9 +54,10 @@ final class LinkTargetAttributesTest extends IntegrationTestCase
     {
         $source = (string) file_get_contents(dirname(__DIR__, 2)."/templates/blocks/{$block}.php");
 
-        // The anchor must print the helper's result, not discard it.
+        // The anchor must print the helper's result, not discard it. A block that always sets the target passes it
+        // without the `?? null` the others need.
         self::assertMatchesRegularExpression(
-            '/aria-label="<\?php echo esc_attr\(\$more_button_description_attr\); \?>"<\?php echo uams_fad_link_target_attributes\(\$more_button_target \?\? null\); \?>>/',
+            '/aria-label="<\?php echo esc_attr\(\$more_button_description_attr\); \?>"<\?php echo uams_fad_link_target_attributes\(\$more_button_target(?: \?\? null)?\); \?>>/',
             $source,
         );
     }

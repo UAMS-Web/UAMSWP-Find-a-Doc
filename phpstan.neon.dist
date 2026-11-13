@@ -80,19 +80,12 @@ parameters:
             # Templates that still report findings at level 10 (1,267 across these files on
             # master at 2539922d). Each slice of #1232 removes its own entries once its files
             # are clean, so the rest of the templates directory is already enforced.
-            - templates/archive-clinical-resource.php
             - templates/archive-condition.php
-            - templates/archive-expertise.php
             - templates/archive-taxonomy-conditions.php
             - templates/archive-taxonomy-treatments.php
             - templates/archive-treatments.php
-            - templates/blocks/clinical-resources.php
-            - templates/blocks/recognitions.php
             - templates/loops/conditions-cpt-loop.php
             - templates/loops/conditions-loop.php
-            - templates/loops/expertise-card.php
-            - templates/loops/resource-card.php
-            - templates/loops/resource-list-item.php
             - templates/loops/treatments-cpt-loop.php
             - templates/loops/treatments-loop.php
 
