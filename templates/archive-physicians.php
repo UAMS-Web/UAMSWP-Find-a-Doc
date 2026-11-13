@@ -3,11 +3,9 @@
 // add_filter('seopress_titles_title', 'uamswp_fad_title_archive_physicians', 15, 2);
 
 // Region Cookie
-if (isset($_COOKIE['wp_filter_region']) && ! isset($_GET['_provider_region'])) {
-    $region = $_COOKIE['wp_filter_region'];
-    $url = $_SERVER['REQUEST_URI'];
-    $url .= (parse_url($url, PHP_URL_QUERY) ? '&' : '?').'_provider_region='.$region;
-    header('Location: '.$url);
+$region_redirect = uamswp_fad_region_redirect_url('_provider_region', $_COOKIE, $_GET, $_SERVER);
+if ($region_redirect !== null) {
+    header('Location: '.$region_redirect);
     exit();
 }
 get_header();
