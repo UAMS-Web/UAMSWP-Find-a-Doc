@@ -205,6 +205,7 @@ if ($phone_output == 'location_profile') {
             $phone_numbers = $location_phone_numbers;
             while (have_rows('field_location_phone_numbers')) {
                 the_row();
+                /** @var string|false|null $title */
                 $title = get_sub_field('location_appointments_text');
                 $title_attr = $title;
                 $title_attr = str_replace('"', "'", $title_attr); // Replace double quotes with single quote
@@ -213,8 +214,10 @@ if ($phone_output == 'location_profile') {
                 $title_attr = htmlentities($title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
                 $title_attr = str_replace('&nbsp;', ' ', $title_attr); // Convert non-breaking space with normal space
                 $title_attr = html_entity_decode($title_attr); // Convert HTML entities to their corresponding characters
+                /** @var string|false|null $phone */
                 $phone = get_sub_field('location_appointments_phone');
                 $phone_format_dash = format_phone_dash($phone);
+                /** @var string|false|null $text */
                 $text = get_sub_field('location_appointments_additional_text');
                 ?>
             <dt><?php echo $title; ?></dt>

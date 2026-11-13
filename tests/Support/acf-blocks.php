@@ -10,6 +10,8 @@
 
 declare(strict_types=1);
 
+use PHPUnit\Framework\Assert;
+
 use function Brain\Monkey\Functions\when;
 
 require_once __DIR__.'/acf-functions.php';
@@ -47,6 +49,9 @@ function uamswp_test_acf_blocks_file(): array
     when('esc_html__')->returnArg();
 
     require_once UAMS_FAD_PATH.'includes/class.fad-acf-blocks.php';
+
+    // Whichever test loads the file first is the one a coverage run credits with the file scope lines.
+    Assert::assertSame(require __DIR__.'/acf-blocks-groups.php', $groups, 'The ACF blocks file registers the field groups it was pinned with.');
 
     $registered = ['groups' => $groups, 'actions' => $actions];
 

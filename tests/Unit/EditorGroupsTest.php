@@ -20,6 +20,7 @@ use function Brain\Monkey\Functions\expect;
 use function Brain\Monkey\Functions\when;
 
 require_once __DIR__.'/../Support/acf-functions.php';
+require_once __DIR__.'/../Support/editor-groups.php';
 
 final class EditorGroupsTest extends UnitTestCase
 {
@@ -37,9 +38,7 @@ final class EditorGroupsTest extends UnitTestCase
 
         $this->get_before = $_GET;
 
-        when('add_action')->justReturn(true);
-        when('add_filter')->justReturn(true);
-        require_once dirname(__DIR__, 2).'/includes/class.fad-editor-groups.php';
+        \uamswp_test_load_editor_groups();
 
         // A marker string stands in for a WP_Error, which the unit process does not load.
         when('is_wp_error')->alias(static fn (mixed $value): bool => $value === 'WP_ERROR');

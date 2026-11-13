@@ -4,6 +4,8 @@
  *  Add description from provider short description or full description *
  */
 
+/** @var WP_Post $post */
+
 // Get the page title and other name values
 
 // Get the elements of the provider's name
@@ -32,8 +34,6 @@ $degrees = get_field('physician_degree', $post->ID);
 
 if (
     $degrees
-    &&
-    is_array($degrees)
 ) {
 
     $degrees = array_filter($degrees);
@@ -52,9 +52,9 @@ if ($degrees) {
 
     foreach ($degrees as $degree) {
 
-        $degree_term = get_term($degree, 'degree');
+        $degree_term = get_term(uamswp_fad_int($degree), 'degree');
 
-        if (is_object($degree_term)) {
+        if (is_object($degree_term) && ! is_wp_error($degree_term)) {
 
             $degree_name = $degree_term->name;
             $degree_list .= $degree_name;
@@ -125,17 +125,17 @@ if (
 // Full name (e.g., "Leonard H. McCoy, M.D.")
 
 $full_name = $first_name.' '.($middle_name ? $middle_name.' ' : '').$last_name.($pedigree ? '&nbsp;'.$pedigree : '').($degree_list ? ', '.$degree_list : '');
-$full_name_attr = $full_name ? uamswp_attr_conversion($full_name) : '';
+$full_name_attr = uamswp_attr_conversion($full_name);
 
 // Medium name (e.g., "Dr. Leonard H. McCoy")
 
 $medium_name = ($prefix ? $prefix.' ' : '').$first_name.' '.($middle_name ? $middle_name.' ' : '').$last_name;
-$medium_name_attr = $medium_name ? uamswp_attr_conversion($medium_name) : '';
+$medium_name_attr = uamswp_attr_conversion($medium_name);
 
 // Short name (e.g., "Dr. McCoy")
 
 $short_name = $prefix ? $prefix.'&nbsp;'.$last_name : $first_name.' '.($middle_name ? $middle_name.' ' : '').$last_name.($pedigree ? '&nbsp;'.$pedigree : '');
-$short_name_attr = $short_name ? uamswp_attr_conversion($short_name) : '';
+$short_name_attr = uamswp_attr_conversion($short_name);
 
 // Short name possessive (e.g., "Dr. McCoy's")
 
@@ -181,7 +181,7 @@ if ($languages) {
 
         $language_name = get_term_by('id', $language, 'language');
 
-        if (is_object($language_name)) {
+        if (is_object($language_name) && ! is_wp_error($language_name)) {
 
             $language_list .= $language_name->name;
 
@@ -231,9 +231,9 @@ if ($resident) {
 
     if ($provider_specialty) {
 
-        $provider_specialty_term = get_term($provider_specialty, 'clinical_title');
+        $provider_specialty_term = get_term(uamswp_fad_int($provider_specialty), 'clinical_title');
 
-        if (is_object($provider_specialty_term)) {
+        if (is_object($provider_specialty_term) && ! is_wp_error($provider_specialty_term)) {
 
             // Get term name
 
@@ -241,7 +241,7 @@ if ($resident) {
 
             // Get occupational title field from term
 
-            $provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term) ?? null;
+            $provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term);
 
             // Set occupational title from term name as a fallback
 
@@ -293,24 +293,20 @@ $provider_occupation_title_indef_article_exceptions = [
     'Uveitis' => 'a',
 ];
 
-if ($provider_occupation_title_indef_article_exceptions !== []) {
+foreach ($provider_occupation_title_indef_article_exceptions as $exception => $indef_article) {
 
-    foreach ($provider_occupation_title_indef_article_exceptions as $exception => $indef_article) {
+    if (
+        substr(
+            strtolower($provider_occupation_title),
+            0,
+            strlen($exception)
+        ) == strtolower($exception)
+    ) {
 
-        if (
-            substr(
-                strtolower($provider_occupation_title),
-                0,
-                strlen($exception)
-            ) == strtolower($exception)
-        ) {
+        // If the clinical title begins with the exception key...
 
-            // If the clinical title begins with the exception key...
-
-            // Use the key's value as the indefinite article
-            $provider_occupation_title_indef_article = $indef_article;
-
-        }
+        // Use the key's value as the indefinite article
+        $provider_occupation_title_indef_article = $indef_article;
 
     }
 
@@ -323,7 +319,7 @@ $locations = get_field('physician_locations', $post->ID);
 $location_valid = false;
 if (! empty($locations)) {
     foreach ($locations as $location) {
-        if (get_post_status($location) == 'publish') {
+        if (get_post_status(uamswp_fad_int($location)) == 'publish') {
             $location_valid = true;
             break;
         }
@@ -333,7 +329,7 @@ if (! empty($locations)) {
 $location_count = 0;
 if ($locations && $location_valid) {
     foreach ($locations as $location) {
-        if (get_post_status($location) == 'publish') {
+        if (get_post_status(uamswp_fad_int($location)) == 'publish') {
             $location_count++;
         }
     } // endforeach
@@ -349,10 +345,10 @@ $l = 1;
 if ($locations && $location_valid) {
     foreach ($locations as $location) {
         if ($l < 2) {
-            if (get_post_status($location) == 'publish') {
-                $primary_appointment_title = get_the_title($location);
+            if (get_post_status(uamswp_fad_int($location)) == 'publish') {
+                $primary_appointment_title = get_the_title(uamswp_fad_int($location));
                 $primary_appointment_title_attr = $primary_appointment_title ? uamswp_attr_conversion($primary_appointment_title) : '';
-                $primary_appointment_url = get_the_permalink($location);
+                $primary_appointment_url = get_the_permalink(uamswp_fad_int($location));
                 $primary_appointment_city = get_field('location_city', $location);
                 $primary_appointment_city_attr = $primary_appointment_city ? uamswp_attr_conversion($primary_appointment_city) : '';
 
@@ -365,8 +361,8 @@ if ($locations && $location_valid) {
 $expertises = get_field('physician_expertise', $post->ID);
 if ($expertises) {
     foreach ($expertises as $expertise) {
-        if (get_post_status($expertise) == 'publish') {
-            $expertise_primary_name = get_the_title($expertise);
+        if (get_post_status(uamswp_fad_int($expertise)) == 'publish') {
+            $expertise_primary_name = get_the_title(uamswp_fad_int($expertise));
             break;
         }
     }
@@ -380,8 +376,10 @@ $provider_service_line = get_field('physician_service_line', $post->ID);
 if (have_rows('remove_ontology_criteria', 'option')) {
     while (have_rows('remove_ontology_criteria', 'option')) {
         the_row();
-        $remove_region = get_sub_field('remove_regions', 'option');
-        $remove_service_line = get_sub_field('remove_service_lines', 'option');
+        /** @var array<int, int|string>|false|null $remove_region */
+        $remove_region = get_sub_field('remove_regions');
+        /** @var array<int, int|string>|false|null $remove_service_line */
+        $remove_service_line = get_sub_field('remove_service_lines');
         if ((! empty($remove_region) && uamswp_provider_region_in_rule($provider_region, $remove_region)) && empty($remove_service_line)) {
             $hide_medical_ontology = true;
             break;
@@ -454,11 +452,11 @@ while (have_posts()) {
             // $resident_hometown_country = $resident_profile_group['physician_resident_hometown_country'];
             // $resident_medical_school = $resident_profile_group['physician_resident_hometown_country'];
             $resident_academic_department = $resident_profile_group['physician_resident_academic_department'];
-            $resident_academic_department_name = $resident_academic_department ? get_term($resident_academic_department, 'academic_department')->name : '';
+            $resident_academic_department_name = $resident_academic_department ? uamswp_fad_term_name($resident_academic_department, 'academic_department') : '';
             $resident_academic_chief = $resident_profile_group['physician_resident_academic_chief'];
             $resident_academic_chief_name = $resident_academic_chief ? 'Chief Resident' : '';
             $resident_academic_year = $resident_profile_group['physician_resident_academic_year'];
-            $resident_academic_year_name = $resident_academic_year ? get_term($resident_academic_year, 'residency_year')->name : '';
+            $resident_academic_year_name = $resident_academic_year ? uamswp_fad_term_name($resident_academic_year, 'residency_year') : '';
             $resident_academic_name = $resident_academic_chief ? $resident_academic_chief_name : $resident_academic_year_name;
 
         }
@@ -506,100 +504,100 @@ while (have_posts()) {
 
     // Classes for indicating presence of content
     $provider_field_classes = '';
-    if ($degrees && ! empty($degrees)) {
+    if ($degrees) {
         $provider_field_classes .= ' has-degrees';
     }
-    if ($prefix && ! empty($prefix)) {
+    if ($prefix) {
         $provider_field_classes .= ' has-prefix';
     }
     if (has_post_thumbnail()) {
         $provider_field_classes .= ' has-image';
-        $image_age = date('Y') - get_the_date('Y', get_post_thumbnail_id()); // How old the provider image is in years
+        $image_age = (int) date('Y') - (int) get_the_date('Y', uamswp_fad_int(get_post_thumbnail_id())); // How old the provider image is in years
         $image_age_threshold = 10; // Set the threshold for how old a provider image can be before a new photo is needed
         if ($image_age >= $image_age_threshold) {
             $image_age = $image_age_threshold.'+'; // Cap attribute value at the threshold
         }
     }
-    if ($service_line && ! empty($service_line)) {
+    if ($service_line) {
         $provider_field_classes .= ' has-service-line';
     }
-    if ($npi && ! empty($npi)) {
+    if ($npi) {
         $provider_field_classes .= ' has-npi';
     }
-    if ($bio && ! empty($bio)) {
+    if ($bio) {
         $provider_field_classes .= ' has-clinical-bio';
     }
-    if ($bio_short && ! empty($bio_short)) {
+    if ($bio_short) {
         $provider_field_classes .= ' has-short-clinical-bio';
     }
-    if ($video && ! empty($video)) {
+    if ($video) {
         $provider_field_classes .= ' has-video';
     }
     // if ($conditions && !empty($conditions)) { $provider_field_classes = $provider_field_classes . ' has-condition'; }
-    if ($conditions_cpt && ! empty($conditions_cpt)) {
+    if ($conditions_cpt) {
         $provider_field_classes .= ' has-condition';
     }
     // if ($treatments && !empty($treatments)) { $provider_field_classes = $provider_field_classes . ' has-treatment'; }
-    if ($treatments_cpt && ! empty($treatments_cpt)) {
+    if ($treatments_cpt) {
         $provider_field_classes .= ' has-treatment';
     }
     if ($locations && $location_valid) {
         $provider_field_classes .= ' has-location';
     }
-    if ($affiliation && ! empty($affiliation)) {
+    if ($affiliation) {
         $provider_field_classes .= ' has-affiliation';
     }
-    if ($expertises && ! empty($expertises)) {
+    if ($expertises) {
         $provider_field_classes .= ' has-expertise';
     }
-    if ($hidden && ! empty($hidden)) {
+    if ($hidden) {
         $provider_field_classes .= ' has-hidden';
     }
     // Add one instance of a class (' has-academic-appt') if there is a physician_academic_appointment row with a value in either/both of the fields.
     // Add one instance of a class (' has-empty-academic-title') if there is an empty academic title field in any of the physician_academic_appointment rows.
     // Add one instance of a class (' has-empty-academic-dept') if there is an empty academic department field in any of the physician_academic_appointment rows.
-    if ($college_affiliation && ! empty($college_affiliation)) {
+    if ($college_affiliation) {
         $provider_field_classes .= ' has-college-affiliation';
     }
-    if ($position && ! empty($position)) {
+    if ($position) {
         $provider_field_classes .= ' has-position';
     }
-    if ($bio_academic && ! empty($bio_academic)) {
+    if ($bio_academic) {
         $provider_field_classes .= ' has-academic-bio';
     }
-    if ($bio_academic_short && ! empty($bio_academic_short)) {
+    if ($bio_academic_short) {
         $provider_field_classes .= ' has-short-academic-bio';
     }
-    if ($office_location && ! empty($office_location)) {
+    if ($office_location) {
         $provider_field_classes .= ' has-office-location';
     }
-    if ($office_building && ! empty($office_building)) {
+    if ($office_building) {
         $provider_field_classes .= ' has-office-building';
     }
     // Add one instance of a class (' has-contact-info') if there is a physician_contact_information row with a value in both of the fields.
     // Add one instance of a class (' has-empty-contact-info') if there is an empty information field in any of the physician_contact_information rows.
     // Add one instance of a class (' has-education') if there is a physician_education row with a value in either education_type or school.
     // Add one instance of a class (' has-empty-education-type') if there is an empty education_type field in any of the physician_education rows.
-    if ($education && ! empty($education)) {
+    if ($education) {
         $provider_field_classes .= ' has-education';
     }
     // Add one instance of a class (' has-empty-education-school') if there is an empty school field in any of the physician_education rows.
-    if ($boards && ! empty($boards)) {
+    if ($boards) {
         $provider_field_classes .= ' has-boards';
     }
-    if ($associations && ! empty($associations)) {
+    if ($associations) {
         $provider_field_classes .= ' has-associations';
     }
-    if ($bio_research && ! empty($bio_research)) {
+    if ($bio_research) {
         $provider_field_classes .= ' has-research-bio';
     }
-    if ($research_interests && ! empty($research_interests)) {
+    if ($research_interests) {
         $provider_field_classes .= ' has-research-interests';
     }
-    if ($research_profile && ! empty($research_profile)) {
+    if ($research_profile) {
         $provider_field_classes .= ' has-research-profile';
     }
-    if ($pubmed_author_id && ! empty($pubmed_author_id)) {
+    if ($pubmed_author_id) {
         $provider_field_classes .= ' has-pubmed-id';
     }
     // Add one instance of a class (' has-selected-pubs') if there is a physician_select_publications row with a value in either/both of the pubmed_id_pmid and pubmed_information fields.
@@ -608,10 +606,10 @@ while (have_posts()) {
     // Add one instance of a class (' has-awards') if there is a physician_awards row with a value in either/both of the year and title fields.
     // Add one instance of a class (' has-empty-selected-pub-id') if there is an empty year field in any of the physician_awards rows.
     // Add one instance of a class (' has-empty-selected-pub-info') if there is an empty title field in any of the physician_awards rows.
-    if ($additional_info && ! empty($additional_info)) {
+    if ($additional_info) {
         $provider_field_classes .= ' has-additional-info';
     }
-    if ($resident && ! empty($resident)) {
+    if ($resident) {
         $provider_field_classes .= ' is-resident';
     }
 
@@ -645,7 +643,7 @@ while (have_posts()) {
     $expertise_valid = false;
     if ($expertises) {
         foreach ($expertises as $expertise) {
-            if (get_post_status($expertise) == 'publish') {
+            if (get_post_status(uamswp_fad_int($expertise)) == 'publish') {
                 $expertise_valid = true;
                 break;
             }
@@ -669,11 +667,15 @@ while (have_posts()) {
     $pg_rating_data = '';
     $pg_rating_valid = '';
     $pg_total_comment_count = '';
+    $avg_rating = '';
+    $review_count = '';
+    $comment_count = '';
     // if ( $npi ) {
     // $pg_rating_request = get_post_meta( get_the_ID(), '_syndicated_api_data', true ); // wp_pg_cached_api( $npi, 10 );
     // $pg_rating_data = json_decode( $pg_rating_request ); // Remove the redundant decode
-    $pg_rating_data = get_post_meta(get_the_ID(), '_syndicated_api_data', true);
-    if (! empty($pg_rating_data) && ($pg_rating_data->status->code == '200')) {
+    /** @var object{status: object{code: string}, data: object{entities: list<object{totalRatingCount: int, totalCommentCount: int, overallRating: object{value: float|int, questionRatings: list<object{name: string, responseCount: int, value: float|int}>}, comments: list<object{overallRating: object{value: float|int}, comment: string, mentionTime: string}>}>}}|string $pg_rating_data */
+    $pg_rating_data = get_post_meta(uamswp_fad_int(get_the_ID()), '_syndicated_api_data', true);
+    if (is_object($pg_rating_data) && ($pg_rating_data->status->code == '200')) {
         $pg_rating_valid = (($pg_rating_data->data->entities[0]->totalRatingCount) >= 30);
         $pg_total_comment_count = $pg_rating_data->data->entities[0]->totalCommentCount;
     }
@@ -796,7 +798,7 @@ while (have_posts()) {
     ?>
 
 <div class="content-sidebar-wrap">
-    <main class="doctor-item<?php echo $provider_field_classes; ?>" id="genesis-content"<?php echo has_post_thumbnail() ? ' data-image-age="'.$image_age.'"' : ''; ?><?php echo $service_line ? ' data-service-line="'.get_term($service_line, 'service_line')->name.'"' : ''; ?>>
+    <main class="doctor-item<?php echo $provider_field_classes; ?>" id="genesis-content"<?php echo has_post_thumbnail() ? ' data-image-age="'.$image_age.'"' : ''; ?><?php echo $service_line ? ' data-service-line="'.uamswp_fad_term_name($service_line, 'service_line').'"' : ''; ?>>
         <section class="container-fluid p-0 p-xs-8 p-sm-10 doctor-info bg-white">
             <div class="row mx-0 mx-xs-n4 mx-sm-n8">
                 <div class="col-12 col-xs p-4 py-xs-0 px-xs-4 px-sm-8 order-2 text">
@@ -804,8 +806,8 @@ while (have_posts()) {
                         <span class="name"><?php echo uamswp_provider_name_html($full_name); ?></span>
                         <?php
 
-                            if ($provider_occupation_title && ! empty($provider_occupation_title)) { ?>
-                            <span class="subtitle"><?php echo $provider_occupation_title ?: ''; ?></span>
+                            if ($provider_occupation_title) { ?>
+                            <span class="subtitle"><?php echo $provider_occupation_title; ?></span>
                         <?php } ?>
                     </h1>
                     <?php
@@ -819,7 +821,7 @@ while (have_posts()) {
                             <?php } // endif?>
                             <?php foreach ($locations as $location) {
                                 if ($l < 2) {
-                                    if (get_post_status($location) == 'publish') {
+                                    if (get_post_status(uamswp_fad_int($location)) == 'publish') {
 
                                         // Reset variables
 
@@ -829,7 +831,7 @@ while (have_posts()) {
                                          * replaces the flat swap to the parent ID that the
                                          * address fields used to read through.
                                          */
-                                        $location_source_ids = uamswp_fad_location_source_ids($location);
+                                        $location_source_ids = uamswp_fad_location_source_ids(uamswp_fad_int($location));
 
                                         // Parent Location
                                         $location_has_parent = get_field('location_parent', $location);
@@ -843,13 +845,13 @@ while (have_posts()) {
                                         $parent_title_phrase = ''; // Eliminate PHP errors
 
                                         if ($location_has_parent && $location_parent_id) {
-                                            $parent_location = get_post($location_parent_id);
+                                            $parent_location = get_post(uamswp_fad_int($location_parent_id));
                                         }
                                         // Get Post ID for Address & Image fields
                                         if ($parent_location) {
                                             $parent_id = $parent_location->ID;
                                             $parent_title = $parent_location->post_title;
-                                            $parent_url = get_permalink($parent_id);
+                                            $parent_url = get_permalink($parent_id) ?: '';
                                             $parent_location_prepend_the = get_field('location_prepend_the', $parent_id);
                                             $parent_title_prepend = $parent_location_prepend_the ? 'the ' : '';
                                             $parent_title_phrase = $parent_title_prepend.$parent_title;
@@ -857,11 +859,16 @@ while (have_posts()) {
 
                                         $location_address_1 = get_field('location_address_1', $location_source_ids['street']);
                                         $location_building = get_field('location_building', $location_source_ids['facility']);
+                                        $building_slug = '';
+                                        $building_name = '';
                                         if ($location_building) {
-                                            $building = get_term($location_building, 'building');
-                                            $building_slug = $building->slug;
-                                            $building_name = $building->name;
+                                            $building = get_term(uamswp_fad_int($location_building), 'building');
+                                            if (is_object($building) && ! is_wp_error($building)) {
+                                                $building_slug = $building->slug;
+                                                $building_name = $building->name;
+                                            }
                                         }
+                                        /** @var array{value: int|string, choices: array<int|string, string>}|false $location_floor */
                                         $location_floor = get_field_object('location_building_floor', $location_source_ids['unit']);
                                         $location_floor_value = '';
                                         $location_floor_label = '';
@@ -870,8 +877,8 @@ while (have_posts()) {
                                             $location_floor_label = $location_floor['choices'][$location_floor_value] ?? '';
                                         }
                                         $location_suite = get_field('location_suite', $location_source_ids['unit']);
-                                        $location_address_2 = uamswp_location_address_2(($location_building && $building_slug != '_none'), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, '<br />', ', ');
-                                        $location_address_2_schema = uamswp_location_address_2(($location_building && $building_slug != '_none'), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, ' ', ' ');
+                                        $location_address_2 = uamswp_location_address_2(($location_building && $building_slug != '_none'), $building_name, $location_floor, $location_floor_value, $location_floor_label, $location_suite ?: false, '<br />', ', ');
+                                        $location_address_2_schema = uamswp_location_address_2(($location_building && $building_slug != '_none'), $building_name, $location_floor, $location_floor_value, $location_floor_label, $location_suite ?: false, ' ', ' ');
 
                                         $location_address_2_deprecated = get_field('location_address_2', $location_source_ids['street']);
                                         if (! $location_address_2) {
@@ -899,7 +906,7 @@ while (have_posts()) {
                                         include UAMS_FAD_PATH.'/templates/blocks/locations-phone.php';
                                         ?>
                                 <div class="btn-container">
-                                    <a class="btn btn-primary" href="<?php echo get_the_permalink($location); ?>" data-itemtitle="<?php echo $primary_appointment_title_attr; ?>" data-categorytitle="View Location">
+                                    <a class="btn btn-primary" href="<?php echo get_the_permalink(uamswp_fad_int($location)); ?>" data-itemtitle="<?php echo $primary_appointment_title_attr; ?>" data-categorytitle="View Location">
                                         View Location
                                     </a>
                                     <?php if ($location_count > 1) { ?>
@@ -919,9 +926,9 @@ while (have_posts()) {
                     <dl data-sectiontitle="Overview">
                     <?php // Display area(s) of expertise
                     $expertise_valid = false;
-    if ($expertises && ! empty($expertises) && ! $hide_medical_ontology) {
+    if ($expertises && ! $hide_medical_ontology) {
         foreach ($expertises as $expertise) {
-            if (get_post_status($expertise) == 'publish') {
+            if (get_post_status(uamswp_fad_int($expertise)) == 'publish') {
                 $expertise_valid = true;
                 break;
             }
@@ -930,8 +937,8 @@ while (have_posts()) {
             ?>
                         <dt>Area<?php echo count($expertises) > 1 ? 's' : ''; ?> of Expertise</dt>
                         <?php foreach ($expertises as $expertise) {
-                            if (get_post_status($expertise) == 'publish' && $expertise !== 0) {
-                                echo '<dd><a href="'.get_permalink($expertise).'" target="_self" data-sectiontitle="Overview" data-categorytitle="View Area of Expertise">'.get_the_title($expertise).'</a></dd>';
+                            if (get_post_status(uamswp_fad_int($expertise)) == 'publish' && $expertise !== 0) {
+                                echo '<dd><a href="'.get_permalink(uamswp_fad_int($expertise)).'" target="_self" data-sectiontitle="Overview" data-categorytitle="View Area of Expertise">'.get_the_title(uamswp_fad_int($expertise)).'</a></dd>';
                             }
                         } ?>
                         <?php }
@@ -961,8 +968,7 @@ while (have_posts()) {
                 ?>
                             <dt>Patient Type<?php echo count($patients) > 1 ? 's' : ''; ?></dt>
                             <?php foreach ($patients as $patient) { ?>
-                                <?php $patient_name = get_term($patient, 'patient_type');
-                                echo '<dd>'.$patient_name->name.'</dd>';
+                                <?php echo '<dd>'.uamswp_fad_term_name($patient, 'patient_type').'</dd>';
                                 ?>
                             <?php } ?>
                     <?php } // endif?>
@@ -978,7 +984,7 @@ while (have_posts()) {
                     </dl>
                     <?php
                             echo '<div class="rating" aria-label="Patient Rating">';
-    if ($pg_rating_valid) {
+    if ($pg_rating_valid && is_object($pg_rating_data)) {
         $avg_rating = $pg_rating_data->data->entities[0]->overallRating->value;
         $avg_rating_dec = $pg_rating_data->data->entities[0]->overallRating->value;
         $review_count = $pg_rating_data->data->entities[0]->totalRatingCount;
@@ -1028,21 +1034,21 @@ while (have_posts()) {
                 <div class="col-12 col-xs px-0 px-xs-4 px-sm-8 order-1 image">
                     <picture>
                     <?php if (function_exists('bis_get_attachment_image')) { ?>
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 389, 519, 'center', 'center', 'portrait-3-4'); ?>"
+                        <source srcset="<?php echo uamswp_fad_str(image_sizer(get_post_thumbnail_id(), 389, 519, 'center', 'center', 'portrait-3-4')); ?>"
                             media="(min-width: 1200px)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 306, 408, 'center', 'center', 'portrait-3-4'); ?>"
+                        <source srcset="<?php echo uamswp_fad_str(image_sizer(get_post_thumbnail_id(), 306, 408, 'center', 'center', 'portrait-3-4')); ?>"
                             media="(min-width: 992px)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 182, 243, 'center', 'center', 'portrait-3-4'); ?>"
+                        <source srcset="<?php echo uamswp_fad_str(image_sizer(get_post_thumbnail_id(), 182, 243, 'center', 'center', 'portrait-3-4')); ?>"
                             media="(min-width: 768px)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 86, 115, 'center', 'center', 'portrait-3-4'); ?>"
+                        <source srcset="<?php echo uamswp_fad_str(image_sizer(get_post_thumbnail_id(), 86, 115, 'center', 'center', 'portrait-3-4')); ?>"
                             media="(min-width: 576px)">
-                        <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 380, 507, 'center', 'center', 'portrait-3-4'); ?>"
+                        <source srcset="<?php echo uamswp_fad_str(image_sizer(get_post_thumbnail_id(), 380, 507, 'center', 'center', 'portrait-3-4')); ?>"
                             media="(min-width: 1px)">
-                        <img src="<?php echo image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center', 'portrait-3-4'); ?>" alt="<?php echo esc_attr($full_name_attr); ?>" />
-                        <?php $docphoto = image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center', 'portrait-3-4');
+                        <img src="<?php echo uamswp_fad_str(image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center', 'portrait-3-4')); ?>" alt="<?php echo esc_attr($full_name_attr); ?>" />
+                        <?php $docphoto = uamswp_fad_str(image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center', 'portrait-3-4'));
                     } else {
                         the_post_thumbnail('large', ['itemprop' => 'image']);
-                        $docphoto = get_the_post_thumbnail('large');
+                        $docphoto = get_the_post_thumbnail_url(null, 'large') ?: $docphoto;
                     } // endif?>
                     </picture>
                 </div>
@@ -1307,11 +1313,11 @@ while (have_posts()) {
                                     <?php while (have_rows('physician_academic_admin_title')) {
                                         the_row(); ?>
                                     <?php
-                                            $department = get_term(get_sub_field('department'), 'academic_department');
-                                        $academic_admin_title_tax = get_term(get_sub_field('academic_admin_title_tax'), 'academic_admin_title');
+                                            $department_name = uamswp_fad_term_name(get_sub_field('department'), 'academic_department');
+                                        $academic_admin_title_name = uamswp_fad_term_name(get_sub_field('academic_admin_title_tax'), 'academic_admin_title');
                                         ?>
-                                        <dt><?php echo $department->name; ?></dt>
-                                        <dd><?php echo $academic_admin_title_tax->name; ?></dd>
+                                        <dt><?php echo $department_name; ?></dt>
+                                        <dd><?php echo $academic_admin_title_name; ?></dd>
                                     <?php } ?>
                                     </dl>
                             <?php } ?>
@@ -1323,15 +1329,16 @@ while (have_posts()) {
                                     <?php while (have_rows('physician_academic_appointment')) {
                                         the_row(); ?>
                                     <?php
-                                            $department = get_term(get_sub_field('department'), 'academic_department');
-                                        $academic_title_tax = get_term(get_sub_field('academic_title_tax'), 'academic_title');
-                                        if ($academic_title_tax->name) {
-                                            $academic_title = $academic_title_tax->name;
+                                            $department_name = uamswp_fad_term_name(get_sub_field('department'), 'academic_department');
+                                        $academic_title_name = uamswp_fad_term_name(get_sub_field('academic_title_tax'), 'academic_title');
+                                        if ($academic_title_name) {
+                                            $academic_title = $academic_title_name;
                                         } else {
+                                            /** @var string|false|null $academic_title */
                                             $academic_title = get_sub_field('academic_title');
                                         }
                                         ?>
-                                        <dt><?php echo $department->name; ?></dt>
+                                        <dt><?php echo $department_name; ?></dt>
                                         <dd><?php echo $academic_title; ?></dd>
                                     <?php } ?>
                                     </dl>
@@ -1350,11 +1357,11 @@ while (have_posts()) {
                                     <dl>
                                     <?php while (have_rows('physician_education')) {
                                         the_row();
-                                        $school_name = get_term(get_sub_field('school'), 'school');
-                                        $education_type = get_term(get_sub_field('education_type'), 'educationtype');
+                                        $school_name = uamswp_fad_term_name(get_sub_field('school'), 'school');
+                                        $education_type = uamswp_fad_term_name(get_sub_field('education_type'), 'educationtype');
                                         ?>
-                                        <dt><?php echo $education_type->name; ?></dt>
-                                        <dd><?php echo $school_name->name; ?><?php echo get_sub_field('description') ? '<br /><span class="subtitle">'.get_sub_field('description').'</span>' : ''; ?></dd>
+                                        <dt><?php echo $education_type; ?></dt>
+                                        <dd><?php echo $school_name; ?><?php echo get_sub_field('description') ? '<br /><span class="subtitle">'.uamswp_fad_str(get_sub_field('description')).'</span>' : ''; ?></dd>
                                     <?php } ?>
                                     </dl>
                             <?php }
@@ -1363,8 +1370,8 @@ while (have_posts()) {
                             <h3 class="h4">Professional Certifications</h3>
                             <ul>
                             <?php foreach ($boards as $board) {
-                                $board_name = get_term($board, 'board'); ?>
-                                <li><?php echo $board_name->name; ?></li>
+                                $board_name = uamswp_fad_term_name($board, 'board'); ?>
+                                <li><?php echo $board_name; ?></li>
                                 <?php // };?>
                             <?php } ?>
                             </ul>
@@ -1374,8 +1381,8 @@ while (have_posts()) {
                             <h3 class="h4">Associations</h3>
                             <ul>
                             <?php foreach ($associations as $association) {
-                                $association_name = get_term($association, 'association'); ?>
-                                <li><?php echo $association_name->name; ?></li>
+                                $association_name = uamswp_fad_term_name($association, 'association'); ?>
+                                <li><?php echo $association_name; ?></li>
                                 <?php // };?>
                             <?php } ?>
                             </ul>
@@ -1419,7 +1426,7 @@ while (have_posts()) {
                             <h3>Selected Publications</h3>
                             <ul>
                             <?php foreach ($publications as $publication) { ?>
-                                <li><?php echo $publication['pubmed_information']; ?></li>
+                                <li><?php echo uamswp_fad_str(uamswp_fad_assoc($publication)['pubmed_information'] ?? ''); ?></li>
                             <?php } ?>
                             </ul>
                             <?php } ?>
@@ -1457,7 +1464,7 @@ while (have_posts()) {
         include UAMS_FAD_PATH.'/templates/loops/conditions-cpt-loop.php';
         // $condition_schema .= ',"medicalSpecialty": [';
         $i = 0;
-        foreach ($conditions_cpt_query->posts as $condition) {
+        foreach (uamswp_fad_query_posts($conditions_cpt_query) as $condition) {
             if ($i > 0) {
                 $condition_schema .= ',
             ';
@@ -1479,7 +1486,7 @@ while (have_posts()) {
         include UAMS_FAD_PATH.'/templates/loops/treatments-cpt-loop.php';
         // $treatment_schema .= ',"medicalSpecialty": [';
         $i = 0;
-        foreach ($treatments_cpt_query->posts as $treatment) {
+        foreach (uamswp_fad_query_posts($treatments_cpt_query) as $treatment) {
             if ($i > 0 || $condition_schema) {
                 $treatment_schema .= ',
             ';
@@ -1504,7 +1511,7 @@ while (have_posts()) {
                                 <div class="card-list card-list-expertise">
                                     <?php foreach ($expertises as $expertise) {
                                         $id = $expertise;
-                                        if (get_post_status($expertise) == 'publish' && $expertise !== 0) {
+                                        if (get_post_status(uamswp_fad_int($expertise)) == 'publish' && $expertise !== 0) {
                                             include UAMS_FAD_PATH.'/templates/loops/expertise-card.php';
                                         }
                                     } ?>
@@ -1529,10 +1536,20 @@ while (have_posts()) {
     "address": [';
             ?>
                             <?php foreach ($locations as $location) {
-                                if (get_post_status($location) == 'publish') {
+                                if (get_post_status(uamswp_fad_int($location)) == 'publish') {
 
                                     $id = $location;
                                     include UAMS_FAD_PATH.'/templates/loops/location-card.php';
+                                    /**
+                                     * Set by the location card partial.
+                                     *
+                                     * @var string|false|null $location_address_1
+                                     * @var string $location_address_2_schema
+                                     * @var string|false|null $location_city
+                                     * @var string|false|null $location_state
+                                     * @var string|false|null $location_zip
+                                     * @var string|false|null $location_phone
+                                     */
                                     // Schema data
                                     if ($l > 1) {
                                         $location_schema .= ',';
@@ -1544,7 +1561,7 @@ while (have_posts()) {
                                         "addressLocality": "'.$location_city.'",
                                         "addressRegion": "'.$location_state.'",
                                         "postalCode": "'.$location_zip.'",
-                                        "telephone": "'.format_phone_dash($location_phone).'"
+                                        "telephone": "'.uamswp_fad_str(format_phone_dash($location_phone)).'"
                                         }
                                         ';
                                     ?>
@@ -1562,7 +1579,7 @@ while (have_posts()) {
             </div>
         </section>
         <?php } ?>
-        <?php if ($show_ratings_section) { ?>
+        <?php if ($show_ratings_section && is_object($pg_rating_data)) { ?>
         <section class="uams-module ratings-and-reviews bg-auto" id="ratings">
             <div class="container-fluid">
                 <div class="row">
@@ -1575,7 +1592,9 @@ while (have_posts()) {
                                     <?php
                     $questionRatings = $pg_rating_data->data->entities[0]->overallRating->questionRatings;
             $questionKey = array_search('Likelihood of recommending this provider', array_column($questionRatings, 'name')); // Find the key for 'Likelihood' question
-            $questionRatings = [$questionKey => $questionRatings[$questionKey]] + $questionRatings; // Move 'Likelihood' question to front of the array
+            if ($questionKey !== false) {
+                $questionRatings = [$questionKey => $questionRatings[$questionKey]] + $questionRatings; // Move 'Likelihood' question to front of the array
+            }
             foreach ($questionRatings as $questionRating) {
                 if ($questionRating->responseCount > 0) { ?>
                                         <?php if (count($questionRatings) < 6 || ((stripos($questionRating->name, 'Would Recommend') === false) && (stripos($questionRating->name, 'Listened Carefully') === false) && (stripos($questionRating->name, 'Knew Medical History') === false) && (stripos($questionRating->name, 'Gave Enough Information') === false) && (stripos($questionRating->name, 'Trust Provider') === false))) { ?>
@@ -1635,7 +1654,7 @@ while (have_posts()) {
                                     </div>
                                     <div class="card-footer bg-transparent text-muted small">
                                         <h4 class="sr-only">Date</h4>
-                                        <?php echo date('M d, Y', strtotime($review->mentionTime)) ?>
+                                        <?php echo date('M d, Y', (int) strtotime($review->mentionTime)) ?>
                                     </div>
                                 </div>
                                 <?php } ?>
@@ -1689,10 +1708,9 @@ while (have_posts()) {
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <div id="comment-list" class="card-list" data-postid="<?php echo esc_attr(get_the_ID()); ?>" data-npi="<?php echo esc_attr($npi); ?>" data-commentcount="<?php echo esc_attr($pg_total_comment_count); ?>">
+                                        <div id="comment-list" class="card-list" data-postid="<?php echo esc_attr(uamswp_fad_str(get_the_ID())); ?>" data-npi="<?php echo esc_attr(uamswp_fad_str($npi)); ?>" data-commentcount="<?php echo esc_attr(uamswp_fad_str($pg_total_comment_count)); ?>">
                                             <?php foreach ($reviews as $review) {
-                                                $i = 1;
-                                                if ($i < 11) { ?>
+                                                ?>
                                             <div class="card">
                                                 <div class="card-header bg-transparent">
                                                     <div class="rating rating-center" aria-label="Average Rating">
@@ -1706,11 +1724,9 @@ while (have_posts()) {
                                                 </div>
                                                 <div class="card-footer bg-transparent text-muted small">
                                                     <h4 class="sr-only">Date</h4>
-                                                    <?php echo date('M d, Y', strtotime($review->mentionTime)); ?>
+                                                    <?php echo date('M d, Y', (int) strtotime($review->mentionTime)); ?>
                                                 </div>
                                             </div>
-                                            <?php }
-                                                $i++; ?>
                                             <?php } ?>
                                         </div>
                                         <div class="loading-spinner"></div> <!-- Loading spinner -->
@@ -1822,7 +1838,7 @@ while (have_posts()) {
     "@type": "AggregateRating",
     "ratingValue": "<?php echo $avg_rating; ?>",
     "ratingCount": "<?php echo $review_count; ?>"
-    <?php echo ($comment_count && $comment_count != '0') ? ',
+    <?php echo $comment_count ? ',
 "reviewCount": "'.$comment_count.'"' : ''; ?>
    }
   <?php } ?>

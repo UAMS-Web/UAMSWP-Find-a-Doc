@@ -18,7 +18,7 @@ declare(strict_types=1);
  */
 function published_loop_flags(string $source): array
 {
-    preg_match_all('/get_post_status\(\$\w+\)\s*==\s*\'publish\'\)\s*\{\s*(\$\w+_valid)\s*=\s*true;\s*(break;)?/', $source, $matches, PREG_SET_ORDER);
+    preg_match_all('/get_post_status\((?:uamswp_fad_int\(\$\w+\)|\$\w+)\)\s*==\s*\'publish\'\)\s*\{\s*(\$\w+_valid)\s*=\s*true;\s*(break;)?/', $source, $matches, PREG_SET_ORDER);
 
     return array_map(static fn (array $match): array => [$match[1], isset($match[2])], $matches);
 }

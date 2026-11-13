@@ -8,6 +8,7 @@
 declare(strict_types=1);
 
 require_once __DIR__.'/../Support/single-location.php';
+require_once __DIR__.'/../Support/acf-blocks.php';
 
 /**
  * Render the location profile and return its output with the whitespace between tags removed.
@@ -195,9 +196,9 @@ test('a single image prints at each size', function (): void {
     $output = single_location_markup(['location_wayfinding_photo' => 501], ['meta' => ['_wp_attachment_image_alt' => 'The clinic']]);
 
     expect($output)->toContain('<div class="col-12 col-md image"><div class="content-width"><picture>')
-        ->and($output)->toContain('<source srcset="https://example.test/photo-630x473.jpg" media="(min-width: 1350px)">')
-        ->and($output)->toContain('<source srcset="https://example.test/photo-576x324.jpg" media="(min-width: 1px)">')
-        ->and($output)->toContain('<img src="https://example.test/photo-630x473.jpg" alt="The clinic" class="single-image" />')
+        ->and($output)->toContain('<source srcset="https://example.test/photo-501-630x473.jpg" media="(min-width: 1350px)">')
+        ->and($output)->toContain('<source srcset="https://example.test/photo-501-576x324.jpg" media="(min-width: 1px)">')
+        ->and($output)->toContain('<img src="https://example.test/photo-501-630x473.jpg" alt="The clinic" class="single-image" />')
         ->and($output)->not->toContain('carousel');
 });
 
@@ -207,7 +208,7 @@ test('several images print as a carousel with thumbnails', function (): void {
     expect($output)->toContain('<div class="carousel slide carousel-thumbnails" id="location-info-carousel"')
         ->and(substr_count($output, 'class="carousel-item'))->toBe(3)
         ->and($output)->toContain('<div class="carousel-item active">')
-        ->and($output)->toContain('<li data-target="#location-info-carousel" data-slide-to="0" class="active"><img src="https://example.test/photo-60x45.jpg" alt="" /></li>')
+        ->and($output)->toContain('<li data-target="#location-info-carousel" data-slide-to="0" class="active"><img src="https://example.test/photo-501-60x45.jpg" alt="" /></li>')
         ->and($output)->toContain('<li data-target="#location-info-carousel" data-slide-to="2" ><img');
 });
 
@@ -739,4 +740,445 @@ test('a closed holiday row and one that has no times each close their descriptio
     expect($output)->toContain('<dt>Closed day<br />'.$date.'<br/></dt><dd>Closed</dd>')
         ->and($output)->toContain('<dt>Unknown day<br />'.$date.'<br/></dt><dd></dd>')
         ->and($output)->toContain('</dd></dl>');
+});
+
+/**
+ * The prepared modified hours text and structured data for one group, over a fixed window, with the whitespace collapsed.
+ *
+ * @param  list<array<string, mixed>>  $times  The rows of modified hours times.
+ * @param  array<string, mixed>  $row  More values of the group.
+ * @param  array<string, mixed>  $group  More values of the hours group.
+ * @return array{text: string, schema: string, start: mixed, end: mixed}
+ */
+function single_location_modified_golden(array $times, array $row = [], array $group = []): array
+{
+    $row += ['location_modified_hours_title' => '', 'location_modified_hours_information' => '', 'location_modified_hours_24_7' => false, 'location_modified_hours_times' => $times];
+    $fields = single_location_modified([$row], $group + ['location_modified_hours_reason' => '', 'location_modified_hours_start_date' => 'January 1, 2020', 'location_modified_hours_end_date' => 'January 1, 2099']);
+    $vars = single_location($fields);
+    $squash = static fn (mixed $value): string => trim((string) preg_replace('/\s+/', ' ', (string) $value));
+
+    return ['text' => $squash($vars['modified_text']), 'schema' => $squash($vars['modified_hours_schema']), 'start' => $vars['active_start'], 'end' => $vars['active_end']];
+}
+
+test('modified hours print every kind of row exactly', function (): void {
+    $times = [
+        single_location_modified_time('Mon - Fri', '08:00:00', '17:00:00', false, 'Lunch'),
+        single_location_modified_time('Mon - Fri', '18:00:00', '20:00:00'),
+        single_location_modified_time('Saturday', '', '', true),
+        single_location_modified_time('Sunday', '00:00:00', '00:00:00'),
+    ];
+    $golden = single_location_modified_golden($times, ['location_modified_hours_title' => 'Week', 'location_modified_hours_information' => '<p>Info</p>'], ['location_modified_hours_reason' => '<p>Why</p>']);
+
+    expect($golden['text'])->toBe('<p>Why</p><p class="small font-italic">These modified hours start on January 1, 2020, and are scheduled to end after January 1, 2099.</p><h3 class="h4">Week</h3><p>Info</p><dl class="hours"><dt>Mon - Fri</dt> <dd>8 a.m. &ndash; 5 p.m. <br /><span class="subtitle">Lunch</span></dd><dd>6 &ndash; 8 p.m.</dd><dt>Saturday</dt> <dd>Closed </dd><dt>Sunday</dt> <dd></dd></dl>')
+        ->and($golden['schema'])->toBe('"openingHoursSpecification": [ { "@type": "OpeningHoursSpecification", "validFrom": "2020-01-01", "validThrough": "2099-01-01", "dayOfWeek": [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" ], "opens": "08:00", "closes": "17:00" }, { "@type": "OpeningHoursSpecification", "validFrom": "2020-01-01", "validThrough": "2099-01-01", "dayOfWeek": [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" ], "opens": "18:00", "closes": "20:00" }, { "@type": "OpeningHoursSpecification", "validFrom": "2020-01-01", "validThrough": "2099-01-01", "dayOfWeek": "Saturday", "opens": "00:00", "closes": "00:00" }, { "@type": "OpeningHoursSpecification", "validFrom": "2020-01-01", "validThrough": "2099-01-01", "dayOfWeek": "Sunday", "opens": "00:00", "closes": "00:00" } ],')
+        ->and($golden['start'])->toBe(1577836800)
+        ->and($golden['end'])->toBe(4070908800);
+});
+
+test('a closed Monday to Friday row names the single day label in the structured data', function (): void {
+    $golden = single_location_modified_golden([single_location_modified_time('Mon - Fri', '', '', true)]);
+
+    expect($golden['schema'])->toBe('"openingHoursSpecification": [ { "@type": "OpeningHoursSpecification", "validFrom": "2020-01-01", "validThrough": "2099-01-01", "dayOfWeek": "Mon - Fri", "opens": "00:00", "closes": "00:00" } ],');
+});
+
+test('modified hours with no end run until further notice and have no end in the structured data', function (): void {
+    $golden = single_location_modified_golden([single_location_modified_time('Monday', '08:00:00', '17:00:00')], [], ['location_modified_hours_end' => false, 'location_modified_hours_end_date' => '']);
+
+    expect($golden['text'])->toBe('<p class="small font-italic">These modified hours start on January 1, 2020, and will remain in effect until further notice.</p><dl class="hours"><dt>Monday</dt> <dd>8 a.m. &ndash; 5 p.m.</dd></dl>')
+        ->and($golden['schema'])->toBe('"openingHoursSpecification": [ { "@type": "OpeningHoursSpecification", "validFrom": "2020-01-01", "dayOfWeek": "Monday", "opens": "08:00", "closes": "17:00" } ],')
+        ->and($golden['end'])->toBe('TBD');
+});
+
+test('an end date that is switched on but empty is treated as no end', function (): void {
+    $golden = single_location_modified_golden([single_location_modified_time('Monday', '08:00:00', '17:00:00')], [], ['location_modified_hours_end_date' => '']);
+
+    expect($golden['text'])->toBe('')
+        ->and($golden['schema'])->toBe('');
+});
+
+test('modified hours open around the clock print the group heading and the whole week', function (): void {
+    $golden = single_location_modified_golden([], ['location_modified_hours_24_7' => true, 'location_modified_hours_title' => 'Always', 'location_modified_hours_information' => '<p>I</p>']);
+    $open = single_location_modified_golden([], ['location_modified_hours_24_7' => true], ['location_modified_hours_end' => false, 'location_modified_hours_end_date' => '']);
+
+    expect($golden['text'])->toBe('<p class="small font-italic">These modified hours start on January 1, 2020, and are scheduled to end after January 1, 2099.</p><h3 class="h4">Always</h3><p>I</p><strong>Open 24/7</strong>')
+        ->and($golden['schema'])->toBe('"openingHoursSpecification": [ { "@type": "OpeningHoursSpecification", "validFrom": "2020-01-01", "validThrough": "2099-01-01", "dayOfWeek": [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" ], "opens": "00:00", "closes": "23:59" } ],')
+        ->and($open['text'])->toBe('<p class="small font-italic">These modified hours start on January 1, 2020, and will remain in effect until further notice.</p><strong>Open 24/7</strong>')
+        ->and($open['schema'])->toBe('"openingHoursSpecification": [ { "@type": "OpeningHoursSpecification", "validFrom": "2020-01-01", "dayOfWeek": [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" ], "opens": "00:00", "closes": "23:59" } ],');
+});
+
+test('a group whose times are not a list prints only the dates', function (): void {
+    $golden = single_location_modified_golden([], ['location_modified_hours_times' => 'x']);
+
+    expect($golden['text'])->toBe('<p class="small font-italic">These modified hours start on January 1, 2020, and are scheduled to end after January 1, 2099.</p>')
+        ->and($golden['schema'])->toBe('');
+});
+
+test('typical hours stay hidden only while modified hours cover today and run past thirty days', function (): void {
+    $times = [single_location_modified_time('Monday', '08:00:00', '17:00:00')];
+    $fields = static fn (string $start, string $end, bool $ends = true): array => single_location_modified([['location_modified_hours_title' => '', 'location_modified_hours_information' => '', 'location_modified_hours_24_7' => false, 'location_modified_hours_times' => $times]], ['location_modified_hours_start_date' => $start, 'location_modified_hours_end' => $ends, 'location_modified_hours_end_date' => $end]);
+    $today = date('F j, Y');
+    $typical = static fn (array $f): bool => str_contains(single_location_markup($f), 'Typical Hours');
+
+    // Starting today with no end hides them, as does an end far away; starting tomorrow or ending soon does not.
+    expect($typical($fields($today, '', false)))->toBeFalse()
+        ->and($typical($fields($today, date('F j, Y', strtotime('+60 days')))))->toBeFalse()
+        ->and($typical($fields(date('F j, Y', strtotime('+1 day')), '', false)))->toBeTrue()
+        ->and($typical($fields($today, date('F j, Y', strtotime('+10 days')))))->toBeTrue()
+        ->and($typical($fields(date('F j, Y', strtotime('-5 days')), $today)))->toBeTrue();
+});
+
+test('an end date is ignored while the end switch is off', function (): void {
+    $off = ['location_modified_hours_end' => false, 'location_modified_hours_end_date' => 'January 1, 2099'];
+    $rows = single_location_modified_golden([single_location_modified_time('Monday', '08:00:00', '17:00:00')], [], $off);
+    $always = single_location_modified_golden([], ['location_modified_hours_24_7' => true], $off);
+
+    expect($rows['text'])->toContain('and will remain in effect until further notice.')
+        ->and($rows['schema'])->not->toContain('validThrough')
+        ->and($always['schema'])->not->toContain('validThrough');
+});
+
+test('modified hours whose window has passed print nothing at all', function (): void {
+    $output = single_location_markup(single_location_modified([], ['location_modified_hours_start_date' => date('F j, Y', strtotime('-20 days')), 'location_modified_hours_end_date' => date('F j, Y', strtotime('-10 days'))]));
+
+    expect($output)->not->toContain('Modified Hours')
+        ->and($output)->not->toContain('openingHoursSpecification": [ {');
+});
+
+test('typical hours with an empty or midnight open time print no times', function (): void {
+    $output = single_location_markup(single_location_hours([single_location_day('Mon', '', '17:00:00'), single_location_day('Tue', '00:00:00', '17:00:00'), single_location_day('Wed', '08:00:00', '17:00:00')]));
+
+    expect($output)->toContain('<dl class="hours"><dt>Mon</dt><dd></dd><dt>Tue</dt><dd></dd><dt>Wed</dt><dd>8 a.m. &ndash; 5 p.m.</dd></dl>');
+});
+
+test('the structured data separates the open rows and skips the closed ones', function (): void {
+    $first = single_location_markup(single_location_hours([single_location_day('Sun', '00:00:00', '00:00:00', true), single_location_day('Mon - Fri'), single_location_day('Sat', '09:00:00', '12:00:00')]));
+    $single = single_location_markup(single_location_hours([single_location_day('Sat', '09:00:00', '12:00:00')]));
+    $closed = single_location_markup(single_location_hours([single_location_day('Sun', '', '', true)]));
+
+    expect($first)->toContain('"openingHours": ["Mo-Fr 08:00-17:00", "Sa 09:00-12:00"],')
+        ->and($single)->toContain('"openingHours": ["Sa 09:00-12:00"],')
+        ->and($closed)->toContain('"openingHours": [],');
+});
+
+test('a closed Monday to Friday row adds nothing to the structured data', function (): void {
+    $output = single_location_markup(single_location_hours([single_location_day('Mon - Fri', '', '', true), single_location_day('Monday', '08:00:00', '17:00:00')]));
+
+    expect($output)->toContain('"openingHours": ["Mo 08:00-17:00"],');
+});
+
+test('holiday hours are listed in date order under one heading', function (): void {
+    $later = date('m/d/Y', strtotime('+20 days'));
+    $sooner = date('m/d/Y', strtotime('+5 days'));
+    $output = single_location_markup(single_location_hours([single_location_day()]) + ['location_holiday_hours' => [
+        ['date' => $later, 'label' => 'Later', 'closed' => true, 'open' => '', 'close' => ''],
+        ['date' => $sooner, 'label' => 'Sooner', 'closed' => true, 'open' => '', 'close' => ''],
+    ]]);
+    $ordered = [$later, $sooner];
+    sort($ordered);
+    $labels = [$later => 'Later', $sooner => 'Sooner'];
+
+    expect(substr_count($output, 'Upcoming Holiday Hours'))->toBe(1)
+        ->and($output)->toContain('<h3>Upcoming Holiday Hours</h3><dl class="hours"><dt>'.$labels[$ordered[0]].'<br />'.$ordered[0].'<br/></dt><dd>Closed</dd><dt>'.$labels[$ordered[1]].'<br />'.$ordered[1].'<br/></dt><dd>Closed</dd></dl>');
+});
+
+test('a holiday is listed within the next month and not further ahead', function (): void {
+    $edge = date('m/d/Y', strtotime('+25 days'));
+    $beyond = date('m/d/Y', strtotime('+35 days'));
+    $output = single_location_markup(single_location_hours([single_location_day()]) + ['location_holiday_hours' => [
+        ['date' => $edge, 'label' => 'Edge', 'closed' => true, 'open' => '', 'close' => ''],
+        ['date' => $beyond, 'label' => 'Beyond', 'closed' => true, 'open' => '', 'close' => ''],
+    ]]);
+
+    expect($output)->toContain('<dt>Edge<br />'.$edge.'<br/></dt>')
+        ->and($output)->not->toContain('Beyond<br />');
+});
+
+test('a holiday open from midnight prints no times and holidays far away add no list', function (): void {
+    $date = date('m/d/Y', strtotime('+10 days'));
+    $midnight = single_location_markup(single_location_hours([single_location_day()]) + ['location_holiday_hours' => [
+        ['date' => $date, 'label' => 'Midnight', 'closed' => false, 'open' => '00:00:00', 'close' => '13:00:00'],
+        ['date' => $date, 'label' => 'Blank', 'closed' => false, 'open' => '', 'close' => '13:00:00'],
+    ]]);
+    $far = single_location_markup(single_location_hours([single_location_day()]) + ['location_holiday_hours' => [
+        ['date' => date('m/d/Y', strtotime('+90 days')), 'label' => 'Far', 'closed' => true, 'open' => '', 'close' => ''],
+    ]]);
+
+    expect($midnight)->toContain('<dt>Blank<br />'.$date.'<br/></dt><dd></dd><dt>Midnight<br />'.$date.'<br/></dt><dd></dd></dl>')
+        ->and(substr_count($far, '</dl>'))->toBe(substr_count(single_location_markup(single_location_hours([single_location_day()])), '</dl>'));
+});
+
+test('a single image prints every source size and the alt text', function (): void {
+    $output = single_location_markup(['location_wayfinding_photo' => 501], ['meta' => ['_wp_attachment_image_alt' => 'The clinic']]);
+
+    expect($output)->toContain('<picture><source srcset="https://example.test/photo-501-630x473.jpg" media="(min-width: 1350px)"><source srcset="https://example.test/photo-501-572x429.jpg" media="(min-width: 992px)"><source srcset="https://example.test/photo-501-992x558.jpg" media="(min-width: 768px)"><source srcset="https://example.test/photo-501-768x432.jpg" media="(min-width: 576px)"><source srcset="https://example.test/photo-501-576x324.jpg" media="(min-width: 1px)"><img src="https://example.test/photo-501-630x473.jpg" alt="The clinic" class="single-image" /></picture>');
+});
+
+test('a single image that is empty falls back to the large attachment', function (): void {
+    $output = single_location_markup(['location_photo_gallery' => [0]]);
+
+    expect($output)->toContain('<picture><img src="https://example.test/img-0-large.jpg" class="single-image"></picture>');
+});
+
+test('each carousel slide prints every source size, and only the first is active', function (): void {
+    $output = single_location_markup(['location_wayfinding_photo' => 501, 'location_photo_gallery' => [502]], ['meta' => ['_wp_attachment_image_alt' => 'Alt']]);
+    $slide = static fn (int $id): string => '<picture><source srcset="https://example.test/photo-'.$id.'-630x473.jpg" media="(min-width: 1350px)"><source srcset="https://example.test/photo-'.$id.'-572x429.jpg" media="(min-width: 992px)"><source srcset="https://example.test/photo-'.$id.'-992x558.jpg" media="(min-width: 768px)"><source srcset="https://example.test/photo-'.$id.'-768x432.jpg" media="(min-width: 576px)"><source srcset="https://example.test/photo-'.$id.'-576x324.jpg" media="(min-width: 1px)"><img src="https://example.test/photo-'.$id.'-630x473.jpg" alt="Alt" /></picture></div>';
+
+    expect($output)->toContain('<div class="carousel-inner"><div class="carousel-item active">'.$slide(501).'<div class="carousel-item">'.$slide(502))
+        ->and(substr_count($output, 'class="carousel-item'))->toBe(2)
+        ->and(substr_count($output, 'data-slide-to='))->toBe(2)
+        ->and($output)->toContain('<li data-target="#location-info-carousel" data-slide-to="1" ><img src="https://example.test/photo-502-60x45.jpg" alt="Alt" /></li>');
+});
+
+test('the alert section prints its color, heading and text', function (): void {
+    $output = single_location_markup([], ['option' => ['location_alert_heading_system' => 'Road work', 'location_alert_body_system' => 'Use the north gate.', 'location_alert_color_system' => 'alert-danger']]);
+
+    expect($output)->toContain('<section class="uams-module location-alert location-alert-danger" id="location-alert"><div class="container-fluid"><div class="row"><div class="col-xs-12"><h2 class="module-title">Road work</h2><div class="module-body"><p>Use the north gate.</p></div></div></div></div></section>');
+});
+
+test('the alert section falls back to the warning color, a hidden heading and no text', function (): void {
+    $output = single_location_markup([], ['option' => ['location_alert_body_system' => 'Notice.']]);
+    $heading = single_location_markup([], ['option' => ['location_alert_heading_system' => 'Only a heading']]);
+
+    expect($output)->toContain('<section class="uams-module location-alert location-alert-warning" id="location-alert"><div class="container-fluid"><div class="row"><div class="col-xs-12"><h2 class="module-title sr-only">Alert</h2><div class="module-body"><p>Notice.</p></div></div></div></div></section>')
+        ->and($heading)->toContain('<h2 class="module-title">Only a heading</h2></div></div></div></section>');
+});
+
+test('the about section prints the text and the embedded video', function (): void {
+    $secure = single_location_markup(['location_about' => '<p>About.</p>', 'location_youtube_link' => 'https://youtu.be/abc']);
+    $plain = single_location_markup(['location_about' => '<p>About.</p>', 'location_youtube_link' => 'http://youtu.be/abc']);
+    $none = single_location_markup(['location_about' => '<p>About.</p>']);
+
+    expect($secure)->toContain('<section class="uams-module bg-auto" id="description"><div class="container-fluid"><div class="row"><div class="col-xs-12"><h2 class="module-title"><span class="title">About Clinic</span></h2><div class="module-body"><p>About.</p><div class="alignwide">lyte:httpv://youtu.be/abc</div></div>')
+        ->and($plain)->toContain('<div class="alignwide">lyte:httpv://youtu.be/abc</div>')
+        ->and($none)->toContain('<div class="module-body"><p>About.</p></div>');
+});
+
+test('the affiliation and prescription headings appear only beside other about content', function (): void {
+    $prescription = ['location_prescription_query' => true, 'location_prescription_type' => 'custom', 'location_prescription' => 'Rx'];
+    $aboutAffiliation = single_location_markup(['location_about' => '<p>A.</p>', 'location_affiliation' => 'UAMS']);
+    $aboutPrescription = single_location_markup(['location_about' => '<p>A.</p>'] + $prescription);
+    $both = single_location_markup(['location_affiliation' => 'UAMS'] + $prescription);
+    $affiliationOnly = single_location_markup(['location_affiliation' => 'UAMS']);
+    $prescriptionOnly = single_location_markup($prescription);
+
+    expect($aboutAffiliation)->toContain('<p>A.</p><h3 id="affiliation">Affiliation</h3>UAMS</div>')
+        ->and($aboutAffiliation)->not->toContain('prescription-info')
+        ->and($aboutPrescription)->toContain('<p>A.</p><h3 id="prescription-info">Prescription Information</h3>Rx</div>')
+        ->and($aboutPrescription)->not->toContain('id="affiliation"')
+        ->and($both)->toContain('<h3 id="affiliation">Affiliation</h3>UAMS<h3 id="prescription-info">Prescription Information</h3>Rx</div>')
+        ->and($affiliationOnly)->toContain('<div class="module-body">UAMS</div>')
+        ->and($prescriptionOnly)->toContain('<div class="module-body">Rx</div>');
+});
+
+test('the about link is a plain item without a submenu', function (): void {
+    $output = single_location_markup(['location_about' => 'x', 'location_parking' => 'y']);
+
+    expect($output)->toContain('<li class="nav-item"><a class="nav-link" href="#description"')
+        ->and($output)->not->toContain('dropdown');
+});
+
+test('the parking section prints the text and the directions under their headings', function (): void {
+    $both = single_location_markup(['location_parking' => '<p>Garage.</p>', 'location_direction' => '<p>Turn left.</p>']);
+    $directions = single_location_markup(['location_direction' => '<p>Turn left.</p>']);
+
+    expect($both)->toContain('<section class="uams-module bg-auto" id="parking-info"><div class="container-fluid"><div class="row"><div class="col-xs-12"><h2 class="module-title"><span class="title">Parking Information</span></h2><div class="module-body"><p>Garage.</p><h3>Directions From the Parking Area</h3><p>Turn left.</p></div></div></div></div></section>')
+        ->and($directions)->toContain('<h2 class="module-title"><span class="title">Directions From the Parking Area</span></h2><div class="module-body"><p>Turn left.</p></div>')
+        ->and($directions)->not->toContain('<h3>Directions From the Parking Area</h3>');
+});
+
+test('the parking section with a map prints the directions link and the map', function (): void {
+    $map = ['lat' => '34.75', 'lng' => '-92.29'];
+    $withText = single_location_markup(['location_parking' => '<p>Garage.</p>', 'location_parking_map' => $map]);
+    $mapOnly = single_location_markup(['location_parking_map' => $map]);
+
+    expect($withText)->toContain('<div class="col-xs-12 col-md-6"><div class="module-body"><h2>Parking Information</h2><p>Garage.</p><a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/34.75,-92.29" target="_blank" aria-label="Get directions to the parking area" data-typetitle="Get directions to the parking area">Get Directions</a></div></div><div class="col-xs-12 col-md-6 parking-map-container"><div class="embed-responsive embed-responsive-16by9" id="map"></div>')
+        ->and($withText)->toContain('new L.LatLng(34.75, -92.29)')
+        ->and($mapOnly)->toContain('<div class="module-body"><h2>Directions From the Parking Area</h2>');
+});
+
+/**
+ * The text of the telemedicine section of a render, without markup and with the whitespace collapsed.
+ *
+ * @param  array<string, mixed>  $group  More values of the hours group.
+ * @param  array<string, mixed>  $fields  More fields of the location.
+ */
+function single_location_telemed_text(array $group = [], array $fields = []): string
+{
+    $output = single_location_markup(['location_hours_group' => $group + ['location_telemed_query' => true]] + $fields + ['location_phone' => '111']);
+    preg_match('#id="telemedicine-info">(.*?)</section>#s', $output, $match);
+
+    $text = trim((string) preg_replace('/\s+/', ' ', (string) preg_replace('/<[^>]+>/', ' ', $match[1] ?? '')));
+
+    return (string) preg_replace('/\s+([.,])/', '$1', $text);
+}
+
+test('the telemedicine section names which patients can use the service', function (): void {
+    expect(single_location_telemed_text(['location_telemed_patients' => 'all']))->toContain('This service is available to both new and existing patients. Patients should call dash:111 to schedule a telemedicine appointment.')
+        ->and(single_location_telemed_text(['location_telemed_patients' => 'new']))->toContain('This service is available to new patients only.')
+        ->and(single_location_telemed_text(['location_telemed_patients' => 'existing']))->toContain('This service is available to existing patients only.')
+        ->and(single_location_telemed_text(['location_telemed_patients' => 'other']))->not->toContain('This service is available');
+});
+
+test('the telemedicine section names which number to call', function (): void {
+    $one = ['location_clinic_phone_query' => true, 'location_new_appointments_phone' => '222'];
+    $two = $one + ['field_location_appointment_phone_query' => true, 'location_return_appointments_phone' => '333'];
+
+    expect(single_location_telemed_text(['location_telemed_patients' => 'all'], $one))->toContain('Patients should call dash:222 to schedule a telemedicine appointment.')
+        ->and(single_location_telemed_text(['location_telemed_patients' => 'all'], $two))->toContain('New patients should call dash:222 to schedule a telemedicine appointment, while existing patients should call dash:333.')
+        ->and(single_location_telemed_text(['location_telemed_patients' => 'new'], $two))->toContain('This service is available to new patients only. Patients should call dash:222 to schedule a telemedicine appointment.')
+        ->and(single_location_telemed_text(['location_telemed_patients' => 'existing'], $two))->toContain('This service is available to existing patients only. Patients should call dash:333 to schedule a telemedicine appointment.')
+        ->and(single_location_telemed_text(['location_telemed_patients' => 'other'], $two))->not->toContain('should call');
+});
+
+test('the telemedicine section prints the system text before the patient details', function (): void {
+    $output = single_location_markup(['location_hours_group' => ['location_telemed_query' => true, 'location_telemed_patients' => 'all']], ['option' => ['location_telemed_descr_system' => '<p>System text.</p>']]);
+    $without = single_location_markup(['location_hours_group' => ['location_telemed_query' => true, 'location_telemed_patients' => 'all']]);
+
+    expect($output)->toContain('<div class="content-width"><p>System text.</p><p>This service is available')
+        ->and($without)->toContain('<div class="content-width"><p>This service is available');
+});
+
+test('typical telemedicine hours print every row and skip the times of an empty or midnight open', function (): void {
+    $rows = [single_location_day('Mon', '08:00:00', '17:00:00', false, 'Phone'), single_location_day('Mon', '18:00:00', '20:00:00'), single_location_day('Tue', '', '17:00:00'), single_location_day('Wed', '00:00:00', '17:00:00'), single_location_day('Thu', '', '', true)];
+    $output = single_location_markup(['location_hours_group' => ['location_telemed_query' => true, 'location_telemed_hours' => $rows]]);
+
+    expect($output)->toContain('<h3>Hours</h3><dl class="hours"><dt>Mon</dt><dd>8 a.m. &ndash; 5 p.m.<br /><span class="subtitle">Phone</span></dd><dd>6 &ndash; 8 p.m.</dd><dt>Tue</dt><dd></dd><dt>Wed</dt><dd></dd><dt>Thu</dt><dd>Closed</dd></dl>');
+});
+
+test('modified telemedicine hours print every kind of row exactly', function (): void {
+    $times = [single_location_telemed_time('Mon', '08:00:00', '17:00:00', false, 'Lunch'), single_location_telemed_time('Mon', '18:00:00', '20:00:00'), single_location_telemed_time('Tue', '', '17:00:00'), single_location_telemed_time('Wed', '00:00:00', '17:00:00'), single_location_telemed_time('Thu', '', '', true)];
+    $output = single_location_markup(single_location_telemed_modified($times, ['location_telemed_modified_hours_start_date' => 'January 1, 2020', 'location_telemed_modified_hours_end_date' => 'January 1, 2099']));
+
+    expect($output)->toContain('<h3>Modified Hours</h3><p>Maintenance.</p><p class="small font-italic">These modified hours start on January 1, 2020, and are scheduled to end after January 1, 2099.</p><dl class="hours"><dt>Mon</dt><dd>8 a.m. &ndash; 5 p.m.<br /><span class="subtitle">Lunch</span></dd><dd>6 &ndash; 8 p.m.</dd><dt>Tue</dt><dd></dd><dt>Wed</dt><dd></dd><dt>Thu</dt><dd>Closed</dd></dl><h3>Typical Hours</h3>');
+});
+
+test('an end date is ignored for modified telemedicine hours while the end switch is off', function (): void {
+    $output = single_location_markup(single_location_telemed_modified([single_location_telemed_time()], ['location_telemed_modified_hours_end' => false, 'location_telemed_modified_hours_end_date' => 'January 1, 2099']));
+
+    expect($output)->toContain('and will remain in effect until further notice.</p>');
+});
+
+test('modified telemedicine hours that end today are still printed', function (): void {
+    $output = single_location_markup(single_location_telemed_modified([single_location_telemed_time()], ['location_telemed_modified_hours_start_date' => date('F j, Y', strtotime('-5 days')), 'location_telemed_modified_hours_end_date' => date('F j, Y')]));
+
+    expect($output)->toContain('<h3>Modified Hours</h3>');
+});
+
+test('modified telemedicine hours that have ended print nothing', function (): void {
+    $output = single_location_markup(single_location_telemed_modified([single_location_telemed_time()], ['location_telemed_modified_hours_start_date' => date('F j, Y', strtotime('-20 days')), 'location_telemed_modified_hours_end_date' => date('F j, Y', strtotime('-10 days'))]));
+
+    expect($output)->not->toContain('<h3>Modified Hours</h3>')
+        ->and($output)->toContain('<h3>Hours</h3>');
+});
+
+test('modified telemedicine hours starting today with no end replace the typical hours', function (): void {
+    $today = single_location_markup(single_location_telemed_modified([single_location_telemed_time()], ['location_telemed_modified_hours_start_date' => date('F j, Y'), 'location_telemed_modified_hours_end' => false, 'location_telemed_modified_hours_end_date' => '']));
+    $tomorrow = single_location_markup(single_location_telemed_modified([single_location_telemed_time()], ['location_telemed_modified_hours_start_date' => date('F j, Y', strtotime('+1 day')), 'location_telemed_modified_hours_end' => false, 'location_telemed_modified_hours_end_date' => '']));
+
+    expect($today)->not->toContain('Typical Hours')
+        ->and($tomorrow)->toContain('<h3>Typical Hours</h3>');
+});
+
+/**
+ * The fields and stubs of a location with providers, conditions, treatments, expertise and resources.
+ *
+ * @return array{0: array<string, mixed>, 1: array<string, mixed>}
+ */
+function single_location_lists(): array
+{
+    $conditions = [(object) ['ID' => 31, 'post_title' => 'Asthma'], (object) ['ID' => 32, 'post_title' => 'Gout']];
+    $treatments = [(object) ['ID' => 41, 'post_title' => 'Infusion']];
+    $fields = ['physician_locations' => [7, 8], 'physician_title' => 'Cardiology', 'location_conditions_cpt' => [31, 32], 'location_treatments_cpt' => [41], 'location_expertise' => [3], 'location_clinical_resources' => [4]];
+    $options = ['pages' => [1], 'queries' => [[4], [7, 8], $conditions, $treatments, [3], [11]], 'fields_by_id' => []];
+
+    return [$fields, $options];
+}
+
+test('the providers section lists every provider and their titles once', function (): void {
+    [$fields, $options] = single_location_lists();
+    $output = single_location_markup($fields, $options);
+
+    expect(substr_count($output, '<div class="card"><picture><source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.svg"'))->toBe(2)
+        ->and($output)->toContain('<h2 class="module-title"><span class="title">Providers at Clinic</span></h2>shortcode:[uamswp_provider_title_ajax_filter providers="7,8"]')
+        ->and($output)->toContain('<data id="provider_ids" data-postids="7,8," data-titles="Cardiology,"></data>');
+});
+
+test('the conditions and treatments each write their own structured data block', function (): void {
+    [$fields, $options] = single_location_lists();
+    $vars = single_location($fields, $options);
+    $squash = static fn (string $text): string => (string) preg_replace('/\s+/', ' ', $text);
+
+    expect($squash($vars['condition_schema']))->toBe('"medicalSpecialty": [{ "@type": "MedicalSpecialty", "name": "Asthma", "url":"https://example.test/p/31/" },{ "@type": "MedicalSpecialty", "name": "Gout", "url":"https://example.test/p/32/" },"" ],')
+        ->and($squash($vars['treatment_schema']))->toBe('"medicalSpecialty": [{ "@type": "MedicalSpecialty", "name": "Infusion", "url":"https://example.test/p/41/" },"" ],');
+});
+
+test('the condition and treatment lists print under their headings', function (): void {
+    [$fields, $options] = single_location_lists();
+    $output = single_location_markup($fields, $options);
+
+    expect($output)->toContain('Conditions Diagnosed or Treated at Clinic')
+        ->and($output)->toContain('Medical Treatments and Procedures Performed or Prescribed at Clinic')
+        ->and($output)->toContain('Areas of Expertise Represented at Clinic')
+        ->and($output)->toContain('Resources Related to Clinic');
+});
+
+/**
+ * The markup of one section of a render, from its id to the end of the section.
+ */
+function single_location_section(string $output, string $id): string
+{
+    preg_match('#id="'.$id.'"[^>]*>(.*?)</section>#s', $output, $match);
+
+    return $match[1] ?? '';
+}
+
+test('the areas of expertise section prints one card for each expertise', function (): void {
+    $output = single_location_markup(['location_expertise' => [3, 5]], ['queries' => [[], [], [], [3, 5]]]);
+    $section = single_location_section($output, 'expertise');
+
+    expect(substr_count($section, '<div class="card">'))->toBe(2);
+});
+
+test('the child locations section prints one card for each child and names no parent on them', function (): void {
+    $fields = ['location_parent' => true, 'location_parent_id' => 90];
+    $options = ['posts' => [90 => (object) ['ID' => 90, 'post_title' => 'Medical Center']], 'fields_by_id' => [90 => ['location_prepend_the' => true]], 'pages' => [1], 'queries' => [[], [], [], [], [11, 12]]];
+    $output = single_location_markup($fields, $options);
+    $section = single_location_section($output, 'sub-clinics');
+
+    expect(substr_count($section, '<div class="card">'))->toBe(2)
+        ->and($section)->not->toContain('Part of');
+});
+
+test('the lists reset the post data once each', function (): void {
+    $expertise = single_location(['location_expertise' => [3]], ['queries' => [[], [], [], [3]]])['single_location_resets'] ?? 0;
+    $children = single_location([], ['pages' => [1], 'queries' => [[], [], [], [], [11]]])['single_location_resets'] ?? 0;
+    $none = single_location()['single_location_resets'] ?? 0;
+
+    expect($expertise - $none)->toBe(1)
+        ->and($children - $none)->toBe(1);
+});
+
+test('the clinical resources heading names the location and offers more only past the first page', function (): void {
+    // The more button reads its link attributes from the ACF blocks file.
+    uamswp_test_acf_blocks_file();
+    $few = single_location_markup(['location_clinical_resources' => [4]], ['queries' => [[4]]]);
+    $many = single_location_markup(['location_clinical_resources' => [4, 5, 6, 7, 8]], ['queries' => [[4, 5, 6, 7, 8]]]);
+
+    expect($few)->toContain('<span class="title">Resources Related to Clinic</span>')
+        ->and($few)->not->toContain('class="col-12 more"')
+        ->and($many)->toContain('<span class="title">Resources Related to Clinic</span>')
+        ->and($many)->toContain('class="col-12 more"');
+});
+
+test('the structured data leaves out the hours that vary and names the logo', function (): void {
+    $varies = single_location_schema(single_location_hours([single_location_day()], ['location_hours_variable' => true, 'location_hours_variable_info' => '<p>Call first.</p>']));
+    $fixed = single_location_schema(single_location_hours([single_location_day()]));
+
+    expect($varies)->not->toHaveKey('openingHours')
+        ->and($fixed)->toHaveKey('openingHours')
+        ->and($fixed['logo'])->toBe('https://example.test/theme/assets/svg/uams-logo_health_horizontal_dark_386x50.png');
+});
+
+test('the page ends with the site footer', function (): void {
+    expect(single_location()['single_location_footers'])->toBe(1);
 });
