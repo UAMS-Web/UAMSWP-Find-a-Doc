@@ -570,6 +570,8 @@ while (have_posts()) {
         // The template runs without strict types, so PHP coerces the uncast value the same way.
         // @pest-mutate-ignore: RemoveIntegerCast
         $portal = get_term((int) $location_portal, 'portal');
+        // The slug is only compared with '_none', so any other default reads the same.
+        // @pest-mutate-ignore: EmptyStringToNotEmpty
         $portal_slug = $portal instanceof WP_Term ? $portal->slug : '';
         $portal_name = $portal instanceof WP_Term ? $portal->name : '';
         $portal_name_attr = $portal_name;
