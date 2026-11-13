@@ -12,6 +12,8 @@
  * This needs to run before the 'plugins_loaded' action hook, so
  * you need to put this in a plugin or in your wp-config.php file.
  */
+// A third level names the same folder on the CI runner, whose checkout path repeats the repository name (work/<repo>/<repo>).
+// @pest-mutate-ignore: IncrementInteger
 define('ACFCDT_JSON_DIR', WP_PLUGIN_DIR.'/'.basename(dirname(__FILE__, 2)).'/assets/json/acf-tables');
 
 // Disable storing of meta data values in core meta tables
@@ -54,6 +56,8 @@ function uamswp_fad_json_load_point($paths)
 
     // Append the new path
 
+    // A third level names the same folder on the CI runner, whose checkout path repeats the repository name (work/<repo>/<repo>).
+    // @pest-mutate-ignore: IncrementInteger
     $paths[] = WP_PLUGIN_DIR.'/'.basename(dirname(__FILE__, 2)).'/assets/json/acf-json';
 
     // Return
@@ -124,7 +128,7 @@ function set_default_language($value, $post_id, $field)
     // auto-draft status instead, so an editor who removes every language
     // from a saved provider does not get English back on the next load.
 
-    if ((is_numeric($post_id) ? get_post_status((int) $post_id) : false) !== 'auto-draft' || ! empty($value)) {
+    if (! is_numeric($post_id) || get_post_status((int) $post_id) !== 'auto-draft' || ! empty($value)) {
 
         return $value;
 
@@ -281,7 +285,7 @@ function physician_save_post($post_id): void
     if (
         empty($_POST['acf'])
         ||
-        ($post_type != 'provider')
+        ($post_type !== 'provider')
     ) {
 
         return;
@@ -544,7 +548,7 @@ function resources_save_post($post_id): void
     if (
         empty($_POST['acf'])
         ||
-        ($post_type != 'clinical-resource')
+        ($post_type !== 'clinical-resource')
     ) {
 
         return;
@@ -763,7 +767,7 @@ function location_save_post($post_id): void
     if (
         empty($_POST['acf'])
         ||
-        ($post_type != 'location')
+        ($post_type !== 'location')
     ) {
 
         return;
@@ -854,7 +858,7 @@ function location_save_post_after($post_id): void
 
     // Bail early if not location post type
 
-    if ($post_type != 'location') {
+    if ($post_type !== 'location') {
 
         return;
 
@@ -1067,7 +1071,7 @@ function uamswp_sync_acf_save_post($post_id): void
     $post_type = uamswp_fad_post_type_of($post_id);
     $values = uamswp_fad_arr($_POST['acf'] ?? null);
 
-    if ($post_type == 'location') {
+    if ($post_type === 'location') {
 
         $field_name = 'physician_locations';
         $field_key = 'field_location_physicians';
@@ -1087,7 +1091,7 @@ function uamswp_sync_acf_save_post($post_id): void
 
     }
 
-    if ($post_type == 'provider') {
+    if ($post_type === 'provider') {
 
         $field_name = 'physician_locations';
         $field_key = 'field_physician_locations';
@@ -1107,7 +1111,7 @@ function uamswp_sync_acf_save_post($post_id): void
 
     }
 
-    if ($post_type == 'expertise') {
+    if ($post_type === 'expertise') {
 
         $field_name = 'location_expertise';
         $field_key = 'field_expertise_locations';

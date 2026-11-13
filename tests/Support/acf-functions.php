@@ -57,6 +57,40 @@ function uamswp_test_acf_functions(): array
 
     // Whichever test loads the file first is the one a coverage run credits with the file scope lines.
     Assert::assertSame(require __DIR__.'/acf-functions-hooks.php', $hooks, 'The ACF functions file registers the hooks it was pinned with.');
+    Assert::assertSame([
+        [
+            'name' => 'uamswp_fad_facetwp_cards',
+            'title' => 'FacetWP Cards',
+            'description' => '',
+            'category' => 'common',
+            'keywords' => ['provider', 'location', 'facetwp'],
+            'acf_block_version' => 3,
+            'align' => '',
+            'render_template' => '',
+            'render_callback' => 'fad_facetwp_cards_callback',
+            'enqueue_style' => '',
+            'enqueue_script' => '',
+            'enqueue_assets' => '',
+            'icon' => 'id',
+            'supports' => ['align' => ['full'], 'mode' => true, 'multiple' => true],
+        ],
+        [
+            'name' => 'uamswp_fad_facetwp_blocks',
+            'title' => 'FacetWP Block',
+            'description' => '',
+            'category' => 'common',
+            'keywords' => ['facetwp', 'shortcode'],
+            'acf_block_version' => 3,
+            'align' => '',
+            'render_template' => '',
+            'render_callback' => 'fad_facetwp_blocks_callback',
+            'enqueue_style' => '',
+            'enqueue_script' => '',
+            'enqueue_assets' => '',
+            'icon' => 'list-view',
+            'supports' => ['align' => true, 'mode' => true, 'multiple' => true],
+        ],
+    ], $blocks, 'The ACF functions file registers the two blocks it was pinned with.');
     Assert::assertSame(WP_PLUGIN_DIR.'/'.basename(rtrim(UAMS_FAD_PATH, '/\\')).'/assets/json/acf-tables', ACFCDT_JSON_DIR);
 
     // [hook, callback, priority] for the registrations the tests pin.
