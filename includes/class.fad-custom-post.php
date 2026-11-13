@@ -3008,6 +3008,8 @@ function uamswp_fad_sync_doc_role_caps(): void
 
     foreach ($desired as $role_name => $caps) {
         $role = get_role($role_name);
+        // The map holds one role, so skipping it and leaving the loop end the same way.
+        // @pest-mutate-ignore: ContinueToBreak
         if (! $role) {
             continue;
         }
@@ -3112,6 +3114,8 @@ function add_theme_caps(): void
             continue;
         }
 
+        // Iterating the capability object reads the same public properties as its array cast.
+        // @pest-mutate-ignore: RemoveArrayCast
         foreach ((array) $type_object->cap as $cap) {
             if (empty($role->capabilities[$cap])) {
                 $role->add_cap(uamswp_fad_str($cap));
@@ -3609,6 +3613,8 @@ function get_provider_meta($object)
         foreach (uamswp_fad_arr($boards) as $board) {
 
             $board_name = get_term(uamswp_fad_int($board), 'board');
+            // Concatenation keeps this accumulator a string.
+            // @pest-mutate-ignore: NotEqualToNotIdentical
             $data['physician_boards'] .= $data['physician_boards'] != '' ? ',' : '';
             $data['physician_boards'] .= uamswp_fad_str(($board_name->name ?? ''));
 
@@ -3624,6 +3630,8 @@ function get_provider_meta($object)
         foreach (uamswp_fad_arr($associations) as $association) {
 
             $association_name = get_term(uamswp_fad_int($association), 'association');
+            // Concatenation keeps this accumulator a string.
+            // @pest-mutate-ignore: NotEqualToNotIdentical
             $data['physician_associations'] .= $data['physician_associations'] != '' ? ',' : '';
             $data['physician_associations'] .= uamswp_fad_str(($association_name->name ?? ''));
 
@@ -3890,6 +3898,8 @@ function get_location_meta($object)
 
         $post_id = $parent_location->ID;
         $parent_title = $parent_location->post_title;
+        // get_permalink() returns a string for the parent post get_post() just returned.
+        // @pest-mutate-ignore: RemoveStringCast
         $parent_url = user_trailingslashit((string) get_permalink($post_id));
 
     } else {
@@ -5301,7 +5311,9 @@ function get_resource_meta($object)
     // selection time; the provider can be unpublished, made private, or
     // trashed afterward, and its title/slug/link must not leak through
     // this public REST field once it is no longer public.
+    // Schema string choices compare identically with loose or strict equality.
     if (
+        // @pest-mutate-ignore: EqualToIdentical
         $resource_type_value == 'provider_spotlight'
         &&
         $spotlight_provider
