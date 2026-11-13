@@ -761,3 +761,70 @@ test('the closing alert announces a closing that has not started', function (): 
     expect($future)->toContain('This location will be closing temporarily beginning on January 1, 2099.')
         ->and($permanent)->toContain('This location will be closing permanently on January 1, 2099.');
 });
+
+test('a location that is not closing has empty closing text values', function (): void {
+    $vars = single_location();
+
+    expect($vars['location_closing_date'])->toBe('')
+        ->and($vars['location_closing_length'])->toBe('')
+        ->and($vars['location_reopen_known'])->toBe('')
+        ->and($vars['location_reopen_date'])->toBe('')
+        ->and($vars['location_closing_info'])->toBe('');
+});
+
+test('only the exact closing length and prescription type words select a branch', function (): void {
+    $closing = single_location(['location_closing' => true, 'location_closing_length' => true, 'location_closing_date' => 'January 1, 2020', 'location_closing_telemed' => 'yes']);
+    $prescription = single_location(
+        ['location_prescription_query' => true, 'location_prescription_type' => true, 'location_prescription' => 'Custom text.'],
+        ['option' => ['location_prescription_clinic_system' => 'Call the clinic.', 'location_prescription_pharm_system' => 'Call the pharmacy.']],
+    );
+
+    expect($closing['location_closing_telemed'])->toBe('')
+        ->and($closing['location_closing_display'])->toBeFalse()
+        ->and($prescription['prescription'])->toBe('Custom text.');
+});
+
+test('the ontology scan stops at the first rule that hides it', function (array $rule, array $fields): void {
+    $rows = [$rule, $rule];
+    $vars = single_location($fields + ['location_service_line' => [3, 7]], ['rows' => ['remove_ontology_criteria' => $rows]]);
+
+    expect($vars['hide_medical_ontology'])->toBeTrue()
+        ->and($vars['single_location_rows']['remove_ontology_criteria'])->toBe(0);
+})->with([
+    'a region' => [['remove_regions' => ['north'], 'remove_service_lines' => null], ['location_region' => 'north']],
+    'a service line' => [['remove_regions' => null, 'remove_service_lines' => [7]], []],
+    'both' => [['remove_regions' => ['north'], 'remove_service_lines' => [7]], ['location_region' => 'north']],
+]);
+
+test('the template asks the theme for its header once', function (): void {
+    expect(single_location()['single_location_headers'])->toBe(1);
+});
+
+test('the address lines read the building, floor and suite', function (): void {
+    $fields = ['location_building' => 5, 'location_suite' => 'Suite 4'];
+    $options = ['terms' => [5 => 'Main Hospital'], 'objects' => ['location_building_floor' => ['value' => '2', 'choices' => ['2' => 'Second Floor']]]];
+    $vars = single_location($fields, $options);
+
+    expect($vars['location_address_2'])->toBe('Main Hospital<br />Second Floor, Suite 4')
+        ->and($vars['location_address_2_schema'])->toBe('Main Hospital Second Floor Suite 4')
+        ->and($vars['location_floor_label'])->toBe('Second Floor');
+
+    $none = single_location($fields, $options + ['slugs' => [5 => '_none']]);
+
+    expect($none['location_address_2'])->toBe('Second Floor, Suite 4')
+        ->and($none['location_address_2_schema'])->toBe('Second Floor Suite 4');
+});
+
+test('a floor without a label and a location without a floor have empty floor values', function (): void {
+    $unlabeled = single_location([], ['objects' => ['location_building_floor' => ['value' => '9', 'choices' => []]]]);
+    $without = single_location();
+
+    expect($unlabeled['location_floor_value'])->toBe('9')
+        ->and($unlabeled['location_floor_label'])->toBe('')
+        ->and($without['location_floor_value'])->toBe('')
+        ->and($without['location_floor_label'])->toBe('');
+});
+
+test('the about section has an empty short title without text to show', function (): void {
+    expect(single_location()['about_section_title_short'])->toBe('');
+});

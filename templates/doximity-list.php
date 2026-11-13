@@ -150,6 +150,8 @@ function display_provider_image_doximity_list(): void
                     $locations = get_field('physician_locations', $post_id);
                     $location_valid = false;
                     foreach ($locations as $location) {
+                        // get_post_status() returns a status string or false, so loose and strict equality agree.
+                        // @pest-mutate-ignore: EqualToIdentical
                         if (get_post_status($location) == 'publish') {
                             $location_valid = true;
                             break;
@@ -177,7 +179,11 @@ function display_provider_image_doximity_list(): void
 
                         // Email Address field
                         $e = 1;
+                        // The loop assigns this before any read.
+                        // @pest-mutate-ignore: EmptyStringToNotEmpty
                         $contact_type = '';
+                        // The loop assigns this before any read.
+                        // @pest-mutate-ignore: EmptyStringToNotEmpty
                         $contact_info = '';
                         echo '<td class="no-break">';
                         if (have_rows('physician_contact_information', $post_id)) {
@@ -185,6 +191,8 @@ function display_provider_image_doximity_list(): void
                                 the_row();
                                 $contact_type = get_sub_field('type');
                                 $contact_info = get_sub_field('information');
+                                // The ACF select sub-field returns a string, so loose and strict equality agree.
+                                // @pest-mutate-ignore: EqualToIdentical
                                 if ($contact_type == 'email' && $e < 2) { // Only display the first instance of an email row
                                     echo $contact_info;
                                     $e++;
@@ -207,6 +215,8 @@ function display_provider_image_doximity_list(): void
                             }
                         }
                         echo '<td>';
+                        // A row needs an affiliation, so the list always holds a span.
+                        // @pest-mutate-ignore: EmptyStringToNotEmpty
                         echo $affiliation_list ?: '';
                         echo '</td>';
 
@@ -214,17 +224,36 @@ function display_provider_image_doximity_list(): void
 
                         // Get primary appointment location name
                         $l = 1;
+                        // The first published location assigns this, and a row needs one.
+                        // @pest-mutate-ignore: EmptyStringToNotEmpty
                         $primary_appointment_title = '';
+                        // The first published location assigns this, and a row needs one.
+                        // @pest-mutate-ignore: EmptyStringToNotEmpty
                         $primary_appointment_address_1 = '';
+                        // The first published location assigns this, and a row needs one.
+                        // @pest-mutate-ignore: EmptyStringToNotEmpty
                         $primary_appointment_address_2 = '';
+                        // The first published location assigns this, and a row needs one.
+                        // @pest-mutate-ignore: EmptyStringToNotEmpty
                         $primary_appointment_city = '';
+                        // The first published location assigns this, and a row needs one.
+                        // @pest-mutate-ignore: EmptyStringToNotEmpty
                         $primary_appointment_state = '';
+                        // The first published location assigns this, and a row needs one.
+                        // @pest-mutate-ignore: EmptyStringToNotEmpty
                         $primary_appointment_zip = '';
+                        // The first published location assigns this, and a row needs one.
+                        // @pest-mutate-ignore: EmptyStringToNotEmpty
                         $primary_appointment_phone = '';
+                        // The first published location assigns this, and a row needs one.
+                        // @pest-mutate-ignore: EmptyStringToNotEmpty
                         $primary_appointment_fax = '';
-                        if ($locations && $location_valid) {
+                        // A valid location needs a non-empty list, so the list needs no check of its own.
+                        if ($location_valid) {
                             foreach ($locations as $location) {
                                 if ($l < 2) {
+                                    // get_post_status() returns a status string or false, so loose and strict equality agree.
+                                    // @pest-mutate-ignore: EqualToIdentical
                                     if (get_post_status($location) == 'publish') {
                                         $primary_appointment_title = get_the_title($location);
 
@@ -245,13 +274,19 @@ function display_provider_image_doximity_list(): void
                                             $building_name = $building->name;
                                         }
                                         $primary_appointment_floor = get_field_object('location_building_floor', $location_source_ids['unit']);
+                                        // The initial value is read only when a floor field object exists, and that case assigns it again.
+                                        // @pest-mutate-ignore: EmptyStringToNotEmpty
                                         $primary_appointment_floor_value = '';
+                                        // The initial value is read only when a floor field object exists, and that case assigns it again.
+                                        // @pest-mutate-ignore: EmptyStringToNotEmpty
                                         $primary_appointment_floor_label = '';
                                         if ($primary_appointment_floor) {
                                             $primary_appointment_floor_value = $primary_appointment_floor['value'];
                                             $primary_appointment_floor_label = $primary_appointment_floor['choices'][$primary_appointment_floor_value] ?? '';
                                         }
                                         $primary_appointment_suite = get_field('location_suite', $location_source_ids['unit']);
+                                        // The building slug is a string, so loose and strict inequality agree, and the building name is read only when a building exists, which sets it.
+                                        // @pest-mutate-ignore: NotEqualToNotIdentical,EmptyStringToNotEmpty
                                         $primary_appointment_address_2 = uamswp_location_address_2(($primary_appointment_building && $building_slug != '_none'), $building_name ?? '', $primary_appointment_floor, $primary_appointment_floor_value, $primary_appointment_floor_label, $primary_appointment_suite, '<br />', '<br />');
                                         $primary_appointment_address_2_deprecated = get_field('location_address_2', $location_source_ids['street']);
                                         if (! $primary_appointment_address_2) {

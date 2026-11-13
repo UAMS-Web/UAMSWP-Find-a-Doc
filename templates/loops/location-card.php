@@ -173,6 +173,14 @@ $telemed_modified_end_date = $location_hours_group['location_telemed_modified_ho
 $telemed_today = $today;
 $telemed_today_30 = $today_30;
 
+// A flag counts only with its start date: `strtotime('')` is false, which compares as on or before any day (#1302).
+$modified = $modified && $modified_start;
+$telemed_modified = $telemed_modified && $telemed_modified_start;
+
+// Reset, so a card in a loop never prints the date of the card before it.
+$location_modified_hours_start = '';
+$location_modified_hours_date_past = false;
+
 if (
     ($modified && strtotime($modified_start) <= $today_30 && (strtotime($modified_end_date) >= $today || ! $modified_end)) ||
     ($telemed_modified && strtotime($telemed_modified_start) <= $telemed_today_30 && (strtotime($telemed_modified_end_date) >= $telemed_today || ! $telemed_modified_end))
@@ -185,15 +193,15 @@ if (
 // // Set start of modified hours based on the earliest of the two (clinic and telemedicine)
 
 if ($location_modified_hours_display) {
-    if (($modified && $modified_start) && ($telemed_modified && $telemed_modified_start)) {
+    if ($modified && $telemed_modified) {
         if (strtotime($modified_start) <= strtotime($telemed_modified_start)) {
             $location_modified_hours_start = $modified_start;
         } else {
             $location_modified_hours_start = $telemed_modified_start;
         }
-    } elseif ($modified_start) {
+    } elseif ($modified) {
         $location_modified_hours_start = $modified_start;
-    } elseif ($telemed_modified_start) {
+    } else {
         $location_modified_hours_start = $telemed_modified_start;
     }
 

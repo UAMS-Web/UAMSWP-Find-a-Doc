@@ -357,6 +357,54 @@ test('the location card starts the modified hours at the earlier of the clinic a
     expect($sameDay)->toContain('beginning on '.location_card_date('+5 days').'.');
 });
 
+test('the location card does not warn about modified hours flagged without a start date', function (array $hours): void {
+    // ACF requires the start date once the flag is on, so only data saved some other way has none.
+    $output = location_card(['location_hours_group' => location_card_hours($hours)]);
+
+    expect($output)->not->toContain('class="alert');
+})->with(fn () => [
+    'clinic' => [['location_modified_hours' => true]],
+    'clinic with a future end' => [['location_modified_hours' => true, 'location_modified_hours_end' => true, 'location_modified_hours_end_date' => location_card_date('+5 days')]],
+    'telemedicine' => [['location_telemed_modified_hours_query' => true]],
+    'both' => [['location_modified_hours' => true, 'location_telemed_modified_hours_query' => true]],
+]);
+
+test('the location card starts the modified hours at the flagged date, not at a date left behind by an unflagged one', function (): void {
+    $output = location_card(['location_hours_group' => location_card_hours([
+        'location_modified_hours' => false, 'location_modified_hours_start_date' => location_card_date('+2 days'),
+        'location_telemed_modified_hours_query' => true, 'location_telemed_modified_hours_start_date' => location_card_date('+7 days'),
+    ])]);
+
+    expect($output)->toContain('beginning on '.location_card_date('+7 days').'.')
+        ->and($output)->not->toContain(location_card_date('+2 days'));
+});
+
+test('the location card does not print the start date of the card before it', function (): void {
+    // The card runs in the scope of the file that includes it, so a loop renders every card in one scope.
+    $first = location_card_next_id();
+    $second = location_card_next_id();
+    location_card_world([
+        'location_hours_group:'.$first => location_card_hours(['location_modified_hours' => true, 'location_modified_hours_start_date' => location_card_date('+3 days')]),
+        'location_hours_group:'.$second => location_card_hours(['location_modified_hours' => true]),
+    ]);
+
+    $outputs = (static function (array $ids): array {
+        $outputs = [];
+
+        foreach ($ids as $id) {
+            ob_start();
+            include UAMS_FAD_PATH.'templates/loops/location-card.php';
+            $outputs[] = (string) ob_get_clean();
+        }
+
+        return $outputs;
+    })([$first, $second]);
+
+    expect($outputs[0])->toContain('beginning on '.location_card_date('+3 days').'.')
+        ->and($outputs[1])->not->toContain('class="alert')
+        ->and($outputs[1])->not->toContain(location_card_date('+3 days'));
+});
+
 test('the location card puts the closure before the modified hours', function (): void {
     $output = location_card([
         'location_closing:ID' => true,
