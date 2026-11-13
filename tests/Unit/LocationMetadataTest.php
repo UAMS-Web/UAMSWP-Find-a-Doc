@@ -3,12 +3,14 @@
 /**
  * Location metadata fallback contracts without a WordPress installation.
  *
- * Thirty-seven approved equivalents are ignored in get_location_meta():
- * six structurally unobservable changes, 24 discarded phone-HTML changes,
+ * Thirty-eight approved equivalents are ignored in get_location_meta():
+ * seven structurally unobservable changes, 24 discarded phone-HTML changes,
  * and seven alert comparisons within the schema string domain.
  * Structural cases are redundant photo truth
  * conditions, an overwritten floor initializer, a non-object region
- * fallback, a string-accumulator comparison, and an unread suppression flag.
+ * fallback, a string-accumulator comparison, an unread suppression flag, and
+ * the string cast of the parent permalink, which get_permalink() returns as a
+ * string for the parent post get_post() has just returned.
  *
  * The phone exclusions depend on the string/absent-value contract and the
  * uams-2020 formatter implementation at revision:
@@ -28,6 +30,8 @@ declare(strict_types=1);
 
 use function Brain\Monkey\Filters\expectApplied;
 use function Brain\Monkey\Functions\when;
+
+require_once __DIR__.'/../Support/query-posts.php';
 
 beforeEach(function (): void {
     // Load the callback without registering WordPress hooks.
@@ -67,6 +71,9 @@ beforeEach(function (): void {
     when('get_post')->alias(fn (int $id): ?object => $this->parentExists && $id === 202
         ? (object) ['ID' => 202, 'post_title' => 'Parent Clinic'] : null);
     when('image_sizer')->alias(fn (int $id, int $width, int $height): array => [$id, $width, $height]);
+
+    // Start each test with no queued or recorded relationship queries.
+    reset_query_stand_in();
 });
 
 test('location portal metadata resolves the term name without changing its fields', function (
@@ -403,4 +410,68 @@ test('location hours preserve repeater order and pass telemedicine values throug
         4 => ['day' => 'Friday', 'closed' => false, 'open' => '09:15', 'close' => '16:45'],
         8 => ['day' => 'Monday', 'closed' => true, 'open' => '', 'close' => ''],
     ]);
+});
+
+test('location taxonomy names are empty for missing or erroneous terms', function (): void {
+    // Select a deleted building, a region whose lookup fails, and a deleted type between two types.
+    $error = (object) ['errors' => ['invalid_taxonomy' => ['Invalid taxonomy']]];
+    $this->locationFields[101] += ['location_building' => 83, 'location_region' => 84, 'location_type' => [44, 83, 43]];
+    when('get_term')->alias(fn (int $id, string $taxonomy): ?object => match ([$id, $taxonomy]) {
+        [84, 'region'] => $error,
+        [43, 'location_type'] => (object) ['name' => 'Hospital'],
+        [44, 'location_type'] => (object) ['name' => 'Clinic'],
+        default => null,
+    });
+
+    // Pin each fallback, and the empty entry the missing type leaves in the list.
+    $data = get_location_meta(['id' => 101]);
+    expect([$data['location_building'], $data['location_region'], $data['location_types']])->toBe(['', '', 'Clinic,,Hospital']);
+});
+
+test('location relationship lists join published query results in their returned order', function (
+    string $field,
+    string $type,
+    string $key,
+    string $list,
+): void {
+    // Return the posts in an order that differs from the selection.
+    $this->locationFields[101][$field] = [302, 301];
+    $this->locationFields[301] = ['physician_full_name' => 'Ann Alpha'];
+    $this->locationFields[302] = ['physician_full_name' => 'Bob Beta'];
+    WP_Query::$queue = [[query_post(301, 'Alpha', 'alpha'), query_post(302, 'Beta', 'beta')]];
+
+    // Pin the query, every exported item, and the joined list.
+    $data = get_location_meta(['id' => 101]);
+    $provider = $type === 'provider';
+    expect(WP_Query::$queries)->toBe([[
+        'post_type' => $type,
+        'post_status' => 'publish',
+        'orderby' => 'title',
+        'order' => 'ASC',
+        'posts_per_page' => -1,
+        'post__in' => [302, 301],
+    ]])->and($data['location_'.$key])->toBe([
+        301 => ['link' => 'https://example.test/location-301', 'title' => $provider ? 'Ann Alpha' : 'Alpha', 'slug' => 'alpha'],
+        302 => ['link' => 'https://example.test/location-302', 'title' => $provider ? 'Bob Beta' : 'Beta', 'slug' => 'beta'],
+    ])->and($data['location_'.$key.'_list'])->toBe($list);
+})->with([
+    'providers' => ['physician_locations', 'provider', 'provider', 'Ann Alpha | Bob Beta'],
+    'expertise' => ['location_expertise', 'expertise', 'expertise', 'Alpha, Beta'],
+    'conditions' => ['location_conditions_cpt', 'condition', 'conditions', 'Alpha, Beta'],
+    'treatments' => ['location_treatments_cpt', 'treatment', 'treatments', 'Alpha, Beta'],
+]);
+
+test('location relationship lists stay empty when no selected post is published', function (): void {
+    // Each query finds nothing although every field has a selection.
+    foreach (['physician_locations', 'location_expertise', 'location_conditions_cpt', 'location_treatments_cpt'] as $field) {
+        $this->locationFields[101][$field] = [301];
+    }
+
+    $data = get_location_meta(['id' => 101]);
+    expect(WP_Query::$queries)->toHaveCount(4)
+        ->and($data)->not->toHaveKeys(['location_provider', 'location_expertise', 'location_conditions', 'location_treatments'])
+        ->and([
+            $data['location_provider_list'], $data['location_expertise_list'],
+            $data['location_conditions_list'], $data['location_treatments_list'],
+        ])->toBe(['', '', '', '']);
 });
