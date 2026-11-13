@@ -126,8 +126,9 @@ function uamswp_fad_title_archive_treatments($html): string
  * The page title for the single-clinical-resource template.
  *
  * @param  string  $html  The title the theme built; replaced.
+ * @param  mixed  $context  The second argument the title filter passes; unused.
  */
-function uamswp_fad_title_single_clinical_resource($html): string
+function uamswp_fad_title_single_clinical_resource($html, $context = null): string
 {
     /** @var string $page_title_attr */
     global $page_title_attr;
@@ -150,8 +151,9 @@ function uamswp_fad_title_single_clinical_resource($html): string
  * The page title for the single-condition template.
  *
  * @param  string  $html  The title the theme built; replaced.
+ * @param  mixed  $context  The second argument the title filter passes; unused.
  */
-function uamswp_fad_title_single_condition($html): string
+function uamswp_fad_title_single_condition($html, $context = null): string
 {
     /** @var string $page_title_attr */
     global $page_title_attr;
@@ -174,8 +176,9 @@ function uamswp_fad_title_single_condition($html): string
  * The page title for the single-expertise template.
  *
  * @param  string  $html  The title the theme built; replaced.
+ * @param  mixed  $context  The second argument the title filter passes; unused.
  */
-function uamswp_fad_title_single_expertise($html): string
+function uamswp_fad_title_single_expertise($html, $context = null): string
 {
     /** @var string $page_title_attr */
     global $page_title_attr;
@@ -272,8 +275,9 @@ function uamswp_fad_title_single_physicians($html, $context = null): string
  * The page title for the single-treatment template.
  *
  * @param  string  $html  The title the theme built; replaced.
+ * @param  mixed  $context  The second argument the title filter passes; unused.
  */
-function uamswp_fad_title_single_treatment($html): string
+function uamswp_fad_title_single_treatment($html, $context = null): string
 {
     /** @var string $page_title_attr */
     global $page_title_attr;
