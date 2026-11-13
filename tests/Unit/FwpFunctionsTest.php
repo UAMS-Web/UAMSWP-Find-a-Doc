@@ -498,4 +498,34 @@ final class FwpFunctionsTest extends UnitTestCase
 
         $this->addToAssertionCount(1);
     }
+
+    private function pageLink(int $page, string $kind = ''): string
+    {
+        $class = $kind === 'active' ? ' active' : '';
+
+        return '<li class="page-item"><a class="facetwp-page page-link'.$class.'" title="Page '.$page.'" data-page="'.$page.'">'.$page.'</a></li>';
+    }
+
+    public function test_a_middle_page_prints_every_link_with_its_title_and_text(): void
+    {
+        $arrow = static fn (string $title, int $page, string $icon): string => '<li class="page-item"><a class="facetwp-page page-link" title="'.$title.'" data-page="'.$page.'"><span class="fas fa-angle-'.$icon.'" aria-hidden="true"></span></a>';
+
+        $this->assertSame(
+            '<nav aria-label="list pagination"><ul class="pagination">'
+            .'<li class="page-item"><a class="facetwp-page page-link first-page" title="First Page" data-page="1"><span class="fas fa-fast-backward" aria-hidden="true"></span></a></li>'
+            .'<li class="page-item"><a class="facetwp-page page-link" title="Previous Page" data-page="14"><span class="fas fa-angle-left" aria-hidden="true"></span></a></li>'
+            .$this->pageLink(5).$this->pageLink(13).$this->pageLink(14).$this->pageLink(15, 'active').$this->pageLink(16).$this->pageLink(17).$this->pageLink(25)
+            .$arrow('Next Page', 16, 'right')
+            .'<li class="page-item"><a class="facetwp-page page-link last-page" title="Last Page" data-page="40"><span class="fas fa-fast-forward aria-hidden="true"></span></a></li>'
+            .'</ul></nav>',
+            $this->pager(15, 40)
+        );
+    }
+
+    public function test_the_last_links_of_a_short_list_include_the_final_page_exactly(): void
+    {
+        // Three pages from the end: the page two ahead is the final page and is still linked.
+        $this->assertSame([2, 1, 2, 3, 4, 5, 4], $this->pages($this->pager(3, 5)));
+        $this->assertSame([1, 1, 2, 3, 3], $this->pages($this->pager(2, 3)));
+    }
 }

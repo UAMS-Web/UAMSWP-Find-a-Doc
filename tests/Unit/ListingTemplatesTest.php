@@ -214,9 +214,10 @@ test('the MyChart list prints the header and one row for each provider that is n
  * @param  array<string, string>  $terms
  * @param  array<string, mixed>  $objects
  * @param  array<int, array<int, array<string, string>>>  $contacts  Contact rows by provider id.
+ * @param  list<int>|null  $statusLog  When given, receives the id of every post whose status is read, in order.
  * @return array{id: int, location: int, html: string, warnings: array<int, string>}
  */
-function doximity_case(array $provider = [], array $location = [], array $terms = [], array $objects = [], ?array $contacts = null, ?int $id = null, ?int $place = null, array $posts = []): array
+function doximity_case(array $provider = [], array $location = [], array $terms = [], array $objects = [], ?array $contacts = null, ?int $id = null, ?int $place = null, array $posts = [], ?array &$statusLog = null): array
 {
     $id ??= gmb_next_id();
     $place ??= gmb_next_id();
@@ -255,19 +256,31 @@ function doximity_case(array $provider = [], array $location = [], array $terms 
         $objectsById[$name.'|'.$place] = $value;
     }
 
+    $allPosts = $posts + [$id => ['title' => 'Lee, Ann', 'slug' => 'ann-lee'], $place => ['title' => 'Main Clinic', 'slug' => 'main-clinic']];
+
     gmb_world([
-        'posts' => $posts + [$id => ['title' => 'Lee, Ann', 'slug' => 'ann-lee'], $place => ['title' => 'Main Clinic', 'slug' => 'main-clinic']],
+        'posts' => $allPosts,
         'fields' => $fields,
         'objects' => $objectsById,
         'terms' => $terms,
     ]);
 
+    if ($statusLog !== null) {
+        when('get_post_status')->alias(static function (int $post) use ($allPosts, &$statusLog): string|false {
+            $statusLog[] = $post;
+
+            return isset($allPosts[$post]) ? (string) ($allPosts[$post]['status'] ?? 'publish') : false;
+        });
+    }
+
     $rows = $contacts ?? [];
     $cursor = [];
-    when('have_rows')->alias(static function (string $name, int $post) use ($rows, &$cursor): bool {
+    $checks = 0;
+    when('have_rows')->alias(static function (string $name, int $post) use ($rows, &$cursor, &$checks): bool {
         $cursor[$post] ??= 0;
 
-        return isset($rows[$post][$cursor[$post]]);
+        // Capped so a loop whose the_row() call is gone ends, and the row it should have read is missing.
+        return $checks++ < 100 && isset($rows[$post][$cursor[$post]]);
     });
     when('the_row')->alias(static function () use (&$cursor): void {
         // Advance the cursor of the post being read; have_rows() reads the same one.
@@ -366,6 +379,7 @@ test('a provider with no usable NPI, no affiliation or no published location get
 })->with([
     'an empty NPI' => ['physician_npi', ''],
     'a zero NPI' => ['physician_npi', '0'],
+    'a zero NPI written as a decimal' => ['physician_npi', '0.0'],
     'no affiliation' => ['physician_affiliation', []],
 ]);
 
@@ -489,4 +503,48 @@ test('the office columns are empty when the location has no address, phone or fa
     ]);
 
     expect(listing_body_rows($case['html']))->toBe(doximity_row(['address_1' => '', 'city' => '', 'state' => '', 'zip' => '', 'phone' => '', 'fax' => '']));
+});
+
+test('the MyChart list leaves the provider ID empty for a zero written as text', function (): void {
+    uamswp_test_template('mychart-list-provider');
+    $id = gmb_next_id();
+    $html = '';
+
+    uamswp_test_capture_warnings(function () use (&$html, $id): void {
+        $html = mychart_html([$id => ['pid' => '0', 'title' => 'Poe, Jo', 'slug' => 'jo-poe']]);
+    });
+
+    expect(listing_body_rows($html))->toStartWith('<tr><td class="no-break"></td><td class="no-break">Poe, Jo</td>');
+});
+
+test('the Doximity list stops looking for a published location at the first one', function (): void {
+    uamswp_test_template('doximity-list');
+    $closed = gmb_next_id();
+    $first = gmb_next_id();
+    $second = gmb_next_id();
+    $id = gmb_next_id();
+    $checked = [];
+
+    $case = doximity_case(
+        ['physician_locations' => [$closed, $first, $second]],
+        id: $id,
+        place: $first,
+        posts: [$closed => ['title' => 'Closed', 'slug' => 'closed', 'status' => 'draft'], $second => ['title' => 'Second', 'slug' => 'second']],
+        statusLog: $checked,
+    );
+
+    expect($checked)->toBe([$closed, $first, $closed, $first])
+        ->and(listing_body_rows($case['html']))->toBe(doximity_row());
+});
+
+test('a floor that is not among the choices adds nothing to the office address 2', function (): void {
+    uamswp_test_template('doximity-list');
+
+    $case = doximity_case(
+        location: ['location_building' => 701],
+        terms: ['building:701' => 'Tower A'],
+        objects: ['location_building_floor' => ['value' => '9', 'choices' => ['2' => 'Floor 2']]],
+    );
+
+    expect(listing_body_rows($case['html']))->toBe(doximity_row(['address_2' => 'Tower A']));
 });

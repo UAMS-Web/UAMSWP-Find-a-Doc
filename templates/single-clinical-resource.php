@@ -70,6 +70,8 @@ $resource_type_value = $resource_type['value'];
 $resource_type_label = $resource_type['label'];
 
 // Provider Spotlight
+// The select value is a string, or null when unset, so a loose and a strict comparison agree.
+// @pest-mutate-ignore: EqualToIdentical
 $is_provider_spotlight = ($resource_type_value == 'provider_spotlight');
 $spotlight_provider = $is_provider_spotlight ? (int) get_field('clinical_resource_spotlight_provider') : 0;
 
@@ -139,7 +141,7 @@ if ($physicians) {
         'post__in' => $physicians,
     ];
     $physicians_query = new WP_Query($args);
-    if ($physicians_query instanceof WP_Query && $physicians_query->have_posts()) {
+    if ($physicians_query->have_posts()) {
         $show_providers_section = true;
         $jump_link_count++;
     } else {

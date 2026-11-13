@@ -7,31 +7,13 @@ class UAMSPhysicians_Settings
 {
     public function __construct()
     {
-        add_action('admin_menu', [$this, 'setup_sections']);
         add_action('admin_init', [$this, 'setup_options']);
-    }
-
-    public function setup_sections(): void
-    {
-        $this->make_setting_pages();
-        $this->add_setting_sections();
-
     }
 
     public function setup_options(): void
     {
         $this->register_settings();
         $this->add_settings_fields();
-    }
-
-    public function make_setting_pages(): void
-    {
-        // no pages atm
-    }
-
-    public function add_setting_sections(): void
-    {
-        // no sections atm
     }
 
     public function register_settings(): void

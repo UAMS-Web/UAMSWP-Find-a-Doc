@@ -469,8 +469,8 @@ final class HelperFunctionsTest extends UnitTestCase
 
     public function test_the_post_type_of_a_numeric_id_is_read_and_a_non_id_is_not(): void
     {
-        expect('get_post_type')->once()->with(12)->andReturn('provider');
-        expect('get_post_type')->once()->with(0)->andReturn(false);
+        expect('get_post_type')->once()->with(\Mockery::mustBe(12))->andReturn('provider');
+        expect('get_post_type')->once()->with(\Mockery::mustBe(0))->andReturn(false);
 
         $this->assertSame('provider', \uamswp_fad_post_type_of('12'));
         $this->assertFalse(\uamswp_fad_post_type_of(0));
@@ -514,5 +514,62 @@ final class HelperFunctionsTest extends UnitTestCase
         unset($_POST['acf']);
         \uamswp_fad_post_set('field_c', 'z');
         $this->assertSame(['field_c' => 'z'], $_POST['acf']);
+    }
+
+    public function test_the_ap_date_flags_take_any_true_value(): void
+    {
+        $now = time();
+        $past = $this->at(2020, 1, 5);
+        $this_year = $this->this_year_not_today();
+
+        $this->assertSame('Today', \ap_date($now, 1, 1, 1, 1));
+        $this->assertSame('today', \ap_date($now, 1, 0, 1, 1));
+        $this->assertSame('Sunday, Jan.  5, 2020', \ap_date($past, 1, 1, 1, 1));
+        $this->assertSame(\ap_date($this_year, true, true, true, true), \ap_date($this_year, 1, 1, 1, 1));
+        $this->assertStringEndsWith(', '.date('Y', $this_year), \ap_date($this_year, 1, 1, 1, 1));
+    }
+
+    public function test_the_time_flags_take_any_true_value(): void
+    {
+        $this->assertSame('Midnight', \ap_time(0, 1));
+        $this->assertSame('Noon', \ap_time(43200, 1));
+        $this->assertSame('Midnight', \apStyleTime('00:00', 1));
+        $this->assertSame('Noon', \apStyleTime('12:00', 1));
+    }
+
+    public function test_a_time_that_cannot_be_read_is_the_start_of_the_epoch(): void
+    {
+        $this->assertSame('Midnight', \apStyleTime('not a time'));
+    }
+
+    public function test_a_taxonomy_given_as_a_number_is_looked_up_by_its_text(): void
+    {
+        expect('get_taxonomy')->once()->with(\Mockery::mustBe('5'))->andReturn(false);
+
+        $this->assertSame('/', \get_taxonomy_archive_link(5));
+    }
+
+    public function test_a_provider_name_that_is_not_text_is_escaped_as_text(): void
+    {
+        expect('esc_html')->once()->with(\Mockery::mustBe('42'))->andReturn('42');
+
+        $this->assertSame('42', \uamswp_provider_name_html(42));
+    }
+
+    public function test_the_taxonomy_crumb_keeps_a_longer_trail_in_order(): void
+    {
+        $this->conditions(['is_tax:condition']);
+        when('get_queried_object')->justReturn((object) ['taxonomy' => 'condition']);
+        $taxonomy = new \WP_Taxonomy;
+        $taxonomy->labels = (object) ['name' => 'Conditions'];
+        $taxonomy->rewrite = ['slug' => 'conditions'];
+
+        when('get_taxonomy')->justReturn($taxonomy);
+
+        $this->assertSame(
+            [['Home', '/'], ['Mid', '/mid'], ['Conditions', '/conditions'], ['Asthma', '/asthma']],
+            \uamswp_fad_taxonomy_breadcrumbs_crumbs([['Home', '/'], ['Mid', '/mid'], ['Asthma', '/asthma']])
+        );
+        $this->assertSame([['Conditions', '/conditions']], \uamswp_fad_taxonomy_breadcrumbs_crumbs([]));
     }
 }
