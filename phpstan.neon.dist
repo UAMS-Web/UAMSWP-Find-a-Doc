@@ -84,16 +84,11 @@ parameters:
             - templates/_unused/_taxonomy-medical_terms.php
             - templates/_unused/taxonomy-specialty.php
             - templates/archive-condition.php
-            - templates/archive-locations.php
             - templates/archive-taxonomy-conditions.php
             - templates/archive-taxonomy-treatments.php
             - templates/archive-treatments.php
-            - templates/blocks/locations-phone.php
-            - templates/blocks/locations.php
-            - templates/fwp/location-list.php
             - templates/loops/conditions-cpt-loop.php
             - templates/loops/conditions-loop.php
-            - templates/loops/location-card.php
             - templates/loops/treatments-cpt-loop.php
             - templates/loops/treatments-loop.php
 
