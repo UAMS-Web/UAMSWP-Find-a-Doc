@@ -175,6 +175,53 @@ final class DeadLinkCleanupTest extends IntegrationTestCase
         $this->assertContains('kept', array_column($run['items'], 'state'));
     }
 
+    public function test_the_undo_restores_a_renumbered_list_and_an_object_shaped_cell_exactly(): void
+    {
+        global $wpdb;
+
+        $world = $this->world();
+
+        // A list stored with 1-based keys and a blank entry, and a custom-table cell stored as a JSON object.
+        update_post_meta($world['condition'], 'condition_physicians', [1 => (string) $world['provider'], 2 => (string) self::DEAD, 3 => '']);
+        $wpdb->update($this->locations_table, ['physician_locations' => '{"1":'.$world['provider'].',"2":'.self::DEAD.'}'], ['post_id' => $world['location']]);
+
+        $before = $this->storage();
+        $run = uamswp_dead_links_apply_step(uamswp_dead_links_scan());
+
+        $this->assertNotSame($before, $this->storage(), 'The removal changed the stored values.');
+
+        $run = uamswp_dead_links_undo_step($run);
+
+        $this->assertSame('undone', $run['status']);
+        $this->assertSame($before, $this->storage());
+        $this->assertSame('{"1":'.$world['provider'].',"2":'.self::DEAD.'}', $this->cell($this->locations_table, 'physician_locations', $world['location']));
+    }
+
+    public function test_the_undo_leaves_no_post_meta_row_for_a_field_the_record_never_had(): void
+    {
+        global $wpdb;
+
+        $world = $this->world();
+        $other = self::factory()->post->create(['post_type' => 'location']);
+
+        // A link held only in the custom table, which the editor reads through ACF Custom Database Tables.
+        $wpdb->insert($this->locations_table, ['post_id' => $other, 'physician_locations' => '['.$world['provider'].','.self::DEAD.']', 'physician_first_name' => 'Table only']);
+        add_filter('default_post_metadata', fn (mixed $value, int $post_id, string $key): mixed => $post_id === $other && $key === 'physician_locations' ? array_map(strval(...), $this->idsOf($other)) : $value, 10, 3);
+
+        $this->assertSame(0, $this->metaRows($other, 'physician_locations'));
+
+        $run = uamswp_dead_links_apply_step(uamswp_dead_links_scan());
+
+        $this->assertSame('['.$world['provider'].']', $this->cell($this->locations_table, 'physician_locations', $other), 'The removal rewrote the cell.');
+        $this->assertSame(1, $this->metaRows($other, 'physician_locations'), 'The removal wrote a post meta row.');
+
+        uamswp_dead_links_undo_step($run);
+
+        $this->assertSame(0, $this->metaRows($other, 'physician_locations'), 'The row the removal added is gone.');
+        $this->assertSame('['.$world['provider'].','.self::DEAD.']', $this->cell($this->locations_table, 'physician_locations', $other));
+        $this->assertSame('Table only', $this->firstName($this->locations_table, $other));
+    }
+
     public function test_only_an_administrator_may_start_a_step(): void
     {
         $this->world();
@@ -459,6 +506,46 @@ final class DeadLinkCleanupTest extends IntegrationTestCase
         global $wpdb;
 
         $wpdb->insert($table, ['post_id' => $post_id, 'physician_locations' => (string) wp_json_encode($linked), 'physician_first_name' => $first_name]);
+    }
+
+    /**
+     * @return array<int, int>
+     */
+    private function idsOf(int $post_id): array
+    {
+        global $wpdb;
+
+        return array_map(intval(...), (array) json_decode((string) $wpdb->get_var($wpdb->prepare("SELECT physician_locations FROM {$this->locations_table} WHERE post_id = %d", $post_id)), true));
+    }
+
+    private function cell(string $table, string $column, int $post_id): ?string
+    {
+        global $wpdb;
+
+        return $wpdb->get_var($wpdb->prepare("SELECT `{$column}` FROM {$table} WHERE post_id = %d", $post_id));
+    }
+
+    private function metaRows(int $post_id, string $key): int
+    {
+        global $wpdb;
+
+        return (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$wpdb->postmeta} WHERE post_id = %d AND meta_key = %s", $post_id, $key));
+    }
+
+    /**
+     * Every stored value the link fields of the test world hold, exactly as the database keeps it.
+     *
+     * @return array<string, mixed>
+     */
+    private function storage(): array
+    {
+        global $wpdb;
+        $meta = $wpdb->get_results("SELECT post_id, meta_key, meta_value FROM {$wpdb->postmeta} WHERE meta_key IN ('condition_physicians', 'treatment_procedure_locations', 'physician_locations') ORDER BY meta_id", ARRAY_A);
+
+        return [
+            'meta' => $meta,
+            'cells' => $wpdb->get_results("SELECT post_id, physician_locations FROM {$this->locations_table} ORDER BY post_id", ARRAY_A),
+        ];
     }
 
     private function rowCount(string $table, int $post_id): int
