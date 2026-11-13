@@ -33,10 +33,15 @@ final class SettingsPagesTest extends UnitTestCase
 
     private static bool $loaded = false;
 
-    protected function setUp(): void
+    /**
+     * Load the file once, from inside a test, capturing what it registers.
+     *
+     * The load runs in the body of the first test that calls it rather than in setUp(), so the mutation run
+     * credits the file-scope registrations to that test. The first test in this class asserts every
+     * registration, so it is the one each file-scope mutant runs against.
+     */
+    private function load(): void
     {
-        parent::setUp();
-
         if (self::$loaded) {
             return;
         }
@@ -58,8 +63,51 @@ final class SettingsPagesTest extends UnitTestCase
         self::$loaded = true;
     }
 
+    /**
+     * Every registration the file makes as it loads, in full. This test is declared first so that it is the
+     * one that loads the file, and so the one each file-scope mutant is run against.
+     */
+    public function test_loading_the_file_registers_every_page_hook_and_filter(): void
+    {
+        $this->load();
+
+        $sub_page = static fn (string $page_title, string $menu_title, string $menu_slug): array => [
+            'page_title' => $page_title,
+            'menu_title' => $menu_title,
+            'menu_slug' => $menu_slug,
+            'parent_slug' => 'fad-settings',
+            'capability' => 'manage_options',
+            'redirect' => false,
+        ];
+
+        $this->assertSame([[
+            'page_title' => 'Find-a-Doc Settings',
+            'menu_title' => 'Find-a-Doc Settings',
+            'menu_slug' => 'fad-settings',
+            'capability' => 'manage_options',
+            'redirect' => false,
+        ]], self::$pages);
+        $this->assertSame([
+            $sub_page('Clinical Providers Options', 'Clinical Providers', 'uamswp-fad-providers'),
+            $sub_page('Clinical Locations Options', 'Clinical Locations', 'uamswp-fad-locations'),
+            $sub_page('Areas of Expertise Options', 'Clinical Areas of Expertise', 'uamswp-fad-expertise'),
+            $sub_page('Clinical Resource Options', 'Clinical Resources', 'uamswp-fad-resources'),
+            $sub_page('Conditions and Treatments Options', 'Conditions and Treatments', 'uamswp-fad-tax'),
+            $sub_page('MyChart Open Scheduling Options', 'MyChart Open Scheduling', 'uamswp-fad-mychart'),
+            $sub_page('Remove Medical Ontology Options', 'Remove Medical Ontology', 'uamswp-fad-remove-ontology'),
+        ], self::$sub_pages);
+        $this->assertSame([['acf/init', 'my_acf_google_key']], self::$actions);
+        $this->assertSame([
+            ['acf/validate_value/name=mychart_scheduling_domain', 'uamswp_fad_validate_mychart_domain', 10, 4],
+            ['acf/validate_value/name=mychart_scheduling_instance', 'uamswp_fad_validate_mychart_instance', 10, 4],
+            ['acf/validate_value/name=mychart_scheduling_linksource', 'uamswp_fad_validate_mychart_domain', 10, 4],
+        ], self::$filters);
+    }
+
     public function test_the_top_level_page_is_for_administrators_and_does_not_redirect(): void
     {
+        $this->load();
+
         $this->assertSame([[
             'page_title' => 'Find-a-Doc Settings',
             'menu_title' => 'Find-a-Doc Settings',
@@ -71,6 +119,8 @@ final class SettingsPagesTest extends UnitTestCase
 
     public function test_seven_sub_pages_hang_under_the_top_level_page_in_menu_order(): void
     {
+        $this->load();
+
         $this->assertSame([
             'uamswp-fad-providers',
             'uamswp-fad-locations',
@@ -90,6 +140,8 @@ final class SettingsPagesTest extends UnitTestCase
 
     public function test_each_sub_page_is_titled_for_its_menu_entry(): void
     {
+        $this->load();
+
         $this->assertSame([
             'uamswp-fad-providers' => ['Clinical Providers Options', 'Clinical Providers'],
             'uamswp-fad-locations' => ['Clinical Locations Options', 'Clinical Locations'],
@@ -106,6 +158,8 @@ final class SettingsPagesTest extends UnitTestCase
 
     public function test_the_google_key_and_the_validators_are_hooked(): void
     {
+        $this->load();
+
         $this->assertSame([['acf/init', 'my_acf_google_key']], self::$actions);
         $this->assertSame([
             ['acf/validate_value/name=mychart_scheduling_domain', 'uamswp_fad_validate_mychart_domain', 10, 4],
@@ -116,6 +170,8 @@ final class SettingsPagesTest extends UnitTestCase
 
     public function test_a_saved_google_key_is_handed_to_acf(): void
     {
+        $this->load();
+
         when('get_field')->alias(static fn (string $field, string $id): string => $field === 'fad_google_key' && $id === 'option' ? 'KEY-123' : '');
         expect('acf_update_setting')->once()->with('google_api_key', 'KEY-123');
 
@@ -124,6 +180,8 @@ final class SettingsPagesTest extends UnitTestCase
 
     public function test_no_google_key_leaves_the_acf_setting_alone(): void
     {
+        $this->load();
+
         when('get_field')->justReturn('');
         expect('acf_update_setting')->never();
 
@@ -159,11 +217,15 @@ final class SettingsPagesTest extends UnitTestCase
     #[DataProvider('domain_values')]
     public function test_the_domain_validator_accepts_only_a_bare_hostname(mixed $value, mixed $expected): void
     {
+        $this->load();
+
         $this->assertSame($expected, \uamswp_fad_validate_mychart_domain(true, $value, [], 'input'));
     }
 
     public function test_the_domain_validator_passes_an_earlier_failure_through_untouched(): void
     {
+        $this->load();
+
         $this->assertSame('Already wrong.', \uamswp_fad_validate_mychart_domain('Already wrong.', 'https://bad', [], 'input'));
         $this->assertFalse(\uamswp_fad_validate_mychart_domain(false, 'https://bad', [], 'input'));
     }
@@ -189,11 +251,15 @@ final class SettingsPagesTest extends UnitTestCase
     #[DataProvider('instance_values')]
     public function test_the_instance_validator_accepts_only_one_path_segment(mixed $value, mixed $expected): void
     {
+        $this->load();
+
         $this->assertSame($expected, \uamswp_fad_validate_mychart_instance(true, $value, [], 'input'));
     }
 
     public function test_the_instance_validator_passes_an_earlier_failure_through_untouched(): void
     {
+        $this->load();
+
         $this->assertSame('Already wrong.', \uamswp_fad_validate_mychart_instance('Already wrong.', 'a/b', [], 'input'));
     }
 }
