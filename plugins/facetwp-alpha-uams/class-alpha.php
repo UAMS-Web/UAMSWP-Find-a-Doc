@@ -79,6 +79,8 @@ class FacetWP_Facet_Alpha_Addon extends FacetWP_Facet
             'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
             'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' );
 
+        // The output is empty before this line, so appending and assigning agree.
+        // @pest-mutate-ignore: ConcatEqualToEqual
         $output .= '<a class="facetwp-alpha available'. $any_selected .'"  role="link" aria-label="Any" aria-selected="'. $any_aria_value .'" tabindex="0" data-id="">' . __( 'Any', 'fwp' ) . '</a>';
 
         foreach ( $available_chars as $char ) {
@@ -133,6 +135,8 @@ class FacetWP_Facet_Alpha_Addon extends FacetWP_Facet
         // value, so every legitimate selected value is a single alphanumeric
         // character. Discard anything else so no attacker-controlled string
         // can reach the SQL statement.
+        // The values are bound by position (array_merge and implode ignore the keys), so renumbering them changes nothing.
+        // @pest-mutate-ignore: UnwrapArrayValues
         $values = array_values( preg_grep( '/^[A-Za-z0-9]$/', $values ) );
 
         if ( empty( $values ) ) {
@@ -141,6 +145,8 @@ class FacetWP_Facet_Alpha_Addon extends FacetWP_Facet
 
         // Build a parameterized IN() list and let $wpdb->prepare() escape both
         // the facet name and every selected value.
+        // Only the count of placeholders matters, not the index the filled array starts at.
+        // @pest-mutate-ignore: DecrementInteger,IncrementInteger
         $placeholders = implode( ', ', array_fill( 0, count( $values ), '%s' ) );
 
         $sql = $wpdb->prepare(
