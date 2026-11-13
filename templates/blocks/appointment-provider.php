@@ -24,11 +24,13 @@ $appointment_phone = '5016868000'; // default (UAMS)
 $show_portal = false;
 $portal_name = '';
 $portal_name_attr = '';
+$portal_url = '';
 // Portal
 if ($physician_portal) {
-    $portal = get_term($physician_portal, 'portal');
-    $portal_slug = $portal->slug;
-    $portal_name = $portal->name;
+    $portal = get_term(uamswp_fad_int($physician_portal), 'portal');
+    $portal_found = is_object($portal) && ! is_wp_error($portal);
+    $portal_slug = $portal_found ? uamswp_fad_str($portal->slug) : '';
+    $portal_name = $portal_found ? uamswp_fad_str($portal->name) : '';
     $portal_name_attr = $portal_name;
     $portal_name_attr = str_replace('"', "'", $portal_name_attr); // Replace double quotes with single quote
     $portal_name_attr = str_replace('&#8217;', "'", $portal_name_attr); // Replace right single quote with single quote
@@ -37,11 +39,10 @@ if ($physician_portal) {
     $portal_name_attr = str_replace('&nbsp;', ' ', $portal_name_attr); // Convert non-breaking space with normal space
     $portal_name_attr = html_entity_decode($portal_name_attr); // Convert HTML entities to their corresponding characters
     $portal_content = get_field('portal_content', $portal);
-    $portal_link = get_field('portal_url', $portal);
-    $portal_url = '';
-    if ($portal_link) {
-        $portal_url = $portal_link['url'];
-        $portal_link_title = $portal_link['title'];
+    $portal_link = uamswp_fad_assoc(get_field('portal_url', $portal));
+    if ($portal_link !== []) {
+        $portal_url = uamswp_fad_str($portal_link['url'] ?? null);
+        $portal_link_title = $portal_link['title'] ?? null;
     }
 
     if ($location_valid && $portal && $portal_slug !== '_none') {
@@ -78,7 +79,7 @@ if ($location_count == 1) {
 }
 $appointment_reference_referral = 'Appointments for new patients are by referral only.';
 $appointment_reference_portal = ! empty($portal_url) ? '<a href="'.esc_url($portal_url).'" target="_blank" data-categorytitle="Make an Appointment | Block '.$appointment_block_instance.'" data-typetitle="Request an Appointment Online | '.$portal_name_attr.'">requesting an appointment online</a> through '.$portal_name : '';
-$appointment_reference_direct = 'by <a href="'.esc_url($appointment_location_url).'" data-categorytitle="Make an Appointment | Block '.$appointment_block_instance.'" data-typetitle="'.$appointment_location_data.'">contacting the clinic&nbsp;directly</a>';
+$appointment_reference_direct = 'by <a href="'.esc_url(uamswp_fad_str($appointment_location_url)).'" data-categorytitle="Make an Appointment | Block '.$appointment_block_instance.'" data-typetitle="'.$appointment_location_data.'">contacting the clinic&nbsp;directly</a>';
 $appointment_reference_main = 'by calling '.$appointment_phone_name.' at <a href="tel:'.$appointment_phone_tel.'" class="no-break" data-categorytitle="Make an Appointment | Block '.$appointment_block_instance.'" data-typetitle="Main Appointment Line | '.$appointment_phone_name_attr.'">'.$appointment_phone_text.'</a>';
 ?>
 <section class="uams-module cta-bar cta-bar-1 bg-auto" id="appointment-info-<?php echo $appointment_block_instance; ?>">
@@ -93,7 +94,7 @@ $appointment_reference_main = 'by calling '.$appointment_phone_name.' at <a href
                     <?php } else { ?>
                         <?php echo $appointment_reference_portal; ?> or <?php echo $appointment_reference_direct; ?>.
                     <?php } ?></p>
-                <?php } elseif (! $location_valid && $refer_req && $accept_new && ! $show_portal) {
+                <?php } elseif (! $location_valid && $refer_req && $accept_new) {
                     // Showing main appointment line reference here regardless of
                     // decision on main appointment line, as there is no valid location
                     // in this scenario. There would otherwise be no manner to make an
@@ -115,7 +116,7 @@ $appointment_reference_main = 'by calling '.$appointment_phone_name.' at <a href
                         <?php echo $appointment_reference_direct; ?>.
                     <?php } ?></p>
                     <p>Existing patients also have the option of <?php echo $appointment_reference_portal; ?>.</p>
-                <?php } elseif (! $location_valid && ! $refer_req && $accept_new && ! $show_portal) {
+                <?php } elseif (! $location_valid && ! $refer_req && $accept_new) {
                     // Showing main appointment line reference here regardless of
                     // decision on main appointment line, as there is no valid location
                     // in this scenario. There would otherwise be no manner to make an
@@ -135,7 +136,7 @@ $appointment_reference_main = 'by calling '.$appointment_phone_name.' at <a href
                     <?php } else { ?>
                         <?php echo $appointment_reference_portal; ?> or <?php echo $appointment_reference_direct; ?>.</p>
                     <?php } ?>
-                <?php } elseif (! $location_valid && ! $refer_req && ! $accept_new && ! $show_portal) {
+                <?php } elseif (! $location_valid && ! $refer_req && ! $accept_new) {
                     // Showing main appointment line reference here regardless of
                     // decision on main appointment line, as there is no valid location
                     // in this scenario. There would otherwise be no manner to make an

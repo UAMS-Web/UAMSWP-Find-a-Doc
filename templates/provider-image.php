@@ -69,7 +69,7 @@ function display_provider_image_provider_image(): void
 
             while ($query->have_posts()) {
                 $query->the_post();
-                $post_id = get_the_ID();
+                $post_id = uamswp_fad_int(get_the_ID());
 
                 echo get_the_post_thumbnail($post_id, 'full');
 

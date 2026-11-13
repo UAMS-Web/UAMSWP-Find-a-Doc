@@ -77,7 +77,7 @@ function display_provider_image_mychart_list_provider(): void
                 <?php
                 while ($query->have_posts()) {
                     $query->the_post();
-                    $post_id = get_the_ID();
+                    $post_id = uamswp_fad_int(get_the_ID());
 
                     // Create the Name variables
                     $pid = get_field('physician_pid', $post_id);
@@ -106,8 +106,6 @@ function display_provider_image_mychart_list_provider(): void
                         echo '<td class="no-break">'.$profile_url.'?utm_source=mychart&utm_medium=link&utm_campaign=clinical_service&utm_term=provider&utm_content='.$profile_slug.'</td>';
 
                         echo '</tr>';
-
-                        $l++;
 
                     } // endif !$resident
 

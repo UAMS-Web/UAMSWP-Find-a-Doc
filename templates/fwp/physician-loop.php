@@ -19,9 +19,8 @@
 	        $degree_list = '';
 	        $i = 1;
 	        if ($degrees) {
-	            foreach ($degrees as $degree) {
-	                $degree_name = get_term($degree, 'degree');
-	                $degree_list .= $degree_name->name;
+	            foreach (uamswp_fad_arr($degrees) as $degree) {
+	                $degree_list .= uamswp_fad_term_name($degree, 'degree');
 	                if (count($degrees) > $i) {
 	                    $degree_list .= ', ';
 	                }
@@ -69,17 +68,17 @@
 
 	            if ($provider_specialty) {
 
-	                $provider_specialty_term = get_term($provider_specialty, 'clinical_title');
+	                $provider_specialty_term = get_term(uamswp_fad_int($provider_specialty), 'clinical_title');
 
-	                if (is_object($provider_specialty_term)) {
+	                if (is_object($provider_specialty_term) && ! is_wp_error($provider_specialty_term)) {
 
 	                    // Get term name
 
-	                    $provider_specialty_name = $provider_specialty_term->name;
+	                    $provider_specialty_name = uamswp_fad_str($provider_specialty_term->name);
 
 	                    // Get occupational title field from term
 
-	                    $provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term) ?? null;
+	                    $provider_occupation_title = uamswp_fad_str(get_field('clinical_specialization_title', $provider_specialty_term));
 
 	                    // Set occupational title from term name as a fallback
 
@@ -103,19 +102,19 @@
 					<a href="<?php echo get_permalink(); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" class="stretched-link" data-categorytitle="Photo" data-itemtitle="<?php echo $full_name_attr; ?>">
 						<picture>
 						<?php if (has_post_thumbnail() && function_exists('bis_get_attachment_image')) { ?>
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center', 'portrait-3-4'); ?>"
+							<source srcset="<?php echo uamswp_fad_str(image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center', 'portrait-3-4')); ?>"
 								media="(min-width: 2054px)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center', 'portrait-3-4'); ?>"
+							<source srcset="<?php echo uamswp_fad_str(image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center', 'portrait-3-4')); ?>"
 								media="(min-width: 1784px)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center', 'portrait-3-4'); ?>"
+							<source srcset="<?php echo uamswp_fad_str(image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center', 'portrait-3-4')); ?>"
 								media="(min-width: 1200px)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center', 'portrait-3-4'); ?>"
+							<source srcset="<?php echo uamswp_fad_str(image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center', 'portrait-3-4')); ?>"
 								media="(min-width: 768px)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 95, 127, 'center', 'center', 'portrait-3-4'); ?>"
+							<source srcset="<?php echo uamswp_fad_str(image_sizer(get_post_thumbnail_id(), 95, 127, 'center', 'center', 'portrait-3-4')); ?>"
 								media="(min-width: 576px)">
-							<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center', 'portrait-3-4'); ?>"
+							<source srcset="<?php echo uamswp_fad_str(image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center', 'portrait-3-4')); ?>"
 								media="(min-width: 1px)">
-							<img src="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center', 'portrait-3-4'); ?>" alt="<?php echo $full_name_attr; ?>" />
+							<img src="<?php echo uamswp_fad_str(image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center', 'portrait-3-4')); ?>" alt="<?php echo $full_name_attr; ?>" />
 						<?php } elseif (has_post_thumbnail()) { ?>
 							<?php the_post_thumbnail('medium', ['itemprop' => 'image']); ?>
 						<?php } else { ?>
@@ -132,11 +131,7 @@
 							<a href="<?php echo get_permalink(); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" data-categorytitle="Name" data-itemtitle="<?php echo $full_name_attr; ?>"><span class="name"><?php echo $full_name; ?></span></a>
 							<?php
 
-	                                if (
-	                                    $provider_occupation_title
-	                                    &&
-	                                    ! empty($provider_occupation_title)
-	                                ) {
+	                                if ($provider_occupation_title) {
 	                                    ?>
 								<span class="subtitle"><?php echo $provider_occupation_title; ?></span>
 								<?php
@@ -157,8 +152,9 @@
 	            $pg_rating_data = '';
 	            $pg_rating_valid = false;
 	            if ($npi) {
-	                $pg_rating_data = get_post_meta(get_the_ID(), '_syndicated_api_data', true);
-	                if (! empty($pg_rating_data) && ! empty($pg_rating_data->data->entities[0]->totalRatingCount)) {
+	                /** @var object{data: object{entities: list<object{totalRatingCount: int, totalCommentCount: int, overallRating: object{value: float|int|string}}>}}|string $pg_rating_data */
+	                $pg_rating_data = get_post_meta(uamswp_fad_int(get_the_ID()), '_syndicated_api_data', true);
+	                if (is_object($pg_rating_data) && ! empty($pg_rating_data->data->entities[0]->totalRatingCount)) {
 	                    $pg_rating_valid = (($pg_rating_data->data->entities[0]->totalRatingCount) >= 30);
 	                }
 	            }
@@ -196,15 +192,15 @@
 	        }
 	        ?>
 
-							<p><?php echo get_field('physician_short_clinical_bio') ?: wp_trim_words(get_field('physician_clinical_bio'), 30, ' &hellip;'); ?></p>
+							<p><?php echo get_field('physician_short_clinical_bio') ?: wp_trim_words(uamswp_fad_str(get_field('physician_clinical_bio')), 30, ' &hellip;'); ?></p>
 						<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" data-categorytitle="View Full Profile" data-itemtitle="<?php echo $full_name_attr; ?>">Full Profile</a>
 						</div>
 						<?php
 	                    // Check for valid locations
-	                    $locations = get_field('physician_locations');
+	                    $locations = uamswp_fad_arr(get_field('physician_locations'));
 	        $location_valid = false;
 	        foreach ($locations as $location) {
-	            if (get_post_status($location) == 'publish') {
+	            if (get_post_status(uamswp_fad_int($location)) == 'publish') {
 	                $location_valid = true;
 	                break;
 	            }
@@ -214,8 +210,8 @@
 								<h4 class="h5">Locations</h4>
 									<ul>
 										<?php foreach ($locations as $location) {
-										    if (get_post_status($location) == 'publish') {
-										        $related_location = get_the_title($location);
+										    if (get_post_status(uamswp_fad_int($location)) == 'publish') {
+										        $related_location = get_the_title(uamswp_fad_int($location));
 										        $related_location_attr = $related_location;
 										        $related_location_attr = str_replace('"', "'", $related_location_attr); // Replace double quotes with single quote
 										        $related_location_attr = str_replace('&#8217;', "'", $related_location_attr); // Replace right single quote with single quote
@@ -225,8 +221,8 @@
 										        $related_location_attr = html_entity_decode($related_location_attr); // Convert HTML entities to their corresponding characters
 										        ?>
 											<li>
-												<a href="<?php echo get_permalink($location); ?>" data-categorytitle="Related Location" data-typetitle="<?php echo $related_location_attr; ?>" data-itemtitle="<?php echo $full_name_attr; ?>">
-													<?php echo get_the_title($location); ?>
+												<a href="<?php echo get_permalink(uamswp_fad_int($location)); ?>" data-categorytitle="Related Location" data-typetitle="<?php echo $related_location_attr; ?>" data-itemtitle="<?php echo $full_name_attr; ?>">
+													<?php echo get_the_title(uamswp_fad_int($location)); ?>
 												</a>
 											</li>
 										<?php } // endif
@@ -245,9 +241,9 @@
 				<?php
                     if (! empty(get_field('physician_clinical_title')) || ! empty($physician_service_line)) {
                         echo '<h4>';
-                        echo get_field('physician_clinical_title') && is_object(get_field('physician_clinical_title')) ? get_field('physician_clinical_title')->name : '';
+                        echo uamswp_fad_object_str(get_field('physician_clinical_title'), 'name');
                         echo (! empty(get_field('physician_clinical_title'))) && (! empty($physician_service_line)) ? ', ' : '';
-                        echo $physician_service_line ? get_term($physician_service_line, 'service_line')->name : '';
+                        echo $physician_service_line ? uamswp_fad_term_name($physician_service_line, 'service_line') : '';
                         echo '</h4>';
                     }
 	        ?>
@@ -303,11 +299,11 @@
 	                <div class="row" class="margin-top-none margin-bottom-none">
 	                    <div class="col-md-6">
 
-	                        <p><?php echo get_field('physician_short_clinical_bio') ?: wp_trim_words(get_field('physician_clinical_bio'), 30, ' &hellip;'); ?></p>
+	                        <p><?php echo get_field('physician_short_clinical_bio') ?: wp_trim_words(uamswp_fad_str(get_field('physician_clinical_bio')), 30, ' &hellip;'); ?></p>
 
 	                         <a class="uams-btn btn-blue btn-sm" target="_self" title="View Profile" href="<?php echo get_permalink($post->ID); ?>">View Profile</a>
 							<?php if (get_field('physician_youtube_link')) { ?>
-								<a class="uams-btn btn-red btn-play btn-sm" target="_self" title="View Physician Video" href="<?php echo esc_url(get_field('physician_youtube_link')); ?>&rel=0" data-lity>View Video</a>
+								<a class="uams-btn btn-red btn-play btn-sm" target="_self" title="View Physician Video" href="<?php echo esc_url(uamswp_fad_str(get_field('physician_youtube_link'))); ?>&rel=0" data-lity>View Video</a>
 							<?php } ?>
 	                    </div>
 	                    <div class="col-md-6">
@@ -319,12 +315,10 @@
 	        if ($specialties) { ?>
 								<h3>Specialties</h3>
 								<ul>
-									<?php foreach ($specialties as $specialty) { ?>
+									<?php foreach (uamswp_fad_arr($specialties) as $specialty) { ?>
 										<li>
-											<a href="<?php echo get_term_link($specialty); ?>">
-											<?php $specialty_name = get_term($specialty, 'specialty');
-									    echo $specialty_name->name;
-									    ?>
+											<a href="<?php echo uamswp_fad_str(get_term_link(uamswp_fad_int($specialty))); ?>">
+											<?php echo uamswp_fad_term_name($specialty, 'specialty'); ?>
 											</a>
 										</li>
 									<?php } ?>
@@ -332,16 +326,16 @@
 							<?php } ?>
 							<?php
 
-                            $locations = get_field('physician_locations');
+	                        $locations = uamswp_fad_arr(get_field('physician_locations'));
 
 	        ?>
-							<?php if ($locations) { ?>
+							<?php if ($locations !== []) { ?>
 							<h3 data-fontsize="16" data-lineheight="24"><i class="fa fa-medkit"></i> Clinic(s)</h3>
 								<ul>
 								<?php foreach ($locations as $location) { ?>
 									<li>
-										<a href="<?php echo get_permalink($location); ?>">
-											<?php echo get_the_title($location); ?>
+										<a href="<?php echo get_permalink(uamswp_fad_int($location)); ?>">
+											<?php echo get_the_title(uamswp_fad_int($location)); ?>
 										</a>
 									</li>
 								<?php } ?>
