@@ -117,8 +117,6 @@ parameters:
             - templates/single-expertise.php
             - templates/single-locations.php
             - templates/single-treatment.php
-            - templates/taxonomy-condition.php
-            - templates/taxonomy-treatment_procedure.php
             # Callbacks moved out of two templates unchanged (#1269). They read the template's variables and the ACF,
             # FacetWP and theme functions it calls, so they report the same findings the templates did (128 at level 10).
             # Analysing them goes with #1232.
