@@ -45,7 +45,8 @@ final class ExpertiseAttributesMetaBoxTest extends UnitTestCase
             echo $text;
         });
         when('__')->returnArg();
-        when('esc_attr')->returnArg();
+        // Marks a value that reaches it as a string, so a dropped cast or a dropped call shows in the markup.
+        when('esc_attr')->alias(static fn (mixed $text): string => is_string($text) ? 'esc('.$text.')' : 'not-a-string');
         when('wp_nonce_field')->alias(static function (string $action, string $name): void {
             echo '[nonce '.$action.' '.$name.']';
         });
@@ -121,7 +122,12 @@ final class ExpertiseAttributesMetaBoxTest extends UnitTestCase
         $this->assertStringContainsString('[nonce sidebar_nonce sidebar_name]', $html);
         $this->assertStringContainsString('name="sidebarcheck"', $html);
         $this->assertStringNotContainsString('checked="checked"', $html);
-        $this->assertStringContainsString('value="3"', $html);
+        $this->assertStringContainsString('value="esc(3)"', $html);
+        $this->assertStringContainsString('<strong>Sidebar</strong>', $html);
+        $this->assertStringContainsString('for="sidebar">Sidebar</label>', $html);
+        $this->assertStringContainsString('/>No Sidebar</p>', $html);
+        $this->assertStringContainsString('<strong>Order</strong>', $html);
+        $this->assertStringContainsString('for="menu_order">Order</label>', $html);
         $this->assertStringNotContainsString('Need help?', $html);
     }
 
@@ -155,6 +161,8 @@ final class ExpertiseAttributesMetaBoxTest extends UnitTestCase
         $this->assertStringContainsString('<select id="parent_id"></select>', $html);
         $this->assertStringContainsString('[nonce parent_nonce parent_name]', $html);
         $this->assertStringContainsString('for="parent_id"', $html);
+        $this->assertStringContainsString('<strong>Parent</strong>', $html);
+        $this->assertStringContainsString('for="parent_id">Parent</label>', $html);
     }
 
     public function test_a_hierarchical_post_type_with_no_pages_shows_no_parent_dropdown(): void
