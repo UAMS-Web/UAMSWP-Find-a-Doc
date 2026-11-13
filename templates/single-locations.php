@@ -502,25 +502,29 @@ while (have_posts()) {
     // Check if Appointment Scheduling section should be displayed
     $mychart_scheduling_query_system = get_field('mychart_scheduling_query_system', 'option');
     $location_scheduling_query = get_field('location_scheduling_query');
-    /** @var list<array<string, mixed>> $location_scheduling_options */
+    /** @var list<array{location_scheduling_title: string, location_scheduling_intro: string, location_scheduling_item_title_nested: string, location_scheduling_ser: string, location_scheduling_dep: string, location_scheduling_vt: string, location_scheduling_fallback: string}> $location_scheduling_options */
     $location_scheduling_options = get_field('location_scheduling_options');
 
     // Set main appointment scheduling section title
     $location_scheduling_title_default = 'Schedule an Appointment Online'; // Default value for appointment section title
     $location_scheduling_title_general = get_field('location_scheduling_title_general'); // Get input for general appointment section title
+    /** @var string $location_scheduling_title */
     $location_scheduling_title = (! empty($location_scheduling_title_general)) ? $location_scheduling_title_general : $location_scheduling_title_default; // Set main title from general title input. If general title value is empty, set to default value.
 
     // Set main appointment scheduling section intro
     $location_scheduling_intro_default = 'Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.'; // Default value for appointment section intro
     $location_scheduling_intro_general = get_field('location_scheduling_intro_general'); // Get input for general appointment section intro
+    /** @var string $location_scheduling_intro */
     $location_scheduling_intro = (! empty($location_scheduling_intro_general)) ? $location_scheduling_intro_general : $location_scheduling_intro_default; // Set main intro from general intro input. If general intro value is empty, set to default value.
 
     // Change main appointment scheduling section title and intro if only one scheduling widget
     if ($location_scheduling_query && (count((array) $location_scheduling_options) < 2)) {
         $row = $location_scheduling_options[0];
         $location_scheduling_item_title_main = $row['location_scheduling_title']; // Get input for specific appointment section standalone title
+        /** @var string $location_scheduling_title */
         $location_scheduling_title = (! empty($location_scheduling_item_title_main)) ? $location_scheduling_item_title_main : $location_scheduling_title; // If input for specific appointment section title exists, use that. Otherwise, keep original value.
         $location_scheduling_item_intro_main = $row['location_scheduling_intro']; // Get input for specific appointment section standalone intro
+        /** @var string $location_scheduling_intro */
         $location_scheduling_intro = (! empty($location_scheduling_item_intro_main)) ? $location_scheduling_item_intro_main : $location_scheduling_intro; // If input for specific appointment section intro exists, use that. Otherwise, keep original value.
     }
 
@@ -588,7 +592,7 @@ while (have_posts()) {
         ];
         $physicians_query = new WP_Query($args);
     }
-    /** @var WP_Query $physicians_query */
+    /** @var WP_Query|null $physicians_query */
     if (isset($physicians_query) && $physicians_query->have_posts()) {
         $show_providers_section = true;
         $jump_link_count++;
@@ -752,7 +756,7 @@ while (have_posts()) {
 						<div class="btn-container">
 							<div class="inner-container">
 								<?php if (isset($map['lat'], $map['lng'])) { ?>
-								<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?? '' ?>,<?php echo $map['lng'] ?? '' ?>" target="_blank" aria-label="Get directions to <?php echo $page_title_phrase; ?>" data-typetitle="Get directions to the clinic">Get Directions</a>
+								<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank" aria-label="Get directions to <?php echo $page_title_phrase; ?>" data-typetitle="Get directions to the clinic">Get Directions</a>
 								<?php } // endif $map?>
 								<?php if ($show_parking_section) { ?>
 									<a class="btn btn-outline-primary" href="#parking-info" aria-label="Parking instructions for <?php echo $page_title_phrase; ?>" data-typetitle="Parking instructions for the clinic">Parking Instructions</a>
@@ -802,6 +806,7 @@ while (have_posts()) {
     $modified_end_date = $location_hours_group['location_modified_hours_end_date'];
     $modified_hours = $location_hours_group['location_modified_hours_group'];
     $modified_hours_schema = '';
+    $hours_schema = '';
     $modified_text = '';
     $active_start = '';
     // The end is read only after a start is set, and they are set together, so its default is never used.
@@ -1741,7 +1746,7 @@ while (have_posts()) {
 
     // Begin Providers Section
     if ($show_providers_section) {
-
+        /** @var list<int> $provider_ids */
         ?>
 		<section class="uams-module bg-auto" id="providers">
 			<div class="container-fluid">
@@ -1753,13 +1758,14 @@ while (have_posts()) {
 							<div class="card-list card-list-doctors">
 								<?php
                                         $title_list = [];
+        /** @var WP_Query $physicians_query */
         while ($physicians_query->have_posts()) {
             $physicians_query->the_post();
             $id = get_the_ID();
             include UAMS_FAD_PATH.'/templates/loops/physician-card.php';
             $title_list[] = get_field('physician_title', $id);
         }
-        echo '<data id="provider_ids" data-postids="'.implode(',', $physicians_query->posts).'," data-titles="'.implode(',', array_unique($title_list)).',"></data>';
+        echo '<data id="provider_ids" data-postids="'.implode(',', $provider_ids).'," data-titles="'.implode(',', array_unique($title_list)).',"></data>';
         wp_reset_postdata();
         ?>
 							</div>
@@ -1846,6 +1852,7 @@ while (have_posts()) {
 						<div class="card-list-container">
 							<div class="card-list">
 								<?php
+                                    /** @var WP_Query $children */
                                     while ($children->have_posts()) {
                                         $children->the_post();
                                         $id = get_the_ID();
@@ -1871,9 +1878,7 @@ while (have_posts()) {
         $resource_more_suppress = false; // Force div.more to not display
         $resource_more_key = '_resource_locations';
         $resource_more_value = $post->post_name;
-        if ($show_related_resource_section) {
-            include UAMS_FAD_PATH.'/templates/blocks/clinical-resources.php';
-        }
+        include UAMS_FAD_PATH.'/templates/blocks/clinical-resources.php';
     }
     // End Clinical Resources Section
 
