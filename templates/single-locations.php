@@ -480,6 +480,12 @@ while (have_posts()) {
     /** @var array{lat: float|int|string, lng: float|int|string}|false|null $parking_map */
     $parking_map = get_field('location_parking_map', $location_source_ids['parking']);
 
+    // A location without a map still shows its parking map, with the clinic at the origin.
+    // The defaults only avoid a notice for a missing map: the output is the same without them.
+    // @pest-mutate-ignore: Coalesce
+    $map_lat = $map['lat'] ?? '';
+    // @pest-mutate-ignore: Coalesce
+    $map_lng = $map['lng'] ?? '';
     if ($location_parking || $location_direction || $parking_map) {
         $show_parking_section = true;
         $jump_link_count++;
@@ -1384,7 +1390,7 @@ while (have_posts()) {
 								/* [lat, lon, fillColor, strokeColor, labelClass, iconText, popupText] */
 								var markers = [
 									// example [ 34.74376029995541, -92.31828863640054, "00F","000","white","A","I am a blue icon." ],
-									[ <?php echo floatval($map['lat'] ?? 0); ?>, <?php echo floatval($map['lng'] ?? 0); ?>, "9d2235","222", "transparentwhite", '1', 'Clinic<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?? '' ?>,<?php echo $map['lng'] ?? '' ?>" target="_blank" aria-label="Get directions to <?php echo esc_js($page_title_phrase); ?>" data-typetitle="Get directions to the clinic">Get Directions</a>' ],
+									[ <?php echo floatval($map_lat); ?>, <?php echo floatval($map_lng); ?>, "9d2235","222", "transparentwhite", '1', 'Clinic<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map_lat ?>,<?php echo $map_lng ?>" target="_blank" aria-label="Get directions to <?php echo esc_js($page_title_phrase); ?>" data-typetitle="Get directions to the clinic">Get Directions</a>' ],
 									[ <?php echo floatval($parking_map['lat']); ?>, <?php echo floatval($parking_map['lng']); ?>, "9d2235","222", "transparentwhite", '2', 'Parking<br/><a href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank" aria-label="Get directions to the parking area" data-typetitle="Get directions to the parking area">Get Directions</a>' ]
 								]
 								//Loop through the markers array
@@ -1411,7 +1417,7 @@ while (have_posts()) {
 							</script>
 							<div class="map-legend bg-info" aria-label="Legend for map">
 								<ol data-categorytitle="Directions">
-									<li>Clinic (<a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?? '' ?>,<?php echo $map['lng'] ?? '' ?>" target="_blank" aria-label="Get directions to <?php echo esc_attr($page_title_phrase); ?>" data-typetitle="Get directions to the clinic">Get Directions</a>)</li>
+									<li>Clinic (<a href="https://www.google.com/maps/dir/Current+Location/<?php echo $map_lat ?>,<?php echo $map_lng ?>" target="_blank" aria-label="Get directions to <?php echo esc_attr($page_title_phrase); ?>" data-typetitle="Get directions to the clinic">Get Directions</a>)</li>
 									<li>Parking (<a href="https://www.google.com/maps/dir/Current+Location/<?php echo $parking_map['lat'] ?>,<?php echo $parking_map['lng'] ?>" target="_blank" aria-label="Get directions to the parking area" data-typetitle="Get directions to the parking area">Get Directions</a>)</li>
 								</ol>
 							</div>

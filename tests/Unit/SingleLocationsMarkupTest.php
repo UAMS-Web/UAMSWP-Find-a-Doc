@@ -996,6 +996,22 @@ test('the parking section with a map prints the directions link and the map', fu
         ->and($mapOnly)->toContain('<div class="module-body"><h2>Directions From the Parking Area</h2>');
 });
 
+test('the parking map shows the clinic at the origin when the location has no map', function (): void {
+    $output = single_location_markup(['location_parking_map' => ['lat' => '34.75', 'lng' => '-92.29']]);
+
+    expect($output)->toContain('[ 0, 0, "9d2235"')
+        ->and($output)->toContain('[ 34.75, -92.29, "9d2235"')
+        ->and($output)->toContain('<li>Clinic (<a href="https://www.google.com/maps/dir/Current+Location/,"');
+});
+
+test('the structured data has no typical opening hours when modified hours replace them', function (): void {
+    $groups = [['location_modified_hours_title' => '', 'location_modified_hours_information' => '', 'location_modified_hours_24_7' => false, 'location_modified_hours_times' => [single_location_modified_time()]]];
+    $schema = single_location_schema(single_location_modified($groups, ['location_modified_hours_end_date' => date('F j, Y', strtotime('+90 days'))]));
+
+    expect($schema)->not->toHaveKey('openingHours')
+        ->and($schema)->toHaveKey('openingHoursSpecification');
+});
+
 /**
  * The text of the telemedicine section of a render, without markup and with the whitespace collapsed.
  *
