@@ -570,17 +570,18 @@ test('saving a spotlight sets the thumbnail and rewrites the short description f
         ->and($writes->getArrayCopy())->toBe([['clinical_resource_excerpt', $expected, 5]]);
 });
 
-test('saving a spotlight leaves a thumbnail that is already right and an image that cannot be resolved', function (int $current, int $wide): void {
+test('saving a spotlight leaves a thumbnail that is already right and an image that cannot be resolved', function (int|string $current, int $wide): void {
     uamswp_test_acf_functions();
     when('get_post_type')->justReturn('clinical-resource');
     spot_fields(['clinical_resource_type' => 'provider_spotlight', 'clinical_resource_spotlight_provider' => 7, 'physician_image_wide|7' => $wide] + spot_provider(7));
-    when('get_post_thumbnail_id')->alias(static fn (int $id): int => $id === 5 ? $current : 0);
+    when('get_post_thumbnail_id')->alias(static fn (int $id): int|string => $id === 5 ? $current : 0);
     spot_writes();
     Functions\expect('set_post_thumbnail')->never();
 
     uamswp_spotlight_save(5);
 })->with([
     'already set' => [22, 22],
+    'already set, stored as text' => ['22', 22],
     'no image' => [0, 0],
 ]);
 
@@ -741,6 +742,9 @@ test('taking a spotlight out of publication releases the link and clears the mir
         'clinical_resource_providers|5' => [7],
         'physician_clinical_resources|7' => [5],
         'clinical_resource_aoe|5' => [40],
+        // Neighbors of provider 0, which must never be read for an unpublished spotlight.
+        'physician_expertise|1' => [98],
+        'physician_expertise|-1' => [99],
     ]);
     $writes = spot_writes();
 
@@ -1134,6 +1138,9 @@ test('deleting a spotlight releases its provider link and clears its ontology mi
         'physician_clinical_resources|7' => [5],
         'clinical_resource_treatments|5' => [60],
         'field_treatment_procedure_clinical_resources|60' => [5],
+        // Neighbors of provider 0, which must never be read for a deleted spotlight.
+        'physician_treatments_cpt|1' => [98],
+        'physician_treatments_cpt|-1' => [99],
     ]);
     $writes = spot_writes();
 
@@ -1309,4 +1316,15 @@ test('the featured provider check reads the first id of a list', function (): vo
     $result = uamswp_spotlight_validate_provider(true, [7, 9], [], 'acf[x]');
 
     expect($result)->toStartWith('This provider has no wide portrait and no headshot');
+});
+
+test('the featured provider check treats a list with no first entry as no provider', function (): void {
+    uamswp_test_acf_functions();
+    $_POST = ['acf' => []];
+    when('acf_maybe_get_POST')->alias(static fn (string $key): mixed => $_POST[$key] ?? null);
+    spot_fields([]);
+    when('get_post_thumbnail_id')->justReturn(0);
+
+    expect(uamswp_spotlight_validate_provider(true, [1 => 7], [], 'acf[x]'))->toBeTrue()
+        ->and(uamswp_spotlight_validate_provider(true, [], [], 'acf[x]'))->toBeTrue();
 });
