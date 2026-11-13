@@ -489,7 +489,7 @@ function uamswp_resource_provider_spotlight(): void
         if ($portrait_id) {
             // The stub types the attributes as a closed shape without itemprop,
             // so itemprop is added through the attributes filter for this call
-            $add_itemprop = static function ($attr) {
+            $add_itemprop = static function ($attr): array {
                 $attr = uamswp_fad_assoc($attr);
                 $attr['itemprop'] = 'image';
 
