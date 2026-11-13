@@ -33,7 +33,11 @@ function uamswp_test_gmb_page(): void
     uamswp_test_functions_file();
     require_once UAMS_FAD_PATH.'includes/class.fad-location-address.php';
 
-    when('add_action')->justReturn();
+    // What the file hooks as it loads, for the test that loads it to assert.
+    $GLOBALS['uamswp_test_gmb_page_actions'] = [];
+    when('add_action')->alias(static function (string $hook, string $callback, int $priority = 10): void {
+        $GLOBALS['uamswp_test_gmb_page_actions'][] = [$hook, $callback, $priority];
+    });
 
     require_once UAMS_FAD_PATH.'includes/class.fad-gmb-settings-page.php';
 
