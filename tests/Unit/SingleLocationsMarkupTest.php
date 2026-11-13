@@ -8,6 +8,7 @@
 declare(strict_types=1);
 
 require_once __DIR__.'/../Support/single-location.php';
+require_once __DIR__.'/../Support/acf-blocks.php';
 
 /**
  * Render the location profile and return its output with the whitespace between tags removed.
@@ -195,9 +196,9 @@ test('a single image prints at each size', function (): void {
     $output = single_location_markup(['location_wayfinding_photo' => 501], ['meta' => ['_wp_attachment_image_alt' => 'The clinic']]);
 
     expect($output)->toContain('<div class="col-12 col-md image"><div class="content-width"><picture>')
-        ->and($output)->toContain('<source srcset="https://example.test/photo-630x473.jpg" media="(min-width: 1350px)">')
-        ->and($output)->toContain('<source srcset="https://example.test/photo-576x324.jpg" media="(min-width: 1px)">')
-        ->and($output)->toContain('<img src="https://example.test/photo-630x473.jpg" alt="The clinic" class="single-image" />')
+        ->and($output)->toContain('<source srcset="https://example.test/photo-501-630x473.jpg" media="(min-width: 1350px)">')
+        ->and($output)->toContain('<source srcset="https://example.test/photo-501-576x324.jpg" media="(min-width: 1px)">')
+        ->and($output)->toContain('<img src="https://example.test/photo-501-630x473.jpg" alt="The clinic" class="single-image" />')
         ->and($output)->not->toContain('carousel');
 });
 
@@ -207,7 +208,7 @@ test('several images print as a carousel with thumbnails', function (): void {
     expect($output)->toContain('<div class="carousel slide carousel-thumbnails" id="location-info-carousel"')
         ->and(substr_count($output, 'class="carousel-item'))->toBe(3)
         ->and($output)->toContain('<div class="carousel-item active">')
-        ->and($output)->toContain('<li data-target="#location-info-carousel" data-slide-to="0" class="active"><img src="https://example.test/photo-60x45.jpg" alt="" /></li>')
+        ->and($output)->toContain('<li data-target="#location-info-carousel" data-slide-to="0" class="active"><img src="https://example.test/photo-501-60x45.jpg" alt="" /></li>')
         ->and($output)->toContain('<li data-target="#location-info-carousel" data-slide-to="2" ><img');
 });
 
@@ -909,7 +910,7 @@ test('a holiday open from midnight prints no times and holidays far away add no 
 test('a single image prints every source size and the alt text', function (): void {
     $output = single_location_markup(['location_wayfinding_photo' => 501], ['meta' => ['_wp_attachment_image_alt' => 'The clinic']]);
 
-    expect($output)->toContain('<picture><source srcset="https://example.test/photo-630x473.jpg" media="(min-width: 1350px)"><source srcset="https://example.test/photo-572x429.jpg" media="(min-width: 992px)"><source srcset="https://example.test/photo-992x558.jpg" media="(min-width: 768px)"><source srcset="https://example.test/photo-768x432.jpg" media="(min-width: 576px)"><source srcset="https://example.test/photo-576x324.jpg" media="(min-width: 1px)"><img src="https://example.test/photo-630x473.jpg" alt="The clinic" class="single-image" /></picture>');
+    expect($output)->toContain('<picture><source srcset="https://example.test/photo-501-630x473.jpg" media="(min-width: 1350px)"><source srcset="https://example.test/photo-501-572x429.jpg" media="(min-width: 992px)"><source srcset="https://example.test/photo-501-992x558.jpg" media="(min-width: 768px)"><source srcset="https://example.test/photo-501-768x432.jpg" media="(min-width: 576px)"><source srcset="https://example.test/photo-501-576x324.jpg" media="(min-width: 1px)"><img src="https://example.test/photo-501-630x473.jpg" alt="The clinic" class="single-image" /></picture>');
 });
 
 test('a single image that is empty falls back to the large attachment', function (): void {
@@ -920,12 +921,12 @@ test('a single image that is empty falls back to the large attachment', function
 
 test('each carousel slide prints every source size, and only the first is active', function (): void {
     $output = single_location_markup(['location_wayfinding_photo' => 501, 'location_photo_gallery' => [502]], ['meta' => ['_wp_attachment_image_alt' => 'Alt']]);
-    $slide = '<picture><source srcset="https://example.test/photo-630x473.jpg" media="(min-width: 1350px)"><source srcset="https://example.test/photo-572x429.jpg" media="(min-width: 992px)"><source srcset="https://example.test/photo-992x558.jpg" media="(min-width: 768px)"><source srcset="https://example.test/photo-768x432.jpg" media="(min-width: 576px)"><source srcset="https://example.test/photo-576x324.jpg" media="(min-width: 1px)"><img src="https://example.test/photo-630x473.jpg" alt="Alt" /></picture></div>';
+    $slide = static fn (int $id): string => '<picture><source srcset="https://example.test/photo-'.$id.'-630x473.jpg" media="(min-width: 1350px)"><source srcset="https://example.test/photo-'.$id.'-572x429.jpg" media="(min-width: 992px)"><source srcset="https://example.test/photo-'.$id.'-992x558.jpg" media="(min-width: 768px)"><source srcset="https://example.test/photo-'.$id.'-768x432.jpg" media="(min-width: 576px)"><source srcset="https://example.test/photo-'.$id.'-576x324.jpg" media="(min-width: 1px)"><img src="https://example.test/photo-'.$id.'-630x473.jpg" alt="Alt" /></picture></div>';
 
-    expect($output)->toContain('<div class="carousel-inner"><div class="carousel-item active">'.$slide.'<div class="carousel-item">'.$slide)
+    expect($output)->toContain('<div class="carousel-inner"><div class="carousel-item active">'.$slide(501).'<div class="carousel-item">'.$slide(502))
         ->and(substr_count($output, 'class="carousel-item'))->toBe(2)
         ->and(substr_count($output, 'data-slide-to='))->toBe(2)
-        ->and($output)->toContain('<li data-target="#location-info-carousel" data-slide-to="1" ><img src="https://example.test/photo-60x45.jpg" alt="Alt" /></li>');
+        ->and($output)->toContain('<li data-target="#location-info-carousel" data-slide-to="1" ><img src="https://example.test/photo-502-60x45.jpg" alt="Alt" /></li>');
 });
 
 test('the alert section prints its color, heading and text', function (): void {
@@ -1119,4 +1120,65 @@ test('the condition and treatment lists print under their headings', function ()
         ->and($output)->toContain('Medical Treatments and Procedures Performed or Prescribed at Clinic')
         ->and($output)->toContain('Areas of Expertise Represented at Clinic')
         ->and($output)->toContain('Resources Related to Clinic');
+});
+
+/**
+ * The markup of one section of a render, from its id to the end of the section.
+ */
+function single_location_section(string $output, string $id): string
+{
+    preg_match('#id="'.$id.'"[^>]*>(.*?)</section>#s', $output, $match);
+
+    return $match[1] ?? '';
+}
+
+test('the areas of expertise section prints one card for each expertise', function (): void {
+    $output = single_location_markup(['location_expertise' => [3, 5]], ['queries' => [[], [], [], [3, 5]]]);
+    $section = single_location_section($output, 'expertise');
+
+    expect(substr_count($section, '<div class="card">'))->toBe(2);
+});
+
+test('the child locations section prints one card for each child and names no parent on them', function (): void {
+    $fields = ['location_parent' => true, 'location_parent_id' => 90];
+    $options = ['posts' => [90 => (object) ['ID' => 90, 'post_title' => 'Medical Center']], 'fields_by_id' => [90 => ['location_prepend_the' => true]], 'pages' => [1], 'queries' => [[], [], [], [], [11, 12]]];
+    $output = single_location_markup($fields, $options);
+    $section = single_location_section($output, 'sub-clinics');
+
+    expect(substr_count($section, '<div class="card">'))->toBe(2)
+        ->and($section)->not->toContain('Part of');
+});
+
+test('the lists reset the post data once each', function (): void {
+    $expertise = single_location(['location_expertise' => [3]], ['queries' => [[], [], [], [3]]])['single_location_resets'] ?? 0;
+    $children = single_location([], ['pages' => [1], 'queries' => [[], [], [], [], [11]]])['single_location_resets'] ?? 0;
+    $none = single_location()['single_location_resets'] ?? 0;
+
+    expect($expertise - $none)->toBe(1)
+        ->and($children - $none)->toBe(1);
+});
+
+test('the clinical resources heading names the location and offers more only past the first page', function (): void {
+    // The more button reads its link attributes from the ACF blocks file.
+    uamswp_test_acf_blocks_file();
+    $few = single_location_markup(['location_clinical_resources' => [4]], ['queries' => [[4]]]);
+    $many = single_location_markup(['location_clinical_resources' => [4, 5, 6, 7, 8]], ['queries' => [[4, 5, 6, 7, 8]]]);
+
+    expect($few)->toContain('<span class="title">Resources Related to Clinic</span>')
+        ->and($few)->not->toContain('class="col-12 more"')
+        ->and($many)->toContain('<span class="title">Resources Related to Clinic</span>')
+        ->and($many)->toContain('class="col-12 more"');
+});
+
+test('the structured data leaves out the hours that vary and names the logo', function (): void {
+    $varies = single_location_schema(single_location_hours([single_location_day()], ['location_hours_variable' => true, 'location_hours_variable_info' => '<p>Call first.</p>']));
+    $fixed = single_location_schema(single_location_hours([single_location_day()]));
+
+    expect($varies)->not->toHaveKey('openingHours')
+        ->and($fixed)->toHaveKey('openingHours')
+        ->and($fixed['logo'])->toBe('https://example.test/theme/assets/svg/uams-logo_health_horizontal_dark_386x50.png');
+});
+
+test('the page ends with the site footer', function (): void {
+    expect(single_location()['single_location_footers'])->toBe(1);
 });

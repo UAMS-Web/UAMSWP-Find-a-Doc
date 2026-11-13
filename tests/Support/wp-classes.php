@@ -18,6 +18,9 @@ if (! class_exists('WP_Post')) {
     {
         /** @var int */
         public $ID = 0;
+
+        /** @var string */
+        public $post_name = '';
     }
 }
 
