@@ -85,6 +85,13 @@ if (! class_exists('WP_Query')) {
 
         public function have_posts(): bool
         {
+            // Like WordPress, a loop that has run to its end rewinds, so the next loop over the query starts again.
+            if ($this->index > 0 && $this->index >= count($this->posts)) {
+                $this->index = 0;
+
+                return false;
+            }
+
             // A loop whose the_post() call is gone would never advance; cap the checks so a mutant of it ends and fails a test.
             return $this->index < count($this->posts) && $this->checks++ < 100;
         }
@@ -94,6 +101,29 @@ if (! class_exists('WP_Query')) {
             $post = $this->posts[$this->index];
             self::$current = is_object($post) ? (int) $post->ID : (int) $post;
             $this->index++;
+        }
+    }
+}
+
+if (! class_exists('WP_Term_Query')) {
+    class WP_Term_Query
+    {
+        /** @var array<int, mixed> */
+        public $terms = [];
+
+        /** @var list<array<int, mixed>> The terms each query will find, in order. */
+        public static array $queue = [];
+
+        /** @var list<array<string, mixed>> The arguments of every query. */
+        public static array $queries = [];
+
+        /**
+         * @param  array<string, mixed>  $args
+         */
+        public function __construct(array $args = [])
+        {
+            self::$queries[] = $args;
+            $this->terms = array_shift(self::$queue) ?? [];
         }
     }
 }

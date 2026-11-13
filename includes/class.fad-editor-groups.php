@@ -450,6 +450,8 @@ function uamswp_fad_inherit_editor_group($post_id): bool
     $derived = uamswp_fad_editor_groups_from_service_line($post_id);
 
     $manual = array_diff($current, $previous);
+    // sort() below renumbers the keys, so the array_values() call changes nothing the comparison or the write sees.
+    // @pest-mutate-ignore: UnwrapArrayValues
     $wanted = array_values(array_unique(array_merge($manual, $derived)));
 
     sort($wanted);
