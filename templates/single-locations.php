@@ -1400,7 +1400,7 @@ while (have_posts()) {
 				<div class="row">
 					<div class="col-xs-12">
 						<h2 class="module-title"><span class="title"><?php echo $location_scheduling_title; ?></span></h2>
-						<?php if ($location_scheduling_intro && ! empty($location_scheduling_intro)) { ?>
+						<?php if (! empty($location_scheduling_intro)) { ?>
 							<p class="note"><?php echo $location_scheduling_intro; ?></p>
 						<?php } ?>
 						<div class="module-body">
@@ -1454,7 +1454,7 @@ while (have_posts()) {
 									'toggleBtnCollapseHelpText': 'Exit fullscreen',
 								});
 								</script>
-								<?php if ($location_scheduling_fallback && ! empty($location_scheduling_fallback)) { ?>
+								<?php if (! empty($location_scheduling_fallback)) { ?>
 									<div class="more">
 										<?php echo $location_scheduling_fallback; ?>
 									</div>
@@ -1479,9 +1479,9 @@ while (have_posts()) {
 							<div class="module-body">
 								<p class="text-center"><strong>
 									<?php if ($location_closing_date_past) { ?>
-										Telemedicine is not available while this location is <?php echo $location_closing_length == 'temporary' ? 'temporarily' : 'permanently'; ?> closed.
+										Telemedicine is not available while this location is <?php echo $location_closing_length === 'temporary' ? 'temporarily' : 'permanently'; ?> closed.
 									<?php } else { ?>
-										Telemedicine will not be available after this location closes <?php echo $location_closing_length == 'temporary' ? 'temporarily beginning' : 'permanently'; ?> on <?php echo $location_closing_date; ?>.
+										Telemedicine will not be available after this location closes <?php echo $location_closing_length === 'temporary' ? 'temporarily beginning' : 'permanently'; ?> on <?php echo $location_closing_date; ?>.
 									<?php } // endif?>
 								</strong></p>
 							</div>
@@ -1489,14 +1489,14 @@ while (have_posts()) {
 							<div class="row content-split-lg">
 								<div class="col-xs-12 col-lg-7">
 									<div class="content-width">
-										<?php echo $telemed_info ?: '' ?>
+										<?php echo $telemed_info; ?>
 										<p>
 											<?php // Declare which patients can use the service.
-                                            if ($telemed_patients == 'all') { ?>
+                                            if ($telemed_patients === 'all') { ?>
 												This service is available to both new and existing patients.
-											<?php } elseif ($telemed_patients == 'new') { ?>
+											<?php } elseif ($telemed_patients === 'new') { ?>
 												This service is available to new patients only.
-											<?php } elseif ($telemed_patients == 'existing') { ?>
+											<?php } elseif ($telemed_patients === 'existing') { ?>
 												This service is available to existing patients only.
 											<?php } // endif
 
@@ -1507,11 +1507,11 @@ while (have_posts()) {
 												<?php } elseif ($location_clinic_phone_query && ! $location_appointment_phone_query) { // If there is only one appointment number?>
 													Patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment.
 												<?php } else { // If there are two appointment numbers (one for new, one for existing)
-												    if ($telemed_patients == 'all') { ?>
+												    if ($telemed_patients === 'all') { ?>
 														New patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment, while existing patients should call <?php echo $location_return_appointments_phone_link; ?>.
-													<?php } elseif ($telemed_patients == 'new') { ?>
+													<?php } elseif ($telemed_patients === 'new') { ?>
 														Patients should call <?php echo $location_new_appointments_phone_link; ?> to schedule a telemedicine appointment.
-													<?php } elseif ($telemed_patients == 'existing') { ?>
+													<?php } elseif ($telemed_patients === 'existing') { ?>
 														Patients should call <?php echo $location_return_appointments_phone_link; ?> to schedule a telemedicine appointment.
 													<?php }
 													} // endif?>
@@ -1522,21 +1522,21 @@ while (have_posts()) {
 									<div class="content-width">
 									<?php
                                     $telemed_modified_text = '';
-						    $telemed_active_start = '';
-						    $telemed_active_end = '';
+						    $telemed_active_start = null;
+						    $telemed_active_end = null;
 						    if ($telemed_modified) {
 						        ?>
 									<?php
 
-						            $telemed_modified_day = ''; // Previous Day
-						        $telemed_modified_comment = ''; // Comment on previous day
-						        $i = 1;
+						            $telemed_modified_day = null; // Previous Day
 
 						        $telemed_today = strtotime('today');
 						        $telemed_today_30 = strtotime('+30 days');
 
+						        // A start date is midnight and the cut-off is the current time thirty days on, so they are never equal.
+						        // @pest-mutate-ignore: SmallerOrEqualToSmaller
 						        if (strtotime($telemed_modified_start) <= $telemed_today_30 && (strtotime($telemed_modified_end_date) >= $telemed_today || ! $telemed_modified_end)) {
-						            $telemed_modified_text .= $telemed_modified_reason;
+						            $telemed_modified_text = $telemed_modified_reason;
 						            $telemed_modified_text .= '<p class="small font-italic">These modified hours start on '.$telemed_modified_start.', ';
 						            $telemed_modified_text .= $telemed_modified_end && $telemed_modified_end_date ? 'and are scheduled to end after '.$telemed_modified_end_date.'.' : 'and will remain in effect until further notice.';
 						            $telemed_modified_text .= '</p>';
@@ -1545,16 +1545,8 @@ while (have_posts()) {
 						                $telemed_modified_text .= '<strong>Open 24/7</strong>';
 						            } else {
 						                $telemed_modified_times = $location_hours_group['location_telemed_modified_hours_times'];
-						                if ($telemed_active_start > strtotime($telemed_modified_start) || $telemed_active_start == '') {
-						                    $telemed_active_start = strtotime($telemed_modified_start);
-						                }
-						                if ($telemed_active_end <= strtotime($telemed_modified_end_date) || ! $telemed_modified_end) {
-						                    if (! $telemed_modified_end) {
-						                        $telemed_active_end = 'TBD';
-						                    } else {
-						                        $telemed_active_end = strtotime($telemed_modified_end_date);
-						                    }
-						                }
+						                $telemed_active_start = strtotime($telemed_modified_start);
+						                $telemed_active_end = $telemed_modified_end ? strtotime($telemed_modified_end_date) : 'TBD';
 
 						                if (is_array($telemed_modified_times) || is_object($telemed_modified_times)) {
 						                    $telemed_modified_text .= '<dl class="hours">';
@@ -1566,17 +1558,13 @@ while (have_posts()) {
 						                        if ($telemed_modified_time['location_telemed_modified_hours_closed']) {
 						                            $telemed_modified_text .= 'Closed ';
 						                        } else {
-						                            $telemed_modified_text .= (($telemed_modified_time['location_telemed_modified_hours_open'] && $telemed_modified_time['location_telemed_modified_hours_open'] != '00:00:00') ? ''.ap_time_span(strtotime($telemed_modified_time['location_telemed_modified_hours_open']), strtotime($telemed_modified_time['location_telemed_modified_hours_close'])).'' : '');
+						                            $telemed_modified_text .= ($telemed_modified_time['location_telemed_modified_hours_open'] && $telemed_modified_time['location_telemed_modified_hours_open'] !== '00:00:00') ? ap_time_span(strtotime($telemed_modified_time['location_telemed_modified_hours_open']), strtotime($telemed_modified_time['location_telemed_modified_hours_close'])) : '';
 						                        }
 						                        if ($telemed_modified_time['location_telemed_modified_hours_comment']) {
 						                            $telemed_modified_text .= ' <br /><span class="subtitle">'.$telemed_modified_time['location_telemed_modified_hours_comment'].'</span>';
-						                            $telemed_modified_comment = $telemed_modified_time['location_telemed_modified_hours_comment'];
-						                        } else {
-						                            $telemed_modified_comment = '';
 						                        }
 						                        $telemed_modified_text .= '</dd>';
 						                        $telemed_modified_day = $telemed_modified_time['location_telemed_modified_hours_day']; // Reset the day
-						                        $i++;
 
 						                    } // endforeach
 						                    $telemed_modified_text .= '</dl>';
@@ -1585,10 +1573,13 @@ while (have_posts()) {
 						            }
 						        }
 
-						        echo $telemed_modified_text ? '<h3>Modified Hours</h3>'.$telemed_modified_text : '';
+						        if ($telemed_modified_text !== '') {
+						            echo '<h3>Modified Hours</h3>'.$telemed_modified_text;
+						        }
 
 						    } // End Modified Hours
-						    if (($telemed_active_start != '' && $telemed_active_start <= $telemed_today) && (strtotime($telemed_active_end) > $telemed_today || $telemed_active_end == 'TBD')) {
+						    // Only a window with no end replaces the typical hours: an end is a time, and strtotime() reads a time as false.
+						    if ($telemed_active_end === 'TBD' && $telemed_active_start <= $telemed_today) {
 						        // Do Nothing;
 						        // Future Option
 						    } else {
@@ -1601,9 +1592,7 @@ while (have_posts()) {
 						                echo '<dl class="hours">';
 						                if ($telemed_hours) {
 						                    $telemed_hours_text = '';
-						                    $telemed_day = ''; // Previous Day
-						                    $telemed_comment = ''; // Comment on previous day
-						                    $i = 1;
+						                    $telemed_day = null; // Previous Day
 						                    foreach ($telemed_hours as $telemed_hour) {
 						                        $telemed_hours_text .= $telemed_day !== $telemed_hour['day'] ? '<dt>'.$telemed_hour['day'].'</dt> ' : '';
 						                        $telemed_hours_text .= '<dd>';
@@ -1611,19 +1600,13 @@ while (have_posts()) {
 						                        if ($telemed_hour['closed']) {
 						                            $telemed_hours_text .= 'Closed ';
 						                        } else {
-						                            $telemed_hours_text .= (($telemed_hour['open'] && $telemed_hour['open'] != '00:00:00') ? ''.ap_time_span(strtotime($telemed_hour['open']), strtotime($telemed_hour['close'])).'' : '');
+						                            $telemed_hours_text .= ($telemed_hour['open'] && $telemed_hour['open'] !== '00:00:00') ? ap_time_span(strtotime($telemed_hour['open']), strtotime($telemed_hour['close'])) : '';
 						                        }
 						                        if ($telemed_hour['comment']) {
 						                            $telemed_hours_text .= ' <br /><span class="subtitle">'.$telemed_hour['comment'].'</span>';
-						                            $telemed_comment = $telemed_hour['comment'];
-						                        } else {
-						                            $telemed_comment = '';
 						                        }
 						                        $telemed_hours_text .= '</dd>';
 						                        $telemed_day = $telemed_hour['day']; // Reset the day
-						                        if (! $telemed_hour['closed']) {
-						                            $i++;
-						                        }
 						                    }
 						                    echo $telemed_hours_text;
 						                } else {
@@ -1680,7 +1663,6 @@ while (have_posts()) {
     // Begin Providers Section
     if ($show_providers_section) {
 
-        $provider_count = count($physicians_query->posts);
         ?>
 		<section class="uams-module bg-auto" id="providers">
 			<div class="container-fluid">
@@ -1691,18 +1673,14 @@ while (have_posts()) {
 						<div class="card-list-container">
 							<div class="card-list card-list-doctors">
 								<?php
-                                    if ($provider_count > 0) {
                                         $title_list = [];
-                                        while ($physicians_query->have_posts()) {
-                                            $physicians_query->the_post();
-                                            $id = get_the_ID();
-                                            include UAMS_FAD_PATH.'/templates/loops/physician-card.php';
-                                            $title_list[] = get_field('physician_title', $id);
-                                        }
-                                        echo '<data id="provider_ids" data-postids="'.implode(',', $physicians_query->posts).'," data-titles="'.implode(',', array_unique($title_list)).',"></data>';
-                                    } else {
-                                        echo '<span class="no-results">Sorry, there are no providers matching your filter criteria. Please adjust your filter options or reset the filters.</span>';
-                                    }
+        while ($physicians_query->have_posts()) {
+            $physicians_query->the_post();
+            $id = get_the_ID();
+            include UAMS_FAD_PATH.'/templates/loops/physician-card.php';
+            $title_list[] = get_field('physician_title', $id);
+        }
+        echo '<data id="provider_ids" data-postids="'.implode(',', $physicians_query->posts).'," data-titles="'.implode(',', array_unique($title_list)).',"></data>';
         wp_reset_postdata();
         ?>
 							</div>
@@ -1723,7 +1701,7 @@ while (have_posts()) {
         $condition_heading_related_name = $page_title_phrase; // To what is it related?
 
         include UAMS_FAD_PATH.'/templates/loops/conditions-cpt-loop.php';
-        $condition_schema .= '"medicalSpecialty": [';
+        $condition_schema = '"medicalSpecialty": [';
         foreach ($conditions_cpt_query->posts as $condition) {
             $condition_schema .= '{
 			"@type": "MedicalSpecialty",
@@ -1740,7 +1718,7 @@ while (have_posts()) {
         $treatment_context = 'single-location';
         $treatment_heading_related_name = $page_title_phrase; // To what is it related?
         include UAMS_FAD_PATH.'/templates/loops/treatments-cpt-loop.php';
-        $treatment_schema .= '"medicalSpecialty": [';
+        $treatment_schema = '"medicalSpecialty": [';
         foreach ($treatments_cpt_query->posts as $treatment) {
             $treatment_schema .= '{
 			"@type": "MedicalSpecialty",
