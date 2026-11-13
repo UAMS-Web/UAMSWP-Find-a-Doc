@@ -216,22 +216,26 @@ $location_closing_display = false;
 
 if ($location_closing) {
     $location_closing_date = get_field('location_closing_date'); // F j, Y
+    // Two DateTime objects built a moment apart never compare equal, so a date of exactly now cannot be tested.
+    // @pest-mutate-ignore: GreaterOrEqualToGreater
     if (new DateTime >= new DateTime($location_closing_date)) {
         $location_closing_date_past = true;
     }
     $location_closing_length = get_field('location_closing_length');
     $location_reopen_known = get_field('location_reopen_known');
     $location_reopen_date = get_field('location_reopen_date'); // F j, Y
+    // Two DateTime objects built a moment apart never compare equal, so a date of exactly now cannot be tested.
+    // @pest-mutate-ignore: GreaterOrEqualToGreater
     if (new DateTime >= new DateTime($location_reopen_date)) {
         $location_reopen_date_past = true;
     }
     $location_closing_info = get_field('location_closing_info');
-    if ($location_closing_length == 'temporary') {
+    if ($location_closing_length === 'temporary') {
         $location_closing_telemed = get_field('location_closing_telemed'); // Will telemedicine be available during closure?
     }
     if (
-        $location_closing_length == 'permanent'
-        || ($location_closing_length == 'temporary' && ! $location_reopen_date_past)
+        $location_closing_length === 'permanent'
+        || ($location_closing_length === 'temporary' && ! $location_reopen_date_past)
     ) {
         $location_closing_display = true;
     }
@@ -246,9 +250,9 @@ $prescription = ''; // Eliminate PHP errors
 
 if ($prescription_query) {
     $prescription_info_type = get_field('location_prescription_type'); // Which preset or custom text?
-    if ($prescription_info_type == 'clinic') {
+    if ($prescription_info_type === 'clinic') {
         $prescription = $prescription_clinic_sys; // Text from location (a.k.a. local)
-    } elseif ($prescription_info_type == 'pharm') {
+    } elseif ($prescription_info_type === 'pharm') {
         $prescription = $prescription_pharm_sys; // Text from location (a.k.a. local)
     } else {
         $prescription = get_field('location_prescription'); // Text from location (a.k.a. local)
@@ -288,7 +292,6 @@ if (have_rows('remove_ontology_criteria', 'option')) {
 // Clinical Resources
 $resources = get_field('location_clinical_resources');
 $resource_postsPerPage = 4; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
-$resource_more = false;
 $args = ([
     'post_type' => 'clinical-resource',
     'order' => 'DESC',
@@ -327,8 +330,8 @@ while (have_posts()) {
         $location_floor_label = $location_floor['choices'][$location_floor_value] ?? '';
     }
     $location_suite = get_field('location_suite', $location_source_ids['unit']);
-    $location_address_2 = uamswp_location_address_2(($location_building && $building_slug != '_none'), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, '<br />', ', ');
-    $location_address_2_schema = uamswp_location_address_2(($location_building && $building_slug != '_none'), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, ' ', ' ');
+    $location_address_2 = uamswp_location_address_2(($location_building && $building_slug !== '_none'), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, '<br />', ', ');
+    $location_address_2_schema = uamswp_location_address_2(($location_building && $building_slug !== '_none'), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, ' ', ' ');
 
     $location_address_2_deprecated = get_field('location_address_2', $location_source_ids['street']);
     if (! $location_address_2) {
@@ -389,7 +392,7 @@ while (have_posts()) {
     if ($location_about || $location_affiliation || $prescription) {
         $show_about_section = true;
         $jump_link_count++;
-        if ($location_about || $location_youtube_link || (! $location_about && $location_affiliation && $prescription)) {
+        if ($location_about || $location_youtube_link || ($location_affiliation && $prescription)) {
             $about_section_title = 'About '.$page_title_phrase;
             $about_section_title_short = 'About';
 
