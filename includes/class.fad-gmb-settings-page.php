@@ -1075,7 +1075,10 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
     $table_head = [];
     $table_body = [];
     // Set per location, and carried from one location to the next when one has no building.
+    // Read only after a location with a building sets them, so these values are never read.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $building_slug = '';
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $building_name = '';
 
     ob_start();
@@ -1390,7 +1393,10 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
         while ($query->have_posts()) {
             $query->the_post();
             // Parent Location
+            // get_the_ID() returns the loop post's id; the casts only turn a false outside the loop into 0.
+            // @pest-mutate-ignore: RemoveIntegerCast
             $location_post_id = (int) get_the_ID();
+            // @pest-mutate-ignore: RemoveIntegerCast
             $location_child_id = (int) get_the_ID();
             /**
              * Which location supplies each address component. A child location
@@ -1420,11 +1426,16 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
             $location_building = get_field('location_building', $location_source_ids['facility']);
             if ($location_building) {
                 $building = get_term(uamswp_fad_int($location_building), 'building');
+                // A missing term's slug is never '_none' whatever it defaults to.
+                // @pest-mutate-ignore: EmptyStringToNotEmpty
                 $building_slug = ($building->slug ?? '');
                 $building_name = ($building->name ?? '');
             }
             $location_floor = get_field_object('location_building_floor', $location_source_ids['unit']);
+            // Read only when the floor object exists, which sets them, so these values are never read.
+            // @pest-mutate-ignore: EmptyStringToNotEmpty
             $location_floor_value = '';
+            // @pest-mutate-ignore: EmptyStringToNotEmpty
             $location_floor_label = '';
             if ($location_floor) {
                 $location_floor_value = uamswp_fad_arr($location_floor)['value'];
@@ -1439,11 +1450,13 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
             //   Building Floor Number
             //   Suite Number
 
+            // The slug and '_none' are both strings, so a loose and a strict comparison agree. With no floor
+            // object the floor value is empty, so passing true for the floor adds no floor line either.
+            // @pest-mutate-ignore: NotEqualToNotIdentical,FalseToTrue
             $location_addresses = uamswp_location_address_parts(($location_building && $building_slug != '_none'), uamswp_fad_str($building_name), is_array($location_floor) ? uamswp_fad_assoc($location_floor) : false, $location_floor_value, uamswp_fad_str($location_floor_label), uamswp_fad_str($location_suite));
             $location_address_2 = array_key_exists(0, $location_addresses) ? $location_addresses[0] : '';
             $location_address_3 = array_key_exists(1, $location_addresses) ? $location_addresses[1] : '';
             $location_address_4 = array_key_exists(2, $location_addresses) ? $location_addresses[2] : '';
-            $location_address_5 = array_key_exists(3, $location_addresses) ? $location_addresses[3] : '';
             $location_address_2_deprecated = get_field('location_address_2', $location_source_ids['street']);
             if (! $location_address_2) {
                 $location_address_2 = $location_address_2_deprecated;
@@ -1496,12 +1509,20 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
             }
 
             $location_gmb_wheelchair_entrance = get_field('has_wheelchair_accessible_entrance', $location_post_id);
+            // The button group returns a string, or null when unset, so a loose and a strict comparison agree.
+            // @pest-mutate-ignore: EqualToIdentical
             $location_gmb_wheelchair_entrance = ($location_gmb_wheelchair_entrance == 'Not Applicable') ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_entrance;
             $location_gmb_wheelchair_restroom = get_field('has_wheelchair_accessible_restroom', $location_post_id);
+            // The button group returns a string, or null when unset, so a loose and a strict comparison agree.
+            // @pest-mutate-ignore: EqualToIdentical
             $location_gmb_wheelchair_restroom = ($location_gmb_wheelchair_restroom == 'Not Applicable') ? '[NOT APPLICABLE]' : $location_gmb_wheelchair_restroom;
             $location_gmb_restroom = get_field('has_restroom', $location_post_id);
+            // The button group returns a string, or null when unset, so a loose and a strict comparison agree.
+            // @pest-mutate-ignore: EqualToIdentical
             $location_gmb_restroom = ($location_gmb_restroom == 'Not Applicable') ? '[NOT APPLICABLE]' : $location_gmb_restroom;
             $location_gmb_appointments = get_field('requires_appointments', $location_post_id);
+            // The button group returns a string, or null when unset, so a loose and a strict comparison agree.
+            // @pest-mutate-ignore: EqualToIdentical
             $location_gmb_appointments = ($location_gmb_appointments == 'Not Applicable') ? '[NOT APPLICABLE]' : $location_gmb_appointments;
             $location_map = get_field('location_map', $location_source_ids['map']);
             $location_latitude = '';
@@ -1539,7 +1560,8 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
                 $row[5] = $location_address_4 ? html_entity_decode($location_address_4) : '';
 
                 // Address line 5
-                $row[6] = $location_address_5 ? html_entity_decode($location_address_5) : '';
+                // Intentionally left blank: the building, the floor and the suite fill at most three lines
+                $row[6] = '';
 
                 // Sub-locality
                 // Intentionally left blank
@@ -1686,31 +1708,31 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
                         $location_images[] = $photo_gallery_image; // add them to the array for location images
                     }
                 }
+                // Attachment ids are ints or numeric strings, which array_unique() and every reader below treat alike.
+                // @pest-mutate-ignore: UnwrapArrayMap
                 $location_images = array_unique(array_map(uamswp_fad_str(...), $location_images)); // Remove duplicate values from the array for location images
                 $location_images_count = count($location_images); // Count how many images are in the array for location images
                 // The table is built for every location in one call, so these start empty for each location.
                 $location_gmb_cover_photo = '';
                 $location_gmb_other_photos = '';
-                if ($location_images_count > 0) {
-                    $p = 1;
-                    foreach ($location_images as $location_images_item) {
-                        if ($p === 1) {
-                            if (function_exists('bis_get_attachment_image')) {
-                                $location_gmb_cover_photo = image_sizer($location_images_item, 2120, 1192, 'center', 'center', 'aspect-16-9'); // Google Business Profile cover photo minimum size: 480x270; maximum size: 2120x1192
-                            } else {
-                                $location_gmb_cover_photo = wp_get_attachment_image_url(uamswp_fad_int($location_images_item), 'large');
-                            }
+                $p = 1;
+                foreach ($location_images as $location_images_item) {
+                    if ($p === 1) {
+                        if (function_exists('bis_get_attachment_image')) {
+                            $location_gmb_cover_photo = image_sizer($location_images_item, 2120, 1192, 'center', 'center', 'aspect-16-9'); // Google Business Profile cover photo minimum size: 480x270; maximum size: 2120x1192
                         } else {
-                            if (function_exists('bis_get_attachment_image')) {
-                                $location_gmb_other_photos .= uamswp_fad_str(image_sizer($location_images_item, 2120, 1192, 'center', 'center', 'aspect-16-9')); // Google Business Profile cover photo minimum size: 480x270; maximum size: 2120x1192
-                            } else {
-                                $location_gmb_other_photos .= wp_get_attachment_image_url(uamswp_fad_int($location_images_item), 'large');
-                            }
-                            $location_gmb_other_photos .= $p < $location_images_count ? ',' : '';
+                            $location_gmb_cover_photo = wp_get_attachment_image_url(uamswp_fad_int($location_images_item), 'large');
                         }
-                        $p++;
-                    } // endforeach
-                }
+                    } else {
+                        if (function_exists('bis_get_attachment_image')) {
+                            $location_gmb_other_photos .= uamswp_fad_str(image_sizer($location_images_item, 2120, 1192, 'center', 'center', 'aspect-16-9')); // Google Business Profile cover photo minimum size: 480x270; maximum size: 2120x1192
+                        } else {
+                            $location_gmb_other_photos .= wp_get_attachment_image_url(uamswp_fad_int($location_images_item), 'large');
+                        }
+                        $location_gmb_other_photos .= $p < $location_images_count ? ',' : '';
+                    }
+                    $p++;
+                } // endforeach
                 $row[19] = $location_gmb_cover_photo ?: '';
 
                 // Other photos
