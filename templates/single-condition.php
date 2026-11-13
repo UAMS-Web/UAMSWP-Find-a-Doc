@@ -131,8 +131,7 @@ if ($location_valid) {
     $location_region_IDs = array_unique($location_region_IDs);
     $location_region_list = [];
     foreach ($location_region_IDs as $location_region_ID) {
-        // Always empty: the lookup result was read only when it was an array, which a term never is (#1348).
-        $location_region_list[] = '';
+        $location_region_list[] = uamswp_fad_term_slug($location_region_ID, 'region');
     }
 
     // if cookie is set, run modified physician query
