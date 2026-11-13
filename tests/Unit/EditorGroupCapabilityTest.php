@@ -14,6 +14,8 @@ use UamswpFindADoc\Tests\Support\UnitTestCase;
 
 use function Brain\Monkey\Functions\when;
 
+require_once __DIR__.'/../Support/editor-groups.php';
+
 final class EditorGroupCapabilityTest extends UnitTestCase
 {
     protected function setUp(): void
@@ -22,9 +24,7 @@ final class EditorGroupCapabilityTest extends UnitTestCase
 
         // The file registers its hooks at file scope, so the hook functions must exist while it loads; Brain
         // Monkey provides them only inside a test. It loads once per process (require_once).
-        when('add_action')->justReturn(true);
-        when('add_filter')->justReturn(true);
-        require_once dirname(__DIR__, 2).'/includes/class.fad-editor-groups.php';
+        \uamswp_test_load_editor_groups();
         require_once dirname(__DIR__, 2).'/includes/class.fad-helper-functions.php';
     }
 
