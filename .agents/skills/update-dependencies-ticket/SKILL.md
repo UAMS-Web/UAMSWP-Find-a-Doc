@@ -92,7 +92,7 @@ lifecycle skill's *The relock* says so), and run `composer install` again.
 ## Step 3: is each patch still needed?
 
 For every patch, check its **removal criterion** (the upstream fix it waits
-for) against the version the branch now installs, the way the lifecycle skill's *Checking whether
+for) against the version the branch now installs, the way the `patch-package` skill's *Checking whether
 the fix shipped* does it (a tag past what was locked, and that tag containing the fix). A patch
 that still applies is not thereby still needed: an upstream fix can land in a different hunk.
 

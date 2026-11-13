@@ -1,6 +1,6 @@
 name: CI
 
-# cspell:ignore vitest vite
+# cspell:ignore vitest vite phpcs
 # (the input names `vitest` and `vite-build` in the commented examples below are the tools, not misspellings)
 
 # Template: .claude/skills/code-quality/templates/ci.yml in UAMS-Web/uams-claude-skills,
