@@ -1,6 +1,19 @@
 <?php
 
 declare(strict_types=1);
+
+/**
+ * The path of a template file in this plugin's templates folder.
+ *
+ * @param  string  $file  The file name inside the templates folder.
+ */
+function uamswp_fad_plugin_template(string $file): string
+{
+    // The plugin folder is the checkout's own name wherever it is installed, and a checkout that repeats its parent's name (as a CI checkout does) cannot tell this level from the next one up.
+    // @pest-mutate-ignore: IncrementInteger
+    return WP_PLUGIN_DIR.'/'.basename(dirname(__FILE__, 2)).'/templates/'.$file;
+}
+
 // force use of templates from plugin folder
 /**
  * @param  mixed  $template
@@ -9,59 +22,59 @@ declare(strict_types=1);
 function uamswp_force_template($template)
 {
     if (is_post_type_archive('provider')) {
-        $template = WP_PLUGIN_DIR.'/'.basename(dirname(__FILE__, 2)).'/templates/archive-physicians.php';
+        $template = uamswp_fad_plugin_template('archive-physicians.php');
     }
 
     if (is_singular('provider')) {
-        $template = WP_PLUGIN_DIR.'/'.basename(dirname(__FILE__, 2)).'/templates/single-physicians.php';
+        $template = uamswp_fad_plugin_template('single-physicians.php');
     }
 
     if (is_post_type_archive('location')) {
-        $template = WP_PLUGIN_DIR.'/'.basename(dirname(__FILE__, 2)).'/templates/archive-locations.php';
+        $template = uamswp_fad_plugin_template('archive-locations.php');
     }
 
     if (is_singular('location')) {
-        $template = WP_PLUGIN_DIR.'/'.basename(dirname(__FILE__, 2)).'/templates/single-locations.php';
+        $template = uamswp_fad_plugin_template('single-locations.php');
     }
 
     if (is_post_type_archive('expertise')) {
-        $template = WP_PLUGIN_DIR.'/'.basename(dirname(__FILE__, 2)).'/templates/archive-expertise.php';
+        $template = uamswp_fad_plugin_template('archive-expertise.php');
     }
 
     if (is_singular('expertise')) {
-        $template = WP_PLUGIN_DIR.'/'.basename(dirname(__FILE__, 2)).'/templates/single-expertise.php';
+        $template = uamswp_fad_plugin_template('single-expertise.php');
     }
 
     if (is_tax('condition')) {
-        $template = WP_PLUGIN_DIR.'/'.basename(dirname(__FILE__, 2)).'/templates/taxonomy-condition.php';
+        $template = uamswp_fad_plugin_template('taxonomy-condition.php');
     }
 
     if (is_singular('condition')) {
-        $template = WP_PLUGIN_DIR.'/'.basename(dirname(__FILE__, 2)).'/templates/single-condition.php';
+        $template = uamswp_fad_plugin_template('single-condition.php');
     }
 
     if (is_post_type_archive('condition')) {
-        $template = WP_PLUGIN_DIR.'/'.basename(dirname(__FILE__, 2)).'/templates/archive-condition.php';
+        $template = uamswp_fad_plugin_template('archive-condition.php');
     }
 
     if (is_tax('treatment')) {
-        $template = WP_PLUGIN_DIR.'/'.basename(dirname(__FILE__, 2)).'/templates/taxonomy-treatment_procedure.php';
+        $template = uamswp_fad_plugin_template('taxonomy-treatment_procedure.php');
     }
 
     if (is_singular('treatment')) {
-        $template = WP_PLUGIN_DIR.'/'.basename(dirname(__FILE__, 2)).'/templates/single-treatment.php';
+        $template = uamswp_fad_plugin_template('single-treatment.php');
     }
 
     if (is_post_type_archive('treatment')) {
-        $template = WP_PLUGIN_DIR.'/'.basename(dirname(__FILE__, 2)).'/templates/archive-treatments.php';
+        $template = uamswp_fad_plugin_template('archive-treatments.php');
     }
 
     if (is_singular('clinical-resource')) {
-        $template = WP_PLUGIN_DIR.'/'.basename(dirname(__FILE__, 2)).'/templates/single-clinical-resource.php';
+        $template = uamswp_fad_plugin_template('single-clinical-resource.php');
     }
 
     if (is_post_type_archive('clinical-resource')) {
-        return WP_PLUGIN_DIR.'/'.basename(dirname(__FILE__, 2)).'/templates/archive-clinical-resource.php';
+        return uamswp_fad_plugin_template('archive-clinical-resource.php');
     }
 
     return $template;
@@ -95,15 +108,15 @@ function uamswp_redirect_page_template($template)
     $post = get_post();
     $page_template = get_post_meta($post->ID ?? 0, '_wp_page_template', true);
     if (basename(uamswp_fad_str($page_template)) === 'archive-taxonomy-conditions.php') {
-        $template = WP_PLUGIN_DIR.'/'.basename(dirname(__FILE__, 2)).'/templates/archive-taxonomy-conditions.php';
+        $template = uamswp_fad_plugin_template('archive-taxonomy-conditions.php');
     }
 
     if (basename(uamswp_fad_str($page_template)) === 'archive-taxonomy-treatments.php') {
-        $template = WP_PLUGIN_DIR.'/'.basename(dirname(__FILE__, 2)).'/templates/archive-taxonomy-treatments.php';
+        $template = uamswp_fad_plugin_template('archive-taxonomy-treatments.php');
     }
 
     if (basename(uamswp_fad_str($page_template)) === 'provider-image.php') {
-        return WP_PLUGIN_DIR.'/'.basename(dirname(__FILE__, 2)).'/templates/provider-image.php';
+        return uamswp_fad_plugin_template('provider-image.php');
     }
 
     // if ('doximity-list.php' == basename ($page_template ))
@@ -145,7 +158,7 @@ add_filter('query_vars', 'provider_image_query_var');
 function provider_image_rewrite_templates(): void
 {
     if (get_query_var('image')) {
-        add_filter('template_include', fn (): string => WP_PLUGIN_DIR.'/'.basename(dirname(__FILE__, 2)).'/templates/provider-image.php');
+        add_filter('template_include', fn (): string => uamswp_fad_plugin_template('provider-image.php'));
     }
 }
 
