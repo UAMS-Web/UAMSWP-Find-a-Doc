@@ -72,7 +72,8 @@ function single_location(array $fields = [], array $options = []): array
     when('get_the_id')->justReturn($location_id);
     when('get_the_permalink')->alias(static fn (mixed $id = 0): string => 'https://example.test/p/'.$id.'/');
     when('get_permalink')->alias(static fn (mixed $id = 0): string => 'https://example.test/p/'.$id.'/');
-    when('get_post_meta')->alias(static fn (mixed $id, string $key = '', bool $single = false): mixed => $meta[$key] ?? '');
+    // Like WordPress, a read that is not single returns a list.
+    when('get_post_meta')->alias(static fn (mixed $id, string $key = '', bool $single = false): mixed => $single ? ($meta[$key] ?? '') : (isset($meta[$key]) ? [$meta[$key]] : []));
     // Called with no id it is the featured image of the location itself; called with the source id it is the parent's.
     when('get_post_thumbnail_id')->alias(static fn (mixed $id = null): mixed => $id === null ? ($options['thumbnail'] ?? 0) : ($options['parent_thumbnail'] ?? $options['thumbnail'] ?? 0));
     when('wp_get_attachment_image_src')->alias(static fn (mixed $id, string $size = ''): array|false => $id ? ['https://example.test/img-'.$id.'.jpg', 640, 480] : false);

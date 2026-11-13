@@ -842,3 +842,88 @@ test('modified hours whose window has passed print nothing at all', function ():
     expect($output)->not->toContain('Modified Hours')
         ->and($output)->not->toContain('openingHoursSpecification": [ {');
 });
+
+test('typical hours with an empty or midnight open time print no times', function (): void {
+    $output = single_location_markup(single_location_hours([single_location_day('Mon', '', '17:00:00'), single_location_day('Tue', '00:00:00', '17:00:00'), single_location_day('Wed', '08:00:00', '17:00:00')]));
+
+    expect($output)->toContain('<dl class="hours"><dt>Mon</dt><dd></dd><dt>Tue</dt><dd></dd><dt>Wed</dt><dd>8 a.m. &ndash; 5 p.m.</dd></dl>');
+});
+
+test('the structured data separates the open rows and skips the closed ones', function (): void {
+    $first = single_location_markup(single_location_hours([single_location_day('Sun', '00:00:00', '00:00:00', true), single_location_day('Mon - Fri'), single_location_day('Sat', '09:00:00', '12:00:00')]));
+    $single = single_location_markup(single_location_hours([single_location_day('Sat', '09:00:00', '12:00:00')]));
+    $closed = single_location_markup(single_location_hours([single_location_day('Sun', '', '', true)]));
+
+    expect($first)->toContain('"openingHours": ["Mo-Fr 08:00-17:00", "Sa 09:00-12:00"],')
+        ->and($single)->toContain('"openingHours": ["Sa 09:00-12:00"],')
+        ->and($closed)->toContain('"openingHours": [],');
+});
+
+test('a closed Monday to Friday row adds nothing to the structured data', function (): void {
+    $output = single_location_markup(single_location_hours([single_location_day('Mon - Fri', '', '', true), single_location_day('Monday', '08:00:00', '17:00:00')]));
+
+    expect($output)->toContain('"openingHours": ["Mo 08:00-17:00"],');
+});
+
+test('holiday hours are listed in date order under one heading', function (): void {
+    $later = date('m/d/Y', strtotime('+20 days'));
+    $sooner = date('m/d/Y', strtotime('+5 days'));
+    $output = single_location_markup(single_location_hours([single_location_day()]) + ['location_holiday_hours' => [
+        ['date' => $later, 'label' => 'Later', 'closed' => true, 'open' => '', 'close' => ''],
+        ['date' => $sooner, 'label' => 'Sooner', 'closed' => true, 'open' => '', 'close' => ''],
+    ]]);
+    $ordered = [$later, $sooner];
+    sort($ordered);
+    $labels = [$later => 'Later', $sooner => 'Sooner'];
+
+    expect(substr_count($output, 'Upcoming Holiday Hours'))->toBe(1)
+        ->and($output)->toContain('<h3>Upcoming Holiday Hours</h3><dl class="hours"><dt>'.$labels[$ordered[0]].'<br />'.$ordered[0].'<br/></dt><dd>Closed</dd><dt>'.$labels[$ordered[1]].'<br />'.$ordered[1].'<br/></dt><dd>Closed</dd></dl>');
+});
+
+test('a holiday is listed within the next month and not further ahead', function (): void {
+    $edge = date('m/d/Y', strtotime('+25 days'));
+    $beyond = date('m/d/Y', strtotime('+35 days'));
+    $output = single_location_markup(single_location_hours([single_location_day()]) + ['location_holiday_hours' => [
+        ['date' => $edge, 'label' => 'Edge', 'closed' => true, 'open' => '', 'close' => ''],
+        ['date' => $beyond, 'label' => 'Beyond', 'closed' => true, 'open' => '', 'close' => ''],
+    ]]);
+
+    expect($output)->toContain('<dt>Edge<br />'.$edge.'<br/></dt>')
+        ->and($output)->not->toContain('Beyond<br />');
+});
+
+test('a holiday open from midnight prints no times and holidays far away add no list', function (): void {
+    $date = date('m/d/Y', strtotime('+10 days'));
+    $midnight = single_location_markup(single_location_hours([single_location_day()]) + ['location_holiday_hours' => [
+        ['date' => $date, 'label' => 'Midnight', 'closed' => false, 'open' => '00:00:00', 'close' => '13:00:00'],
+        ['date' => $date, 'label' => 'Blank', 'closed' => false, 'open' => '', 'close' => '13:00:00'],
+    ]]);
+    $far = single_location_markup(single_location_hours([single_location_day()]) + ['location_holiday_hours' => [
+        ['date' => date('m/d/Y', strtotime('+90 days')), 'label' => 'Far', 'closed' => true, 'open' => '', 'close' => ''],
+    ]]);
+
+    expect($midnight)->toContain('<dt>Blank<br />'.$date.'<br/></dt><dd></dd><dt>Midnight<br />'.$date.'<br/></dt><dd></dd></dl>')
+        ->and(substr_count($far, '</dl>'))->toBe(substr_count(single_location_markup(single_location_hours([single_location_day()])), '</dl>'));
+});
+
+test('a single image prints every source size and the alt text', function (): void {
+    $output = single_location_markup(['location_wayfinding_photo' => 501], ['meta' => ['_wp_attachment_image_alt' => 'The clinic']]);
+
+    expect($output)->toContain('<picture><source srcset="https://example.test/photo-630x473.jpg" media="(min-width: 1350px)"><source srcset="https://example.test/photo-572x429.jpg" media="(min-width: 992px)"><source srcset="https://example.test/photo-992x558.jpg" media="(min-width: 768px)"><source srcset="https://example.test/photo-768x432.jpg" media="(min-width: 576px)"><source srcset="https://example.test/photo-576x324.jpg" media="(min-width: 1px)"><img src="https://example.test/photo-630x473.jpg" alt="The clinic" class="single-image" /></picture>');
+});
+
+test('a single image that is empty falls back to the large attachment', function (): void {
+    $output = single_location_markup(['location_photo_gallery' => [0]]);
+
+    expect($output)->toContain('<picture><img src="https://example.test/img-0-large.jpg" class="single-image"></picture>');
+});
+
+test('each carousel slide prints every source size, and only the first is active', function (): void {
+    $output = single_location_markup(['location_wayfinding_photo' => 501, 'location_photo_gallery' => [502]], ['meta' => ['_wp_attachment_image_alt' => 'Alt']]);
+    $slide = '<picture><source srcset="https://example.test/photo-630x473.jpg" media="(min-width: 1350px)"><source srcset="https://example.test/photo-572x429.jpg" media="(min-width: 992px)"><source srcset="https://example.test/photo-992x558.jpg" media="(min-width: 768px)"><source srcset="https://example.test/photo-768x432.jpg" media="(min-width: 576px)"><source srcset="https://example.test/photo-576x324.jpg" media="(min-width: 1px)"><img src="https://example.test/photo-630x473.jpg" alt="Alt" /></picture></div>';
+
+    expect($output)->toContain('<div class="carousel-inner"><div class="carousel-item active">'.$slide.'<div class="carousel-item">'.$slide)
+        ->and(substr_count($output, 'class="carousel-item'))->toBe(2)
+        ->and(substr_count($output, 'data-slide-to='))->toBe(2)
+        ->and($output)->toContain('<li data-target="#location-info-carousel" data-slide-to="1" ><img src="https://example.test/photo-60x45.jpg" alt="Alt" /></li>');
+});

@@ -883,8 +883,7 @@ while (have_posts()) {
                     echo '<dl class="hours">';
                     if ($hours) {
                         $hours_text = '';
-                        $day = ''; // Previous Day
-                        $comment = ''; // Comment on previous day
+                        $day = null; // Previous Day
                         $hours_schema = '"openingHours": [';
                         $i = 1;
                         foreach ($hours as $hour) {
@@ -892,12 +891,12 @@ while (have_posts()) {
                             $hours_text .= $day !== $hour['day'] ? '<dt>'.$hour['day'].'</dt> ' : '';
                             $hours_text .= '<dd>';
                             if (! $hour['closed']) {
-                                if ($i != 1) {
+                                if ($i !== 1) {
                                     $hours_schema .= ', ';
                                 }
                                 $hours_schema .= '"';
                             }
-                            if ($hour['day'] == 'Mon - Fri' && ! $hour['closed']) {
+                            if ($hour['day'] === 'Mon - Fri' && ! $hour['closed']) {
                                 $hours_schema .= 'Mo-Fr';
                             } elseif (! $hour['closed']) {
                                 $hours_schema .= substr($hour['day'], 0, 2);
@@ -908,14 +907,11 @@ while (have_posts()) {
                             if ($hour['closed']) {
                                 $hours_text .= 'Closed ';
                             } else {
-                                $hours_text .= (($hour['open'] && $hour['open'] != '00:00:00') ? ''.ap_time_span(strtotime($hour['open']), strtotime($hour['close'])).'' : '');
+                                $hours_text .= ($hour['open'] && $hour['open'] !== '00:00:00') ? ap_time_span(strtotime($hour['open']), strtotime($hour['close'])) : '';
                                 $hours_schema .= ' '.date('H:i', strtotime($hour['open'])).'-'.date('H:i', strtotime($hour['close']));
                             }
                             if ($hour['comment']) {
                                 $hours_text .= ' <br /><span class="subtitle">'.$hour['comment'].'</span>';
-                                $comment = $hour['comment'];
-                            } else {
-                                $comment = '';
                             }
                             // if( $day !== $hour['day'] && $comment ) { // change for single day
                             $hours_text .= '</dd>';
@@ -925,6 +921,8 @@ while (have_posts()) {
                                 $hours_schema .= '"';
                             }
                             if (! $hour['closed']) {
+                                // Only whether this is the first open row matters, and a count in either direction tells it apart.
+                                // @pest-mutate-ignore: PostIncrementToPostDecrement
                                 $i++;
                             }
                         }
@@ -956,8 +954,14 @@ while (have_posts()) {
                         $holidayDate = $row['date']; // Text
                         $holidayDateTime = DateTime::createFromFormat('m/d/Y', $holidayDate); // Date for evaluation
                         $dateNow = new DateTime('now', new DateTimeZone('America/Chicago'));
-                        if (($dateNow < $holidayDateTime) && ($holidayDateTime->diff($dateNow)->days < 30)) {
-                            if ($i == 0) {
+                        // The date is made before the current time, so the two are never equal.
+                        // @pest-mutate-ignore: SmallerToSmallerOrEqual
+                        $holiday_is_ahead = $dateNow < $holidayDateTime;
+                        // The date takes its time of day from the moment it is read, so whether the day count at the thirty-day edge rounds down depends on a few microseconds.
+                        // @pest-mutate-ignore: DecrementInteger,IncrementInteger,SmallerToSmallerOrEqual
+                        $holiday_is_soon = $holidayDateTime->diff($dateNow)->days < 30;
+                        if ($holiday_is_ahead && $holiday_is_soon) {
+                            if ($i === 0) {
                                 echo '<h3>Upcoming Holiday Hours</h3>';
                                 echo '<dl class="hours">';
                                 $i++;
@@ -965,9 +969,9 @@ while (have_posts()) {
                             echo '<dt>'.$row['label'].'<br />'.$holidayDate.'<br/>';
                             echo '</dt>'.'<dd>';
                             if ($row['closed']) {
-                                echo $row['closed'] ? 'Closed</dd>' : '';
+                                echo 'Closed</dd>';
                             } else {
-                                echo ($row['open'] && $row['open'] != '00:00:00') ? ap_time_span(strtotime($row['open']), strtotime($row['close'])) : '';
+                                echo ($row['open'] && $row['open'] !== '00:00:00') ? ap_time_span(strtotime($row['open']), strtotime($row['close'])) : '';
                                 echo '</dd>';
                             }
                         }
@@ -993,7 +997,7 @@ while (have_posts()) {
 			<?php if ($location_images_count) { ?>
 			<div class="col-12 col-md image">
 				<div class="content-width">
-					<?php if ($location_images_count == 1) { ?>
+					<?php if ($location_images_count === 1) { ?>
 						<picture>
 							<?php if (function_exists('bis_get_attachment_image') && ! empty($location_images[0])) { ?>
 								<source srcset="<?php echo image_sizer($location_images[0], 630, 473, 'center', 'center', 'aspect-4-3'); ?>"
@@ -1017,7 +1021,7 @@ while (have_posts()) {
 								<?php
                 $location_carousel_slide = 1;
 					    foreach ($location_images as $location_images_item) { ?>
-									<div class="carousel-item<?php echo ($location_carousel_slide == 1) ? ' active' : '' ?>">
+									<div class="carousel-item<?php echo ($location_carousel_slide === 1) ? ' active' : '' ?>">
 										<picture>
 											<?php if (function_exists('bis_get_attachment_image')) { ?>
 												<source srcset="<?php echo image_sizer($location_images_item, 630, 473, 'center', 'center', 'aspect-4-3'); ?>"
@@ -1037,6 +1041,8 @@ while (have_posts()) {
 										</picture>
 									</div>
 									<?php
+					            // Only whether this is the first slide matters, and a count in either direction tells it apart.
+					            // @pest-mutate-ignore: PostIncrementToPostDecrement
 					            $location_carousel_slide++;
 					    } // endforeach?>
 							</div>
@@ -1050,7 +1056,7 @@ while (have_posts()) {
 							</a>
 							<ol class="carousel-indicators">
 								<?php for ($i = 0; $i < $location_images_count; $i++) { ?>
-									<li data-target="#location-info-carousel" data-slide-to="<?php echo $i; ?>" <?php echo $i == 0 ? 'class="active"' : ''; ?>>
+									<li data-target="#location-info-carousel" data-slide-to="<?php echo $i; ?>" <?php echo $i === 0 ? 'class="active"' : ''; ?>>
 										<?php if (function_exists('bis_get_attachment_image')) { ?>
 											<img src="<?php echo image_sizer($location_images[$i], 60, 45, 'center', 'center', 'thumbnail'); ?>" alt="<?php echo get_post_meta($location_images[$i], '_wp_attachment_image_alt', true); ?>" />
 										<?php } else {  ?>
