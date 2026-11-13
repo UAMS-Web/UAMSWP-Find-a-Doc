@@ -330,7 +330,11 @@ while (have_posts()) {
         $location_floor_label = $location_floor['choices'][$location_floor_value] ?? '';
     }
     $location_suite = get_field('location_suite', $location_source_ids['unit']);
+    // The building name is read only when the location has a building, and then it is set, so its default is never used.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $location_address_2 = uamswp_location_address_2(($location_building && $building_slug !== '_none'), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, '<br />', ', ');
+    // The building name is read only when the location has a building, and then it is set, so its default is never used.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $location_address_2_schema = uamswp_location_address_2(($location_building && $building_slug !== '_none'), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, ' ', ' ');
 
     $location_address_2_deprecated = get_field('location_address_2', $location_source_ids['street']);
