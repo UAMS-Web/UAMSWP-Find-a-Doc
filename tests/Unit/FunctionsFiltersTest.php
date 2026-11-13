@@ -29,6 +29,9 @@ final class FunctionsFiltersTest extends UnitTestCase
     /** @var list<array{0: string, 1: string, 2: mixed, 3: int, 4: int}> */
     private static array $hooks = [];
 
+    /** @var list<array<string, mixed>> */
+    private array $termsArgs = [];
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -307,6 +310,20 @@ final class FunctionsFiltersTest extends UnitTestCase
     // The provider shortcodes.
 
     /**
+     * Answer the region lookup with the regions, keeping the arguments it was asked with.
+     *
+     * @param  array<int, object>|\WP_Error  $regions
+     */
+    private function recordTerms(array|\WP_Error $regions): void
+    {
+        when('get_terms')->alias(function (array $args) use ($regions): array|\WP_Error {
+            $this->termsArgs[] = $args;
+
+            return $regions;
+        });
+    }
+
+    /**
      * Stubs for a set of providers: published status, a field map keyed `id:field`, the clinical title terms
      * and the regions.
      *
@@ -321,7 +338,7 @@ final class FunctionsFiltersTest extends UnitTestCase
         when('get_post_status')->alias(static fn (int $id): string => $status[$id] ?? 'draft');
         when('get_field')->alias(static fn (string $field, mixed $id = null): mixed => is_object($id) ? ($termFields[$field] ?? '') : ($fields[$id.':'.$field] ?? ''));
         when('get_term')->alias(static fn (int $id, string $taxonomy): ?object => $titleTerms[$id] ?? null);
-        when('get_terms')->justReturn($regions);
+        $this->recordTerms($regions);
     }
 
     /**
@@ -365,6 +382,34 @@ final class FunctionsFiltersTest extends UnitTestCase
         $this->assertStringContainsString('<option value="c" disabled>Region C</option>', $html, 'a region no listed provider serves is disabled');
         $this->assertStringContainsString('value="1,2,3,4"', $html);
         $this->assertStringNotContainsString('provider-ajax-filter-message', $html);
+    }
+
+    public function test_providers_with_the_same_title_list_it_once_and_those_without_a_name_list_nothing(): void
+    {
+        $this->providers(
+            [5 => 'publish', 6 => 'publish', 7 => 'publish', 8 => 'publish'],
+            ['5:physician_title' => '20', '6:physician_title' => '21', '8:physician_title' => '22'],
+            [20 => (object) ['name' => 'Same'], 21 => (object) ['name' => 'Same'], 22 => (object) []]
+        );
+
+        $html = \uamswp_provider_ajax_filter_shortcode(['providers' => '5,6,7,8']);
+
+        $this->assertSame(1, substr_count($html, '>Same<'));
+        $this->assertStringContainsString('<option value="20">Same</option>', $html);
+        $this->assertStringNotContainsString('value="21"', $html);
+        $this->assertStringNotContainsString('value="22"', $html);
+        $this->assertStringNotContainsString('<option value="0">', $html, 'a provider with no title adds no option');
+    }
+
+    public function test_a_cookie_of_zero_selects_no_title_and_the_regions_are_asked_for_by_name(): void
+    {
+        $this->providers(...$this->sampleProviders());
+        $_COOKIE = ['_provider_title' => '0'];
+
+        $html = \uamswp_provider_ajax_filter_shortcode(['providers' => '1,2']);
+
+        $this->assertStringContainsString('<option value="0">Resident Physician</option>', $html);
+        $this->assertSame([['taxonomy' => 'region', 'orderby' => 'name', 'hide_empty' => 0]], $this->termsArgs);
     }
 
     public function test_the_region_menu_can_be_hidden(): void
@@ -468,6 +513,24 @@ final class FunctionsFiltersTest extends UnitTestCase
         $_COOKIE = ['_provider_title' => '7'];
         $this->assertStringContainsString('<option value="7" selected>Cardiology</option>', \uamswp_provider_title_ajax_filter_shortcode(['providers' => '2']));
         $this->assertStringContainsString('name="providers-ids" value="0"', \uamswp_provider_title_ajax_filter_shortcode(null));
+    }
+
+    public function test_the_title_filter_lists_equal_titles_once_in_order_and_skips_providers_without_a_name(): void
+    {
+        $this->providers(
+            [5 => 'publish', 6 => 'publish', 7 => 'publish', 8 => 'publish', 9 => 'publish', 10 => 'publish'],
+            ['5:physician_title' => '20', '6:physician_title' => '21', '8:physician_title' => '22', '9:physician_title' => '23', '10:physician_title' => '24'],
+            [20 => (object) ['name' => 'Same'], 21 => (object) ['name' => 'Same'], 22 => (object) [], 23 => (object) ['name' => 'Zeta'], 24 => (object) ['name' => 'Alpha']]
+        );
+
+        $html = \uamswp_provider_title_ajax_filter_shortcode(['providers' => '5,6,7,8,9,10']);
+
+        $this->assertSame(1, substr_count($html, '>Same<'));
+        $this->assertStringNotContainsString('value="21"', $html);
+        $this->assertStringNotContainsString('value="22"', $html);
+        $this->assertStringNotContainsString('<option value="0">', $html);
+        $this->assertLessThan(strpos($html, '>Same<'), strpos($html, '>Alpha<'), 'titles are sorted by name');
+        $this->assertLessThan(strpos($html, '>Zeta<'), strpos($html, '>Same<'));
     }
 
     public function test_the_title_filter_uses_the_term_specialization_title_when_there_is_one(): void
@@ -600,7 +663,7 @@ final class FunctionsFiltersTest extends UnitTestCase
     {
         when('get_post_status')->alias(static fn (int $id): string => $status[$id] ?? 'draft');
         when('get_field')->alias(static fn (string $field, mixed $id = null): mixed => $fields[$id.':'.$field] ?? '');
-        when('get_terms')->justReturn($regions);
+        $this->recordTerms($regions);
     }
 
     /**
@@ -632,6 +695,18 @@ final class FunctionsFiltersTest extends UnitTestCase
         $this->assertStringContainsString('id="location-ajax-filter"', $html);
         $this->assertStringNotContainsString('d-none', $html);
         $this->assertStringNotContainsString('location-ajax-filter-message', $html);
+    }
+
+    public function test_a_region_given_as_text_enables_its_region_and_the_regions_are_asked_for_by_name(): void
+    {
+        $this->locations([1 => 'publish'], ['1:location_region' => ['12']], $this->regionTerms());
+
+        $html = \uamswp_location_ajax_filter_shortcode(['locations' => '1']);
+
+        $this->assertStringContainsString('<option value="c">Region C</option>', $html);
+        $this->assertStringContainsString('<option value="a" disabled>Region A</option>', $html);
+        $this->assertStringContainsString('mb-sm-0">', $html);
+        $this->assertSame([['taxonomy' => 'region', 'orderby' => 'name', 'hide_empty' => 0]], $this->termsArgs);
     }
 
     public function test_the_location_region_menu_can_be_hidden_and_the_selection_is_marked(): void
@@ -698,6 +773,117 @@ final class FunctionsFiltersTest extends UnitTestCase
         \location_ajax_filter_callback();
 
         $this->assertSame([], \WP_Query::$queries[1]['tax_query']);
+    }
+
+    // Rendering the real cards.
+
+    private function cardStubs(): void
+    {
+        require_once UAMS_FAD_PATH.'includes/class.fad-location-address.php';
+        when('get_field_object')->justReturn();
+        when('format_phone_dash')->justReturn('');
+        when('uamswp_custom_table_query')->justReturn([]);
+        when('get_post')->alias(static fn (mixed $id): object => (object) ['ID' => (int) $id, 'post_title' => 'Title '.$id]);
+        when('get_term')->justReturn(false);
+        when('sanitize_title_with_dashes')->returnArg();
+        when('esc_html__')->returnArg();
+        when('__')->returnArg();
+        when('wp_reset_postdata')->justReturn();
+        when('get_the_title')->alias(static fn (mixed $id = 0): string => 'Title '.$id);
+        when('get_permalink')->alias(static fn (mixed $id = 0): string => 'https://example.test/'.$id);
+        when('has_post_thumbnail')->justReturn(false);
+        when('the_permalink')->alias(static function (mixed $id = 0): void {
+            echo 'https://example.test/'.$id;
+        });
+        when('wp_die')->justReturn();
+    }
+
+    public function test_the_location_callback_prints_a_card_and_the_ids_and_region_slugs_for_the_locations_found(): void
+    {
+        $_POST = ['locations' => '1,2,3'];
+        \WP_Query::$queue = [[1, 2, 3], [1, 2]];
+        $this->cardStubs();
+        $asked = [];
+        when('get_field')->alias(static fn (string $field, mixed $id = null): mixed => match ($field) {
+            'location_region' => $id === 3 ? [10, 11] : 10,
+            'location_hours_group' => ['location_modified_hours' => false, 'location_modified_hours_start_date' => '', 'location_modified_hours_end' => false, 'location_modified_hours_end_date' => '', 'location_telemed_modified_hours_query' => false, 'location_telemed_modified_hours_start_date' => '', 'location_telemed_modified_hours_end' => false, 'location_telemed_modified_hours_end_date' => ''],
+            default => null,
+        });
+        when('get_term_by')->alias(static function (string $by, mixed $id, string $taxonomy) use (&$asked): object|false {
+            $asked[] = $id;
+
+            return $id === '10' ? (object) ['slug' => 'north'] : false;
+        });
+
+        ob_start();
+        \location_ajax_filter_callback();
+        $html = (string) ob_get_clean();
+
+        $this->assertSame(['10', ''], $asked, 'the regions of the locations are looked up once each, as text');
+        $this->assertSame(2, substr_count($html, '<div class="card">'));
+        $this->assertStringContainsString('href="https://example.test/1"', $html);
+        $this->assertStringContainsString('href="https://example.test/2"', $html);
+        $this->assertStringEndsWith('<data id="location_ids" data-postids="1,2," data-regions="north,,"></data>', $html);
+        $this->assertStringNotContainsString('no-results', $html);
+    }
+
+    public function test_the_location_callback_shows_no_results_when_no_locations_were_posted_even_if_the_query_finds_some(): void
+    {
+        \WP_Query::$queue = [[], [7]];
+        $this->cardStubs();
+        $this->expectOutputRegex('/^<span class="no-results">Sorry, there are no locations/');
+
+        \location_ajax_filter_callback();
+    }
+
+    public function test_the_provider_callback_looks_up_the_regions_by_number_and_shows_no_results_without_posted_providers(): void
+    {
+        \WP_Query::$queue = [[1], [], [7]];
+        $this->cardStubs();
+        $asked = [];
+        when('get_field')->alias(static fn (string $field, mixed $id = null): mixed => $field === 'physician_region' ? ['10', '11'] : null);
+        when('get_term_by')->alias(static function (string $by, mixed $id, string $taxonomy) use (&$asked): object|false {
+            $asked[] = $id;
+
+            return (object) ['slug' => 'r'.$id];
+        });
+
+        ob_start();
+        \provider_ajax_filter_callback();
+        $html = (string) ob_get_clean();
+
+        $this->assertSame([10, 11], $asked);
+        $this->assertStringStartsWith('<span class="no-results">Sorry, there are no providers', $html);
+        $this->assertStringEndsWith('<data id="provider_ids" data-postids="" data-regions="r10,r11," data-titles=","></data>', $html);
+    }
+
+    public function test_the_title_callback_shows_no_results_without_posted_providers_even_if_the_query_finds_some(): void
+    {
+        \WP_Query::$queue = [[7]];
+        $this->cardStubs();
+        $this->expectOutputRegex('/^<span class="no-results">Sorry, there are no providers/');
+
+        \provider_title_ajax_filter_callback();
+    }
+
+    public function test_the_provider_callback_prints_the_cards_with_the_ids_regions_and_titles(): void
+    {
+        $_POST = ['providers' => '1,2'];
+        \WP_Query::$queue = [[1, 2], [1, 2], [1, 2]];
+        $this->cardStubs();
+        when('get_field')->alias(static fn (string $field, mixed $id = null): mixed => match ($field) {
+            'physician_region' => [10],
+            'physician_title' => 7,
+            default => null,
+        });
+        when('get_term_by')->alias(static fn (string $by, mixed $id, string $taxonomy): object|false => (object) ['slug' => 'north']);
+
+        ob_start();
+        \provider_ajax_filter_callback();
+        $html = (string) ob_get_clean();
+
+        $this->assertSame(2, substr_count($html, '<div class="card">'));
+        $this->assertStringEndsWith('<data id="provider_ids" data-postids="1,2," data-regions="north," data-titles="7,"></data>', $html);
     }
 
     // The region cookie script.
@@ -808,6 +994,7 @@ final class FunctionsFiltersTest extends UnitTestCase
         return [
             'no pid' => [['schedule_options' => '0'], 'location', 'publish', $options],
             'a pid of zero' => [['pid' => '0'], 'location', 'publish', $options],
+            'no pid, with options on the numbers beside zero' => [['schedule_options' => '0'], 'location', 'publish', ['1:location_scheduling_options' => [0 => ['location_scheduling_ser' => 'S']], '-1:location_scheduling_options' => [0 => ['location_scheduling_ser' => 'S']]]],
             'a post that is not a location' => [['pid' => '12'], 'page', 'publish', $options],
             'an unpublished location' => [['pid' => '12'], 'location', 'draft', $options],
             'no scheduling options' => [['pid' => '12'], 'location', 'publish', []],
@@ -937,6 +1124,7 @@ final class FunctionsFiltersTest extends UnitTestCase
             'a markup character' => ['<b>', '<b>'],
             'an accented letter' => ['caf'."\u{00E9}", 'caf'."\u{00E9}"],
             'a number' => [12, '12'],
+            'a non-breaking space character' => ["a\u{00A0}b", 'a b'],
         ];
     }
 
@@ -948,7 +1136,7 @@ final class FunctionsFiltersTest extends UnitTestCase
 
     // The location source resolver.
 
-    private function location(int $id): \WP_Post
+    private function location(int|string $id): \WP_Post
     {
         $post = new \WP_Post;
         $post->ID = $id;
@@ -960,7 +1148,7 @@ final class FunctionsFiltersTest extends UnitTestCase
      * @param  array<string, mixed>  $fields
      * @param  array<int, \WP_Post|null>  $posts
      */
-    private function sourceStubs(array $fields, array $posts = [], int $current = 0): void
+    private function sourceStubs(array $fields, array $posts = [], int|string $current = 0): void
     {
         when('get_the_ID')->justReturn($current);
         when('get_field')->alias(static fn (string $field, mixed $id = null): mixed => $fields[$id.':'.$field] ?? false);
@@ -986,6 +1174,33 @@ final class FunctionsFiltersTest extends UnitTestCase
             ['self' => 9101, 'parent' => 0, 'street' => 9101, 'facility' => 9101, 'unit' => 9101, 'map' => 9101, 'parking' => 9101, 'directions' => 9101],
             \uamswp_fad_location_source_ids()
         );
+    }
+
+    public function test_the_current_post_id_may_arrive_as_text(): void
+    {
+        $this->sourceStubs([], [], '9161');
+
+        $this->assertSame(9161, \uamswp_fad_location_source_ids()['self']);
+    }
+
+    public function test_a_parent_whose_id_arrives_as_text_is_read_as_a_number(): void
+    {
+        $this->sourceStubs(['9200:location_parent' => true, '9200:location_parent_id' => 9199], [9199 => $this->location('9199')]);
+
+        $ids = \uamswp_fad_location_source_ids(9200);
+
+        $this->assertSame(9199, $ids['parent']);
+        $this->assertSame(9199, $ids['street']);
+    }
+
+    public function test_a_parent_that_is_the_location_itself_with_its_id_as_text_is_ignored(): void
+    {
+        $this->sourceStubs(['9190:location_parent' => true, '9190:location_parent_id' => 9190], [9190 => $this->location('9190')]);
+
+        $ids = \uamswp_fad_location_source_ids(9190);
+
+        $this->assertSame(0, $ids['parent']);
+        $this->assertSame(9190, $ids['street']);
     }
 
     public function test_a_post_object_or_an_id_string_names_the_location(): void
