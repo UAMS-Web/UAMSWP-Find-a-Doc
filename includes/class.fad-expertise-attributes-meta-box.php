@@ -108,25 +108,21 @@ class UAMS_Expertise_Attributes_Meta_Box
         }
 
         if (isset($_POST['sidebar_name'])) {
-            if (check_admin_referer('sidebar_nonce', 'sidebar_name')) { // limit to only pages
-                if ($post_type) {
-                    if (isset($_POST['sidebarcheck'])) {
-                        update_post_meta($post_ID, 'sidebar', $_POST['sidebarcheck']);
-                    } else {
-                        update_post_meta($post_ID, 'sidebar', null);
-                    }
+            if (check_admin_referer('sidebar_nonce', 'sidebar_name')) {
+                if (isset($_POST['sidebarcheck'])) {
+                    update_post_meta($post_ID, 'sidebar', $_POST['sidebarcheck']);
+                } else {
+                    update_post_meta($post_ID, 'sidebar', null);
                 }
             }
         }
 
         if (isset($_POST['parent_name'])) {
-            if (check_admin_referer('parent_nonce', 'parent_name')) { // limit to only pages
-                if ($post_type) {
-                    if (isset($_POST['parentcheck'])) {
-                        update_post_meta($post_ID, 'parent', $_POST['parentcheck']);
-                    } else {
-                        update_post_meta($post_ID, 'parent', null);
-                    }
+            if (check_admin_referer('parent_nonce', 'parent_name')) {
+                if (isset($_POST['parentcheck'])) {
+                    update_post_meta($post_ID, 'parent', $_POST['parentcheck']);
+                } else {
+                    update_post_meta($post_ID, 'parent', null);
                 }
             }
         }
