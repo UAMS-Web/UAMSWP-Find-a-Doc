@@ -2075,6 +2075,7 @@ function uamswp_spotlight_current_type()
 
     }
 
+    /** @var mixed $stored The field is stored as a value or, on older saves, as a value and label pair. */
     $stored = get_field('clinical_resource_type', $post_id);
 
     return is_array($stored) ? ($stored['value'] ?? '') : $stored;
@@ -2361,6 +2362,7 @@ function uamswp_spotlight_seed_questions($value, $post_id, $field)
 function uamswp_spotlight_stored_type($post_id)
 {
 
+    /** @var mixed $stored The field is stored as a value or, on older saves, as a value and label pair. */
     $stored = get_field('clinical_resource_type', $post_id);
 
     return is_array($stored) ? ($stored['value'] ?? '') : uamswp_fad_str($stored);

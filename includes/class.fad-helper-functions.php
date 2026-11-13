@@ -505,6 +505,7 @@ if (! function_exists('uamswp_provider_names')) {
         $pedigree = uamswp_fad_str(get_field('physician_pedigree', $provider_id));
 
         // Degrees and credentials (e.g., M.D., Ph.D.)
+        /** @var mixed $degrees A list of IDs, or anything else when the field was never saved as one. */
         $degrees = get_field('physician_degree', $provider_id);
 
         // Clean up degrees value

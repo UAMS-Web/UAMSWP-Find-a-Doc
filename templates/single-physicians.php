@@ -380,7 +380,9 @@ $provider_service_line = get_field('physician_service_line', $post->ID);
 if (have_rows('remove_ontology_criteria', 'option')) {
     while (have_rows('remove_ontology_criteria', 'option')) {
         the_row();
+        /** @var array<int, int|string>|false|null $remove_region */
         $remove_region = get_sub_field('remove_regions', 'option');
+        /** @var array<int, int|string>|false|null $remove_service_line */
         $remove_service_line = get_sub_field('remove_service_lines', 'option');
         if ((! empty($remove_region) && uamswp_provider_region_in_rule($provider_region, $remove_region)) && empty($remove_service_line)) {
             $hide_medical_ontology = true;
@@ -1328,6 +1330,7 @@ while (have_posts()) {
                                         if ($academic_title_tax->name) {
                                             $academic_title = $academic_title_tax->name;
                                         } else {
+                                            /** @var string|false|null $academic_title */
                                             $academic_title = get_sub_field('academic_title');
                                         }
                                         ?>

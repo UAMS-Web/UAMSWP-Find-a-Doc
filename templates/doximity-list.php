@@ -189,7 +189,9 @@ function display_provider_image_doximity_list(): void
                         if (have_rows('physician_contact_information', $post_id)) {
                             while (have_rows('physician_contact_information', $post_id)) {
                                 the_row();
+                                /** @var string|false|null $contact_type */
                                 $contact_type = get_sub_field('type');
+                                /** @var string|false|null $contact_info */
                                 $contact_info = get_sub_field('information');
                                 // The ACF select sub-field returns a string, so loose and strict equality agree.
                                 // @pest-mutate-ignore: EqualToIdentical
