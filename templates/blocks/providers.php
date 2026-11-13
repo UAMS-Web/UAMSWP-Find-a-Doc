@@ -122,7 +122,7 @@ if (! empty($filter_aoe)) {
 }
 
 // Build $post_ids from $location_ids and $aoe_ids
-if (! empty($location_ids) && ! empty($aoe_ids)) {
+if ($location_ids !== [] && $aoe_ids !== []) {
     $post_ids = array_intersect($location_ids, $aoe_ids);
 } else {
     $post_ids = array_merge($location_ids, $aoe_ids);
