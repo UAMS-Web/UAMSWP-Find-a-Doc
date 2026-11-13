@@ -102,6 +102,29 @@ if (! class_exists('WP_Query')) {
     }
 }
 
+if (! class_exists('WP_Term_Query')) {
+    class WP_Term_Query
+    {
+        /** @var array<int, mixed> */
+        public $terms = [];
+
+        /** @var list<array<int, mixed>> The terms each query will find, in order. */
+        public static array $queue = [];
+
+        /** @var list<array<string, mixed>> The arguments of every query. */
+        public static array $queries = [];
+
+        /**
+         * @param  array<string, mixed>  $args
+         */
+        public function __construct(array $args = [])
+        {
+            self::$queries[] = $args;
+            $this->terms = array_shift(self::$queue) ?? [];
+        }
+    }
+}
+
 if (! class_exists('WP_Error')) {
     class WP_Error
     {
