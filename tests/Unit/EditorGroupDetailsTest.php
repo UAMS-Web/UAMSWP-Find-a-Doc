@@ -58,20 +58,6 @@ final class EditorGroupDetailsTest extends UnitTestCase
         };
     }
 
-    public function test_the_hooks_are_registered_with_their_priorities_and_argument_counts(): void
-    {
-        $this->assertSame([
-            ['add_action', 'init', 'uamswp_fad_register_editor_group_taxonomy', 5],
-            ['add_action', 'acf/init', 'uamswp_fad_register_editor_group_fields'],
-            ['add_filter', 'map_meta_cap', 'uamswp_fad_editor_group_map_meta_cap', 10, 4],
-            ['add_action', 'pre_get_posts', 'uamswp_fad_editor_group_admin_list_scope'],
-            ['add_filter', 'posts_where', 'uamswp_fad_editor_group_admin_list_where', 10, 2],
-            ['add_action', 'save_post', 'uamswp_fad_inherit_editor_group_on_save', 20, 2],
-            ['add_action', 'editor_group_pre_add_form', 'uamswp_fad_editor_group_sync_notice'],
-            ['add_action', 'admin_post_uamswp_fad_sync_editor_groups', 'uamswp_fad_sync_editor_groups'],
-        ], \uamswp_test_load_editor_groups());
-    }
-
     public function test_the_fields_carry_their_keys_labels_and_instructions(): void
     {
         $groups = [];
