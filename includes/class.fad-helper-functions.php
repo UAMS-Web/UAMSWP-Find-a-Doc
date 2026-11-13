@@ -90,7 +90,7 @@ if (! function_exists('ap_date')) {
                 $apdate = 'today';
             }
         } else {
-            $apdate = $weekdayname.' '.$apmonth.' '.date('j', uamswp_fad_int($date)).''.$apyear;
+            $apdate = $weekdayname.' '.$apmonth.' '.date('j', uamswp_fad_int($date)).$apyear;
         }
 
         return $apdate;
@@ -188,7 +188,7 @@ if (! function_exists('isDate')) {
         }
 
         $date = date_parse(uamswp_fad_str($value));
-        if ($date['error_count'] == 0 && $date['warning_count'] == 0) {
+        if ($date['error_count'] === 0 && $date['warning_count'] === 0) {
             return checkdate(uamswp_fad_int($date['month']), uamswp_fad_int($date['day']), uamswp_fad_int($date['year']));
         }
 
@@ -254,6 +254,8 @@ if (! function_exists('partition')) {
         $partrem = $listlen % $p;
         $partition = [];
         $mark = 0;
+        // Counting down instead of up never ends the loop, so a test cannot observe it: the harness can only report a timeout.
+        // @pest-mutate-ignore: PostIncrementToPostDecrement
         for ($px = 0; $px < $p; $px++) {
             $incr = ($px < $partrem) ? $partlen + 1 : $partlen;
             $partition[$px] = array_slice(uamswp_fad_arr($list), $mark, $incr);
@@ -339,6 +341,8 @@ if (! function_exists('partition')) {
 function get_taxonomy_archive_link($taxonomy): string
 {
     $tax = get_taxonomy((string) $taxonomy);
+    // Without a taxonomy the rewrite is not an array either way, so true and false give the same link.
+    // @pest-mutate-ignore: FalseToTrue
     $rewrite = $tax instanceof WP_Taxonomy ? $tax->rewrite : false;
 
     return '/'.(is_array($rewrite) ? uamswp_fad_str(($rewrite['slug'] ?? '')) : '');
@@ -365,7 +369,7 @@ function uamswp_fad_taxonomy_breadcrumbs_crumbs($crumbs)
 
         if ($tax instanceof WP_Taxonomy) {
             $taxonomy = [$tax->labels->name, get_taxonomy_archive_link($taxonomy_name)];
-            array_splice($crumbs, -1, 0, [$taxonomy]);
+            $crumbs = [...array_slice($crumbs, 0, -1), $taxonomy, ...array_slice($crumbs, -1)];
         }
     }
 
@@ -513,10 +517,14 @@ if (! function_exists('uamswp_provider_names')) {
 
             $degrees = array_filter($degrees);
             $degrees = array_unique($degrees, SORT_REGULAR);
+            // The degrees are read with foreach and count(), which ignore the keys.
+            // @pest-mutate-ignore: UnwrapArrayValues
             $degrees = array_values($degrees);
 
         }
 
+        // The count is read only when there are degrees, so the fallback value never shows.
+        // @pest-mutate-ignore: DecrementInteger,IncrementInteger
         $degree_count = $degrees ? count(uamswp_fad_arr($degrees)) : 0;
         $degree_list = '';
         $degree_attr_array = [];
@@ -547,12 +555,6 @@ if (! function_exists('uamswp_provider_names')) {
             } // endforeach
 
         } // endif ( $degrees )
-
-        // Remove empty rows, remove duplicate rows, reindex
-
-        $degree_attr_array = array_filter($degree_attr_array);
-        $degree_attr_array = array_unique($degree_attr_array, SORT_REGULAR);
-        $degree_attr_array = array_values($degree_attr_array);
 
         // Set the "Dr." prefix
 
@@ -721,6 +723,8 @@ if (! function_exists('uamswp_provider_pronouns')) {
     function uamswp_provider_pronouns($provider_id): array
     {
 
+        // Without a provider any value that is not female or male reaches the same default arm.
+        // @pest-mutate-ignore: EmptyStringToNotEmpty
         $gender = $provider_id ? get_field('physician_gender', $provider_id) : '';
 
         return match ($gender) {
@@ -999,6 +1003,8 @@ if (! function_exists('uamswp_spotlight_appointment_cta')) {
 
             $phone = get_field('clinical_resource_spotlight_phone');
             // Dashed format for both the tel: href and the visible text (e.g. 501-686-8000)
+            // The dashed phone is read only when there is a phone, so the fallback value never shows.
+            // @pest-mutate-ignore: EmptyStringToNotEmpty
             $phone_dash = $phone ? format_phone_dash($phone) : '';
 
             if ($phone && $phone_dash) {
@@ -1225,6 +1231,8 @@ function uamswp_fad_assoc(mixed $value): array
 {
     $out = [];
     foreach (uamswp_fad_arr($value) as $key => $item) {
+        // PHP turns a numeric string key back into an integer, so the cast changes nothing.
+        // @pest-mutate-ignore: RemoveStringCast
         $out[(string) $key] = $item;
     }
 

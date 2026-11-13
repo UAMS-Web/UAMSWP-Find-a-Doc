@@ -285,4 +285,31 @@ final class SpotlightCtaTest extends UnitTestCase
 
         $this->assertSame('<section>replaced</section>', \uamswp_spotlight_appointment_cta(5));
     }
+
+    /**
+     * @return array<string, array{0: array<string, mixed>}>
+     */
+    public static function bands(): array
+    {
+        return [
+            'a call to schedule' => [[]],
+            'the profile line' => [['clinical_resource_spotlight_phone' => '']],
+            'the learn more line' => [['physician_resident' => '1']],
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $changes
+     */
+    #[DataProvider('bands')]
+    public function test_a_provider_with_no_permalink_links_to_an_empty_address(array $changes): void
+    {
+        $this->fields = $changes + $this->fields;
+        when('get_permalink')->justReturn(false);
+        // A link address is escaped as text, so a missing permalink reaches esc_url() as an empty string.
+        when('esc_url')->alias(static fn ($url): string => is_string($url) ? $url : 'NOT-TEXT');
+
+        $this->assertStringNotContainsString('NOT-TEXT', \uamswp_spotlight_appointment_cta(5));
+        $this->assertStringContainsString('<a href="" data-itemtitle', \uamswp_spotlight_appointment_cta(5));
+    }
 }
