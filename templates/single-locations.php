@@ -682,7 +682,7 @@ while (have_posts()) {
 					<?php } // endif?>
 					<h2 class="sr-only">Address</h2>
 					<p><?php echo $location_address_1; ?><br/>
-					<?php echo $location_address_2 ? $location_address_2.'<br/>' : ($location_address_2_deprecated ? $location_address_2_deprecated.'<br/>' : ''); ?>
+					<?php echo $location_address_2 ? $location_address_2.'<br/>' : ''; ?>
 					<?php echo $location_city; ?>, <?php echo $location_state; ?> <?php echo $location_zip; ?></p>
 						<div class="btn-container">
 							<div class="inner-container">
