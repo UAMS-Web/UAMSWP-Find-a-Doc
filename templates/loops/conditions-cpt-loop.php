@@ -23,30 +23,30 @@ $condition_heading = 'Conditions';
 $condition_disclaimer = false;
 $condition_disclaimer_text = 'UAMS Health providers care for a broad range of conditions, some of which may not be listed below.';
 
-if ($condition_context == 'single-provider') {
+if ($condition_context === 'single-provider') {
 
     $condition_heading = $condition_heading.' Diagnosed or Treated by '.$condition_heading_related_name;
     $condition_disclaimer = true;
 
-} elseif ($condition_context == 'single-location') {
+} elseif ($condition_context === 'single-location') {
 
     $condition_heading = $condition_heading.' Diagnosed or Treated at '.$condition_heading_related_name;
     $condition_disclaimer = true;
 
-} elseif ($condition_context == 'single-condition') {
+} elseif ($condition_context === 'single-condition') {
 
     $condition_heading = $condition_heading.' Related to '.$condition_heading_related_name;
 
-} elseif ($condition_context == 'single-treatment') {
+} elseif ($condition_context === 'single-treatment') {
 
     $condition_heading = 'Related '.$condition_heading;
 
-} elseif ($condition_context == 'single-expertise') {
+} elseif ($condition_context === 'single-expertise') {
 
     $condition_heading = 'Related '.$condition_heading;
     $condition_disclaimer = true;
 
-} elseif ($condition_context == 'single-resource') {
+} elseif ($condition_context === 'single-resource') {
 
     $condition_heading = 'Related '.$condition_heading;
 

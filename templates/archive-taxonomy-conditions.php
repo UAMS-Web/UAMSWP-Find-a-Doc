@@ -28,7 +28,7 @@ get_header(); ?>
                             <?php
                             // if show all is set
                             $taxonomy = 'condition';
-$paged = 1;
+$paged = max(1, uamswp_fad_int(get_query_var('paged')));
 // number of tags to show per page
 $per_page = 40;
 if (isset($_GET['showall'])) {
@@ -38,7 +38,6 @@ if (isset($_GET['showall'])) {
 } else {
     // else show paged
 
-    $paged = max(1, uamswp_fad_int(get_query_var('paged')));
     $offset = ($paged - 1) * $per_page;
     $args = ['taxonomy' => $taxonomy, 'number' => $per_page, 'offset' => $offset, 'hide_empty' => 0];
     // `0` stands for every name that starts with a number (uamswp_terms_clauses()).

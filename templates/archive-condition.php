@@ -29,7 +29,7 @@ get_header(); ?>
                             <?php
                             // if show all is set
                             $post_type = 'condition';
-$paged = 1;
+$paged = max(1, uamswp_fad_int(get_query_var('paged')));
 // number of tags to show per page
 $per_page = 40;
 if (isset($_GET['showall'])) {
@@ -39,7 +39,6 @@ if (isset($_GET['showall'])) {
 } else {
     // else show paged
 
-    $paged = max(1, uamswp_fad_int(get_query_var('paged')));
     $offset = ($paged - 1) * $per_page;
     $args = ['post_type' => $post_type, 'orderby' => 'title', 'order' => 'ASC', 'posts_per_page' => $per_page, 'offset' => $offset];
     // `0` stands for every title that starts with a number (title_filter()).
