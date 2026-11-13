@@ -108,7 +108,7 @@ final class AcfFieldTypesTest extends TestCase
 
     public function test_the_generator_check_passes_for_the_committed_map(): void
     {
-        exec('php '.escapeshellarg($this->root().'/scripts/generate-acf-field-types.php').' --check 2>&1', $output, $status);
+        exec(escapeshellarg(PHP_BINARY).' '.escapeshellarg($this->root().'/scripts/generate-acf-field-types.php').' --check 2>&1', $output, $status);
 
         $this->assertSame(0, $status, implode("\n", $output));
     }
@@ -139,7 +139,10 @@ final class AcfFieldTypesTest extends TestCase
             PHP_WRAP);
             file_put_contents($directory.'/phpstan.neon', "parameters:\n    level: 10\nservices:\n    -\n        class: UamswpFindADoc\\PhpStan\\AcfReturnTypeExtension\n        tags:\n            - phpstan.broker.dynamicFunctionReturnTypeExtension\n");
 
-            exec('cd '.escapeshellarg($this->root()).' && vendor/bin/phpstan analyse --no-progress --memory-limit=1G --error-format=json -c '.escapeshellarg($directory.'/phpstan.neon').' '.escapeshellarg($directory.'/probe.php').' 2>&1', $output, $status);
+            $working_directory = getcwd();
+            chdir($this->root());
+            exec(escapeshellarg(PHP_BINARY).' '.escapeshellarg($this->root().'/vendor/phpstan/phpstan/phpstan').' analyse --no-progress --memory-limit=1G --error-format=json -c '.escapeshellarg($directory.'/phpstan.neon').' '.escapeshellarg($directory.'/probe.php').' 2>&1', $output, $status);
+            chdir($working_directory === false ? $this->root() : $working_directory);
 
             $json = strstr(implode("\n", $output), '{"totals"');
             $report = json_decode($json === false ? '' : $json, true);
