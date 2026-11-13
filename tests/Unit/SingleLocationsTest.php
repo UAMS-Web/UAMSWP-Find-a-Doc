@@ -578,3 +578,87 @@ test('the jump links show once two sections have links', function (): void {
         ->and($two['jump_link_count'])->toBe(2)
         ->and($two['show_jump_links_section'])->toBeTrue();
 });
+
+test('the title for attributes keeps the text it was given apart from the entities', function (): void {
+    $title = fn (string $text): string => single_location([], ['titles' => [0 => $text]])['page_title_attr'];
+
+    expect($title('Heart&nbsp;Clinic'))->toBe('Heart Clinic')
+        ->and($title("Heart\u{00A0}Clinic"))->toBe('Heart Clinic')
+        ->and($title('Heart &amp; Lung'))->toBe('Heart &amp; Lung');
+});
+
+test('the description is cut from the first character of the about text', function (): void {
+    $vars = single_location(['location_about' => 'A'.str_repeat('x', 300)]);
+
+    expect($vars['excerpt'])->toBe('A'.str_repeat('x', 151).'...');
+});
+
+test('a location with no parent has an empty value for each parent variable', function (): void {
+    $vars = single_location();
+
+    expect($vars['parent_title'])->toBe('')
+        ->and($vars['parent_url'])->toBe('')
+        ->and($vars['parent_location_prepend_the'])->toBe('')
+        ->and($vars['parent_title_prepend'])->toBe('')
+        ->and($vars['parent_title_phrase'])->toBe('');
+});
+
+test('a child location takes its own photos only when the override and the kind are both on', function (bool $override, bool $parent, bool $kind, bool $own): void {
+    $fields = ['location_image_override_parent' => $override, 'location_image_override_parent_wayfinding' => $kind, 'location_image_override_parent_gallery' => $kind, 'location_wayfinding_photo' => 601, 'location_photo_gallery' => [602]];
+    $options = ['fields_by_id' => [94 => ['location_wayfinding_photo' => 701, 'location_photo_gallery' => [702]]]];
+
+    if ($parent) {
+        $fields += ['location_parent' => true, 'location_parent_id' => 94];
+        $options['posts'] = [94 => (object) ['ID' => 94, 'post_title' => 'Parent']];
+    }
+
+    // A location with no parent reads its own photos under its own id, which the stub answers with the fields.
+    $expected = $own ? [601, 602] : ($parent ? [701, 702] : [601, 602]);
+
+    expect(single_location($fields, $options)['location_images'])->toBe($expected);
+})->with([
+    'no override' => [false, true, true, false],
+    'no parent' => [true, false, true, true],
+    'no kind' => [true, true, false, false],
+    'all on' => [true, true, true, true],
+]);
+
+test('the featured image comes from the location only when it overrides the parent featured image', function (bool $override, bool $parent, bool $featured, int $expected): void {
+    $fields = ['location_image_override_parent' => $override, 'location_image_override_parent_featured' => $featured];
+    $options = ['thumbnail' => 801, 'parent_thumbnail' => 802];
+
+    if ($parent) {
+        $fields += ['location_parent' => true, 'location_parent_id' => 95];
+        $options['posts'] = [95 => (object) ['ID' => 95, 'post_title' => 'Parent']];
+    }
+
+    expect(single_location($fields, $options)['featured_image'])->toBe($expected);
+})->with([
+    'no override' => [false, true, true, 802],
+    'no parent' => [true, false, true, 802],
+    'not the featured kind' => [true, true, false, 802],
+    'all on' => [true, true, true, 801],
+]);
+
+test('the hours group holds every field the template reads, each empty when missing', function (): void {
+    $group = single_location(['location_hours_group' => ['location_hours' => 'x']])['location_hours_group'];
+
+    expect($group)->toHaveCount(23)
+        ->and($group['location_hours'])->toBe('x')
+        ->and($group)->toHaveKeys(['location_telemed_modified_hours_group', 'location_telemed_modified_hours_times']);
+});
+
+test('an empty after hours text takes the default for emergencies', function (): void {
+    expect(single_location([], ['option' => ['location_afterhours_descr_system' => '']])['afterhours_system'])->toContain('call 911')
+        ->and(single_location([], ['option' => ['location_afterhours_descr_system' => '<p>Custom.</p>']])['afterhours_system'])->toBe('<p>Custom.</p>');
+});
+
+test('a modification that only loosely equals a name does not change the alert', function (): void {
+    $option = ['option' => ['location_alert_heading_system' => 'System', 'location_alert_body_system' => 'System.', 'location_alert_color_system' => 'blue']];
+    $fields = ['location_alert_modification' => true, 'location_alert_heading' => 'Local', 'location_alert_body' => 'Local.', 'location_alert_color' => 'red'];
+    $vars = single_location($fields, $option);
+
+    expect($vars['location_alert_title'])->toBe('System')
+        ->and($vars['location_alert_text'])->toBe('System.')
+        ->and($vars['location_alert_color'])->toBe('blue');
+});
