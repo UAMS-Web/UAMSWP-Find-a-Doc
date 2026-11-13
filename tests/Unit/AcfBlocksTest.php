@@ -134,6 +134,7 @@ final class AcfBlocksTest extends UnitTestCase
             'a list' => [['title' => 'T', 'data' => ['ids' => [1]]]],
             'true' => [['title' => 'T', 'data' => ['more' => true]]],
             'a numbered key' => [['title' => 'T', 'data' => [0 => 'x']]],
+            'content after a hidden key' => [['title' => 'T', 'data' => ['_heading' => 'field_1', 'heading' => 'Hello']]],
         ];
     }
 
