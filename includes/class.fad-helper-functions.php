@@ -1210,6 +1210,22 @@ function uamswp_fad_post_type_of(mixed $id): string|false
 }
 
 /**
+ * The name of a term that ACF or WordPress may hand over as an ID, a numeric string or nothing.
+ *
+ * `get_term()` returns a term, an error or null, and a template that reads `->name` straight off the result
+ * reads a property of an error or of null whenever the ID is stale or empty. This gives an empty string then.
+ *
+ * @param  mixed  $term_id  The term ID, as ACF returns it.
+ * @param  string  $taxonomy  The taxonomy the term belongs to.
+ */
+function uamswp_fad_term_name(mixed $term_id, string $taxonomy): string
+{
+    $term = get_term(uamswp_fad_int($term_id), $taxonomy);
+
+    return (is_object($term) && ! is_wp_error($term)) ? uamswp_fad_str($term->name) : '';
+}
+
+/**
  * A value read from post meta, an ACF field, a request or an option, as an array.
  *
  * An array comes back as it is; anything else gives an empty array.

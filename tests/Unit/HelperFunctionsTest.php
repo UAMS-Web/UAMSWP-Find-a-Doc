@@ -479,6 +479,23 @@ final class HelperFunctionsTest extends UnitTestCase
         $this->assertFalse(\uamswp_fad_post_type_of(null));
     }
 
+    public function test_the_name_of_a_term_is_read_and_a_missing_or_failed_lookup_gives_an_empty_string(): void
+    {
+        $term = new \stdClass;
+        $term->name = 'Cardiology';
+
+        when('is_wp_error')->alias(static fn (mixed $thing): bool => $thing instanceof \WP_Error);
+        expect('get_term')->once()->with(\Mockery::mustBe(7), 'degree')->andReturn($term);
+        expect('get_term')->once()->with(\Mockery::mustBe(8), 'degree')->andReturn(null);
+        expect('get_term')->once()->with(\Mockery::mustBe(9), 'degree')->andReturn(new \WP_Error);
+        expect('get_term')->once()->with(\Mockery::mustBe(0), 'degree')->andReturn(null);
+
+        $this->assertSame('Cardiology', \uamswp_fad_term_name('7', 'degree'));
+        $this->assertSame('', \uamswp_fad_term_name(8, 'degree'));
+        $this->assertSame('', \uamswp_fad_term_name(9, 'degree'));
+        $this->assertSame('', \uamswp_fad_term_name(false, 'degree'));
+    }
+
     public function test_a_submitted_acf_value_is_read_by_field_key(): void
     {
         $_POST['acf'] = ['field_a' => 'x', 'field_b' => null, 'field_c' => ['y']];

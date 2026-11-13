@@ -116,7 +116,6 @@ parameters:
             - templates/single-condition.php
             - templates/single-expertise.php
             - templates/single-locations.php
-            - templates/single-physicians.php
             - templates/single-treatment.php
             - templates/taxonomy-condition.php
             - templates/taxonomy-treatment_procedure.php
