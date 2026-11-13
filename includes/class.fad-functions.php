@@ -1067,7 +1067,7 @@ function display_medline_api_data($code, $type): void
             // @pest-mutate-ignore: EmptyStringToNotEmpty
             $href = uamswp_fad_str(uamswp_fad_arr($item['link'] ?? null)['href'] ?? '');
             if (str_contains($href, 'medlineplus.gov')) {
-                if ($a !== 0) {
+                if ($a) {
                     echo '<h2>'.uamswp_fad_str(uamswp_fad_arr($item['title'] ?? null)['_value'] ?? '').'</h2>'; // Add heading if there is more than one
                 }
                 echo '<p>'.uamswp_fad_str(uamswp_fad_arr($item['summary'] ?? null)['_value'] ?? '').'</p>';
