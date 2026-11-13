@@ -441,26 +441,26 @@ while (have_posts()) {
     // Set main appointment scheduling section title
     $location_scheduling_title_default = 'Schedule an Appointment Online'; // Default value for appointment section title
     $location_scheduling_title_general = get_field('location_scheduling_title_general'); // Get input for general appointment section title
-    $location_scheduling_title = (isset($location_scheduling_title_general) && ! empty($location_scheduling_title_general)) ? $location_scheduling_title_general : $location_scheduling_title_default; // Set main title from general title input. If general title value is empty, set to default value.
+    $location_scheduling_title = (! empty($location_scheduling_title_general)) ? $location_scheduling_title_general : $location_scheduling_title_default; // Set main title from general title input. If general title value is empty, set to default value.
 
     // Set main appointment scheduling section intro
     $location_scheduling_intro_default = 'Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.'; // Default value for appointment section intro
     $location_scheduling_intro_general = get_field('location_scheduling_intro_general'); // Get input for general appointment section intro
-    $location_scheduling_intro = (isset($location_scheduling_intro_general) && ! empty($location_scheduling_intro_general)) ? $location_scheduling_intro_general : $location_scheduling_intro_default; // Set main intro from general intro input. If general intro value is empty, set to default value.
+    $location_scheduling_intro = (! empty($location_scheduling_intro_general)) ? $location_scheduling_intro_general : $location_scheduling_intro_default; // Set main intro from general intro input. If general intro value is empty, set to default value.
 
     // Change main appointment scheduling section title and intro if only one scheduling widget
     if ($location_scheduling_query && (count((array) $location_scheduling_options) < 2)) {
         $row = $location_scheduling_options[0];
         $location_scheduling_item_title_main = $row['location_scheduling_title']; // Get input for specific appointment section standalone title
-        $location_scheduling_title = (isset($location_scheduling_item_title_main) && ! empty($location_scheduling_item_title_main)) ? $location_scheduling_item_title_main : $location_scheduling_title; // If input for specific appointment section title exists, use that. Otherwise, keep original value.
+        $location_scheduling_title = (! empty($location_scheduling_item_title_main)) ? $location_scheduling_item_title_main : $location_scheduling_title; // If input for specific appointment section title exists, use that. Otherwise, keep original value.
         $location_scheduling_item_intro_main = $row['location_scheduling_intro']; // Get input for specific appointment section standalone intro
-        $location_scheduling_intro = (isset($location_scheduling_item_intro_main) && ! empty($location_scheduling_item_intro_main)) ? $location_scheduling_item_intro_main : $location_scheduling_intro; // If input for specific appointment section intro exists, use that. Otherwise, keep original value.
+        $location_scheduling_intro = (! empty($location_scheduling_item_intro_main)) ? $location_scheduling_item_intro_main : $location_scheduling_intro; // If input for specific appointment section intro exists, use that. Otherwise, keep original value.
     }
 
     $mychart_scheduling_domain = get_field('mychart_scheduling_domain', 'option');
     $mychart_scheduling_instance = get_field('mychart_scheduling_instance', 'option');
     $mychart_scheduling_linksource = get_field('mychart_scheduling_linksource', 'option');
-    $mychart_scheduling_linksource = (isset($mychart_scheduling_linksource) && ! empty($mychart_scheduling_linksource)) ? $mychart_scheduling_linksource : 'uamshealth.com';
+    $mychart_scheduling_linksource = (! empty($mychart_scheduling_linksource)) ? $mychart_scheduling_linksource : 'uamshealth.com';
 
     if ($mychart_scheduling_query_system && $location_scheduling_query) {
         $show_mychart_scheduling_section = true;
@@ -592,7 +592,7 @@ while (have_posts()) {
 
     // Check if Child Locations section should be displayed
     $current_id = get_the_ID();
-    if ((count(get_pages(['child_of' => $current_id, 'post_type' => 'location'])) != 0)) { // If none available, set to false
+    if ((count(get_pages(['child_of' => $current_id, 'post_type' => 'location'])) !== 0)) { // If none available, set to false
         $args = [
             'post_type' => 'location',
             'post_status' => 'publish',
@@ -647,20 +647,20 @@ while (have_posts()) {
 						<div class="alert alert-warning" role="alert">
 							<p>
 							<?php if ($location_closing_date_past) { ?>
-								This location is <?php echo $location_closing_length == 'temporary' ? 'temporarily' : 'permanently'; ?> closed.
+								This location is <?php echo $location_closing_length === 'temporary' ? 'temporarily' : 'permanently'; ?> closed.
 							<?php } else { ?>
-								This location will be closing <?php echo $location_closing_length == 'temporary' ? 'temporarily beginning' : 'permanently'; ?> on <?php echo $location_closing_date; ?>.
+								This location will be closing <?php echo $location_closing_length === 'temporary' ? 'temporarily beginning' : 'permanently'; ?> on <?php echo $location_closing_date; ?>.
 							<?php } // endif
 					    if (
-					        $location_closing_length == 'temporary'
-					        && $location_reopen_known == 'date'
+					        $location_closing_length === 'temporary'
+					        && $location_reopen_known === 'date'
 					        && ! empty($location_reopen_date)
 					        && (new DateTime($location_reopen_date) >= new DateTime($location_closing_date))
 					    ) { ?>
 								It is scheduled to reopen on <?php echo $location_reopen_date; ?>.
 							<?php } elseif (
-							    $location_closing_length == 'temporary'
-							    && $location_reopen_known == 'tbd'
+							    $location_closing_length === 'temporary'
+							    && $location_reopen_known === 'tbd'
 							) { ?>
 								It will remain closed until further notice.
 							<?php } // endif

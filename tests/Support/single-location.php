@@ -81,8 +81,14 @@ function single_location(array $fields = [], array $options = []): array
     when('wp_strip_all_tags')->alias(static fn (string $text): string => strip_tags($text));
     when('wp_json_encode')->alias(static fn (mixed $value): string|false => json_encode($value));
     when('wp_oembed_get')->alias(static fn (string $url): string => '<iframe src="'.$url.'"></iframe>');
-    when('wp_reset_postdata')->justReturn();
-    when('get_pages')->justReturn($options['pages'] ?? []);
+    when('wp_reset_postdata')->alias(static function (): void {
+        $GLOBALS['single_location_resets'] = ($GLOBALS['single_location_resets'] ?? 0) + 1;
+    });
+    when('get_pages')->alias(static function (array $args) use ($options): array {
+        $GLOBALS['single_location_pages_args'] = $args;
+
+        return $options['pages'] ?? [];
+    });
     when('get_stylesheet_directory_uri')->justReturn('https://example.test/theme');
     when('format_phone_dash')->alias(static fn (mixed $phone): string => $phone ? 'dash:'.$phone : '');
     when('esc_url')->returnArg();
