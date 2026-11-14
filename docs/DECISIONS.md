@@ -83,3 +83,13 @@ Every entry heading is `## YYYY-MM-DD`, a space, and a short title. Leave exactl
 **Rejected.** Option 1 now, a check inside WordPress only: always agrees with the plugin, but it needs a new CI job and surfaces drift that has not caused a failure. Option 2, an approximation in the standalone script with a hardcoded type list: it can run in a hook but drifts from the plugin, and a hook that blocks on it would fail on the existing drift from the first commit.
 
 **Companion.** [UAMS-Web/UAMSWP-Find-a-Doc#1133](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1133); the retirement in [UAMS-Web/UAMSWP-Find-a-Doc#1063](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1063).
+
+## 2026-11-14 Revert the appointments default and pre-select Yes only for a new location (#1383)
+
+**Decision.** The `default_value` of `location_appointments_query` in `group_uamswp_locations.json` goes back to `""`, in its own small pull request. Pre-selecting Yes is done only for a new location, through an `acf/prepare_field` filter tracked as its own ticket (#1384), which has no read-time effect and does not depend on #1380 or #1063. #1380 stays open as a content decision only: which value each never-stored published location should hold.
+
+**Why.** With a default of `1`, ACF applies it on read for a location with no stored value while ACF Custom Database Tables is active and does not when it is off, so the phone block for a never-stored published location changes at deploy and again when CDT is retired. The edit screen also pre-selects Yes on existing never-stored locations, so a save would write `1` unchosen. An empty default keeps output at deploy equal to production in both states.
+
+**Rejected.** Keeping the default and settling #1380 first: it writes an answer to every never-stored location before deploy, a content decision this fix should not force. Re-adding the JSON default in #1063: it brings back the pre-select on existing locations.
+
+**Companion.** [UAMS-Web/UAMSWP-Find-a-Doc#1383](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1383) (its `## Decision` section); the new-location filter in [UAMS-Web/UAMSWP-Find-a-Doc#1384](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1384).
