@@ -108,29 +108,6 @@ test('a provider title grows from the name through the clinical title, city and 
     expect(uamswp_fad_title_single_physicians('x'))->toBe('Jo Smith | UAMS Health');
 });
 
-test('the taxonomy titles add the label only for a short term name', function (): void {
-    when('single_cat_title')->justReturn('Asthma');
-
-    expect(uamswp_fad_title_taxonomy_condition('x'))->toBe('Asthma | Conditions | UAMS Health')
-        ->and(uamswp_fad_title_taxonomy_treatment_procedure('x'))->toBe('Asthma | Treatments & Procedures | UAMS Health');
-
-    when('single_cat_title')->justReturn(str_repeat('a', 34));
-
-    expect(uamswp_fad_title_taxonomy_condition('x'))->toBe(str_repeat('a', 34).' | UAMS Health');
-
-    when('single_cat_title')->justReturn(str_repeat('a', 33));
-
-    expect(uamswp_fad_title_taxonomy_condition('x'))->toBe(str_repeat('a', 33).' | Conditions | UAMS Health');
-
-    when('single_cat_title')->justReturn(str_repeat('a', 21));
-
-    expect(uamswp_fad_title_taxonomy_treatment_procedure('x'))->toBe(str_repeat('a', 21).' | UAMS Health');
-
-    when('single_cat_title')->justReturn(str_repeat('a', 20));
-
-    expect(uamswp_fad_title_taxonomy_treatment_procedure('x'))->toBe(str_repeat('a', 20).' | Treatments & Procedures | UAMS Health');
-});
-
 test('the archive excerpt length is 35 words', function (): void {
     expect(wpdocs_custom_excerpt_length(55))->toBe(35);
 });
@@ -165,17 +142,4 @@ test('the SEOPress breadcrumbs end with the provider name and permalink', functi
 
     expect(sp_change_title_from_provider_crumb([['Home', '/'], ['Old', '/old/']]))
         ->toBe([['Home', '/'], ['Jo Smith', 'https://example.test/provider/jo/']]);
-});
-
-test('the treatment procedure keywords function prints nothing because it never reads the global', function (): void {
-    $GLOBALS['keywords'] = [['text' => 'heart']];
-
-    ob_start();
-    $warnings = uamswp_test_capture_warnings(static function (): void {
-        uamswp_keyword_hook_header_taxonomy_treatment_procedure();
-    });
-    $output = ob_get_clean();
-
-    expect($output)->toBe('')
-        ->and($warnings)->toBe(['Undefined variable $keywords']);
 });

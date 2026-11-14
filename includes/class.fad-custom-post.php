@@ -583,10 +583,6 @@ add_action('init', 'create_academic_title_taxonomy', 0);
 
 add_action('init', 'create_location_type_taxonomy', 0);
 
-// Conditions
-
-// add_action( 'init', 'create_clinical_conditions_taxonomy', 0 );
-
 // Departments, Clinical
 
 // add_action( 'init', 'create_departments_taxonomy', 0 );
@@ -599,137 +595,7 @@ add_action('init', 'create_location_type_taxonomy', 0);
 
 // add_action( 'init', 'create_medical_terms_taxonomy', 0 ); // Disabled
 
-// Treatments and Procedures
-
-// add_action( 'init', 'create_clinical_treatments_taxonomy', 0 );
-
 // Taxonomy Functions
-
-// Conditions
-
-function create_clinical_conditions_taxonomy(): void
-{
-
-    $labels = [
-        'name' => 'Conditions',
-        'singular_name' => 'Condition',
-        'search_items' => 'Search Conditions',
-        'all_items' => 'All Conditions',
-        'edit_item' => 'Edit Condition',
-        'update_item' => 'Update Condition',
-        'add_new_item' => 'Add New Condition',
-        'new_item_name' => 'New Condition',
-        'menu_name' => 'Conditions',
-        'view_item' => 'View Condition',
-        'popular_items' => 'Popular Condition',
-        'separate_items_with_commas' => 'Separate conditions with commas',
-        'add_or_remove_items' => 'Add or remove conditions',
-        'choose_from_most_used' => 'Choose from the most used conditions',
-        'not_found' => 'No conditions found',
-        'parent_item' => 'Parent Condition',
-        'parent_item_colon' => 'Parent Condition:',
-        'no_terms' => 'No Conditions',
-        'items_list' => 'Condition list',
-        'items_list_navigation' => 'Condition list navigation',
-    ];
-    $rewrite = [
-        'slug' => 'condition',
-        'with_front' => true,
-        'hierarchical' => true,
-    ];
-    $capabilities = [
-        'manage_terms' => 'manage_options',
-        'edit_terms' => 'manage_options',
-        'delete_terms' => 'manage_options',
-        'assign_terms' => 'edit_physicians',
-    ];
-    $args = [
-        'labels' => $labels,
-        // 'description' => '',
-        'public' => true,
-        // 'publicly_queryable' => '',
-        'hierarchical' => false,
-        'show_ui' => true, // Set as true to add and edit terms in the back end
-        // 'show_in_menu' => '',
-        'show_in_nav_menus' => false,
-        'show_in_rest' => true,
-        'rest_base' => 'condition',
-        // 'rest_namespace' => '',
-        'rest_controller_class' => 'WP_REST_Terms_Controller',
-        'show_tagcloud' => false,
-        // 'show_in_quick_edit' => '',
-        'show_admin_column' => false,
-        'meta_box_cb' => false, // Set as false to hide meta box in the back end
-        // 'meta_box_sanitize_cb' => '',
-        'capabilities' => $capabilities,
-        'rewrite' => $rewrite,
-    ];
-    register_taxonomy('condition', ['provider'], $args);
-
-}
-
-// Treatments and Procedures
-
-function create_clinical_treatments_taxonomy(): void
-{
-
-    $labels = [
-        'name' => 'Treatments and Procedures',
-        'singular_name' => 'Treatments and Procedures',
-        'search_items' => 'Search Treatments and Procedures',
-        'all_items' => 'All Treatments and Procedures',
-        'edit_item' => 'Edit Treatment or Procedure',
-        'update_item' => 'Update Treatment or Procedure',
-        'add_new_item' => 'Add New Treatment or Procedure',
-        'new_item_name' => 'New Treatment or Procedure',
-        'menu_name' => 'Treatments and Procedures',
-        'view_item' => 'View Treatment or Procedure',
-        'popular_items' => 'Popular Treatment or Procedure',
-        'separate_items_with_commas' => 'Separate Treatments or Procedures with commas',
-        'add_or_remove_items' => 'Add or remove Treatment or Procedure',
-        'choose_from_most_used' => 'Choose from the most used Treatments or Procedures',
-        'not_found' => 'No Treatments or Procedures found',
-        'parent_item' => 'Parent Treatment or Procedure',
-        'parent_item_colon' => 'Parent Treatment or Procedure:',
-        'no_terms' => 'No Treatments or Procedures',
-        'items_list' => 'Treatment and Procedure list',
-        'items_list_navigation' => 'Treatment and Procedure list navigation',
-    ];
-    $rewrite = [
-        'slug' => 'treatment',
-        'with_front' => true,
-        'hierarchical' => true,
-    ];
-    $capabilities = [
-        'manage_terms' => 'manage_options',
-        'edit_terms' => 'manage_options',
-        'delete_terms' => 'manage_options',
-        'assign_terms' => 'edit_physicians',
-    ];
-    $args = [
-        'labels' => $labels,
-        // 'description' => '',
-        'public' => true,
-        // 'publicly_queryable' => '',
-        'hierarchical' => false,
-        'show_ui' => true, // Set as true to add and edit terms in the back end
-        // 'show_in_menu' => '',
-        'show_in_nav_menus' => false,
-        'show_in_rest' => true,
-        'rest_base' => 'treatment',
-        // 'rest_namespace' => '',
-        'rest_controller_class' => 'WP_REST_Terms_Controller',
-        'show_tagcloud' => false,
-        // 'show_in_quick_edit' => '',
-        'show_admin_column' => false,
-        'meta_box_cb' => false, // Set as false to hide meta box in the back end
-        // 'meta_box_sanitize_cb' => '',
-        'capabilities' => $capabilities,
-        'rewrite' => $rewrite,
-    ];
-    register_taxonomy('treatment', ['provider'], $args);
-
-}
 
 // Medical Specialties
 

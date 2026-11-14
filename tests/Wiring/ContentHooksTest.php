@@ -70,12 +70,6 @@ final class ContentHooksTest extends UnitTestCase
             $this->assertSame(0, has_action('init', $callback), $callback);
         }
 
-        // Keep callable legacy taxonomies unregistered, as they are today.
-        foreach (['create_clinical_conditions_taxonomy', 'create_clinical_treatments_taxonomy'] as $callback) {
-            $this->assertTrue(\function_exists($callback), $callback);
-            $this->assertFalse(has_action('init', $callback), $callback);
-        }
-
         // Preserve creation before stored-role repair and the other lifecycle hooks.
         $this->assertSame(1, has_action('init', 'uamswp_fad_sync_doc_role_caps'));
         $this->assertSame(10, has_action('admin_init', 'add_theme_caps'));

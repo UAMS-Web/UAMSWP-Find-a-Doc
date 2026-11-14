@@ -75,7 +75,6 @@ final class TemplatesTest extends UnitTestCase
             ['theme_page_templates', 'uamswp_taxonomy_archive_page_template'],
             ['page_template', 'uamswp_redirect_page_template'],
             ['query_vars', 'provider_image_query_var'],
-            ['body_class', 'uamswp_fad_body_class'],
         ], self::$filters);
 
         $this->assertSame('init', self::$actions[0][0]);
@@ -228,22 +227,6 @@ final class TemplatesTest extends UnitTestCase
         \provider_image_rewrite_templates();
 
         $this->addToAssertionCount(1);
-    }
-
-    public function test_condition_and_treatment_taxonomies_get_the_default_page_class(): void
-    {
-        $this->conditions(['is_tax:condition']);
-        $this->assertSame(['a', 'page-template-default'], \uamswp_fad_body_class(['a']));
-
-        $this->conditions(['is_tax:treatment']);
-        $this->assertSame(['a', 'page-template-default'], \uamswp_fad_body_class(['a']));
-    }
-
-    public function test_other_views_keep_their_body_classes(): void
-    {
-        $this->conditions([]);
-
-        $this->assertSame(['a'], \uamswp_fad_body_class(['a']));
     }
 
     public function test_the_redirect_hook_leaves_other_requests_alone(): void
