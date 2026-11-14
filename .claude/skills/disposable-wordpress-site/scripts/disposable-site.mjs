@@ -5,8 +5,12 @@
 //
 // The site is WordPress Playground (`@wp-playground/cli`, run through `npx`), which needs Node and
 // no Docker. Playground keeps its WordPress files in a directory it creates under the operating
-// system's temporary directory and removes that directory when it is stopped, so the site is never
-// inside any `wp-content/plugins` of a working site and a working site is never read or written.
+// system's temporary directory, so the site is never inside any `wp-content/plugins` of a working
+// site and a working site is never read or written. Playground removes that directory itself when
+// it is stopped with SIGTERM (macOS, measured). On Windows the stop is `taskkill /t /f`, which
+// does not let it (measured: 182 MB left in %TEMP%), so the script removes the one directory its
+// own run created, by the exact path Playground printed (`--verbosity debug` prints it), after
+// checking the path is a direct child of the temporary directory with Playground's name prefix.
 // The plugin checkout is mounted into it at `/wordpress/wp-content/plugins/<slug>`; the checkout
 // itself is the only host path the site can see.
 //
@@ -23,14 +27,17 @@
 // failed or the site did not come up; 2 bad usage or an unsafe plugin path; 3 the site could not
 // be removed (the port is still listening).
 //
-// Measured on macOS 26.6.2 (arm64), Node v26.12.1, `@wp-playground/cli@3.1.64`. Windows has not
-// been measured: the process-tree stop below uses `taskkill` there and is untested.
+// Measured with `@wp-playground/cli@3.1.64` and a one-file probe plugin (one AJAX action
+// open to visitors who are not logged in): macOS 26.6.2 (arm64), Node v26.12.1, exit 0 with HTTP 200, no `disposable-site-*` or
+// `node-playground-cli-site-*` directory left; Windows 11, Node v22.22.3, exit 0 with HTTP 200 and no
+// such directory left after the exact-path removal (UAMS-Web/uams-claude-skills#654). Not measured:
+// Node 24, a forced failed start on Windows, and a real plugin checkout.
 
 import { spawn, spawnSync } from 'node:child_process';
-import { existsSync, mkdtempSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, readdirSync, realpathSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { createServer } from 'node:net';
 import { tmpdir } from 'node:os';
-import { basename, join, resolve, sep } from 'node:path';
+import { basename, dirname, join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 export const PLAYGROUND_VERSION = '3.1.64';
@@ -75,6 +82,8 @@ export function buildNpxArgs({ port, blueprint, plugin, slug }) {
     '--yes',
     `@wp-playground/cli@${PLAYGROUND_VERSION}`,
     'server',
+    '--verbosity',
+    'debug',
     '--port',
     String(port),
     '--blueprint',
@@ -227,6 +236,34 @@ function killTree(child) {
   }
 }
 
+const SITE_PREFIX = 'node-playground-cli-site-';
+
+/**
+ * The exact site directory Playground created for a run, read from its debug output
+ * (`Mount before WP install: /wordpress -> <dir>/wordpress`), or null. The directory is returned
+ * only when it is a direct child of the temporary directory `tmp` and carries Playground's name
+ * prefix, so no other path can be named by what the process printed.
+ */
+export function findSiteDir(output, tmp) {
+  const match = /Mount before WP install: \/wordpress -> (.+)$/m.exec(output.replace(/\r/g, ''));
+
+  if (match === null) {
+    return null;
+  }
+
+  const dir = dirname(match[1].trim());
+
+  if (!basename(dir).startsWith(SITE_PREFIX)) {
+    return null;
+  }
+
+  try {
+    return realpathSync.native(dirname(dir)) === realpathSync.native(tmp) ? dir : null;
+  } catch {
+    return null;
+  }
+}
+
 /** Remove the scratch directory (the blueprint). Runs on every path out of `run`, failed starts included. */
 export function removeScratch(dir, log = console.log) {
   try {
@@ -362,6 +399,12 @@ export async function run(argv, log = console.log) {
   } finally {
     await stop();
     removeScratch(scratch, log);
+
+    const siteDir = findSiteDir(output, tmpdir());
+
+    if (siteDir !== null && existsSync(siteDir)) {
+      removeScratch(siteDir, log);
+    }
   }
 
   const stillUp = await listening(port);
