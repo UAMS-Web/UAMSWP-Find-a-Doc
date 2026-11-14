@@ -51,6 +51,9 @@ jobs:
       linux-only: true
       mutate: false
       mutate-ignore: true
+      # The check scans only these directories, where the `@pest-mutate-ignore` annotations are. Without the input it
+      # scans whichever of `app`, `src` and `tests` exist, which here is `tests`, and audits none of them.
+      mutate-ignore-paths: includes templates admin
       global-test-symbols: false
       pest-command: composer test:unit
       floor-lint: true
