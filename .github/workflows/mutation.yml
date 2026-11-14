@@ -4,9 +4,9 @@ name: Mutation
 # next to its Windows one. Start it from the Actions tab (or `gh workflow run mutation.yml`) with the
 # first-party file to mutate and the test files that cover it.
 #
-# This workflow is not part of the `CI` aggregate and no ruleset requires it. The required form, run on
-# every pull request through the shared chain, is its own ticket (UAMS-Web/UAMSWP-Find-a-Doc#1171) and
-# waits for coverage to be complete.
+# This workflow is not part of the `CI` aggregate and no ruleset requires it. The required form, `composer mutate`
+# on the changed files of every pull request, runs through the shared chain in `ci.yml`; this one stays for a
+# single file scored against named test files.
 #
 # The run prints the plain test run first and the mutation run after it, with the duration of each, so a
 # mutation phase that did not execute its child processes shows as a score of 100% with a duration far
