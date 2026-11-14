@@ -46,10 +46,14 @@ jobs:
   checks:
     # Pinned to a release tag, never a branch or a commit, so a change to the chain reaches this plugin
     # only when the pin moves.
-    uses: UAMS-Web/uams-ci-workflows/.github/workflows/ci.yml@v0.10.1
+    uses: UAMS-Web/uams-ci-workflows/.github/workflows/ci.yml@v0.11.0
     with:
       linux-only: true
       mutate: false
+      mutate-ignore: true
+      # The check scans only these directories, where the `@pest-mutate-ignore` annotations are. Without the input it
+      # scans whichever of `app`, `src` and `tests` exist, which here is `tests`, and audits none of them.
+      mutate-ignore-paths: includes templates admin
       global-test-symbols: false
       pest-command: composer test:unit
       floor-lint: true
