@@ -7,8 +7,9 @@ name: CI
 # `checks` job, so this plugin does not carry a copy that drifts. The call runs the Composer,
 # synced-files, emoji, aggregate-needs, Pint, Rector and PHPStan jobs, the unit suite as
 # `composer test:unit`, the mutation job and the PHP 8.2 floor lint. It runs on Linux only. A pull
-# request and a push mutate the first-party PHP files they change (`mutate-paths`); a manual run
-# mutates everything `composer mutate` covers. `download-archive` is off in the call
+# request and a push mutate the first-party PHP files they change (`mutate-paths`); a manual run and
+# the weekly schedule mutate everything `composer mutate` covers, under the chain's default full-run
+# timeout. `download-archive` is off in the call
 # because this repository runs that check from its own `download-archive.yml`. `phpcs` stays off:
 # this plugin has no PHPCS configuration. The chain's own header lists every input and default.
 #
@@ -33,6 +34,10 @@ on:
     branches: [master]
   # Lets the workflow be run on demand against a branch.
   workflow_dispatch:
+  # The full mutation pass, weekly: it catches decay that no pull request touches. A schedule runs only on the
+  # default branch, at 07:00 UTC on Mondays (early Monday morning Central).
+  schedule:
+    - cron: '0 7 * * 1'
 
 # A new push to a pull request cancels that pull request's stale run.
 concurrency:
