@@ -103,3 +103,12 @@ Every entry heading is `## YYYY-MM-DD`, a space, and a short title. Leave exactl
 **Rejected.** A per-file map of source files to covering tests (the option the 2026-11-13 decision rejected): it needs upkeep that the whole-suite form does not. Holding the job off: it leaves pull requests ungated by mutation.
 
 **Companion.** [UAMS-Web/UAMSWP-Find-a-Doc#1171](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1171).
+## 2026-11-14 Ship the interim `location` preview fix now and remove it at retirement (#1064)
+
+**Decision.** `location` is added to `uamswp_fad_preview_saved_post_types()` now (#1391), so a Draft location previews with its saved fields until ACF Custom Database Tables (CDT) is retired. The filter and the list are removed in #1069, not kept.
+
+**Why.** A Draft location previewed with `preview=true` renders empty for the same reason a Draft provider did (#1001), because `location` stores its values in a custom table (#1046). Kept after retirement, the filter would hand back the saved post's ID for every revision of a listed post type and undo ACF's own swap, so an unsaved edit would never show in a preview. That is read from `includes/class.fad-provider-preview.php`, not measured; #1069 records the check.
+
+**Rejected.** Leaving `location` previews empty until the cutover: editors would work around it by editing the URL for an unknown time, since the cutover has no date. Shipping the fix and keeping the filter as a harmless no-op: it is not one.
+
+**Companion.** [UAMS-Web/UAMSWP-Find-a-Doc#1064](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1064) (its `## Decision` section); the fix in [UAMS-Web/UAMSWP-Find-a-Doc#1391](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1391) and its removal in [UAMS-Web/UAMSWP-Find-a-Doc#1069](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1069).
