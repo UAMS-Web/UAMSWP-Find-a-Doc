@@ -139,7 +139,7 @@ function uamswp_fad_preselect_appointments_for_new_location($field)
     // A stored No is the string "0", which empty() reads as no value, so compare the value strictly.
     $value = $field['value'] ?? null;
 
-    if ($value !== null && $value !== '' && $value !== false) {
+    if (! in_array($value, [null, '', false], true)) {
         return $field;
     }
 
