@@ -307,29 +307,3 @@ function sp_change_title_from_provider_crumb($crumbs) // SEOPress
 
     return $crumbs;
 }
-
-/**
- * Print the meta keywords tag for the treatment procedure taxonomy template.
- *
- * Kept as it was: the function never reads the `$keywords` global, so it prints nothing (#1266).
- */
-function uamswp_keyword_hook_header_taxonomy_treatment_procedure(): void
-{
-    $keyword_text = '';
-    // @phpstan-ignore variable.undefined (kept as it was; the function never reads the $keywords global, see #1266)
-    if ($keywords) {
-        $i = 1;
-        // @phpstan-ignore variable.undefined, foreach.nonIterable (same: $keywords is never set in this function, see #1266)
-        foreach ($keywords as $keyword) {
-            if ($i > 1) {
-                $keyword_text .= ', ';
-            }
-
-            // @phpstan-ignore offsetAccess.nonOffsetAccessible, argument.type (same: $keyword comes from the never-set $keywords, see #1266)
-            $keyword_text .= str_replace(',', '', $keyword['text']);
-            $i++;
-        }
-
-        echo '<meta name="keywords" content="'.$keyword_text.'" />';
-    }
-}

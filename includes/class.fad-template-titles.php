@@ -295,37 +295,3 @@ function uamswp_fad_title_single_treatment($html, $context = null): string
 
     return $meta_title_base;
 }
-
-/**
- * The page title for the taxonomy-condition template.
- *
- * @param  string  $html  The title the theme built; replaced.
- */
-function uamswp_fad_title_taxonomy_condition($html): string
-{
-    // global $condition_title;
-    // you can add here all your conditions as if is_page(), is_category() etc..
-    // @phpstan-ignore argument.type (single_cat_title() is declared string|null; with display off it returns the title)
-    if (strlen(single_cat_title('', false)) < 34) {
-        return single_cat_title('', false).' | Conditions | '.get_bloginfo('name');
-    }
-
-    return single_cat_title('', false).' | '.get_bloginfo('name');
-}
-
-/**
- * The page title for the taxonomy-treatment_procedure template.
- *
- * @param  string  $html  The title the theme built; replaced.
- */
-function uamswp_fad_title_taxonomy_treatment_procedure($html): string
-{
-    // global $treatment_title;
-    // you can add here all your conditions as if is_page(), is_category() etc..
-    // @phpstan-ignore argument.type (single_cat_title() is declared string|null; with display off it returns the title)
-    if (strlen(single_cat_title('', false)) < 21) {
-        return single_cat_title('', false).' | Treatments & Procedures | '.get_bloginfo('name');
-    }
-
-    return single_cat_title('', false).' | '.get_bloginfo('name');
-}

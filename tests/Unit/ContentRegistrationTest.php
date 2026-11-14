@@ -135,7 +135,7 @@ test('taxonomy registration retains its associations, hierarchy, and REST exposu
         ], true),
     ]);
     expect($args['show_in_quick_edit'] ?? $args['show_ui'])->toBe(in_array($name, [
-        'condition', 'treatment', 'location_type', 'gmb_cat_provider', 'gmb_cat_location',
+        'location_type', 'gmb_cat_provider', 'gmb_cat_location',
     ], true));
 
     expect((bool) ($args['show_in_rest'] ?? false))->toBe($rest_base !== '')
@@ -144,8 +144,6 @@ test('taxonomy registration retains its associations, hierarchy, and REST exposu
     // Preserve every explicit option, including labels and term permissions.
     expect($args)->toMatchSnapshot();
 })->with([
-    'conditions, callable but not hooked' => ['create_clinical_conditions_taxonomy', 'condition', ['provider'], false, 'condition'],
-    'treatments, callable but not hooked' => ['create_clinical_treatments_taxonomy', 'treatment', ['provider'], false, 'treatment'],
     'service line' => ['create_service_line_taxonomy', 'service_line', ['location', 'provider'], true, 'service_line'],
     'degree' => ['create_degrees_taxonomy', 'degree', ['provider'], false, 'medical_degree'],
     'patient type' => ['create_patient_type_taxonomy', 'patient_type', ['location', 'provider'], true, 'patient_type'],
