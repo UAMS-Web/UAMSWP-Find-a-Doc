@@ -64,6 +64,92 @@ test('a portal that already has a value is left alone', function (): void {
     expect(set_default_portal($field))->toBe($field);
 });
 
+/**
+ * Stub get_post() with a post of the given type and status, or none.
+ */
+function acf_filters_current_post(?string $type, ?string $status): void
+{
+    when('get_post')->justReturn($type === null ? null : (object) ['post_type' => $type, 'post_status' => $status]);
+}
+
+test('a new location pre-selects Yes for the appointments question when no value is set', function (mixed $empty): void {
+    uamswp_test_acf_functions();
+    acf_filters_current_post('location', 'auto-draft');
+
+    expect(uamswp_fad_preselect_appointments_for_new_location(['key' => 'field_location_appointments_query', 'value' => $empty])['value'])->toBe('1');
+})->with([
+    'null' => [null],
+    'empty string' => [''],
+    'false' => [false],
+]);
+
+test('a new location pre-selects Yes when the field carries no value key', function (): void {
+    uamswp_test_acf_functions();
+    acf_filters_current_post('location', 'auto-draft');
+
+    expect(uamswp_fad_preselect_appointments_for_new_location(['key' => 'field_location_appointments_query']))
+        ->toBe(['key' => 'field_location_appointments_query', 'value' => '1']);
+});
+
+test('an existing location with no stored appointments value is left unselected', function (string $status): void {
+    uamswp_test_acf_functions();
+    acf_filters_current_post('location', $status);
+
+    $field = ['key' => 'field_location_appointments_query', 'value' => ''];
+
+    expect(uamswp_fad_preselect_appointments_for_new_location($field))->toBe($field);
+})->with([
+    'published' => ['publish'],
+    'draft' => ['draft'],
+    'pending' => ['pending'],
+]);
+
+test('a stored appointments answer is kept on a new location', function (mixed $stored): void {
+    uamswp_test_acf_functions();
+    acf_filters_current_post('location', 'auto-draft');
+
+    $field = ['key' => 'field_location_appointments_query', 'value' => $stored];
+
+    expect(uamswp_fad_preselect_appointments_for_new_location($field))->toBe($field);
+})->with([
+    'No' => ['0'],
+    'Yes' => ['1'],
+]);
+
+test('a location saved as No is left as No', function (): void {
+    uamswp_test_acf_functions();
+    acf_filters_current_post('location', 'publish');
+
+    $field = ['key' => 'field_location_appointments_query', 'value' => '0'];
+
+    expect(uamswp_fad_preselect_appointments_for_new_location($field))->toBe($field);
+});
+
+test('the appointments pre-selection is only for the location post type', function (): void {
+    uamswp_test_acf_functions();
+    acf_filters_current_post('provider', 'auto-draft');
+
+    $field = ['key' => 'field_location_appointments_query', 'value' => ''];
+
+    expect(uamswp_fad_preselect_appointments_for_new_location($field))->toBe($field);
+});
+
+test('the appointments pre-selection leaves the field alone with no current post or no field', function (): void {
+    uamswp_test_acf_functions();
+    acf_filters_current_post(null, null);
+
+    $field = ['key' => 'field_location_appointments_query', 'value' => ''];
+
+    expect(uamswp_fad_preselect_appointments_for_new_location($field))->toBe($field);
+});
+
+test('a field ACF has already removed is returned as it is, even for a new location', function (): void {
+    uamswp_test_acf_functions();
+    acf_filters_current_post('location', 'auto-draft');
+
+    expect(uamswp_fad_preselect_appointments_for_new_location(false))->toBeFalse();
+});
+
 test('the region default is the central term only when the value is null', function (): void {
     uamswp_test_acf_functions();
     Functions\expect('get_term_by')->once()->with('slug', 'central', 'region')->andReturn((object) ['term_id' => 3]);

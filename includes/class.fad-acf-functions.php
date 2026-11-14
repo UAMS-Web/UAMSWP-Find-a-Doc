@@ -105,6 +105,50 @@ function set_default_portal($field)
 
 }
 
+// Appointments
+
+/**
+ * Pre-select Yes for "Can a patient schedule an appointment for services rendered at this location?" on a new
+ * location only.
+ *
+ * The field's `default_value` stays empty: ACF applies a default on read for a location with no stored value
+ * while ACF Custom Database Tables is active, and on the edit screen of every location with no stored value,
+ * so a default would change what published locations show and what an editor saves unchosen (#1383).
+ * `acf/prepare_field` runs only when the field renders, and a new location is the one with the `auto-draft`
+ * status, so nothing a visitor sees and no existing location is affected.
+ */
+add_filter('acf/prepare_field/key=field_location_appointments_query', 'uamswp_fad_preselect_appointments_for_new_location', 20);
+
+/**
+ * @param  array<string, mixed>|false  $field
+ * @return array<string, mixed>|false
+ */
+function uamswp_fad_preselect_appointments_for_new_location($field)
+{
+
+    if (! is_array($field)) {
+        return $field;
+    }
+
+    $post = get_post();
+
+    if ($post === null || $post->post_type !== 'location' || $post->post_status !== 'auto-draft') {
+        return $field;
+    }
+
+    // A stored No is the string "0", which empty() reads as no value, so compare the value strictly.
+    $value = $field['value'] ?? null;
+
+    if (! in_array($value, [null, '', false], true)) {
+        return $field;
+    }
+
+    $field['value'] = '1';
+
+    return $field;
+
+}
+
 // Language
 
 /**
