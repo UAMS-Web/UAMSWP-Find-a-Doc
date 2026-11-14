@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 // these are UAMSPhysicians settings.
+// Scratch change, never merged: exercises the mutate job on a changed class (#1171).
 
 class UAMSPhysicians_Settings
 {

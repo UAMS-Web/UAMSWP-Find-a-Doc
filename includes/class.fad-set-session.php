@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-// Scratch change, never merged: exercises the mutate job on a changed class (#1171).
-
 session_start();
 defined('ABSPATH') || exit("You can't access this file directly.");
 
