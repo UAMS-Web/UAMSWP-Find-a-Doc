@@ -73,3 +73,13 @@ Every entry heading is `## YYYY-MM-DD`, a space, and a short title. Leave exactl
 **Rejected.** Deleting the two calls: a production deletion that #904's decisions did not authorize. Leaving them as recorded survivors in the closing record: the bar is no unexplained survivors, and the finding explains them.
 
 **Companion.** [UAMS-Web/UAMSWP-Find-a-Doc#904](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/904); [UAMS-Web/UAMSWP-Find-a-Doc#1355](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/pull/1355).
+
+## 2026-11-14 Build no field-group-against-table-JSON check before the custom tables retire (#1133)
+
+**Decision.** No check of the ACF field groups against the table definition files (link 1) is built while ACF Custom Database Tables is on its way out (#1063). The drift (provider 73 columns implied against 53 committed, location 94 against 57) and the missing `acfcdt_manage_table_definition` on `group_uamswp_locations.json` are recorded as accepted. The link 2 check, hook and notice from #814 stay as they are. If the retirement slips far enough that the drift starts to matter, option 1 (a check that runs inside WordPress, as a WP-CLI command and a CI job) is the one to build.
+
+**Why.** The check guards a storage layer that #1063 removes, and the drift has mostly left values readable: on a local install `location_appointments_query` has no column in `wp_uamswp_locations` and still reads correctly from postmeta. Building a WordPress-booting CI job (none runs the Integration suite today) for a layer on its way out costs more than it protects.
+
+**Rejected.** Option 1 now, a check inside WordPress only: always agrees with the plugin, but it needs a new CI job and surfaces drift that has not caused a failure. Option 2, an approximation in the standalone script with a hardcoded type list: it can run in a hook but drifts from the plugin, and a hook that blocks on it would fail on the existing drift from the first commit.
+
+**Companion.** [UAMS-Web/UAMSWP-Find-a-Doc#1133](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1133); the retirement in [UAMS-Web/UAMSWP-Find-a-Doc#1063](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1063).
