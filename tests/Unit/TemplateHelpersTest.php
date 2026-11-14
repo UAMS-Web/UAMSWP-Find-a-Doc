@@ -110,7 +110,7 @@ function template_helper_registrations(): array
     return [
         'uams_default_page_body_class' => [
             'registration' => "add_filter('body_class', 'uams_default_page_body_class');",
-            'templates' => ['archive-condition', 'archive-taxonomy-conditions', 'archive-taxonomy-treatments', 'archive-treatments', 'single-clinical-resource', 'single-condition', 'single-expertise', 'single-treatment'],
+            'templates' => ['archive-condition', 'archive-treatments', 'single-clinical-resource', 'single-condition', 'single-expertise', 'single-treatment'],
         ],
         'sp_titles_desc' => [
             'registration' => "add_filter('seopress_titles_desc', 'sp_titles_desc');",
@@ -123,10 +123,6 @@ function template_helper_registrations(): array
         'title_filter' => [
             'registration' => "add_filter('posts_where', 'title_filter', 10, 2);",
             'templates' => ['archive-condition', 'archive-treatments'],
-        ],
-        'uamswp_terms_clauses' => [
-            'registration' => "add_filter('terms_clauses', 'uamswp_terms_clauses', 10, 3);",
-            'templates' => ['archive-taxonomy-conditions', 'archive-taxonomy-treatments'],
         ],
         'uamswp_keyword_hook_header' => [
             'registration' => "add_action('wp_head', 'uamswp_keyword_hook_header');",
@@ -156,7 +152,7 @@ function template_sources(): array
 }
 
 test('the template sources are found', function (): void {
-    expect(count(template_sources()))->toBeGreaterThan(15);
+    expect(count(template_sources()))->toBeGreaterThan(13);
 });
 
 test('no template declares a shared helper', function (string $function): void {
@@ -248,7 +244,7 @@ test('each template that sets a page title registers its own function at priorit
     }
 
     // The functions take the title alone, so a template registered with one accepted argument matches its function; the rest still pass two.
-    $single_argument = ['archive-condition', 'archive-taxonomy-conditions', 'archive-taxonomy-treatments', 'archive-treatments', 'single-locations'];
+    $single_argument = ['archive-condition', 'archive-treatments', 'single-locations'];
     $expected = [];
 
     foreach (array_keys($registrations) as $name) {
@@ -256,7 +252,7 @@ test('each template that sets a page title registers its own function at priorit
     }
 
     expect($registrations)->toBe($expected)
-        ->and(array_keys($registrations))->toBe(['archive-condition', 'archive-taxonomy-conditions', 'archive-taxonomy-treatments', 'archive-treatments', 'single-clinical-resource', 'single-condition', 'single-expertise', 'single-locations', 'single-physicians', 'single-treatment']);
+        ->and(array_keys($registrations))->toBe(['archive-condition', 'archive-treatments', 'single-clinical-resource', 'single-condition', 'single-expertise', 'single-locations', 'single-physicians', 'single-treatment']);
 });
 
 test('each listing template shows its images with a function named for the template', function (string $template): void {

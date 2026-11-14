@@ -140,12 +140,10 @@ final class TemplatesTest extends UnitTestCase
         $this->assertStringEndsWith('/'.basename(dirname(__DIR__, 2)).'/templates/single-physicians.php', \uamswp_force_template(null));
     }
 
-    public function test_the_page_template_list_gains_three_entries(): void
+    public function test_the_page_template_list_gains_one_entry(): void
     {
         $this->assertSame([
             'existing.php' => 'Existing',
-            'archive-taxonomy-conditions.php' => 'Conditions Archive',
-            'archive-taxonomy-treatments.php' => 'Treatments Archive',
             'provider-image.php' => 'Provider Image',
         ], \uamswp_taxonomy_archive_page_template(['existing.php' => 'Existing']));
     }
@@ -156,8 +154,6 @@ final class TemplatesTest extends UnitTestCase
     public static function page_templates(): array
     {
         return [
-            'conditions archive' => ['archive-taxonomy-conditions.php', 'archive-taxonomy-conditions.php'],
-            'treatments archive' => ['archive-taxonomy-treatments.php', 'archive-taxonomy-treatments.php'],
             'provider image' => ['provider-image.php', 'provider-image.php'],
             'a theme folder path' => ['templates/provider-image.php', 'provider-image.php'],
             'another template' => ['page.php', null],
