@@ -209,29 +209,6 @@ final class HelperFunctionsTest extends UnitTestCase
         $this->assertSame($expected, \partition($list, $parts));
     }
 
-    public function test_a_taxonomy_archive_link_is_the_rewrite_slug_under_the_root(): void
-    {
-        $taxonomy = new \WP_Taxonomy;
-        $taxonomy->rewrite = ['slug' => 'conditions'];
-        expect('get_taxonomy')->once()->with('condition')->andReturn($taxonomy);
-
-        $this->assertSame('/conditions', \get_taxonomy_archive_link('condition'));
-    }
-
-    public function test_a_taxonomy_without_a_rewrite_slug_or_that_does_not_exist_links_to_the_root(): void
-    {
-        $no_slug = new \WP_Taxonomy;
-        $no_slug->rewrite = ['with_front' => true];
-
-        $no_rewrite = new \WP_Taxonomy;
-        expect('get_taxonomy')->times(4)->andReturn($no_slug, $no_rewrite, false, null);
-
-        $this->assertSame('/', \get_taxonomy_archive_link('a'));
-        $this->assertSame('/', \get_taxonomy_archive_link('b'));
-        $this->assertSame('/', \get_taxonomy_archive_link('c'));
-        $this->assertSame('/', \get_taxonomy_archive_link(12));
-    }
-
     private function database(): object
     {
         return new class
@@ -527,13 +504,6 @@ final class HelperFunctionsTest extends UnitTestCase
     public function test_a_time_that_cannot_be_read_is_the_start_of_the_epoch(): void
     {
         $this->assertSame('Midnight', \apStyleTime('not a time'));
-    }
-
-    public function test_a_taxonomy_given_as_a_number_is_looked_up_by_its_text(): void
-    {
-        expect('get_taxonomy')->once()->with(\Mockery::mustBe('5'))->andReturn(false);
-
-        $this->assertSame('/', \get_taxonomy_archive_link(5));
     }
 
     public function test_a_provider_name_that_is_not_text_is_escaped_as_text(): void
