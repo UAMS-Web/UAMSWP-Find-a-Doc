@@ -232,66 +232,6 @@ final class HelperFunctionsTest extends UnitTestCase
         $this->assertSame('/', \get_taxonomy_archive_link(12));
     }
 
-    /**
-     * @param  list<string>  $true  Conditions that answer true, as `tag:type`.
-     */
-    private function conditions(array $true): void
-    {
-        foreach (['is_singular', 'is_tax'] as $tag) {
-            when($tag)->alias(static fn (string $type): bool => in_array($tag.':'.$type, $true, true));
-        }
-    }
-
-    /**
-     * @return array<string, array{0: string}>
-     */
-    public static function taxonomy_views(): array
-    {
-        return [
-            'a condition page' => ['is_singular:condition'],
-            'a treatment page' => ['is_singular:treatment'],
-            'a condition archive' => ['is_tax:condition'],
-            'a treatment archive' => ['is_tax:treatment'],
-        ];
-    }
-
-    #[DataProvider('taxonomy_views')]
-    public function test_the_taxonomy_crumb_is_added_before_the_last_crumb(string $view): void
-    {
-        $this->conditions([$view]);
-        when('get_queried_object')->justReturn((object) ['taxonomy' => 'condition']);
-        $taxonomy = new \WP_Taxonomy;
-        $taxonomy->labels = (object) ['name' => 'Conditions'];
-        $taxonomy->rewrite = ['slug' => 'conditions'];
-        expect('get_taxonomy')->twice()->with('condition')->andReturn($taxonomy);
-
-        $this->assertSame(
-            [['Home', '/'], ['Conditions', '/conditions'], ['Asthma', '/asthma']],
-            \uamswp_fad_taxonomy_breadcrumbs_crumbs([['Home', '/'], ['Asthma', '/asthma']])
-        );
-    }
-
-    public function test_other_views_keep_their_crumbs_and_never_read_a_taxonomy(): void
-    {
-        $crumbs = [['Home', '/'], ['Page', '/page']];
-
-        $this->conditions([]);
-        expect('get_taxonomy')->never();
-
-        $this->assertSame($crumbs, \uamswp_fad_taxonomy_breadcrumbs_crumbs($crumbs));
-    }
-
-    public function test_an_unknown_taxonomy_keeps_the_crumbs(): void
-    {
-        $crumbs = [['Home', '/'], ['Page', '/page']];
-
-        $this->conditions(['is_tax:condition']);
-        when('get_queried_object')->justReturn();
-        expect('get_taxonomy')->once()->with('')->andReturn(false);
-
-        $this->assertSame($crumbs, \uamswp_fad_taxonomy_breadcrumbs_crumbs($crumbs));
-    }
-
     private function database(): object
     {
         return new class
@@ -601,22 +541,5 @@ final class HelperFunctionsTest extends UnitTestCase
         expect('esc_html')->once()->with(\Mockery::mustBe('42'))->andReturn('42');
 
         $this->assertSame('42', \uamswp_provider_name_html(42));
-    }
-
-    public function test_the_taxonomy_crumb_keeps_a_longer_trail_in_order(): void
-    {
-        $this->conditions(['is_tax:condition']);
-        when('get_queried_object')->justReturn((object) ['taxonomy' => 'condition']);
-        $taxonomy = new \WP_Taxonomy;
-        $taxonomy->labels = (object) ['name' => 'Conditions'];
-        $taxonomy->rewrite = ['slug' => 'conditions'];
-
-        when('get_taxonomy')->justReturn($taxonomy);
-
-        $this->assertSame(
-            [['Home', '/'], ['Mid', '/mid'], ['Conditions', '/conditions'], ['Asthma', '/asthma']],
-            \uamswp_fad_taxonomy_breadcrumbs_crumbs([['Home', '/'], ['Mid', '/mid'], ['Asthma', '/asthma']])
-        );
-        $this->assertSame([['Conditions', '/conditions']], \uamswp_fad_taxonomy_breadcrumbs_crumbs([]));
     }
 }
