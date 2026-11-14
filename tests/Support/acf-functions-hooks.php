@@ -13,6 +13,7 @@ return [
     ['filter', 'acf/settings/load_json', 'uamswp_fad_json_load_point', 10, 1],
     ['filter', 'acf/prepare_field/key=field_physician_portal', 'set_default_portal', 20, 1],
     ['filter', 'acf/prepare_field/key=field_location_portal', 'set_default_portal', 20, 1],
+    ['filter', 'acf/prepare_field/key=field_location_appointments_query', 'uamswp_fad_preselect_appointments_for_new_location', 20, 1],
     ['filter', 'acf/load_value/key=field_physician_languages', 'set_default_language', 20, 3],
     ['filter', 'acf/load_value/key=field_location_region', 'set_default_region', 20, 3],
     ['filter', 'acf/fields/taxonomy/wp_list_categories/key=field_location_portal', 'my_taxonomy_query', 10, 2],
