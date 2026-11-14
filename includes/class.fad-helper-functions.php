@@ -332,22 +332,6 @@ if (! function_exists('partition')) {
 //     return $crumb;
 //   }
 // add_filter( 'genesis_cpt_crumb', 'uamswp_cpt_breadcrumb', 10, 2 );
-/**
- * Pass in a taxonomy value that is supported by WP's `get_taxonomy`
- * and you will get back the url to the archive view.
- *
- * @param  string|int  $taxonomy
- */
-function get_taxonomy_archive_link($taxonomy): string
-{
-    $tax = get_taxonomy((string) $taxonomy);
-    // Without a taxonomy the rewrite is not an array either way, so true and false give the same link.
-    // @pest-mutate-ignore: FalseToTrue
-    $rewrite = $tax instanceof WP_Taxonomy ? $tax->rewrite : false;
-
-    return '/'.(is_array($rewrite) ? uamswp_fad_str(($rewrite['slug'] ?? '')) : '');
-}
-
 // Query custom table values
 /**
  * @param  string  $table_name
