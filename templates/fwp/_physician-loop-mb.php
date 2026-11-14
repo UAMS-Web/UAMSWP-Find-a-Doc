@@ -51,7 +51,7 @@
 	                if ($npi) {
 	                    $pg_rating_request = get_post_meta(uamswp_fad_int(get_the_ID()), '_syndicated_api_data', true); // wp_pg_cached_api( $npi, 0 );
 	                    /** @var object{data: object{entities: list<object{totalRatingCount: int, totalCommentCount: int, overallRating: object{value: float|int|string}}>}}|null $pg_rating_data */
-	                    $pg_rating_data = json_decode(uamswp_fad_str($pg_rating_request));
+	                    $pg_rating_data = uamswp_fad_pg_payload($pg_rating_request);
 	                    if (is_object($pg_rating_data)) {
 	                        $pg_rating_valid = (($pg_rating_data->data->entities[0]->totalRatingCount) >= 30);
 	                    }

@@ -17,6 +17,7 @@ require_once __DIR__.'/../Support/acf-functions.php';
  *
  * @param  array<string, mixed>  $fields  Field values by name, for ACF and Meta Box alike.
  * @param  array<string, mixed>  $options  `terms` (`taxonomy:id` => name), `rating` (the syndicated rating data as JSON),
+ *                                         `rating_array` (store it as an array, as the sync does),
  *                                         `thumbnail` (whether the post has a featured image), `published` (the ids of
  *                                         the published locations; all others are drafts).
  */
@@ -39,7 +40,8 @@ function physician_loops_world(array $fields, array $options = []): void
     when('the_post_thumbnail')->alias(static function (string $size): void {
         echo '[thumbnail '.$size.']';
     });
-    when('get_post_meta')->alias(static fn (mixed $id, string $key): mixed => isset($options['rating']) ? ($options['rating_object'] ?? false ? json_decode($options['rating']) : $options['rating']) : '');
+    when('get_post_meta')->alias(static fn (mixed $id, string $key): mixed => isset($options['rating']) ? ($options['rating_array'] ?? false ? json_decode($options['rating'], true) : ($options['rating_object'] ?? false ? json_decode($options['rating']) : $options['rating'])) : '');
+    when('wp_json_encode')->alias(static fn (mixed $value): string|false => json_encode($value));
     when('wp_trim_words')->alias(static fn (mixed $text, int $words, string $more): string => 'TRIMMED('.$text.')'.$more);
     when('esc_url')->returnArg();
     when('__')->returnArg();
@@ -151,6 +153,15 @@ test('the provider loop prints the rating for a provider with at least 30 rating
     $output = physician_loop([5], ['physician_npi' => '123'], ['rating' => $rating]);
 
     expect($output)->toContain('<div class="rating"><div class="star-ratings-sprite" title="4.5 out of 5"><div class="star-ratings-sprite-percentage" style="width: 90%;"></div></div><div class="ratings-count">30 Ratings</div></div>')
+        ->and($output)->not->toContain('Patient ratings are not available');
+});
+
+test('the provider loop prints the rating when the sync stored the payload as an array', function (): void {
+    $rating = (string) json_encode(['data' => ['entities' => [['totalRatingCount' => 30, 'totalCommentCount' => 12, 'overallRating' => ['value' => 4.5]]]]]);
+
+    $output = physician_loop([5], ['physician_npi' => '123'], ['rating' => $rating, 'rating_array' => true]);
+
+    expect($output)->toContain('<div class="ratings-count">30 Ratings</div>')
         ->and($output)->not->toContain('Patient ratings are not available');
 });
 
@@ -294,6 +305,17 @@ test('the Meta Box provider loop prints the rating for a provider with at least 
 
     expect($output)->toContain('<div class="text-center"><div class="ds-title">Patient Rating</div><div><span class="ds-stars ds-stars4.5"></span></div><div class="ds-xofy"><span class="ds-average">4.5</span><span class="ds-average-max">out of 5</span></div><div class="ds-ratings"><span class="ds-ratingcount">30</span> Ratings</div><div class="ds-comments"><span class="ds-commentcount">12</span> Comments</div></div>');
 });
+
+test('the Meta Box provider loop prints the rating when the payload is stored as an array or as an object', function (array $options): void {
+    $rating = (string) json_encode(['data' => ['entities' => [['totalRatingCount' => 30, 'totalCommentCount' => 12, 'overallRating' => ['value' => 4.5]]]]]);
+
+    $output = physician_loop_mb([5], ['physician_npi' => '123'], [], ['rating' => $rating] + $options);
+
+    expect($output)->toContain('<span class="ds-ratingcount">30</span> Ratings');
+})->with([
+    'an array' => [['rating_array' => true]],
+    'an object' => [['rating_object' => true]],
+]);
 
 test('the Meta Box provider loop says there are no reviews for fewer than 30 ratings or no data', function (): void {
     $few = (string) json_encode(['data' => ['entities' => [['totalRatingCount' => 29, 'totalCommentCount' => 1, 'overallRating' => ['value' => 4.5]]]]]);

@@ -1212,6 +1212,35 @@ function uamswp_fad_object_str(mixed $value, string $property): string
 }
 
 /**
+ * A stored Press Ganey review payload, as the object the provider templates read.
+ *
+ * The sync stores the decoded response as an array, and an earlier version stored an object or
+ * the JSON text. An object comes back as it is, an array or the JSON text of an object is
+ * converted to an object (lists stay arrays), and anything else, including an empty value,
+ * gives null.
+ */
+function uamswp_fad_pg_payload(mixed $stored): ?object
+{
+    if (is_object($stored)) {
+        return $stored;
+    }
+
+    if (is_string($stored)) {
+        $stored = json_decode($stored);
+
+        return is_object($stored) ? $stored : null;
+    }
+
+    if (is_array($stored) && $stored !== []) {
+        $decoded = json_decode((string) wp_json_encode($stored));
+
+        return is_object($decoded) ? $decoded : null;
+    }
+
+    return null;
+}
+
+/**
  * A value read from post meta, an ACF field, a request or an option, as an array.
  *
  * An array comes back as it is; anything else gives an empty array.

@@ -673,8 +673,8 @@ while (have_posts()) {
     // if ( $npi ) {
     // $pg_rating_request = get_post_meta( get_the_ID(), '_syndicated_api_data', true ); // wp_pg_cached_api( $npi, 10 );
     // $pg_rating_data = json_decode( $pg_rating_request ); // Remove the redundant decode
-    /** @var object{status: object{code: string}, data: object{entities: list<object{totalRatingCount: int, totalCommentCount: int, overallRating: object{value: float|int, questionRatings: list<object{name: string, responseCount: int, value: float|int}>}, comments: list<object{overallRating: object{value: float|int}, comment: string, mentionTime: string}>}>}}|string $pg_rating_data */
-    $pg_rating_data = get_post_meta(uamswp_fad_int(get_the_ID()), '_syndicated_api_data', true);
+    /** @var object{status: object{code: string}, data: object{entities: list<object{totalRatingCount: int, totalCommentCount: int, overallRating: object{value: float|int, questionRatings: list<object{name: string, responseCount: int, value: float|int}>}, comments: list<object{overallRating: object{value: float|int}, comment: string, mentionTime: string}>}>}}|null $pg_rating_data */
+    $pg_rating_data = uamswp_fad_pg_payload(get_post_meta(uamswp_fad_int(get_the_ID()), '_syndicated_api_data', true));
     if (is_object($pg_rating_data) && ($pg_rating_data->status->code == '200')) {
         $pg_rating_valid = (($pg_rating_data->data->entities[0]->totalRatingCount) >= 30);
         $pg_total_comment_count = $pg_rating_data->data->entities[0]->totalCommentCount;

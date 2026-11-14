@@ -152,8 +152,8 @@
 	            $pg_rating_data = '';
 	            $pg_rating_valid = false;
 	            if ($npi) {
-	                /** @var object{data: object{entities: list<object{totalRatingCount: int, totalCommentCount: int, overallRating: object{value: float|int|string}}>}}|string $pg_rating_data */
-	                $pg_rating_data = get_post_meta(uamswp_fad_int(get_the_ID()), '_syndicated_api_data', true);
+	                /** @var object{data: object{entities: list<object{totalRatingCount: int, totalCommentCount: int, overallRating: object{value: float|int|string}}>}}|null $pg_rating_data */
+	                $pg_rating_data = uamswp_fad_pg_payload(get_post_meta(uamswp_fad_int(get_the_ID()), '_syndicated_api_data', true));
 	                if (is_object($pg_rating_data) && ! empty($pg_rating_data->data->entities[0]->totalRatingCount)) {
 	                    $pg_rating_valid = (($pg_rating_data->data->entities[0]->totalRatingCount) >= 30);
 	                }
