@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace UamswpFindADoc\Tests\Unit;
 
 use Brain\Monkey\Functions;
+use PHPUnit\Framework\Attributes\DataProvider;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
 
 use function Brain\Monkey\Functions\expect;
@@ -17,7 +18,7 @@ use function Brain\Monkey\Functions\when;
 /**
  * ACF swaps the post ID for the latest revision's ID during a preview, and a revision has no row in the
  * provider custom table (class.fad-acf-functions.php turns off the copy into core post meta). The filter
- * undoes the swap for a provider; see includes/class.fad-provider-preview.php.
+ * undoes the swap for a provider or a location; see includes/class.fad-provider-preview.php.
  */
 final class ProviderPreviewTest extends UnitTestCase
 {
@@ -48,6 +49,36 @@ final class ProviderPreviewTest extends UnitTestCase
         $this->assertSame(89, uamswp_fad_preview_keep_saved_post_id(412, 89));
         $this->assertSame(89, uamswp_fad_preview_keep_saved_post_id('412', 89), 'ACF can hand the ID over as a string');
         $this->assertSame(89, uamswp_fad_preview_keep_saved_post_id(412), 'the original ID is not needed');
+    }
+
+    #[DataProvider('listed_post_types')]
+    public function test_a_listed_post_types_revision_id_becomes_the_saved_posts_id(string $post_type): void
+    {
+        when('wp_is_post_revision')->justReturn(89);
+        when('get_post_type')->justReturn($post_type);
+
+        $this->assertSame(89, uamswp_fad_preview_keep_saved_post_id(412, 89));
+        $this->assertSame(89, uamswp_fad_preview_keep_saved_post_id('412', 89), 'ACF can hand the ID over as a string');
+    }
+
+    /**
+     * @return array<string, array{string}>
+     */
+    public static function listed_post_types(): array
+    {
+        return [
+            'provider' => ['provider'],
+            'location' => ['location'],
+            'area of expertise' => ['expertise'],
+            'condition' => ['condition'],
+            'treatment' => ['treatment'],
+            'clinical resource' => ['clinical-resource'],
+        ];
+    }
+
+    public function test_the_listed_post_types_are_the_custom_post_types_with_revisions(): void
+    {
+        $this->assertSame(['provider', 'location', 'expertise', 'condition', 'treatment', 'clinical-resource'], uamswp_fad_preview_saved_post_types());
     }
 
     public function test_the_previewed_post_is_named_by_preview_id_then_p_then_page_id(): void
