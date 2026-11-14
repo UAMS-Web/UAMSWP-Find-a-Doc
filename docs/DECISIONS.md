@@ -103,6 +103,7 @@ Every entry heading is `## YYYY-MM-DD`, a space, and a short title. Leave exactl
 **Rejected.** A per-file map of source files to covering tests (the option the 2026-11-13 decision rejected): it needs upkeep that the whole-suite form does not. Holding the job off: it leaves pull requests ungated by mutation.
 
 **Companion.** [UAMS-Web/UAMSWP-Find-a-Doc#1171](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1171).
+
 ## 2026-11-14 Ship the interim `location` preview fix now and remove it at retirement (#1064)
 
 **Decision.** `location` is added to `uamswp_fad_preview_saved_post_types()` now (#1391), so a Draft location previews with its saved fields until ACF Custom Database Tables (CDT) is retired. The filter and the list are removed in #1069, not kept.
