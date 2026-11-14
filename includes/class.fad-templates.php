@@ -80,8 +80,6 @@ add_filter('template_include', 'uamswp_force_template');
  */
 function uamswp_taxonomy_archive_page_template($templates)
 {
-    $templates['archive-taxonomy-conditions.php'] = 'Conditions Archive';
-    $templates['archive-taxonomy-treatments.php'] = 'Treatments Archive';
     $templates['provider-image.php'] = 'Provider Image';
 
     // $templates['doximity-list.php'] = 'Doximity List';
@@ -99,14 +97,6 @@ function uamswp_redirect_page_template($template)
 {
     $post = get_post();
     $page_template = get_post_meta($post->ID ?? 0, '_wp_page_template', true);
-    if (basename(uamswp_fad_str($page_template)) === 'archive-taxonomy-conditions.php') {
-        $template = uamswp_fad_plugin_template('archive-taxonomy-conditions.php');
-    }
-
-    if (basename(uamswp_fad_str($page_template)) === 'archive-taxonomy-treatments.php') {
-        $template = uamswp_fad_plugin_template('archive-taxonomy-treatments.php');
-    }
-
     if (basename(uamswp_fad_str($page_template)) === 'provider-image.php') {
         return uamswp_fad_plugin_template('provider-image.php');
     }

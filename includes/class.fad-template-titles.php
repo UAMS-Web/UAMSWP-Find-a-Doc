@@ -78,36 +78,6 @@ function uamswp_fad_title_archive_physicians($html): string
 }
 
 /**
- * The page title for the archive-taxonomy-conditions template.
- *
- * @param  string  $html  The title the theme built; replaced.
- */
-function uamswp_fad_title_archive_taxonomy_conditions($html): string
-{
-    /** @var string $condition_title */
-    global $condition_title;
-    // you can add here all your conditions as if is_page(), is_category() etc..
-    $html = ($condition_title ?: 'Conditions').' | '.get_bloginfo('name');
-
-    return $html;
-}
-
-/**
- * The page title for the archive-taxonomy-treatments template.
- *
- * @param  string  $html  The title the theme built; replaced.
- */
-function uamswp_fad_title_archive_taxonomy_treatments($html): string
-{
-    /** @var string $treatment_title */
-    global $treatment_title;
-    // you can add here all your conditions as if is_page(), is_category() etc..
-    $html = ($treatment_title ?: 'Treatments &amp; Procedures').' | '.get_bloginfo('name');
-
-    return $html;
-}
-
-/**
  * The page title for the archive-treatments template.
  *
  * @param  string  $html  The title the theme built; replaced.

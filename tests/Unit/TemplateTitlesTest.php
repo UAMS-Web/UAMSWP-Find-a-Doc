@@ -40,20 +40,6 @@ test('the condition and treatment archive titles use the title the template set'
         ->and(uamswp_fad_title_archive_treatments('x'))->toBe('Treatments A-Z | UAMS Health');
 });
 
-test('the taxonomy archive titles fall back to a label when no title was set', function (): void {
-    $GLOBALS['condition_title'] = '';
-    $GLOBALS['treatment_title'] = '';
-
-    expect(uamswp_fad_title_archive_taxonomy_conditions('x'))->toBe('Conditions | UAMS Health')
-        ->and(uamswp_fad_title_archive_taxonomy_treatments('x'))->toBe('Treatments &amp; Procedures | UAMS Health');
-
-    $GLOBALS['condition_title'] = 'Heart';
-    $GLOBALS['treatment_title'] = 'Surgery';
-
-    expect(uamswp_fad_title_archive_taxonomy_conditions('x'))->toBe('Heart | UAMS Health')
-        ->and(uamswp_fad_title_archive_taxonomy_treatments('x'))->toBe('Surgery | UAMS Health');
-});
-
 test('a single page title adds the second part only while it fits in 60 characters', function (string $function, string $global): void {
     $GLOBALS['page_title_attr'] = 'Asthma';
     $GLOBALS[$global] = 'Conditions';
