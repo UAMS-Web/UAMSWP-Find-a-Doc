@@ -6,8 +6,9 @@ name: CI
 # The lint and unit chain is the shared one, `UAMS-Web/uams-ci-workflows`, called by the
 # `checks` job, so this plugin does not carry a copy that drifts. The call runs the Composer,
 # synced-files, emoji, aggregate-needs, Pint, Rector and PHPStan jobs, the unit suite as
-# `composer test:unit`, and the PHP 8.2 floor lint. It runs on Linux only and leaves mutation
-# testing off until its own ticket (`mutate: false`). `download-archive` is off in the call
+# `composer test:unit`, the mutation job and the PHP 8.2 floor lint. It runs on Linux only. A pull
+# request and a push mutate the first-party PHP files they change (`mutate-paths`); a manual run
+# mutates everything `composer mutate` covers. `download-archive` is off in the call
 # because this repository runs that check from its own `download-archive.yml`. `phpcs` stays off:
 # this plugin has no PHPCS configuration. The chain's own header lists every input and default.
 #
@@ -49,8 +50,10 @@ jobs:
     uses: UAMS-Web/uams-ci-workflows/.github/workflows/ci.yml@v0.11.0
     with:
       linux-only: true
-      mutate: false
-      mutate-ignore: true
+      # The first-party PHP the `mutate` job selects changed files from, and that `composer mutate` mutates: the
+      # `includes` and `templates` folders, the facetwp-alpha-uams plugin and the two root files. `includes/_unused`
+      # holds code nothing loads and no test covers, so a git pathspec leaves it out of the selection.
+      mutate-paths: includes templates plugins/facetwp-alpha-uams uamswp-find-a-doc.php required-plugins.php :(exclude)includes/_unused
       # The check scans only these directories, where the `@pest-mutate-ignore` annotations are. Without the input it
       # scans whichever of `app`, `src` and `tests` exist, which here is `tests`, and audits none of them.
       mutate-ignore-paths: includes templates admin

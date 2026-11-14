@@ -93,3 +93,13 @@ Every entry heading is `## YYYY-MM-DD`, a space, and a short title. Leave exactl
 **Rejected.** Keeping the default and settling #1380 first: it writes an answer to every never-stored location before deploy, a content decision this fix should not force. Re-adding the JSON default in #1063: it brings back the pre-select on existing locations.
 
 **Companion.** [UAMS-Web/UAMSWP-Find-a-Doc#1383](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1383) (its `## Decision` section); the new-location filter in [UAMS-Web/UAMSWP-Find-a-Doc#1384](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1384).
+
+## 2026-11-14 Turn on mutation testing in the shared caller with the two patch packages (#1171)
+
+**Decision.** One pull request adopts `uams-web/patches-pest-plugin-mutate` (v1.4.0) and `uams-web/patches-patchwork` (v1.0.0), removes `mutate: false` from the shared caller, sets `mutate-paths` to the first-party PHP, and adds a `mutate` Composer script the chain runs. The packages are required in `require`, because `cweagans/composer-patches` applies a dependency's patches only from `packages` in the lock, and `cweagans/composer-patches` joins `require-dev` with its `allow-plugins` entry, since neither patch package requires it. The scope ruling of 2026-11-14 on #1171 named the two patch packages; the plugin and its helper package (`cweagans/composer-configurable-plugin`) were added with the owner's agreement, and the lock otherwise moves no version.
+
+**Why.** The 2026-11-13 decision left the job off because a whole-suite `composer mutate` scored a mutant child that died with `DatasetMissing` as killed. The patches (UAMS-Web/patches-pest-plugin-mutate#31) fix both defects, and with them the whole-suite form reports a planted survivor: `1 untested, 192 tested` on `templates/single-clinical-resource.php` with its `EqualToIdentical` annotation removed, against `192 tested` and 100.00% with it in place.
+
+**Rejected.** A per-file map of source files to covering tests (the option the 2026-11-13 decision rejected): it needs upkeep that the whole-suite form does not. Holding the job off: it leaves pull requests ungated by mutation.
+
+**Companion.** [UAMS-Web/UAMSWP-Find-a-Doc#1171](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1171).

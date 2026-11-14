@@ -4,10 +4,13 @@
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
     "require": {
-        "php": ">=8.2"
+        "php": ">=8.2",
+        "uams-web/patches-patchwork": "^1.0",
+        "uams-web/patches-pest-plugin-mutate": "^1.4"
     },
     "require-dev": {
         "brain/monkey": "^2.7",
+        "cweagans/composer-patches": "^2.0",
         "laravel/pint": "^1.32",
         "pestphp/pest": "^5.3",
         "php-stubs/wordpress-stubs": "6.8",
@@ -23,7 +26,8 @@
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
-            "phpstan/extension-installer": true
+            "phpstan/extension-installer": true,
+            "cweagans/composer-patches": true
         }
     },
     "scripts": {
@@ -38,6 +42,10 @@
         ],
         "test:wiring": "pest --ci tests/Wiring/ContentHooksTest.php",
         "test:integration": "@php tests/Integration/vendor/bin/phpunit --configuration tests/Integration/phpunit.xml",
+        "mutate": [
+            "Composer\\Config::disableProcessTimeout",
+            "pest --mutate --path=includes,templates,plugins/facetwp-alpha-uams,uamswp-find-a-doc.php,required-plugins.php --ignore=includes/_unused,includes\\_unused tests/Wiring/ContentHooksTest.php tests/Unit"
+        ],
         "stan": "phpstan analyse --no-progress --memory-limit=2G",
         "refactor": "rector",
         "refactor:sweep": "rector --clear-cache --config=rector-sweep.php",
@@ -51,6 +59,7 @@
         "test": "Run both suites, each in its own process, so the Unit suite never sees WordPress.",
         "test:unit": "Run fresh-load wiring and callback tests in separate Pest processes, without WordPress or a database.",
         "test:wiring": "Pin content hooks in a fresh Pest process before any callbacks are loaded.",
+        "mutate": "Run Pest mutation testing over the first-party PHP, naming the wiring test first and then the Unit suite, so the mutants score against the tests that cover them.",
         "test:integration": "Run the PHPUnit 9.6 suite that boots WordPress through wp-phpunit against the test database."
     },
     "autoload-dev": {
@@ -58,5 +67,17 @@
             "UamswpFindADoc\\PhpStan\\": "phpstan/",
             "UamswpFindADoc\\Tests\\": "tests/"
         }
-    }
+    },
+    "repositories": [
+        {
+            "name": "patches-pest-plugin-mutate",
+            "type": "vcs",
+            "url": "https://github.com/UAMS-Web/patches-pest-plugin-mutate.git"
+        },
+        {
+            "name": "patches-patchwork",
+            "type": "vcs",
+            "url": "https://github.com/UAMS-Web/patches-patchwork.git"
+        }
+    ]
 }

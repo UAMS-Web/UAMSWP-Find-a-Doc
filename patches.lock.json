@@ -1,0 +1,159 @@
+{
+    "_hash": "c97c1cf2c98566419518292f717c8a968d107eecda7417656fa9885fd61fe39d",
+    "patches": {
+        "antecedent/patchwork": [
+            {
+                "package": "antecedent/patchwork",
+                "description": "Retain delegated directory wrappers (temporary; see UAMS-Web/UAMSWP-Logo-List#82)",
+                "url": "vendor/uams-web/patches-patchwork/patches/patchwork-directory-wrapper.patch",
+                "sha256": "756b894b061e999b848b821a4130a0ae79451a3ed96ed932e5afc6bb65a312a3",
+                "depth": 1,
+                "extra": {
+                    "provenance": "dependency:antecedent/patchwork"
+                }
+            }
+        ],
+        "pestphp/pest-plugin-mutate": [
+            {
+                "package": "pestphp/pest-plugin-mutate",
+                "description": "Launch each mutant child process so a run cannot score every mutant killed without executing one (temporary; see #2322)",
+                "url": "vendor/uams-web/patches-pest-plugin-mutate/patches/pest-plugin-mutate-mutant-process-launch.patch",
+                "sha256": "7a6c762ea7a0eaf0043f251a76fec8bb48f2bf6dd062e684a989b592e670ebbc",
+                "depth": 1,
+                "extra": {
+                    "provenance": "dependency:pestphp/pest-plugin-mutate"
+                }
+            },
+            {
+                "package": "pestphp/pest-plugin-mutate",
+                "description": "Stop three silent @pest-mutate-ignore parsing defects suppressing nothing or the wrong set (temporary; see #2327)",
+                "url": "vendor/uams-web/patches-pest-plugin-mutate/patches/pest-plugin-mutate-annotation-parsing.patch",
+                "sha256": "6e0994c0bfa9a637a90efccfb14b3c37831b76bd39d57f826ac18aeaf2a57915",
+                "depth": 1,
+                "extra": {
+                    "provenance": "dependency:pestphp/pest-plugin-mutate"
+                }
+            },
+            {
+                "package": "pestphp/pest-plugin-mutate",
+                "description": "Let a mutant child on Windows run its tests and write files, so its failure is a real kill (temporary; see #2524)",
+                "url": "vendor/uams-web/patches-pest-plugin-mutate/patches/pest-plugin-mutate-windows-mutant-child.patch",
+                "sha256": "2d3d2cebd7d0d6ef642c6e1c64ddce866d018e1bdec235df57b8a00f988a6341",
+                "depth": 1,
+                "extra": {
+                    "provenance": "dependency:pestphp/pest-plugin-mutate"
+                }
+            },
+            {
+                "package": "pestphp/pest-plugin-mutate",
+                "description": "Drop the run's own --filter from each mutant child so a filtered run cannot score every mutant killed (temporary; see #2570)",
+                "url": "vendor/uams-web/patches-pest-plugin-mutate/patches/pest-plugin-mutate-drop-run-filter.patch",
+                "sha256": "538ba0225a9ed22a1cb01483ddc62dffb41f2f220d4629333ba7caaf052026b7",
+                "depth": 1,
+                "extra": {
+                    "provenance": "dependency:pestphp/pest-plugin-mutate"
+                }
+            },
+            {
+                "package": "pestphp/pest-plugin-mutate",
+                "description": "Widen or refuse a mutant child's filter that PCRE cannot compile, or that would pass cmd.exe's command-line limit on Windows, so it cannot score a kill without running a test (temporary; see #2578, #3114)",
+                "url": "vendor/uams-web/patches-pest-plugin-mutate/patches/pest-plugin-mutate-windows-filter-length.patch",
+                "sha256": "6490ba74c6308ae31143850356cea27bbc7bca53e22d266f5c3b3d19ed3a21b1",
+                "depth": 1,
+                "extra": {
+                    "provenance": "dependency:pestphp/pest-plugin-mutate"
+                }
+            },
+            {
+                "package": "pestphp/pest-plugin-mutate",
+                "description": "Create the mutations directory and fail on a mutated source that cannot be written, so a run cannot score mutants it never applied (temporary; see #2812)",
+                "url": "vendor/uams-web/patches-pest-plugin-mutate/patches/pest-plugin-mutate-write-mutated-source.patch",
+                "sha256": "5519d00dce1e8bd364c28c208997e57619242f39733d04f953fba9d0708d1c62",
+                "depth": 1,
+                "extra": {
+                    "provenance": "dependency:pestphp/pest-plugin-mutate"
+                }
+            },
+            {
+                "package": "pestphp/pest-plugin-mutate",
+                "description": "Drop the parallel runner's options (--passthru-php, --processes and the rest) from each mutant child so a parallel run given one cannot score every mutant killed (temporary; see #2926, #2947)",
+                "url": "vendor/uams-web/patches-pest-plugin-mutate/patches/pest-plugin-mutate-drop-parallel-runner-options.patch",
+                "sha256": "b999bc57c3eb43da339e37e7781f3f1d479481dc6f82c5b388775f1083b5043c",
+                "depth": 1,
+                "extra": {
+                    "provenance": "dependency:pestphp/pest-plugin-mutate"
+                }
+            },
+            {
+                "package": "pestphp/pest-plugin-mutate",
+                "description": "Select tests for a mutated scalar function default, so it is not scored without a test running it (temporary; see UAMS-Web/uams-2020#673)",
+                "url": "vendor/uams-web/patches-pest-plugin-mutate/patches/pest-plugin-mutate-function-defaults.patch",
+                "sha256": "04e7c1c42edb2ef07da615e5ac57b2236384e8c2ca8aa27323a69ed5aef37a7e",
+                "depth": 1,
+                "extra": {
+                    "provenance": "dependency:pestphp/pest-plugin-mutate"
+                }
+            },
+            {
+                "package": "pestphp/pest-plugin-mutate",
+                "description": "Propagate a mutation into isolated test processes and reject a test report that ran no tests, so an isolated run cannot score a mutant killed without running a test (temporary; see UAMS-Web/UAMSWP-Logo-List#82)",
+                "url": "vendor/uams-web/patches-pest-plugin-mutate/patches/pest-plugin-mutate-isolated-processes.patch",
+                "sha256": "6dd578588121b5291568bf26d001bd865a3a7e74d93f236a31ce93326dc0f3d2",
+                "depth": 1,
+                "extra": {
+                    "provenance": "dependency:pestphp/pest-plugin-mutate"
+                }
+            },
+            {
+                "package": "pestphp/pest-plugin-mutate",
+                "description": "Map a class constant mutant to the tests covering its containing class, since a constant initializer has no executable coverage line (temporary)",
+                "url": "vendor/uams-web/patches-pest-plugin-mutate/patches/pest-plugin-mutate-class-constant-coverage.patch",
+                "sha256": "e09b3535c7a69db85b35366fd1c0aa676a5cf98d0671d8245323516f8018b8f4",
+                "depth": 1,
+                "extra": {
+                    "provenance": "dependency:pestphp/pest-plugin-mutate"
+                }
+            },
+            {
+                "package": "pestphp/pest-plugin-mutate",
+                "description": "Skip a node whose own comment carries a matching @pest-mutate-ignore marker, including when the traverser still leaves that node (temporary)",
+                "url": "vendor/uams-web/patches-pest-plugin-mutate/patches/pest-plugin-mutate-ignore-annotated-statement.patch",
+                "sha256": "70378c227b12c6218eeb4f7ee5e2d0de5396bfb9165cff5683de7be5bdd6ff44",
+                "depth": 1,
+                "extra": {
+                    "provenance": "dependency:pestphp/pest-plugin-mutate"
+                }
+            },
+            {
+                "package": "pestphp/pest-plugin-mutate",
+                "description": "Size a mutant child's time limit from the serial work the initial suite stands for, so a --parallel run cannot score a mutant a timeout that no test caused (temporary; see UAMS-Web/patches-pest-plugin-mutate#2)",
+                "url": "vendor/uams-web/patches-pest-plugin-mutate/patches/pest-plugin-mutate-mutant-timeout.patch",
+                "sha256": "ff9e004e545e2b93cb051af4dafe109cb3427869d1294543aec06a26bac7c2b1",
+                "depth": 1,
+                "extra": {
+                    "provenance": "dependency:pestphp/pest-plugin-mutate"
+                }
+            },
+            {
+                "package": "pestphp/pest-plugin-mutate",
+                "description": "Keep Patchwork in front of the mutation stream wrapper after a pass-through read, so a function a test mocks is still redefined in a mutant child that logs to junit (temporary; see UAMS-Web/patches-pest-plugin-mutate#31)",
+                "url": "vendor/uams-web/patches-pest-plugin-mutate/patches/pest-plugin-mutate-stream-wrapper-patchwork.patch",
+                "sha256": "c4e064cf26f7f9daaa21f06b0f71c68993faa178813672188562cc54b7bf6827",
+                "depth": 1,
+                "extra": {
+                    "provenance": "dependency:pestphp/pest-plugin-mutate"
+                }
+            },
+            {
+                "package": "pestphp/pest-plugin-mutate",
+                "description": "Run a mutant child again when it times out once, and score a timeout only when the second attempt times out too, so a transient slowdown of the machine cannot keep --min=100 out of reach (temporary; see UAMS-Web/patches-pest-plugin-mutate#30)",
+                "url": "vendor/uams-web/patches-pest-plugin-mutate/patches/pest-plugin-mutate-mutant-timeout-retry.patch",
+                "sha256": "2516b97553a04990fbdfd51a2651b7dc24e372f885d9ebd2f247742f2fa94f19",
+                "depth": 1,
+                "extra": {
+                    "provenance": "dependency:pestphp/pest-plugin-mutate"
+                }
+            }
+        ]
+    }
+}
