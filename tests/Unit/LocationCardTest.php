@@ -269,7 +269,7 @@ test('the location card links to directions from the map coordinates', function 
 });
 
 test('the location card prints the phone numbers of the location', function (): void {
-    $output = location_card(['location_phone' => '501-1']);
+    $output = location_card(['location_phone' => '501-1', 'location_appointments_query' => '1']);
 
     expect($output)->toContain('<dt>Appointment Phone Number</dt>')
         ->and($output)->toContain('data-itemtitle="Clinic A" data-typetitle="Appointment Phone Number for New and Returning Patients">dash:501-1</a>');

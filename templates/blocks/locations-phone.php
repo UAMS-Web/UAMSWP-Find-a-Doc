@@ -25,8 +25,8 @@
 $location_ac_query = get_field('location_ac_query', $phone_output_id);
 
 // Check if a patient can schedule an appointment for services rendered at this location
+// An empty value and a missing one both mean the location does not offer scheduling: with ACF Custom Database Tables active a missing value reads as an empty string, and without it as null, so no fallback may tell them apart (#1378).
 $location_appointments_query = get_field('location_appointments_query', $phone_output_id); // Get the input
-$location_appointments_query ??= true; // Fallback value of 'true' for if value is otherwise null
 
 // Data attributes
 $location_phone_data_categorytitle = 'Telephone Number';

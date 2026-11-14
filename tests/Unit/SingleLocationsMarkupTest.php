@@ -496,9 +496,9 @@ test('the telemedicine section prints the system text and who can use the servic
 
 test('the telemedicine section names the phone number to call', function (): void {
     $group = ['location_telemed_query' => true, 'location_telemed_patients' => 'all'];
-    $general = single_location_markup(['location_hours_group' => $group, 'location_phone' => '501-1']);
-    $one = single_location_markup(['location_hours_group' => $group, 'location_phone' => '501-1', 'location_clinic_phone_query' => true, 'location_new_appointments_phone' => '501-2']);
-    $two = single_location_markup(['location_hours_group' => $group, 'location_phone' => '501-1', 'location_clinic_phone_query' => true, 'field_location_appointment_phone_query' => true, 'location_new_appointments_phone' => '501-2', 'location_return_appointments_phone' => '501-3']);
+    $general = single_location_markup(['location_hours_group' => $group, 'location_phone' => '501-1', 'location_appointments_query' => '1']);
+    $one = single_location_markup(['location_hours_group' => $group, 'location_phone' => '501-1', 'location_appointments_query' => '1', 'location_clinic_phone_query' => true, 'location_new_appointments_phone' => '501-2']);
+    $two = single_location_markup(['location_hours_group' => $group, 'location_phone' => '501-1', 'location_appointments_query' => '1', 'location_clinic_phone_query' => true, 'field_location_appointment_phone_query' => true, 'location_new_appointments_phone' => '501-2', 'location_return_appointments_phone' => '501-3']);
 
     expect($general)->toContain('Patients should call<a href="tel:dash:501-1"')
         ->and($one)->toContain('Patients should call<a href="tel:dash:501-2"')
@@ -507,7 +507,7 @@ test('the telemedicine section names the phone number to call', function (): voi
 });
 
 test('with two appointment numbers each kind of patient gets its own number', function (): void {
-    $fields = ['location_clinic_phone_query' => true, 'field_location_appointment_phone_query' => true, 'location_new_appointments_phone' => '501-2', 'location_return_appointments_phone' => '501-3'];
+    $fields = ['location_appointments_query' => '1', 'location_clinic_phone_query' => true, 'field_location_appointment_phone_query' => true, 'location_new_appointments_phone' => '501-2', 'location_return_appointments_phone' => '501-3'];
     $new = single_location_markup($fields + ['location_hours_group' => ['location_telemed_query' => true, 'location_telemed_patients' => 'new']]);
     $existing = single_location_markup($fields + ['location_hours_group' => ['location_telemed_query' => true, 'location_telemed_patients' => 'existing']]);
 
@@ -672,7 +672,7 @@ test('the structured data parses for a location with typical hours', function ()
 });
 
 test('the structured data parses with telephone numbers beside the hours', function (): void {
-    $fields = single_location_hours([single_location_day()]) + ['location_phone' => '501-1', 'location_clinic_phone_query' => true, 'location_new_appointments_phone' => '501-2'];
+    $fields = single_location_hours([single_location_day()]) + ['location_phone' => '501-1', 'location_appointments_query' => '1', 'location_clinic_phone_query' => true, 'location_new_appointments_phone' => '501-2'];
     $schema = single_location_schema($fields);
 
     expect($schema['telephone'])->toBe(['dash:501-1', 'dash:501-2'])
@@ -1075,7 +1075,7 @@ test('the telemedicine section names which patients can use the service', functi
 });
 
 test('the telemedicine section names which number to call', function (): void {
-    $one = ['location_clinic_phone_query' => true, 'location_new_appointments_phone' => '222'];
+    $one = ['location_appointments_query' => '1', 'location_clinic_phone_query' => true, 'location_new_appointments_phone' => '222'];
     $two = $one + ['field_location_appointment_phone_query' => true, 'location_return_appointments_phone' => '333'];
 
     expect(single_location_telemed_text(['location_telemed_patients' => 'all'], $one))->toContain('Patients should call dash:222 to schedule a telemedicine appointment.')

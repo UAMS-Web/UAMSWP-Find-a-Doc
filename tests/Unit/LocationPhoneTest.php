@@ -23,6 +23,9 @@ function location_phone(array $fields, string $output = 'associated_locations', 
     $position = new stdClass;
     $position->index = -1;
 
+    // A location saved as able to schedule, unless a test sets the field (a missing value reads as unable to, #1378).
+    $fields += ['location_appointments_query' => '1'];
+
     when('get_field')->alias(static fn (string $name, mixed $id = null): mixed => $fields[$name] ?? null);
     when('get_the_title')->justReturn($fields['__title'] ?? 'Clinic A');
     when('format_phone_dash')->alias(static fn (mixed $phone): string => $phone ? 'dash:'.$phone : '');
@@ -49,17 +52,24 @@ test('the card phone block prints nothing without a phone number', function (): 
     expect(location_phone([]))->toBe('');
 });
 
-test('the card phone block offers the general number for appointments when there is no separate one', function (): void {
-    $output = location_phone(['location_phone' => '501-1']);
+test('the card phone block offers the general number for appointments when the location is saved as able to schedule', function (): void {
+    $output = location_phone(['location_phone' => '501-1', 'location_appointments_query' => '1']);
 
     expect($output)->toBe('<dl data-categorytitle="Telephone Number"> <dt>Appointment Phone Number</dt> <dd>'.location_phone_link('501-1', 'Appointment Phone Number for New and Returning Patients').'<br/><span class="subtitle">New and Returning Patients</span></dd> </dl>');
 });
 
-test('the card phone block treats a location that cannot schedule as a general information number', function (): void {
-    $output = location_phone(['location_phone' => '501-1', 'location_appointments_query' => false]);
+// An empty value and a missing one both read as unable to schedule, because with ACF Custom Database Tables active
+// a missing value reads as an empty string and without it as null, and the page must not change when the plugin goes (#1378).
+test('the card phone block treats a location saved as unable to schedule, saved empty or never saved the same', function (mixed $value): void {
+    $output = location_phone(['location_phone' => '501-1', 'location_appointments_query' => $value]);
 
     expect($output)->toBe('<dl data-categorytitle="Telephone Number"> <dt>General Information</dt> <dd>'.location_phone_link('501-1', 'Clinic Phone Number').'</dd> </dl>');
-});
+})->with([
+    'saved No' => ['0'],
+    'saved false' => [false],
+    'saved empty' => [''],
+    'never stored (null)' => [null],
+]);
 
 test('the card phone block prints the appointment number for new and returning patients', function (): void {
     $output = location_phone(['location_phone' => '501-1', 'location_clinic_phone_query' => true, 'location_new_appointments_phone' => '501-2']);

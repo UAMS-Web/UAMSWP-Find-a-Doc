@@ -1583,7 +1583,7 @@
 				"1": "Yes"
 			},
 			"allow_null": 1,
-			"default_value": "",
+			"default_value": "1",
 			"layout": "horizontal",
 			"return_format": "value"
 		},
