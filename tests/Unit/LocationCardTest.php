@@ -357,6 +357,25 @@ test('the location card starts the modified hours at the earlier of the clinic a
     expect($sameDay)->toContain('beginning on '.location_card_date('+5 days').'.');
 });
 
+test('the location card names the start date of the source that is in its window', function (array $hours, string $expected): void {
+    $output = location_card(['location_hours_group' => location_card_hours($hours)]);
+
+    expect($output)->toContain($expected);
+})->with([
+    'clinic over, telemedicine coming' => [[
+        'location_modified_hours' => true, 'location_modified_hours_start_date' => location_card_date('-10 days'), 'location_modified_hours_end' => true, 'location_modified_hours_end_date' => location_card_date('-2 days'),
+        'location_telemed_modified_hours_query' => true, 'location_telemed_modified_hours_start_date' => location_card_date('+5 days'),
+    ], 'hours will be temporarily modified beginning on '.location_card_date('+5 days').'.'],
+    'clinic too far away, telemedicine under way' => [[
+        'location_modified_hours' => true, 'location_modified_hours_start_date' => location_card_date('+40 days'),
+        'location_telemed_modified_hours_query' => true, 'location_telemed_modified_hours_start_date' => location_card_date('-3 days'), 'location_telemed_modified_hours_end' => true, 'location_telemed_modified_hours_end_date' => location_card_date('+3 days'),
+    ], "This location's hours have been temporarily modified."],
+    'telemedicine over, clinic coming' => [[
+        'location_modified_hours' => true, 'location_modified_hours_start_date' => location_card_date('+7 days'),
+        'location_telemed_modified_hours_query' => true, 'location_telemed_modified_hours_start_date' => location_card_date('-10 days'), 'location_telemed_modified_hours_end' => true, 'location_telemed_modified_hours_end_date' => location_card_date('-2 days'),
+    ], 'hours will be temporarily modified beginning on '.location_card_date('+7 days').'.'],
+]);
+
 test('the location card does not warn about modified hours flagged without a start date', function (array $hours): void {
     // ACF requires the start date once the flag is on, so only data saved some other way has none.
     $output = location_card(['location_hours_group' => location_card_hours($hours)]);
