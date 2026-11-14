@@ -50,6 +50,20 @@ final class LocationFieldGroupTest extends TestCase
     }
 
     /**
+     * ACF applies a field's default on read for a location with no stored value when ACF Custom Database Tables is
+     * active, and not when it is off. A non-empty default would make the phone block differ between the two states
+     * and change what published locations show at deploy, so the default stays empty (#1383).
+     */
+    public function test_the_appointments_choice_has_no_default_value(): void
+    {
+        $found = $this->findAll('location_appointments_query');
+
+        $this->assertCount(1, $found, 'field location_appointments_query appears once in the group');
+        $this->assertArrayHasKey('default_value', $found[0]);
+        $this->assertSame('', $found[0]['default_value']);
+    }
+
+    /**
      * @return array<string, mixed>
      */
     private function group(): array
