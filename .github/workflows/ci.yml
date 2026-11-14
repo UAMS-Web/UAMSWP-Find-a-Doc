@@ -62,6 +62,10 @@ jobs:
       # The check scans only these directories, where the `@pest-mutate-ignore` annotations are. Without the input it
       # scans whichever of `app`, `src` and `tests` exist, which here is `tests`, and audits none of them.
       mutate-ignore-paths: includes templates admin
+      # The changed-file mutation run on a pull request that changes `includes/class.fad-helper-functions.php` was
+      # cancelled at the 45 minute default (#1400), so the limit is raised to 120. The weekly and manual full runs keep
+      # their own `mutate-full-timeout-minutes`.
+      mutate-timeout-minutes: 120
       global-test-symbols: false
       pest-command: composer test:unit
       floor-lint: true
