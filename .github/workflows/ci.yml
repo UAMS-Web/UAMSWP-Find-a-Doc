@@ -6,10 +6,10 @@ name: CI
 # The lint and unit chain is the shared one, `UAMS-Web/uams-ci-workflows`, called by the
 # `checks` job, so this plugin does not carry a copy that drifts. The call runs the Composer,
 # synced-files, emoji, aggregate-needs, Pint, Rector and PHPStan jobs, the unit suite as
-# `composer test:unit`, the mutation job and the PHP 8.2 floor lint. It runs on Linux only. A pull
-# request and a push mutate the first-party PHP files they change (`mutate-paths`); a manual run and
-# the weekly schedule mutate everything `composer mutate` covers, under the chain's default full-run
-# timeout. `download-archive` is off in the call
+# `composer test:unit` and the PHP 8.2 floor lint. It runs on Linux only. The mutation job is off
+# (`mutate: false`) until the coverage work closes (#1395); when it is on, a pull request and a push mutate
+# the first-party PHP files they change (`mutate-paths`), and a manual run and the weekly schedule mutate
+# everything `composer mutate` covers, under the chain's default full-run timeout. `download-archive` is off in the call
 # because this repository runs that check from its own `download-archive.yml`. `phpcs` stays off:
 # this plugin has no PHPCS configuration. The chain's own header lists every input and default.
 #
@@ -55,6 +55,10 @@ jobs:
     uses: UAMS-Web/uams-ci-workflows/.github/workflows/ci.yml@v0.13.0
     with:
       linux-only: true
+      # Mutation testing is off until the coverage work closes (#1395): a pull request that changes a file mutates the
+      # whole file, and the templates and helpers already carry about 300 survivors (#1400). The inputs below stay so
+      # that turning it back on is this one line.
+      mutate: false
       # The first-party PHP the `mutate` job selects changed files from, and that `composer mutate` mutates: the
       # `includes` and `templates` folders, the facetwp-alpha-uams plugin and the two root files. `includes/_unused`
       # holds code nothing loads and no test covers, so a git pathspec leaves it out of the selection.

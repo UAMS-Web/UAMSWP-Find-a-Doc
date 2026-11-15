@@ -482,6 +482,17 @@ test('the rating is valid at thirty ratings and not below', function (int $count
     'above the limit' => [31, true],
 ]);
 
+test('the rating is read when the payload is stored as an array or as JSON text', function (Closure $stored): void {
+    $vars = single_physician([], ['ratings' => $stored()]);
+
+    expect($vars['pg_rating_valid'])->toBeTrue()
+        ->and($vars['pg_total_comment_count'])->toBe(4)
+        ->and($vars['provider_field_classes'])->toContain(' has-ratings');
+})->with([
+    'an array' => [fn (): array => json_decode((string) json_encode(single_physician_rating()), true)],
+    'JSON text' => [fn (): string => (string) json_encode(single_physician_rating())],
+]);
+
 test('a rating response that is not a success is ignored', function (): void {
     $vars = single_physician([], ['ratings' => single_physician_rating('500', 99)]);
 
@@ -489,11 +500,20 @@ test('a rating response that is not a success is ignored', function (): void {
         ->and($vars['pg_total_comment_count'])->toBe('');
 });
 
-test('rating data stored as an array is ignored without a warning', function (): void {
-    $vars = single_physician([], ['ratings' => ['status' => ['code' => '200'], 'data' => ['entities' => [['totalRatingCount' => 99]]]]]);
+test('rating data stored as an array is read without a warning', function (): void {
+    $stored = json_decode((string) json_encode(single_physician_rating('200', 99, 3)), true);
+    $vars = single_physician([], ['ratings' => $stored]);
+
+    expect($vars['pg_rating_valid'])->toBeTrue()
+        ->and($vars['pg_total_comment_count'])->toBe(3)
+        ->and($vars['single_physician_warnings'])->toBe([]);
+});
+
+test('rating data stored as an array without a success code is ignored', function (): void {
+    $stored = json_decode((string) json_encode(single_physician_rating('500', 99)), true);
+    $vars = single_physician([], ['ratings' => $stored]);
 
     expect($vars['pg_rating_valid'])->toBe('')
-        ->and($vars['pg_total_comment_count'])->toBe('')
         ->and($vars['single_physician_warnings'])->toBe([]);
 });
 
@@ -501,7 +521,7 @@ test('a provider without rating data has no rating', function (): void {
     $vars = single_physician();
 
     expect($vars['pg_rating_valid'])->toBe('')
-        ->and($vars['pg_rating_data'])->toBe('');
+        ->and($vars['pg_rating_data'])->toBeNull();
 });
 
 test('the appointment section shows only for a provider who takes appointments', function (): void {

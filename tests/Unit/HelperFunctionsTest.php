@@ -344,6 +344,30 @@ final class HelperFunctionsTest extends UnitTestCase
         $this->assertSame($float, \uamswp_fad_float($value));
     }
 
+    public function test_a_stored_review_payload_is_read_as_an_object_whichever_shape_it_was_stored_in(): void
+    {
+        when('wp_json_encode')->alias(static fn (mixed $value): string|false => json_encode($value));
+        $payload = ['status' => ['code' => '200'], 'data' => ['entities' => [['totalRatingCount' => 31]]]];
+
+        $fromArray = \uamswp_fad_pg_payload($payload);
+        $fromText = \uamswp_fad_pg_payload((string) json_encode($payload));
+        $object = json_decode((string) json_encode($payload));
+
+        $this->assertSame('200', $fromArray?->status->code);
+        $this->assertSame(31, $fromArray->data->entities[0]->totalRatingCount);
+        $this->assertEquals($fromArray, $fromText);
+        $this->assertSame($object, \uamswp_fad_pg_payload($object));
+    }
+
+    public function test_a_stored_review_payload_that_is_empty_or_not_an_object_is_null(): void
+    {
+        when('wp_json_encode')->alias(static fn (mixed $value): string|false => json_encode($value));
+
+        foreach (['', [], null, false, 'not json', '5', '[1,2]', [1, 2], 7] as $stored) {
+            $this->assertNull(\uamswp_fad_pg_payload($stored), var_export($stored, true));
+        }
+    }
+
     public function test_an_array_is_returned_as_it_is_and_anything_else_is_empty(): void
     {
         $this->assertSame(['a' => 1, 2 => 'b'], \uamswp_fad_arr(['a' => 1, 2 => 'b']));
