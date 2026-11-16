@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace UamswpFindADoc\Tests\Unit;
 
 use RuntimeException;
+use UamswpFindADoc\Tests\Support\ExitCalled;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
 
 use function Brain\Monkey\Functions\expect;
@@ -127,6 +128,43 @@ final class GbpSettingsTest extends UnitTestCase
         expect('update_option')->once()->with('uamswp_fad_gbp_modes', ['uams' => 'live', 'arkansas-childrens' => 'dry-run', 'baptist-health' => 'dry-run'], false);
 
         uamswp_fad_gbp_save_modes(false);
+    }
+
+    public function test_saving_ends_the_request_after_the_redirect_unless_told_not_to(): void
+    {
+        $_POST['modes'] = [];
+        when('current_user_can')->justReturn(true);
+        when('check_admin_referer')->justReturn(1);
+        when('wp_unslash')->returnArg();
+        when('admin_url')->returnArg();
+        when('add_query_arg')->alias(fn (string $key, string $value, string $url): string => $url.'&'.$key.'='.$value);
+        when('update_option')->justReturn(true);
+
+        expect('wp_safe_redirect')->twice();
+
+        uamswp_fad_gbp_save_modes(false);
+
+        $this->expectException(ExitCalled::class);
+
+        uamswp_fad_gbp_save_modes();
+    }
+
+    public function test_queueing_all_ends_the_request_after_the_redirect_unless_told_not_to(): void
+    {
+        when('current_user_can')->justReturn(true);
+        when('check_admin_referer')->justReturn(1);
+        when('admin_url')->returnArg();
+        when('get_option')->alias(fn (string $name, $default = false) => $name === 'uamswp_fad_gbp_modes' ? [] : $default);
+        when('get_posts')->justReturn([]);
+        when('add_query_arg')->alias(fn (string $key, int $value, string $url): string => $url.'&'.$key.'='.$value);
+
+        expect('wp_safe_redirect')->twice();
+
+        uamswp_fad_gbp_queue_all_action(false, fn (string $name): string => 'value-of-'.$name);
+
+        $this->expectException(ExitCalled::class);
+
+        uamswp_fad_gbp_queue_all_action(true, fn (string $name): string => 'value-of-'.$name);
     }
 
     public function test_log_filters_accept_only_known_actions_and_silos(): void
