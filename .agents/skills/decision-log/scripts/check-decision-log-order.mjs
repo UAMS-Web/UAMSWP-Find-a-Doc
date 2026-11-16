@@ -17,12 +17,19 @@
 // Fenced blocks are skipped: the log documents its own entry shape inside a fence, and a
 // template is not an entry.
 //
+// A `## ` heading outside a fence that is not dated, wherever it sits, is an entry this
+// check cannot read, so it cannot vouch for the file: the run exits 2 and says how many
+// headings it read and how many it skipped. The one exemption is the skeleton's own
+// `## How to add an entry` section (see PREAMBLE_HEADING), so a log started from the
+// skeleton passes; an undated heading above the first dated entry is still counted.
+//
 // EXIT CODES
 //     0  ordered and separated
 //     1  an order or separator finding
-//     2  the check could not answer: unreadable file, no entries, or a usage error. A
-//        log with no entries is a failure, not a pass, so a heading format that stops
-//        matching cannot turn this into a check that passes on everything.
+//     2  the check could not answer: unreadable file, no entries, entry headings it
+//        cannot read, or a usage error. A log with no entries is a failure, not a pass,
+//        so a heading format that stops matching cannot turn this into a check that
+//        passes on everything; the same holds for a log where only some entries match.
 //
 // USAGE
 //     node .claude/skills/decision-log/scripts/check-decision-log-order.mjs [--file <path>]
@@ -38,6 +45,9 @@ export const DEFAULT_LOG = 'docs/DECISIONS.md'
 
 const HEADING = /^## (\d{4}-\d{2}-\d{2})(.*)$/
 const FENCE = /^\s*(```|~~~)/
+// The skeleton's own section heading. Exempt by exact text and nothing wider, so a log that
+// predates dated headings does not read as covered.
+const PREAMBLE_HEADING = /^## How to add an entry\s*$/
 
 /**
  * Every entry heading outside a fence, with the line above it.
@@ -67,6 +77,33 @@ export function parseEntries(source) {
     })
 
     return entries
+}
+
+/**
+ * Every `## ` heading outside a fence that is not an entry heading, other than the
+ * skeleton's own section: the headings this check skips. A malformed date
+ * (`## 2026-1-1`) does not match the entry pattern, so it is counted here. Headings above
+ * the first entry are counted too.
+ */
+export function findSkippedHeadings(source) {
+    const lines = source.split(/\r?\n/)
+    const skipped = []
+    let inFence = false
+
+    lines.forEach((line, index) => {
+        if (FENCE.test(line)) {
+            inFence = !inFence
+            return
+        }
+        if (inFence) {
+            return
+        }
+        if (line.startsWith('## ') && !HEADING.test(line) && !PREAMBLE_HEADING.test(line)) {
+            skipped.push({ line: index + 1, title: line.slice(3).trim() })
+        }
+    })
+
+    return skipped
 }
 
 /**
@@ -138,6 +175,19 @@ export function main(argv, cwd, out = console.log, err = console.error) {
     if (entries.length === 0) {
         err(`check-decision-log-order: no "## YYYY-MM-DD" entries found in ${path}`)
         err('An empty result here means the heading shape changed or the log has no entries yet, not that the log is ordered.')
+        return 2
+    }
+
+    const skipped = findSkippedHeadings(source)
+    if (skipped.length > 0) {
+        err(`check-decision-log-order: ${path}: ${entries.length} of ${entries.length + skipped.length} entry headings are dated; this check reads only dated headings, so it skipped ${skipped.length}.`)
+        for (const heading of skipped.slice(0, 5)) {
+            err(`  line ${heading.line}  ${heading.title.slice(0, 72)}`)
+        }
+        if (skipped.length > 5) {
+            err(`  ... and ${skipped.length - 5} more`)
+        }
+        err('A pass here would say nothing about the headings skipped. Date them as "## YYYY-MM-DD <title>", or keep a check of the log\'s own for the shape it uses.')
         return 2
     }
 

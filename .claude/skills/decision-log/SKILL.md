@@ -33,7 +33,7 @@ The sync never writes `docs/` or `.gitattributes`, so both are the repository's 
 - One blank line sits above every entry heading.
 - A fenced block is not an entry. The skeleton shows the entry shape inside a fence.
 
-An existing log that is dated newest first, undated, or keyed by number is not migrated by this skill. The checker reads only `## YYYY-MM-DD` headings; a log in another shape keeps its own check.
+An existing log that is dated newest first, undated, or keyed by number is not migrated by this skill. The checker reads only `## YYYY-MM-DD` headings; a log in another shape keeps its own check. A log in two shapes is not covered by either: a `## ` heading outside a fence that is not dated, above or below the first dated entry, fails the check with exit 2, and the message says how many headings it read and how many it skipped. The one exemption is the skeleton's own `## How to add an entry` section, matched by its exact text.
 
 ## The `.gitattributes` line
 
@@ -60,7 +60,7 @@ It reads `docs/DECISIONS.md` under the working directory. `--file <path>` reads 
 |------|---------|
 | 0 | Ordered and separated. The output gives the entry count and the date range. |
 | 1 | At least one finding. A separator finding names the entry and the line above it; an order finding names both entries and their lines. |
-| 2 | The check could not answer: the file is unreadable, it holds no entries, or the arguments were wrong. |
+| 2 | The check could not answer: the file is unreadable, it holds no entries, some entry headings are not dated (it names the count read and skipped), or the arguments were wrong. |
 
 Zero entries is exit 2 and not a pass, because a heading format that stopped matching would otherwise pass on everything. The skeleton alone therefore fails the check, which is why the check is wired in with the first entry.
 
