@@ -235,12 +235,17 @@ function uamswp_fad_gbp_queue_on_publish($new_status, $old_status, $post, ?calla
  * For the first run of a silo, and to recheck every listing against Google. Each job is the same cron job a save queues, spaced apart so the single-run
  * lock is rarely contended. A provider with a job already waiting is not queued again.
  *
+ * Only a post with a listing in a silo that is not Off is queued: a job for the others would only
+ * report that the silo is off, one 15-second slot each.
+ *
  * @param  (callable(string): string)|null  $lookup  Credential lookup; for tests.
  * @return int How many providers and locations were queued.
  */
 function uamswp_fad_gbp_queue_all(?callable $lookup = null): int
 {
-    if (uamswp_fad_gbp_credentials($lookup) === null || array_diff(array_values(uamswp_fad_gbp_modes()), ['off']) === []) {
+    $modes = uamswp_fad_gbp_modes();
+
+    if (uamswp_fad_gbp_credentials($lookup) === null || array_diff(array_values($modes), ['off']) === []) {
         return 0;
     }
 
@@ -252,6 +257,10 @@ function uamswp_fad_gbp_queue_all(?callable $lookup = null): int
             continue;
         }
 
+        if (! uamswp_fad_gbp_has_silo_to_sync($post_id, $modes)) {
+            continue;
+        }
+
         // An explicit run checks every listing against Google, so it forgets what was settled.
         delete_post_meta($post_id, UAMSWP_FAD_GBP_HASH_META);
         wp_schedule_single_event($now + 30 + $queued * 15, UAMSWP_FAD_GBP_SYNC_HOOK, [$post_id]);
@@ -259,6 +268,38 @@ function uamswp_fad_gbp_queue_all(?callable $lookup = null): int
     }
 
     return $queued;
+}
+
+/**
+ * Whether a provider or location has any listing in a silo that is not Off.
+ *
+ * A provider's listings are at the published locations it lists; a location's is its own. A
+ * location whose brand has no silo counts as having one to sync, so the sync still reports it, as
+ * before. A provider with no published location has no listing at all.
+ *
+ * @param  array<string, string>  $modes  Each silo's mode.
+ */
+function uamswp_fad_gbp_has_silo_to_sync(int $post_id, array $modes): bool
+{
+    if (get_post_type($post_id) === 'location') {
+        $location_ids = [$post_id];
+    } else {
+        $listed = function_exists('get_field') ? get_field('physician_locations', $post_id) : [];
+        $location_ids = array_values(array_filter(
+            uamswp_fad_ids(is_array($listed) ? $listed : []),
+            fn (int $location_id): bool => get_post_status($location_id) === 'publish'
+        ));
+    }
+
+    foreach ($location_ids as $location_id) {
+        $silo = uamswp_fad_gbp_silo_for_location($location_id);
+
+        if ($silo === null || ($modes[$silo] ?? 'off') !== 'off') {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 /**

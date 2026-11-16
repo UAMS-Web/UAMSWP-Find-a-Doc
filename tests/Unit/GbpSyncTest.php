@@ -176,13 +176,37 @@ final class GbpSyncTest extends UnitTestCase
         $this->assertSame([], $this->client->calls);
     }
 
-    public function test_an_off_silo_is_skipped_without_a_call(): void
+    public function test_an_off_silo_is_skipped_without_a_call_and_is_not_logged(): void
     {
-        $this->sync(['uams' => 'off'])->run([$this->item()]);
+        $entries = $this->sync(['uams' => 'off'])->run([$this->item()]);
 
-        $this->assertSame(['skip'], $this->actions());
-        $this->assertStringContainsString('off', $this->log[0]['reason']);
+        $this->assertSame([], $this->log, 'an Off silo writes nothing to the activity log');
+        $this->assertSame(['skip'], array_column($entries, 'action'), 'the run still reports the skip to the command');
+        $this->assertSame('Silo uams is off', $entries[0]['reason']);
         $this->assertSame([], $this->client->calls);
+    }
+
+    public function test_an_off_silo_leaves_the_attention_entry_of_its_store_code_alone(): void
+    {
+        $this->sync(['uams' => 'dry-run'], false)->run([$this->item(['store_code' => str_repeat('d', 66)])]);
+        $attention = \UAMSWP_FAD_GBP_Logic::next_attention([], ['time' => 1] + $this->log[0], 1000);
+        $this->assertCount(1, $attention, 'control: an over-length code is a review entry that Needs attention keeps');
+
+        $this->log = [];
+        $this->sync(['uams' => 'off'])->run([$this->item(['store_code' => str_repeat('d', 66)])]);
+
+        foreach ($this->log as $entry) {
+            $attention = \UAMSWP_FAD_GBP_Logic::next_attention($attention, ['time' => 2] + $entry, 1000);
+        }
+
+        $this->assertCount(1, $attention, 'a run that finds the silo Off feeds the list nothing, so the entry stays');
+    }
+
+    public function test_the_other_skips_are_still_logged(): void
+    {
+        $this->sync(['uams' => 'live'])->run([$this->item(['silo' => null]), $this->item(['excluded' => true])]);
+
+        $this->assertSame(['skip', 'skip'], $this->actions());
     }
 
     public function test_a_silo_with_no_configured_mode_is_off(): void

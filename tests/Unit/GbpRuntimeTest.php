@@ -163,6 +163,7 @@ final class GbpRuntimeTest extends UnitTestCase
         $this->enable();
         $this->recordSchedule();
         when('get_posts')->alias(fn (array $args) => $args['post_type'] === 'provider' ? ['7', 8, 9] : [55]);
+        $this->wirePosts(['7' => 'uams', 8 => 'uams', 9 => 'uams', 55 => 'uams']);
 
         expect('delete_post_meta')->times(4)->with(\Mockery::anyOf(7, 8, 9, 55), UAMSWP_FAD_GBP_HASH_META);
 
@@ -174,6 +175,69 @@ final class GbpRuntimeTest extends UnitTestCase
         $this->assertSame(15, $this->scheduled[1][0] - $this->scheduled[0][0]);
         $this->assertSame(15, $this->scheduled[2][0] - $this->scheduled[1][0]);
         $this->assertSame(15, $this->scheduled[3][0] - $this->scheduled[2][0]);
+    }
+
+    /**
+     * Describe the providers and locations: each post's silo, by post ID. A location is its own silo's;
+     * a provider has the one published location of that ID's silo. The brand fields pick the silo.
+     *
+     * @param  array<int|string, ?string>  $silos  Post ID => silo name, null for a brand with no silo.
+     */
+    private function wirePosts(array $silos, int $location_post = 55): void
+    {
+        $brands = ['uams' => ['0', ''], 'baptist-health' => ['1', 'baptist-health'], 'arkansas-childrens' => ['1', 'arkansas-childrens'], 'none' => ['1', 'dhs']];
+        $place = fn (int $post_id): int => $post_id === $location_post ? $post_id : 1000 + $post_id;
+
+        when('get_post_type')->alias(fn (int $id) => $id === $location_post ? 'location' : 'provider');
+        when('get_post_status')->justReturn('publish');
+        when('get_field')->alias(fn (string $name, int $id) => [$place($id)]);
+        when('get_post_meta')->alias(function (int $id, string $key) use ($silos, $brands, $place): string {
+            foreach ($silos as $post_id => $silo) {
+                if ($place((int) $post_id) === $id) {
+                    return $brands[$silo ?? 'none'][$key === 'schema_brandorg_query' ? 0 : 1];
+                }
+            }
+
+            return '';
+        });
+    }
+
+    public function test_queue_all_schedules_only_the_listings_of_a_silo_that_is_not_off(): void
+    {
+        $this->enable(['uams' => 'off', 'arkansas-childrens' => 'off', 'baptist-health' => 'dry-run']);
+        $this->recordSchedule();
+        when('get_posts')->alias(fn (array $args) => $args['post_type'] === 'provider' ? [7, 8, 9] : [55]);
+        $this->wirePosts([7 => 'uams', 8 => 'baptist-health', 9 => 'arkansas-childrens', 55 => 'baptist-health']);
+        when('delete_post_meta')->justReturn(true);
+
+        $queued = uamswp_fad_gbp_queue_all($this->creds());
+
+        $this->assertSame(2, $queued);
+        $this->assertSame([[8], [55]], array_column($this->scheduled, 2), 'a provider and a location in the silo that is on; the Off silos got none');
+        $this->assertSame(15, $this->scheduled[1][0] - $this->scheduled[0][0], 'the slots are packed, not left with gaps for skipped posts');
+    }
+
+    public function test_queue_all_still_queues_a_listing_whose_brand_has_no_silo(): void
+    {
+        $this->enable(['uams' => 'off', 'arkansas-childrens' => 'off', 'baptist-health' => 'dry-run']);
+        $this->recordSchedule();
+        when('get_posts')->alias(fn (array $args) => $args['post_type'] === 'provider' ? [7] : []);
+        $this->wirePosts([7 => null]);
+        when('delete_post_meta')->justReturn(true);
+
+        $this->assertSame(1, uamswp_fad_gbp_queue_all($this->creds()), 'the sync reports a brand with no silo, as before');
+    }
+
+    public function test_queue_all_skips_a_provider_with_no_published_location(): void
+    {
+        $this->enable(['uams' => 'dry-run']);
+        $this->recordSchedule();
+        when('get_posts')->alias(fn (array $args) => $args['post_type'] === 'provider' ? [7] : []);
+        when('get_post_type')->justReturn('provider');
+        when('get_post_status')->justReturn('draft');
+        when('get_field')->justReturn([1007]);
+
+        $this->assertSame(0, uamswp_fad_gbp_queue_all($this->creds()));
     }
 
     public function test_queue_all_does_nothing_without_credentials_or_when_every_silo_is_off(): void
