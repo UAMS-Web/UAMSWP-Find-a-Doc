@@ -33,9 +33,10 @@ declare(strict_types=1);
  * rows and each link field's saved storage), kept until the next dry run replaces it; it is not a
  * substitute for a database backup.
  */
-if (! defined('ABSPATH')) {
-    exit;
-}
+// The guard exits the process when ABSPATH is missing. A mutant of it exits the test child before any test runs,
+// so no test can score it; the guard is plain WordPress boilerplate with no logic to pin.
+// @pest-mutate-ignore: BooleanOrToBooleanAnd
+defined('ABSPATH') || exit;
 
 const UAMSWP_DEAD_LINKS_RUN_OPTION = 'uamswp_fad_dead_links_run';
 

@@ -8,6 +8,9 @@ Author URI: https://facetwp.com/
 GitHub URI: facetwp/facetwp-alpha
 */
 
+// The guard exits the process when ABSPATH is missing. A mutant of it exits the test child before any test runs,
+// so no test can score it; the guard is plain WordPress boilerplate with no logic to pin.
+// @pest-mutate-ignore: LogicalOrToLogicalAnd
 defined( 'ABSPATH' ) or exit;
 
 
