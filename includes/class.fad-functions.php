@@ -103,7 +103,7 @@ class pubmed_field_on_change
         // check for our other required values
         if (! isset($_POST['pmid'])) {
             // echo json_encode(false);
-            exit;
+            uamswp_fad_exit();
         }
 
         $idstr = intval(uamswp_fad_str($_POST['pmid'])); // '22703441';
@@ -170,7 +170,7 @@ class pubmed_field_on_change
             'id' => $result->uid,
         ];
         echo json_encode($array);
-        exit;
+        uamswp_fad_exit();
         // }
 
     } // end public function load_content_from_relationship

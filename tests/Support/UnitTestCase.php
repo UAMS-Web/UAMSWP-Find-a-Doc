@@ -30,6 +30,7 @@ abstract class UnitTestCase extends TestCase
     {
         parent::setUp();
         setUp();
+        ExitCalled::stubExit();
     }
 
     protected function tearDown(): void

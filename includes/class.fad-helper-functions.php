@@ -2,6 +2,25 @@
 
 declare(strict_types=1);
 
+/**
+ * End the request, printing a message first when one is given.
+ *
+ * Every `exit` the plugin makes in a request handler or a template goes through here, so the Unit suite can replace
+ * it: a test that reaches it fails instead of ending the test process (UAMS-Web/UAMSWP-Find-a-Doc#1416). The
+ * file-load guards (`defined('ABSPATH') || exit;`) stay as they are, since they run before any test.
+ *
+ * The function never returns, but its native return type is `void`: a native `never` makes PHP refuse the
+ * replaced function the tests install, which does return. The `never` in the docblock tells static analysis that
+ * the request ends here.
+ *
+ * @param  string  $message  Printed before the request ends, as `exit($message)` prints it.
+ * @return never
+ */
+function uamswp_fad_exit(string $message = ''): void
+{
+    exit($message);
+}
+
 // AP Style for Dates
 if (! function_exists('apStyleDate')) {
     /**
