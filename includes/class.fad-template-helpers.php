@@ -68,34 +68,6 @@ function title_filter($where, $query)
 }
 
 /**
- * Limit a terms query to names that start with the letter in the `__first_letter` argument.
- *
- * @param  array<string, string>  $clauses  The query clauses.
- * @param  array<int, string>  $taxonomies  The taxonomies queried.
- * @param  array<string, mixed>  $args  The query arguments.
- * @return array<string, string>
- */
-function uamswp_terms_clauses($clauses, $taxonomies, $args)
-{
-    // Search for terms with the first letter
-    /** @var wpdb $wpdb */
-    global $wpdb;
-
-    if (! isset($args['__first_letter'])) {
-        return $clauses;
-    }
-
-    if (is_numeric($args['__first_letter'])) {
-        $clauses['where'] .= ' AND '.$wpdb->prepare('t.name REGEXP %s', '^[0-9]');
-    } else {
-        $clauses['where'] .= ' AND '.$wpdb->prepare('t.name LIKE %s', $wpdb->esc_like(uamswp_fad_str($args['__first_letter'])).'%');
-    }
-
-    return $clauses;
-
-}
-
-/**
  * Add the white background class to the entry.
  *
  * @param  array<string, string>  $attributes  The entry attributes.

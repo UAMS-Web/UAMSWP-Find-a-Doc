@@ -1,7 +1,7 @@
 <?php
 
 /**
- * The small partials under templates/loops, templates/blocks and templates/fwp: the term lists, the appointment
+ * The small partials under templates/loops, templates/blocks and templates/fwp: the appointment
  * and clinical trial blocks, the resource list item, and the loop wrappers that include a card for each post.
  */
 
@@ -10,62 +10,6 @@ declare(strict_types=1);
 use function Brain\Monkey\Functions\when;
 
 require_once __DIR__.'/../Support/templates.php';
-
-/**
- * A stand-in for a term query that returns the given terms.
- *
- * @param  list<object>  $terms
- */
-function small_partials_terms(array $terms): object
-{
-    return new class($terms)
-    {
-        /** @param list<object> $terms */
-        public function __construct(private array $terms) {}
-
-        /** @return list<object> */
-        public function get_terms(): array
-        {
-            return $this->terms;
-        }
-    };
-}
-
-test('the conditions list links each condition to its page', function (): void {
-    when('get_term_link')->alias(static fn (int $id): string => 'https://example.test/condition/'.$id.'/');
-    $terms = [(object) ['term_id' => 4, 'name' => 'Asthma'], (object) ['term_id' => 9, 'name' => 'Gout']];
-
-    $output = uamswp_test_include_partial('loops/conditions-loop', ['conditions_query' => small_partials_terms($terms)]);
-
-    expect($output)->toContain('<h2 class="module-title"><span class="title">Conditions Treated</span></h2>')
-        ->and($output)->toContain('href="https://example.test/condition/4/" aria-label="Go to Condition page for Asthma"')
-        ->and($output)->toContain('href="https://example.test/condition/9/" aria-label="Go to Condition page for Gout"')
-        ->and(substr_count($output, '<li>'))->toBe(2);
-});
-
-test('the conditions list prints no items without conditions', function (): void {
-    $output = uamswp_test_include_partial('loops/conditions-loop', ['conditions_query' => small_partials_terms([])]);
-
-    expect($output)->toContain('<ul class="list">')
-        ->and($output)->not->toContain('<li>');
-});
-
-test('the treatments list links each treatment to its page', function (): void {
-    when('get_term_link')->alias(static fn (int $id): string => 'https://example.test/treatment/'.$id.'/');
-    $terms = [(object) ['term_id' => 2, 'name' => 'Bypass']];
-
-    $output = uamswp_test_include_partial('loops/treatments-loop', ['treatments_query' => small_partials_terms($terms)]);
-
-    expect($output)->toContain('<span class="title">Medical Treatments and Procedures Performed</span>')
-        ->and($output)->toContain('<a href="https://example.test/treatment/2/" aria-label="Go to Treatment page for Bypass" class="btn btn-outline-primary">Bypass</a>')
-        ->and(substr_count($output, '<li>'))->toBe(1);
-});
-
-test('the treatments list prints no items without treatments', function (): void {
-    $output = uamswp_test_include_partial('loops/treatments-loop', ['treatments_query' => small_partials_terms([])]);
-
-    expect($output)->not->toContain('<li>');
-});
 
 test('the appointment block links to the locations on the page when there are valid ones', function (): void {
     $output = uamswp_test_include_partial('blocks/appointment', ['locations' => [1], 'location_valid' => true]);
