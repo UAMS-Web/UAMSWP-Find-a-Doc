@@ -16,9 +16,10 @@ declare(strict_types=1);
  * FacetWP) can hide a linked record from the cleanup, and written back through ACF so the
  * custom-table plugin stores the value in its own format.
  */
-if (! defined('ABSPATH')) {
-    exit;
-}
+// The guard exits the process when ABSPATH is missing. A mutant of it exits the test child before any test runs,
+// so no test can score it; the guard is plain WordPress boilerplate with no logic to pin.
+// @pest-mutate-ignore: BooleanOrToBooleanAnd
+defined('ABSPATH') || exit;
 
 /**
  * Where each deletable post type is linked from.
