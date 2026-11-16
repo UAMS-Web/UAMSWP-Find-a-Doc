@@ -14,6 +14,8 @@
 
 declare(strict_types=1);
 
+use UamswpFindADoc\Tests\Support\ExitCalled;
+
 use function Brain\Monkey\Functions\when;
 
 require_once __DIR__.'/../Support/templates.php';
@@ -190,6 +192,30 @@ test('the provider and location archives render without redirecting when the req
 })->with([
     'providers' => ['archive-physicians', '_provider_region'],
     'locations' => ['archive-locations', '_location_region'],
+]);
+
+test('the provider and location archives send a request with a saved region to the filtered address and end it', function (string $name, string $parameter, string $uri): void {
+    $sent = [];
+    when('header')->alias(static function (string $header) use (&$sent): void {
+        $sent[] = $header;
+    });
+    $server = $_SERVER['REQUEST_URI'] ?? null;
+    $_SERVER['REQUEST_URI'] = $uri;
+    $exited = false;
+
+    try {
+        archive_template_with_request(['wp_filter_region' => 'central'], [], static fn (): string => archive_template($name));
+    } catch (ExitCalled) {
+        $exited = true;
+    } finally {
+        $_SERVER['REQUEST_URI'] = $server;
+    }
+
+    expect($exited)->toBeTrue()
+        ->and($sent)->toBe(['Location: '.$uri.'?'.$parameter.'=central']);
+})->with([
+    'providers' => ['archive-physicians', '_provider_region', '/providers/'],
+    'locations' => ['archive-locations', '_location_region', '/locations/'],
 ]);
 
 test('the region redirect adds the saved region to the address', function (string $requestUri, string $expected): void {

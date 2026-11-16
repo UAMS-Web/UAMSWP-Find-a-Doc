@@ -16,6 +16,7 @@ namespace UamswpFindADoc\Tests\Unit;
 use Brain\Monkey\Functions;
 use Mockery;
 use PHPUnit\Framework\Attributes\DataProvider;
+use UamswpFindADoc\Tests\Support\ExitCalled;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
 
 use function Brain\Monkey\Functions\expect;
@@ -388,6 +389,46 @@ final class FunctionsTest extends UnitTestCase
             ['wp_register_script', 'pubmed_field_on_change', UAMS_FAD_ROOT_URL.'/assets/js/acf-pubmed.js', ['acf-input'], null, null],
             ['wp_enqueue_script', 'pubmed_field_on_change', '', [], null, null],
         ], $calls->getArrayCopy());
+    }
+
+    public function test_a_pubmed_request_without_an_id_ends_before_asking_pubmed(): void
+    {
+        unset($_POST['pmid']);
+        expect('wp_remote_get')->never();
+
+        $this->expectException(ExitCalled::class);
+
+        (new \pubmed_field_on_change)->load_content_from_pubmed();
+    }
+
+    public function test_a_found_pubmed_record_is_printed_as_json_and_ends_the_request(): void
+    {
+        $_POST['pmid'] = '123';
+        when('wp_remote_get')->justReturn(['body' => 'ignored']);
+        when('wp_remote_retrieve_body')->justReturn((string) json_encode(['result' => ['123' => [
+            'uid' => '123',
+            'title' => 'A study.',
+            'authors' => [['name' => 'Lee A'], ['name' => 'Ng B']],
+            'source' => 'J Test',
+            'volume' => '4',
+            'issue' => '2',
+            'pages' => '10-12',
+            'pubdate' => '2020 Jan',
+            'elocationid' => 'doi: 10.1/x',
+        ]]]));
+        $exited = false;
+
+        ob_start();
+        try {
+            (new \pubmed_field_on_change)->load_content_from_pubmed();
+        } catch (ExitCalled) {
+            $exited = true;
+        }
+
+        $printed = (string) ob_get_clean();
+
+        $this->assertTrue($exited);
+        $this->assertSame('A study.', json_decode($printed, true)['title'] ?? null);
     }
 
     public function test_a_failed_pubmed_request_returns_false(): void

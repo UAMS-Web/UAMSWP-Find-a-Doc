@@ -57,7 +57,7 @@ function uamswp_fad_gbp_save_modes(bool $exit = true): void
     wp_safe_redirect(add_query_arg('saved', '1', admin_url('admin.php?page=uamswp-fad-gbp')));
 
     if ($exit) {
-        exit;
+        uamswp_fad_exit();
     }
 }
 
@@ -80,7 +80,7 @@ function uamswp_fad_gbp_queue_all_action(bool $exit = true, ?callable $lookup = 
     wp_safe_redirect(add_query_arg('queued', $queued, admin_url('admin.php?page=uamswp-fad-gbp')));
 
     if ($exit) {
-        exit;
+        uamswp_fad_exit();
     }
 }
 
