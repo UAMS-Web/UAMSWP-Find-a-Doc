@@ -269,6 +269,11 @@ final class GbpLogicTest extends UnitTestCase
         $this->assertNotSame($base, UAMSWP_FAD_GBP_Logic::fingerprint([['store_code' => 'a_b', 'fields' => ['title' => 'Two']]], $modes, true, '1.0'));
         $this->assertNotSame($base, UAMSWP_FAD_GBP_Logic::fingerprint($items, ['uams' => 'dry-run', 'baptist-health' => 'dry-run'], true, '1.0'));
         $this->assertNotSame($base, UAMSWP_FAD_GBP_Logic::fingerprint($items, $modes, false, '1.0'));
+        $this->assertNotSame(
+            UAMSWP_FAD_GBP_Logic::fingerprint($items, ['uams' => 'off', 'baptist-health' => 'live'], true, '1.0'),
+            UAMSWP_FAD_GBP_Logic::fingerprint($items, ['uams' => 'dry-run', 'baptist-health' => 'live'], true, '1.0'),
+            'turning a silo on from Off changes the fingerprint, so its listings run again'
+        );
         $this->assertNotSame($base, UAMSWP_FAD_GBP_Logic::fingerprint($items, $modes, true, '1.1'));
     }
 
