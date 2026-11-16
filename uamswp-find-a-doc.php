@@ -7,7 +7,7 @@ Plugin URI: https://github.com/UAMS-Web/UAMSWP-Find-a-Doc
 Description: Find-a-doc plugin for uamshealth.com
 Author: UAMS Web Services
 Author URI: https://communications.uams.edu/web/
-Version: 2.4.0
+Version: 2.5.0
 Requires at least: 6.8
 Requires PHP: 8.2
 */
