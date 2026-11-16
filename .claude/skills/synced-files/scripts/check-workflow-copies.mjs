@@ -50,12 +50,17 @@ export const SKILLS_DIR = join(dirname(fileURLToPath(import.meta.url)), '..', '.
 /** The workflows with a template, as [file under .github/workflows/, owning skill]. */
 export const WORKFLOWS = [
     ['assign-author.yml', 'writing-pull-requests'],
-    ['check-attribution-footer.yml', 'writing-pull-requests'],
-    ['check-closing-keyword-across-lines.yml', 'writing-pull-requests'],
     ['pr-body-checks.yml', 'writing-pull-requests'],
     ['clear-handed-back.yml', 'handed-back-label'],
 ]
 
+/**
+ * The workflow copies that were retired when the two body checks moved into the reusable
+ * workflow `pr-body-checks.yml` in UAMS-Web/uams-ci-workflows (UAMS-Web/uams-claude-skills#669).
+ * Their templates are gone, so a repository still carrying one has a full copy that nothing
+ * updates and the caller `pr-body-checks.yml` does not replace.
+ */
+export const RETIRED_WORKFLOWS = ['check-attribution-footer.yml', 'check-closing-keyword-across-lines.yml']
 
 const asLf = (text) => text.replace(/\r\n/g, '\n')
 const LINE_BREAK = String.fromCharCode(10)
@@ -130,7 +135,32 @@ export function checkCopies({ root, required = [], skillsDir = SKILLS_DIR, workf
     if (results.every((result) => result.reason === 'no-template')) {
         return { status: 2, lines: ['workflow copy check cannot run: no template is delivered here.', ...results.map((result) => result.line)] }
     }
-    return { status: results.some((result) => result.status === 1) ? 1 : 0, lines: results.map((result) => result.line) }
+    const retired = retiredCopies(root)
+    const lines = [...results.map((result) => result.line), ...retired.map((entry) => entry.line)]
+    return { status: results.some((result) => result.status === 1) || retired.length > 0 ? 1 : 0, lines }
+}
+
+/**
+ * The retired workflow copies a repository still carries, as `{ file, line }`. A file that
+ * declares `workflow_call` is a reusable workflow the repository defines itself, not a retired
+ * copy, and is not listed.
+ */
+export function retiredCopies(root) {
+    const found = []
+    for (const file of RETIRED_WORKFLOWS) {
+        const path = join(root, '.github', 'workflows', file)
+        if (!existsSync(path)) continue
+        let text
+        try {
+            text = readFileSync(path, 'utf8')
+        } catch (failure) {
+            found.push({ file, line: `${path} could not be read: ${failure.message}` })
+            continue
+        }
+        if (declaresWorkflowCall(text)) continue
+        found.push({ file, line: `${path} is a retired copy: its check now runs through .github/workflows/pr-body-checks.yml, the caller template of the writing-pull-requests skill. Delete ${file}; the sync does this on its next run.` })
+    }
+    return found
 }
 
 function repoRoot(cwd) {
