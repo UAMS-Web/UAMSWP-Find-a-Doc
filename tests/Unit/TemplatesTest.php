@@ -13,6 +13,7 @@ namespace UamswpFindADoc\Tests\Unit;
 
 use Mockery;
 use PHPUnit\Framework\Attributes\DataProvider;
+use UamswpFindADoc\Tests\Support\ExitCalled;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
 
 use function Brain\Monkey\Functions\expect;
@@ -283,7 +284,7 @@ final class TemplatesTest extends UnitTestCase
     }
 
     #[DataProvider('missing_archive_types')]
-    public function test_a_provider_or_location_that_is_not_found_is_sent_to_its_archive_page(string $type, string $archive): void
+    public function test_a_provider_or_location_that_is_not_found_is_sent_to_its_archive_page_and_the_request_ends(string $type, string $archive): void
     {
         global $wp_query;
         $previous = $wp_query;
@@ -299,20 +300,24 @@ final class TemplatesTest extends UnitTestCase
         when('is_404')->justReturn(true);
         when('uamswp_fad_str')->returnArg();
         expect('get_post_type_archive_link')->once()->with($type)->andReturn($archive);
-        // wp_redirect() is followed by exit; the sentinel ends the callback where the exit would.
-        expect('wp_redirect')->once()->with($archive, 301)->andThrow(new \RuntimeException('redirected'));
+        $redirects = [];
+        when('wp_redirect')->alias(static function (string $location, int $status) use (&$redirects): bool {
+            $redirects[] = [$location, $status];
+
+            return true;
+        });
 
         try {
             (self::$actions[3][1])();
-            $this->fail('The request was not redirected.');
-        } catch (\RuntimeException $runtimeException) {
-            $this->assertSame('redirected', $runtimeException->getMessage());
+            $this->fail('The request did not end after the redirect.');
+        } catch (ExitCalled) {
+            $this->assertSame([[$archive, 301]], $redirects);
         } finally {
             $wp_query = $previous;
         }
     }
 
-    public function test_a_type_with_no_archive_page_is_redirected_to_an_empty_address(): void
+    public function test_a_type_with_no_archive_page_is_redirected_to_an_empty_address_and_the_request_ends(): void
     {
         global $wp_query;
         $previous = $wp_query;
@@ -327,13 +332,13 @@ final class TemplatesTest extends UnitTestCase
         when('uamswp_fad_str')->returnArg();
         when('get_post_type_archive_link')->justReturn(false);
         // The address is cast to a string, so a type without an archive reaches wp_redirect() as '' and not as false.
-        expect('wp_redirect')->once()->with(Mockery::mustBe(''), 301)->andThrow(new \RuntimeException('redirected'));
+        expect('wp_redirect')->once()->with(Mockery::mustBe(''), 301)->andReturn(true);
 
         try {
             (self::$actions[3][1])();
-            $this->fail('The request was not redirected.');
-        } catch (\RuntimeException $runtimeException) {
-            $this->assertSame('redirected', $runtimeException->getMessage());
+            $this->fail('The request did not end after the redirect.');
+        } catch (ExitCalled) {
+            $this->addToAssertionCount(1);
         } finally {
             $wp_query = $previous;
         }

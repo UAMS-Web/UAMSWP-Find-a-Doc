@@ -2,13 +2,16 @@
 
 /**
  * The hooks includes/class.fad-gmb-settings-page.php adds: the export page on `admin_menu`, and an export on
- * `admin_init` only when the request's `action` names it.
+ * `admin_init` only when the request's `action` names it. Also how each export ends the request: with the
+ * security message on a bad nonce, and with nothing more once the CSV is written.
  *
  * The file loads once per process. The first test here loads it from its own body, so the mutation run
  * credits the call the file makes as it loads to that test. Name this file first when mutating the GMB file.
  */
 
 declare(strict_types=1);
+
+use UamswpFindADoc\Tests\Support\ExitCalled;
 
 use function Brain\Monkey\Functions\when;
 
@@ -20,6 +23,8 @@ beforeEach(function (): void {
 
 afterEach(function (): void {
     $_GET = $this->get_backup;
+    WP_Query::$queue = [];
+    WP_Query::$queries = [];
 });
 
 /**
@@ -76,3 +81,77 @@ test('any other action hooks no export', function (mixed $action): void {
     'an empty action' => [''],
     'an array' => [['download_doximity_csv']],
 ]);
+
+/**
+ * Run an export as an administrator in WP-Admin with the given nonce, and return how it ended.
+ *
+ * @param  list<int>  $providers  The provider ids the export query finds.
+ * @return array{exit: string|null, output: string, headers: list<string>} The message the request ended with
+ *                                                                         (null when it did not end), what it
+ *                                                                         printed and the headers it sent.
+ */
+function gmb_export_run(string $export, string $nonce, array $providers = []): array
+{
+    uamswp_test_gmb_page();
+    $_GET = ['_wpnonce' => $nonce];
+    when('current_user_can')->justReturn(true);
+    when('is_admin')->justReturn(true);
+    when('wp_verify_nonce')->alias(static fn (string $given, string $action): int|false => $given === 'valid-'.$action ? 1 : false);
+
+    $headers = [];
+    when('header')->alias(static function (string $header) use (&$headers): void {
+        $headers[] = $header;
+    });
+    WP_Query::$queue = [$providers];
+    WP_Query::$queries = [];
+    $exit = null;
+
+    // The exports call fputcsv() without its $escape argument, which PHP 8.4 deprecates. That notice is about
+    // the CSV call and not how the request ends, so it alone is set aside; any other deprecation falls through to
+    // PHP's own handler, which prints it into the captured output and fails the test.
+    set_error_handler(static fn (int $level, string $message): bool => str_starts_with($message, 'fputcsv(): the $escape parameter'), E_DEPRECATED);
+    ob_start();
+    try {
+        $export();
+    } catch (ExitCalled $exitCalled) {
+        $exit = $exitCalled->getMessage();
+    } finally {
+        $output = (string) ob_get_clean();
+        restore_error_handler();
+    }
+
+    return ['exit' => $exit, 'output' => $output, 'headers' => $headers];
+}
+
+test('an export with a bad nonce ends the request with the security message before building anything', function (string $export): void {
+    $run = gmb_export_run($export, 'forged');
+
+    expect($run)->toBe(['exit' => 'Security check error', 'output' => '', 'headers' => []])
+        ->and(WP_Query::$queries)->toBe([]);
+})->with(['Doximity' => ['doximity_csv_export'], 'MyChart' => ['mychart_csv_export']]);
+
+test('the Doximity export ends the request with no message once the CSV is written', function (): void {
+    $run = gmb_export_run('doximity_csv_export', 'valid-download_doximity_csv');
+
+    expect($run['exit'])->toBe('')
+        ->and($run['output'])->toBe(chr(0xEF).chr(0xBB).chr(0xBF)."\n")
+        ->and($run['headers'])->toContain('Content-type: text/csv')
+        ->and(WP_Query::$queries)->toHaveCount(1);
+});
+
+test('the MyChart export ends the request with no message once the CSV is written', function (): void {
+    $provider = gmb_next_id();
+    gmb_world([
+        'posts' => [$provider => ['slug' => 'ann-lee', 'title' => 'Ann Lee']],
+        'fields' => ['physician_pid|'.$provider => '123', 'physician_resident|'.$provider => false],
+    ]);
+    when('get_the_permalink')->justReturn('https://example.test/provider/ann-lee/');
+
+    $run = gmb_export_run('mychart_csv_export', 'valid-download_mychart_csv', [$provider]);
+
+    expect($run['exit'])->toBe('')
+        ->and($run['output'])->toBe(chr(0xEF).chr(0xBB).chr(0xBF)
+            ."\"SER ID\",\"Provider Name\",\"Provider Profile URL\",\"Provider Photo URL\"\n"
+            ."123,\"Ann Lee\",https://example.test/provider/ann-lee/?utm_source=mychart&utm_medium=link&utm_campaign=clinical_service&utm_term=provider&utm_content=ann-lee&utm_specs=123,\n")
+        ->and($run['headers'])->toContain('Content-type: text/csv');
+});

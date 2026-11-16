@@ -66,7 +66,7 @@ function doximity_csv_export(): false
     // Nonce Check
     $nonce = $_GET['_wpnonce'] ?? '';
     if (! wp_verify_nonce(uamswp_fad_str($nonce), 'download_doximity_csv')) {
-        exit('Security check error');
+        uamswp_fad_exit('Security check error');
     }
 
     ob_start();
@@ -341,7 +341,7 @@ function doximity_csv_export(): false
         fputcsv($fh, $data_row, $delimiter);
     }
 
-    exit();
+    uamswp_fad_exit();
 
 }
 
@@ -1802,7 +1802,7 @@ function mychart_csv_export(): false
     // Nonce Check
     $nonce = $_GET['_wpnonce'] ?? '';
     if (! wp_verify_nonce(uamswp_fad_str($nonce), 'download_mychart_csv')) {
-        exit('Security check error');
+        uamswp_fad_exit('Security check error');
     }
 
     ob_start();
@@ -1905,6 +1905,6 @@ function mychart_csv_export(): false
         fputcsv($fh, $data_row, $delimiter);
     }
 
-    exit();
+    uamswp_fad_exit();
 
 }

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace UamswpFindADoc\Tests\Unit;
 
 use Brain\Monkey\Functions;
+use UamswpFindADoc\Tests\Support\ExitCalled;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
 
 use function Brain\Monkey\Functions\expect;
@@ -647,5 +648,31 @@ final class EditorGroupsTest extends UnitTestCase
         $this->expectExceptionMessage('died');
 
         \uamswp_fad_sync_editor_groups();
+    }
+
+    public function test_the_sync_action_redirects_back_to_the_editor_groups_screen_and_ends_the_request(): void
+    {
+        when('current_user_can')->justReturn(true);
+        expect('check_admin_referer')->once()->with('uamswp_fad_sync_editor_groups');
+        when('get_posts')->justReturn([]);
+        when('admin_url')->alias(static fn (string $path): string => 'https://x/wp-admin/'.$path);
+        when('add_query_arg')->alias(static fn (array $args, string $url): string => $url.'?'.http_build_query($args));
+
+        $redirects = [];
+        when('wp_safe_redirect')->alias(static function (string $location) use (&$redirects): bool {
+            $redirects[] = $location;
+
+            return true;
+        });
+        $exited = false;
+
+        try {
+            \uamswp_fad_sync_editor_groups();
+        } catch (ExitCalled) {
+            $exited = true;
+        }
+
+        $this->assertTrue($exited, 'The sync action ends the request.');
+        $this->assertSame(['https://x/wp-admin/edit-tags.php?taxonomy=editor_group&post_type=provider&uamswp_synced=0'], $redirects);
     }
 }
