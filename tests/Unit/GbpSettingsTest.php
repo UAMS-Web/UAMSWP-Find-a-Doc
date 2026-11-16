@@ -102,6 +102,11 @@ final class GbpSettingsTest extends UnitTestCase
         when('admin_url')->returnArg();
         when('get_option')->alias(fn (string $name, $default = false) => $name === 'uamswp_fad_gbp_modes' ? [] : $default);
         when('get_posts')->alias(fn (array $args) => $args['post_type'] === 'provider' ? [7, 8] : [55]);
+        // Every post has a published listing in the default silo, which is in dry run, so all three are queued.
+        when('get_post_type')->alias(fn (int $id) => $id === 55 ? 'location' : 'provider');
+        when('get_post_status')->justReturn('publish');
+        when('get_field')->alias(fn (string $name, int $id) => [1000 + $id]);
+        when('get_post_meta')->justReturn('');
         when('delete_post_meta')->justReturn(true);
         when('wp_next_scheduled')->justReturn(false);
         when('wp_schedule_single_event')->justReturn(true);
