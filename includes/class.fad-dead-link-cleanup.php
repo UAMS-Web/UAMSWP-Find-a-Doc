@@ -872,7 +872,7 @@ function uamswp_dead_links_back(string $notice = ''): never
 
     wp_safe_redirect(add_query_arg(array_filter(['page' => 'uamswp-dead-links', 'notice' => $notice]), admin_url('admin.php')));
 
-    exit;
+    uamswp_fad_exit();
 
 }
 
@@ -980,7 +980,7 @@ function uamswp_dead_links_run_step(string $action, array $statuses, callable $s
 
         wp_safe_redirect(uamswp_dead_links_step_url($action, $run));
 
-        exit;
+        uamswp_fad_exit();
 
     }
 
