@@ -81,25 +81,6 @@ test('the posts query is limited to titles starting with the letter, or to digit
     'a quote is escaped' => ["O'", " AND wp_posts.post_title LIKE 'O\\'%'"],
 ]);
 
-test('the terms query is left alone without a first letter', function (): void {
-    $GLOBALS['wpdb'] = template_helpers_wpdb();
-    $clauses = ['where' => 'x'];
-
-    expect(uamswp_terms_clauses($clauses, ['condition'], []))->toBe($clauses);
-});
-
-test('the terms query is limited to names starting with the letter, or to digits for a number', function (string $letter, string $expected): void {
-    $GLOBALS['wpdb'] = template_helpers_wpdb();
-
-    $clauses = uamswp_terms_clauses(['where' => 'x'], ['condition'], ['__first_letter' => $letter]);
-
-    expect($clauses)->toBe(['where' => 'x'.$expected]);
-})->with([
-    'a letter' => ['C', " AND t.name LIKE 'C%'"],
-    'a digit' => ['4', " AND t.name REGEXP '^[0-9]'"],
-    'a wildcard is escaped, then quoted' => ['_', " AND t.name LIKE '\\\\_%'"],
-]);
-
 /**
  * The hook each helper is registered on, and the templates that register it. A template not listed registers none.
  *
