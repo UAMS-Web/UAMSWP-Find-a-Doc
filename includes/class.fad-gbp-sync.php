@@ -141,7 +141,12 @@ final class UAMSWP_FAD_GBP_Sync
         foreach ($items as $item) {
             $entry = $this->handle($item);
             $entries[] = $entry;
-            ($this->logger)($entry);
+
+            // An Off silo says nothing the settings screen does not: logging it would fill the
+            // activity log and, as a settled skip, clear the store code's Needs attention entry.
+            if (empty($entry['unlogged'])) {
+                ($this->logger)($entry);
+            }
         }
 
         return $entries;
@@ -178,7 +183,7 @@ final class UAMSWP_FAD_GBP_Sync
         $entry['mode'] = $mode;
 
         if ($mode === 'off') {
-            return ['reason' => 'Silo '.$silo.' is off'] + $entry;
+            return ['reason' => 'Silo '.$silo.' is off', 'unlogged' => true] + $entry;
         }
 
         // Google rejects a longer code on every attempt with an error that does not name the cause.

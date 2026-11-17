@@ -9,6 +9,8 @@
 
 declare(strict_types=1);
 
+use UamswpFindADoc\Tests\Support\ExitCalled;
+
 use function Brain\Monkey\setUp;
 use function Brain\Monkey\tearDown;
 
@@ -26,6 +28,7 @@ use function Brain\Monkey\tearDown;
 uses()
     ->beforeEach(function (): void {
         setUp();
+        ExitCalled::stubExit();
     })
     ->afterEach(function (): void {
         $this->addToAssertionCount(Mockery::getContainer()->mockery_getExpectationCount());

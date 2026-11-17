@@ -154,6 +154,6 @@ add_action('template_redirect', function (): void {
     if (in_array($post_type, ['provider', 'location'], true) && is_404()) {
         $redirectLink = get_post_type_archive_link(uamswp_fad_str($post_type));
         wp_redirect((string) $redirectLink, 301);
-        exit;
+        uamswp_fad_exit();
     }
 });

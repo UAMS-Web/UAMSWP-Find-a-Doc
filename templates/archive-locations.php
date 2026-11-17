@@ -5,7 +5,7 @@
 $region_redirect = uamswp_fad_region_redirect_url('_location_region', $_COOKIE, $_GET, $_SERVER);
 if ($region_redirect !== null) {
     header('Location: '.$region_redirect);
-    exit();
+    uamswp_fad_exit();
 }
 get_header();
 

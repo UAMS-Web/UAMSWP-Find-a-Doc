@@ -569,7 +569,7 @@ function uamswp_fad_sync_editor_groups(): void
             admin_url('edit-tags.php')
         )
     );
-    exit;
+    uamswp_fad_exit();
 }
 
 add_action('admin_post_uamswp_fad_sync_editor_groups', 'uamswp_fad_sync_editor_groups');
