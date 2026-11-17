@@ -13,7 +13,9 @@ Requires PHP: 8.2
 */
 
 // If this file is called directly, abort.
-if (! defined('WPINC')) {
+// The two mutants that make this guard exit when WordPress is loaded end the test process before it reports
+// (a silent exit on Linux, so the run cannot score them), and no test can reach the exit without ending the process.
+if (! defined('WPINC')) { // @pest-mutate-ignore: IfNegated,RemoveNot
     exit;
 }
 
