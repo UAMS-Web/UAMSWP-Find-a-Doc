@@ -352,11 +352,80 @@ final class GbpDashboardTest extends UnitTestCase
         $this->assertStringContainsString('20 of 80 (25%)', $html);
         $this->assertStringContainsString('<progress max="80" value="20"', $html);
         $this->assertSame(2, substr_count($html, '<svg role="img" aria-label="'), 'two graphics, each named');
-        $this->assertStringContainsString('Last 7 days, oldest first:', $html);
-        $this->assertStringContainsString('Next 24 hours, per hour (not counting those waiting for the reset):', $html);
+        $this->assertStringContainsString('aria-label="Creates sent on each of the last 7 Pacific days, oldest first: 0, 0, 0, 0, 0, 0, 20"', $html, 'the full list stays in the name');
+        $this->assertStringContainsString('aria-label="Scheduled sync events due in each of the next 24 hours, not counting those waiting for the reset: '.implode(', ', array_fill(0, 24, 0)).'"', $html);
+        $this->assertStringContainsString("<small>20 creates sent in the last 7 days, the most (20) today. Counted by this site as it sends; Google's own quota figure is in the Google Cloud console.</small>", $html);
+        $this->assertStringContainsString('<small>Nothing due in the next 24 hours. Not counting those waiting for the reset.</small>', $html);
+        $this->assertStringContainsString('<span>6 days ago</span><span>today</span>', $html);
+        $this->assertStringContainsString('<span>now</span><span>+24 h</span>', $html);
+        $this->assertStringNotContainsString('oldest first: 0, 0, 0, 0, 0, 0, 20.', $html, 'no bare list in a caption');
         $this->assertStringContainsString('log_action=error', $html);
         $this->assertStringNotContainsString('<script', $html);
         $this->assertStringNotContainsString('<link', $html);
+    }
+
+    public function test_the_days_caption_says_when_no_creates_were_sent(): void
+    {
+        $days = UAMSWP_FAD_GBP_Logic::last_days([], self::NOW);
+
+        $this->assertSame('No creates sent in the last 7 days.', uamswp_fad_gbp_days_caption($days));
+    }
+
+    public function test_the_days_caption_gives_the_total_and_the_day_with_the_most(): void
+    {
+        $days = UAMSWP_FAD_GBP_Logic::last_days(['2026-10-30' => 1180, '2026-11-02' => 40, '2026-11-03' => 3], self::NOW);
+
+        $this->assertSame('1,223 creates sent in the last 7 days, the most (1,180) on Friday.', uamswp_fad_gbp_days_caption($days));
+    }
+
+    public function test_the_days_caption_names_today_and_yesterday_and_takes_the_latest_of_a_tie(): void
+    {
+        $this->assertSame('1 create sent in the last 7 days, the most (1) today.', uamswp_fad_gbp_days_caption(UAMSWP_FAD_GBP_Logic::last_days(['2026-11-03' => 1], self::NOW)));
+        // 2026-10-29 and 2026-11-02 both sent 5; the later one is named.
+        $this->assertSame('10 creates sent in the last 7 days, the most (5) yesterday.', uamswp_fad_gbp_days_caption(UAMSWP_FAD_GBP_Logic::last_days(['2026-10-29' => 5, '2026-11-02' => 5], self::NOW)));
+    }
+
+    public function test_the_queue_caption_says_when_nothing_is_due(): void
+    {
+        $this->assertSame('Nothing due in the next 24 hours.', uamswp_fad_gbp_queue_caption(array_fill(0, 24, 0)));
+    }
+
+    public function test_the_queue_caption_for_a_queue_that_fits_in_the_next_hour(): void
+    {
+        $hours = array_fill(0, 24, 0);
+        $hours[0] = 1500;
+
+        $this->assertSame('1,500 due within the next hour.', uamswp_fad_gbp_queue_caption($hours));
+    }
+
+    public function test_the_queue_caption_gives_the_total_the_busiest_hour_and_how_far_off_the_last_is(): void
+    {
+        // Staging on 2026-11-16: five full hours, then the rest in the sixth.
+        $hours = array_merge([240, 240, 240, 240, 240, 23], array_fill(0, 18, 0));
+
+        $this->assertSame('1,223 due in the next 24 hours, at most 240 an hour; the last is due in about 5 hours.', uamswp_fad_gbp_queue_caption($hours));
+
+        $hours = array_fill(0, 24, 0);
+        $hours[1] = 2;
+
+        $this->assertSame('2 due in the next 24 hours, at most 2 an hour; the last is due in about 1 hour.', uamswp_fad_gbp_queue_caption($hours));
+
+        // An hour holding a single event still counts as the last.
+        $hours = array_fill(0, 24, 0);
+        $hours[0] = 5;
+        $hours[3] = 1;
+
+        $this->assertSame('6 due in the next 24 hours, at most 5 an hour; the last is due in about 3 hours.', uamswp_fad_gbp_queue_caption($hours));
+    }
+
+    public function test_a_chart_is_labeled_at_each_end_without_the_labels_in_its_name(): void
+    {
+        $chart = uamswp_fad_gbp_dashboard_bars([1, 2], 2, 'Two values: 1, 2', '<start>', 'end');
+
+        $this->assertStringStartsWith('<svg role="img" aria-label="Two values: 1, 2" width="27"', $chart);
+        $this->assertStringEndsWith('</svg><span aria-hidden="true" style="display:flex;justify-content:space-between;width:27px;font-size:11px"><span>&lt;start&gt;</span><span>end</span></span>', $chart);
+        $this->assertStringEndsWith('</svg>', uamswp_fad_gbp_dashboard_bars([1, 2], 2, 'Two values: 1, 2'), 'no labels, no label row');
+        $this->assertStringEndsWith('</svg><span aria-hidden="true" style="display:flex;justify-content:space-between;width:27px;font-size:11px"><span>start</span><span></span></span>', uamswp_fad_gbp_dashboard_bars([1, 2], 2, 'Two values: 1, 2', 'start'), 'one label still gets the row');
     }
 
     public function test_a_user_without_the_settings_capability_gets_no_widget_and_no_output(): void
