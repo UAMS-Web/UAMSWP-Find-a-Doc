@@ -336,12 +336,18 @@ if (have_rows('remove_ontology_criteria', 'option')) {
             foreach ($location_service_lines as $location_service_line) {
                 if ((! empty($remove_region) && in_array($location_region, $remove_region)) && empty($remove_service_line)) {
                     $hide_medical_ontology = true;
+                    // Raising the level makes PHP refuse to compile the template, since only two loops enclose this statement.
+                    // @pest-mutate-ignore: IncrementInteger
                     break 2;
                 } elseif (empty($remove_region) && (! empty($remove_service_line) && in_array($location_service_line, $remove_service_line))) {
                     $hide_medical_ontology = true;
+                    // Raising the level makes PHP refuse to compile the template, since only two loops enclose this statement.
+                    // @pest-mutate-ignore: IncrementInteger
                     break 2;
                 } elseif ((! empty($remove_region) && in_array($location_region, $remove_region)) && (! empty($remove_service_line) && in_array($location_service_line, $remove_service_line))) {
                     $hide_medical_ontology = true;
+                    // Raising the level makes PHP refuse to compile the template, since only two loops enclose this statement.
+                    // @pest-mutate-ignore: IncrementInteger
                     break 2;
                 }
             }
