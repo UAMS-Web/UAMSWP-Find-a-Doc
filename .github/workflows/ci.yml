@@ -52,13 +52,15 @@ jobs:
   checks:
     # Pinned to a release tag, never a branch or a commit, so a change to the chain reaches this plugin
     # only when the pin moves.
-    uses: UAMS-Web/uams-ci-workflows/.github/workflows/ci.yml@v0.13.0
+    uses: UAMS-Web/uams-ci-workflows/.github/workflows/ci.yml@v0.14.0
     with:
       linux-only: true
       # Mutation testing is off until the coverage work closes (#1395): a pull request that changes a file mutates the
       # whole file, and the templates and helpers already carry about 300 survivors (#1400). The inputs below stay so
       # that turning it back on is this one line.
-      mutate: false
+      mutate: true
+      mutate-shards: 8
+      mutate-full-timeout-minutes: 345
       # The first-party PHP the `mutate` job selects changed files from, and that `composer mutate` mutates: the
       # `includes` and `templates` folders, the facetwp-alpha-uams plugin and the two root files. `includes/_unused`
       # holds code nothing loads and no test covers, so a git pathspec leaves it out of the selection.
