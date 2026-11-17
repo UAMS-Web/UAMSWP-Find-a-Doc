@@ -78,11 +78,14 @@ function uamswp_fad_gbp_scheduled_times(): array
 }
 
 /**
- * A bar chart as inline SVG. The values are also written out by the caller, so the figure is never the only carrier.
+ * A bar chart as inline SVG, with a label under each end. The full list of values is in the accessible name, and the
+ * caller writes what they add up to beside it, so the figure is never the only carrier.
  *
  * @param  array<int, int>  $values
+ * @param  string  $start  The label under the first bar (`6 days ago`).
+ * @param  string  $end  The label under the last bar (`today`).
  */
-function uamswp_fad_gbp_dashboard_bars(array $values, int $ceiling, string $description): string
+function uamswp_fad_gbp_dashboard_bars(array $values, int $ceiling, string $description, string $start = '', string $end = ''): string
 {
     $width = 12;
     $gap = 3;
@@ -98,7 +101,69 @@ function uamswp_fad_gbp_dashboard_bars(array $values, int $ceiling, string $desc
 
     $total = max(0, count($values) * ($width + $gap) - $gap);
 
-    return '<svg role="img" aria-label="'.esc_attr($description).'" width="'.$total.'" height="'.($height + 1).'" viewBox="0 0 '.$total.' '.($height + 1).'" focusable="false">'.$bars.'</svg>';
+    $svg = '<svg role="img" aria-label="'.esc_attr($description).'" width="'.$total.'" height="'.($height + 1).'" viewBox="0 0 '.$total.' '.($height + 1).'" focusable="false">'.$bars.'</svg>';
+
+    if ($start === '' && $end === '') {
+        return $svg;
+    }
+
+    // The accessible name already says where the values start and end, so the labels are hidden from it.
+    return $svg.'<span aria-hidden="true" style="display:flex;justify-content:space-between;width:'.$total.'px;font-size:11px"><span>'.esc_html($start).'</span><span>'.esc_html($end).'</span></span>';
+}
+
+/**
+ * The caption under the chart of the last days' creates: the total, and the day with the most.
+ *
+ * @param  array<int, array{day: string, count: int}>  $days  Oldest first; the last is today.
+ */
+function uamswp_fad_gbp_days_caption(array $days): string
+{
+    $counts = array_column($days, 'count');
+    $total = array_sum($counts);
+    $period = 'the last '.count($days).' days';
+
+    if ($total === 0) {
+        return 'No creates sent in '.$period.'.';
+    }
+
+    /** @var non-empty-array<int, int> $counts A total above zero means at least one day. */
+    $most = max($counts);
+    // The most recent of the days that share the highest count. The total is above zero, so the filter keeps at
+    // least one day and the cast only narrows the type.
+    // @pest-mutate-ignore: RemoveIntegerCast
+    $index = (int) array_key_last(array_filter($counts, static fn (int $count): bool => $count === $most));
+    $back = count($days) - 1 - $index;
+    $day = match ($back) {
+        0 => 'today',
+        1 => 'yesterday',
+        default => 'on '.(new DateTimeImmutable($days[$index]['day'], new DateTimeZone('America/Los_Angeles')))->format('l'),
+    };
+
+    return number_format($total).' '.($total === 1 ? 'create' : 'creates').' sent in '.$period.', the most ('.number_format($most).') '.$day.'.';
+}
+
+/**
+ * The caption under the chart of the next 24 hours: how many are due, the most in one hour, and how far off the last is.
+ *
+ * @param  array<int, int>  $hours  `hours[0]` is the next hour.
+ */
+function uamswp_fad_gbp_queue_caption(array $hours): string
+{
+    $total = array_sum($hours);
+
+    if ($total === 0) {
+        return 'Nothing due in the next 24 hours.';
+    }
+
+    /** @var non-empty-array<int, int> $busy A total above zero means at least one hour with an event. */
+    $busy = array_filter($hours, static fn (int $count): bool => $count > 0);
+    $last = array_key_last($busy);
+
+    if ($last === 0) {
+        return number_format($total).' due within the next hour.';
+    }
+
+    return number_format($total).' due in the next 24 hours, at most '.number_format(max($busy)).' an hour; the last is due in about '.$last.' '.($last === 1 ? 'hour' : 'hours').'.';
 }
 
 /**
@@ -130,15 +195,15 @@ function uamswp_fad_gbp_render_dashboard_widget(): void
         <progress max="<?php echo esc_attr((string) $data['budget']); ?>" value="<?php echo esc_attr((string) min($data['used'], $data['budget'])); ?>" aria-label="Creates sent today"><?php echo esc_html($data['used'].' of '.$data['budget']); ?></progress>
     <?php } ?>
     <p>
-        <?php echo uamswp_fad_gbp_dashboard_bars($day_counts, $data['budget'], 'Creates sent on each of the last 7 Pacific days, oldest first: '.implode(', ', $day_counts)); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built from integers and an escaped attribute.?>
-        <br><small>Last 7 days, oldest first: <?php echo esc_html(implode(', ', $day_counts)); ?>. Counted by this site as it sends; Google's own quota figure is in the Google Cloud console.</small>
+        <?php echo uamswp_fad_gbp_dashboard_bars($day_counts, $data['budget'], 'Creates sent on each of the last 7 Pacific days, oldest first: '.implode(', ', $day_counts), (count($day_counts) - 1).' days ago', 'today'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built from integers and escaped text.?>
+        <small><?php echo esc_html(uamswp_fad_gbp_days_caption($data['days'])); ?> Counted by this site as it sends; Google's own quota figure is in the Google Cloud console.</small>
     </p>
 
     <h3>Queue</h3>
     <p>
         <?php echo esc_html($queue['total'].' scheduled, '.$queue['due'].' due now, '.$queue['waiting'].' waiting for the reset.'); ?>
-        <br><?php echo uamswp_fad_gbp_dashboard_bars($queue['hours'], 1, 'Scheduled sync events due in each of the next 24 hours, not counting those waiting for the reset: '.implode(', ', $queue['hours'])); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built from integers and an escaped attribute.?>
-        <br><small>Next 24 hours, per hour (not counting those waiting for the reset): <?php echo esc_html(implode(', ', $queue['hours'])); ?>.</small>
+        <br><?php echo uamswp_fad_gbp_dashboard_bars($queue['hours'], 1, 'Scheduled sync events due in each of the next 24 hours, not counting those waiting for the reset: '.implode(', ', $queue['hours']), 'now', '+24 h'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built from integers and escaped text.?>
+        <small><?php echo esc_html(uamswp_fad_gbp_queue_caption($queue['hours'])); ?> Not counting those waiting for the reset.</small>
     </p>
 
     <h3>Last 24 hours</h3>
