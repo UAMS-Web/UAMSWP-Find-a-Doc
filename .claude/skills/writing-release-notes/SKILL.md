@@ -6,7 +6,7 @@ description: >-
   would-be-major-at-1.0 callout, who may cut a release (only with the operator's authorization,
   given in the session's own chat or recorded as a standing grant, and within its bounds), and a
   CLOSED, ordered heading vocabulary (`## Breaking changes`, `## What's new`, `## What's fixed`,
-  `## Security`, `## Maintenance and tooling`) with one bullet per change formatted as
+  `## Security`, `## Maintenance and tooling`) with one bullet per distinct title formatted as
   `- <PR title> [#N](…/pull/N)`: using the API PR title (never the branch-name merge-commit
   subject), no `by @author`, inline code preserved. Covers the label-and-path routing rules, the
   bundled generator `gen_release_notes.py` (`--repo` required; per-repository routing by option),
@@ -93,7 +93,18 @@ generator below), and the generator emits each only when its option is passed.
 
 ## Line format
 
-- One bullet per change: `- <PR title> [#N](https://github.com/UAMS-Web/<repo>/pull/N)`.
+- One bullet per distinct title: `- <PR title> [#N](https://github.com/UAMS-Web/<repo>/pull/N)`.
+  Within one heading, changes whose title is identical after the generator's own cleanup
+  (prefix and `[skip ci]` stripping, casing, `&` to "and"), compared byte for byte, become one
+  bullet that carries every ref, each its own link, separated by a comma and a space: pull
+  requests first in ascending order, then direct commits in the order they landed. The merged
+  bullet sits where its first member sat, so the other bullets do not move. Example, from the
+  `aether-tables` `v0.1.0` notes, where one title was five bullets:
+  `- Sync shared skills and rules from uams-claude-skills [#5](…/pull/5), [#18](…/pull/18), [#23](…/pull/23), [#24](…/pull/24), [#25](…/pull/25)`.
+  A title that differs in any character, including a version number or a count (Dependabot
+  titles), stays its own bullet, as does the same title under a different heading, because
+  placement is a routing decision the reader relies on. A `--breaking-item` bullet is
+  hand-written and is never merged or rewritten.
 - **Use the PR title from the GitHub API**, **never the merge-commit subject**: those are branch
   slugs (`Merge pull request #N from UAMS-Web/…`), not titles. For a change pushed straight to
   `main` with no PR, use the commit subject (strip any Conventional-Commit prefix and `[skip ci]`
