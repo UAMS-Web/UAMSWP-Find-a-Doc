@@ -857,6 +857,79 @@ class DiffSignalsTest(unittest.TestCase):
         self.assertEqual(len(GEN.read_log("-", self.plain_sha)), 3)
 
 
+class CollapseTest(unittest.TestCase):
+    """One bullet per distinct title within a bucket, carrying every ref."""
+
+    @staticmethod
+    def pulls(*numbers, title="Sync shared skills and rules from uams-claude-skills"):
+        return {n: {"title": title, "body": "", "labels": [], "closing": []} for n in numbers}
+
+    @staticmethod
+    def maint(sha):
+        return ([".claude/rules/x.md"], 0, 3)
+
+    def link(self, n):
+        return f"[#{n}](https://github.com/{REPO}/pull/{n})"
+
+    def render(self, log, pulls, **kw):
+        return GEN.render(log, opts(lead="L.", **kw), FakeGitHub(pulls), self.maint)
+
+    def test_the_same_title_becomes_one_bullet_with_refs_in_ascending_order(self):
+        # Newest first, as the log arrives; the refs still ascend.
+        log = [(c * 40, f"Sync shared skills and rules from uams-claude-skills (#{n})")
+               for c, n in zip("abcde", (25, 24, 23, 18, 5))]
+        body = self.render(log, self.pulls(25, 24, 23, 18, 5))
+
+        self.assertEqual(body.count("Sync shared skills and rules"), 1)
+        self.assertIn("- Sync shared skills and rules from uams-claude-skills "
+                      + ", ".join(self.link(n) for n in (5, 18, 23, 24, 25)) + "\n", body)
+
+    def test_a_title_differing_in_any_character_stays_its_own_bullet(self):
+        pulls = {1: self.pulls(1)[1], 2: self.pulls(2, title="Sync shared skills and rules from uams-claude-skill")[2]}
+        body = self.render([("a" * 40, "x (#1)"), ("b" * 40, "x (#2)")], pulls)
+
+        self.assertEqual(body.count("\n- "), 2)
+
+    def test_the_same_title_in_different_buckets_stays_separate(self):
+        pulls = {1: self.pulls(1, title="Handle a thing")[1], 2: self.pulls(2, title="Handle a thing")[2]}
+        sig = lambda sha: ([".claude/rules/x.md"], 0, 3) if sha == "a" * 40 else (["includes/X.php"], 0, 3)
+        body = GEN.render([("a" * 40, "x (#1)"), ("b" * 40, "x (#2)")], opts(lead="L."),
+                          FakeGitHub(pulls), sig)
+
+        self.assertEqual(body.count("- Handle a thing"), 2)
+        self.assertIn("## Maintenance and tooling", body)
+
+    def test_a_pull_request_and_a_direct_commit_collapse_into_one_bullet(self):
+        pulls = self.pulls(7, title="Tidy the docs")
+        body = self.render([("a" * 40, "x (#7)"), ("d" * 40, "Tidy the docs")], pulls)
+
+        self.assertEqual(body.count("- Tidy the docs"), 1)
+        self.assertIn(f"- Tidy the docs {self.link(7)}, [`ddddddd`](https://github.com/{REPO}/commit/{'d' * 40})\n", body)
+
+    def test_a_breaking_item_is_left_exactly_as_passed(self):
+        item = "Sync shared skills and rules from uams-claude-skills [#30](https://example.invalid/30)."
+        body = self.render([("a" * 40, "x (#5)"), ("b" * 40, "x (#6)")], self.pulls(5, 6),
+                           breaking_item=[item])
+
+        self.assertIn(f"## Breaking changes\n- {item}\n", body)
+        self.assertEqual(body.count("- Sync shared skills and rules"), 2)
+
+    def test_the_merged_bullet_sits_where_its_first_member_sat(self):
+        pulls = {1: self.pulls(1, title="Alpha")[1], 2: self.pulls(2, title="Beta")[2], 3: self.pulls(3, title="Alpha")[3],
+                 4: self.pulls(4, title="Gamma")[4]}
+        log = [(c * 40, f"x (#{n})") for c, n in zip("abcd", (1, 2, 3, 4))]
+        body = self.render(log, pulls)
+
+        titles = [l.split(" [")[0] for l in body.splitlines() if l.startswith("- ")]
+        self.assertEqual(titles, ["- Alpha", "- Beta", "- Gamma"])
+        self.assertIn(f"- Alpha {self.link(1)}, {self.link(3)}", body)
+
+    def test_the_same_pull_request_listed_twice_keeps_one_ref(self):
+        body = self.render([("a" * 40, "x (#5)"), ("b" * 40, "x (#5)")], self.pulls(5))
+
+        self.assertEqual(body.count(self.link(5)), 1)
+
+
 class BodyTest(unittest.TestCase):
     """The rendered shape, with every repository's optional section."""
 

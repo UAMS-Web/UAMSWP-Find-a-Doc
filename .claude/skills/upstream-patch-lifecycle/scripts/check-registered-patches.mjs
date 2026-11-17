@@ -1,35 +1,39 @@
 #!/usr/bin/env node
 // check-registered-patches.mjs: fail when a locked `uams-web/patches-*` package declares a patch
-// that the root registration omits (UAMS-Web/uams-claude-skills#768).
+// that composer-patches did not resolve into `patches.lock.json`
+// (UAMS-Web/uams-claude-skills#768, reworked in UAMS-Web/uams-claude-skills#797).
 //
-// WHY. `cweagans/composer-patches` v2 reads a dependency's own declared patches only from the
-// lock's `packages`, never `packages-dev`. The `uams-web/patches-*` packages sit in `require-dev`
-// in a consumer, so the root registration is the only thing that applies them. When a release of
-// a patches package declares a new patch and the consumer moves its pin, the new patch is silently
-// unapplied unless the root list gains it in the same change (measured on
-// UAMS-Web/aether-redirects#134).
+// WHY. A patch is applied only when composer-patches resolved it into `patches.lock.json`, which
+// records what the plugin will apply. Where a patches package sits in `require-dev`, the plugin
+// reads its declared patches only from the root registration, so a pin move that adds a declared
+// patch leaves it unapplied until the root list gains it and the lock is relocked (measured on
+// UAMS-Web/aether-redirects#134). Where the package sits in `require`, the plugin reads the
+// declaration itself and no root registration exists (UAMS-Web/uams-statamic#756). Reading the
+// outcome, `patches.lock.json`, answers both layouts with one comparison instead of inferring from
+// where the package is required.
 //
 // WHAT IT READS.
-//   composer.lock    every package named `uams-web/patches-*`, from `packages` and `packages-dev`,
-//                    and its `extra.patches` (a map of target package to patches).
-//   registration     the root `patches.json` (its `patches` key), plus the root `composer.json`
-//                    `extra.patches`, plus the file `extra.patches-file` names when it is set.
+//   composer.lock        every package named `uams-web/patches-*`, from `packages` and
+//                        `packages-dev`, and its `extra.patches` (a map of target package to patches).
+//   patches.lock.json    the `url` of every patch under its `patches` key, whatever its provenance
+//                        (`root`, `patches-file:...`, `dependency:...`).
 // A patch is matched by its file path (slashes normalized, a leading `./` dropped), because the
-// description is free text and may differ between the package and the root.
+// description is free text and may differ between the package and the lock.
 //
-// A repository with no `uams-web/patches-*` package passes, and so does one that registers every
-// declared patch. A repository with such a package and no registration at all fails and names
-// every file.
+// A repository with no declared patch passes. A repository that declares a patch and has no
+// `patches.lock.json` fails and names every file: a `--no-dev` relock deletes the file, and a
+// missing file must not read as a clean result.
 //
-// CONTROLS, run before the repository is read: a fixture whose root list omits one declared patch
-// must fail and name that file (and so must one omitting a patch declared under a second target
-// package key, since a package may patch several packages), a fixture registering every declared patch must pass, and a
-// fixture with no patches package must pass. A control misbehaving is exit 2.
+// CONTROLS, run before the repository is read: a fixture whose lock omits one declared patch must
+// fail and name that file (and so must one omitting a patch declared under a second target package
+// key, since a package may patch several packages), a fixture whose lock holds every declared patch
+// must pass whether the package is in `packages` or `packages-dev`, and a fixture with no patches
+// package must pass. A control misbehaving is exit 2.
 //
 // EXIT CODES
-//     0  every declared patch is registered, or there is no patches package
-//     1  a declared patch is omitted from the root registration; each file is named
-//     2  the check could not answer: a control failed, or composer.lock or a registration file is
+//     0  every declared patch is in patches.lock.json, or there is no declared patch
+//     1  a declared patch is missing from patches.lock.json, or the file is absent; each file is named
+//     2  the check could not answer: a control failed, or composer.lock or patches.lock.json is
 //        unreadable or is not JSON
 //
 // USAGE
@@ -75,26 +79,27 @@ export function declaredPatches(lock) {
 }
 
 /**
- * The declared patches whose file is not in the registered set.
+ * The declared patches whose file is not in the recorded set.
  *
  * @param {object} lock parsed composer.lock
- * @param {Iterable<string>} registered patch file paths registered at the root
+ * @param {Iterable<string>} recorded patch file paths recorded in patches.lock.json
  */
-export function findOmitted(lock, registered) {
-    const have = new Set([...registered].map(normalize))
+export function findOmitted(lock, recorded) {
+    const have = new Set([...recorded].map(normalize))
     return declaredPatches(lock).filter((patch) => !have.has(patch.file))
 }
 
-/** The patch file paths registered at the root, from the files the root carries. */
-export function registeredFiles({ patchesJson, composerJson }) {
-    const files = []
-    if (patchesJson) {
-        files.push(...listPatches(patchesJson.patches))
+/** The patch file paths a parsed `patches.lock.json` records, whatever the target package or provenance. */
+export function lockedFiles(patchesLock) {
+    const patches = patchesLock !== null && typeof patchesLock === 'object' ? patchesLock.patches : undefined
+    if (patches === null || typeof patches !== 'object') {
+        return []
     }
-    if (composerJson?.extra?.patches) {
-        files.push(...listPatches(composerJson.extra.patches))
-    }
-    return files.map((patch) => patch.file)
+    return Object.values(patches)
+        .flatMap((entries) => (Array.isArray(entries) ? entries : []))
+        .map((entry) => entry?.url)
+        .filter((url) => typeof url === 'string' && url !== '')
+        .map(normalize)
 }
 
 const FIXTURE_LOCK = {
@@ -109,23 +114,27 @@ const FIXTURE_LOCK = {
     ],
 }
 
-/** Run the three controls; returns the failures. */
+/** Run the controls; returns the failures. */
 export function runControls() {
     const failed = []
     const first = 'vendor/uams-web/patches-example/patches/first.patch'
     const second = 'vendor/uams-web/patches-example/patches/second.patch'
-    const omitted = findOmitted(FIXTURE_LOCK, [first])
+    const lockOf = (...urls) => ({ patches: { 'vendor/target': urls.map((url) => ({ package: 'vendor/target', url })) } })
+    const omitted = findOmitted(FIXTURE_LOCK, lockedFiles(lockOf(first)))
     if (omitted.length !== 1 || omitted[0].file !== second) {
-        failed.push('a root list omitting one declared patch did not report exactly that file')
+        failed.push('a patches.lock.json omitting one declared patch did not report exactly that file')
     }
     // A package declares patches under more than one target key; an omission under the second key must be seen.
     const twoTargets = { packages: [{ name: 'uams-web/patches-two', version: 'v1', extra: { patches: { 'a/one': { x: 'p/one.patch' }, 'b/two': { y: 'p/two.patch' } } } }] }
-    const second_key = findOmitted(twoTargets, ['p/one.patch'])
+    const second_key = findOmitted(twoTargets, lockedFiles(lockOf('p/one.patch')))
     if (second_key.length !== 1 || second_key[0].file !== 'p/two.patch' || second_key[0].target !== 'b/two') {
-        failed.push('a root list omitting a patch declared under a second target package did not report that file')
+        failed.push('a patches.lock.json omitting a patch declared under a second target package did not report that file')
     }
-    if (findOmitted(FIXTURE_LOCK, [first, `./${second}`]).length !== 0) {
-        failed.push('a root list registering every declared patch was reported')
+    // The same full lock passes whether the package sits in `packages` (require) or `packages-dev` (require-dev).
+    const full = lockedFiles(lockOf(first, `./${second}`))
+    const inRequire = { packages: FIXTURE_LOCK['packages-dev'], 'packages-dev': [] }
+    if (findOmitted(FIXTURE_LOCK, full).length !== 0 || findOmitted(inRequire, full).length !== 0) {
+        failed.push('a patches.lock.json holding every declared patch was reported')
     }
     if (findOmitted({ packages: [{ name: 'a/b', version: '1' }], 'packages-dev': [] }, []).length !== 0) {
         failed.push('a lock with no patches package was reported')
@@ -148,14 +157,11 @@ export function checkRoot(root) {
         return { code: 0, lines: [`check-registered-patches: no composer.lock at ${lockPath}, so no patches package is locked: nothing to check.`] }
     }
     let lock
-    let composerJson
-    let patchesJson
+    let patchesLock
+    const patchesLockPath = join(root, 'patches.lock.json')
     try {
         lock = readJson(lockPath, 'composer.lock')
-        composerJson = existsSync(join(root, 'composer.json')) ? readJson(join(root, 'composer.json'), 'composer.json') : undefined
-        const named = composerJson?.extra?.['patches-file']
-        const patchesPath = join(root, typeof named === 'string' && named !== '' ? named : 'patches.json')
-        patchesJson = existsSync(patchesPath) ? readJson(patchesPath, 'patches file') : undefined
+        patchesLock = existsSync(patchesLockPath) ? readJson(patchesLockPath, 'patches.lock.json') : undefined
     } catch (error) {
         return { code: 2, lines: [`check-registered-patches: ${error.message}`] }
     }
@@ -164,16 +170,26 @@ export function checkRoot(root) {
     if (declared.length === 0) {
         return { code: 0, lines: ['check-registered-patches: no locked uams-web/patches-* package declares a patch: nothing to check.'] }
     }
-    const omitted = findOmitted(lock, registeredFiles({ patchesJson, composerJson }))
+    if (patchesLock === undefined) {
+        return {
+            code: 1,
+            lines: [
+                `check-registered-patches: FAIL: ${declared.length} declared patch(es) and no patches.lock.json at ${patchesLockPath}, so none is recorded as applied (a relock with --no-dev deletes the file):`,
+                ...declared.map((p) => `  ${p.file}  (${p.pkg} ${p.version}, patches ${p.target})`),
+                'Run composer patches-relock, then composer patches-repatch, and commit patches.lock.json.',
+            ],
+        }
+    }
+    const omitted = findOmitted(lock, lockedFiles(patchesLock))
     if (omitted.length === 0) {
-        return { code: 0, lines: [`check-registered-patches: clean (${declared.length} declared patch(es), all registered at the root).`] }
+        return { code: 0, lines: [`check-registered-patches: clean (${declared.length} declared patch(es), all recorded in patches.lock.json).`] }
     }
     return {
         code: 1,
         lines: [
-            `check-registered-patches: FAIL: ${omitted.length} declared patch(es) are not registered at the root, so composer-patches will not apply them:`,
+            `check-registered-patches: FAIL: ${omitted.length} declared patch(es) are not recorded in patches.lock.json, so composer-patches will not apply them:`,
             ...omitted.map((p) => `  ${p.file}  (${p.pkg} ${p.version}, patches ${p.target})`),
-            'Add each to the root patches.json (or extra.patches) under its target package, then run composer update to refresh patches.lock.json.',
+            'Register each in the root patches.json (or extra.patches) where the package is in require-dev, then run composer patches-relock and composer patches-repatch.',
         ],
     }
 }

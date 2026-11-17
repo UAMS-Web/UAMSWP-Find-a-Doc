@@ -113,3 +113,13 @@ Every entry heading is `## YYYY-MM-DD`, a space, and a short title. Leave exactl
 **Rejected.** Leaving `location` previews empty until the cutover: editors would work around it by editing the URL for an unknown time, since the cutover has no date. Shipping the fix and keeping the filter as a harmless no-op: it is not one.
 
 **Companion.** [UAMS-Web/UAMSWP-Find-a-Doc#1064](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1064) (its `## Decision` section); the fix in [UAMS-Web/UAMSWP-Find-a-Doc#1391](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1391) and its removal in [UAMS-Web/UAMSWP-Find-a-Doc#1069](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1069).
+
+## 2026-11-17 Keep the 64-character store code guard, verify the limit, then decide ID-based codes (#1425)
+
+**Decision.** The store code length guard (`STORE_CODE_MAX`, 64) stays as it is. Whether Google rejects a longer code is verified first, by one `validateOnly` create of a 65-character code in a non-production silo with the response recorded (#1426). Store codes built from provider and location post IDs instead of slugs are decided on that result and blocked by it (#1427); existing listings keep matching by their stored Google ID.
+
+**Why.** On staging (plugin 2.5.0), 1 of 1,594 provider rows is over 64 characters (maximum 68) and no location row is, so the guard affects one listing. Google's reference states no maximum length for `storeCode`, and the 64 in #928 cites no Google document or recorded response, so a change built on it rests on an unverified figure.
+
+**Rejected.** Shortening the slugs on the website: it changes public URLs and every code built from the slug for one affected row, and a later rename moves the code again. Building ID-based codes now: the limit it works around is not verified.
+
+**Companion.** [UAMS-Web/UAMSWP-Find-a-Doc#1425](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1425) (its `## Decision` section); the follow-ups [UAMS-Web/UAMSWP-Find-a-Doc#1426](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1426) and [UAMS-Web/UAMSWP-Find-a-Doc#1427](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1427).

@@ -56,4 +56,8 @@ Closes #
 <!-- Mandatory, and always last. `- [x]` = verified locally; `- [ ]` = deferred to CI, review,
      or staging. Name the command, URL, or observation. -->
 
-- [ ] The repository's gate passed on the head commit.
+<!-- A gate item belongs here only where no status check is required (a repository without
+     protection, or a private one with remote CI off). Where `gh api
+     repos/<owner>/<repo>/rules/branches/<default>` lists required checks, they are the
+     record and a CI-is-green item is circular. Add an item only for a check they do not
+     run, naming the commit the runner printed. -->

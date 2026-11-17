@@ -74,16 +74,21 @@ a consumer requires the patches packages in `require-dev`, so the root registrat
 thing that applies them. When a release of the package declares a new patch and the consumer moves
 its pin, the new patch stays unapplied unless the same change adds it to the root list
 (UAMS-Web/aether-redirects#134 measured nine omitted patches that way). The check that catches it
-reads `composer.lock` and the root registration (`patches.json`, `extra.patches` and the file
-`extra.patches-file` names), matches patches by file path, and fails naming each omitted file;
-it passes when no patches package is locked:
+reads the outcome rather than inferring it from where the package is required: it compares each
+locked `uams-web/patches-*` package's declared patches (`composer.lock`, `packages` and
+`packages-dev`) with the patch `url` values in `patches.lock.json`, which records what
+composer-patches resolved, matches by file path, and fails naming each missing file. A package in
+`require` (the application form, whose declaration the plugin reads itself) and one in
+`require-dev` (registered at the root) are judged the same way. It fails, naming the cause, when a
+patch is declared and `patches.lock.json` is absent (a `--no-dev` relock deletes it), and passes when
+no patches package declares a patch (UAMS-Web/uams-claude-skills#797):
 
 ```bash
 node .claude/skills/upstream-patch-lifecycle/scripts/check-registered-patches.mjs
 ```
 
-It exits 0 when every declared patch is registered, 1 when one is omitted, and 2 when it could not
-answer (a control failed, or a file is not JSON). The shared `local-ci` runner runs it on its own
+It exits 0 when every declared patch is recorded, 1 when one is missing or the lock file is absent,
+and 2 when it could not answer (a control failed, or a file is not JSON). The shared `local-ci` runner runs it on its own
 as the `patches-registered` job whenever `composer.lock` locks a `uams-web/patches-*` package, with
 no `local-ci.json` entry; `"registeredPatches": false` in `local-ci.json` turns that off
 (UAMS-Web/uams-claude-skills#768, UAMS-Web/uams-claude-skills#770).
