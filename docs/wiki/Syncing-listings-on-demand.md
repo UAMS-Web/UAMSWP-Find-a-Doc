@@ -27,7 +27,7 @@ Written against v2.5.0.
    Done: 1 update
    ```
 
-   The columns are the store code, silo, mode, action and reason. The command exits `1` when any listing ends in review or error, when a create is held back by the daily budget (it prints when creates resume), when Google rate limits the run, when the credentials are missing, when another sync holds the run lock, when `--silo` names an unknown silo, when there is nothing to sync, or when the post is not a published provider or location. Otherwise it exits `0`.
+   The columns are the store code, silo, mode, action and reason. The command exits `1` when any listing ends in review or error, when a create is held back by the daily budget (it prints when creates resume), when Google rate limits the run, when the credentials are missing, when another sync holds the run lock, when `--silo` names an unknown silo, when there is nothing to sync, when the post is not a published provider or location, when Google refuses the request (`Stopped: <message>`), or when neither or both of `--post` and `--all` is given (`Pass exactly one of --post=<id> or --all.`). Otherwise it exits `0`.
 
 5. **Run the closing scan now, if needed:**
 
@@ -42,7 +42,7 @@ The command does not use the change check the queue relies on, so it always comp
 ## Two more commands
 
 - `wp uamswp gbp backfill-ids` matches posts to their listings by store code, then by Google's customer ID, and prints what it would store. Add `--apply` to store the matches.
-- `wp uamswp gbp cid-report` lists posts with no listing or no customer ID. It changes nothing.
+- `wp uamswp gbp cid-report` lists, as `NO LISTING` lines, the providers marked as having listings on Google whose customer IDs match no listing, and, as `NO CID` lines, the listings whose customer ID is on no provider or location. It changes nothing.
 
 ## Reference
 

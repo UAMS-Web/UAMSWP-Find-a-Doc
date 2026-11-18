@@ -12,7 +12,7 @@ Written against v2.5.0.
 | Conditions and Treatments | Taxonomy options, labels and archive pages. |
 | MyChart Open Scheduling | The scheduling widget's configuration. |
 | Remove Medical Ontology | The removal conditions. |
-| UAMSWP CSV Export | Provider CSV exports for U.S. News and Doximity, and for MyChart. |
+| CSV Export (page title *UAMSWP CSV Export*) | Provider CSV exports for U.S. News and Doximity, and for MyChart. |
 | Dead Link Cleanup | A dry run, a removal in batches of 25, and an undo, for relationship fields that point at deleted posts and for orphaned rows in the custom tables. |
 | Business Profile Sync | Credentials status, silo modes, the queue-all button and the activity log: see [Business Profile sync](Business-Profile-sync.md). |
 | Settings > General (WordPress) | One field: the Ajax Search Pro ID for providers. |

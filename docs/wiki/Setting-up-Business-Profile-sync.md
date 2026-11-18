@@ -20,7 +20,7 @@ Written against v2.5.0.
 
 5. **Read the dry run.** Under *Activity*, **Recent activity** lists what each listing would get (*Dry run, no write made* or *Dry run, no listing created*), and **Needs attention** lists every listing left for review or that failed. Filter by silo to take one silo at a time. Resolve each entry before going further; [Troubleshooting](Troubleshooting.md) lists the messages and their fixes.
 
-6. **Set one silo to Live.** On the production site, choose **Live** for that silo and select **Save silo modes**. The notice *Settings saved.* confirms it. From now on, saving a provider or location in that silo updates or creates its listings about two minutes later.
+6. **Set one silo to Live.** On the production site, choose **Live** for that silo and select **Save silo modes**. The notice *Settings saved.* confirms it. Switching the mode queues nothing by itself: select **Queue a sync for all providers and locations** again to write every listing in the silo now. From then on, saving a provider or location in that silo updates or creates its listings about two minutes later.
 
 7. **Watch the first live writes.** The *Business Profile Sync* widget on the WordPress Dashboard shows the status, the creates sent today against the daily budget of 80, and the queue. Entries in **Recent activity** now read *Updated*, *Created* or *Photos sent*.
 

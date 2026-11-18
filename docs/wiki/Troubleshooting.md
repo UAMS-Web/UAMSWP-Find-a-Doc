@@ -20,7 +20,7 @@ Written against v2.5.0.
 
 ## A credential shows Missing
 
-**Cause:** the settings screen cannot read that constant or environment variable. While any is missing, queued syncs do nothing and the dashboard widget says *Not configured*.
+**Cause:** the settings screen cannot read that constant or environment variable. While any is missing, queued syncs do nothing and the dashboard widget says *Not configured* (or *Off*, when every silo is Off).
 
 **Fix:** define all three in `wp-config.php` or the site's environment, as in [Setting up Business Profile sync](Setting-up-Business-Profile-sync.md), and reload the screen.
 
@@ -68,7 +68,7 @@ Shown as *Store code `<code>` is already on another listing than the stored `<na
 
 ## Listing is in another group
 
-Shown as *Listing is in this silo's other group*, *Listing is in another silo's group (`<silo>`)* or *Listing is parked in `<group>`*.
+Shown as *Listing is in this silo's other group (`<group>`)*, *Listing is in another silo's group (`<silo>`)* or *Listing is parked in `<group>`*.
 
 **Cause:** the store code was found outside the account group the sync writes to for this silo and kind of listing, for example in a group kept for closed or duplicate listings. The sync never moves or recreates such a listing.
 
@@ -94,7 +94,7 @@ Shown as *Creates paused until `<time>` (daily Google limit)*, *Daily create bud
 
 Shown as *Gave up on post `<id>` after 5 rate-limited attempts*, or in WP-CLI as *Stopped: Google is rate limiting this account. Run again later.*
 
-**Cause:** Google answered 429 or 503 five times in a row for this post.
+**Cause:** Google answered 429 or 503 six times in a row for this post: the first try and five retries.
 
 **Fix:** wait, then save the profile again or run [the command](Syncing-listings-on-demand.md) for it.
 

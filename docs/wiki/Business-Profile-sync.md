@@ -48,6 +48,8 @@ Each silo maps to its own Google account groups, one for provider listings and o
 | Dry run (default) | Logs what would change and writes nothing. |
 | Live | Writes to Google, on the production site only. Anywhere else a Live silo runs as a dry run, and the settings screen says which kind of site it is. |
 
+A site counts as production when the host of its home URL is the public Find-a-Doc site's; a developer can override the check with the `uamswp_fad_gbp_is_production` filter.
+
 A silo with no saved mode, or with a value that is not one of the three, is in dry run.
 
 ## What it writes
@@ -60,7 +62,7 @@ For every listing, each field only when it differs from the live listing (phone 
 | Address and coordinates | The location's address and map position. |
 | Phone | The primary phone for the listing. |
 | Website | The profile page on the site, with tracking parameters. |
-| Categories | The primary and additional categories from the *Google Business Profile Categories* taxonomies. A provider with none gets `Doctor`. |
+| Categories | The primary and additional categories from the *Google Business Profile Categories* taxonomies. A provider with none gets `Doctor`, and a location with none gets `Medical Clinic`. |
 | Description | The profile's description. |
 
 **Category names** are matched to Google's categories without regard to case. A name Google has no category for is left off and named in the activity log as *No Google category for: ...*.
@@ -103,7 +105,7 @@ Each defaults to No. Residents, and providers with no published location, are al
 
 Google limits how many listings an account can create in a day, so the sync sends at most 80 creates per Pacific day. When the budget is used, or Google refuses a create for its daily limit, creates pause until Pacific midnight and the post is queued again after the reset. Updates are not paused.
 
-**Rate limits.** A refusal with status 429 or 503 is a rate limit: the job retries after 60 seconds, doubling the wait each time up to an hour, and gives up after five attempts with *Gave up on post ... after 5 rate-limited attempts*.
+**Rate limits.** A refusal with status 429 or 503 is a rate limit: the job retries after 1, 2, 4, 8 and 16 minutes, and when the fifth retry is also refused it gives up with *Gave up on post ... after 5 rate-limited attempts*.
 
 ## The activity log
 
@@ -132,7 +134,7 @@ A listing is orphaned when:
 - **its provider or location is unpublished** (draft, pending, private, scheduled or in the trash) and no published post stores the same listing; or
 - **a provider no longer lists the location** the listing is for.
 
-The count starts on the day the profile was unpublished or the association was removed. Republishing the profile, or adding the location back to the provider, clears it.
+For an unpublished profile the count starts on the day it left Published, or on the first daily scan if it left before the scan existed. For a removed location it starts at the provider's next sync in which one of its listings is in a Live silo. Republishing the profile, or adding the location back to the provider, clears it.
 
 | Days orphaned | What happens |
 | --- | --- |
@@ -143,4 +145,4 @@ The count starts on the day the profile was unpublished or the association was r
 
 A listing already closed on Google, or no longer on Google, is left alone. The scan can also be run at once with `wp uamswp gbp sync --orphans`.
 
-**Note:** a profile moved to the Edit Flow *Inactive* status is not yet found by the daily scan, so its listing is not closed. See [UAMS-Web/UAMSWP-Find-a-Doc issues](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues) for the follow-up.
+**Note:** a profile moved to the Edit Flow *Inactive* status is not yet found by the daily scan, so its listing is not closed. The fix is [UAMS-Web/UAMSWP-Find-a-Doc#1432](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1432); until it ships, move such a profile to Draft instead.
