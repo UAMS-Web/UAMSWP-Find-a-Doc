@@ -64,7 +64,7 @@ It is a mechanical rewrite, not step 2. Run it, then do every step of the loop b
 
 Pest's native `--mutate` (`pestphp/pest-plugin-mutate`, bundled with Pest) mutates the source and demands a test fail; a surviving (**UNTESTED**) mutant is a false-green gap. A coverage driver is required; if it is missing, or you are stuck on slow `herd coverage`/Xdebug, set it up per [`pcov-setup`](../pcov-setup/SKILL.md), which also holds every invocation gotcha: the relative `--path`, the worktree sub-path, the Windows env-block limit, and the forms that report `100.00%` without running a mutant. `0 Mutations for 0 Files created` means it found nothing (a setup failure), **not** a pass.
 
-Scope the run to the class under test with `--path=<source dir>` and, where the installed Pest major has it, `--class="<Namespace>\<Class>"` with `--covered-only`.
+Scope the run to the class under test with `--path=<source dir>` and, where the installed Pest major has it, `--class="<Namespace>\<Class>"`. Run it without `--covered-only`: the flag mutates only lines the tests already execute, so a closing figure taken with it can read 100% on a class whose tests miss most of it.
 
 ### Triaging survivors
 

@@ -1,0 +1,53 @@
+name: Check commit session links
+
+# Fails when a commit message in a pull request carries a trailer whose value is a tool session
+# URL. The no-emoji-in-durable-records rule and the `Attribution footer` check keep such a link out
+# of a pull-request body; neither reaches a commit message, so a trailer naming a session passed
+# every check and stayed readable in the commit list (UAMS-Web/uams-claude-skills#819, deciding
+# UAMS-Web/uams-statamic#628). A `Co-authored-by` trailer naming the tool is allowed.
+#
+# Template: .claude/skills/writing-pull-requests/templates/check-commit-session-links.yml in
+# UAMS-Web/uams-claude-skills, copied to .github/workflows/check-commit-session-links.yml. The
+# template owns the whole copy, this header included. The synced-files skill's
+# check-workflow-copies.mjs fails when the copy differs from the template. The script it runs
+# ships in the same skill, so no repository file is needed beyond the synced .claude/ tree.
+#
+# The commits are read from the API, so a push that lands between the event and the run is still
+# what is checked. The run fails on a finding (exit 1) and on a check that could not run (exit 2,
+# a failed or truncated read). A failure is fixed by rewording the commit; the check never
+# rewrites one, and a merged commit is not rewritten.
+#
+# Gated on RUN_REMOTE_CI like the rest of CI: the job carries
+# `if: vars.RUN_REMOTE_CI != 'false'`, so a private repository, where the variable is `false`,
+# skips it before a runner is dispatched and bills no minutes, and a public repository, where the
+# variable is unset, runs it as before. A skipped job reports `skipped`, so a skipped run is not a
+# passing run: nothing has read the commits while the switch is off.
+#
+# The job is not a required status check anywhere; making it one is each repository's own
+# ruleset change.
+
+on:
+  pull_request:
+    types: [opened, reopened, ready_for_review, synchronize]
+
+# Nothing at the workflow level; the one job states the scopes it needs.
+permissions: {}
+
+jobs:
+  commit-session-links:
+    name: Commit session links
+    if: vars.RUN_REMOTE_CI != 'false'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Check the commit messages for a tool session URL trailer
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node .claude/skills/writing-pull-requests/scripts/check-commit-session-links.mjs --repo "$GITHUB_REPOSITORY" --pr "${{ github.event.pull_request.number }}"

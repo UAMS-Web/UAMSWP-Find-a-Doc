@@ -611,11 +611,13 @@ issue: don't open a duplicate. Only file once you've confirmed nothing matches.
 
 ## Filing into the project board
 
-**A ticket is not filed until it is on the board with its `Status` set.** `gh issue create`
-returns a URL and a number, and a number is not a filed ticket: an issue that exists on no board
+**A ticket is not filed until it has an issue type and is on the board with its `Status` set.**
+`gh issue create` returns a URL and a number, and a number is not a filed ticket: an issue that exists on no board
 is invisible in every view anyone plans from, and nothing downstream will ever say so. Creating
 the issue is half of it; adding it to the project and setting `Status` is the other half, done in
-the same breath as the labels and the issue type, not as a follow-up step. That is stated before
+the same breath as the labels and the issue type, not as a follow-up step. An issue with no type
+is unfinished in the same way an issue on no board is: it can be built, reviewed and closed with
+nothing ever saying so, and a view filtered by type never shows it. That is stated before
 the mechanics because the mechanics are what get read, and a recipe answers *how* without ever
 answering *whether*.
 
@@ -651,13 +653,20 @@ while REST is untouched), and check the budget the way that rule prescribes befo
 quota is metered per user across the whole organization, not per repository, and the board is
 shared: treat it as a resource you can exhaust for someone else, not just for yourself.
 
-**Set the issue type too.** Separate from labels and from the board, GitHub carries an
-org-level **issue type**: `Bug`, `Feature`, or `Task`, and it is *single-select*, so unlike
-labels it cannot contradict itself. It matters more than the label vocabulary does for bugs,
-since bugs are not filed under a label. Align it with the archetype you
-filed: `Bug` → the bug template, `Feature` → the feature template, `Task` → a research spike or
-a follow-up cleanup. The web-UI templates set it via their `type:` front matter; `gh issue
-create` has no `--type` flag, so on the agent path set it with the API (step 1b in the recipe).
+**Set the issue type in the creation step, and read it back.** Separate from labels and from the
+board, GitHub carries an org-level **issue type**: `Bug`, `Feature`, or `Task`, and it is
+*single-select*, so unlike labels it cannot contradict itself. It matters more than the label
+vocabulary does for bugs, since bugs are not filed under a label. The web-UI templates set it via
+their `type:` front matter; `gh issue create` has no `--type` flag, so on the command-line path
+the type is a second call that follows `gh issue create` at once, and the recipe below treats the
+two as one step. **An issue with no type is unfinished, not filed.** Skipping the call is silent:
+on 2026-11-17, 59 of the issues in `UAMS-Web/UAMSWP-Pusher` had no type, 20 of them created after
+setting the type was already the stated practice.
+
+**Choosing the type from the title:** a defect in existing behavior is `Bug`, new behavior is
+`Feature`, and everything else (research, cleanup, chores, follow-ups) is `Task`. This matches the
+archetype templates: the bug template is `Bug`, the feature template is `Feature`, and the
+research spike and follow-up cleanup templates are `Task`.
 
 Issue types are **organization-wide**: the same three defaults apply in every UAMS-Web
 repository, so adding a custom type is not a per-repository decision. The three defaults are
@@ -670,12 +679,16 @@ diagnosis lives in the body, not the board). The transitions after that are the 
 **Recipe:**
 
 ```bash
-# 1. create + assign + label (pass a --label only for a label `gh label list` shows)
+# 1. create + assign + label (pass a --label only for a label `gh label list` shows),
+#    then set the issue type before anything else (no `gh issue create --type` flag
+#    exists; Bug | Feature | Task)
 gh issue create --repo UAMS-Web/<repo> --title '…' --body-file body.md \
   --label <label> --assignee @me
-
-# 1b. set the issue type (no `gh issue create --type` flag exists; Bug | Feature | Task)
 gh api -X PATCH repos/UAMS-Web/<repo>/issues/<n> -f type=Task
+
+# 1 (read back). prints the type name; `none` means the type was missed, so set it now
+# (plain `--jq .type.name` prints an empty line for an untyped issue, which reads as nothing)
+gh api repos/UAMS-Web/<repo>/issues/<n> --jq '.type.name // "none"'
 
 # 2. add to the board → prints the item id (PVTI_…)
 gh project item-add 1 --owner UAMS-Web --url <issue-url> --format json

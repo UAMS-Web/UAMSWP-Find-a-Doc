@@ -370,7 +370,7 @@ class RoutingTest(unittest.TestCase):
         )
 
     def test_a_change_touching_what_ships_is_never_tooling(self):
-        for path in ("includes/Auth.php", "config/defaults.php", "uamswp-migration-api.php", "src/X.php"):
+        for path in ("includes/Auth.php", "config/defaults.php", "aether-wordpress-migration-api.php", "src/X.php"):
             with self.subTest(path=path):
                 self.assertFalse(GEN.paths_are_tooling(["tests/Feature/AuthTest.php", path]))
 

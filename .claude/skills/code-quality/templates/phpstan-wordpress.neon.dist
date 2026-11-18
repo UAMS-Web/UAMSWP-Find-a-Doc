@@ -171,7 +171,9 @@ parameters:
         # match depends on the level and on which calls a suite happens to
         # make: the internal-class entry matches only from level 2, and a suite
         # whose `Pest.php` never uses `$this` has nothing for the first entry to
-        # match. Measured on the `tests` skill's WordPress plugin template with
+        # match (the `tests` skill's template counts Mockery expectations
+        # through `MockeryPHPUnitIntegration`, so its `Pest.php` has no `$this`
+        # and needs no `addToAssertionCount()` entry). Measured on the `tests` skill's WordPress plugin template with
         # PHPStan 2.3.0 and Pest 5.3.0, 2026-10-07: without the first it fails
         # at level 0. The Integration suite is class-based PHPUnit 9.6 and
         # needs no entry of its own.

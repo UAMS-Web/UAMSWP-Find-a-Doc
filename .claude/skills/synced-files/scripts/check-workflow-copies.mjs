@@ -52,15 +52,20 @@ export const WORKFLOWS = [
     ['assign-author.yml', 'writing-pull-requests'],
     ['pr-body-checks.yml', 'writing-pull-requests'],
     ['clear-handed-back.yml', 'handed-back-label'],
+    ['check-untyped-issues.yml', 'writing-issues'],
+    ['check-commit-session-links.yml', 'writing-pull-requests'],
 ]
 
 /**
  * The workflow copies that were retired when the two body checks moved into the reusable
  * workflow `pr-body-checks.yml` in UAMS-Web/uams-ci-workflows (UAMS-Web/uams-claude-skills#669).
+ * `check-closing-keywords.yml` joined them for the targets that carried a standalone copy under that name,
+ * whose `Closing keywords` job would otherwise stand beside the caller's job of the same name
+ * (UAMS-Web/uams-claude-skills#818).
  * Their templates are gone, so a repository still carrying one has a full copy that nothing
  * updates and the caller `pr-body-checks.yml` does not replace.
  */
-export const RETIRED_WORKFLOWS = ['check-attribution-footer.yml', 'check-closing-keyword-across-lines.yml']
+export const RETIRED_WORKFLOWS = ['check-attribution-footer.yml', 'check-closing-keyword-across-lines.yml', 'check-closing-keywords.yml']
 
 const asLf = (text) => text.replace(/\r\n/g, '\n')
 const LINE_BREAK = String.fromCharCode(10)

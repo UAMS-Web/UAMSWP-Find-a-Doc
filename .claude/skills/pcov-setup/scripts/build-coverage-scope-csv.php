@@ -326,12 +326,12 @@ if ($runPass3) {
             continue;
         }
 
-        // Same shape as `composer mutate -- --class=… --covered-only` (bakes
+        // Same shape as `composer mutate -- --class=…` (bakes
         // --path=app). Invoke php + backslash pest path so Windows mutant
         // children launch (#2322); do not shell out to composer.bat (proc_open
         // argv form cannot start .bat). Never pass a test file / --filter
         // (false 100% via child timeouts) or --parallel (false DB kills).
-        fwrite(STDOUT, "pass3: php vendor\\bin\\pest --mutate --path=app --class={$fqcn} --covered-only\n");
+        fwrite(STDOUT, "pass3: php vendor\\bin\\pest --mutate --path=app --class={$fqcn}\n");
         [$exit, $output] = runPestMutate($root, $fqcn);
         $cell = interpretMutateOutput($output, $exit);
         $mutationResults[$relative] = $cell;
@@ -573,7 +573,8 @@ function coveringTestsForSources(
  *
  * Uses `php` + `vendor\bin\pest` (platform separators) so Windows mutant
  * children launch (#2322). Equivalent to the composer script's
- * `@php vendor/bin/pest --mutate --path=app` plus `--class` / `--covered-only`.
+ * `@php vendor/bin/pest --mutate --path=app` plus `--class`. No `--covered-only`: the figure this feeds is a
+ * closing one, and the flag lets a class whose tests miss most of it read 100%.
  *
  * @return array{0: int, 1: string} exit code and combined stdout/stderr
  */
@@ -590,7 +591,6 @@ function runPestMutate(string $root, string $fqcn): array
         '--mutate',
         '--path=app',
         '--class='.$fqcn,
-        '--covered-only',
         '--compact',
     ];
 

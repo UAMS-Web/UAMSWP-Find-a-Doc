@@ -168,7 +168,7 @@ if (
 }
 ```
 
-Short calls that read fine inline (`__('…', 'uamswp-migration-api')`, `$entry->get('field',
+Short calls that read fine inline (`__('…', 'aether-wordpress-migration-api')`, `$entry->get('field',
 [])`, `add_action('rest_api_init', …)`) stay inline; the rule bites on definitions and on calls
 long enough to wrap. Pint's `method_argument_space: ensure_fully_multiline` normalizes a split
 argument list once you have broken the first line, so `vendor/bin/pint --dirty` finishes the job.

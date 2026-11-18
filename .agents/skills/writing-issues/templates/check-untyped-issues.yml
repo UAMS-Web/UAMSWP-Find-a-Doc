@@ -1,0 +1,57 @@
+name: Check issue types
+
+# Fails the run, listing the numbers, when the repository has an open issue with no issue
+# type. The `writing-issues` skill says to set Bug, Feature or Task on every issue; filing from
+# the command line skips the step, and an instruction cannot catch a miss. This reads the
+# issues once a week, so a missed type surfaces within seven days whoever filed the issue, a
+# person or a bot (UAMS-Web/uams-claude-skills#809). It reports and never sets a type, because
+# choosing between Bug, Feature and Task is a judgement.
+#
+# Template: .claude/skills/writing-issues/templates/check-untyped-issues.yml in
+# UAMS-Web/uams-claude-skills, copied to .github/workflows/check-untyped-issues.yml. The
+# template owns the whole copy, this header included. The synced-files skill's
+# check-workflow-copies.mjs fails when the copy differs from the template. The script it runs
+# ships in the same skill, so no repository file is needed beyond the synced .claude/ tree.
+#
+# The run reads this repository's own issues with its own token (`issues: read`). Pull
+# requests, which the issues endpoint also returns, are skipped. The script prints the number of
+# issues it read first, so a log that lists none can be told from a failed read. Exit 1 is a
+# finding, exit 2 is a check that could not run (a failed or truncated read), and both fail the
+# run. `workflow_dispatch` runs it on demand.
+#
+# GitHub disables a scheduled workflow in a public repository after 60 days with no repository
+# activity; a run is then missing, and the weekly report with it, until the workflow is
+# re-enabled.
+#
+# Gated on RUN_REMOTE_CI like the rest of CI: the job carries
+# `if: vars.RUN_REMOTE_CI != 'false'`, so a private repository, where the variable is
+# `false`, skips it before a runner is dispatched and bills no minutes, and a public
+# repository, where the variable is unset, runs it as before. A skipped job reports
+# `skipped`, so a skipped run is not a passing run: nothing has read the issues while the
+# switch is off.
+
+on:
+  schedule:
+    - cron: '17 14 * * 1'
+  workflow_dispatch:
+
+# Nothing at the workflow level; the one job states the scopes it needs.
+permissions: {}
+
+jobs:
+  untyped-issues:
+    if: vars.RUN_REMOTE_CI != 'false'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      issues: read
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Report open issues with no type
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node .claude/skills/writing-issues/scripts/check-untyped-issues.mjs --repo "$GITHUB_REPOSITORY"

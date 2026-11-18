@@ -17,7 +17,7 @@ description: >-
   Edit it there, not here; the next sync overwrites this copy.
   Delivered to this repository through the profile(s): tests.
 -->
-<!-- cspell:ignore absint ABSPATH autoloaded muplugins Packagist packagist phpcs Playwright Stache tia WPCS wpdb yoast -->
+<!-- cspell:ignore absint ABSPATH autoloaded muplugins opcache Packagist packagist phpcs Playwright Stache tia WPCS wpdb yoast -->
 
 # Tests
 
@@ -44,6 +44,8 @@ A repository develops and tests on one PHP, and that is not the oldest PHP it su
 **The floor in every Laravel app, PHP package and Statamic add-on is PHP 8.4**, written `^8.4` in `composer.json` (UAMS-Web/uams-claude-skills#579). `UAMS-Web/statamic-addon-template`'s `composer.json` requires `"php": "^8.4"`, read 2026-11-06, and a Statamic add-on keeps it. A repository that declares a lower constraint raises it in its own ticket.
 
 **Every repository, of every kind, develops on the latest PHP 8.4 patch, 8.4.27 today, and runs Pest 5.** `config.platform.php` is `8.4.27`, and it is raised on each 8.4 security release, here and in each repository's `composer.json` and lock (UAMS-Web/uams-claude-skills#394). It can never go below 8.4.1, because every PHPUnit 13 release, which Pest 5.3 requires, needs `php >=8.4.1`. The pin also keeps Composer from resolving for a newer PHP than a teammate has. `local-ci.json`'s `php` is `8.4`, and the local CI runner refuses, before any job, a PHP older than `config.platform.php`; a job with a `php` of its own, such as the floor lint, is not held to it.
+
+**When the pin is raised, a repository whose CI turns the JIT off on Windows re-tries `opcache.jit=tracing` on its Windows leg once, on the new patch** (UAMS-Web/uams-claude-skills#802). The setting is a repository's own and lives in its setup action, because the shared files set no `opcache` value. Change the leg to the tracing JIT in the same pull request that raises the pin, and run it once. On a pass, the JIT stays on for that leg. On a crash (an access violation, `0xC0000005`, partway through the suite), restore `opcache.jit=off` and add the new patch version to the comment that records why it is off. The current instance is `UAMS-Web/aether-wordpress-importer`'s `.github/actions/setup/action.yml`, which turned the tracing JIT off on Windows after crashes on PHP 8.4.27 and on the 8.4.28RC1 build (UAMS-Web/aether-wordpress-importer#341). A repository that does not turn the JIT off has nothing to re-try.
 
 The development PHP is a separate setting from the floor, and the floor never sets it: a Laravel app, PHP package or Statamic add-on pins `config.platform.php` and `local-ci.json`'s `php` the same way, never below 8.4.1 or its floor. A repository on another development PHP today is moved by its own ticket. The newest Pest major that PHP allows is the one to run (repo.packagist.org, 2026-10-07):
 
@@ -127,7 +129,7 @@ Template: [`templates/wordpress-plugin/`](templates/wordpress-plugin/). Two Comp
 | `composer.require-dev.jsonc` | The `require-dev`, `config` and `scripts` keys to merge into the root `composer.json`: Pest 5 and Brain Monkey, the development PHP pin, and the `setup:integration`, `test`, `test:unit` and `test:integration` scripts. Not a `composer.json` of its own. |
 | `phpunit.xml` | The root configuration: the `Unit` testsuite only, and the paths coverage measures (`<source>`). |
 | `tests/bootstrap.php.dist` | The Unit bootstrap: Composer's autoloader, Patchwork, `ABSPATH`, the plugin's definition files. No WordPress. |
-| `tests/Pest.php.dist` | Brain Monkey around every Unit test, with its expectations added to the assertion count. |
+| `tests/Pest.php.dist` | Brain Monkey around every Unit test, with its expectations added to the assertion count through Mockery's PHPUnit integration (`MockeryPHPUnitIntegration`). |
 | `tests/Unit/ExampleTest.php.dist` | Example unit test of `example_plugin_read_more_link()` with `get_permalink()` mocked. |
 | `tests/Integration/composer.json.dist` | The Integration suite's own Composer setup: `phpunit/phpunit ^9.6`, `wp-phpunit/wp-phpunit`, `yoast/phpunit-polyfills ^4.0`, the same platform pin. Shipped as `.dist` so tools that scan a repository for `composer.json` files do not pick up the template; the copy drops the suffix. |
 | `tests/Integration/phpunit.xml` | The Integration configuration, on PHPUnit 9: one testsuite over this directory excluding `./vendor`, and the paths coverage measures in PHPUnit 9's `<coverage><include>`. |
@@ -272,7 +274,7 @@ expect(has_action('init', 'my_plugin_register'))->toBeTruthy();     // after cal
 
 **What it cannot see:** what WordPress actually does. Whether the hook fires at the point the code assumes, whether a query returns what the mock returned, whether the REST route is reachable or answers anonymously, whether the option round-trips through the database, whether multisite switching is restored. A mock returns what the test told it to, so a unit test of code whose correctness lives in WordPress' behavior passes against a wrong assumption. That is what the integration layer is for.
 
-Two mechanics the templates already handle: Patchwork is loaded before the plugin's files, so a test can also mock one of the plugin's own functions; and `tests/Pest.php` adds Brain Monkey's expectations to the assertion count, so a test whose only check is `Functions\expect(...)->once()` is not reported as risky. A function mocked in one test stays defined afterwards, as a stub that throws if called unmocked, so one test's mock never answers for another.
+Two mechanics the templates already handle: Patchwork is loaded before the plugin's files, so a test can also mock one of the plugin's own functions; and `tests/Pest.php` adds Brain Monkey's expectations to the assertion count through `MockeryPHPUnitIntegration` (no `$this` call in `Pest.php`, so PHPStan level 10 needs no suppression for it), so a test whose only check is `Functions\expect(...)->once()` is not reported as risky. A function mocked in one test stays defined afterwards, as a stub that throws if called unmocked, so one test's mock never answers for another.
 
 **Why not `10up/wp_mock`.** It is the common alternative and does the same job, but WP_Mock 1.1.1 requires `phpunit/phpunit ^9.6`, which only the unmaintained Pest 1 accepts, and PHP 7.4 to 8.x. Brain Monkey requires no PHPUnit at all, so it works under every Pest major and under any PHPUnit a repository that cannot run Pest is on.
 

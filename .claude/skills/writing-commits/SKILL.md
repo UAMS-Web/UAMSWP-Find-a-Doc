@@ -23,6 +23,14 @@ is held to belongs to [`writing-issues`](../writing-issues/SKILL.md) and
 [`writing-pull-requests`](../writing-pull-requests/SKILL.md); what a COMMENT is held to, and the
 check to run on a draft before posting it, is [`writing-comments`](../writing-comments/SKILL.md).
 
+## No tool session link in a message
+
+A commit message may not carry a trailer whose value is a tool session URL, such as `Amp-Thread-ID: <thread URL>` or a Claude Code session link (UAMS-Web/uams-claude-skills#819). It is a link into an outside tool's conversation that a reader cannot follow, and it stays in the branch's commits, the pull request's commit list and the squash message.
+
+- **`Co-authored-by` naming the tool is allowed** and is the attribution the convention keeps: it names the tool, and links to nothing.
+- **Delete the session trailer when drafting a message.** A harness that offers one is wrong here.
+- **A pull-request check reads every commit message and fails on one**, naming the commit and line; the gate hands the pull request back to its author to reword it and does not rewrite the commit. A commit already merged is left as it is. The rule is the third conflict in [`no-emoji-in-durable-records`](../../rules/no-emoji-in-durable-records.md).
+
 ## Output format
 
 When proposing a commit message, **present the final message inside a Markdown code block** so
