@@ -1,5 +1,19 @@
 # UAMSWP-Find-a-Doc
 
+The WordPress plugin behind Find-a-Doc: the provider, location, area of expertise, condition, treatment and clinical resource content types, the templates that display them, the Doc Profile Editor and Doc Profile Admin roles with their editor groups, and the sync that keeps Google Business Profile listings in step with providers and locations.
+
+**Documentation is in the [wiki](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/wiki):** setting up the Business Profile sync, editor groups, the WP-CLI commands, the reference pages and troubleshooting. This README keeps the requirements, installation and development notes.
+
+## Requirements
+
+- WordPress 6.8 or later and PHP 8.2 or later (the plugin header's `Requires at least` and `Requires PHP`).
+- Advanced Custom Fields PRO, Advanced Custom Fields: Mask Field, Advanced Custom Fields: Extended, FacetWP and FacetWP - Alpha for UAMS. The plugin lists them as required and prompts for any that are missing (`required-plugins.php`).
+- The UAMS 2020 theme ([`UAMS-Web/uams-2020`](https://github.com/UAMS-Web/uams-2020)), a Genesis child theme. The templates are written for it, and the style build imports its Sass.
+
+## Installation
+
+Install the plugin folder as `wp-content/plugins/UAMSWP-Find-a-Doc` and activate it under **Plugins**. The GitHub download carries only the files the plugin runs (see `.gitattributes`). To turn on the Business Profile sync afterwards, follow [Setting up Business Profile sync](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/wiki/Setting-up-Business-Profile-sync) in the wiki.
+
 ## Amp orbs
 
 On Debian 12 orbs, executable `.agents/setup` installs PHP 8.4 with the test extensions and PCOV, PHP 8.2 for floor linting, Composer 2.11.1, MariaDB, and Node 22 (matching CI). PHP and MariaDB use the available package patch releases; Node uses the available Node 22 patch release on the first install. Both Composer trees install from their lockfiles. npm installs with scripts disabled so the `preinstall` hook cannot rewrite the lockfile. No tracked dependency versions are changed.
@@ -12,11 +26,7 @@ Run `.agents/setup` to refresh dependencies or repair missing fixtures, then `.a
 
 ## Editor groups
 
-Doc Profile Editors (`doc_editor`) can edit a provider or location only when they are its author or a member of one of its **editor groups**. Editor groups are a private taxonomy on providers and locations (Providers > Editor Groups). Each group has a primary editor and a list of editors, all with the same rights: edit, hide, or unpublish the records in the group. Publishing stays with administrators, and so does deleting: Doc Profile Admins (`doc_admin`) can edit any provider or location but cannot delete one.
-
-- **Assign a group to a record:** administrators and `doc_admin` tick it in the Editor Groups box on the provider or location edit screen (or in Quick Edit). `doc_editor` accounts see the box but cannot change it.
-- **Groups for a service line:** edit the service line term (Providers > Service Lines) and pick its editor group. Every provider and location in that service line picks the group up when it is saved, and follows if its service line changes; groups added by hand on the record are kept. The Editor Groups screen has an "Apply service line mapping" button that does this for every existing record at once.
-- **Groups without a service line** (department sections, stand-alone teams) are plain terms that are assigned by hand.
+Editor groups let a Doc Profile Editor maintain a set of providers and locations. They moved to the wiki: [Giving editors access with editor groups](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/wiki/Giving-editors-access-with-editor-groups) and [Roles and editor groups](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/wiki/Roles-and-editor-groups).
 
 ## Tests
 
@@ -55,29 +65,7 @@ Pull requests are gated by the GitHub Actions workflow in [`.github/workflows/ci
 
 ## Google Business Profile sync
 
-Saving a provider or a location queues an update of the matching Google Business Profile listings: a provider's own listings, and a location's own listing plus those of the providers who practice there. A listing that exists is updated, and one that does not exist is created. The settings screen is under Find-a-Doc Settings > Business Profile Sync.
-
-**Credentials.** Define these three constants in `wp-config.php`, or set them as environment variables of the same name. They are never stored in the database or shown on the settings screen.
-
-```php
-define('GOOGLE_BUSINESS_PROFILE_CLIENT_ID', '...');
-define('GOOGLE_BUSINESS_PROFILE_CLIENT_SECRET', '...');
-define('GOOGLE_BUSINESS_PROFILE_REFRESH_TOKEN', '...');
-```
-
-The refresh token needs the `https://www.googleapis.com/auth/business.manage` scope, and the Google Cloud project needs the My Business Account Management and My Business Business Information APIs enabled.
-
-**Silos.** A location's brand fields (`schema_brandorg_query` and `schema_brandorg`) decide its silo: UAMS, Arkansas Children's or Baptist Health. Each silo maps to its own Google account group, and each is set to Off, Dry run or Live on the settings screen. Every silo starts in dry run, which logs what would change and writes nothing. Live writes only on production (`uamshealth.com`); anywhere else it runs as a dry run.
-
-**What it writes.** Business name, address, coordinates, phone, website, categories and description, and for a location five true/false attributes (wheelchair accessible entrance and restroom, restroom, appointment required, online care), each only when it differs from the live listing and only when the site has a Yes or No answer. It never writes hours, photos, posts or Q&A, and never deletes a listing. A listing is updated only when it is in its silo's account group. A store code that exists anywhere else, including the closed, duplicate and non-clinical groups, is logged for review and never recreated.
-
-**Exclusions.** A provider is left out when its own "excluded from bulk imports and updates" field is Yes. A location has two separate fields: one for the location's own listing, and one ("Should providers at this location be excluded...") that keeps every provider listing at that location from being created or updated. The second defaults to No, so existing locations behave as before.
-
-**On demand.** `wp uamswp gbp sync --post=<id>` syncs one published provider or location now (a location also covers its child locations and the providers at them), and `wp uamswp gbp sync --all` syncs every one. `--silo=<name>` limits a run to `uams`, `arkansas-childrens` or `baptist-health`, and `--dry-run` runs every silo that is not off as a dry run, even a live silo on production. The command prints one line per listing (store code, silo, mode, action, reason) and a count per action, and exits 1 when any listing ends in error or review, when Google rate limits the run, or when the queued sync holds the run lock. It does not read or store the fingerprint the queue skips on.
-
-**Activity log.** The settings screen keeps the 300 newest entries (listings already in sync are not logged) and shows 100. Entries for a listing left for review or that failed are also kept in a separate list, one per store code, up to 1,000, that routine entries cannot push out. A later run for the same store code that settles (nothing to change, skipped, or really created or updated) removes it. Both lists filter by action and silo.
-
-**Category names** come from the `gmb_cat_provider` and `gmb_cat_location` taxonomies and are matched to Google's categories without regard to case. A name Google has no category for is left off the listing and shown in the log.
+Saving a provider or a location queues an update of its Google Business Profile listings. The documentation moved to the wiki: [Setting up Business Profile sync](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/wiki/Setting-up-Business-Profile-sync), [Syncing listings on demand](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/wiki/Syncing-listings-on-demand), the [Business Profile sync reference](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/wiki/Business-Profile-sync) and [Troubleshooting](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/wiki/Troubleshooting).
 
 ## Credits
 

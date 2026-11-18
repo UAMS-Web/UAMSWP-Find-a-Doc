@@ -1,0 +1,39 @@
+name: Publish wiki
+
+# Publishes docs/wiki/ to the repository's GitHub wiki (#1431). The pages are written and reviewed
+# here; the action replaces the whole wiki with the folder on every run, so a page edited in the
+# browser is overwritten. The `github-wiki` skill (.claude/skills/github-wiki/SKILL.md) records
+# how the action behaves at the pinned commit.
+#
+# It runs when a release is published, so the wiki describes what people install, and by hand.
+# It does not run on pull requests, so it is not one of `master`'s required checks.
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+concurrency:
+  group: publish-wiki
+  cancel-in-progress: true
+
+# Nothing at the workflow level; the one job states the scope it needs.
+permissions: {}
+
+jobs:
+  publish:
+    name: Publish wiki
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      # Pushing to the wiki's git repository
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+
+      # Pinned to the commit of v5.0.6. Take input names from that commit's action.yml, not
+      # from the README on the action's default branch, which describes unreleased changes.
+      - uses: Andrew-Chen-Wang/github-wiki-action@1bbb4280446f9630e8e21a18012cbacf3b0f992e # v5.0.6
+        with:
+          path: docs/wiki
+          disable-empty-commits: true

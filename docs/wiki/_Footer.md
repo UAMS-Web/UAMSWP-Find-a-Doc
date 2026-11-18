@@ -1,0 +1,3 @@
+[Home](Home.md) | [Getting started](Setting-up-Business-Profile-sync.md) | [Guides](Giving-editors-access-with-editor-groups.md) | [Troubleshooting](Troubleshooting.md) | [Reference](Business-Profile-sync.md) | [Project](Project.md) | [README](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc#readme) | [Repository](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc)
+
+Written against v2.5.0 and the unreleased changes on `master` after it. Edit these pages in [`docs/wiki/`](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/tree/master/docs/wiki) through a pull request; edits made in the wiki are overwritten by the next publish.
