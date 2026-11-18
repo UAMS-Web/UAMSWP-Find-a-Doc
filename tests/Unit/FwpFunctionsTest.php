@@ -165,6 +165,33 @@ final class FwpFunctionsTest extends UnitTestCase
         $this->assertSame(2, substr_count($html, '</script>'));
     }
 
+    /**
+     * @return array<string, array{0: string}>
+     */
+    public static function alphabet_archives(): array
+    {
+        return [
+            'provider archive' => ['is_post_type_archive:provider'],
+            'location archive' => ['is_post_type_archive:location'],
+        ];
+    }
+
+    #[DataProvider('alphabet_archives')]
+    public function test_the_facet_scripts_bind_a_letter_click_handler_that_refreshes_facetwp(string $condition): void
+    {
+        $this->conditions([$condition]);
+        when('get_body_class')->justReturn([]);
+        when('get_queried_object')->justReturn();
+
+        ob_start();
+        \fwp_facet_scripts();
+        $html = (string) ob_get_clean();
+
+        $this->assertStringContainsString("FWP.hooks.addAction('facetwp/refresh/alpha'", $html);
+        $this->assertStringContainsString("$(document).on('click', '.facetwp-alpha.available'", $html);
+        $this->assertSame(1, substr_count($html, 'FWP.refresh();'));
+    }
+
     public function test_the_facet_scripts_on_a_location_archive_use_the_location_region(): void
     {
         $this->conditions(['is_post_type_archive:location']);
