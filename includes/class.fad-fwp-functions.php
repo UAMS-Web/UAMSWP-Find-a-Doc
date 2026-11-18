@@ -218,18 +218,8 @@ function fwp_facet_scripts(): void
             FWP.facets[facet_name] = $this.find('.facetwp-alpha.selected').attr('data-id') || '';
         });
     });
-
-    $(document).on('click', '.facetwp-alpha.available', function() {
-        $parent = $(this).closest('.facetwp-facet');
-        $parent.find('.facetwp-alpha').removeClass('selected');
-        var facet_name = $parent.attr('data-name');
-        $(this).addClass('selected');
-
-        if ('' !== $(this).attr('data-id')) {
-            FWP.frozen_facets[facet_name] = 'soft';
-        }
-        FWP.refresh();
-    });
+    // A letter click is handled by the FacetWP Alpha add-on, which refreshes FacetWP itself
+    // (UAMS-Web/facetwp-alpha-uams#76). A second handler here would refresh twice per click.
     /*
     Cookie handler
     */

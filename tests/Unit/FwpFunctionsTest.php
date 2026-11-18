@@ -177,7 +177,7 @@ final class FwpFunctionsTest extends UnitTestCase
     }
 
     #[DataProvider('alphabet_archives')]
-    public function test_the_facet_scripts_bind_a_letter_click_handler_that_refreshes_facetwp(string $condition): void
+    public function test_the_facet_scripts_leave_the_letter_click_to_the_alpha_add_on(string $condition): void
     {
         $this->conditions([$condition]);
         when('get_body_class')->justReturn([]);
@@ -187,9 +187,12 @@ final class FwpFunctionsTest extends UnitTestCase
         \fwp_facet_scripts();
         $html = (string) ob_get_clean();
 
+        // The add-on binds the click and refreshes FacetWP (UAMS-Web/facetwp-alpha-uams#76); a handler here would
+        // refresh a second time. The refresh hook that reads the selected letter stays.
         $this->assertStringContainsString("FWP.hooks.addAction('facetwp/refresh/alpha'", $html);
-        $this->assertStringContainsString("$(document).on('click', '.facetwp-alpha.available'", $html);
-        $this->assertSame(1, substr_count($html, 'FWP.refresh();'));
+        $this->assertStringNotContainsString('.facetwp-alpha.available', $html);
+        $this->assertStringNotContainsString('FWP.refresh(', $html);
+        $this->assertSame(2, substr_count($html, '</script>'));
     }
 
     public function test_the_facet_scripts_on_a_location_archive_use_the_location_region(): void
