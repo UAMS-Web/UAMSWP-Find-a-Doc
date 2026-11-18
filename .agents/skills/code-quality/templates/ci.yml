@@ -80,7 +80,7 @@ permissions:
 jobs:
   # The shared chain. Its checks report as `checks / <job name> (<operating system>)`.
   checks:
-    uses: UAMS-Web/uams-ci-workflows/.github/workflows/ci.yml@v0.13.0
+    uses: UAMS-Web/uams-ci-workflows/.github/workflows/ci.yml@v0.14.0
     # with:
     #   linux-only: true
     #   all-platform-jobs: 'pint'

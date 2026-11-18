@@ -131,6 +131,10 @@ on:
         description: The timeout, in minutes, of the mutate job on a pull request or a push, which mutates the whole of every changed PHP file (UAMS-Web/uams-ci-workflows#59). A change to a large file, such as one of about 3,800 mutants, needs more than the default. A value above 360, the longest job GitHub runs, is clamped to 360. A scheduled or manually dispatched run takes mutate-full-timeout-minutes instead.
         type: number
         default: 45
+      mutate-shards:
+        description: The number of jobs a scheduled or manually dispatched run splits the full mutation pass across (UAMS-Web/uams-ci-workflows#62). Each job mutates its own share of the PHP files under mutate-paths, balanced by file size, under mutate-full-timeout-minutes. The count is clamped to the number of files and to 100, and a value that is not a whole number of 1 or more fails the run. The default 1 runs one job, as before; a pull request or a push mutates only the changed files in one job whatever this is.
+        type: number
+        default: 1
       mutate-ignore-paths:
         description: Space-separated paths the mutate-ignore job scans for `@pest-mutate-ignore` annotations (UAMS-Web/uams-claude-skills#534). Empty keeps the script's own default, whichever of app, src and tests exist. A WordPress plugin names its source directory, such as includes.
         type: string
@@ -523,16 +527,105 @@ jobs:
           MUTATE_IGNORE_PATHS: ${{ inputs.mutate-ignore-paths }}
         run: php .claude/skills/pest-testing/scripts/check-mutate-ignore.php $MUTATE_IGNORE_PATHS
 
-  mutate:
-    name: Mutation score (changed files, with PCOV) (${{ matrix.os }})
+  # Splits a scheduled or dispatched full mutation pass into `mutate-shards` lists of files, one per `mutate` leg
+  # (UAMS-Web/uams-ci-workflows#62). It runs whenever `mutate` does and emits a one-leg matrix with an empty list in
+  # every other case, because the `result` job fails a `skipped` job that no input switched off.
+  mutate-plan:
+    name: Plan the mutation shards
     if: inputs.mutate
-    needs: [rector, phpstan]
+    # Legs: Linux only. It lists tracked files and splits them with git, awk and sort.
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      shards: ${{ steps.plan.outputs.shards }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      # Largest files first, each to the shard with the least total size so far (the file count breaks a tie, so a run
+      # of empty files cannot leave a shard with none). Size stands in for the mutant count, which is not known before
+      # the run; each leg reports its own count and duration so a caller can re-balance from one run.
+      - name: Plan the shards
+        id: plan
+        env:
+          EVENT: ${{ github.event_name }}
+          SHARDS: ${{ inputs.mutate-shards }}
+          MUTATE_PATHS: ${{ inputs.mutate-paths }}
+        run: |
+          single='[{"id":0,"n":1,"of":1,"paths":""}]'
+          if ! [[ "$SHARDS" =~ ^[0-9]{1,6}$ ]] || [ "$SHARDS" -lt 1 ]; then
+            echo "::error::mutate-shards is '$SHARDS', which is not a whole number of 1 or more"
+            exit 1
+          fi
+          case "$EVENT" in
+            schedule|workflow_dispatch) ;;
+            *)
+              echo "shards=$single" >> "$GITHUB_OUTPUT"
+              echo "A $EVENT run mutates the changed files in one job."
+              exit 0
+              ;;
+          esac
+          if [ "$SHARDS" -eq 1 ]; then
+            echo "shards=$single" >> "$GITHUB_OUTPUT"
+            echo "mutate-shards is 1: one job mutates everything composer mutate covers."
+            exit 0
+          fi
+          list=$(mktemp)
+          sizes=$(mktemp)
+          git ls-files -z -- $MUTATE_PATHS > "$list"
+          count=0
+          while IFS= read -r -d '' f; do
+            [[ "$f" == *.php ]] || continue
+            case "$f" in
+              *,*|*'"'*|*\\*|*[[:cntrl:]]*)
+                echo "::error::A path holds a comma, a double quote, a backslash or a control character, which the shard list cannot carry: $f"
+                exit 1
+                ;;
+            esac
+            printf '%s\t%s\n' "$(wc -c < "$f" | tr -d ' ')" "$f" >> "$sizes"
+            count=$((count + 1))
+          done < "$list"
+          if [ "$count" -eq 0 ]; then
+            echo "::error::No tracked PHP file under $MUTATE_PATHS, so there is nothing to shard"
+            exit 1
+          fi
+          n=$SHARDS
+          if [ "$n" -gt 100 ]; then n=100; fi
+          if [ "$n" -gt "$count" ]; then n=$count; fi
+          json=$(LC_ALL=C sort -t "$(printf '\t')" -k1,1nr -k2,2 "$sizes" | awk -F '\t' -v n="$n" '
+            BEGIN { for (i = 0; i < n; i++) { load[i] = 0; files[i] = 0; paths[i] = "" } }
+            {
+              best = 0
+              for (i = 1; i < n; i++) {
+                if (load[i] < load[best] || (load[i] == load[best] && files[i] < files[best])) best = i
+              }
+              load[best] += $1
+              files[best]++
+              paths[best] = paths[best] (paths[best] == "" ? "" : ",") $2
+            }
+            END {
+              out = "["
+              for (i = 0; i < n; i++) {
+                out = out (i ? "," : "") "{\"id\":" i ",\"n\":" i + 1 ",\"of\":" n ",\"paths\":\"" paths[i] "\"}"
+                printf "shard %d of %d: %d file(s), %d bytes\n", i + 1, n, files[i], load[i] > "/dev/stderr"
+              }
+              print out "]"
+            }')
+          echo "$count PHP file(s) under $MUTATE_PATHS split into $n shard(s) (asked for $SHARDS)."
+          echo "shards=$json" >> "$GITHUB_OUTPUT"
+
+  mutate:
+    name: Mutation score (changed files, with PCOV) (${{ matrix.os }}${{ matrix.shard.of > 1 && format(', shard {0} of {1}', matrix.shard.n, matrix.shard.of) || '' }})
+    if: inputs.mutate
+    needs: [rector, phpstan, mutate-plan]
     # Legs: Ubuntu only, whatever the caller passes. A Windows leg scored mutants the tests never detect as killed (UAMS-Web/uams-ci-workflows#13), so `all-platform-jobs`, `windows-jobs` and `linux-only` do not reach this matrix.
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
+        shard: ${{ fromJSON(needs.mutate-plan.outputs.shards) }}
     # `mutate-timeout-minutes` (default 45) for the changed files a pull request or a push selects, clamped to GitHub's
     # 360-minute maximum; a scheduled or manually dispatched run mutates everything and takes the longer
     # `mutate-full-timeout-minutes`. The event is the caller's.
@@ -600,7 +693,21 @@ jobs:
         env:
           EVENT: ${{ github.event_name }}
           MUTATE_PATHS: ${{ inputs.mutate-paths }}
+          SHARD_ID: ${{ matrix.shard.id }}
+          SHARD_OF: ${{ matrix.shard.of }}
+          SHARD_PATHS: ${{ matrix.shard.paths }}
         run: |
+          if [ "$SHARD_OF" -gt 1 ]; then
+            if [ -z "$SHARD_PATHS" ]; then
+              echo "::error::Shard $((SHARD_ID + 1)) of $SHARD_OF has no files, so it would mutate everything."
+              exit 1
+            fi
+            echo "mode=shard" >> "$GITHUB_OUTPUT"
+            echo "paths=$SHARD_PATHS" >> "$GITHUB_OUTPUT"
+            echo "Mutating shard $((SHARD_ID + 1)) of $SHARD_OF:"
+            printf '%s\n' "$SHARD_PATHS" | tr ',' '\n'
+            exit 0
+          fi
           case "$EVENT" in
             pull_request)
               what="pull request"
@@ -657,7 +764,7 @@ jobs:
           MODE: ${{ steps.select.outputs.mode }}
           PATHS: ${{ steps.select.outputs.paths }}
         run: |
-          if [ "$MODE" = "changed" ]; then
+          if [ "$MODE" = "changed" ] || [ "$MODE" = "shard" ]; then
             composer mutate -- --min=100 --ignore-min-score-on-zero-mutations --path="$PATHS" 2>&1 | tee mutate.log
           else
             composer mutate -- --min=100 2>&1 | tee mutate.log
@@ -680,6 +787,20 @@ jobs:
             exit 0
           fi
           php .claude/skills/pest-testing/scripts/check-mutation-run.php mutate.log
+
+      # What this leg did, in one place, so a caller can re-balance the shards from a single run (UAMS-Web/uams-ci-workflows#62).
+      - name: Report the leg
+        if: always() && steps.select.outputs.mode != 'none'
+        env:
+          MODE: ${{ steps.select.outputs.mode }}
+          SHARD_ID: ${{ matrix.shard.id }}
+          SHARD_OF: ${{ matrix.shard.of }}
+          PATHS: ${{ steps.select.outputs.paths }}
+        run: |
+          files=0
+          if [ -n "$PATHS" ]; then files=$(printf '%s\n' "$PATHS" | tr ',' '\n' | grep -c .); fi
+          echo "Leg $((SHARD_ID + 1)) of $SHARD_OF ($MODE): $files file(s) named"
+          sed "s/$(printf '\033')\[[0-9;]*m//g" mutate.log | grep -E 'Mutations for|Mutations:|Score:|Duration:' || echo "mutate.log holds no summary line"
 
   pest:
     name: Pest (${{ matrix.os }})
@@ -1207,7 +1328,7 @@ jobs:
   # file; scripts/check-templates.mjs in UAMS-Web/uams-claude-skills checks it.
   result:
     name: Chain result
-    needs: [composer-validate, synced-files, no-emoji, aggregate-needs, pint, rector, phpstan, mutate-ignore, mutate, pest, encoding-guard, vitest, vite-build, mutation-smoke, floor-lint, download-archive, phpcs, guard, dev-lint]
+    needs: [composer-validate, synced-files, no-emoji, aggregate-needs, pint, rector, phpstan, mutate-ignore, mutate-plan, mutate, pest, encoding-guard, vitest, vite-build, mutation-smoke, floor-lint, download-archive, phpcs, guard, dev-lint]
     if: always()
     # Legs: Linux only. It reads job results with jq.
     runs-on: ubuntu-latest
@@ -1218,7 +1339,7 @@ jobs:
       - name: Every needed job succeeded
         env:
           NEEDS: ${{ toJSON(needs) }}
-          SWITCHED_OFF: ${{ format('{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}{11}', !inputs.pest && 'pest ' || '', !inputs.mutate && 'mutate ' || '', (!inputs.mutate && !inputs.mutate-ignore) && 'mutate-ignore ' || '', !inputs.encoding-guard && 'encoding-guard ' || '', !inputs.vitest && 'vitest ' || '', !inputs.vite-build && 'vite-build ' || '', !inputs.mutation-smoke && 'mutation-smoke ' || '', !inputs.floor-lint && 'floor-lint ' || '', !inputs.download-archive && 'download-archive ' || '', !inputs.phpcs && 'phpcs ' || '', !inputs.guard && 'guard ' || '', !inputs.dev-lint && 'dev-lint ' || '') }}
+          SWITCHED_OFF: ${{ format('{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}{11}{12}', !inputs.pest && 'pest ' || '', !inputs.mutate && 'mutate ' || '', !inputs.mutate && 'mutate-plan ' || '', (!inputs.mutate && !inputs.mutate-ignore) && 'mutate-ignore ' || '', !inputs.encoding-guard && 'encoding-guard ' || '', !inputs.vitest && 'vitest ' || '', !inputs.vite-build && 'vite-build ' || '', !inputs.mutation-smoke && 'mutation-smoke ' || '', !inputs.floor-lint && 'floor-lint ' || '', !inputs.download-archive && 'download-archive ' || '', !inputs.phpcs && 'phpcs ' || '', !inputs.guard && 'guard ' || '', !inputs.dev-lint && 'dev-lint ' || '') }}
         run: |
           results=$(echo "$NEEDS" | jq -r 'to_entries[] | "\(.key) \(.value.result)"')
           echo "Needed job results:"
