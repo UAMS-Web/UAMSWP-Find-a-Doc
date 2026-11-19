@@ -474,9 +474,13 @@ class UAMSWP_FAD_GBP_Logic
     public static function orphan_report(array $candidates, string $today): array
     {
         $report = [];
+        // strtotime() reads the time and zone before or after the date alike.
+        // @pest-mutate-ignore: ConcatSwitchSides
         $end = strtotime($today.' 00:00:00 UTC');
 
         foreach ($candidates as $candidate) {
+            // strtotime() reads the time and zone before or after the date alike.
+            // @pest-mutate-ignore: ConcatSwitchSides
             $start = strtotime($candidate['since'].' 00:00:00 UTC');
             // Both are UTC midnights, so their day numbers differ by the whole days between them. A date that does not
             // parse counts no days, so it is never due.

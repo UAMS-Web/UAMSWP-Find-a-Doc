@@ -238,6 +238,8 @@ final class GbpLogicEdgesTest extends UnitTestCase
             'a date after today' => ['2026-11-20', '2026-11-19', 14, false],
             'a today that does not parse, with a date long ago' => ['1960-01-01', 'not a date', 14, false],
             'a date that does not parse' => ['not a date', '2026-11-19', 14, false],
+            // Far enough on that a day of 86,399 seconds would count one more or one fewer.
+            'thirteen days in 2300' => ['2300-01-02', '2300-01-15', 1, false],
         ];
     }
 
@@ -277,6 +279,8 @@ final class GbpLogicEdgesTest extends UnitTestCase
         $this->assertSame(['1111111111', '2222222222'], UAMSWP_FAD_GBP_Logic::cids_from_value([['1111111111'], '1111111111 1111111111 2222222222']));
         $this->assertSame(['12345678901'], UAMSWP_FAD_GBP_Logic::cids_from_value(12345678901));
         $this->assertSame(['12345678901'], UAMSWP_FAD_GBP_Logic::cids_from_value(12345678901.0));
+        $this->assertSame(['12345678902'], UAMSWP_FAD_GBP_Logic::cids_from_value(12345678901.6), 'a float is rounded to a whole number');
+        $this->assertSame(['1111111111', '2222222222'], UAMSWP_FAD_GBP_Logic::cids_from_value('1111111111 1111111111 2222222222'));
         $this->assertSame([], UAMSWP_FAD_GBP_Logic::cids_from_value(new \stdClass));
     }
 
