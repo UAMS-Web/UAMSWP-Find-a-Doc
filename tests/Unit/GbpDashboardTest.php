@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use UAMSWP_FAD_GBP_Logic;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
 
@@ -552,7 +553,7 @@ final class GbpDashboardTest extends UnitTestCase
         ];
     }
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('creates_sent')]
+    #[DataProvider('creates_sent')]
     public function test_the_widget_gives_the_creates_sent_today_as_a_rounded_share_of_the_budget(int $used, string $figure): void
     {
         $this->options['uamswp_fad_gbp_modes'] = ['uams' => 'live'];

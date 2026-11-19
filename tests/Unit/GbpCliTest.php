@@ -310,8 +310,8 @@ final class GbpCliTest extends UnitTestCase
 
         try {
             $handler([], $assoc);
-        } catch (WpCliEnded $ended) {
-            return ['status' => $ended->status, 'error' => $ended->getMessage(), 'lines' => \WP_CLI::$lines];
+        } catch (WpCliEnded $wpCliEnded) {
+            return ['status' => $wpCliEnded->status, 'error' => $wpCliEnded->getMessage(), 'lines' => \WP_CLI::$lines];
         }
 
         $this->fail($handler.' returned without halting');
@@ -376,7 +376,7 @@ final class GbpCliTest extends UnitTestCase
     public function test_the_commands_stop_when_there_is_no_client_and_no_credentials(): void
     {
         $this->wordpress(['uams' => 'dry-run']);
-        when('uamswp_fad_gbp_credentials')->justReturn(null);
+        when('uamswp_fad_gbp_credentials')->justReturn();
 
         $this->assertSame(1, uamswp_fad_gbp_manual_sync([100], null, false, $this->out(), null, $this->itemsFor([])));
         $this->assertSame(['The Google Business Profile credentials are not set'], $this->lines);
@@ -390,9 +390,9 @@ final class GbpCliTest extends UnitTestCase
     public function test_the_commands_use_the_client_they_are_given_without_reading_the_credentials(): void
     {
         $this->wordpress(['uams' => 'dry-run']);
-        when('uamswp_fad_gbp_credentials')->justReturn(null);
+        when('uamswp_fad_gbp_credentials')->justReturn();
         when('uamswp_fad_gbp_index')->justReturn([]);
-        when('get_field')->justReturn(null);
+        when('get_field')->justReturn();
         when('get_the_title')->justReturn('Post');
 
         $this->assertSame(0, uamswp_fad_gbp_backfill_ids([], false, $this->out(), $this->client(), $this->itemsFor([])));
@@ -445,9 +445,7 @@ final class GbpCliTest extends UnitTestCase
     public function test_an_error_fails_the_exit_status_and_the_run_goes_on(): void
     {
         $this->wordpress(['uams' => 'live'], 'uamshealth.com');
-        $failing = new UAMSWP_FAD_GBP_Client(['client_id' => 'a', 'client_secret' => 'b', 'refresh_token' => 'c'], function (string $method, string $url): array {
-            return str_contains($url, 'oauth2.googleapis.com') ? [200, (string) json_encode(['access_token' => 't', 'expires_in' => 3600])] : [500, '{}'];
-        });
+        $failing = new UAMSWP_FAD_GBP_Client(['client_id' => 'a', 'client_secret' => 'b', 'refresh_token' => 'c'], fn (string $method, string $url): array => str_contains($url, 'oauth2.googleapis.com') ? [200, (string) json_encode(['access_token' => 't', 'expires_in' => 3600])] : [500, '{}']);
 
         $status = uamswp_fad_gbp_manual_sync([100], null, false, $this->out(), $failing, $this->itemsFor([100 => [$this->item('a_clinic', 'uams'), $this->item('b_clinic', 'uams')]]));
 
@@ -482,6 +480,7 @@ final class GbpCliTest extends UnitTestCase
         when('uamswp_fad_gbp_categories')->justReturn([]);
         when('uamswp_fad_gbp_attach_stored_ids')->returnArg();
         when('get_the_title')->alias(fn (int $id): string => 'Post '.$id);
+
         $cids = [100 => '1111111111', 200 => '5555555555', 300 => '3333333333', 400 => '2222222222'];
         // The location's Yes is not a provider's, so it never reports a missing listing.
         $yes = [100 => '1', 200 => '1', 300 => '1', 400 => '1'];
