@@ -1705,6 +1705,8 @@ while (have_posts()) {
 
 						    } // End Modified Hours
 						    // The typical hours give way to a window that has started and has no end or ends more than 30 days out, as for the location hours.
+						    // An end date is a midnight and the 30-day mark is the time of the request, so the two never fall on the same second.
+						    // @pest-mutate-ignore: GreaterToGreaterOrEqual
 						    if ($telemed_active_start !== null && $telemed_active_start <= $telemed_today && ($telemed_active_end === 'TBD' || $telemed_active_end > $telemed_today_30)) {
 						        // Do Nothing;
 						        // Future Option

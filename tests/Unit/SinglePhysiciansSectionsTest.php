@@ -214,7 +214,7 @@ test('the window of more reviews opens only after six', function (int $count, bo
 ]);
 
 test('the second appointment section follows a clinical section and is numbered 2', function (): void {
-    $output = single_physician_sections_markup(['physician_locations' => [21], 'physician_eligible_appointments' => true, 'physician_clinical_bio' => '<p>Bio.</p>'], ['status' => [21 => 'publish'], 'titles' => [21 => 'Heart Clinic']]);
+    $output = single_physician_sections_markup(['physician_eligible_appointments' => true, 'physician_clinical_bio' => '<p>Bio.</p>']);
 
     expect($output)->toContain('id="appointment-info-2"')
         ->and(substr_count($output, 'id="appointment-info-'))->toBe(2);

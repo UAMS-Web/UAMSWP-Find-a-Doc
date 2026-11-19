@@ -1671,7 +1671,10 @@ while (have_posts()) {
                                     </div>
                                     <div class="card-footer bg-transparent text-muted small">
                                         <h4 class="sr-only">Date</h4>
-                                        <?php echo date('M d, Y', (int) strtotime($review->mentionTime)) ?>
+                                        <?php
+                                        // The template is not in strict mode, so date() reads a false time as 0, as the cast does.
+                                        // @pest-mutate-ignore: RemoveIntegerCast
+                                        echo date('M d, Y', (int) strtotime($review->mentionTime)) ?>
                                     </div>
                                 </div>
                                 <?php } ?>
@@ -1741,7 +1744,10 @@ while (have_posts()) {
                                                 </div>
                                                 <div class="card-footer bg-transparent text-muted small">
                                                     <h4 class="sr-only">Date</h4>
-                                                    <?php echo date('M d, Y', (int) strtotime($review->mentionTime)); ?>
+                                                    <?php
+                                                    // The template is not in strict mode, so date() reads a false time as 0, as the cast does.
+                                                    // @pest-mutate-ignore: RemoveIntegerCast
+                                                    echo date('M d, Y', (int) strtotime($review->mentionTime)); ?>
                                                 </div>
                                             </div>
                                             <?php } ?>
