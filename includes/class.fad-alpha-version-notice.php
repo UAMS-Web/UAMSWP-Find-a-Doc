@@ -11,7 +11,7 @@ declare(strict_types=1);
  * not, and rely on a click handler that #1433 removes from this plugin, so the floor is 1.3.5.2
  * (#1438).
  *
- * The plugin defines `FACETWP_ALPHA_VERSION` from 1.3.5 on; 1.3.1 and earlier define nothing. An
+ * The plugin defines `FACETWP_ALPHA_VERSION` from 1.3.5 on, and 1.3.1 defines none. An
  * undefined constant therefore means either the plugin is missing or it is older than 1.3.5, and
  * the notice says both.
  */
