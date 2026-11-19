@@ -328,15 +328,27 @@ function uamswp_dead_links_save(string $option, array $value): bool
 /**
  * Take the run lock, so two steps never work on the run at once.
  *
- * `add_option()` fails when the option exists, which makes it a lock that two requests cannot both
- * take. A lock older than five minutes belongs to a request that died, and is taken over.
+ * The lock is a row in the options table, read and written with direct SQL. `add_option()` cannot be
+ * the lock: it skips its check for an existing option when the request's `notoptions` cache already
+ * lists it, as any earlier read of the missing lock does, and then writes with `INSERT ... ON
+ * DUPLICATE KEY UPDATE`, which overwrites a lock another request took in between (#1457). An
+ * `INSERT IGNORE` adds the row only when no row has the name, and its affected-row count says which
+ * request did.
+ *
+ * A lock older than five minutes belongs to a request that died, and is taken over. It is deleted
+ * only while it still holds the time that was read as stale, so of two requests taking it over, one
+ * deletes it and both then race on the insert as above.
  */
 function uamswp_dead_links_lock(): bool
 {
 
-    $held = get_option('uamswp_fad_dead_links_lock', null);
+    /** @var wpdb $wpdb */
+    global $wpdb;
 
-    if ($held !== null && uamswp_fad_int($held) > time() - 300) {
+    $now = time();
+    $held = $wpdb->get_var($wpdb->prepare("SELECT option_value FROM {$wpdb->options} WHERE option_name = %s", 'uamswp_fad_dead_links_lock'));
+
+    if ($held !== null && uamswp_fad_int($held) > $now - 300) {
 
         return false;
 
@@ -344,11 +356,18 @@ function uamswp_dead_links_lock(): bool
 
     if ($held !== null) {
 
-        delete_option('uamswp_fad_dead_links_lock');
+        $wpdb->query(uamswp_fad_str($wpdb->prepare("DELETE FROM {$wpdb->options} WHERE option_name = %s AND option_value = %s", 'uamswp_fad_dead_links_lock', $held)));
 
     }
 
-    return add_option('uamswp_fad_dead_links_lock', time(), '', false);
+    // A statement that cannot be prepared is empty, and an empty statement takes no lock.
+    $taken = $wpdb->query(uamswp_fad_str($wpdb->prepare("INSERT IGNORE INTO {$wpdb->options} (option_name, option_value, autoload) VALUES (%s, %s, %s)", 'uamswp_fad_dead_links_lock', (string) $now, 'no')));
+
+    // The row was written behind the option cache, so drop what this request cached about it.
+    wp_cache_delete('uamswp_fad_dead_links_lock', 'options');
+    wp_cache_delete('notoptions', 'options');
+
+    return $taken === 1;
 
 }
 
