@@ -566,10 +566,14 @@ final class GbpDashboardTest extends UnitTestCase
 
     public function test_the_widget_says_how_long_until_the_reset(): void
     {
+        $before = time();
         $html = $this->render();
-        $reset = UAMSWP_FAD_GBP_Logic::next_pacific_reset(time());
+        $after = time();
+        $reset = UAMSWP_FAD_GBP_Logic::next_pacific_reset($before);
 
-        $this->assertStringContainsString(', in '.UAMSWP_FAD_GBP_Logic::remaining_label($reset - time()).'.', $html);
+        // The widget reads the clock itself, so either second around the call may be the one it read.
+        $labels = array_unique([UAMSWP_FAD_GBP_Logic::remaining_label($reset - $before), UAMSWP_FAD_GBP_Logic::remaining_label($reset - $after)]);
+        $this->assertNotEmpty(array_filter($labels, fn (string $label): bool => str_contains($html, ', in '.$label.'.')));
     }
 
     public function test_the_widget_counts_the_queue_and_charts_it_against_one_event_an_hour(): void

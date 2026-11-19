@@ -592,6 +592,19 @@ final class GbpCliTest extends UnitTestCase
         $this->assertSame([[[12], null, false], [[5, 6], 'uams', true]], $calls);
     }
 
+    public function test_a_flag_given_with_no_value_is_read_as_one(): void
+    {
+        $calls = [];
+        $this->record('uamswp_fad_gbp_manual_sync', $calls);
+        when('uamswp_fad_gbp_all_post_ids')->justReturn([5, 6]);
+
+        // WP-CLI passes `--post` and `--silo` given with no value as true, and `--no-post` as false.
+        $this->command('uamswp_fad_gbp_cli_sync', ['post' => true]);
+        $this->command('uamswp_fad_gbp_cli_sync', ['post' => false, 'all' => true, 'silo' => true]);
+
+        $this->assertSame([[[1], null, false], [[5, 6], '1', false]], $calls);
+    }
+
     public function test_the_backfill_and_cid_report_commands_run_over_every_post(): void
     {
         $backfill = [];

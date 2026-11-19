@@ -352,8 +352,6 @@ function uamswp_fad_gbp_cli_sync(array $args, array $assoc): void
         }, ! empty($assoc['dry-run'])));
     }
 
-    // WP-CLI passes every option value as a string, so the cast never changes one.
-    // @pest-mutate-ignore: RemoveStringCast
     $post = isset($assoc['post']) ? (string) $assoc['post'] : '';
     $all = ! empty($assoc['all']);
 
@@ -362,8 +360,6 @@ function uamswp_fad_gbp_cli_sync(array $args, array $assoc): void
     }
 
     $ids = $all ? uamswp_fad_gbp_all_post_ids() : [(int) $post];
-    // WP-CLI passes every option value as a string, so the cast never changes one.
-    // @pest-mutate-ignore: RemoveStringCast
     $silo = isset($assoc['silo']) ? (string) $assoc['silo'] : null;
 
     $status = uamswp_fad_gbp_manual_sync($ids, $silo, ! empty($assoc['dry-run']), function (string $line): void {
@@ -379,9 +375,9 @@ function uamswp_fad_gbp_cli_sync(array $args, array $assoc): void
 function uamswp_fad_gbp_register_cli(): void
 {
     if (defined('WP_CLI') && WP_CLI && class_exists('WP_CLI')) {
-        // Only WP-CLI defines its constant, and a definition lasts the whole process, so the Unit suite cannot
-        // reach these calls without registering the commands for every test after it. Pest cannot run that test
-        // in a process of its own.
+        // Only WP-CLI defines its constant, and a definition lasts the whole process: a test that defined it would
+        // decide the outcome of the test that checks the commands are not registered without it, by running order.
+        // Pest refuses to run a test in a process of its own, so these calls are left unreached.
         // @pest-mutate-ignore: RemoveMethodCall
         WP_CLI::add_command('uamswp gbp sync', 'uamswp_fad_gbp_cli_sync');
         // @pest-mutate-ignore: RemoveMethodCall
