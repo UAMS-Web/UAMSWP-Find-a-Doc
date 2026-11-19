@@ -196,6 +196,16 @@ test('each image type gets the image icon after a file of another type', functio
     expect($icons[1])->toBe(['fa-file-pdf', 'fa-file-image', 'fa-file-pdf', 'fa-file-image', 'fa-file-pdf', 'fa-file-image', 'fa-file-pdf', 'fa-file-image', 'fa-file-pdf', 'fa-file-image']);
 });
 
+test('each newer Office extension gets its program\'s icon after a file of another type', function (): void {
+    $files = ['a.pdf', 'b.docx', 'c.pdf', 'd.pptx', 'e.pdf', 'f.xlsx'];
+    resource_callback_rows('clinical_resource_document', array_map(static fn (string $file): array => ['document_title' => $file, 'document_file' => ['url' => 'https://example.test/'.$file]], $files));
+
+    $output = resource_callback_output('uamswp_resource_document', [], ['resource_type_value' => 'doc']);
+    preg_match_all('/<span class="far (fa-file[a-z-]*) fa-fw">/', $output, $icons);
+
+    expect($icons[1])->toBe(['fa-file-pdf', 'fa-file-word', 'fa-file-pdf', 'fa-file-powerpoint', 'fa-file-pdf', 'fa-file-excel']);
+});
+
 test('an attachment of another file type keeps the icon of the one before it, starting from the plain file icon', function (): void {
     resource_callback_rows('clinical_resource_document', [
         ['document_title' => 'Notes', 'document_file' => ['url' => 'https://example.test/notes.txt']],
