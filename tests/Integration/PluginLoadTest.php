@@ -56,7 +56,7 @@ final class PluginLoadTest extends IntegrationTestCase
         $files = [
             'class.fad-physicians.php', 'class.fad-custom-post.php', 'class.fad-helper-functions.php', 'class.fad-location-address.php',
             'class.fad-settings.php', 'class.fad-templates.php', 'class.fad-acf-functions.php', 'class.fad-acf-table-map-notice.php',
-            'class.fad-provider-nullable-fields.php', 'class.fad-provider-preview.php', 'class.fad-delete-cleanup.php',
+            'class.fad-alpha-version-notice.php', 'class.fad-provider-nullable-fields.php', 'class.fad-provider-preview.php', 'class.fad-delete-cleanup.php',
             'class.fad-dead-link-cleanup.php', 'class.fad-fwp-functions.php', 'class.fad-functions.php', 'class.fad-settings-pages.php',
             'class.fad-acf-blocks.php', 'class.fad-gmb-settings-page.php', 'class.fad-editor-groups.php', 'class.fad-edit-flow-status.php',
             'class.fad-gbp-logic.php', 'class.fad-gbp-client.php', 'class.fad-gbp-sync.php', 'class.fad-gbp-runtime.php',

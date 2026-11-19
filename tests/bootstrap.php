@@ -77,6 +77,7 @@ setUp();
 
 require_once dirname(__DIR__).'/includes/class.fad-delete-cleanup.php';
 require_once dirname(__DIR__).'/includes/class.fad-acf-table-map-notice.php';
+require_once dirname(__DIR__).'/includes/class.fad-alpha-version-notice.php';
 
 tearDown();
 
