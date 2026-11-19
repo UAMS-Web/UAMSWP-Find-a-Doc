@@ -33,6 +33,8 @@ const UAMSWP_FAD_GBP_ORPHAN_HOOK = 'uamswp_fad_gbp_orphan_scan';
  */
 function uamswp_fad_gbp_track_unpublish($new_status, $old_status, $post, ?int $now = null): void
 {
+    // A post with no type is never a provider or a location, so the default only has to be neither.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     if (! is_object($post) || ! in_array($post->post_type ?? '', ['provider', 'location'], true)) {
         return;
     }
@@ -118,6 +120,8 @@ function uamswp_fad_gbp_orphan_candidates(?int $now = null, ?callable $locations
         foreach (is_array($map) ? $map : [] as $location_id => $entry) {
             $entry = uamswp_fad_arr($entry);
             $entry_id = uamswp_fad_str($entry['id'] ?? '');
+            // An entry with no date counted as live above, or has no id, so either way the check below skips it.
+            // @pest-mutate-ignore: EmptyStringToNotEmpty
             $since = uamswp_fad_str(($entry['orphaned_since'] ?? ''));
 
             if ($since === '' || $entry_id === '' || isset($live[$entry_id]) || isset($candidates[$entry_id])) {
@@ -127,6 +131,8 @@ function uamswp_fad_gbp_orphan_candidates(?int $now = null, ?callable $locations
             // The stored date is only as fresh as the last live run: check the provider's locations now.
             $current ??= $locations_for($post_id);
 
+            // The map's keys are location ids, which PHP already stores as integers.
+            // @pest-mutate-ignore: RemoveIntegerCast
             if (in_array((int) $location_id, uamswp_fad_arr($current), true)) {
                 continue;
             }
@@ -199,6 +205,8 @@ function uamswp_fad_gbp_orphan_scan(callable $out, ?UAMSWP_FAD_GBP_Client $clien
         $listings = [];
 
         foreach (uamswp_fad_gbp_index($client) as $entry) {
+            // The plugin never stores an empty listing name, so the key a listing with no name gets is never looked up.
+            // @pest-mutate-ignore: EmptyStringToNotEmpty
             $listings[uamswp_fad_str(($entry['listing']['name'] ?? ''))] = $entry;
         }
     } catch (RuntimeException $runtimeException) {
@@ -266,6 +274,8 @@ function uamswp_fad_gbp_orphan_scan(callable $out, ?UAMSWP_FAD_GBP_Client $clien
 
         if ($mode === 'off') {
             $entry['action'] = 'review';
+            // sprintf() writes a null silo as an empty string, as the cast does.
+            // @pest-mutate-ignore: RemoveStringCast
             $entry['reason'] = sprintf('Due to close (%s since %s) but silo %s is off: %s', $row['cause'], $row['since'], (string) $silo, $row['label']);
             $out($line.'  due, silo off');
             uamswp_fad_gbp_log($entry);
@@ -330,6 +340,8 @@ function uamswp_fad_gbp_silo_for_account(string $account, array $silos): ?string
  */
 function uamswp_fad_gbp_run_orphan_scan(): void
 {
+    // array_diff() keeps the keys it is given, but only whether anything is left is read.
+    // @pest-mutate-ignore: UnwrapArrayValues
     if (uamswp_fad_gbp_credentials() === null || array_diff(array_values(uamswp_fad_gbp_modes()), ['off']) === []) {
         return;
     }
