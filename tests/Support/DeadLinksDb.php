@@ -48,7 +48,7 @@ final class DeadLinksDb
     /** @var array<int, array<int, mixed>> The WordPress and ACF calls the tests stub, each as [function, ...arguments]. */
     public array $calls = [];
 
-    /** @var array<string, true> Options whose next writes are lost, as a failed database write loses them. */
+    /** @var array<string, true> Options whose writes are lost while they are listed, as a failed database write loses them. */
     public array $lose = [];
 
     /** @var array<string, int> Options whose writes are lost after this many have been stored. */
@@ -56,6 +56,9 @@ final class DeadLinksDb
 
     /** @var array<string, true> Custom tables whose deletes and inserts fail. */
     public array $refuse = [];
+
+    /** @var bool Whether get_results() fails, returning null as wpdb does on a query error. */
+    public bool $fail_results = false;
 
     private int $next_meta = 1;
 
@@ -160,12 +163,16 @@ final class DeadLinksDb
     }
 
     /**
-     * @return array<int, array<string, string|null>>
+     * @return array<int, array<string, string|null>>|null
      */
-    public function get_results(string $sql, string $output = 'OBJECT'): array
+    public function get_results(string $sql, string $output = 'OBJECT'): ?array
     {
         $this->queries[] = $sql;
         $this->array_a($output);
+
+        if ($this->fail_results) {
+            return null;
+        }
 
         if (preg_match("/^SELECT m\\.post_id, m\\.meta_value FROM wp_postmeta m INNER JOIN wp_posts p ON p\\.ID = m\\.post_id WHERE p\\.post_type = '([^']+)' AND m\\.meta_key = '([^']+)' AND m\\.meta_value <> ''$/", $sql, $m)) {
             $rows = [];

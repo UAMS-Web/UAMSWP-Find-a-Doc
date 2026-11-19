@@ -1,8 +1,8 @@
 <?php
 
 /**
- * How the dead link cleanup screen (includes/class.fad-dead-link-cleanup.php) ends a request: every handler
- * redirects and then ends the request through `uamswp_fad_exit()`.
+ * The dead link cleanup (includes/class.fad-dead-link-cleanup.php): the dry run, the removal and its undo, the
+ * handlers, which redirect and then end the request through `uamswp_fad_exit()`, and the screen.
  *
  * The scan, removal and undo read and write the database. Here they run against `DeadLinksDb`, an in-memory
  * database that answers only the statements the file sends; the Integration suite runs them against MySQL.
@@ -239,7 +239,16 @@ function dead_links_db(): DeadLinksDb
     });
     when('update_field')->alias(static function (string $field, mixed $value, int $post) use ($db, $serialize): bool {
         $db->calls[] = ['update_field', $field, $value, $post];
-        $db->meta = array_values(array_filter($db->meta, static fn (array $row): bool => ! ($row['post'] === $post && $row['key'] === $field)));
+
+        // In place, keeping the row's position, as update_post_meta() keeps its meta_id.
+        foreach ($db->meta as $i => $row) {
+            if ($row['post'] === $post && $row['key'] === $field) {
+                $db->meta[$i]['value'] = $serialize($value);
+
+                return true;
+            }
+        }
+
         $db->add_meta($post, $field, $serialize($value));
 
         return true;
@@ -425,10 +434,15 @@ test('the lock is taken when nobody holds it, with the time and no autoload', fu
 });
 
 test('a lock held for less than five minutes is not taken', function (int $age): void {
-    $db = dead_links_db();
-    $db->option_values['uamswp_fad_dead_links_lock'] = (string) (time() - $age);
+    // Repeated until the clock did not tick during the call, so a boundary age is read in the second it was set.
+    do {
+        $db = dead_links_db();
+        $now = time();
+        $db->option_values['uamswp_fad_dead_links_lock'] = (string) ($now - $age);
+        $taken = uamswp_dead_links_lock();
+    } while (time() !== $now);
 
-    expect(uamswp_dead_links_lock())->toBeFalse()
+    expect($taken)->toBeFalse()
         ->and($db->calls)->toBe([]);
 })->with(['just taken' => [0], 'four minutes' => [240], 'a second short of five minutes' => [299]]);
 
@@ -441,7 +455,7 @@ test('a lock held for five minutes or more is taken over', function (int $age): 
         ->and($db->calls[0])->toBe(['delete_option', 'uamswp_fad_dead_links_lock']);
 })->with(['five minutes' => [300], 'an hour' => [3600]]);
 
-test('the lock is not taken when another request takes it first', function (): void {
+test('the lock is not taken when adding its option fails', function (): void {
     dead_links_db();
     when('add_option')->justReturn(false);
 
@@ -660,7 +674,7 @@ test('restoring a field with no saved meta rows leaves it with none, and a cell 
         ->and($db->tables['uamswp_physicians'])->toBe([['post_id' => '30', 'physician_locations' => null]]);
 });
 
-test('a post exists in any status, and an ID with no post does not', function (): void {
+test('a post exists when get_post() finds it, and an ID with no post does not', function (): void {
     $db = dead_links_db();
     $db->post(5, 'provider');
 
@@ -768,7 +782,7 @@ test('a removal saves what it replaces, then removes the dead IDs and orphan row
             'link|12|clinical_resource_spotlight_provider' => ['meta' => [['clinical_resource_spotlight_provider', '98']], 'cells' => []],
             'uamswp_physicians|96' => ['post_id' => '96', 'physician_locations' => serialize(['20'])],
         ])
-        ->and($db->meta_of(10))->toBe([['_condition_physicians', 'field_cp'], ['condition_locations', serialize(['93'])], ['condition_physicians', serialize(['20'])]])
+        ->and($db->meta_of(10))->toBe([['_condition_physicians', 'field_cp'], ['condition_physicians', serialize(['20'])], ['condition_locations', serialize(['93'])]])
         ->and($db->meta_of(12))->toBe([['clinical_resource_spotlight_provider', '']])
         ->and($db->tables['uamswp_physicians'])->toBe([])
         ->and($db->tables['uamswp_locations'])->toBe([['post_id' => '94', 'physician_locations' => '']])
@@ -829,7 +843,7 @@ test('a removal that ended after saving an item finishes it, or leaves it when i
     ], 'applying'));
 
     expect(array_column($result['items'], 'state'))->toBe(['done', 'done', 'skipped'])
-        ->and($db->meta_of(10))->toBe([['condition_physicians', serialize(['20'])], ['treatment_procedure_physicians', serialize(['21'])], ['condition_locations', serialize(['20'])]])
+        ->and($db->meta_of(10))->toBe([['condition_physicians', serialize(['20'])], ['condition_locations', serialize(['20'])], ['treatment_procedure_physicians', serialize(['21'])]])
         ->and(array_column(array_filter($db->calls, static fn (array $call): bool => $call[0] === 'update_field'), 1))->toBe(['condition_locations']);
 });
 
@@ -1279,16 +1293,16 @@ test('undoing does nothing before a removal', function (): void {
         ->and($redirects->getArrayCopy())->toBe(['https://example.test/wp-admin/admin.php?page=uamswp-dead-links&notice=nothing']);
 });
 
-test('a post is labeled with its ID and title, linked to its edit screen when it has one', function (string $title, string|false $edit, string $label): void {
+test('a post is labeled with its ID and title, linked to its edit screen when it has one', function (string $title, ?string $edit, string $label): void {
     dead_links_admin();
     when('get_the_title')->alias(static fn (int $post): string => $post === 10 ? $title : 'wrong post');
-    when('get_edit_post_link')->alias(static fn (int $post): string|false => $post === 10 ? $edit : 'wrong post');
+    when('get_edit_post_link')->alias(static fn (int $post): ?string => $post === 10 ? $edit : 'wrong post');
 
     expect(uamswp_dead_links_post_label(10))->toBe($label);
 })->with([
     'a title and a link' => ['Asthma & you', 'https://example.test/wp-admin/post.php?post=10&action=edit', '<a href="https://example.test/wp-admin/post.php?post=10&amp;action=edit">#10 Asthma &amp; you</a>'],
     'no title' => ['', 'https://example.test/edit', '<a href="https://example.test/edit">#10</a>'],
-    'no edit link' => ['Asthma', false, '#10 Asthma'],
+    'no edit link' => ['Asthma', null, '#10 Asthma'],
     'an empty edit link' => ['Asthma', '', '#10 Asthma'],
 ]);
 
@@ -1382,7 +1396,7 @@ test('the screen names each notice, as an error or a success, and ignores one it
     'busy' => ['busy', '<div class="notice notice-error"><p>Another step is running. Wait for it to finish.</p></div>'],
     'noacf' => ['noacf', '<div class="notice notice-error"><p>Advanced Custom Fields is not available, so nothing can be removed or restored.</p></div>'],
     'failed' => ['failed', '<div class="notice notice-error"><p>The backup could not be saved, so nothing was changed by that step. Check the database and try again.</p></div>'],
-    'escaped in the query' => ['bu\\sy', '<div class="notice notice-error"><p>Another step is running. Wait for it to finish.</p></div>'],
+    'a backslash in the query' => ['bu\\sy', '<div class="notice notice-error"><p>Another step is running. Wait for it to finish.</p></div>'],
     'unknown' => ['other', null],
     'none' => ['', null],
 ]);
@@ -1409,4 +1423,100 @@ test('a dry run with nothing in it offers no removal, and one with only orphan r
 test('the screen shows the last check made after a removal started', function (): void {
     expect(dead_links_screen_html(dead_links_make_run(dead_links_screen_items(), 'applied'), null, ['at' => 1700000100, 'links' => 2, 'rows' => 1]))
         ->toContain('failed</li></ul><p><strong>Check made F j, Y g:i a@1700000100:</strong> 2 dead links and 1 orphan rows are left.</p><h2>Every dead link and orphan row</h2>');
+});
+
+test('an empty delete cleanup map gives three empty lists of sources', function (): void {
+    dead_links_load();
+    when('uamswp_delete_cleanup_map')->justReturn([]);
+
+    expect(uamswp_dead_links_sources())->toBe(['meta' => [], 'tables' => [], 'own' => []]);
+});
+
+test('a dry run whose reads fail lists nothing instead of failing', function (): void {
+    $db = dead_links_scan_world();
+    $db->fail_results = true;
+
+    expect(uamswp_dead_links_scan(false)['items'])->toBe([])
+        ->and(uamswp_dead_links_capture('physician_locations', 30))->toBe(['meta' => [], 'cells' => ['uamswp_locations' => serialize(['99', '20']), 'uamswp_physicians' => serialize(['95', '99'])]]);
+});
+
+test('a dry run with the first custom table missing still reads the second', function (): void {
+    $db = dead_links_scan_world();
+    unset($db->tables['uamswp_locations']);
+
+    expect(uamswp_dead_links_scan(false)['items'])->toBe([
+        dead_links_link(12, 'clinical_resource_spotlight_provider', 'single', [98]),
+        dead_links_link(10, 'condition_physicians', 'list', [99]),
+        dead_links_link(11, 'physician_expertise', 'list', [97]),
+        dead_links_link(20, 'physician_locations', 'list', [96]),
+        dead_links_link(30, 'physician_locations', 'list', [95, 99]),
+        dead_links_row('uamswp_physicians', 96),
+    ]);
+});
+
+test('a field found twice lists each dead ID once, and later reads are still listed', function (): void {
+    $db = dead_links_db();
+    $db->post(30, 'location');
+    $db->post(31, 'location');
+    $db->tables['uamswp_locations'] = [['post_id' => '30', 'physician_locations' => serialize(['99'])]];
+    $db->tables['uamswp_physicians'] = [
+        ['post_id' => '30', 'physician_locations' => serialize(['99', '95'])],
+        ['post_id' => '31', 'physician_locations' => serialize(['94'])],
+    ];
+
+    expect(uamswp_dead_links_scan(false)['items'])->toBe([
+        dead_links_link(30, 'physician_locations', 'list', [99, 95]),
+        dead_links_link(31, 'physician_locations', 'list', [94]),
+    ]);
+});
+
+test('the storage of a field reads the second custom table when the first is missing', function (): void {
+    $db = dead_links_db();
+    unset($db->tables['uamswp_locations']);
+    $db->tables['uamswp_physicians'] = [['post_id' => '30', 'physician_locations' => 'x']];
+
+    expect(uamswp_dead_links_capture('physician_locations', 30))->toBe(['meta' => [], 'cells' => ['uamswp_physicians' => 'x']]);
+});
+
+test('a removal removes only the dead IDs it listed, keeps the order of the rest, and passes over handled items', function (): void {
+    $db = dead_links_db();
+    $db->post(10, 'condition');
+    $db->post(20, 'provider');
+    // 88 also names no post, but the dry run did not list it.
+    $db->add_meta(10, 'condition_physicians', serialize(['99', '20', '88']));
+
+    $result = uamswp_dead_links_apply_step(dead_links_make_run([
+        dead_links_row('uamswp_locations', 91, 'done'),
+        dead_links_link(10, 'condition_physicians', 'list', [99]),
+    ]));
+
+    expect($result['items'][1])->toBe(dead_links_link(10, 'condition_physicians', 'list', [99], 'done', ['before' => [99, 20, 88], 'remove' => [99], 'after' => [20, 88], 'saved' => true]))
+        ->and($result['items'][0]['state'])->toBe('done')
+        ->and($db->meta_of(10))->toBe([['condition_physicians', serialize(['20', '88'])]]);
+});
+
+test('the run saved before a removal writes is marked as applying', function (): void {
+    [$db, $run] = dead_links_apply_world();
+    $db->keep_writes[UAMSWP_DEAD_LINKS_RUN_OPTION] = 1;
+
+    uamswp_dead_links_apply_step($run);
+    $saved = unserialize($db->option_values[UAMSWP_DEAD_LINKS_RUN_OPTION]);
+
+    expect($saved['status'])->toBe('applying')
+        ->and($saved['cursor'])->toBe(0)
+        ->and($saved['items'][0]['saved'])->toBeTrue()
+        ->and($saved['items'][0]['state'])->toBe('pending');
+});
+
+test('an undo passes over items it did not remove and still handles the ones after them', function (): void {
+    $db = dead_links_db();
+    $db->option_values[UAMSWP_DEAD_LINKS_ROWS_OPTION] = serialize(['uamswp_locations|91' => ['post_id' => '91']]);
+
+    $result = uamswp_dead_links_undo_step(dead_links_make_run([
+        dead_links_row('uamswp_locations', 90, 'skipped'),
+        dead_links_row('uamswp_locations', 91, 'done'),
+    ], 'applied'));
+
+    expect(array_column($result['items'], 'state'))->toBe(['skipped', 'restored'])
+        ->and($db->tables['uamswp_locations'])->toBe([['post_id' => '91']]);
 });
