@@ -31,8 +31,15 @@ function resources_block_query(array $ids): object
         /** @param list<int> $ids */
         public function __construct(private readonly array $ids, private readonly stdClass $current) {}
 
+        private int $asked = 0;
+
         public function have_posts(): bool
         {
+            // A loop that never moves on would ask forever; fail instead, so a mutant that drops the_post() is killed rather than timed out.
+            if (++$this->asked > 2 * count($this->ids) + 4) {
+                throw new RuntimeException('have_posts() asked again without the_post()');
+            }
+
             return $this->position < count($this->ids);
         }
 
@@ -55,7 +62,10 @@ function resources_block(array $ids, array $variables = [], array $drafts = []):
 {
     uamswp_test_acf_blocks_file();
 
-    when('wp_reset_postdata')->justReturn();
+    $GLOBALS['resources_block_resets'] = 0;
+    when('wp_reset_postdata')->alias(static function (): void {
+        $GLOBALS['resources_block_resets']++;
+    });
     when('get_post_status')->alias(static fn (int $id): string => in_array($id, $drafts, true) ? 'draft' : 'publish');
     when('esc_url')->returnArg();
     when('esc_attr')->alias(static fn (string $text): string => htmlspecialchars($text));
@@ -161,4 +171,21 @@ test('the clinical resources block describes the link with a label that has no q
     $output = resources_block([1, 2, 3, 4], ['resource_postsPerPage' => 3, 'resource_heading_related_name' => 'Mom&#8217;s "Heart"']);
 
     expect($output)->toContain('aria-label="View the full list of clinical resources related to Mom&#039;s &#039;Heart&#039;"');
+});
+
+test('the clinical resources block moves on to each resource once, and restores the post after the cards and after the list', function (array $ids, int $perPage, string $layout): void {
+    $output = resources_block($ids, ['resource_postsPerPage' => $perPage]);
+
+    expect($output)->toContain($layout)
+        ->and(substr_count($output, 'https://example.test/resource/'.$ids[0].'/'))->toBeGreaterThan(0)
+        ->and($GLOBALS['resources_block_resets'])->toBe(1);
+})->with([
+    'cards' => [[1, 2, 3], 4, 'stacked-image-text'],
+    'list' => [[1, 2, 3, 4, 5], -1, 'link-list'],
+]);
+
+test('the clinical resources block label turns a non-breaking space into a space and keeps an ampersand as one', function (): void {
+    $output = resources_block([1, 2, 3, 4], ['resource_postsPerPage' => 3, 'resource_heading_related_name' => "A&nbsp;B\u{A0}C & D"]);
+
+    expect($output)->toContain('aria-label="View the full list of clinical resources related to A B C &amp; D"');
 });

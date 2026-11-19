@@ -34,8 +34,8 @@ function block_partials_appointment_stubs(bool $mainLine, ?array $portal): void
 /**
  * Render the provider appointment block and collapse its whitespace.
  *
- * Without a portal the template never sets the attribute-safe name of the appointment line and warns when it
- * reads it, so the warnings are kept for the test to assert (see block_partials_warnings()).
+ * The warnings of the render are kept for the test to assert (see block_partials_warnings()), so a read of a
+ * variable or property the template never set fails the test.
  *
  * @param  array<string, mixed>  $variables  Overrides of the variables the profile template sets.
  */
@@ -180,4 +180,84 @@ test('the provider appointment block labels the main line link for a provider wi
 
     expect($output)->toContain('class="no-break" data-categorytitle="Make an Appointment | Block 1" data-typetitle="Main Appointment Line | the UAMS Health appointment line"')
         ->and(block_partials_warnings())->toBe([]);
+});
+
+/**
+ * The text of the provider appointment block for the given state, with its tags and spacing removed.
+ */
+function block_partials_appointment_text(bool $locationValid, bool $referral, bool $acceptNew, bool $portal, bool $mainLine): string
+{
+    block_partials_appointment_stubs($mainLine, $portal ? ['slug' => 'mychart', 'name' => 'MyChart', 'url' => 'https://portal.example.test/'] : null);
+
+    $output = block_partials_appointment([
+        'physician_portal' => $portal ? 5 : 0,
+        'location_valid' => $locationValid,
+        'refer_req' => $referral,
+        'accept_new' => $acceptNew,
+    ]);
+
+    $text = trim((string) preg_replace('/\s+/', ' ', html_entity_decode(strip_tags($output), ENT_QUOTES, 'UTF-8')));
+
+    return str_replace("\u{00A0}", ' ', $text);
+}
+
+const BLOCK_PARTIALS_REFERRAL = 'Appointments for new patients are by referral only.';
+const BLOCK_PARTIALS_CLOSED = 'This provider is not currently accepting new patients.';
+const BLOCK_PARTIALS_PORTAL = 'requesting an appointment online through MyChart';
+const BLOCK_PARTIALS_DIRECT = 'by contacting the clinic directly';
+const BLOCK_PARTIALS_MAIN = 'by calling the UAMS Health appointment line at (501) 686-8000';
+
+test('the provider appointment block says exactly one thing for each state, and a provider who needs a referral and takes no new patients gets the closed wording', function (bool $locationValid, bool $referral, bool $acceptNew, bool $portal, bool $mainLine, string $expected): void {
+    expect(block_partials_appointment_text($locationValid, $referral, $acceptNew, $portal, $mainLine))->toBe('Make an Appointment With Dr. Smith '.$expected)
+        ->and(block_partials_warnings())->toBe([]);
+})->with([
+    'referral, new patients, portal, main line' => [true, true, true, true, true, BLOCK_PARTIALS_REFERRAL.' Existing patients can make an appointment by '.BLOCK_PARTIALS_PORTAL.', '.BLOCK_PARTIALS_DIRECT.' or '.BLOCK_PARTIALS_MAIN.'.'],
+    'referral, new patients, portal' => [true, true, true, true, false, BLOCK_PARTIALS_REFERRAL.' Existing patients can make an appointment by '.BLOCK_PARTIALS_PORTAL.' or '.BLOCK_PARTIALS_DIRECT.'.'],
+    'referral, new patients, no portal, main line' => [true, true, true, false, true, BLOCK_PARTIALS_REFERRAL.' Existing patients can make an appointment '.BLOCK_PARTIALS_DIRECT.' or '.BLOCK_PARTIALS_MAIN.'.'],
+    'referral, new patients, no portal' => [true, true, true, false, false, BLOCK_PARTIALS_REFERRAL.' Existing patients can make an appointment '.BLOCK_PARTIALS_DIRECT.'.'],
+    'referral, new patients, no valid location, portal' => [false, true, true, true, false, BLOCK_PARTIALS_REFERRAL.' Existing patients can make an appointment '.BLOCK_PARTIALS_MAIN.'.'],
+    'no referral, new patients, portal, main line' => [true, false, true, true, true, 'New patients can make an appointment '.BLOCK_PARTIALS_DIRECT.' or '.BLOCK_PARTIALS_MAIN.'. Existing patients also have the option of '.BLOCK_PARTIALS_PORTAL.'.'],
+    'no referral, new patients, portal' => [true, false, true, true, false, 'New patients can make an appointment '.BLOCK_PARTIALS_DIRECT.'. Existing patients also have the option of '.BLOCK_PARTIALS_PORTAL.'.'],
+    'no referral, new patients, no portal, main line' => [true, false, true, false, true, 'New and existing patients can make an appointment '.BLOCK_PARTIALS_DIRECT.' or '.BLOCK_PARTIALS_MAIN.'.'],
+    'no referral, new patients, no portal' => [true, false, true, false, false, 'New and existing patients can make an appointment '.BLOCK_PARTIALS_DIRECT.'.'],
+    'no referral, new patients, no valid location, portal' => [false, false, true, true, true, 'New and existing patients can make an appointment '.BLOCK_PARTIALS_MAIN.'.'],
+    'no referral, not accepting, portal, main line' => [true, false, false, true, true, BLOCK_PARTIALS_CLOSED.' Existing patients can make an appointment by '.BLOCK_PARTIALS_PORTAL.', '.BLOCK_PARTIALS_DIRECT.' or '.BLOCK_PARTIALS_MAIN.'.'],
+    'no referral, not accepting, portal' => [true, false, false, true, false, BLOCK_PARTIALS_CLOSED.' Existing patients can make an appointment by '.BLOCK_PARTIALS_PORTAL.' or '.BLOCK_PARTIALS_DIRECT.'.'],
+    'no referral, not accepting, no portal, main line' => [true, false, false, false, true, BLOCK_PARTIALS_CLOSED.' Existing patients can make an appointment '.BLOCK_PARTIALS_DIRECT.' or '.BLOCK_PARTIALS_MAIN.'.'],
+    'no referral, not accepting, no portal' => [true, false, false, false, false, BLOCK_PARTIALS_CLOSED.' Existing patients can make an appointment '.BLOCK_PARTIALS_DIRECT.'.'],
+    'no referral, not accepting, no valid location, portal' => [false, false, false, true, true, BLOCK_PARTIALS_CLOSED.' Existing patients can make an appointment '.BLOCK_PARTIALS_MAIN.'.'],
+    'referral, not accepting, portal, main line' => [true, true, false, true, true, BLOCK_PARTIALS_CLOSED.' Existing patients can make an appointment '.BLOCK_PARTIALS_DIRECT.' or '.BLOCK_PARTIALS_MAIN.'.'],
+    'referral, not accepting, portal' => [true, true, false, true, false, BLOCK_PARTIALS_CLOSED.' Existing patients can make an appointment '.BLOCK_PARTIALS_DIRECT.'.'],
+    'referral, not accepting, no portal, main line' => [true, true, false, false, true, BLOCK_PARTIALS_CLOSED.' Existing patients can make an appointment '.BLOCK_PARTIALS_DIRECT.' or '.BLOCK_PARTIALS_MAIN.'.'],
+    'referral, not accepting, no valid location' => [false, true, false, false, false, BLOCK_PARTIALS_CLOSED.' Existing patients can make an appointment '.BLOCK_PARTIALS_DIRECT.'.'],
+]);
+
+test('a portal term that is an error still counts as a portal, with no name and no warning', function (): void {
+    block_partials_appointment_stubs(false, ['url' => 'https://portal.example.test/']);
+    when('get_term')->justReturn(new WP_Error);
+    when('is_wp_error')->alias(static fn (mixed $thing): bool => $thing instanceof WP_Error);
+
+    $output = block_partials_appointment(['physician_portal' => 5]);
+
+    expect($output)->toContain('data-typetitle="Request an Appointment Online | ">requesting an appointment online</a> through .</p>')
+        ->and(block_partials_warnings())->toBe([]);
+});
+
+test('a portal that cannot be found is not offered, even with a link', function (): void {
+    block_partials_appointment_stubs(false, ['url' => 'https://portal.example.test/']);
+    when('get_term')->justReturn(false);
+
+    expect(block_partials_appointment(['physician_portal' => 5]))->not->toContain('portal.example.test');
+});
+
+test('a portal offered with no link leaves the online request out of the sentence', function (): void {
+    block_partials_appointment_stubs(false, ['slug' => 'mychart', 'name' => 'MyChart']);
+
+    expect(block_partials_appointment(['physician_portal' => 5]))->toContain('<p>Existing patients also have the option of .</p>');
+});
+
+test('the portal name in the tracking label turns a non-breaking space into a space and keeps an ampersand as one', function (): void {
+    block_partials_appointment_stubs(false, ['slug' => 'mychart', 'name' => "My&nbsp;Chart\u{A0}& More", 'url' => 'https://portal.example.test/']);
+
+    expect(block_partials_appointment(['physician_portal' => 5]))->toContain('data-typetitle="Request an Appointment Online | My Chart & More">');
 });

@@ -46,7 +46,10 @@ function provider_blocks_world(array $fields = [], array $terms = [], array $opt
     when('esc_attr')->alias(static fn (mixed $text): string => htmlspecialchars((string) $text));
     when('esc_html')->alias(static fn (mixed $text): string => htmlspecialchars((string) $text));
     when('sanitize_title_with_dashes')->alias(static fn (string $text): string => strtolower(str_replace(' ', '-', $text)));
-    when('wp_reset_postdata')->justReturn();
+    $GLOBALS['provider_blocks_resets'] = 0;
+    when('wp_reset_postdata')->alias(static function (): void {
+        $GLOBALS['provider_blocks_resets']++;
+    });
     when('uamswp_custom_table_query')->alias(static fn (string $table, string $field, mixed $values): array => $fields['__table:'.$field] ?? []);
 
     WP_Query::$queue = [];
@@ -413,4 +416,47 @@ test('the provider card loop prints a card for each post of the main loop, and n
     uamswp_test_main_loop([]);
 
     expect(trim(uamswp_test_include_partial('fwp/physician-loop-card')))->toBe('');
+});
+
+test('the recognition list asks for every published provider of the recognition by title', function (): void {
+    recognition_block(['field_select_recognition_list' => [5]], [], []);
+
+    expect(WP_Query::$queries)->toBe([[
+        'post_type' => 'provider',
+        'post_status' => 'publish',
+        'posts_per_page' => -1,
+        'order' => 'ASC',
+        'orderby' => 'title',
+        'tax_query' => [['taxonomy' => 'recognition', 'field' => 'term_id', 'terms' => [5]]],
+    ]]);
+});
+
+test('the recognition list prints the table for a block outside the editor preview', function (): void {
+    $output = recognition_block(['physician_first_name:21' => 'Jo', 'physician_last_name:21' => 'Smith'], [], [21], ['block' => ['id' => 'b1', 'title' => 'Recognitions', 'data' => ['field_x' => '']]]);
+
+    expect($output)->toStartWith('<div class="table-responsive">')
+        ->and($output)->not->toContain('uams-block-placeholder');
+});
+
+test('the providers block prints no description without one, and restores the post after the cards', function (): void {
+    $output = providers_block(['block_fad_providers_heading' => 'Our Providers', 'block_fad_providers_filter_ids' => [41]], [[41]], ['block' => ['id' => 'abc']]);
+
+    expect((string) preg_replace('/>\s+</', '><', $output))->toContain('<span class="title">Our Providers</span></h2><div class="card-list-container">')
+        ->and($GLOBALS['provider_blocks_resets'])->toBe(1);
+});
+
+test('the providers block reads a link array without an address as no address, with no warning', function (): void {
+    $output = '';
+    $warnings = uamswp_test_capture_warnings(static function () use (&$output): void {
+        $output = providers_block(['block_fad_providers_filter_ids' => [41], 'block_fad_providers_more' => true, 'block_fad_providers_more_button_url' => ['target' => '_self']], [[41]], ['block' => ['id' => 'abc']]);
+    });
+
+    expect($warnings)->toBe([])
+        ->and($output)->toContain('<a href="" class="btn btn-outline-white"');
+});
+
+test('the providers block button label turns a non-breaking space into a space and keeps an ampersand as one', function (): void {
+    $output = providers_block(['block_fad_providers_filter_ids' => [41], 'block_fad_providers_more' => true, 'block_fad_providers_more_button_description' => "A&nbsp;B\u{A0}C & D"], [[41]], ['block' => ['id' => 'abc']]);
+
+    expect($output)->toContain('aria-label="A B C &amp; D"');
 });

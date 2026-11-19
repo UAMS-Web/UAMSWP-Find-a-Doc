@@ -43,18 +43,18 @@ if ($resource_heading_related_post) {
 $resource_count = 0;
 if ($resources && $resource_query->have_posts()) {
     foreach (uamswp_fad_ids($resources) as $resource) {
-        if (get_post_status($resource) == 'publish') {
+        if (get_post_status($resource) === 'publish') {
             $resource_count++;
         }
     }
 }
 
-if ($resource_count > 4 && $resource_postsPerPage == -1) {
+if ($resource_count > 4 && $resource_postsPerPage === -1) {
     $resource_layout = 'list';
 } else {
     $resource_layout = 'card';
 }
-$resource_more = $resource_layout == 'card' && $resource_count > $resource_postsPerPage && ($resource_more_key && $resource_more_value);
+$resource_more = $resource_layout === 'card' && $resource_count > $resource_postsPerPage && ($resource_more_key && $resource_more_value);
 if ($resource_more_suppress) {
     $resource_more = false;
 }
@@ -71,7 +71,7 @@ $more_button_description_attr = html_entity_decode($more_button_description_attr
 $more_button_target = '_blank';
 $more_button_text = 'View the Full List';
 
-if ($resource_layout == 'card') { ?>
+if ($resource_layout === 'card') { ?>
         <section class="uams-module stacked-image-text bg-auto" id="related-resources" aria-labelledby="related-resources-title">
             <div class="container-fluid">
                 <div class="row">

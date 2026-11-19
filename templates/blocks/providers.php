@@ -24,14 +24,6 @@ if (function_exists('uams_fad_block_placeholder') && uams_fad_block_placeholder(
 $block_data = uamswp_fad_assoc($block ?? null);
 $id = 'providers-'.uamswp_fad_str($block_data['id'] ?? null);
 
-$className = '';
-if (! empty($block_data['className'])) {
-    $className .= ' '.uamswp_fad_str($block_data['className']);
-}
-if (! empty($block_data['align'])) {
-    $className .= ' align'.uamswp_fad_str($block_data['align']);
-}
-
 // Load values.
 if (empty($heading)) {
     /** @var string|false|null $heading */
@@ -49,6 +41,8 @@ if (empty($more)) {
     /** @var bool|null $more */
     $more = get_field('block_fad_providers_more');
 }
+// Read only by the button, which prints only when $more holds and the value is set below; PHPStan needs it defined.
+// @pest-mutate-ignore: EmptyStringToNotEmpty
 $more_button_description_attr = '';
 if ($more) {
     if (empty($more_text)) {
@@ -80,7 +74,7 @@ if ($more) {
     $more_button_description_attr = htmlentities($more_button_description_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
     $more_button_description_attr = str_replace('&nbsp;', ' ', $more_button_description_attr); // Convert non-breaking space with normal space
     $more_button_description_attr = html_entity_decode($more_button_description_attr); // Convert HTML entities to their corresponding characters
-    if (empty($more_button_color) && ($background_color == 'bg-white' || $background_color == 'bg-gray')) {
+    if (empty($more_button_color) && ($background_color === 'bg-white' || $background_color === 'bg-gray')) {
         $more_button_color = 'primary';
     } else {
         $more_button_color = 'white';
