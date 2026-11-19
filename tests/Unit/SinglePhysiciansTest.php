@@ -385,6 +385,43 @@ test('the page classes follow the order of the template', function (): void {
     expect($vars['provider_field_classes'])->toBe(' has-image has-npi has-clinical-bio has-hidden has-additional-info');
 });
 
+test('every page class is added to the ones before it', function (): void {
+    $vars = single_physician(
+        [
+            'physician_degree' => [3],
+            'physician_service_line' => 4,
+            'physician_npi' => '123',
+            'physician_clinical_bio' => 'Bio.',
+            'physician_short_clinical_bio' => 'Bio.',
+            'physician_youtube_link' => 'https://example.test/v',
+            'physician_conditions_cpt' => [1],
+            'physician_treatments_cpt' => [1],
+            'physician_locations' => [21],
+            'physician_affiliation' => 'UAMS',
+            'physician_expertise' => [30],
+            'physician_hidden' => true,
+            'physician_academic_college' => 'College',
+            'physician_academic_position' => 'Professor',
+            'physician_academic_bio' => 'Bio.',
+            'physician_academic_short_bio' => 'Bio.',
+            'physician_academic_office' => 'Room 1',
+            'physician_academic_map' => 'Tower',
+            'physician_education' => [['school' => 'Med']],
+            'physician_boards' => [1],
+            'physician_associations' => [1],
+            'physician_research_bio' => 'Bio.',
+            'physician_research_interests' => 'Interests.',
+            'physician_research_profiles_link' => 'https://example.test/r',
+            'physician_pubmed_author_id' => '99',
+            'physician_additional_info' => 'More.',
+            'physician_resident' => true,
+        ],
+        ['terms' => [3 => 'M.D.', 4 => 'Heart'], 'status' => [21 => 'publish', 30 => 'publish'], 'thumbnail' => true, 'ratings' => single_physician_rating('200', 30, 6)],
+    );
+
+    expect($vars['provider_field_classes'])->toBe(' has-degrees has-prefix has-image has-service-line has-npi has-clinical-bio has-short-clinical-bio has-video has-condition has-treatment has-location has-affiliation has-expertise has-hidden has-college-affiliation has-position has-academic-bio has-short-academic-bio has-office-location has-office-building has-education has-boards has-associations has-research-bio has-research-interests has-research-profile has-pubmed-id has-additional-info is-resident has-ratings');
+});
+
 test('the age of the photo is counted in years from its upload', function (int $years, string $age): void {
     $vars = single_physician([], ['thumbnail' => true, 'image_year' => (int) date('Y') - $years]);
 
@@ -650,4 +687,70 @@ test('the template holds no condition that can never be true', function (): void
     $source = (string) file_get_contents(UAMS_FAD_PATH.'templates/single-physicians.php');
 
     expect($source)->not->toContain('true == false');
+});
+
+test('the short name of a provider with no prefix is the full name with the middle name and pedigree', function (): void {
+    $vars = single_physician(['physician_first_name' => 'Leonard', 'physician_middle_name' => 'H.', 'physician_last_name' => 'McCoy', 'physician_pedigree' => 'Jr.']);
+
+    expect($vars['short_name'])->toBe('Leonard H. McCoy&nbsp;Jr.');
+});
+
+test('a resident has no clinical specialty', function (): void {
+    $vars = single_physician(['physician_resident' => true]);
+
+    expect($vars['provider_specialty_term'])->toBe('')
+        ->and($vars['provider_specialty_name'])->toBe('');
+});
+
+test('a clinical title whose term is gone gives no occupation title and no warning', function (): void {
+    $vars = single_physician(['physician_title' => 99]);
+
+    expect($vars['single_physician_warnings'])->toBe([])
+        ->and($vars['provider_occupation_title'])->toBe('')
+        ->and($vars['provider_occupation_title_attr'])->toBe('');
+});
+
+test('a title that starts with any vowel takes an', function (string $title): void {
+    expect(single_physician([], ['terms' => [10 => $title]])['provider_occupation_title_indef_article'])->toBe('an');
+})->with(['Allergist', 'Endocrinologist', 'Internist', 'Oncologist', 'Ultrasonographer']);
+
+test('a provider with no published location has no primary location values', function (): void {
+    $vars = single_physician(['physician_locations' => [21]], ['status' => [21 => 'draft']]);
+
+    expect([$vars['primary_appointment_title'], $vars['primary_appointment_title_attr'], $vars['primary_appointment_url'], $vars['primary_appointment_city'], $vars['primary_appointment_city_attr'], $vars['location_count']])
+        ->toBe(['', '', '', '', '', 0]);
+});
+
+test('a published location with no title or city gives empty attributes', function (): void {
+    $vars = single_physician(['physician_locations' => [21]], ['status' => [21 => 'publish'], 'titles' => [21 => '']]);
+
+    expect([$vars['primary_appointment_title_attr'], $vars['primary_appointment_city_attr']])->toBe(['', '']);
+});
+
+test('the first published area of expertise names the profile', function (): void {
+    $vars = single_physician(['physician_expertise' => [30, 31, 32]], ['status' => [30 => 'draft', 31 => 'publish', 32 => 'publish'], 'titles' => [31 => 'Cardiology', 32 => 'Oncology']]);
+
+    expect($vars['expertise_primary_name'])->toBe('Cardiology');
+});
+
+test('the page header is printed once', function (): void {
+    expect(single_physician()['single_physician_headers'] ?? 0)->toBe(1);
+});
+
+test('a provider who is not a resident has no residency values', function (): void {
+    $vars = single_physician();
+
+    expect([$vars['resident_academic_department'], $vars['resident_academic_department_name'], $vars['resident_academic_chief'], $vars['resident_academic_year'], $vars['resident_academic_year_name']])
+        ->toBe(['', '', '', '', '']);
+});
+
+test('a photo with no upload date counts its age from year zero', function (): void {
+    expect((string) single_physician([], ['thumbnail' => true, 'image_date' => ''])['image_age'])->toBe('10+');
+});
+
+test('a rating response whose code is a number is read as a success', function (): void {
+    $rating = single_physician_rating('200', 30, 6);
+    $rating->status->code = 200;
+
+    expect(single_physician([], ['ratings' => $rating])['pg_rating_valid'])->toBeTrue();
 });

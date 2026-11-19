@@ -101,13 +101,16 @@ function single_physician(array $fields = [], array $options = []): array
     when('bis_get_attachment_image')->justReturn('');
     when('lyte_preparse')->justReturn();
     when('image_sizer')->alias(static fn (mixed $id, int $width, int $height): string => 'https://example.test/photo-'.$width.'x'.$height.'.jpg');
-    when('get_header')->justReturn();
+    when('get_header')->alias(static function (): void {
+        $GLOBALS['single_physician_headers'] = ($GLOBALS['single_physician_headers'] ?? 0) + 1;
+    });
     when('get_footer')->justReturn();
     uamswp_test_main_loop([5]);
     when('has_post_thumbnail')->justReturn($options['thumbnail'] ?? false);
     when('get_post_thumbnail_id')->justReturn(77);
-    when('get_the_date')->justReturn((string) ($options['image_year'] ?? date('Y')));
-    when('get_post_meta')->justReturn($options['ratings'] ?? '');
+    when('get_the_date')->justReturn(array_key_exists('image_date', $options) ? $options['image_date'] : (string) ($options['image_year'] ?? date('Y')));
+    // As WordPress answers it: a single read gives the value, any other read a list of values.
+    when('get_post_meta')->alias(static fn (mixed $id, string $key = '', bool $single = false): mixed => $single ? ($options['ratings'] ?? '') : [$options['ratings'] ?? '']);
     when('get_the_ID')->justReturn(5);
     when('esc_url')->returnArg();
     when('esc_attr')->returnArg();

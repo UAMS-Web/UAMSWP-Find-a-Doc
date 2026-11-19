@@ -560,3 +560,100 @@ test('the photo prints at each size with the name as its text', function (): voi
         ->and($output)->toContain('<img src="https://example.test/photo-778x1038.jpg" alt="Leonard McCoy" />')
         ->and(single_physician_markup())->not->toContain('<picture>');
 });
+
+/**
+ * The options of a provider whose first location (21) is part of another (40), in a building with a floor and suite,
+ * and who practices at a second location (22).
+ *
+ * @return array<string, mixed>
+ */
+function single_physician_two_clinics(array $location = [], array $parent = ['location_prepend_the' => true]): array
+{
+    $options = single_physician_clinic($location + ['location_parent' => true, 'location_parent_id' => 40, 'location_building' => 70, 'location_suite' => '200', 'location_phone' => '501-555-0100']);
+    $options['status'][22] = 'publish';
+    $options['titles'][22] = 'Second Clinic';
+    $options['location_fields'][22] = ['location_address_1' => '9 Side St', 'location_city' => 'Conway', 'location_state' => 'AR', 'location_zip' => '72032'];
+    $options['location_fields'][40] = $parent;
+    $options['posts'] = [40 => (object) ['ID' => 40, 'post_title' => 'Medical Center']];
+    $options['terms'] = [70 => 'Tower', 4 => 'Heart'];
+    $options['objects'] = ['location_building_floor' => ['value' => '2', 'choices' => ['2' => 'Second floor']]];
+
+    return $options;
+}
+
+/**
+ * The primary location block of a render, from its section to the overview heading.
+ */
+function single_physician_primary(string $output): string
+{
+    return preg_match('/<div data-sectiontitle="Primary Location">.*?(?=<h2 class="h3">Overview)/', $output, $match) === 1 ? $match[0] : '';
+}
+
+test('the page element carries the classes, the age of the photo and the service line', function (): void {
+    $options = single_physician_two_clinics();
+    $options['thumbnail'] = true;
+    $options['image_year'] = (int) date('Y') - 3;
+
+    expect(single_physician_markup(['physician_locations' => [21, 22], 'physician_service_line' => 4], $options))
+        ->toContain('<main class="doctor-item has-image has-service-line has-location" id="genesis-content" data-image-age="3" data-service-line="Heart">')
+        ->and(single_physician_markup(['physician_title' => null]))->toContain('<main class="doctor-item" id="genesis-content">');
+});
+
+test('the primary location prints only the first published location, its parent, its building, floor and suite, and its phone', function (): void {
+    $vars = single_physician(['physician_first_name' => 'Leonard', 'physician_last_name' => 'McCoy', 'physician_locations' => [23, 21, 22]], single_physician_two_clinics());
+    $output = trim((string) preg_replace('/\s*(<[^>]+>)\s*/', '$1', (string) preg_replace('/\s+/', ' ', $vars['single_physician_output'])));
+
+    expect($vars['single_physician_warnings'])->toBe([])
+        ->and(single_physician_primary($output))->toBe('<div data-sectiontitle="Primary Location"><h2 class="h3">Primary Location</h2><p><strong>Heart Clinic</strong><br />(Part of the<a href="https://example.test/p/40/" data-categorytitle="Parent Name">Medical Center</a>)<br />1 Main St<br/>Tower<br />Second floor, 200<br/>Little Rock, AR 72205</p><dl data-categorytitle="Telephone Number"><dt>General Information</dt><dd><a href="tel:dash:501-555-0100" class="icon-phone" data-categorytitle="Telephone Number" data-itemtitle="Heart Clinic" data-typetitle="Clinic Phone Number">dash:501-555-0100</a></dd></dl><div class="btn-container"><a class="btn btn-primary" href="https://example.test/p/21/" data-itemtitle="Heart Clinic" data-categorytitle="View Location">View Location</a><a class="btn btn-outline-primary" href="#locations" aria-label="Jump to list of locations for this provider" data-categorytitle="View All Locations">View All Locations</a></div></div>');
+});
+
+test('a parent that does not take the article, or that is not marked as the parent, prints as it should', function (): void {
+    $plain = single_physician_markup(['physician_locations' => [21]], single_physician_two_clinics([], []));
+    $unmarked = single_physician_markup(['physician_locations' => [21]], single_physician_two_clinics(['location_parent' => false]));
+
+    expect(single_physician_primary($plain))->toContain('<br />(Part of<a href="https://example.test/p/40/" data-categorytitle="Parent Name">Medical Center</a>)<br />')
+        ->and(single_physician_primary($unmarked))->not->toContain('Part of');
+});
+
+test('a building whose term is gone, a floor with no label and no suite leave the address line to the older field', function (): void {
+    $options = single_physician_two_clinics(['location_parent' => false, 'location_building' => 71, 'location_suite' => '', 'location_address_2' => 'Old line 2']);
+    $options['objects'] = ['location_building_floor' => ['value' => '9', 'choices' => ['2' => 'Second floor']]];
+    $vars = single_physician(['physician_first_name' => 'Leonard', 'physician_last_name' => 'McCoy', 'physician_locations' => [21]], $options);
+    $output = trim((string) preg_replace('/\s*(<[^>]+>)\s*/', '$1', (string) preg_replace('/\s+/', ' ', $vars['single_physician_output'])));
+
+    expect($vars['single_physician_warnings'])->toBe([])
+        ->and(single_physician_primary($output))->toContain('<p><strong>Heart Clinic</strong><br />1 Main St<br/>Old line 2<br/>Little Rock, AR 72205</p>');
+});
+
+test('a location with no second address line prints none', function (): void {
+    $options = single_physician_two_clinics(['location_parent' => false, 'location_building' => null, 'location_suite' => '']);
+    $options['objects'] = [];
+
+    expect(single_physician_primary(single_physician_markup(['physician_locations' => [21]], $options)))->toContain('<p><strong>Heart Clinic</strong><br />1 Main St<br/>Little Rock, AR 72205</p>');
+});
+
+test('the photo is offered in five sizes', function (): void {
+    preg_match_all('/<source srcset="[^"]*"[^>]*>/', single_physician_markup([], ['thumbnail' => true]), $sources);
+
+    expect($sources[0])->toBe([
+        '<source srcset="https://example.test/photo-389x519.jpg" media="(min-width: 1200px)">',
+        '<source srcset="https://example.test/photo-306x408.jpg" media="(min-width: 992px)">',
+        '<source srcset="https://example.test/photo-182x243.jpg" media="(min-width: 768px)">',
+        '<source srcset="https://example.test/photo-86x115.jpg" media="(min-width: 576px)">',
+        '<source srcset="https://example.test/photo-380x507.jpg" media="(min-width: 1px)">',
+    ]);
+});
+
+test('the overview lists two published areas of expertise under a plural heading and skips post 0', function (): void {
+    $output = single_physician_markup(['physician_expertise' => [0, 1, 31]], ['status' => [0 => 'publish', 1 => 'publish', 31 => 'publish'], 'titles' => [1 => 'Cardiology', 31 => 'Oncology']]);
+
+    expect($output)->toContain('<dt>Areas of Expertise</dt><dd><a href="https://example.test/p/1/" target="_self" data-sectiontitle="Overview" data-categorytitle="View Area of Expertise">Cardiology</a></dd><dd><a href="https://example.test/p/31/" target="_self" data-sectiontitle="Overview" data-categorytitle="View Area of Expertise">Oncology</a></dd>');
+});
+
+test('the overview prints no expertise heading when none of them is published', function (): void {
+    expect(single_physician_markup(['physician_expertise' => [30]], ['status' => [30 => 'draft']]))->not->toContain('of Expertise</dt>');
+});
+
+test('a rating response that is not a success prints the unavailable note', function (): void {
+    expect(single_physician_markup([], ['ratings' => single_physician_rating('500', 99)]))->toContain('<p class="small"><em>Patient ratings are not available for this provider.');
+});
