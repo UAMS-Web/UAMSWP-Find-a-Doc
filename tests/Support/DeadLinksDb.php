@@ -107,7 +107,7 @@ final class DeadLinksDb
             $args = $args[0];
         }
 
-        return (string) preg_replace_callback('/%[sd]/', function (array $match) use (&$args): string {
+        return preg_replace_callback('/%[sd]/', function (array $match) use (&$args): string {
             $arg = array_shift($args);
 
             if ($arg === null) {
@@ -251,7 +251,7 @@ final class DeadLinksDb
         if ($table === $this->postmeta) {
             $this->format_is($format, ['%d', '%s']);
             $before = count($this->meta);
-            $this->meta = array_values(array_filter($this->meta, fn (array $row): bool => ! ($row['post'] === (int) $where['post_id'] && $row['key'] === $where['meta_key'])));
+            $this->meta = array_values(array_filter($this->meta, fn (array $row): bool => $row['post'] !== (int) $where['post_id'] || $row['key'] !== $where['meta_key']));
 
             return $before - count($this->meta);
         }

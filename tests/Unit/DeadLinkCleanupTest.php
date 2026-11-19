@@ -840,6 +840,7 @@ test('a removal that ended after saving an item finishes it, or leaves it when i
     $db->add_meta(10, 'condition_physicians', serialize(['20']));
     $db->add_meta(10, 'condition_locations', serialize(['20', '99']));
     $db->add_meta(10, 'treatment_procedure_physicians', serialize(['21']));
+
     $saved = ['before' => [20, 99], 'remove' => [99], 'after' => [20], 'saved' => true];
 
     $result = uamswp_dead_links_apply_step(dead_links_make_run([
@@ -1138,7 +1139,7 @@ test('a request from a user who cannot manage options is refused with a 403', fu
         ->and($db->calls)->toBe([]);
 });
 
-test('an administrator\'s request has its nonce checked for the action', function (): void {
+test("an administrator's request has its nonce checked for the action", function (): void {
     [$db] = dead_links_admin();
 
     uamswp_dead_links_guard('uamswp_dead_links_apply');
