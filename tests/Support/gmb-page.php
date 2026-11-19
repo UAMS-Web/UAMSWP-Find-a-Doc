@@ -11,6 +11,7 @@
 declare(strict_types=1);
 
 use Brain\Monkey\Functions;
+use UamswpFindADoc\Tests\Support\ExitCalled;
 
 use function Brain\Monkey\Functions\when;
 
@@ -40,6 +41,12 @@ function uamswp_test_gmb_page(): void
     });
 
     require_once UAMS_FAD_PATH.'includes/class.fad-gmb-settings-page.php';
+
+    // Whichever test loads the file first is the one a mutation run credits with the hook the file adds as it
+    // loads, so the load itself fails when that hook is missing. GmbExportHooksTest pins the hook exactly.
+    if (! in_array(['admin_menu', 'uamswp_add_gmb_export_page', 105], $GLOBALS['uamswp_test_gmb_page_actions'], true)) {
+        throw new RuntimeException('Loading includes/class.fad-gmb-settings-page.php did not hook the export page on admin_menu.');
+    }
 
     $loaded = true;
 }
@@ -105,4 +112,51 @@ function gmb_build(string $builder, array $ids): array
     WP_Query::$queries = [];
 
     return $builder();
+}
+
+/**
+ * Run an export as an administrator in WP-Admin with the given nonce, and return how it ended.
+ *
+ * @param  list<int>  $providers  The provider ids the export query finds.
+ * @return array{exit: string|null, output: string, headers: list<string>} The message the request ended with
+ *                                                                         (null when it did not end), what it
+ *                                                                         printed and the headers it sent.
+ */
+function gmb_export_run(string $export, string $nonce, array $providers = []): array
+{
+    uamswp_test_gmb_page();
+    $_GET = ['_wpnonce' => $nonce];
+    when('current_user_can')->justReturn(true);
+    when('is_admin')->justReturn(true);
+    when('wp_verify_nonce')->alias(static fn (string $given, string $action): int|false => $given === 'valid-'.$action ? 1 : false);
+
+    $headers = [];
+    when('header')->alias(static function (string $header) use (&$headers): void {
+        $headers[] = $header;
+    });
+    WP_Query::$queue = [$providers];
+    WP_Query::$queries = [];
+    $exit = null;
+
+    // The exports call fputcsv() without its $escape argument, which PHP 8.4 deprecates. That notice is about
+    // the CSV call and not how the request ends, so it alone is set aside. Any other error raised while the export
+    // runs fails the test: this handler replaces PHPUnit's for as long as it is set, so it reports them itself.
+    set_error_handler(static function (int $level, string $message, string $file = '', int $line = 0): bool {
+        if ($level === E_DEPRECATED && str_starts_with($message, 'fputcsv(): the $escape parameter')) {
+            return true;
+        }
+
+        throw new ErrorException($message, 0, $level, $file, $line);
+    });
+    ob_start();
+    try {
+        $export();
+    } catch (ExitCalled $exitCalled) {
+        $exit = $exitCalled->getMessage();
+    } finally {
+        $output = (string) ob_get_clean();
+        restore_error_handler();
+    }
+
+    return ['exit' => $exit, 'output' => $output, 'headers' => $headers];
 }
