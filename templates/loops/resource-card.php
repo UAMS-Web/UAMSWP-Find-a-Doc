@@ -59,12 +59,10 @@ $resource_button_text_attr = str_replace('"', "'", $resource_button_text_attr); 
 // The button text is one of the fixed strings above, none with a quote or a non-breaking space.
 // @pest-mutate-ignore: UnwrapStrReplace
 $resource_button_text_attr = str_replace('&#8217;', "'", $resource_button_text_attr); // Replace right single quote with single quote
-// The button text is one of the fixed strings above, none with a quote or a non-breaking space.
-// @pest-mutate-ignore: UnwrapStrReplace
-$resource_button_text_attr = str_replace('&nbsp;', ' ', $resource_button_text_attr); // Convert non-breaking space entity text to a normal space before it is encoded
-// The fixed button texts hold no entity, so decoding them unencoded gives the same text.
-// @pest-mutate-ignore: UnwrapHtmlentities
-$resource_button_text_attr = htmlentities($resource_button_text_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
+// The button text is one of the fixed strings above, with no non-breaking space and no entity, so leaving out the
+// replacement or the encoding gives the same text.
+// @pest-mutate-ignore: UnwrapStrReplace,UnwrapHtmlentities
+$resource_button_text_attr = htmlentities(str_replace('&nbsp;', ' ', $resource_button_text_attr), ENT_HTML401, 'UTF-8'); // Convert non-breaking space entity text to a normal space, then convert all applicable characters to HTML entities
 // The button text is one of the fixed strings above, none with a quote or a non-breaking space.
 // @pest-mutate-ignore: UnwrapStrReplace
 $resource_button_text_attr = str_replace('&nbsp;', ' ', $resource_button_text_attr); // Convert non-breaking space with normal space
