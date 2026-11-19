@@ -591,17 +591,31 @@ final class GbpCliTest extends UnitTestCase
         $this->assertSame([[[12], null, false], [[5, 6], 'uams', true]], $calls);
     }
 
-    public function test_a_flag_given_with_no_value_is_read_as_one(): void
+    /**
+     * @return array<string, array{array<string, string|bool>, string}>
+     */
+    public static function options_with_no_value(): array
+    {
+        // WP-CLI passes an option given with no value as true, and a --no- option as false.
+        return [
+            '--post with no value' => [['post' => true], 'Pass exactly one of --post=<id> or --all.'],
+            '--no-post with --all' => [['post' => false, 'all' => true], 'Pass exactly one of --post=<id> or --all.'],
+            '--silo with no value' => [['all' => true, 'silo' => true], 'Pass a silo name with --silo=<silo>.'],
+            '--no-silo' => [['post' => '12', 'silo' => false], 'Pass a silo name with --silo=<silo>.'],
+        ];
+    }
+
+    #[DataProvider('options_with_no_value')]
+    public function test_an_option_given_with_no_value_is_refused_and_nothing_syncs(array $assoc, string $error): void
     {
         $calls = [];
         $this->record('uamswp_fad_gbp_manual_sync', $calls);
-        when('uamswp_fad_gbp_all_post_ids')->justReturn([5, 6]);
+        $all = [];
+        $this->record('uamswp_fad_gbp_all_post_ids', $all);
 
-        // WP-CLI passes `--post` and `--silo` given with no value as true, and `--no-post` as false.
-        $this->command('uamswp_fad_gbp_cli_sync', ['post' => true]);
-        $this->command('uamswp_fad_gbp_cli_sync', ['post' => false, 'all' => true, 'silo' => true]);
-
-        $this->assertSame([[[1], null, false], [[5, 6], '1', false]], $calls);
+        $this->assertSame(['status' => null, 'error' => $error, 'lines' => []], $this->command('uamswp_fad_gbp_cli_sync', $assoc));
+        $this->assertSame([], $calls);
+        $this->assertSame([], $all, 'no post was read either');
     }
 
     public function test_the_backfill_and_cid_report_commands_run_over_every_post(): void
