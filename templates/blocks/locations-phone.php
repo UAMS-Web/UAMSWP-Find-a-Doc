@@ -213,7 +213,7 @@ if ($phone_output === 'location_profile') {
                 ?>
             <dt><?php echo $title; ?></dt>
             <dd><a href="tel:<?php echo $phone_format_dash; ?>" data-typetitle="Additional Phone Number: <?php echo $title_attr; ?>"><?php echo $phone_format_dash; ?></a><?php echo $text ? '<br/><span class="subtitle">'.$text.'</span>' : ''; ?></dd>
-            <?php if ($phone != '') {
+            <?php if ($phone !== '') {
                 if (isset($phone_schema)) {
                     $profile_phone_schema[] = $phone_format_dash;
                 }

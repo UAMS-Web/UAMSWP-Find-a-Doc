@@ -277,3 +277,30 @@ test("a profile of a children's hospital location reads no fax or additional num
         'location_phone_numbers' => '',
     ]));
 });
+
+test("a profile leaves the children's hospital links without an item title", function (): void {
+    $scope = location_phone_scope([
+        'location_appointments_query' => '1',
+        'location_ac_query' => true,
+        'location_ac_appointments_query' => true,
+        'location_ac_appointments_primary' => '501-4',
+        'location_ac_appointments_specialty' => '501-5',
+    ], 'location_profile');
+
+    expect($scope['location_ac_appointments_primary_link'])->toBe(location_phone_scope_link('501-4', "Arkansas Children's Primary Care Appointments Phone Number", ''))
+        ->and($scope['location_ac_appointments_specialty_link'])->toBe(location_phone_scope_link('501-5', "Arkansas Children's Specialty Care Appointments Phone Number", ''))
+        ->and($scope['profile_phone_schema'])->toBe([]);
+});
+
+test('a profile leaves the new and returning patient links without an item title', function (): void {
+    $scope = location_phone_scope([
+        'location_appointments_query' => '1',
+        'location_clinic_phone_query' => true,
+        'location_new_appointments_phone' => '501-2',
+        'field_location_appointment_phone_query' => true,
+        'location_return_appointments_phone' => '501-3',
+    ], 'location_profile');
+
+    expect($scope['location_new_appointments_phone_link'])->toBe(location_phone_scope_link('501-2', 'Appointment Phone Number for New and Returning Patients', ''))
+        ->and($scope['location_return_appointments_phone_link'])->toBe(location_phone_scope_link('501-3', 'Appointment Phone Number for Returning Patients', ''));
+});
