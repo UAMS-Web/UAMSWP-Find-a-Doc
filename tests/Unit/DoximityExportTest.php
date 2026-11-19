@@ -5,8 +5,7 @@
  * today: who qualifies, and what each of the fifteen columns holds.
  *
  * A provider qualifies with an NPI that is neither empty nor zero, a first degree that is M.D., D.O., CNP or
- * FNP-C, an affiliation and a published location. A provider who does not qualify still adds a row: the row the
- * provider before built, or an empty line when none has been built yet.
+ * FNP-C, an affiliation and a published location. A provider who does not qualify adds no row.
  */
 
 declare(strict_types=1);
@@ -237,7 +236,7 @@ test('the credential is MD, DO or NP from the first degree that is one of them',
     'CNP then M.D.' => [['CNP', 'M.D.'], 'NP'],
 ]);
 
-test('a provider who does not qualify writes an empty line when no row has been built before', function (string $case): void {
+test('a provider who does not qualify adds no row', function (string $case): void {
     [$provider, $fields, $objects, $terms] = doximity_provider();
     $statuses = [];
     $degree = $fields['physician_degree|'.$provider][0];
@@ -254,21 +253,29 @@ test('a provider who does not qualify writes an empty line when no row has been 
         'only a draft location' => $statuses[$fields['physician_locations|'.$provider][0]] = 'draft',
     };
 
-    expect(doximity_run([$provider], $fields, $objects, $terms, $statuses))->toBe([DOXIMITY_HEAD, [null]]);
+    expect(doximity_run([$provider], $fields, $objects, $terms, $statuses))->toBe([DOXIMITY_HEAD]);
 })->with([
     'no NPI', 'an NPI of zero', 'an NPI of 00, which compares equal to zero', 'no degree', 'a degree that is not one of them', 'a PA, then an M.D.',
     'a degree that is not a term', 'no affiliation', 'no location', 'only a draft location',
 ]);
 
-test('a provider who does not qualify repeats the row of the provider before', function (): void {
+test('a provider who does not qualify, between two who do, adds no row and leaves the next row its own', function (): void {
     [$first, $fields, $objects, $terms] = doximity_provider();
-    [$second, $second_fields, $second_objects, $second_terms] = doximity_provider('');
+    [$skipped, $skipped_fields, $skipped_objects, $skipped_terms] = doximity_provider('');
+    [$third, $third_fields, $third_objects, $third_terms] = doximity_provider('2222222222');
+    $third_fields['physician_first_name|'.$third] = 'Bo';
 
-    $rows = doximity_run([$first, $second], $fields + $second_fields, $objects + $second_objects, $terms + $second_terms);
+    $rows = doximity_run(
+        [$first, $skipped, $third],
+        $fields + $skipped_fields + $third_fields,
+        $objects + $skipped_objects + $third_objects,
+        $terms + $skipped_terms + $third_terms,
+    );
 
     expect($rows)->toHaveCount(3)
-        ->and($rows[2])->toBe($rows[1])
-        ->and($rows[1][0])->toBe('1234567890');
+        ->and([$rows[1][0], $rows[1][1]])->toBe(['1234567890', 'Ann'])
+        ->and([$rows[2][0], $rows[2][1]])->toBe(['2222222222', 'Bo'])
+        ->and($rows[2])->toHaveCount(15);
 });
 
 test('the email address is the first email row of the contact information', function (): void {

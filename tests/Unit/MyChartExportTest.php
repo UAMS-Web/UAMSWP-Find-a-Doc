@@ -5,8 +5,7 @@
  * today.
  *
  * Every published provider who is not a resident is written with the SER ID, the name, the tagged profile
- * address and the photo. A resident still adds a row: the row the provider before built, or an empty line when
- * none has been built yet.
+ * address and the photo. A resident adds no row.
  */
 
 declare(strict_types=1);
@@ -122,20 +121,20 @@ test('a SER ID of zero, or none, is written empty', function (mixed $pid): void 
         ->and($row[2])->toEndWith('&utm_content=ann-lee&utm_specs=');
 })->with(['zero' => [0], 'the string zero' => ['0'], 'none' => [null]]);
 
-test('a resident writes an empty line when no row has been built before, and repeats the row before after one', function (): void {
+test('a resident adds no row, alone or between two providers', function (): void {
     $first = gmb_next_id();
     $resident = gmb_next_id();
+    $third = gmb_next_id();
     $alone = gmb_next_id();
 
     $rows = mychart_run([
         $first => ['slug' => 'ann-lee', 'title' => 'Ann Lee', 'pid' => '1'],
         $resident => ['slug' => 'bo-ray', 'title' => 'Bo Ray', 'pid' => '2', 'resident' => true],
+        $third => ['slug' => 'cy-jo', 'title' => 'Cy Jo', 'pid' => '3'],
     ]);
 
-    expect($rows)->toHaveCount(3)
-        ->and($rows[2])->toBe($rows[1])
-        ->and($rows[1][0])->toBe('1')
-        ->and(mychart_run([$alone => ['slug' => 'cy-jo', 'title' => 'Cy Jo', 'resident' => true]]))->toBe([MYCHART_HEAD, [null]]);
+    expect(array_map(static fn (array $row): array => [$row[0], $row[1]], array_slice($rows, 1)))->toBe([['1', 'Ann Lee'], ['3', 'Cy Jo']])
+        ->and(mychart_run([$alone => ['slug' => 'di-po', 'title' => 'Di Po', 'resident' => true]]))->toBe([MYCHART_HEAD]);
 });
 
 test('a cell that would start a spreadsheet formula is written as text', function (string $title): void {
