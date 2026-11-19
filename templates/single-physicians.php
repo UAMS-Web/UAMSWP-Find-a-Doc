@@ -504,6 +504,8 @@ while (have_posts()) {
     // Classes for indicating presence of content
     $provider_field_classes = '';
     if ($degrees) {
+        // The classes are still empty here, so adding to them is the same as setting them.
+        // @pest-mutate-ignore: ConcatEqualToEqual
         $provider_field_classes .= ' has-degrees';
     }
     if ($prefix) {
@@ -669,9 +671,10 @@ while (have_posts()) {
 
     $pg_rating_valid = '';
     $pg_total_comment_count = '';
-    $avg_rating = '';
-    $review_count = '';
-    $comment_count = '';
+    // Read only when the rating is valid, which sets each of them first.
+    $avg_rating = null;
+    $review_count = null;
+    $comment_count = null;
     // if ( $npi ) {
     // $pg_rating_request = get_post_meta( get_the_ID(), '_syndicated_api_data', true ); // wp_pg_cached_api( $npi, 10 );
     // $pg_rating_data = json_decode( $pg_rating_request ); // Remove the redundant decode
@@ -880,13 +883,11 @@ while (have_posts()) {
                                             $location_floor_label = $location_floor['choices'][$location_floor_value] ?? '';
                                         }
                                         $location_suite = get_field('location_suite', $location_source_ids['unit']);
-                                        $location_address_2 = uamswp_location_address_2(($location_building && $building_slug != '_none'), $building_name, $location_floor, $location_floor_value, $location_floor_label, $location_suite ?: false, '<br />', ', ');
-                                        $location_address_2_schema = uamswp_location_address_2(($location_building && $building_slug != '_none'), $building_name, $location_floor, $location_floor_value, $location_floor_label, $location_suite ?: false, ' ', ' ');
+                                        $location_address_2 = uamswp_location_address_2(($location_building && $building_slug !== '_none'), $building_name, $location_floor, $location_floor_value, $location_floor_label, $location_suite ?: false, '<br />', ', ');
 
                                         $location_address_2_deprecated = get_field('location_address_2', $location_source_ids['street']);
                                         if (! $location_address_2) {
                                             $location_address_2 = $location_address_2_deprecated;
-                                            $location_address_2_schema = $location_address_2_deprecated;
                                         }
 
                                         $location_city = get_field('location_city', $location_source_ids['street']);
@@ -1052,7 +1053,11 @@ while (have_posts()) {
                         <img src="<?php echo uamswp_fad_str(image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center', 'portrait-3-4')); ?>" alt="<?php echo esc_attr($full_name_attr); ?>" />
                         <?php $docphoto = uamswp_fad_str(image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center', 'portrait-3-4'));
                     } else {
+                        // Every test process defines image_sizer(), so this fallback for a site without it cannot run under test.
+                        // @pest-mutate-ignore: RemoveArrayItem,RemoveFunctionCall
                         the_post_thumbnail('large', ['itemprop' => 'image']);
+                        // Every test process defines image_sizer(), so this fallback for a site without it cannot run under test.
+                        // @pest-mutate-ignore: TernaryNegated
                         $docphoto = get_the_post_thumbnail_url(null, 'large') ?: $docphoto;
                     } // endif?>
                     </picture>
@@ -1506,7 +1511,7 @@ while (have_posts()) {
         // $treatment_schema .= ']';
     } // endif
 
-    if ($show_aoe_section && ! empty($expertises)) { ?>
+    if ($show_aoe_section) { ?>
             <section class="uams-module expertise-list bg-auto" id="expertise">
                 <div class="container-fluid">
                     <div class="row">
@@ -1514,7 +1519,7 @@ while (have_posts()) {
                             <h2 class="module-title"><span class="title"><?php echo uamswp_provider_name_html($short_name_possessive); ?> Areas of Expertise</span></h2>
                             <div class="card-list-container">
                                 <div class="card-list card-list-expertise">
-                                    <?php foreach ($expertises as $expertise) {
+                                    <?php foreach (uamswp_fad_arr($expertises) as $expertise) {
                                         $id = $expertise;
                                         if (get_post_status(uamswp_fad_int($expertise)) === 'publish' && $expertise !== 0) {
                                             include UAMS_FAD_PATH.'/templates/loops/expertise-card.php';
@@ -1597,6 +1602,8 @@ while (have_posts()) {
                                     <?php
                     $questionRatings = $pg_rating_data->data->entities[0]->overallRating->questionRatings;
             $questionKey = array_search('Likelihood of recommending this provider', array_column($questionRatings, 'name')); // Find the key for 'Likelihood' question
+            // A missing question gives false, which as a key reads as 0, so the first question moves to where it already is.
+            // @pest-mutate-ignore: FalseToTrue
             if ($questionKey !== false) {
                 $questionRatings = [$questionKey => $questionRatings[$questionKey]] + $questionRatings; // Move 'Likelihood' question to front of the array
             }
@@ -1617,7 +1624,10 @@ while (have_posts()) {
                             </div>
                             <div class="card-footer bg-transparent text-muted small">
                                 <p class="h5">Overall: <?php echo $pg_rating_data->data->entities[0]->overallRating->value; ?> out of 5</p>
-                                <p>(<?php echo $pg_rating_data->data->entities[0]->totalRatingCount ? $pg_rating_data->data->entities[0]->totalRatingCount.' Ratings' : ''; ?><?php echo $pg_rating_data->data->entities[0]->totalCommentCount ? ', '.$pg_rating_data->data->entities[0]->totalCommentCount.' Comments' : ''; ?>)</p>
+                                <p>(<?php
+                                // The section is shown only for thirty ratings or more, so the count is never empty here.
+                                // @pest-mutate-ignore: EmptyStringToNotEmpty
+                                echo $pg_rating_data->data->entities[0]->totalRatingCount ? $pg_rating_data->data->entities[0]->totalRatingCount.' Ratings' : ''; ?><?php echo $pg_rating_data->data->entities[0]->totalCommentCount ? ', '.$pg_rating_data->data->entities[0]->totalCommentCount.' Comments' : ''; ?>)</p>
                             </div>
                         </div>
                         <?php /* -- AI Review Summary --  ** Disabled until further testing **
@@ -1643,6 +1653,8 @@ while (have_posts()) {
                             <div class="card-list">
                                 <?php foreach ($reviews as $review) {
                                     if ($i >= 6) {
+                                        // Once six are shown every later review is skipped here too, so going on prints nothing more.
+                                        // @pest-mutate-ignore: BreakToContinue
                                         break;
                                     }
                                     $i++; ?>

@@ -650,6 +650,10 @@ test('the overview lists two published areas of expertise under a plural heading
     expect($output)->toContain('<dt>Areas of Expertise</dt><dd><a href="https://example.test/p/1/" target="_self" data-sectiontitle="Overview" data-categorytitle="View Area of Expertise">Cardiology</a></dd><dd><a href="https://example.test/p/31/" target="_self" data-sectiontitle="Overview" data-categorytitle="View Area of Expertise">Oncology</a></dd>');
 });
 
+test('two areas of expertise take the plural heading', function (): void {
+    expect(single_physician_markup(['physician_expertise' => [1, 31]], ['status' => [1 => 'publish', 31 => 'publish']]))->toContain('<dt>Areas of Expertise</dt>');
+});
+
 test('the overview prints no expertise heading when none of them is published', function (): void {
     expect(single_physician_markup(['physician_expertise' => [30]], ['status' => [30 => 'draft']]))->not->toContain('of Expertise</dt>');
 });

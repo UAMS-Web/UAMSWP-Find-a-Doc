@@ -133,3 +133,89 @@ test('the related resources section is headed with the provider and lists the re
 test('an academic bio with any other academic content splits the section', function (string $field): void {
     expect(single_physician(['physician_academic_bio' => '<p>Academic.</p>', $field => [1]])['physician_academic_split'])->toBeTrue();
 })->with(['physician_academic_appointment', 'physician_academic_admin_title', 'physician_education', 'physician_boards']);
+
+test('more published resources than a page holds offer the rest', function (): void {
+    // The more button names its link target with a helper the blocks file declares.
+    require_once __DIR__.'/../Support/acf-blocks.php';
+    uamswp_test_acf_blocks_file();
+
+    $output = single_physician_section(single_physician_sections_markup(['physician_clinical_resources' => [61, 62, 63, 64, 65]], ['queries' => [[], [], [61, 62, 63, 64, 65]], 'status' => [61 => 'publish', 62 => 'publish', 63 => 'publish', 64 => 'publish', 65 => 'publish']]), 'related-resources');
+
+    expect($output)->toContain('Want to find more resources related to Leonard McCoy?')
+        ->and($output)->toContain('/clinical-resource/?_resource_provider=');
+});
+
+test('a provider whose locations are all unpublished has no locations section', function (): void {
+    expect(single_physician_sections_markup(['physician_locations' => [22]], ['status' => [22 => 'draft']]))->not->toContain('id="locations"');
+});
+
+test('a successful rating response with too few ratings has no ratings section', function (): void {
+    expect(single_physician_sections_markup([], ['ratings' => single_physician_rating('200', 29, 4)]))->not->toContain('id="ratings"');
+});
+
+test('the structured data carries the second address line of a location', function (): void {
+    $options = single_physician_sections_locations();
+    $options['location_fields'][21]['location_suite'] = '200';
+    preg_match('/"address":.*?\]/s', single_physician_sections_markup(['physician_locations' => [21]], $options), $match);
+
+    expect($match[0] ?? '')->toContain('"streetAddress": "1 Main St 200",')
+        ->and($match[0] ?? '')->toStartWith('"address": [ { "@type": "PostalAddress"');
+});
+
+/**
+ * A valid rating with the given questions, each with responses, and the given reviews.
+ *
+ * @param  list<string>  $questions
+ * @param  list<object>  $reviews
+ */
+function single_physician_sections_questions(array $questions, array $reviews = [], int $comments = 4): object
+{
+    $rating = single_physician_rating('200', 40, $comments, 4.5);
+    $rating->data->entities[0]->overallRating->questionRatings = array_map(static fn (string $name): object => (object) ['name' => $name, 'responseCount' => 5, 'value' => 4.0], $questions);
+    $rating->data->entities[0]->comments = $reviews;
+
+    return $rating;
+}
+
+test('five questions are all shown, the ones a recommendation repeats included', function (): void {
+    $output = single_physician_section(single_physician_sections_markup([], ['ratings' => single_physician_sections_questions(['A', 'B', 'C', 'D', 'Would Recommend'])]), 'ratings');
+
+    expect($output)->toContain('<dt>Would Recommend</dt>');
+});
+
+test('a rating with no comments says only the number of ratings', function (): void {
+    expect(single_physician_section(single_physician_sections_markup([], ['ratings' => single_physician_sections_questions(['A'], [], 0)]), 'ratings'))->toContain('<p>(40 Ratings)</p>');
+});
+
+/**
+ * Reviews numbered from 1, the given one with a date that does not parse.
+ *
+ * @return list<object>
+ */
+function single_physician_sections_reviews(int $count, int $undated = 0): array
+{
+    return array_map(static fn (int $n): object => (object) ['overallRating' => (object) ['value' => 4.0], 'comment' => 'Review '.$n, 'mentionTime' => $n === $undated ? 'not a date' : '2026-03-04'], range(1, $count));
+}
+
+test('a review whose date does not parse is dated the start of 1970', function (int $count, int $undated): void {
+    expect(single_physician_section(single_physician_sections_markup(['physician_npi' => '123'], ['ratings' => single_physician_sections_questions(['A'], single_physician_sections_reviews($count, $undated))]), 'ratings'))->toContain('Jan 01, 1970');
+})->with([
+    'among the first six' => [1, 1],
+    'in the window of the rest' => [8, 8],
+]);
+
+test('the window of more reviews opens only after six', function (int $count, bool $more): void {
+    $output = single_physician_section(single_physician_sections_markup(['physician_npi' => '123'], ['ratings' => single_physician_sections_questions(['A'], single_physician_sections_reviews($count))]), 'ratings');
+
+    expect(str_contains($output, 'id="MoreReviews"'))->toBe($more);
+})->with([
+    'six' => [6, false],
+    'seven' => [7, true],
+]);
+
+test('the second appointment section follows a clinical section and is numbered 2', function (): void {
+    $output = single_physician_sections_markup(['physician_locations' => [21], 'physician_eligible_appointments' => true, 'physician_clinical_bio' => '<p>Bio.</p>'], ['status' => [21 => 'publish'], 'titles' => [21 => 'Heart Clinic']]);
+
+    expect($output)->toContain('id="appointment-info-2"')
+        ->and(substr_count($output, 'id="appointment-info-'))->toBe(2);
+});
