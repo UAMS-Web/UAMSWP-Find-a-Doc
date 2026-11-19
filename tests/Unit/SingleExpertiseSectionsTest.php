@@ -293,6 +293,10 @@ test('the video plays through Lyte when it is installed, and is embedded otherwi
 
     expect(trim(expertise_section('uamswp_expertise_youtube')))->toBe('<div class="alignwide">[lyte httpv://www.youtube.com/watch?v=abc]</div>');
 
+    when('get_field')->alias(static fn (string $name): mixed => $name === 'expertise_youtube_link' ? 'http://youtu.be/abc' : null);
+
+    expect(trim(expertise_section('uamswp_expertise_youtube')))->toBe('<div class="alignwide">[lyte httpv://youtu.be/abc]</div>');
+
     when('get_field')->justReturn();
 
     expect(expertise_section('uamswp_expertise_youtube'))->toBe('');
@@ -399,6 +403,8 @@ test('the related resources link to the full list filtered to this area once the
 
 test('the areas within this one are queried by parent, leaving out those hidden from the menu, and get an expertise card each', function (): void {
     $calls = expertise_section_cards();
+    // Each child has this area as its parent, which a card in a list of children does not repeat.
+    when('wp_get_post_parent_id')->justReturn(7);
     WP_Query::$queue = [[81, 82]];
 
     $output = expertise_section('uamswp_list_child_expertise', ['page_id' => 7, 'page_title' => 'Eye Care', 'show_child_aoe_section' => true]);
@@ -416,6 +422,7 @@ test('the areas within this one are queried by parent, leaving out those hidden 
         ->toContain('<h2 class="module-title" id="sub-expertise-title"><span class="title">Areas Within Eye Care</span></h2>')
         ->toContain('<div class="card-list card-list-expertise">')
         ->and(substr_count($output, 'Post 81'))->toBeGreaterThan(0)
+        ->and($output)->not->toContain('Part of')
         ->and(strpos($output, 'Post 81'))->toBeLessThan((int) strpos($output, 'Post 82'))
         ->and($calls->getArrayCopy())->toBe(['reset']);
 });

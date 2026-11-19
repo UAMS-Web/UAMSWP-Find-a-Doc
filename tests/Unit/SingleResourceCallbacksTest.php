@@ -120,6 +120,7 @@ test('an article prints its text, or the NCI embed when it is an NCI query, and 
     'no text' => ['text', [], ''],
     'the embed without the NCI query' => ['text', ['clinical_resource_nci_embed' => '<div>NCI</div>'], ''],
     'another type' => ['video', ['clinical_resource_text' => '<p>Text.</p>', 'clinical_resource_text_nci_query' => true, 'clinical_resource_nci_embed' => '<div>NCI</div>'], ''],
+    'another type with only text' => ['video', ['clinical_resource_text' => '<p>Text.</p>'], ''],
 ]);
 
 test('an infographic prints its description, the wide image and its transcript', function (): void {
@@ -145,10 +146,11 @@ test('an infographic without a description or transcript prints only the image, 
  */
 function resource_callback_rows(string $field, array $rows): void
 {
-    $state = new ArrayObject(['row' => -1]);
+    $state = new ArrayObject(['row' => -1, 'checks' => 0]);
 
     when('have_rows')->alias(static function (string $name) use ($field, $rows, $state): bool {
-        if ($name !== $field) {
+        // A loop whose the_row() call is gone would never advance; cap the checks so it ends and fails its test.
+        if ($name !== $field || ++$state['checks'] > 100) {
             return false;
         }
 
@@ -182,6 +184,16 @@ test('a document lists each attachment with the icon of its file type', function
     }
 
     expect(resource_callback_squeeze($output))->toBe(resource_callback_squeeze('<p>Forms.</p><hr /><h2>Attachments</h2><ul class="attachments">'.$items.'</ul>'));
+});
+
+test('each image type gets the image icon after a file of another type', function (): void {
+    $files = ['a.pdf', 'b.jpg', 'c.pdf', 'd.jpeg', 'e.pdf', 'f.gif', 'g.pdf', 'h.png', 'i.pdf', 'j.bmp'];
+    resource_callback_rows('clinical_resource_document', array_map(static fn (string $file): array => ['document_title' => $file, 'document_file' => ['url' => 'https://example.test/'.$file]], $files));
+
+    $output = resource_callback_output('uamswp_resource_document', [], ['resource_type_value' => 'doc']);
+    preg_match_all('/<span class="far (fa-file[a-z-]*) fa-fw">/', $output, $icons);
+
+    expect($icons[1])->toBe(['fa-file-pdf', 'fa-file-image', 'fa-file-pdf', 'fa-file-image', 'fa-file-pdf', 'fa-file-image', 'fa-file-pdf', 'fa-file-image', 'fa-file-pdf', 'fa-file-image']);
 });
 
 test('an attachment of another file type keeps the icon of the one before it, starting from the plain file icon', function (): void {
@@ -434,6 +446,10 @@ function resource_callback_cards(): ArrayObject
 {
     /** @var ArrayObject<int, string> $resets */
     $resets = new ArrayObject;
+
+    // The location card's first call is a plugin function; load it first so the stub redefines it rather than
+    // declaring a function the file would declare again.
+    uamswp_test_functions_file();
 
     when('get_the_ID')->alias(static fn (): int => WP_Query::$current);
     when('wp_reset_postdata')->alias(static function () use ($resets): void {
