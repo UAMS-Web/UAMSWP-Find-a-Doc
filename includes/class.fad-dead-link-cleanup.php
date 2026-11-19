@@ -361,7 +361,7 @@ function uamswp_dead_links_lock(): bool
     }
 
     // A statement that cannot be prepared is empty, and an empty statement takes no lock.
-    $taken = $wpdb->query(uamswp_fad_str($wpdb->prepare("INSERT IGNORE INTO {$wpdb->options} (option_name, option_value, autoload) VALUES (%s, %s, %s)", 'uamswp_fad_dead_links_lock', (string) $now, 'no')));
+    $taken = $wpdb->query(uamswp_fad_str($wpdb->prepare("INSERT IGNORE INTO {$wpdb->options} (option_name, option_value, autoload) VALUES (%s, %s, %s)", 'uamswp_fad_dead_links_lock', $now, 'no')));
 
     // The row was written behind the option cache, so drop what this request cached about it.
     wp_cache_delete('uamswp_fad_dead_links_lock', 'options');
