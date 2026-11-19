@@ -103,6 +103,8 @@ function uamswp_fad_gbp_dashboard_bars(array $values, int $ceiling, string $desc
     $bars = '';
 
     foreach ($values as $i => $value) {
+        // round() gives a whole number, which prints the same with or without the cast.
+        // @pest-mutate-ignore: RemoveIntegerCast
         $bar = $value > 0 ? max(2, (int) round($value / $ceiling * $height)) : 0;
         $bars .= '<rect x="'.($i * ($width + $gap)).'" y="'.($height - $bar).'" width="'.$width.'" height="'.$bar.'" fill="currentColor"></rect>';
         $bars .= '<line x1="'.($i * ($width + $gap)).'" y1="'.$height.'" x2="'.($i * ($width + $gap) + $width).'" y2="'.$height.'" stroke="currentColor" stroke-width="1"></line>';

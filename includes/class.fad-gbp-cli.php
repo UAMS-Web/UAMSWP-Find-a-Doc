@@ -282,7 +282,13 @@ function uamswp_fad_gbp_cid_report(array $post_ids, callable $out, ?UAMSWP_FAD_G
     $yes = [];
 
     foreach ($post_ids as $post_id) {
-        $row = ['id' => $post_id, 'label' => get_the_title($post_id).' (post '.$post_id.')', 'cids' => uamswp_fad_gbp_post_cids($post_id)];
+        // The report reads each row's label and CIDs; the id is carried for its shape and never read.
+        $row = [
+            // @pest-mutate-ignore: RemoveArrayItem
+            'id' => $post_id,
+            'label' => get_the_title($post_id).' (post '.$post_id.')',
+            'cids' => uamswp_fad_gbp_post_cids($post_id),
+        ];
         $posts[] = $row;
 
         if (get_post_type($post_id) === 'provider' && function_exists('get_field') && UAMSWP_FAD_GBP_Logic::is_yes(get_field('physician_schema_gmb_query', $post_id))) {

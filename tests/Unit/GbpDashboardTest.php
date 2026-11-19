@@ -468,9 +468,17 @@ final class GbpDashboardTest extends UnitTestCase
     private function render(): string
     {
         when('current_user_can')->justReturn(true);
-        // WordPress documents both as taking a string, so these stubs hold the widget to that.
-        when('esc_attr')->alias(static fn (string $text): string => htmlspecialchars($text, ENT_QUOTES));
-        when('esc_html')->alias(static fn (string $text): string => htmlspecialchars($text, ENT_QUOTES));
+        // WordPress documents both as taking a string, so these stubs hold the widget to that. The check is in the
+        // body because the stub is called from a file without strict types, which would coerce a typed parameter.
+        $escape = static function (mixed $text): string {
+            if (! is_string($text)) {
+                throw new \TypeError('An escape function got '.get_debug_type($text).', not a string');
+            }
+
+            return htmlspecialchars($text, ENT_QUOTES);
+        };
+        when('esc_attr')->alias($escape);
+        when('esc_html')->alias($escape);
         ob_start();
         uamswp_fad_gbp_render_dashboard_widget();
 
