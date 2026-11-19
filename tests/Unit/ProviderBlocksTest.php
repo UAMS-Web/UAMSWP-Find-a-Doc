@@ -456,7 +456,7 @@ test('the providers block reads a link array without an address as no address, w
 });
 
 test('the providers block button label turns a non-breaking space into a space and keeps an ampersand as one', function (): void {
-    $output = providers_block(['block_fad_providers_filter_ids' => [41], 'block_fad_providers_more' => true, 'block_fad_providers_more_button_description' => "A&nbsp;B\u{A0}C & D"], [[41]], ['block' => ['id' => 'abc']]);
+    $output = providers_block(['block_fad_providers_filter_ids' => [41], 'block_fad_providers_more' => true, 'block_fad_providers_more_button_description' => "Mom&#8217;s A&nbsp;B\u{A0}C & D"], [[41]], ['block' => ['id' => 'abc']]);
 
-    expect($output)->toContain('aria-label="A B C &amp; D"');
+    expect($output)->toContain('aria-label="Mom&#039;s A B C &amp; D"');
 });

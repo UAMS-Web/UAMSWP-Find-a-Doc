@@ -257,7 +257,7 @@ test('a portal offered with no link leaves the online request out of the sentenc
 });
 
 test('the portal name in the tracking label turns a non-breaking space into a space and keeps an ampersand as one', function (): void {
-    block_partials_appointment_stubs(false, ['slug' => 'mychart', 'name' => "My&nbsp;Chart\u{A0}& More", 'url' => 'https://portal.example.test/']);
+    block_partials_appointment_stubs(false, ['slug' => 'mychart', 'name' => "Mom&#8217;s My&nbsp;Chart\u{A0}& More", 'url' => 'https://portal.example.test/']);
 
-    expect(block_partials_appointment(['physician_portal' => 5]))->toContain('data-typetitle="Request an Appointment Online | My Chart & More">');
+    expect(block_partials_appointment(['physician_portal' => 5]))->toContain('data-typetitle="Request an Appointment Online | Mom\'s My Chart & More">');
 });

@@ -102,7 +102,9 @@ $appointment_reference_main = 'by calling '.$appointment_phone_name.' at <a href
                     <?php } else { ?>
                         <?php echo $appointment_reference_direct; ?>.
                     <?php } ?></p>
-                <?php } elseif ($location_valid && ! $refer_req && $accept_new && $show_portal) { ?>
+                <?php } elseif (! $refer_req && $accept_new && $show_portal) {
+                    // The portal is shown only for a valid location (above), so this is the valid-location case.
+                    ?>
                     <p>New patients can make an appointment <?php if ($appointment_show_main_line_sys) { ?>
                         <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.
                     <?php } else { ?>
@@ -116,7 +118,9 @@ $appointment_reference_main = 'by calling '.$appointment_phone_name.' at <a href
                     // appointment with this provider.
                     ?>
                     <p>New and existing patients can make an appointment <?php echo $appointment_reference_main; ?>.</p>
-                <?php } elseif ($location_valid && ! $refer_req && $accept_new && ! $show_portal) { ?>
+                <?php } elseif (! $refer_req && $accept_new && ! $show_portal) {
+                    // A provider with no valid location who needs no referral and takes new patients matched above, so the location is valid here.
+                    ?>
                     <p>New and existing patients can make an appointment <?php if ($appointment_show_main_line_sys) { ?>
                         <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.
                     <?php } else { ?>

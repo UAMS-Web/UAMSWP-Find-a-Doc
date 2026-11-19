@@ -635,7 +635,7 @@ test('the locations block reads a link array without an address as no address, w
 });
 
 test('the locations block button label turns a non-breaking space into a space and keeps an ampersand as one', function (): void {
-    $output = locations_block(['block_fad_locations_filter_ids' => [61], 'block_fad_locations_more' => true, 'block_fad_locations_more_button_description' => "A&nbsp;B\u{A0}C & D"], [[61]], ['block' => ['id' => 'abc']]);
+    $output = locations_block(['block_fad_locations_filter_ids' => [61], 'block_fad_locations_more' => true, 'block_fad_locations_more_button_description' => "Mom&#8217;s A&nbsp;B\u{A0}C & D"], [[61]], ['block' => ['id' => 'abc']]);
 
-    expect($output)->toContain('aria-label="A B C &amp; D"');
+    expect($output)->toContain('aria-label="Mom&#039;s A B C &amp; D"');
 });
