@@ -410,4 +410,36 @@ final class GbpRuntimeQueriesTest extends UnitTestCase
         ], $items[0]);
         $this->assertSame(['dr-example_gone-clinic', [], 0, null, false], [$items[1]['store_code'], $items[1]['photos'], $items[1]['location_id'], $items[1]['silo'], $items[1]['excluded']], 'a row whose location is gone sends no photos');
     }
+
+    public function test_the_transport_sends_the_method_headers_and_a_45_second_timeout_and_no_body_when_there_is_none(): void
+    {
+        $sent = [];
+        when('wp_remote_request')->alias(function (string $url, array $request) use (&$sent): array {
+            $sent[] = [$url, $request];
+
+            return ['response' => ['code' => '204'], 'body' => ''];
+        });
+        when('is_wp_error')->justReturn(false);
+        when('wp_remote_retrieve_response_code')->alias(fn (array $response) => $response['response']['code']);
+        when('wp_remote_retrieve_body')->alias(fn (array $response) => $response['body']);
+
+        $this->assertSame([204, ''], uamswp_fad_gbp_transport('GET', 'https://x.test/a', ['Authorization' => 'Bearer t'], null));
+        $this->assertSame([['https://x.test/a', ['method' => 'GET', 'headers' => ['Authorization' => 'Bearer t'], 'timeout' => 45.0]]], $sent);
+    }
+
+    public function test_the_transport_sends_a_body_and_returns_the_status_and_body(): void
+    {
+        $sent = [];
+        when('wp_remote_request')->alias(function (string $url, array $request) use (&$sent): array {
+            $sent[] = $request;
+
+            return ['code' => 200, 'body' => '{"ok":true}'];
+        });
+        when('is_wp_error')->justReturn(false);
+        when('wp_remote_retrieve_response_code')->alias(fn (array $response) => $response['code']);
+        when('wp_remote_retrieve_body')->alias(fn (array $response) => $response['body']);
+
+        $this->assertSame([200, '{"ok":true}'], uamswp_fad_gbp_transport('POST', 'https://x.test/b', [], ''));
+        $this->assertSame([['method' => 'POST', 'headers' => [], 'timeout' => 45.0, 'body' => '']], $sent, 'an empty body is still a body');
+    }
 }
