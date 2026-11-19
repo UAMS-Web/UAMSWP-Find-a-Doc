@@ -352,15 +352,21 @@ function uamswp_fad_gbp_cli_sync(array $args, array $assoc): void
         }, ! empty($assoc['dry-run'])));
     }
 
-    $post = isset($assoc['post']) ? (string) $assoc['post'] : '';
+    // WP-CLI passes an option given with no value as true, and a --no- option as false: neither names a post.
+    $post = $assoc['post'] ?? '';
     $all = ! empty($assoc['all']);
 
-    if (($post === '') === ! $all || ($post !== '' && ! ctype_digit($post))) {
+    if (! is_string($post) || ($post === '') === ! $all || ($post !== '' && ! ctype_digit($post))) {
         WP_CLI::error('Pass exactly one of --post=<id> or --all.');
     }
 
+    $silo = $assoc['silo'] ?? null;
+
+    if ($silo !== null && ! is_string($silo)) {
+        WP_CLI::error('Pass a silo name with --silo=<silo>.');
+    }
+
     $ids = $all ? uamswp_fad_gbp_all_post_ids() : [(int) $post];
-    $silo = isset($assoc['silo']) ? (string) $assoc['silo'] : null;
 
     $status = uamswp_fad_gbp_manual_sync($ids, $silo, ! empty($assoc['dry-run']), function (string $line): void {
         WP_CLI::line($line);
