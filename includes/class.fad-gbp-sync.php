@@ -30,6 +30,8 @@ final class UAMSWP_FAD_GBP_Sync
     private int $now;
 
     /** How many creates this run has made. */
+    // A property default runs before any test, so a mutation run has no test to select for it.
+    // @pest-mutate-ignore: DecrementInteger,IncrementInteger
     private int $creates_made = 0;
 
     /** @var array<int, int> The moment each create of this run was sent. */
@@ -56,14 +58,20 @@ final class UAMSWP_FAD_GBP_Sync
     {
         $this->logger = $logger;
         $this->paused_until = (int) ($config['creates_paused_until'] ?? 0);
+        // A budget of -1 and of 0 both hold back the first create, so the floor's exact value makes no difference.
+        // @pest-mutate-ignore: DecrementInteger
         $this->creates_left = isset($config['creates_left']) ? max(0, (int) $config['creates_left']) : null;
         $this->now = (int) ($config['now'] ?? time());
         $this->clock = $config['clock'] ?? time(...);
 
         foreach ($index as $listings) {
             foreach ($listings as $listing) {
+                // A listing with no name is looked up by no stored name, whatever it is filed under.
+                // @pest-mutate-ignore: EmptyStringToNotEmpty
                 $name = uamswp_fad_str(($listing['listing']['name'] ?? ''));
 
+                // A stored name is looked up only when it is not empty, so a listing filed under '' is never found.
+                // @pest-mutate-ignore: EmptyStringToNotEmpty
                 if ($name !== '') {
                     $this->by_name[$name] = $listing;
                 }
@@ -165,6 +173,8 @@ final class UAMSWP_FAD_GBP_Sync
             'kind' => $item['kind'],
             'mode' => 'off',
             'action' => 'skip',
+            // Every outcome sets its own reason first, so this default never reaches a log entry.
+            // @pest-mutate-ignore: RemoveArrayItem,EmptyStringToNotEmpty
             'reason' => '',
             'fields' => [],
             'attributes' => [],
@@ -206,10 +216,16 @@ final class UAMSWP_FAD_GBP_Sync
 
         // The Google location ID stored on the post comes first: it survives a slug change, which
         // changes the store code. A stored ID no listing has any more falls back to the store code.
+        // No listing is indexed under a missing stored name, whatever it reads as.
+        // @pest-mutate-ignore: EmptyStringToNotEmpty
         $stored = $item['stored_name'] ?? '';
+        // No listing is indexed under '' either, so looking it up finds nothing as skipping it does.
+        // @pest-mutate-ignore: EmptyStringToNotEmpty
         $match = $stored !== '' ? ($this->by_name[$stored] ?? null) : null;
 
         if ($match !== null) {
+            // A listing with no name is another listing than the stored one whatever it reads as.
+            // @pest-mutate-ignore: EmptyStringToNotEmpty
             $others = array_filter($found, fn (array $listing): bool => uamswp_fad_str(($listing['listing']['name'] ?? '')) !== $stored);
 
             if ($others !== []) {
@@ -253,6 +269,9 @@ final class UAMSWP_FAD_GBP_Sync
     private function update(array $item, array $entry, array $listing, string $mode, string $account): array
     {
         // Named on every outcome, so the caller can store the ID of the listing that was matched.
+        // An update is reached only for a listing found by name or by store code, and the line after the
+        // next reads its name without a default, so the default here is never used by a run that completes.
+        // @pest-mutate-ignore: EmptyStringToNotEmpty
         $entry = ['listing_name' => uamswp_fad_str(($listing['name'] ?? ''))] + $entry;
         $changed = UAMSWP_FAD_GBP_Logic::changed_fields($item['fields'], $listing);
 
@@ -263,7 +282,11 @@ final class UAMSWP_FAD_GBP_Sync
         }
 
         // A photo goes only when its address is new for this listing: an unchanged image makes no call.
-        $photos = UAMSWP_FAD_GBP_Logic::photos_to_send((array) ($item['photos'] ?? []), (array) ($item['photos_sent'] ?? []));
+        // A photo list that is not a list cannot be sent with or without the cast: a cast scalar is a list of one
+        // value that is not a photo.
+        // @pest-mutate-ignore: RemoveArrayCast
+        $wanted = (array) ($item['photos'] ?? []);
+        $photos = UAMSWP_FAD_GBP_Logic::photos_to_send($wanted, (array) ($item['photos_sent'] ?? []));
 
         if ($changed === [] && $attributes === [] && $photos === []) {
             return ['action' => 'noop', 'reason' => 'Listing already matches'] + $entry;
@@ -305,6 +328,8 @@ final class UAMSWP_FAD_GBP_Sync
      */
     private function create(array $item, array $entry, string $account, string $mode): array
     {
+        // The missing names are only joined and tested for empty, neither of which reads the keys.
+        // @pest-mutate-ignore: UnwrapArrayValues
         $missing = array_values(array_diff(['title', 'storefrontAddress', 'categories'], array_keys(uamswp_fad_arr($item['fields']))));
 
         if ($missing !== []) {
@@ -312,6 +337,8 @@ final class UAMSWP_FAD_GBP_Sync
         }
 
         $attributes = (array) ($item['attributes'] ?? []);
+        // As in update(): a photo list that is not a list cannot be sent with or without the cast.
+        // @pest-mutate-ignore: RemoveArrayCast
         $photos = UAMSWP_FAD_GBP_Logic::photos_to_send((array) ($item['photos'] ?? []), []);
         $entry = ['action' => 'create', 'fields' => array_keys(uamswp_fad_arr($item['fields'])), 'attributes' => array_keys($attributes), 'photos' => array_column($photos, 'url')] + $entry;
 
@@ -356,6 +383,8 @@ final class UAMSWP_FAD_GBP_Sync
         $this->index[$item['store_code']][] = $listing;
         $this->created[] = $listing;
 
+        // An unnamed listing filed under '' is never looked up: a stored name is looked up only when it is not empty.
+        // @pest-mutate-ignore: EmptyStringToNotEmpty
         if ($listing['listing']['name'] !== '') {
             $this->by_name[$listing['listing']['name']] = $listing;
         }
@@ -363,6 +392,9 @@ final class UAMSWP_FAD_GBP_Sync
         // The listing exists now. A failure setting attributes is reported, and the next run
         // finds the listing by its store code and sets them as an update. Its name is on the entry
         // either way, so the caller stores the ID.
+        // Read only by the returns below that run when the created listing has a name; without one, the final
+        // return names it again with its own default.
+        // @pest-mutate-ignore: EmptyStringToNotEmpty
         $entry = ['listing_name' => uamswp_fad_str(($created['name'] ?? ''))] + $entry;
 
         if ($attributes !== [] && ! empty($created['name'])) {
@@ -407,6 +439,8 @@ final class UAMSWP_FAD_GBP_Sync
                 throw $rateLimited;
             } catch (RuntimeException $runtimeException) {
                 // One refused photo must not block the ones after it; the first refusal is the one reported.
+                // Only the message reaches the log entry, never the exception's code.
+                // @pest-mutate-ignore: DecrementInteger,IncrementInteger
                 $refused ??= new RuntimeException($photo['url'].': '.$runtimeException->getMessage(), 0, $runtimeException);
             }
         }
@@ -428,6 +462,9 @@ final class UAMSWP_FAD_GBP_Sync
      */
     private function changed_attributes(array $item, string $listing_name): array
     {
+        // An attribute list that is not a list fails the comparison with or without the cast: a cast scalar is a
+        // list of one value with no attribute name.
+        // @pest-mutate-ignore: RemoveArrayCast
         $desired = (array) ($item['attributes'] ?? []);
 
         if ($desired === []) {
