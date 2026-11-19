@@ -11,8 +11,6 @@
 
 declare(strict_types=1);
 
-use UamswpFindADoc\Tests\Support\ExitCalled;
-
 use function Brain\Monkey\Functions\when;
 
 require_once __DIR__.'/../Support/gmb-page.php';
@@ -81,47 +79,6 @@ test('any other action hooks no export', function (mixed $action): void {
     'an empty action' => [''],
     'an array' => [['download_doximity_csv']],
 ]);
-
-/**
- * Run an export as an administrator in WP-Admin with the given nonce, and return how it ended.
- *
- * @param  list<int>  $providers  The provider ids the export query finds.
- * @return array{exit: string|null, output: string, headers: list<string>} The message the request ended with
- *                                                                         (null when it did not end), what it
- *                                                                         printed and the headers it sent.
- */
-function gmb_export_run(string $export, string $nonce, array $providers = []): array
-{
-    uamswp_test_gmb_page();
-    $_GET = ['_wpnonce' => $nonce];
-    when('current_user_can')->justReturn(true);
-    when('is_admin')->justReturn(true);
-    when('wp_verify_nonce')->alias(static fn (string $given, string $action): int|false => $given === 'valid-'.$action ? 1 : false);
-
-    $headers = [];
-    when('header')->alias(static function (string $header) use (&$headers): void {
-        $headers[] = $header;
-    });
-    WP_Query::$queue = [$providers];
-    WP_Query::$queries = [];
-    $exit = null;
-
-    // The exports call fputcsv() without its $escape argument, which PHP 8.4 deprecates. That notice is about
-    // the CSV call and not how the request ends, so it alone is set aside; any other deprecation falls through to
-    // PHP's own handler, which prints it into the captured output and fails the test.
-    set_error_handler(static fn (int $level, string $message): bool => str_starts_with($message, 'fputcsv(): the $escape parameter'), E_DEPRECATED);
-    ob_start();
-    try {
-        $export();
-    } catch (ExitCalled $exitCalled) {
-        $exit = $exitCalled->getMessage();
-    } finally {
-        $output = (string) ob_get_clean();
-        restore_error_handler();
-    }
-
-    return ['exit' => $exit, 'output' => $output, 'headers' => $headers];
-}
 
 test('an export with a bad nonce ends the request with the security message before building anything', function (string $export): void {
     $run = gmb_export_run($export, 'forged');
