@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use UAMSWP_FAD_GBP_Client;
 use UAMSWP_FAD_GBP_Logic;
 use UAMSWP_FAD_GBP_Rate_Limited;
@@ -251,6 +252,148 @@ final class GbpQuotaTest extends UnitTestCase
         $this->assertSame(['day' => '2026-11-04', 'count' => 2], $this->options[UAMSWP_FAD_GBP_COUNT_OPTION]);
         $this->assertSame(1, $this->options[UAMSWP_FAD_GBP_HISTORY_OPTION]['2026-11-03'] ?? null);
         $this->assertSame(2, $this->options[UAMSWP_FAD_GBP_HISTORY_OPTION]['2026-11-04'] ?? null);
+    }
+
+    public function test_a_run_with_no_creates_counts_nothing_even_with_a_stamp(): void
+    {
+        $now = $this->utc('2026-11-03 19:00:00');
+
+        uamswp_fad_gbp_after_run($this->syncWithUnstampedCreates(0, [$now]), [], $now);
+
+        $this->assertArrayNotHasKey(UAMSWP_FAD_GBP_COUNT_OPTION, $this->options);
+    }
+
+    public function test_a_run_with_one_create_counts_it(): void
+    {
+        $now = $this->utc('2026-11-03 19:00:00');
+
+        uamswp_fad_gbp_after_run($this->syncWithUnstampedCreates(1, [$now]), [], $now);
+
+        $this->assertSame(['day' => '2026-11-03', 'count' => 1], $this->options[UAMSWP_FAD_GBP_COUNT_OPTION]);
+    }
+
+    public function test_a_run_whose_creates_are_all_stamped_adds_nothing_on_the_run_s_own_day(): void
+    {
+        $now = $this->utc('2026-11-04 19:00:00');
+
+        uamswp_fad_gbp_after_run($this->syncWithUnstampedCreates(1, [$this->utc('2026-11-03 18:00:00')]), [], $now);
+
+        $this->assertSame(['day' => '2026-11-03', 'count' => 1], $this->options[UAMSWP_FAD_GBP_COUNT_OPTION]);
+        $this->assertArrayNotHasKey('2026-11-04', $this->options[UAMSWP_FAD_GBP_HISTORY_OPTION]);
+    }
+
+    public function test_one_unstamped_create_is_counted(): void
+    {
+        $now = $this->utc('2026-11-03 19:00:00');
+
+        uamswp_fad_gbp_after_run($this->syncWithUnstampedCreates(2, [$now]), [], $now);
+
+        $this->assertSame(['day' => '2026-11-03', 'count' => 2], $this->options[UAMSWP_FAD_GBP_COUNT_OPTION]);
+    }
+
+    public function test_a_stored_count_with_no_number_starts_the_day_from_zero(): void
+    {
+        $now = $this->utc('2026-11-03 19:00:00');
+        $this->options[UAMSWP_FAD_GBP_COUNT_OPTION] = ['day' => '2026-11-03'];
+
+        uamswp_fad_gbp_after_run($this->syncWithUnstampedCreates(1, [$now]), [], $now);
+
+        $this->assertSame(['day' => '2026-11-03', 'count' => 1], $this->options[UAMSWP_FAD_GBP_COUNT_OPTION]);
+    }
+
+    public function test_the_gate_reads_a_stored_count_with_no_number_as_none_used(): void
+    {
+        $now = $this->utc('2026-11-03 19:00:00');
+        $this->options[UAMSWP_FAD_GBP_COUNT_OPTION] = ['day' => '2026-11-03'];
+
+        $this->assertSame(UAMSWP_FAD_GBP_DEFAULT_CREATE_BUDGET, uamswp_fad_gbp_create_gate($now)['creates_left']);
+    }
+
+    public function test_a_numeric_string_budget_is_read_as_a_number(): void
+    {
+        when('apply_filters')->alias(fn (string $hook, $value) => $hook === 'uamswp_fad_gbp_daily_create_budget' ? '50' : $value);
+
+        $this->assertSame(50, uamswp_fad_gbp_create_budget());
+    }
+
+    public function test_a_pause_is_stored_when_none_is_stored_yet(): void
+    {
+        $sync = $this->quotaSync(['now' => 1, 'creates_paused_until' => 1], 0, false);
+
+        uamswp_fad_gbp_after_run($sync, [], 1);
+
+        $this->assertSame(1, $this->options[UAMSWP_FAD_GBP_PAUSE_OPTION] ?? null);
+    }
+
+    public function test_an_update_with_no_creates_still_drops_the_cached_index(): void
+    {
+        $this->transients['uamswp_fad_gbp_index'] = [['account' => 'accounts/up', 'listing' => ['name' => 'locations/1', 'storeCode' => 'old_clinic']]];
+        $this->transients['uamswp_fad_gbp_index_at'] = 1;
+        $sync = $this->quotaSync(['now' => 1], 0, false);
+
+        uamswp_fad_gbp_after_run($sync, [['reason' => 'Updated']], 1);
+
+        $this->assertArrayNotHasKey('uamswp_fad_gbp_index', $this->transients);
+    }
+
+    public function test_a_run_with_no_creates_leaves_a_fresh_cached_index_as_it_is(): void
+    {
+        $this->transients['uamswp_fad_gbp_index'] = [['account' => 'accounts/up', 'listing' => ['name' => 'locations/1', 'storeCode' => 'old_clinic']]];
+        $this->transients['uamswp_fad_gbp_index_at'] = 1000;
+        $sync = $this->quotaSync(['now' => 1100], 0, false);
+
+        uamswp_fad_gbp_after_run($sync, [['reason' => 'Listing already matches']], 1100);
+
+        $this->assertSame([], $this->transientTtls, 'the index is not written again');
+        $this->assertCount(1, $this->transients['uamswp_fad_gbp_index']);
+    }
+
+    public function test_an_index_with_no_read_time_is_dropped_after_a_create(): void
+    {
+        $this->transients['uamswp_fad_gbp_index'] = [['account' => 'accounts/up', 'listing' => ['name' => 'locations/1', 'storeCode' => 'old_clinic']]];
+        $sync = $this->quotaSync(['now' => 1100], 1, false);
+
+        uamswp_fad_gbp_after_run($sync, [['reason' => 'Created']], 1100);
+
+        $this->assertArrayNotHasKey('uamswp_fad_gbp_index', $this->transients);
+        $this->assertSame([], $this->transientTtls);
+    }
+
+    /**
+     * @return array<string, array{0: int, 1: list<int>}>
+     */
+    public static function index_ages(): array
+    {
+        return [
+            'read 300 seconds ago, no time left' => [300, []],
+            'read 299 seconds ago, one second left' => [299, [1]],
+        ];
+    }
+
+    /**
+     * @param  list<int>  $ttls
+     */
+    #[DataProvider('index_ages')]
+    public function test_a_created_listing_extends_the_index_only_while_a_second_of_it_remains(int $age, array $ttls): void
+    {
+        $this->transients['uamswp_fad_gbp_index'] = [['account' => 'accounts/up', 'listing' => ['name' => 'locations/1', 'storeCode' => 'old_clinic']]];
+        $this->transients['uamswp_fad_gbp_index_at'] = 1000;
+        $sync = $this->quotaSync(['now' => 1000 + $age], 1, false);
+
+        uamswp_fad_gbp_after_run($sync, [['reason' => 'Created']], 1000 + $age);
+
+        $this->assertSame($ttls, $this->transientTtls);
+        $this->assertSame($ttls !== [], isset($this->transients['uamswp_fad_gbp_index']));
+    }
+
+    public function test_a_post_held_back_twice_is_queued_after_the_later_reset(): void
+    {
+        $early = $this->utc('2026-11-04 08:00:00');
+        $late = $this->utc('2026-11-05 08:00:00');
+
+        uamswp_fad_gbp_schedule_deferred(1234, [['defer_until' => $late], ['defer_until' => $early]]);
+
+        $this->assertSame($late + 60 + (1234 % 600), $this->scheduled[0][0]);
     }
 
     public function test_a_run_that_created_nothing_leaves_the_count_and_pause_alone(): void

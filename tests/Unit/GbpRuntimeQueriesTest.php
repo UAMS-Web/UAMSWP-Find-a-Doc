@@ -214,7 +214,7 @@ final class GbpRuntimeQueriesTest extends UnitTestCase
                 }
             }
 
-            $accounts = array_map(fn (string $account): array => ['name' => $account, 'accountName' => $account, 'type' => 'LOCATION_GROUP'], array_keys($groups));
+            $accounts = array_map(fn (string $account): array => ['name' => $account, 'accountName' => 'Group '.$account, 'type' => 'LOCATION_GROUP'], array_keys($groups));
 
             return [200, (string) json_encode(['accounts' => $accounts])];
         });
@@ -441,5 +441,8 @@ final class GbpRuntimeQueriesTest extends UnitTestCase
 
         $this->assertSame([200, '{"ok":true}'], uamswp_fad_gbp_transport('POST', 'https://x.test/b', [], ''));
         $this->assertSame([['method' => 'POST', 'headers' => [], 'timeout' => 45.0, 'body' => '']], $sent, 'an empty body is still a body');
+
+        when('wp_remote_retrieve_body')->justReturn(5);
+        $this->assertSame([200, '5'], uamswp_fad_gbp_transport('POST', 'https://x.test/b', [], null), 'a body that is not a string is returned as one');
     }
 }
