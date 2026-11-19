@@ -159,4 +159,26 @@ final class LocationAddressTest extends UnitTestCase
         );
         $this->assertSame(['Bldg A'], \uamswp_location_address_parts(true, 'Bldg A', $this->floor('3'), '3', '', ''));
     }
+
+    /**
+     * @return array<string, array{mixed, mixed, string}>
+     */
+    public static function floors_that_are_left_out(): array
+    {
+        return [
+            'no floor field' => [false, '3', 'Third Floor'],
+            'no floor value' => ['field', '', 'Third Floor'],
+            'a floor value that equals zero' => ['field', '0.0', 'Third Floor'],
+            'no floor label' => ['field', '3', ''],
+        ];
+    }
+
+    #[DataProvider('floors_that_are_left_out')]
+    public function test_a_floor_is_left_out_unless_it_has_a_field_a_value_that_is_not_zero_and_a_label(mixed $floor, mixed $value, string $label): void
+    {
+        $field = $floor === 'field' ? $this->floor((string) $value) : false;
+
+        $this->assertSame(['Suite 5'], \uamswp_location_address_parts(false, '', $field, $value, $label, 'Suite 5'));
+        $this->assertSame('Suite 5', \uamswp_location_address_2(false, '', $field, $value, $label, 'Suite 5'));
+    }
 }

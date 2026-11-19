@@ -1469,8 +1469,12 @@ if (function_exists('acf_register_block_type')) {
  */
 function fad_facetwp_cards_callback(
     $block, // array // Required // The block settings and attributes.
+    // ACF passes every argument to a block callback, and this one reads only the block, so no default is used.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $content = '', // string // Optional // The block inner HTML (empty).
+    // @pest-mutate-ignore: FalseToTrue
     $is_preview = false, // bool // Optional // True during AJAX preview.
+    // @pest-mutate-ignore: DecrementInteger, IncrementInteger
     $post_id = 0 // (int|string) // Optional // The post ID this block is saved to.
 ): void {
 
@@ -1521,8 +1525,12 @@ function fad_facetwp_cards_callback(
  */
 function fad_facetwp_blocks_callback(
     $block, // array // RequiredThe block settings and attributes.
+    // ACF passes every argument to a block callback, and this one reads only the block, so no default is used.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $content = '', // string // Optional // The block inner HTML (empty).
+    // @pest-mutate-ignore: FalseToTrue
     $is_preview = false, // bool // Optional // True during AJAX preview.
+    // @pest-mutate-ignore: DecrementInteger, IncrementInteger
     $post_id = 0 // (int|string) // Optional // The post ID this block is saved to.
 ): void {
 

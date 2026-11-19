@@ -56,6 +56,8 @@ function uamswp_fad_preview_keep_saved_post_id($post_id, $original_post_id = nul
     $parent_id = wp_is_post_revision((int) $post_id);
 
     // ACF swaps only the post being previewed: the ID in `preview_id`, else `p`, else `page_id`.
+    // With none of the three in the request no post is named, and a default of 0 or below matches no post's ID.
+    // @pest-mutate-ignore: DecrementInteger
     if (! $parent_id || uamswp_fad_int(($_GET['preview_id'] ?? $_GET['p'] ?? $_GET['page_id'] ?? 0)) !== uamswp_fad_int($parent_id)) {
         return $post_id;
     }
@@ -64,6 +66,8 @@ function uamswp_fad_preview_keep_saved_post_id($post_id, $original_post_id = nul
         return $post_id;
     }
 
+    // wp_is_post_revision() returns the parent's ID as an integer, and false was refused above.
+    // @pest-mutate-ignore: RemoveIntegerCast
     return (int) $parent_id;
 
 }

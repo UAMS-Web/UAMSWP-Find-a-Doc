@@ -44,7 +44,12 @@ final class DeleteCleanupTest extends UnitTestCase
 
             public function esc_like($text): string
             {
-                return addcslashes((string) $text, '_%\\');
+                // wpdb documents the text as a string, so the stand-in holds the caller to that.
+                if (! is_string($text)) {
+                    throw new \TypeError('esc_like() got '.get_debug_type($text));
+                }
+
+                return addcslashes($text, '_%\\');
             }
 
             public function prepare($sql, ...$args)
@@ -273,5 +278,88 @@ final class DeleteCleanupTest extends UnitTestCase
         $this->assertSame([], uamswp_delete_cleanup_ids(''));
         $this->assertSame([], uamswp_delete_cleanup_ids(false));
         $this->assertSame([], uamswp_delete_cleanup_ids(null));
+    }
+
+    public function test_the_map_says_where_each_deletable_type_is_linked_from(): void
+    {
+        $this->assertSame([
+            'provider' => [
+                'meta' => [
+                    'clinical-resource' => [['clinical_resource_providers', 'list'], ['clinical_resource_spotlight_provider', 'single']],
+                    'condition' => [['condition_physicians', 'list']],
+                    'treatment' => [['treatment_procedure_physicians', 'list']],
+                    'expertise' => [['physician_expertise', 'list']],
+                ],
+                'tables' => [['uamswp_locations', 'physician_locations', 'location']],
+                'own_table' => 'uamswp_physicians',
+            ],
+            'location' => [
+                'meta' => [
+                    'clinical-resource' => [['clinical_resource_locations', 'list']],
+                    'condition' => [['condition_locations', 'list']],
+                    'treatment' => [['treatment_procedure_locations', 'list']],
+                    'expertise' => [['location_expertise', 'list']],
+                ],
+                'tables' => [['uamswp_physicians', 'physician_locations', 'provider']],
+                'own_table' => 'uamswp_locations',
+            ],
+        ], uamswp_delete_cleanup_map());
+    }
+
+    public function test_ids_skip_an_object_with_no_id_a_fraction_and_keep_one(): void
+    {
+        $this->assertSame([1], uamswp_delete_cleanup_ids([(object) ['name' => 'x'], '0.5', 1, true]));
+    }
+
+    public function test_the_table_query_matches_the_id_anywhere_in_the_column_and_reads_no_rows_as_none(): void
+    {
+        $this->db->rows = null;
+
+        $this->assertSame([], uamswp_delete_cleanup_table_post_ids('uamswp_physicians', 'physician_locations', 12));
+        $this->assertSame("SELECT post_id, `physician_locations` AS links FROM wp_uamswp_physicians WHERE `physician_locations` LIKE '%12%'", $this->db->queries[0]);
+    }
+
+    public function test_unlinking_reads_the_stored_ids_unformatted_and_says_whether_it_wrote(): void
+    {
+        expect('get_field')->twice()->with('condition_physicians', 10, false)->andReturn(['5', '12'], ['5']);
+        expect('update_field')->once()->with('condition_physicians', [5], 10);
+
+        $this->assertTrue(uamswp_delete_cleanup_unlink(10, 'condition_physicians', 'list', 12));
+        $this->assertFalse(uamswp_delete_cleanup_unlink(10, 'condition_physicians', 'list', 12));
+    }
+
+    public function test_an_id_given_as_a_string_is_cleaned_up_as_the_number(): void
+    {
+        $asked = [];
+        when('get_post_type')->alias(static function ($id) use (&$asked): string {
+            $asked[] = $id;
+
+            return 'provider';
+        });
+        $this->links(['condition_physicians' => [10]]);
+        when('get_field')->justReturn(['12', '7']);
+        expect('update_field')->once()->with('condition_physicians', [7], 10);
+
+        uamswp_delete_cleanup_before_delete('12');
+        uamswp_delete_cleanup_after_delete('12');
+
+        $this->assertSame([12], $asked);
+        $this->assertSame([['wp_uamswp_physicians', ['post_id' => 12], ['%d']]], $this->db->deleted);
+        $this->assertSame([], uamswp_delete_cleanup_pending(), 'the remembered table is forgotten once the row is gone');
+    }
+
+    public function test_a_failure_is_written_to_the_php_error_log_with_the_plugin_name(): void
+    {
+        $file = (string) tempnam(sys_get_temp_dir(), 'delete-cleanup-log');
+        $previous = ini_set('error_log', $file);
+
+        try {
+            uamswp_delete_cleanup_log('could not remove');
+        } finally {
+            ini_set('error_log', (string) $previous);
+        }
+
+        $this->assertStringEndsWith("UAMSWP Find-a-Doc: could not remove\n", (string) file_get_contents($file));
+        unlink($file);
     }
 }

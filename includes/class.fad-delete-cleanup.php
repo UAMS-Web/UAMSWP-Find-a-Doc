@@ -72,12 +72,6 @@ function uamswp_delete_cleanup_map(): array
 function uamswp_delete_cleanup_ids($value): array
 {
 
-    if (in_array($value, [null, false, ''], true)) {
-
-        return [];
-
-    }
-
     $ids = [];
 
     foreach ((array) $value as $item) {
@@ -136,6 +130,8 @@ function uamswp_delete_cleanup_meta_post_ids(string $post_type, string $meta_key
 
     }
 
+    // wpdb::get_col() always returns a list, so neither the cast nor array_values() changes it.
+    // @pest-mutate-ignore: RemoveArrayCast, UnwrapArrayValues
     return array_values(array_map(uamswp_fad_int(...), (array) $wpdb->get_col($sql)));
 
 }
@@ -164,6 +160,9 @@ function uamswp_delete_cleanup_table_post_ids(string $table, string $field, int 
 
     foreach ((array) $wpdb->get_results($sql, ARRAY_A) as $row) {
 
+        // The column holds a JSON array of integers, which decodes to the same array either way, and a row with no
+        // column decodes to nothing whatever its default is.
+        // @pest-mutate-ignore: TrueToFalse, EmptyStringToNotEmpty
         $decoded = json_decode(uamswp_fad_str((uamswp_fad_arr($row)['links'] ?? '')), true);
         $ids = uamswp_delete_cleanup_ids(is_array($decoded) ? $decoded : []);
 
@@ -189,9 +188,12 @@ function uamswp_delete_cleanup_table_post_ids(string $table, string $field, int 
 function uamswp_delete_cleanup_unlink(int $linked_post_id, string $field, string $shape, int $id): bool
 {
 
-    // Without ACF there are no fields to read or write.
+    // Without ACF there are no fields to read or write. ACF defines both functions or neither, so either test gives
+    // the same answer, and both always exist in the Unit suite, so the return below is never reached there.
+    // @pest-mutate-ignore: BooleanOrToBooleanAnd
     if (! function_exists('get_field') || ! function_exists('update_field')) {
 
+        // @pest-mutate-ignore: FalseToTrue
         return false;
 
     }
@@ -258,6 +260,8 @@ function uamswp_delete_cleanup_before_delete($post_id): void
 {
 
     $map = uamswp_delete_cleanup_map();
+    // For an ID that is not a number either default fails the string test below.
+    // @pest-mutate-ignore: FalseToTrue
     $post_type = is_numeric($post_id) ? get_post_type((int) $post_id) : false;
 
     if (! is_string($post_type) || ! isset($map[$post_type])) {
@@ -359,4 +363,7 @@ function uamswp_delete_cleanup_register(): void
 
 }
 
+// The suite's bootstrap loads this file before any test runs, so no test is credited with this call;
+// test_the_hooks_fire_on_a_permanent_delete_and_never_on_the_trash pins what it registers.
+// @pest-mutate-ignore: RemoveFunctionCall
 uamswp_delete_cleanup_register();
