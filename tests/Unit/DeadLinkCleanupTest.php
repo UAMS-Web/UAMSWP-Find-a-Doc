@@ -100,12 +100,16 @@ function dead_links_stored_run(string $status): array
 }
 
 test('loading the file hooks the screen on admin_menu at priority 106 and the three steps on admin_post', function (): void {
+    // The constants are read here too: this test loads the file, so it is the one a mutation run picks for them.
     expect(dead_links_load())->toBe([
         ['admin_menu', 'uamswp_dead_links_menu', 106],
         ['admin_post_uamswp_dead_links_scan', 'uamswp_dead_links_handle_scan'],
         ['admin_post_uamswp_dead_links_apply', 'uamswp_dead_links_handle_apply'],
         ['admin_post_uamswp_dead_links_undo', 'uamswp_dead_links_handle_undo'],
-    ]);
+    ])
+        ->and(UAMSWP_DEAD_LINKS_BATCH)->toBe(25)
+        ->and(UAMSWP_DEAD_LINKS_RUN_OPTION)->toBe('uamswp_fad_dead_links_run')
+        ->and(UAMSWP_DEAD_LINKS_ROWS_OPTION)->toBe('uamswp_fad_dead_links_rows');
 });
 
 test('going back to the screen redirects there with the notice and ends the request', function (string $notice, string $expected): void {
@@ -1521,4 +1525,52 @@ test('an undo passes over items it did not remove and still handles the ones aft
 
     expect(array_column($result['items'], 'state'))->toBe(['skipped', 'restored'])
         ->and($db->tables['uamswp_locations'])->toBe([['post_id' => '91']]);
+});
+
+test('a field of two post types, and two fields of one table, are each their own source', function (): void {
+    dead_links_load();
+    when('uamswp_delete_cleanup_map')->justReturn([
+        'one' => [
+            'meta' => ['condition' => [['shared_field', 'list']], 'treatment' => [['shared_field', 'list']]],
+            'tables' => [['uamswp_locations', 'first'], ['uamswp_locations', 'second']],
+            'own_table' => 'uamswp_locations',
+        ],
+    ]);
+
+    expect(uamswp_dead_links_sources())->toBe([
+        'meta' => [['condition', 'shared_field', 'list'], ['treatment', 'shared_field', 'list']],
+        'tables' => [['uamswp_locations', 'first'], ['uamswp_locations', 'second']],
+        'own' => ['uamswp_locations'],
+    ]);
+});
+
+test('two fields of one record with dead IDs are two items', function (): void {
+    $db = dead_links_db();
+    $db->post(10, 'condition');
+    $db->add_meta(10, 'condition_physicians', serialize(['99']));
+    $db->add_meta(10, 'condition_locations', serialize(['98']));
+
+    expect(uamswp_dead_links_scan(false)['items'])->toBe([
+        dead_links_link(10, 'condition_physicians', 'list', [99]),
+        dead_links_link(10, 'condition_locations', 'list', [98]),
+    ]);
+});
+
+test('a removal over a row backup that is not a list keeps it as one and still saves the new rows', function (): void {
+    $db = dead_links_db();
+    $db->option_values[UAMSWP_DEAD_LINKS_ROWS_OPTION] = 'not a list';
+    $db->tables['uamswp_locations'] = [['post_id' => '91']];
+
+    $result = uamswp_dead_links_apply_step(dead_links_make_run([dead_links_row('uamswp_locations', 91)]));
+
+    expect($result['status'])->toBe('applied')
+        ->and(unserialize($db->option_values[UAMSWP_DEAD_LINKS_ROWS_OPTION]))->toBe([0 => 'not a list', 'uamswp_locations|91' => ['post_id' => '91']]);
+});
+
+test('going back to the screen with no notice named sends no notice', function (): void {
+    dead_links_load();
+    $redirects = dead_links_world();
+
+    expect(fn () => uamswp_dead_links_back())->toThrow(ExitCalled::class)
+        ->and($redirects->getArrayCopy())->toBe(['https://example.test/wp-admin/admin.php?page=uamswp-dead-links']);
 });
