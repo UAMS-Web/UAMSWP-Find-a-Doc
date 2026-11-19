@@ -138,14 +138,9 @@ function gmb_export_run(string $export, string $nonce, array $providers = []): a
     WP_Query::$queries = [];
     $exit = null;
 
-    // The exports call fputcsv() without its $escape argument, which PHP 8.4 deprecates. That notice is about
-    // the CSV call and not how the request ends, so it alone is set aside. Any other error raised while the export
-    // runs fails the test: this handler replaces PHPUnit's for as long as it is set, so it reports them itself.
+    // Any error raised while the export runs fails the test: this handler replaces PHPUnit's for as long as it is
+    // set, so it reports them itself.
     set_error_handler(static function (int $level, string $message, string $file = '', int $line = 0): bool {
-        if ($level === E_DEPRECATED && str_starts_with($message, 'fputcsv(): the $escape parameter')) {
-            return true;
-        }
-
         throw new ErrorException($message, 0, $level, $file, $line);
     });
     ob_start();

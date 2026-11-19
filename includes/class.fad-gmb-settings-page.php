@@ -377,7 +377,7 @@ function doximity_csv_export(): false
     header("Content-Disposition: attachment; filename={$filename}");
     header('Pragma: no-cache'); // no cache
     header('Expires: 0'); // expire date
-    fputcsv($fh, $table_head, $delimiter);
+    fputcsv($fh, $table_head, $delimiter, '"', '\\');
     foreach ($table_body as $data_row) {
         // Neutralize CSV formula injection: any cell whose first character is
         // =, +, -, @, tab, or CR is prefixed with a single quote so spreadsheet
@@ -391,7 +391,7 @@ function doximity_csv_export(): false
             // @pest-mutate-ignore: BooleanOrToBooleanAnd, IdenticalToNotIdentical, TernaryNegated
             return is_scalar($cell) || $cell === null ? $cell : uamswp_fad_str($cell);
         }, $data_row);
-        fputcsv($fh, $data_row, $delimiter);
+        fputcsv($fh, $data_row, $delimiter, '"', '\\');
     }
 
     uamswp_fad_exit();
@@ -1960,7 +1960,7 @@ function mychart_csv_export(): false
     header("Content-Disposition: attachment; filename={$filename}");
     header('Pragma: no-cache'); // no cache
     header('Expires: 0'); // expire date
-    fputcsv($fh, $table_head, $delimiter);
+    fputcsv($fh, $table_head, $delimiter, '"', '\\');
     foreach ($table_body as $data_row) {
         // Neutralize CSV formula injection: prefix any cell value beginning with
         // =, +, -, @, tab (\t), or CR (\r) with a leading single quote so it is
@@ -1971,7 +1971,7 @@ function mychart_csv_export(): false
                 $data_row[$cell_index] = "'".$cell_value;
             }
         }
-        fputcsv($fh, $data_row, $delimiter);
+        fputcsv($fh, $data_row, $delimiter, '"', '\\');
     }
 
     uamswp_fad_exit();
