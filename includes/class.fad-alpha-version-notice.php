@@ -7,8 +7,9 @@ declare(strict_types=1);
  * The alphabet facet on the provider and location lists comes from the standalone
  * UAMS-Web/facetwp-alpha-uams plugin, which is installed through UAMSWP-Pusher rather than from the
  * required-plugins prompt (#1437), so that prompt never names it. From 1.3.5.2 the plugin refreshes
- * the results itself when a letter is clicked (UAMS-Web/facetwp-alpha-uams#80). Older copies leave
- * that to a handler in this plugin, so the floor is 1.3.5.2 (#1438).
+ * the results itself when a letter is clicked (UAMS-Web/facetwp-alpha-uams#80). Older copies do
+ * not, and rely on a click handler that #1433 removes from this plugin, so the floor is 1.3.5.2
+ * (#1438).
  *
  * The plugin defines `FACETWP_ALPHA_VERSION` from 1.3.5 on; 1.3.1 and earlier define nothing. An
  * undefined constant therefore means either the plugin is missing or it is older than 1.3.5, and
