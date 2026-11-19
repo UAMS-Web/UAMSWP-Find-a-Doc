@@ -498,4 +498,146 @@ final class GbpRuntimeTest extends UnitTestCase
         $this->assertSame([], $this->options['uamswp_fad_gbp_attention']);
         $this->assertSame(['error'], array_column($this->options['uamswp_fad_gbp_log'], 'action'));
     }
+
+    public function test_each_post_a_save_covers_is_queued_two_minutes_out_and_thirty_seconds_apart(): void
+    {
+        $this->enable();
+        $this->recordSchedule();
+        when('get_post_type')->justReturn('location');
+        when('get_post_status')->justReturn('publish');
+        when('uamswp_fad_gbp_child_location_ids')->justReturn([56]);
+        when('uamswp_fad_gbp_provider_ids_for_locations')->justReturn([7, 8]);
+        $before = time();
+
+        uamswp_fad_gbp_queue_on_save('55', $this->creds());
+
+        $after = time();
+        $this->assertSame([[55], [56], [7], [8]], array_column($this->scheduled, 2), 'a numeric string is a post ID');
+
+        foreach ([120, 150, 180, 210] as $position => $delay) {
+            $this->assertGreaterThanOrEqual($before + $delay, $this->scheduled[$position][0]);
+            $this->assertLessThanOrEqual($after + $delay, $this->scheduled[$position][0]);
+        }
+    }
+
+    public function test_queue_all_starts_thirty_seconds_out(): void
+    {
+        $this->enable();
+        $this->recordSchedule();
+        when('get_posts')->alias(fn (array $args) => $args['post_type'] === 'provider' ? [7] : []);
+        $this->wirePosts([7 => 'uams']);
+        when('delete_post_meta')->justReturn(true);
+        $before = time();
+
+        uamswp_fad_gbp_queue_all($this->creds());
+
+        $this->assertGreaterThanOrEqual($before + 30, $this->scheduled[0][0]);
+        $this->assertLessThanOrEqual(time() + 30, $this->scheduled[0][0]);
+    }
+
+    public function test_a_retry_counts_its_attempt_for_a_day_and_stores_the_backoff_without_autoload(): void
+    {
+        $set = [];
+        when('get_transient')->justReturn(2);
+        when('set_transient')->alias(function (string $key, $value, int $expiry) use (&$set): bool {
+            $set[] = [$key, $value, $expiry];
+
+            return true;
+        });
+        when('get_option')->justReturn(0);
+        $autoload = [];
+        when('update_option')->alias(function (string $name, $value, $load = null) use (&$autoload): bool {
+            $autoload[$name] = $load;
+
+            return true;
+        });
+        $this->recordSchedule();
+        $before = time();
+
+        uamswp_fad_gbp_schedule_retry(7);
+
+        $this->assertSame([['uamswp_fad_gbp_attempts_7', 3, DAY_IN_SECONDS]], $set);
+        $this->assertSame([UAMSWP_FAD_GBP_BACKOFF_OPTION => false], $autoload);
+        $this->assertGreaterThanOrEqual($before + 240, $this->scheduled[0][0], 'the third attempt waits four minutes');
+        $this->assertLessThanOrEqual(time() + 240, $this->scheduled[0][0]);
+    }
+
+    public function test_a_retry_for_a_post_already_queued_counts_the_attempt_but_queues_nothing(): void
+    {
+        when('get_transient')->justReturn(false);
+        expect('set_transient')->once()->with('uamswp_fad_gbp_attempts_7', 1, DAY_IN_SECONDS)->andReturn(true);
+        when('wp_next_scheduled')->justReturn(12345);
+        expect('wp_schedule_single_event')->never();
+        expect('update_option')->never();
+
+        uamswp_fad_gbp_schedule_retry(7);
+    }
+
+    public function test_giving_up_forgets_the_attempts_and_logs_the_post_s_kind(): void
+    {
+        when('get_transient')->justReturn(UAMSWP_FAD_GBP_MAX_ATTEMPTS);
+        expect('delete_transient')->once()->with('uamswp_fad_gbp_attempts_55')->andReturn(true);
+        expect('set_transient')->never();
+        when('get_post_type')->justReturn('location');
+        $this->storeOptions();
+
+        uamswp_fad_gbp_schedule_retry(55);
+
+        $entry = $this->options['uamswp_fad_gbp_log'][0];
+        unset($entry['time']);
+        $this->assertSame(['store_code' => '', 'silo' => null, 'kind' => 'location', 'mode' => 'n/a', 'action' => 'error', 'reason' => 'Gave up on post 55 after 5 rate-limited attempts', 'fields' => [], 'unresolved_categories' => []], $entry);
+    }
+
+    public function test_a_log_entry_is_stamped_first_and_both_lists_are_stored_without_autoload(): void
+    {
+        $this->storeOptions();
+        $autoload = [];
+        when('update_option')->alias(function (string $name, $value, $load = null) use (&$autoload): bool {
+            $this->options[$name] = $value;
+            $autoload[$name] = $load;
+
+            return true;
+        });
+        $before = time();
+
+        uamswp_fad_gbp_log(['store_code' => 'a', 'silo' => 'uams', 'action' => 'error', 'reason' => 'HTTP 500']);
+
+        $entry = $this->options['uamswp_fad_gbp_log'][0];
+        $this->assertSame(['time', 'store_code', 'silo', 'action', 'reason'], array_keys($entry));
+        $this->assertGreaterThanOrEqual($before, $entry['time']);
+        $this->assertLessThanOrEqual(time(), $entry['time']);
+        $this->assertSame(['uamswp_fad_gbp_attention' => false, 'uamswp_fad_gbp_log' => false], $autoload);
+    }
+
+    public function test_an_unchanged_attention_list_is_not_written(): void
+    {
+        $this->storeOptions();
+        $written = [];
+        when('update_option')->alias(function (string $name, $value) use (&$written): bool {
+            $written[] = $name;
+            $this->options[$name] = $value;
+
+            return true;
+        });
+
+        uamswp_fad_gbp_log(['store_code' => 'a', 'silo' => 'uams', 'action' => 'update', 'reason' => 'Updated']);
+
+        $this->assertSame(['uamswp_fad_gbp_log'], $written);
+    }
+
+    public function test_the_log_and_attention_list_tolerate_a_stored_value_that_is_not_a_list(): void
+    {
+        $store = ['uamswp_fad_gbp_log' => 'junk', 'uamswp_fad_gbp_attention' => 'junk'];
+        when('get_option')->alias(fn (string $name, $default = false) => $store[$name] ?? $default);
+        when('update_option')->alias(function (string $name, $value) use (&$store): bool {
+            $store[$name] = $value;
+
+            return true;
+        });
+
+        uamswp_fad_gbp_log(['store_code' => 'a', 'silo' => 'uams', 'action' => 'error', 'reason' => 'HTTP 500']);
+
+        $this->assertSame(['a'], array_column($store['uamswp_fad_gbp_log'], 'store_code'));
+        $this->assertSame(['a'], array_keys($store['uamswp_fad_gbp_attention']));
+    }
 }

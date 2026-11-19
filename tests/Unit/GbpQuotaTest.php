@@ -201,6 +201,23 @@ final class GbpQuotaTest extends UnitTestCase
         $this->assertSame($this->utc('2026-11-04 08:00:00'), $this->options[UAMSWP_FAD_GBP_PAUSE_OPTION]);
     }
 
+    public function test_the_quota_options_are_stored_without_autoload(): void
+    {
+        $autoload = [];
+        when('update_option')->alias(function (string $name, $value, $load = null) use (&$autoload): bool {
+            $this->options[$name] = $value;
+            $autoload[$name] = $load;
+
+            return true;
+        });
+        $now = $this->utc('2026-11-03 19:00:00');
+        $sync = $this->quotaSync(['now' => $now, 'creates_left' => 10], 3, true);
+
+        uamswp_fad_gbp_after_run($sync, [], $now);
+
+        $this->assertSame([UAMSWP_FAD_GBP_COUNT_OPTION => false, UAMSWP_FAD_GBP_HISTORY_OPTION => false, UAMSWP_FAD_GBP_PAUSE_OPTION => false], $autoload);
+    }
+
     public function test_a_run_that_created_nothing_leaves_the_count_and_pause_alone(): void
     {
         $now = $this->utc('2026-11-03 19:00:00');
