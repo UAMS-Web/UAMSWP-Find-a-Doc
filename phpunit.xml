@@ -15,6 +15,14 @@
         Composer setup, tests/Integration/composer.json and tests/Integration/phpunit.xml,
         on PHPUnit 9.6 (composer test:integration).
     -->
+    <!--
+        The whole Unit suite in one process peaked at 119M on master at 25ebd28e (macOS, PHP 8.5), and the
+        dead link cleanup tests (#1442) take it to 135M, past the 128M default of the PHP that Laravel Herd
+        installs. Set here, the limit is the same under every PHP the suite runs on.
+    -->
+    <php>
+        <ini name="memory_limit" value="512M"/>
+    </php>
     <testsuites>
         <testsuite name="Unit">
             <directory suffix="Test.php">./tests/Unit</directory>
