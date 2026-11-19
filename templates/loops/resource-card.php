@@ -213,9 +213,12 @@ if ($resource_expertises !== []) {
     $resource_expertise_label = $resource_expertise_count > 1 ? 'Areas of Expertise' : 'Area of Expertise';
 }
 
-// The page is a string set by the file that includes the card, so == and === agree.
+// The page is a string set by the file that includes the card, so == and === agree. Kept apart from the if below
+// so that the annotation does not reach the comparisons inside the archive card.
 // @pest-mutate-ignore: EqualToIdentical
-if ($resource_page == 'archive') { ?>
+$resource_is_archive = $resource_page == 'archive';
+
+if ($resource_is_archive) { ?>
         <div class="col item-container">
             <div class="item">
                 <div class="row">
@@ -241,9 +244,19 @@ if ($resource_page == 'archive') { ?>
                                 <?php } elseif (has_post_thumbnail()) { ?>
                                     <?php
                                     // Reached only on a site without the image plugin. The Unit suite defines bis_get_attachment_image() once
-                                    // any test stubs it, for the rest of the process, so no test there reaches this line.
-                                    // @pest-mutate-ignore: RemoveArrayItem,RemoveFunctionCall,EmptyStringToNotEmpty
-                                    the_post_thumbnail('medium', ['itemprop' => 'image', 'alt' => '', 'role' => 'presentation']); ?>
+                                    // any test stubs it, for the rest of the process, so no test there reaches this call or its attributes.
+                                    // @pest-mutate-ignore: RemoveFunctionCall
+                                    the_post_thumbnail('medium', [
+                                        // Unreachable in the Unit suite, as above.
+                                        // @pest-mutate-ignore: RemoveArrayItem
+                                        'itemprop' => 'image',
+                                        // Unreachable in the Unit suite, as above.
+                                        // @pest-mutate-ignore: RemoveArrayItem,EmptyStringToNotEmpty
+                                        'alt' => '',
+                                        // Unreachable in the Unit suite, as above.
+                                        // @pest-mutate-ignore: RemoveArrayItem
+                                        'role' => 'presentation',
+                                    ]); ?>
                                 <?php } else { ?>
                                     <source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" media="(min-width: 1px)">
                                     <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.jpg" alt="" role="presentation" />
@@ -281,8 +294,7 @@ if ($resource_page == 'archive') { ?>
                                             $resource_provider_pedigree = get_field('physician_pedigree', $associate);
                                             $resource_provider_medium_name = ($resource_provider_prefix ? uamswp_fad_str($resource_provider_prefix).' ' : '').$resource_provider_first_name.' '.($resource_provider_middle_name ? $resource_provider_middle_name.' ' : '').$resource_provider_last_name.($resource_provider_pedigree ? ' '.$resource_provider_pedigree : '');
 
-                                            // get_post_status() returns a status string or false, and $resource_i and $resource_count are
-                                            // integers, so == and === agree in every comparison of this block.
+                                            // get_post_status() returns a status string or false, so == and === agree against 'publish'.
                                             // @pest-mutate-ignore: EqualToIdentical
                                             if (get_post_status($associate) == 'publish') {
                                                 if ($resource_i < $resource_related_max) {
@@ -297,20 +309,19 @@ if ($resource_page == 'archive') { ?>
 
                                                     echo '<a href="'.get_permalink($associate).'" data-categorytitle="Related Location" data-typetitle="'.$associate_title_attr.'" data-itemtitle="'.esc_attr($resource_title_attr).'">'.$associate_title.'</a>';
                                                     $resource_i++;
-                                                    // Both are integers, so != and !== agree.
-                                                    // @pest-mutate-ignore: NotEqualToNotIdentical
                                                     if (
-                                                        ($resource_count > $resource_related_max && $resource_i != $resource_related_max)
+                                                        ($resource_count > $resource_related_max && $resource_i < $resource_related_max)
                                                         || ($resource_count <= $resource_related_max && $resource_i < ($resource_count - 1))
                                                     ) {
                                                         // If there are more items than the max AND this is not the max item
                                                         // OR If there are as many or fewer items than the max AND this is not the penultimate item
                                                         echo ', ';
-                                                    } elseif ($resource_count <= $resource_related_max && $resource_i == ($resource_count - 1)) {
+                                                    } elseif ($resource_count <= $resource_related_max && $resource_i < $resource_count) {
                                                         // If there are as many or fewer items than the max AND this is the penultimate item
                                                         echo ' and ';
                                                     }
-                                                } elseif ($resource_i == $resource_related_max) {
+                                                } else {
+                                                    // $resource_i stops at the max, so the next published post after it ends the list.
                                                     echo ' and more';
                                                     break;
                                                 }
@@ -327,8 +338,7 @@ if ($resource_page == 'archive') { ?>
                                         $resource_count = $resource_location_count;
                                         $associates = $resource_locations;
                                         foreach ($associates as $associate) {
-                                            // get_post_status() returns a status string or false, and $resource_i and $resource_count are
-                                            // integers, so == and === agree in every comparison of this block.
+                                            // get_post_status() returns a status string or false, so == and === agree against 'publish'.
                                             // @pest-mutate-ignore: EqualToIdentical
                                             if (get_post_status($associate) == 'publish') {
                                                 if ($resource_i < $resource_related_max) {
@@ -343,20 +353,19 @@ if ($resource_page == 'archive') { ?>
 
                                                     echo '<a href="'.get_permalink($associate).'" data-categorytitle="Related Location" data-typetitle="'.$associate_title_attr.'" data-itemtitle="'.esc_attr($resource_title_attr).'">'.$associate_title.'</a>';
                                                     $resource_i++;
-                                                    // Both are integers, so != and !== agree.
-                                                    // @pest-mutate-ignore: NotEqualToNotIdentical
                                                     if (
-                                                        ($resource_count > $resource_related_max && $resource_i != $resource_related_max)
+                                                        ($resource_count > $resource_related_max && $resource_i < $resource_related_max)
                                                         || ($resource_count <= $resource_related_max && $resource_i < ($resource_count - 1))
                                                     ) {
                                                         // If there are more items than the max AND this is not the max item
                                                         // OR If there are as many or fewer items than the max AND this is not the penultimate item
                                                         echo ', ';
-                                                    } elseif ($resource_count <= $resource_related_max && $resource_i == ($resource_count - 1)) {
+                                                    } elseif ($resource_count <= $resource_related_max && $resource_i < $resource_count) {
                                                         // If there are as many or fewer items than the max AND this is the penultimate item
                                                         echo ' and ';
                                                     }
-                                                } elseif ($resource_i == $resource_related_max) {
+                                                } else {
+                                                    // $resource_i stops at the max, so the next published post after it ends the list.
                                                     echo ' and more';
                                                     break;
                                                 }
@@ -373,8 +382,7 @@ if ($resource_page == 'archive') { ?>
                                         $resource_count = $resource_condition_count;
                                         $associates = $resource_conditions;
                                         foreach ($associates as $associate) {
-                                            // get_post_status() returns a status string or false, and $resource_i and $resource_count are
-                                            // integers, so == and === agree in every comparison of this block.
+                                            // get_post_status() returns a status string or false, so == and === agree against 'publish'.
                                             // @pest-mutate-ignore: EqualToIdentical
                                             if (get_post_status($associate) == 'publish') {
                                                 if ($resource_i < $resource_related_max) {
@@ -389,20 +397,19 @@ if ($resource_page == 'archive') { ?>
 
                                                     echo '<a href="'.get_permalink($associate).'" data-categorytitle="Related Location" data-typetitle="'.$associate_title_attr.'" data-itemtitle="'.esc_attr($resource_title_attr).'">'.$associate_title.'</a>';
                                                     $resource_i++;
-                                                    // Both are integers, so != and !== agree.
-                                                    // @pest-mutate-ignore: NotEqualToNotIdentical
                                                     if (
-                                                        ($resource_count > $resource_related_max && $resource_i != $resource_related_max)
+                                                        ($resource_count > $resource_related_max && $resource_i < $resource_related_max)
                                                         || ($resource_count <= $resource_related_max && $resource_i < ($resource_count - 1))
                                                     ) {
                                                         // If there are more items than the max AND this is not the max item
                                                         // OR If there are as many or fewer items than the max AND this is not the penultimate item
                                                         echo ', ';
-                                                    } elseif ($resource_count <= $resource_related_max && $resource_i == ($resource_count - 1)) {
+                                                    } elseif ($resource_count <= $resource_related_max && $resource_i < $resource_count) {
                                                         // If there are as many or fewer items than the max AND this is the penultimate item
                                                         echo ' and ';
                                                     }
-                                                } elseif ($resource_i == $resource_related_max) {
+                                                } else {
+                                                    // $resource_i stops at the max, so the next published post after it ends the list.
                                                     echo ' and more';
                                                     break;
                                                 }
@@ -419,8 +426,7 @@ if ($resource_page == 'archive') { ?>
                                         $resource_count = $resource_treatment_count;
                                         $associates = $resource_treatments;
                                         foreach ($associates as $associate) {
-                                            // get_post_status() returns a status string or false, and $resource_i and $resource_count are
-                                            // integers, so == and === agree in every comparison of this block.
+                                            // get_post_status() returns a status string or false, so == and === agree against 'publish'.
                                             // @pest-mutate-ignore: EqualToIdentical
                                             if (get_post_status($associate) == 'publish') {
                                                 if ($resource_i < $resource_related_max) {
@@ -435,20 +441,19 @@ if ($resource_page == 'archive') { ?>
 
                                                     echo '<a href="'.get_permalink($associate).'" data-categorytitle="Related Location" data-typetitle="'.$associate_title_attr.'" data-itemtitle="'.esc_attr($resource_title_attr).'">'.$associate_title.'</a>';
                                                     $resource_i++;
-                                                    // Both are integers, so != and !== agree.
-                                                    // @pest-mutate-ignore: NotEqualToNotIdentical
                                                     if (
-                                                        ($resource_count > $resource_related_max && $resource_i != $resource_related_max)
+                                                        ($resource_count > $resource_related_max && $resource_i < $resource_related_max)
                                                         || ($resource_count <= $resource_related_max && $resource_i < ($resource_count - 1))
                                                     ) {
                                                         // If there are more items than the max AND this is not the max item
                                                         // OR If there are as many or fewer items than the max AND this is not the penultimate item
                                                         echo ', ';
-                                                    } elseif ($resource_count <= $resource_related_max && $resource_i == ($resource_count - 1)) {
+                                                    } elseif ($resource_count <= $resource_related_max && $resource_i < $resource_count) {
                                                         // If there are as many or fewer items than the max AND this is the penultimate item
                                                         echo ' and ';
                                                     }
-                                                } elseif ($resource_i == $resource_related_max) {
+                                                } else {
+                                                    // $resource_i stops at the max, so the next published post after it ends the list.
                                                     echo ' and more';
                                                     break;
                                                 }
@@ -465,8 +470,7 @@ if ($resource_page == 'archive') { ?>
                                         $resource_count = $resource_expertise_count;
                                         $associates = $resource_expertises;
                                         foreach ($associates as $associate) {
-                                            // get_post_status() returns a status string or false, and $resource_i and $resource_count are
-                                            // integers, so == and === agree in every comparison of this block.
+                                            // get_post_status() returns a status string or false, so == and === agree against 'publish'.
                                             // @pest-mutate-ignore: EqualToIdentical
                                             if (get_post_status($associate) == 'publish') {
                                                 if ($resource_i < $resource_related_max) {
@@ -481,20 +485,19 @@ if ($resource_page == 'archive') { ?>
 
                                                     echo '<a href="'.get_permalink($associate).'" data-categorytitle="Related Location" data-typetitle="'.$associate_title_attr.'" data-itemtitle="'.esc_attr($resource_title_attr).'">'.$associate_title.'</a>';
                                                     $resource_i++;
-                                                    // Both are integers, so != and !== agree.
-                                                    // @pest-mutate-ignore: NotEqualToNotIdentical
                                                     if (
-                                                        ($resource_count > $resource_related_max && $resource_i != $resource_related_max)
+                                                        ($resource_count > $resource_related_max && $resource_i < $resource_related_max)
                                                         || ($resource_count <= $resource_related_max && $resource_i < ($resource_count - 1))
                                                     ) {
                                                         // If there are more items than the max AND this is not the max item
                                                         // OR If there are as many or fewer items than the max AND this is not the penultimate item
                                                         echo ', ';
-                                                    } elseif ($resource_count <= $resource_related_max && $resource_i == ($resource_count - 1)) {
+                                                    } elseif ($resource_count <= $resource_related_max && $resource_i < $resource_count) {
                                                         // If there are as many or fewer items than the max AND this is the penultimate item
                                                         echo ' and ';
                                                     }
-                                                } elseif ($resource_i == $resource_related_max) {
+                                                } else {
+                                                    // $resource_i stops at the max, so the next published post after it ends the list.
                                                     echo ' and more';
                                                     break;
                                                 }
@@ -533,9 +536,16 @@ if ($resource_page == 'archive') { ?>
                             <!-- Fallback -->
                             <?php
                             // Reached only on a site without the image plugin. The Unit suite defines bis_get_attachment_image() once
-                            // any test stubs it, for the rest of the process, so no test there reaches this line.
-                            // @pest-mutate-ignore: RemoveArrayItem,RemoveFunctionCall,EmptyStringToNotEmpty
-                            the_post_thumbnail('aspect-16-9-small', ['alt' => '', 'role' => 'presentation']); ?>
+                            // any test stubs it, for the rest of the process, so no test there reaches this call or its attributes.
+                            // @pest-mutate-ignore: RemoveFunctionCall
+                            the_post_thumbnail('aspect-16-9-small', [
+                                // Unreachable in the Unit suite, as above.
+                                // @pest-mutate-ignore: RemoveArrayItem,EmptyStringToNotEmpty
+                                'alt' => '',
+                                // Unreachable in the Unit suite, as above.
+                                // @pest-mutate-ignore: RemoveArrayItem
+                                'role' => 'presentation',
+                            ]); ?>
                         <?php } else { ?>
                             <source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" media="(min-width: 1px)">
                             <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.jpg" alt="" role="presentation" />
