@@ -169,7 +169,7 @@ final class RootFilesTest extends UnitTestCase
         sort($included);
         sort($onDisk);
 
-        $this->assertSame(31, count($included));
+        $this->assertSame(32, count($included));
         $this->assertSame(array_values(array_unique($included)), $included, 'no file is included twice');
         $this->assertSame(
             ['class.fad-acf-table-map-check.php', 'class.fad-expertise-attributes-meta-box.php', 'class.fad-set-session.php'],
