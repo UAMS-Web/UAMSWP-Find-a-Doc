@@ -33,7 +33,7 @@ const UAMSWP_FAD_GBP_ORPHAN_HOOK = 'uamswp_fad_gbp_orphan_scan';
  */
 function uamswp_fad_gbp_track_unpublish($new_status, $old_status, $post, ?int $now = null): void
 {
-    // A post with no type matches neither type whatever it defaults to.
+    // A post with no type is never a provider or a location, so the default only has to be neither.
     // @pest-mutate-ignore: EmptyStringToNotEmpty
     if (! is_object($post) || ! in_array($post->post_type ?? '', ['provider', 'location'], true)) {
         return;
@@ -120,7 +120,7 @@ function uamswp_fad_gbp_orphan_candidates(?int $now = null, ?callable $locations
         foreach (is_array($map) ? $map : [] as $location_id => $entry) {
             $entry = uamswp_fad_arr($entry);
             $entry_id = uamswp_fad_str($entry['id'] ?? '');
-            // An entry with no date at all counted as live above, so it is skipped before its date is read.
+            // An entry with no date counted as live above, or has no id, so either way the check below skips it.
             // @pest-mutate-ignore: EmptyStringToNotEmpty
             $since = uamswp_fad_str(($entry['orphaned_since'] ?? ''));
 
@@ -205,7 +205,7 @@ function uamswp_fad_gbp_orphan_scan(callable $out, ?UAMSWP_FAD_GBP_Client $clien
         $listings = [];
 
         foreach (uamswp_fad_gbp_index($client) as $entry) {
-            // No candidate is ever named with an empty string, so the key a nameless listing gets is never read.
+            // The plugin never stores an empty listing name, so the key a listing with no name gets is never looked up.
             // @pest-mutate-ignore: EmptyStringToNotEmpty
             $listings[uamswp_fad_str(($entry['listing']['name'] ?? ''))] = $entry;
         }

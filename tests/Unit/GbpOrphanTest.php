@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace UamswpFindADoc\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use UAMSWP_FAD_GBP_Client;
 use UAMSWP_FAD_GBP_Logic;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
@@ -621,7 +622,7 @@ final class GbpOrphanTest extends UnitTestCase
 
     public function test_a_scan_with_no_client_and_no_credentials_stops_before_reading_anything(): void
     {
-        when('uamswp_fad_gbp_credentials')->justReturn(null);
+        when('uamswp_fad_gbp_credentials')->justReturn();
         $lines = [];
 
         $status = uamswp_fad_gbp_orphan_scan(function (string $line) use (&$lines): void {
@@ -759,7 +760,7 @@ final class GbpOrphanTest extends UnitTestCase
         return ['14' => [14, 1], '13' => [13, 0], '8' => [8, 0], '7' => [7, 1], '6' => [6, 0], '4' => [4, 0], '3' => [3, 1], '2' => [2, 0], '1' => [1, 1]];
     }
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('days_left_logging')]
+    #[DataProvider('days_left_logging')]
     public function test_a_listing_that_is_not_due_is_logged_only_on_the_days_that_mark_the_countdown(int $days_left, int $logged): void
     {
         $since = gmdate('Y-m-d', self::NOW - (14 - $days_left) * 86400);
@@ -856,9 +857,16 @@ final class GbpOrphanTest extends UnitTestCase
         $this->assertSame([], $scheduled, 'an event already scheduled is not scheduled again');
 
         when('wp_next_scheduled')->justReturn(false);
-        $before = time();
-        uamswp_fad_gbp_register_orphan_hooks();
-        $after = time();
+
+        // time() cannot be stubbed, so register again until no second boundary falls inside the call; the scheduled
+        // time is then exactly an hour from it.
+        do {
+            $actions = [];
+            $scheduled = [];
+            $before = time();
+            uamswp_fad_gbp_register_orphan_hooks();
+            $after = time();
+        } while ($before !== $after);
 
         $this->assertSame([
             ['transition_post_status', 'uamswp_fad_gbp_track_unpublish', 10, 3],
@@ -866,7 +874,6 @@ final class GbpOrphanTest extends UnitTestCase
         ], array_slice($actions, 0, 2));
         $this->assertCount(1, $scheduled);
         $this->assertSame(['daily', UAMSWP_FAD_GBP_ORPHAN_HOOK], array_slice($scheduled[0], 1));
-        $this->assertGreaterThanOrEqual($before + 3600, $scheduled[0][0]);
-        $this->assertLessThanOrEqual($after + 3600, $scheduled[0][0]);
+        $this->assertSame($before + 3600, $scheduled[0][0]);
     }
 }
