@@ -218,6 +218,41 @@ final class GbpQuotaTest extends UnitTestCase
         $this->assertSame([UAMSWP_FAD_GBP_COUNT_OPTION => false, UAMSWP_FAD_GBP_HISTORY_OPTION => false, UAMSWP_FAD_GBP_PAUSE_OPTION => false], $autoload);
     }
 
+    /**
+     * The sync stamps every create as it counts it, so a create with no stamp is not expected. The runtime still counts
+     * one on the day the run started; the counters are set by hand here to reach that fallback.
+     *
+     * @param  list<int>  $stamps
+     */
+    private function syncWithUnstampedCreates(int $made, array $stamps): UAMSWP_FAD_GBP_Sync
+    {
+        $sync = $this->quotaSync(['now' => 1], 0, false);
+        (new \ReflectionProperty($sync, 'creates_made'))->setValue($sync, $made);
+        (new \ReflectionProperty($sync, 'create_times'))->setValue($sync, $stamps);
+
+        return $sync;
+    }
+
+    public function test_a_create_with_no_stamp_counts_on_the_run_s_day_with_that_day_s_stamped_creates(): void
+    {
+        $now = $this->utc('2026-11-03 19:00:00');
+
+        uamswp_fad_gbp_after_run($this->syncWithUnstampedCreates(3, [$this->utc('2026-11-03 18:00:00')]), [], $now);
+
+        $this->assertSame(['day' => '2026-11-03', 'count' => 3], $this->options[UAMSWP_FAD_GBP_COUNT_OPTION], "one stamped and two unstamped, all on the run's day");
+    }
+
+    public function test_a_create_with_no_stamp_counts_on_the_run_s_day_when_the_stamped_ones_are_on_another(): void
+    {
+        $now = $this->utc('2026-11-04 19:00:00');
+
+        uamswp_fad_gbp_after_run($this->syncWithUnstampedCreates(3, [$this->utc('2026-11-03 18:00:00')]), [], $now);
+
+        $this->assertSame(['day' => '2026-11-04', 'count' => 2], $this->options[UAMSWP_FAD_GBP_COUNT_OPTION]);
+        $this->assertSame(1, $this->options[UAMSWP_FAD_GBP_HISTORY_OPTION]['2026-11-03'] ?? null);
+        $this->assertSame(2, $this->options[UAMSWP_FAD_GBP_HISTORY_OPTION]['2026-11-04'] ?? null);
+    }
+
     public function test_a_run_that_created_nothing_leaves_the_count_and_pause_alone(): void
     {
         $now = $this->utc('2026-11-03 19:00:00');

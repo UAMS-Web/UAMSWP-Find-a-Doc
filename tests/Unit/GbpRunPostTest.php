@@ -194,7 +194,7 @@ final class GbpRunPostTest extends UnitTestCase
         $after = $this->callsOf('after_run')[0];
         $this->assertInstanceOf(UAMSWP_FAD_GBP_Sync::class, $after[0]);
         $this->assertSame([$entries, 1_700_000_000], [$after[1], $after[2]], 'the quota is counted from the moment the gate was read');
-        $this->assertSame([[$entries[0]], [$entries[1]]], $this->callsOf('log'), 'the sync logs through the job\'s logger');
+        $this->assertSame([[$entries[0]], [$entries[1]]], $this->callsOf('log'), "the sync logs through the job's logger");
     }
 
     public function test_orphans_are_not_marked_when_no_entry_was_live(): void

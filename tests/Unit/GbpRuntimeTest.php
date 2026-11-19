@@ -507,6 +507,7 @@ final class GbpRuntimeTest extends UnitTestCase
         when('get_post_status')->justReturn('publish');
         when('uamswp_fad_gbp_child_location_ids')->justReturn([56]);
         when('uamswp_fad_gbp_provider_ids_for_locations')->justReturn([7, 8]);
+
         $before = time();
 
         uamswp_fad_gbp_queue_on_save('55', $this->creds());
@@ -545,6 +546,7 @@ final class GbpRuntimeTest extends UnitTestCase
             return true;
         });
         when('get_option')->justReturn(0);
+
         $autoload = [];
         when('update_option')->alias(function (string $name, $value, $load = null) use (&$autoload): bool {
             $autoload[$name] = $load;

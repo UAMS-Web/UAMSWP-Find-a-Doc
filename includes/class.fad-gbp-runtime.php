@@ -17,6 +17,8 @@ const UAMSWP_FAD_GBP_SYNC_HOOK = 'uamswp_fad_gbp_sync_post';
 const UAMSWP_FAD_GBP_HASH_META = '_uamswp_fad_gbp_hash';
 
 /** How many times a rate-limited provider is retried before the job gives up. */
+// A constant is set when the file loads, before any test's coverage starts, so its mutants are never run.
+// @pest-mutate-ignore: DecrementInteger,IncrementInteger
 const UAMSWP_FAD_GBP_MAX_ATTEMPTS = 5;
 
 /** The option that holds the moment creates are paused until, after Google's daily create limit. */
@@ -32,12 +34,18 @@ const UAMSWP_FAD_GBP_HISTORY_OPTION = 'uamswp_fad_gbp_create_history';
 const UAMSWP_FAD_GBP_BACKOFF_OPTION = 'uamswp_fad_gbp_backoff_until';
 
 /** Creates allowed per Pacific day by default, below the 102 Google accepted on 2026-10-30. */
+// A constant is set when the file loads, before any test's coverage starts, so its mutants are never run.
+// @pest-mutate-ignore: DecrementInteger,IncrementInteger
 const UAMSWP_FAD_GBP_DEFAULT_CREATE_BUDGET = 80;
 
 /** How many recent entries the activity log keeps. */
+// A constant is set when the file loads, before any test's coverage starts, so its mutants are never run.
+// @pest-mutate-ignore: DecrementInteger,IncrementInteger
 const UAMSWP_FAD_GBP_LOG_CAP = 300;
 
 /** How many review and error entries are kept apart from the activity log, one per store code. */
+// A constant is set when the file loads, before any test's coverage starts, so its mutants are never run.
+// @pest-mutate-ignore: DecrementInteger,IncrementInteger
 const UAMSWP_FAD_GBP_ATTENTION_CAP = 1000;
 
 /**
@@ -285,10 +293,10 @@ function uamswp_fad_gbp_has_silo_to_sync(int $post_id, array $modes): bool
         $location_ids = [$post_id];
     } else {
         $listed = function_exists('get_field') ? get_field('physician_locations', $post_id) : [];
-        $location_ids = array_values(array_filter(
-            uamswp_fad_ids(is_array($listed) ? $listed : []),
-            fn (int $location_id): bool => get_post_status($location_id) === 'publish'
-        ));
+        $location_ids = uamswp_fad_ids(is_array($listed) ? $listed : []);
+        // One statement per call: Patchwork, which the tests load, joins the line after a multi-line
+        // `array_filter(` onto it, and every later line of this file would then be covered one line early.
+        $location_ids = array_values(array_filter($location_ids, fn (int $location_id): bool => get_post_status($location_id) === 'publish'));
     }
 
     foreach ($location_ids as $location_id) {
