@@ -431,7 +431,7 @@ test('saving an option writes it without autoload and is true when the database 
     expect(uamswp_dead_links_save('uamswp_fad_test', ['a' => 1]))->toBeTrue()
         ->and($db->option_values['uamswp_fad_test'])->toBe(serialize(['a' => 1]))
         ->and($db->calls)->toBe([['update_option', 'uamswp_fad_test', false]])
-        ->and($db->queries)->toBe(["SELECT MD5(option_value) FROM wp_options WHERE option_name = 'uamswp_fad_test'"]);
+        ->and($db->queries)->toBe(["SELECT option_value FROM wp_options WHERE option_name = 'uamswp_fad_test'"]);
 });
 
 test('saving an option is false when the database does not hold the value written', function (): void {

@@ -137,10 +137,6 @@ final class DeadLinksDb
             return $this->option_values[$m[1]] ?? null;
         }
 
-        if (preg_match("/^SELECT MD5\\(option_value\\) FROM wp_options WHERE option_name = '([^']+)'$/", $sql, $m)) {
-            return isset($this->option_values[$m[1]]) ? md5($this->option_values[$m[1]]) : null;
-        }
-
         if (preg_match('/^SELECT COUNT\\(\\*\\) FROM wp_(\\w+) WHERE post_id = (\\d+)$/', $sql, $m)) {
             return (string) count($this->table_rows($m[1], (int) $m[2]));
         }
