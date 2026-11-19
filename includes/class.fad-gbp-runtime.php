@@ -17,6 +17,8 @@ const UAMSWP_FAD_GBP_SYNC_HOOK = 'uamswp_fad_gbp_sync_post';
 const UAMSWP_FAD_GBP_HASH_META = '_uamswp_fad_gbp_hash';
 
 /** How many times a rate-limited provider is retried before the job gives up. */
+// A constant is set when the file loads, before any test's coverage starts, so its mutants are never run.
+// @pest-mutate-ignore: DecrementInteger,IncrementInteger
 const UAMSWP_FAD_GBP_MAX_ATTEMPTS = 5;
 
 /** The option that holds the moment creates are paused until, after Google's daily create limit. */
@@ -32,12 +34,18 @@ const UAMSWP_FAD_GBP_HISTORY_OPTION = 'uamswp_fad_gbp_create_history';
 const UAMSWP_FAD_GBP_BACKOFF_OPTION = 'uamswp_fad_gbp_backoff_until';
 
 /** Creates allowed per Pacific day by default, below the 102 Google accepted on 2026-10-30. */
+// A constant is set when the file loads, before any test's coverage starts, so its mutants are never run.
+// @pest-mutate-ignore: DecrementInteger,IncrementInteger
 const UAMSWP_FAD_GBP_DEFAULT_CREATE_BUDGET = 80;
 
 /** How many recent entries the activity log keeps. */
+// A constant is set when the file loads, before any test's coverage starts, so its mutants are never run.
+// @pest-mutate-ignore: DecrementInteger,IncrementInteger
 const UAMSWP_FAD_GBP_LOG_CAP = 300;
 
 /** How many review and error entries are kept apart from the activity log, one per store code. */
+// A constant is set when the file loads, before any test's coverage starts, so its mutants are never run.
+// @pest-mutate-ignore: DecrementInteger,IncrementInteger
 const UAMSWP_FAD_GBP_ATTENTION_CAP = 1000;
 
 /**
@@ -108,7 +116,7 @@ function uamswp_fad_gbp_modes(): array
     $modes = [];
 
     foreach (array_keys(uamswp_fad_gbp_silos()) as $silo) {
-        $mode = $saved[$silo] ?? '';
+        $mode = $saved[$silo] ?? null;
         $modes[$silo] = in_array($mode, UAMSWP_FAD_GBP_Logic::MODES, true) ? $mode : 'dry-run';
     }
 
@@ -120,7 +128,7 @@ function uamswp_fad_gbp_modes(): array
  */
 function uamswp_fad_gbp_is_production(): bool
 {
-    $host = (string) wp_parse_url(home_url(), PHP_URL_HOST);
+    $host = wp_parse_url(home_url(), PHP_URL_HOST);
 
     return (bool) apply_filters('uamswp_fad_gbp_is_production', $host === 'uamshealth.com');
 }
@@ -184,7 +192,7 @@ function uamswp_fad_gbp_queue_on_save($post_id, ?callable $lookup = null): void
 
     $post_id = (int) $post_id;
 
-    if (uamswp_fad_gbp_credentials($lookup) === null || array_diff(array_values(uamswp_fad_gbp_modes()), ['off']) === []) {
+    if (uamswp_fad_gbp_credentials($lookup) === null || array_diff(uamswp_fad_gbp_modes(), ['off']) === []) {
         return;
     }
 
@@ -245,7 +253,7 @@ function uamswp_fad_gbp_queue_all(?callable $lookup = null): int
 {
     $modes = uamswp_fad_gbp_modes();
 
-    if (uamswp_fad_gbp_credentials($lookup) === null || array_diff(array_values($modes), ['off']) === []) {
+    if (uamswp_fad_gbp_credentials($lookup) === null || array_diff($modes, ['off']) === []) {
         return 0;
     }
 
@@ -285,10 +293,10 @@ function uamswp_fad_gbp_has_silo_to_sync(int $post_id, array $modes): bool
         $location_ids = [$post_id];
     } else {
         $listed = function_exists('get_field') ? get_field('physician_locations', $post_id) : [];
-        $location_ids = array_values(array_filter(
-            uamswp_fad_ids(is_array($listed) ? $listed : []),
-            fn (int $location_id): bool => get_post_status($location_id) === 'publish'
-        ));
+        $location_ids = uamswp_fad_ids(is_array($listed) ? $listed : []);
+        // One statement per call: Patchwork, which the tests load, joins the line after a multi-line
+        // `array_filter(` onto it, and every later line of this file would then be covered one line early.
+        $location_ids = array_filter($location_ids, fn (int $location_id): bool => get_post_status($location_id) === 'publish');
     }
 
     foreach ($location_ids as $location_id) {
@@ -485,7 +493,7 @@ function uamswp_fad_gbp_write_photos_sent(array $item, array $entry): void
         return;
     }
 
-    $fresh = ($entry['action'] ?? '') === 'create';
+    $fresh = ($entry['action'] ?? null) === 'create';
 
     if ($item['kind'] === 'location') {
         if (uamswp_fad_str(get_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_META, true)) !== $name) {
@@ -502,7 +510,7 @@ function uamswp_fad_gbp_write_photos_sent(array $item, array $entry): void
     $map = get_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_MAP_META, true);
     $location_id = uamswp_fad_int(($item['location_id'] ?? 0));
 
-    if (! is_array($map) || (uamswp_fad_arr($map[$location_id] ?? null)['id'] ?? '') !== $name) {
+    if (! is_array($map) || (uamswp_fad_arr($map[$location_id] ?? null)['id'] ?? null) !== $name) {
         return;
     }
 
@@ -580,9 +588,9 @@ function uamswp_fad_gbp_store_listing_ids(array $items, array $entries): void
 {
     foreach (array_values($items) as $position => $item) {
         $name = uamswp_fad_str(($entries[$position]['listing_name'] ?? ''));
-        $post_id = uamswp_fad_int(($item['post_id'] ?? 0));
 
-        if ($name === '' || $post_id === 0 || ($entries[$position]['mode'] ?? '') !== 'live') {
+        // An item with no post is skipped by both writes below.
+        if ($name === '' || ($entries[$position]['mode'] ?? null) !== 'live') {
             continue;
         }
 
@@ -620,9 +628,10 @@ function uamswp_fad_gbp_write_listing_id(array $item, string $name): void
     /** @var array<int|string, array{id: string, orphaned_since: ?string, photos?: array<int, array{category: string, url: string}>}> $map */
     $map = is_array($map) ? $map : [];
 
-    $location_id = uamswp_fad_int(($item['location_id'] ?? 0));
+    // A provider item with no location returned above, so the location is always set here.
+    $location_id = uamswp_fad_int(($item['location_id'] ?? null));
 
-    if (($map[$location_id]['id'] ?? '') !== $name || ($map[$location_id]['orphaned_since'] ?? null) !== null) {
+    if (($map[$location_id]['id'] ?? null) !== $name || ($map[$location_id]['orphaned_since'] ?? null) !== null) {
         update_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_MAP_META, UAMSWP_FAD_GBP_Logic::remember_listing($map, $location_id, $name));
     }
 }
@@ -690,7 +699,7 @@ function uamswp_fad_gbp_items_for_provider(int $provider_id, array $categories):
     $items = [];
 
     foreach ($table['body'] as $row) {
-        $store_code = uamswp_fad_str(($row[0] ?? ''));
+        $store_code = uamswp_fad_str(($row[0] ?? null));
         $parts = UAMSWP_FAD_GBP_Logic::split_provider_store_code($store_code);
 
         if ($parts === null) {
@@ -774,7 +783,7 @@ function uamswp_fad_gbp_log(array $entry): void
         update_option('uamswp_fad_gbp_attention', $next, false);
     }
 
-    if (($entry['action'] ?? '') === 'noop') {
+    if (($entry['action'] ?? null) === 'noop') {
         return;
     }
 
@@ -810,7 +819,7 @@ function uamswp_fad_gbp_create_gate(?int $now = null): array
 {
     $now ??= time();
     $count = get_option(UAMSWP_FAD_GBP_COUNT_OPTION, []);
-    $used = is_array($count) && ($count['day'] ?? '') === UAMSWP_FAD_GBP_Logic::pacific_day($now) ? uamswp_fad_int(($count['count'] ?? 0)) : 0;
+    $used = is_array($count) && ($count['day'] ?? null) === UAMSWP_FAD_GBP_Logic::pacific_day($now) ? uamswp_fad_int(($count['count'] ?? 0)) : 0;
 
     return [
         'creates_paused_until' => uamswp_fad_int(get_option(UAMSWP_FAD_GBP_PAUSE_OPTION, 0)),
@@ -851,6 +860,9 @@ function uamswp_fad_gbp_after_run(UAMSWP_FAD_GBP_Sync $sync, array $entries, ?in
             $by_day[$day] = ($by_day[$day] ?? 0) + $unstamped;
         }
 
+        // The count keeps the newest day whatever order the days come in, and the history sorts itself, so the order
+        // is not observable; the sort keeps the days in the order they happened.
+        // @pest-mutate-ignore: RemoveFunctionCall
         ksort($by_day);
 
         foreach ($by_day as $day => $day_made) {
@@ -858,7 +870,7 @@ function uamswp_fad_gbp_after_run(UAMSWP_FAD_GBP_Sync $sync, array $entries, ?in
 
             // A later-finishing run must not replace a newer day's budget with an older one.
             if (! is_array($count) || ($count['day'] ?? '') <= $day) {
-                $before = is_array($count) && ($count['day'] ?? '') === $day ? uamswp_fad_int(($count['count'] ?? 0)) : 0;
+                $before = is_array($count) && ($count['day'] ?? null) === $day ? uamswp_fad_int(($count['count'] ?? 0)) : 0;
                 update_option(UAMSWP_FAD_GBP_COUNT_OPTION, ['day' => $day, 'count' => $before + $day_made], false);
             }
 
@@ -885,9 +897,9 @@ function uamswp_fad_gbp_after_run(UAMSWP_FAD_GBP_Sync $sync, array $entries, ?in
     }
 
     // Keep the index's original expiry: a long backlog of creates must not keep a stale read alive.
-    $remaining = is_int($read_at) ? 300 - ($now - $read_at) : 0;
+    $remaining = is_int($read_at) ? 300 - ($now - $read_at) : null;
 
-    if ($remaining < 1) {
+    if ($remaining === null || $remaining < 1) {
         delete_transient('uamswp_fad_gbp_index');
 
         return;
@@ -971,6 +983,8 @@ function uamswp_fad_gbp_schedule_retry(int $post_id): void
         wp_schedule_single_event($until, UAMSWP_FAD_GBP_SYNC_HOOK, [$post_id]);
 
         // The dashboard shows the latest backoff in force.
+        // With no stored backoff any value up to the current time reads the same, since a backoff always ends later.
+        // @pest-mutate-ignore: DecrementInteger,IncrementInteger
         if ($until > uamswp_fad_int(get_option(UAMSWP_FAD_GBP_BACKOFF_OPTION, 0))) {
             update_option(UAMSWP_FAD_GBP_BACKOFF_OPTION, $until, false);
         }
@@ -1004,6 +1018,8 @@ function uamswp_fad_gbp_run_post(int $post_id): void
         $modes = uamswp_fad_gbp_modes();
         $production = uamswp_fad_gbp_is_production();
         $items = uamswp_fad_gbp_items_for_post($post_id, uamswp_fad_gbp_categories($client));
+        // The plugin file defines the version before this runs, so the fallback is never read.
+        // @pest-mutate-ignore: EmptyStringToNotEmpty
         $hash = UAMSWP_FAD_GBP_Logic::fingerprint($items, $modes, $production, defined('UAMS_FAD_VERSION') ? UAMS_FAD_VERSION : '');
 
         // Nothing that decides the sync has changed since its last settled run: no Google call.

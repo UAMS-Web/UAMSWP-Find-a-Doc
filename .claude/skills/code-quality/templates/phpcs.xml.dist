@@ -25,6 +25,11 @@
     <exclude-pattern>vendor/*</exclude-pattern>
     <exclude-pattern>node_modules/*</exclude-pattern>
     <exclude-pattern>tests/*</exclude-pattern>
+    <!-- The agent folders the shared-skills sync writes: their CLI scripts are
+         not plugin code, and the escaping sniffs fail on them. -->
+    <exclude-pattern>.claude/*</exclude-pattern>
+    <exclude-pattern>.agents/*</exclude-pattern>
+    <exclude-pattern>.cursor/*</exclude-pattern>
 
     <arg name="extensions" value="php"/>
     <arg value="sp"/>
@@ -52,5 +57,5 @@
 
     <!-- PLACEHOLDER: the lowest WordPress version the repository supports; the
          security sniffs use it to know which core functions exist. -->
-    <config name="minimum_supported_wp_version" value="6.9"/>
+    <config name="minimum_supported_wp_version" value="6.8"/>
 </ruleset>
