@@ -114,7 +114,6 @@ function doximity_csv_export(): false
         // @pest-mutate-ignore: IncrementInteger
         $table_head[14] = 'Sub-Specialty';
 
-        $row = [];
         while ($query->have_posts()) {
             $query->the_post();
             // get_the_ID() returns the loop post's id; the cast only turns a false outside the loop into 0.
@@ -182,7 +181,10 @@ function doximity_csv_export(): false
                 }
             }
             // Create the table
+            // A provider who does not qualify adds no row.
             if ($degree_valid && $npi_valid && $affiliation_valid && $location_valid) {
+                $row = [];
+
                 // NPI Number field
                 // fputcsv() writes the values in the order they were added, not by key, so a first key below 0 writes the same row.
                 // @pest-mutate-ignore: DecrementInteger
@@ -353,8 +355,8 @@ function doximity_csv_export(): false
                 // @pest-mutate-ignore: IncrementInteger
                 $row[14] = '';
 
+                $table_body[] = $row;
             }
-            $table_body[] = $row;
         }
     }
 
@@ -1885,7 +1887,6 @@ function mychart_csv_export(): false
         // @pest-mutate-ignore: IncrementInteger
         $table_head[3] = 'Provider Photo URL';
 
-        $row = [];
         while ($query->have_posts()) {
             $query->the_post();
             // get_the_ID() returns the loop post's id; the cast only turns a false outside the loop into 0.
@@ -1914,10 +1915,11 @@ function mychart_csv_export(): false
 
             $resident = get_field('physician_resident', $post_id);
 
-            // Create the table
+            // Create the table: a resident adds no row
             if (! $resident) {
 
                 // Start table row
+                $row = [];
 
                 // PID
                 // fputcsv() writes the values in the order they were added, not by key, so a first key below 0 writes the same row.
@@ -1935,9 +1937,8 @@ function mychart_csv_export(): false
                 // @pest-mutate-ignore: IncrementInteger
                 $row[3] = $provider_mychart_photo ?: '';
 
+                $table_body[] = $row;
             } // endif !$resident
-
-            $table_body[] = $row;
         }
 
     }
