@@ -44,7 +44,8 @@ final class DeleteCleanupTest extends UnitTestCase
 
             public function esc_like($text): string
             {
-                // wpdb documents the text as a string, so the stand-in holds the caller to that.
+                // wpdb documents the text as a string, so the stand-in holds the caller to that contract. The real
+                // method would coerce a number, so a call that breaks the contract fails here and not in production.
                 if (! is_string($text)) {
                     throw new \TypeError('esc_like() got '.get_debug_type($text));
                 }
@@ -355,11 +356,13 @@ final class DeleteCleanupTest extends UnitTestCase
 
         try {
             uamswp_delete_cleanup_log('could not remove');
+            $logged = (string) file_get_contents($file);
         } finally {
             ini_set('error_log', (string) $previous);
+            unlink($file);
         }
 
-        $this->assertStringEndsWith("UAMSWP Find-a-Doc: could not remove\n", (string) file_get_contents($file));
-        unlink($file);
+        // PHP ends each line it writes to an error log file with the platform's line ending.
+        $this->assertStringEndsWith('UAMSWP Find-a-Doc: could not remove'.PHP_EOL, $logged);
     }
 }

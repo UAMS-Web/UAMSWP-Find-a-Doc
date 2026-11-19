@@ -1472,8 +1472,10 @@ function fad_facetwp_cards_callback(
     // ACF passes every argument to a block callback, and this one reads only the block, so no default is used.
     // @pest-mutate-ignore: EmptyStringToNotEmpty
     $content = '', // string // Optional // The block inner HTML (empty).
+    // As for the content: ACF always passes the preview flag, and the callback does not read it.
     // @pest-mutate-ignore: FalseToTrue
     $is_preview = false, // bool // Optional // True during AJAX preview.
+    // As for the content: ACF always passes the post ID, and the callback does not read it.
     // @pest-mutate-ignore: DecrementInteger, IncrementInteger
     $post_id = 0 // (int|string) // Optional // The post ID this block is saved to.
 ): void {
@@ -1528,8 +1530,10 @@ function fad_facetwp_blocks_callback(
     // ACF passes every argument to a block callback, and this one reads only the block, so no default is used.
     // @pest-mutate-ignore: EmptyStringToNotEmpty
     $content = '', // string // Optional // The block inner HTML (empty).
+    // As for the content: ACF always passes the preview flag, and the callback does not read it.
     // @pest-mutate-ignore: FalseToTrue
     $is_preview = false, // bool // Optional // True during AJAX preview.
+    // As for the content: ACF always passes the post ID, and the callback does not read it.
     // @pest-mutate-ignore: DecrementInteger, IncrementInteger
     $post_id = 0 // (int|string) // Optional // The post ID this block is saved to.
 ): void {
