@@ -273,11 +273,14 @@ function doximity_csv_export(): false
                                 }
                                 $primary_appointment_floor_object = get_field_object('location_building_floor', $location); // Get floor object from input
                                 $primary_appointment_floor_value = uamswp_fad_arr($primary_appointment_floor_object)['value']; // Get the floor selection value
-                                // The label is used only below, under the same value test, so the label given to the single-story
-                                // value is never read; a loose and a strict test differ only for a value of 0 that is not a
-                                // string, which the test below then leaves out either way.
-                                // @pest-mutate-ignore: EmptyStringToNotEmpty, NotEqualToNotIdentical
-                                $primary_appointment_floor_label = $primary_appointment_floor_value != '0' ? uamswp_fad_str(uamswp_fad_arr(uamswp_fad_arr($primary_appointment_floor_object)['choices'])[uamswp_fad_str($primary_appointment_floor_value)] ?? '') : ''; // If the floor value is not 0, get the floor selection label
+                                // If the floor value is not 0, get the floor selection label.
+                                // A loose and a strict test differ for a value such as false, 0 or '00', and the test below
+                                // leaves that floor out either way.
+                                // @pest-mutate-ignore: NotEqualToNotIdentical
+                                $primary_appointment_floor_label = $primary_appointment_floor_value != '0'
+                                    ? uamswp_fad_str(uamswp_fad_arr(uamswp_fad_arr($primary_appointment_floor_object)['choices'])[uamswp_fad_str($primary_appointment_floor_value)] ?? '')
+                                    // The label given to the single-story value is never read: the test below leaves that floor out.
+                                    : ''; // @pest-mutate-ignore: EmptyStringToNotEmpty
                                 $primary_appointment_suite = get_field('location_suite', $location); // Get the suite input
                                 $primary_appointment_address_2_arr = []; // Create empty array for constructing Address 2 value
                                 // The slug is a string, so a loose and a strict comparison agree.
@@ -382,7 +385,7 @@ function doximity_csv_export(): false
                 return "'".$cell;
             }
 
-            // Every cell is a string, a number or null, and fputcsv() writes each the same as its string form.
+            // Every cell is a string, a number, false or null, and fputcsv() writes each the same as its string form.
             // @pest-mutate-ignore: BooleanOrToBooleanAnd, IdenticalToNotIdentical, TernaryNegated
             return is_scalar($cell) || $cell === null ? $cell : uamswp_fad_str($cell);
         }, $data_row);
@@ -793,9 +796,9 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
 
                 // Create row for each valid location
                 foreach (uamswp_fad_arr($locations) as $location) {
-                    // get_post_status() returns a string or false, so a loose and a strict comparison agree.
-                    // @pest-mutate-ignore: EqualToIdentical
-                    if (get_post_status(uamswp_fad_int($location)) == 'publish') {
+                    // get_post_status() returns a string or false, so a loose and a strict comparison agree. The marker
+                    // sits on the line itself so that it covers this comparison and not the ones in the block.
+                    if (get_post_status(uamswp_fad_int($location)) == 'publish') { // @pest-mutate-ignore: EqualToIdentical
 
                         // Store code
                         $location_slug = get_post_field('post_name', uamswp_fad_int($location));
@@ -1905,7 +1908,7 @@ function mychart_csv_export(): false
             // Most placements are background images inside a circular container no larger than 122x122.
             // The details window for a provider displays the full image, restricted only by the max-width of the window and Epic's 1000px maximum on image size.
             // Defining hot spots within the media library, placing them between the provider's front teeth, yields the best result.
-            // get_post_thumbnail_id() returns an id, or false for a post with none, which finds no image either way.
+            // get_post_thumbnail_id() returns an id, 0 for a post with no thumbnail or false for no post; 0 and false find no image.
             // @pest-mutate-ignore: RemoveIntegerCast
             $provider_mychart_photo = wp_get_attachment_image_url((int) get_post_thumbnail_id($post_id), 'thumbnail'); // 150x150
 

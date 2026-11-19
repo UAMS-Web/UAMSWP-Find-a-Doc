@@ -45,6 +45,7 @@ function mychart_run(array $providers): array
         $fields['physician_resident|'.$id] = $provider['resident'] ?? false;
         $thumbs[$id] = $provider['thumb'] ?? 0;
     }
+
     uamswp_test_gmb_page();
     gmb_world(['posts' => $posts, 'fields' => $fields, 'thumbs' => $thumbs]);
     when('get_the_permalink')->alias(static fn (int $id): string => 'https://example.test/provider/'.$posts[$id]['slug'].'/');
@@ -67,6 +68,7 @@ test('an export by someone who cannot manage options, or outside WP-Admin, build
     when('current_user_can')->alias(static fn (string $capability): bool => $capability === 'manage_options' && $can);
     when('is_admin')->justReturn($admin);
     when('wp_verify_nonce')->justReturn(false);
+
     WP_Query::$queries = [];
 
     ob_start();

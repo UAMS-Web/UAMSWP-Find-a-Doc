@@ -56,6 +56,7 @@ function doximity_run(array $providers, array $fields, array $objects = [], arra
         if ($name === null) {
             return null;
         }
+
         $term = (object) ['name' => $name, 'slug' => strtolower(str_replace(' ', '-', $name))];
         $term_ids[spl_object_id($term)] = $taxonomy.':'.$id;
 
@@ -79,9 +80,11 @@ function doximity_run(array $providers, array $fields, array $objects = [], arra
         if ($asked[$at] > 20) {
             throw new RuntimeException('have_rows() was asked twenty times without the_row() moving to a row.');
         }
+
         if (isset($contacts[$post][($cursor[$post] ?? -1) + 1])) {
             return true;
         }
+
         unset($cursor[$post]);
 
         return false;
@@ -151,6 +154,7 @@ test('an export by someone who cannot manage options, or outside WP-Admin, build
     when('current_user_can')->alias(static fn (string $capability): bool => $capability === 'manage_options' && $can);
     when('is_admin')->justReturn($admin);
     when('wp_verify_nonce')->justReturn(false);
+
     WP_Query::$queries = [];
 
     ob_start();
@@ -219,6 +223,7 @@ test('the credential is MD, DO or NP from the first degree that is one of them',
         $terms['degree:'.$id] = $name;
         $ids[] = $id;
     }
+
     $fields['physician_degree|'.$provider] = $ids;
 
     expect(doximity_run([$provider], $fields, $objects, $terms)[1][3])->toBe($credential);
@@ -332,6 +337,7 @@ test('the second address line joins the building, the floor and the suite', func
     foreach ($location_fields as $name => $value) {
         $fields[$name.'|'.$location] = $value;
     }
+
     $objects['location_building_floor|'.$location] = $floor;
 
     expect(doximity_run([$provider], $fields, $objects, $terms + $extra_terms)[1][7])->toBe($address_2);

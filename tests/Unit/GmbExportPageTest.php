@@ -25,7 +25,7 @@ test('the export page is added under the Find-a-Doc settings for those who can m
     expect($added)->toBe([['fad-settings', 'UAMSWP CSV Export', 'CSV Export', 'manage_options', 'uamswp-gmb-export', 'uamswp_fad_gmb_export_page', 90]]);
 });
 
-test('the export page prints its title and a link to each export with that export\'s nonce', function (): void {
+test("the export page prints its title and a link to each export with that export's nonce", function (): void {
     uamswp_test_gmb_page();
     $title = $GLOBALS['title'] ?? null;
     $GLOBALS['title'] = 'UAMSWP CSV Export';
