@@ -299,3 +299,12 @@ test('the attributes are written with a mask naming each one, in order', functio
     expect(array_slice($calls[1], 0, 2))->toBe(['PATCH', GBP_INFO.'/locations/5/attributes?'.http_build_query(['attributeMask' => 'attributes/a,attributes/b'])])
         ->and($calls[1][3])->toBe('{"name":"locations\/5\/attributes","attributes":[{"name":"attributes\/a","values":[true]},{"name":"attributes\/b","values":[false]}]}');
 });
+
+test('writing no attributes sends an empty list under an empty mask', function (): void {
+    [$client, $calls] = gbp_requests_client([gbp_requests_token(), gbp_requests_json([])]);
+
+    $client->update_attributes('locations/5', []);
+
+    expect($calls[1][1])->toBe(GBP_INFO.'/locations/5/attributes?attributeMask=')
+        ->and($calls[1][3])->toBe('{"name":"locations\\/5\\/attributes","attributes":[]}');
+});

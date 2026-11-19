@@ -46,8 +46,13 @@ final class UAMSWP_FAD_GBP_Client
     /** @var callable(string, string, array<string, string>, ?string): array{0: int, 1: string} */
     private $transport;
 
+    // The first exchange is made because the expiry below is in the past, whatever the empty token is
+    // compared with; a property default also runs before any test, so it has no coverage to select by.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     private string $token = '';
 
+    // Any moment in the past makes the first call exchange a token: 0, 1 and -1 all do.
+    // @pest-mutate-ignore: DecrementInteger,IncrementInteger
     private int $token_expires = 0;
 
     /**
@@ -64,6 +69,9 @@ final class UAMSWP_FAD_GBP_Client
      */
     public function access_token(): string
     {
+        // The token is never empty once the expiry is in the future, so the first test decides nothing the
+        // second does not.
+        // @pest-mutate-ignore: EmptyStringToNotEmpty
         if ($this->token !== '' && time() < $this->token_expires - 60) {
             return $this->token;
         }
@@ -114,6 +122,8 @@ final class UAMSWP_FAD_GBP_Client
 
         [$status, $raw] = ($this->transport)($method, $url, $headers, $body === null ? null : (string) json_encode($body));
 
+        // An empty body decodes to null, which the next line reads as an empty array too.
+        // @pest-mutate-ignore: EmptyStringToNotEmpty
         $data = $raw === '' ? [] : json_decode($raw, true);
         /** @var array<string, mixed> $data */
         $data = is_array($data) ? $data : [];
@@ -151,7 +161,11 @@ final class UAMSWP_FAD_GBP_Client
             foreach ((array) ($data['accounts'] ?? []) as $account) {
                 $account = uamswp_fad_arr($account);
 
-                if (($account['type'] ?? '') === 'LOCATION_GROUP') {
+                // An account with no type is not a location group whatever it reads as.
+                // @pest-mutate-ignore: EmptyStringToNotEmpty
+                $type = $account['type'] ?? '';
+
+                if ($type === 'LOCATION_GROUP') {
                     $groups[uamswp_fad_str($account['name'])] = uamswp_fad_str(($account['accountName'] ?? ''));
                 }
             }
@@ -294,7 +308,11 @@ final class UAMSWP_FAD_GBP_Client
             $attribute = uamswp_fad_arr($attribute);
             $value = uamswp_fad_arr($attribute['values'] ?? null)[0] ?? null;
 
-            if (($attribute['valueType'] ?? '') === 'BOOL' && is_bool($value)) {
+            // An attribute with no value type is not a true/false one whatever it reads as.
+            // @pest-mutate-ignore: EmptyStringToNotEmpty
+            $type = $attribute['valueType'] ?? '';
+
+            if ($type === 'BOOL' && is_bool($value)) {
                 $attributes[uamswp_fad_str(preg_replace('#^attributes/#', '', uamswp_fad_str($attribute['name'])))] = $value;
             }
         }

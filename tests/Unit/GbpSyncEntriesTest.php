@@ -235,11 +235,14 @@ test('a create in a live silo sends the fields under the store code and logs the
         ->and($sync->created())->toBe([['account' => 'accounts/up', 'listing' => ['name' => 'locations/new', 'storeCode' => 'P-1'] + GBP_ENTRIES_FIELDS]]);
 });
 
-test('a create that lacks a required field names each missing one', function (): void {
+test('a create that lacks a required field names each missing one', function (array $fields, string $missing): void {
     [$sync] = gbp_entries_sync(new GbpSyncEntriesClient);
 
-    expect(gbp_entries_one($sync, gbp_entries_item(['fields' => ['storefrontAddress' => []]])))->toBe(['reason' => 'Cannot create, missing title, categories'] + gbp_entries_base());
-});
+    expect(gbp_entries_one($sync, gbp_entries_item(['fields' => $fields])))->toBe(['reason' => 'Cannot create, missing '.$missing] + gbp_entries_base());
+})->with([
+    'the title and categories' => [['storefrontAddress' => []], 'title, categories'],
+    'the address' => [['title' => 'A', 'categories' => []], 'storefrontAddress'],
+]);
 
 test('a create in a dry run names what it would send and sends nothing', function (): void {
     $client = new GbpSyncEntriesClient;
@@ -329,13 +332,17 @@ test('a create refused for the day pauses every later create until the Pacific m
         ->and(array_column($client->calls, 0))->toBe(['create']);
 });
 
-test('a pause still in force holds a create back, and one that ends now does not', function (int $paused, string $action): void {
-    [$sync] = gbp_entries_sync(new GbpSyncEntriesClient, ['creates_paused_until' => (string) $paused, 'now' => '1700000000']);
+test('a pause still in force holds a create back, and one that ends now does not', function (int $paused, bool $held): void {
+    $client = new GbpSyncEntriesClient;
+    [$sync] = gbp_entries_sync($client, ['creates_paused_until' => (string) $paused, 'now' => '1700000000']);
 
-    expect(gbp_entries_one($sync, gbp_entries_item())['action'])->toBe($action);
+    $entry = gbp_entries_one($sync, gbp_entries_item());
+
+    expect(array_key_exists('defer_until', $entry))->toBe($held)
+        ->and(count($client->calls))->toBe($held ? 0 : 1);
 })->with([
-    'a second from now' => [1700000001, 'create'],
-    'now' => [1700000000, 'create'],
+    'a second from now' => [1700000001, true],
+    'now' => [1700000000, false],
 ]);
 
 test('a pause in force holds the create back until it ends', function (): void {
@@ -594,4 +601,14 @@ test("the configuration's numbers are read as integers whatever type they come i
 
     expect($sync->creates_paused_until())->toBe(5)
         ->and($sync->creates_made())->toBe(0);
+});
+
+test('photos sent recorded as one address, not a list, still keep that photo from being sent again', function (): void {
+    $client = new GbpSyncEntriesClient;
+    [$sync] = gbp_entries_sync($client, [], [gbp_entries_listing()]);
+
+    $entry = gbp_entries_one($sync, gbp_entries_item(['photos' => [['category' => 'LOGO', 'url' => 'https://x/old.jpg']], 'photos_sent' => 'https://x/old.jpg']));
+
+    expect($entry['action'])->toBe('noop')
+        ->and($client->calls)->toBe([]);
 });

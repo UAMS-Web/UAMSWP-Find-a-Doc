@@ -280,3 +280,15 @@ test('a save with no modes posted puts every silo in dry-run, and both handlers 
 test('the activity filter accepts each known action', function (string $action): void {
     expect(uamswp_fad_gbp_log_filters(['log_action' => $action])['action'])->toBe($action);
 })->with(['review', 'error', 'create', 'update', 'skip']);
+
+test('an entry with no fields at all prints an empty row', function (): void {
+    gbp_screen_world(['uamswp_fad_gbp_log' => [[]]]);
+
+    expect(gbp_screen_squeeze(gbp_screen()))->toContain('<tbody><tr><td>Y-m-d H:i@0</td><td><code></code></td><td></td><td></td><td></td><td></td></tr></tbody>');
+});
+
+test('a detail list that holds a list prints it as empty rather than as Array', function (): void {
+    gbp_screen_world(['uamswp_fad_gbp_log' => [gbp_screen_entry(['fields' => ['title', ['nested']], 'attributes' => [['nested']], 'unresolved_categories' => [['nested'], 'Podiatry']])]]);
+
+    expect(gbp_screen_squeeze(gbp_screen()))->toContain('<br><small>title, </small><br><small>Attributes: </small><br><small>No Google category for: , Podiatry</small>');
+});
