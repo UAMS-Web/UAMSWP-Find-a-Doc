@@ -365,6 +365,7 @@ function uamswp_resource_expertise(): void
 					</div>
 				</div>
 			</div>
+		</div>
         </section>
 	<?php
     } // endif

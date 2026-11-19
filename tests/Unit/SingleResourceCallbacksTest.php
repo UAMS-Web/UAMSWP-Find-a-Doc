@@ -549,7 +549,6 @@ test('the locations section prints its heading around the location cards, and in
         ->and(fn () => resource_callback_section('uamswp_resource_locations', ['show_locations_section' => true, 'location_query' => resource_callback_query([31])]))->toThrow(RuntimeException::class, 'location card 31');
 });
 
-// The section opens five divs and closes four, as it does today: #1471.
 test('the areas of expertise section prints its heading around the expertise cards, and includes a card for each area', function (): void {
     $resets = resource_callback_cards();
 
@@ -565,6 +564,7 @@ test('the areas of expertise section prints its heading around the expertise car
                         </div>
                     </div>
                 </div>
+            </div>
         </section>'))
         ->and($resets->count())->toBe(1)
         ->and(fn () => resource_callback_section('uamswp_resource_expertise', ['show_aoe_section' => true, 'expertise_query' => resource_callback_query([61])]))->toThrow(RuntimeException::class, 'expertise card 61');
