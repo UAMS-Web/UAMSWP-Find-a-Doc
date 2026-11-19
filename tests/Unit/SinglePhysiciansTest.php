@@ -733,8 +733,10 @@ test('the first published area of expertise names the profile', function (): voi
     expect($vars['expertise_primary_name'])->toBe('Cardiology');
 });
 
-test('the page header is printed once', function (): void {
-    expect(single_physician()['single_physician_headers'] ?? 0)->toBe(1);
+test('the page header and footer are each printed once', function (): void {
+    $vars = single_physician();
+
+    expect([$vars['single_physician_headers'] ?? 0, $vars['single_physician_footers'] ?? 0])->toBe([1, 1]);
 });
 
 test('a provider who is not a resident has no residency values', function (): void {

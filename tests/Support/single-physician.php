@@ -104,7 +104,9 @@ function single_physician(array $fields = [], array $options = []): array
     when('get_header')->alias(static function (): void {
         $GLOBALS['single_physician_headers'] = ($GLOBALS['single_physician_headers'] ?? 0) + 1;
     });
-    when('get_footer')->justReturn();
+    when('get_footer')->alias(static function (): void {
+        $GLOBALS['single_physician_footers'] = ($GLOBALS['single_physician_footers'] ?? 0) + 1;
+    });
     uamswp_test_main_loop([5]);
     when('has_post_thumbnail')->justReturn($options['thumbnail'] ?? false);
     when('get_post_thumbnail_id')->justReturn(77);
