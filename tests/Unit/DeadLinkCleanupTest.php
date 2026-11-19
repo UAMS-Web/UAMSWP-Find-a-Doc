@@ -455,6 +455,8 @@ test('a lock held for five minutes or more is taken over', function (int $age): 
         ->and($db->calls[0])->toBe(['delete_option', 'uamswp_fad_dead_links_lock']);
 })->with(['five minutes' => [300], 'an hour' => [3600]]);
 
+// WordPress' add_option() can succeed over an existing row within one request, so this is not yet a lock two
+// requests cannot both take: #1457.
 test('the lock is not taken when adding its option fails', function (): void {
     dead_links_db();
     when('add_option')->justReturn(false);
