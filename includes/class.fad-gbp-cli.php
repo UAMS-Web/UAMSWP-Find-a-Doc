@@ -362,8 +362,12 @@ function uamswp_fad_gbp_cli_sync(array $args, array $assoc): void
 
     $silo = $assoc['silo'] ?? null;
 
-    if ($silo !== null && ! is_string($silo)) {
-        WP_CLI::error('Pass a silo name with --silo=<silo>.');
+    if (! is_string($silo)) {
+        if ($silo !== null) {
+            WP_CLI::error('Pass a silo name with --silo=<silo>.');
+        }
+
+        $silo = null;
     }
 
     $ids = $all ? uamswp_fad_gbp_all_post_ids() : [(int) $post];
