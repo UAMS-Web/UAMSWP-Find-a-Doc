@@ -45,6 +45,8 @@ function uamswp_fad_gbp_manual_sync(array $post_ids, ?string $silo, bool $dry_ru
         $covered = array_merge($covered, uamswp_fad_gbp_covered_post_ids($post_id));
     }
 
+    // Only whether the list is empty and the ids it holds are read, never their keys.
+    // @pest-mutate-ignore: UnwrapArrayValues
     $covered = array_values(array_unique($covered));
 
     if ($covered === []) {
@@ -92,6 +94,8 @@ function uamswp_fad_gbp_manual_sync(array $post_ids, ?string $silo, bool $dry_ru
         $items = uamswp_fad_gbp_attach_stored_ids($items);
 
         if ($silo !== null) {
+            // The items are only walked in order, so the keys the filter leaves are never read.
+            // @pest-mutate-ignore: UnwrapArrayValues
             $items = array_values(array_filter($items, fn (array $item): bool => $item['silo'] === $silo));
         }
 
@@ -141,6 +145,8 @@ function uamswp_fad_gbp_manual_sync(array $post_ids, ?string $silo, bool $dry_ru
         }
 
         if ($held) {
+            // A held create always sets the resume time, so the default is never used.
+            // @pest-mutate-ignore: DecrementInteger, IncrementInteger
             $out('Creates were held back and resume '.UAMSWP_FAD_GBP_Logic::reset_label($resume ?? 0).'. Run again after that.');
         }
 
@@ -276,7 +282,13 @@ function uamswp_fad_gbp_cid_report(array $post_ids, callable $out, ?UAMSWP_FAD_G
     $yes = [];
 
     foreach ($post_ids as $post_id) {
-        $row = ['id' => $post_id, 'label' => get_the_title($post_id).' (post '.$post_id.')', 'cids' => uamswp_fad_gbp_post_cids($post_id)];
+        // The report reads each row's label and CIDs; the id is carried for its shape and never read.
+        $row = [
+            // @pest-mutate-ignore: RemoveArrayItem
+            'id' => $post_id,
+            'label' => get_the_title($post_id).' (post '.$post_id.')',
+            'cids' => uamswp_fad_gbp_post_cids($post_id),
+        ];
         $posts[] = $row;
 
         if (get_post_type($post_id) === 'provider' && function_exists('get_field') && UAMSWP_FAD_GBP_Logic::is_yes(get_field('physician_schema_gmb_query', $post_id))) {
@@ -340,15 +352,25 @@ function uamswp_fad_gbp_cli_sync(array $args, array $assoc): void
         }, ! empty($assoc['dry-run'])));
     }
 
-    $post = isset($assoc['post']) ? (string) $assoc['post'] : '';
+    // WP-CLI passes an option given with no value as true, and a --no- option as false: neither names a post.
+    $post = $assoc['post'] ?? '';
     $all = ! empty($assoc['all']);
 
-    if (($post === '') === ! $all || ($post !== '' && ! ctype_digit($post))) {
+    if (! is_string($post) || ($post === '') === ! $all || ($post !== '' && ! ctype_digit($post))) {
         WP_CLI::error('Pass exactly one of --post=<id> or --all.');
     }
 
+    $silo = $assoc['silo'] ?? null;
+
+    if (! is_string($silo)) {
+        if ($silo !== null) {
+            WP_CLI::error('Pass a silo name with --silo=<silo>.');
+        }
+
+        $silo = null;
+    }
+
     $ids = $all ? uamswp_fad_gbp_all_post_ids() : [(int) $post];
-    $silo = isset($assoc['silo']) ? (string) $assoc['silo'] : null;
 
     $status = uamswp_fad_gbp_manual_sync($ids, $silo, ! empty($assoc['dry-run']), function (string $line): void {
         WP_CLI::line($line);
@@ -363,8 +385,14 @@ function uamswp_fad_gbp_cli_sync(array $args, array $assoc): void
 function uamswp_fad_gbp_register_cli(): void
 {
     if (defined('WP_CLI') && WP_CLI && class_exists('WP_CLI')) {
+        // Only WP-CLI defines its constant, and a definition lasts the whole process: a test that defined it would
+        // decide the outcome of the test that checks the commands are not registered without it, by running order.
+        // Pest refuses to run a test in a process of its own, so these calls are left unreached.
+        // @pest-mutate-ignore: RemoveMethodCall
         WP_CLI::add_command('uamswp gbp sync', 'uamswp_fad_gbp_cli_sync');
+        // @pest-mutate-ignore: RemoveMethodCall
         WP_CLI::add_command('uamswp gbp backfill-ids', 'uamswp_fad_gbp_cli_backfill');
+        // @pest-mutate-ignore: RemoveMethodCall
         WP_CLI::add_command('uamswp gbp cid-report', 'uamswp_fad_gbp_cli_cid_report');
     }
 }
