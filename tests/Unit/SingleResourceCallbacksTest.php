@@ -196,7 +196,7 @@ test('each image type gets the image icon after a file of another type', functio
     expect($icons[1])->toBe(['fa-file-pdf', 'fa-file-image', 'fa-file-pdf', 'fa-file-image', 'fa-file-pdf', 'fa-file-image', 'fa-file-pdf', 'fa-file-image', 'fa-file-pdf', 'fa-file-image']);
 });
 
-test('each newer Office extension gets its program\'s icon after a file of another type', function (): void {
+test("each newer Office extension gets its program's icon after a file of another type", function (): void {
     $files = ['a.pdf', 'b.docx', 'c.pdf', 'd.pptx', 'e.pdf', 'f.xlsx'];
     resource_callback_rows('clinical_resource_document', array_map(static fn (string $file): array => ['document_title' => $file, 'document_file' => ['url' => 'https://example.test/'.$file]], $files));
 
