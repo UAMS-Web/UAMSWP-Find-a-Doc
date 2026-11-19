@@ -68,8 +68,10 @@ function single_physician(array $fields = [], array $options = []): array
     when('have_rows')->alias(static function (string $name) use ($row, $rows): bool {
         $row->name = $name;
         $row->cursor[$name] ??= -1;
+        $row->checks[$name] = ($row->checks[$name] ?? 0) + 1;
 
-        if (count($rows[$name] ?? []) > $row->cursor[$name] + 1) {
+        // A loop whose the_row() call is gone would never advance; cap the checks so a mutant of it ends and fails a test.
+        if (count($rows[$name] ?? []) > $row->cursor[$name] + 1 && $row->checks[$name] <= 100) {
             return true;
         }
 

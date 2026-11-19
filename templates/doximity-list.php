@@ -130,8 +130,6 @@ function display_provider_image_doximity_list(): void
                                     $degree_valid = 'DO';
                                 } elseif (in_array($degree_valid, $degree_np)) {
                                     $degree_valid = 'NP';
-                                } elseif (! in_array($degree_valid, $degree_pa)) {
-                                    $degree_valid = '';
                                 }
                                 $d++;
                             }
@@ -255,6 +253,8 @@ function display_provider_image_doximity_list(): void
                                     if ($primary_appointment_building) {
                                         $building = get_term(uamswp_fad_int($primary_appointment_building), 'building');
                                         $building_found = is_object($building) && ! is_wp_error($building);
+                                        // The slug is only compared with _none, which an empty slug is not either.
+                                        // @pest-mutate-ignore: EmptyStringToNotEmpty
                                         $building_slug = $building_found ? uamswp_fad_str($building->slug) : '';
                                         $building_name = $building_found ? uamswp_fad_str($building->name) : '';
                                     }
