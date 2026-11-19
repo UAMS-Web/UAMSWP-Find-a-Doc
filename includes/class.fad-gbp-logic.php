@@ -290,7 +290,7 @@ class UAMSWP_FAD_GBP_Logic
     public static function update_mask(array $changed): string
     {
 
-        return implode(',', array_values(array_intersect(self::OWNED_FIELDS, array_keys($changed))));
+        return implode(',', array_intersect(self::OWNED_FIELDS, array_keys($changed)));
 
     }
 
@@ -313,7 +313,7 @@ class UAMSWP_FAD_GBP_Logic
         switch ($field) {
 
             case 'phoneNumbers':
-                return ['primaryPhone' => preg_replace('/\D+/', '', uamswp_fad_str(($fields['primaryPhone'] ?? '')))];
+                return ['primaryPhone' => preg_replace('/\D+/', '', uamswp_fad_str(($fields['primaryPhone'] ?? null)))];
 
             case 'latlng':
                 return [
@@ -417,6 +417,8 @@ class UAMSWP_FAD_GBP_Logic
         foreach ($photos as $photo) {
             if (! isset($seen[$photo['url']])) {
                 $pending[] = $photo;
+                // Only the key is read, with isset(), and isset() is true for a false value too.
+                // @pest-mutate-ignore: TrueToFalse
                 $seen[$photo['url']] = true;
             }
         }
@@ -457,7 +459,7 @@ class UAMSWP_FAD_GBP_Logic
      */
     public static function is_closed(array $listing): bool
     {
-        return in_array(uamswp_fad_arr($listing['openInfo'] ?? null)['status'] ?? '', ['CLOSED_PERMANENTLY', 'CLOSED_TEMPORARILY'], true);
+        return in_array(uamswp_fad_arr($listing['openInfo'] ?? null)['status'] ?? null, ['CLOSED_PERMANENTLY', 'CLOSED_TEMPORARILY'], true);
     }
 
     /**
@@ -476,12 +478,13 @@ class UAMSWP_FAD_GBP_Logic
 
         foreach ($candidates as $candidate) {
             $start = strtotime($candidate['since'].' 00:00:00 UTC');
-            $elapsed = $start === false || $end === false ? 0 : max(0, intdiv($end - $start, 86400));
-            $valid = $start !== false && $end !== false;
+            // Both are UTC midnights, so their day numbers differ by the whole days between them. A date that does not
+            // parse counts no days, so it is never due.
+            $elapsed = $start === false || $end === false ? 0 : max(0, intdiv($end, 86400) - intdiv($start, 86400));
 
             $report[] = $candidate + [
                 'days_left' => max(0, self::ORPHAN_GRACE_DAYS - $elapsed),
-                'due' => $valid && $elapsed >= self::ORPHAN_GRACE_DAYS,
+                'due' => $elapsed >= self::ORPHAN_GRACE_DAYS,
             ];
         }
 
@@ -498,7 +501,7 @@ class UAMSWP_FAD_GBP_Logic
      */
     public static function remember_listing(array $map, int $location_id, string $name): array
     {
-        $kept = ($map[$location_id]['id'] ?? '') === $name ? (array) ($map[$location_id]['photos'] ?? []) : [];
+        $kept = ($map[$location_id]['id'] ?? null) === $name ? (array) ($map[$location_id]['photos'] ?? []) : [];
         $map[$location_id] = ['id' => $name, 'orphaned_since' => null] + ($kept === [] ? [] : ['photos' => $kept]);
 
         return $map;
@@ -550,7 +553,7 @@ class UAMSWP_FAD_GBP_Logic
 
         // A number field can come back as a float, which would print as 1.2345E+19.
         if (is_float($value)) {
-            $value = number_format($value, 0, '', '');
+            $value = number_format($value, 0, '.', '');
         }
 
         preg_match_all('/\d{10,}/', (string) $value, $matches);
@@ -587,13 +590,15 @@ class UAMSWP_FAD_GBP_Logic
         foreach ($listings as $entry) {
             $listing = $entry['listing'];
             $name = uamswp_fad_str(($listing['name'] ?? ''));
+            // Only the key is read, with isset(), and isset() is true for a false value too.
+            // @pest-mutate-ignore: TrueToFalse
             $by_name[$name] = true;
 
             if (($listing['storeCode'] ?? '') !== '') {
                 $by_code[uamswp_fad_str($listing['storeCode'])][] = $name;
             }
 
-            $cid = self::cid_from_maps_uri(uamswp_fad_str(uamswp_fad_arr($listing['metadata'] ?? null)['mapsUri'] ?? ''));
+            $cid = self::cid_from_maps_uri(uamswp_fad_str(uamswp_fad_arr($listing['metadata'] ?? null)['mapsUri'] ?? null));
 
             if ($cid !== null) {
                 $by_cid[$cid][] = $name;
@@ -603,7 +608,7 @@ class UAMSWP_FAD_GBP_Logic
         $per_post = [];
 
         foreach ($items as $item) {
-            $per_post[uamswp_fad_int(($item['post_id'] ?? 0))] = ($per_post[uamswp_fad_int(($item['post_id'] ?? 0))] ?? 0) + 1;
+            $per_post[uamswp_fad_int(($item['post_id'] ?? null))] = ($per_post[uamswp_fad_int(($item['post_id'] ?? null))] ?? 0) + 1;
         }
 
         $plan = ['already' => [], 'by_store_code' => [], 'by_cid' => [], 'unmatched' => []];
@@ -611,10 +616,12 @@ class UAMSWP_FAD_GBP_Logic
 
         // Names already stored are taken, so no route hands the same listing to a second post.
         foreach ($items as $position => $item) {
-            $stored = uamswp_fad_str(($item['stored_name'] ?? ''));
+            $stored = uamswp_fad_str(($item['stored_name'] ?? null));
 
             if ($stored !== '' && isset($by_name[$stored])) {
                 $plan['already'][] = $item;
+                // Only the key is read, with isset(), and isset() is true for a false value too.
+                // @pest-mutate-ignore: TrueToFalse
                 $claimed[$stored] = true;
                 unset($items[$position]);
             }
@@ -622,7 +629,7 @@ class UAMSWP_FAD_GBP_Logic
 
         // An item with no resolved post or location cannot be stored under the right key.
         foreach ($items as $position => $item) {
-            if (uamswp_fad_int(($item['post_id'] ?? 0)) === 0 || ($item['kind'] === 'provider' && uamswp_fad_int(($item['location_id'] ?? 0)) === 0)) {
+            if (uamswp_fad_int(($item['post_id'] ?? null)) === 0 || ($item['kind'] === 'provider' && uamswp_fad_int(($item['location_id'] ?? null)) === 0)) {
                 $plan['unmatched'][] = $item;
                 unset($items[$position]);
             }
@@ -634,6 +641,8 @@ class UAMSWP_FAD_GBP_Logic
 
             if (count($codes) === 1 && ! isset($claimed[$codes[0]])) {
                 $plan['by_store_code'][] = ['item' => $item, 'name' => $codes[0]];
+                // Only the key is read, with isset(), and isset() is true for a false value too.
+                // @pest-mutate-ignore: TrueToFalse
                 $claimed[$codes[0]] = true;
                 unset($items[$position]);
             }
@@ -641,18 +650,23 @@ class UAMSWP_FAD_GBP_Logic
 
         foreach ($items as $item) {
             $codes = $by_code[uamswp_fad_str($item['store_code'])] ?? [];
-            $post_id = uamswp_fad_int(($item['post_id'] ?? 0));
-            $eligible = $item['kind'] === 'location' || ($per_post[$post_id] ?? 0) === 1;
+            $post_id = uamswp_fad_int(($item['post_id'] ?? null));
+            // Every item's post was counted above, so the count is always there.
+            $eligible = $item['kind'] === 'location' || ($per_post[$post_id] ?? null) === 1;
             $names = [];
 
             foreach ($eligible ? ($cids_by_post[$post_id] ?? []) : [] as $cid) {
                 $names = array_merge($names, $by_cid[$cid] ?? []);
             }
 
+            // Only one name is used, and array_unique() keeps the first, which is at key 0.
+            // @pest-mutate-ignore: UnwrapArrayValues
             $names = array_values(array_unique($names));
 
             if (count($names) === 1 && $codes === [] && ! isset($claimed[$names[0]])) {
                 $plan['by_cid'][] = ['item' => $item, 'name' => $names[0]];
+                // Only the key is read, with isset(), and isset() is true for a false value too.
+                // @pest-mutate-ignore: TrueToFalse
                 $claimed[$names[0]] = true;
 
                 continue;
@@ -678,15 +692,19 @@ class UAMSWP_FAD_GBP_Logic
         $known = [];
 
         foreach ($listings as $entry) {
-            $cid = self::cid_from_maps_uri(uamswp_fad_str(uamswp_fad_arr(uamswp_fad_arr($entry['listing'])['metadata'] ?? null)['mapsUri'] ?? ''));
+            $cid = self::cid_from_maps_uri(uamswp_fad_str(uamswp_fad_arr(uamswp_fad_arr($entry['listing'])['metadata'] ?? null)['mapsUri'] ?? null));
 
             if ($cid !== null) {
+                // Only the keys are read, by array_intersect_key().
+                // @pest-mutate-ignore: TrueToFalse
                 $listing_cids[$cid] = true;
             }
         }
 
         foreach ($posts as $post) {
             foreach ($post['cids'] as $cid) {
+                // Only the key is read, with isset(), and isset() is true for a false value too.
+                // @pest-mutate-ignore: TrueToFalse
                 $known[$cid] = true;
             }
         }
@@ -702,7 +720,7 @@ class UAMSWP_FAD_GBP_Logic
         $without_cid = [];
 
         foreach ($listings as $entry) {
-            $cid = self::cid_from_maps_uri(uamswp_fad_str(uamswp_fad_arr(uamswp_fad_arr($entry['listing'])['metadata'] ?? null)['mapsUri'] ?? ''));
+            $cid = self::cid_from_maps_uri(uamswp_fad_str(uamswp_fad_arr(uamswp_fad_arr($entry['listing'])['metadata'] ?? null)['mapsUri'] ?? null));
 
             if ($cid === null || ! isset($known[$cid])) {
                 $without_cid[] = uamswp_fad_str(($entry['listing']['storeCode'] ?? $entry['listing']['name'] ?? ''));
@@ -739,7 +757,7 @@ class UAMSWP_FAD_GBP_Logic
     public static function next_attention(array $attention, array $entry, int $cap): array
     {
         $key = self::attention_key($entry);
-        $action = uamswp_fad_str(($entry['action'] ?? ''));
+        $action = uamswp_fad_str(($entry['action'] ?? null));
 
         if (in_array($action, ['review', 'error'], true)) {
             // The union puts the new entry first and drops the older one for the same key.
@@ -818,6 +836,8 @@ class UAMSWP_FAD_GBP_Logic
         $clean[$day] = ($clean[$day] ?? 0) + max(0, $made);
         ksort($clean);
 
+        // The keys are dates, which array_slice() keeps whether or not it is told to.
+        // @pest-mutate-ignore: TrueToFalse
         return array_slice($clean, -max(1, $keep), null, true);
     }
 
@@ -832,7 +852,8 @@ class UAMSWP_FAD_GBP_Logic
     public static function last_days(array $history, int $now, int $days = 7): array
     {
         $zone = new DateTimeZone('America/Los_Angeles');
-        $today = (new DateTimeImmutable('@'.$now))->setTimezone($zone)->setTime(12, 0);
+        // Noon keeps a daylight saving change from moving the day when days are subtracted.
+        $today = (new DateTimeImmutable('@'.$now))->setTimezone($zone)->modify('noon');
         $out = [];
 
         for ($back = $days - 1; $back >= 0; $back--) {
@@ -856,7 +877,7 @@ class UAMSWP_FAD_GBP_Logic
      */
     public static function dashboard_status(array $effective_modes, bool $running, int $paused_until, int $backoff_until, int $now, bool $configured = true): array
     {
-        $in_use = array_values(array_diff(array_values($effective_modes), ['off']));
+        $in_use = array_diff($effective_modes, ['off']);
 
         if ($in_use === []) {
             return ['key' => 'off', 'label' => 'Off'];
@@ -890,7 +911,8 @@ class UAMSWP_FAD_GBP_Logic
      */
     public static function remaining_label(int $seconds): string
     {
-        $minutes = intdiv(max(0, $seconds), 60);
+        // A negative time divides to less than a minute too.
+        $minutes = intdiv($seconds, 60);
 
         if ($minutes < 1) {
             return 'under 1 min';
@@ -952,12 +974,12 @@ class UAMSWP_FAD_GBP_Logic
         $counts = ['create' => 0, 'update' => 0, 'review' => 0, 'error' => 0];
 
         foreach ($log as $entry) {
-            if (uamswp_fad_int(($entry['time'] ?? 0)) < $now - 86400) {
+            if (uamswp_fad_int(($entry['time'] ?? null)) < $now - 86400) {
                 continue;
             }
 
-            $action = uamswp_fad_str(($entry['action'] ?? ''));
-            $reason = uamswp_fad_str(($entry['reason'] ?? ''));
+            $action = uamswp_fad_str(($entry['action'] ?? null));
+            $reason = uamswp_fad_str(($entry['reason'] ?? null));
 
             if (($action === 'create' && $reason === 'Created') || ($action === 'update' && $reason === 'Updated') || $action === 'review' || $action === 'error') {
                 $counts[$action]++;
@@ -979,8 +1001,8 @@ class UAMSWP_FAD_GBP_Logic
     public static function is_settled(array $entries): bool
     {
         foreach ($entries as $entry) {
-            $action = $entry['action'] ?? '';
-            $reason = $entry['reason'] ?? '';
+            $action = $entry['action'] ?? null;
+            $reason = $entry['reason'] ?? null;
 
             $settled = in_array($action, ['noop', 'skip'], true)
                 || (in_array($action, ['create', 'update'], true) && in_array($reason, ['Created', 'Updated', 'Photos sent'], true));
@@ -1064,7 +1086,7 @@ class UAMSWP_FAD_GBP_Logic
         $attributes = [];
 
         foreach (self::ATTRIBUTE_COLUMNS as $column => $name) {
-            $cell = isset($row[$column]) ? strtolower(trim(uamswp_fad_str($row[$column]))) : '';
+            $cell = isset($row[$column]) ? strtolower(trim(uamswp_fad_str($row[$column]))) : null;
 
             if ($cell === 'yes') {
                 $attributes[$name] = true;
