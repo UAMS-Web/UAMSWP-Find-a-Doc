@@ -64,10 +64,7 @@ function uamswp_dead_links_sources(): array
 
             foreach ($fields as [$field, $shape]) {
 
-                // The key only keeps each pair once. Joined without the bar or in the other order it is still one key per
-                // pair, since a post type never ends in a field name.
-                // @pest-mutate-ignore: ConcatRemoveRight,ConcatSwitchSides
-                $sources['meta'][$post_type.'|'.$field] = [$post_type, $field, $shape];
+                $sources['meta']["{$post_type}|{$field}"] = [$post_type, $field, $shape];
 
             }
 
@@ -75,10 +72,7 @@ function uamswp_dead_links_sources(): array
 
         foreach ($links['tables'] as [$table, $field]) {
 
-            // The key only keeps each pair once. Joined without the bar or in the other order it is still one key per
-            // pair, since a table name never ends in a field name.
-            // @pest-mutate-ignore: ConcatRemoveRight,ConcatSwitchSides
-            $sources['tables'][$table.'|'.$field] = [$table, $field];
+            $sources['tables']["{$table}|{$field}"] = [$table, $field];
 
         }
 
@@ -244,10 +238,7 @@ function uamswp_dead_links_scan(bool $store = true): array
     foreach ($reads as [$owner, $field, $shape, $ids]) {
 
         $dead = array_values(array_filter($ids, fn (int $id): bool => isset($missing[$id])));
-        // The key only joins the copies of one field of one record. A post ID is digits and a field name starts with a
-        // letter, so the key is still one per pair without the bar or in the other order.
-        // @pest-mutate-ignore: ConcatRemoveRight,ConcatSwitchSides
-        $key = $owner.'|'.$field;
+        $key = "{$owner}|{$field}";
 
         if ($dead === []) {
 
