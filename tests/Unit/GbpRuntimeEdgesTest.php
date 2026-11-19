@@ -77,7 +77,7 @@ final class GbpRuntimeEdgesTest extends UnitTestCase
      */
     private static function location(int $post_id, array $extra = []): array
     {
-        return ['store_code' => 'clinic', 'kind' => 'location', 'post_id' => $post_id, 'location_id' => $post_id] + $extra;
+        return $extra + ['store_code' => 'clinic', 'kind' => 'location', 'post_id' => $post_id, 'location_id' => $post_id];
     }
 
     /**
@@ -286,9 +286,15 @@ final class GbpRuntimeEdgesTest extends UnitTestCase
     public function test_an_item_with_no_stored_listing_does_not_look_for_another_holder(): void
     {
         $this->wireMeta([]);
-        expect('get_posts')->never();
+        $looked = false;
+        when('get_posts')->alias(function () use (&$looked): array {
+            $looked = true;
+
+            return [];
+        });
 
         $this->assertSame('', uamswp_fad_gbp_attach_stored_ids([self::location(55)])[0]['stored_name']);
+        $this->assertFalse($looked);
     }
 
     // Storing the listing names a run matched or created.
@@ -320,7 +326,7 @@ final class GbpRuntimeEdgesTest extends UnitTestCase
     #[DataProvider('entries_with_no_name_to_store')]
     public function test_an_entry_with_no_live_listing_name_stores_nothing(array $entry): void
     {
-        $this->wireMeta([]);
+        $this->wireMeta([55 => [UAMSWP_FAD_GBP_LISTING_META => 'locations/9']]);
 
         uamswp_fad_gbp_store_listing_ids([self::location(55)], [$entry]);
 
@@ -387,6 +393,18 @@ final class GbpRuntimeEdgesTest extends UnitTestCase
         uamswp_fad_gbp_mark_orphans(7, [self::provider()], strtotime('2026-11-19 12:00:00 UTC'));
 
         $this->assertSame([[7, UAMSWP_FAD_GBP_LISTING_MAP_META, [55 => ['id' => 'locations/1', 'orphaned_since' => null], 56 => ['id' => 'locations/2', 'orphaned_since' => '2026-11-19']]]], $this->updates);
+    }
+
+    public function test_an_item_with_no_location_keeps_no_map_entry_current(): void
+    {
+        when('get_post_type')->justReturn('provider');
+        $item = self::provider();
+        unset($item['location_id']);
+        $this->wireMeta([7 => [UAMSWP_FAD_GBP_LISTING_MAP_META => [1 => ['id' => 'locations/1', 'orphaned_since' => null], -1 => ['id' => 'locations/2', 'orphaned_since' => null]]]]);
+
+        uamswp_fad_gbp_mark_orphans(7, [$item], strtotime('2026-11-19 12:00:00 UTC'));
+
+        $this->assertSame([1 => '2026-11-19', -1 => '2026-11-19'], array_map(fn (array $entry): ?string => $entry['orphaned_since'], $this->updates[0][2]));
     }
 
     public function test_an_orphan_map_that_is_not_an_array_is_left_alone(): void

@@ -628,9 +628,10 @@ function uamswp_fad_gbp_write_listing_id(array $item, string $name): void
     /** @var array<int|string, array{id: string, orphaned_since: ?string, photos?: array<int, array{category: string, url: string}>}> $map */
     $map = is_array($map) ? $map : [];
 
-    $location_id = uamswp_fad_int(($item['location_id'] ?? 0));
+    // A provider item with no location returned above, so the location is always set here.
+    $location_id = uamswp_fad_int(($item['location_id'] ?? null));
 
-    if (($map[$location_id]['id'] ?? '') !== $name || ($map[$location_id]['orphaned_since'] ?? null) !== null) {
+    if (($map[$location_id]['id'] ?? null) !== $name || ($map[$location_id]['orphaned_since'] ?? null) !== null) {
         update_post_meta($post_id, UAMSWP_FAD_GBP_LISTING_MAP_META, UAMSWP_FAD_GBP_Logic::remember_listing($map, $location_id, $name));
     }
 }
