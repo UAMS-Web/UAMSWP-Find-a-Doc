@@ -133,7 +133,6 @@ final class RootFilesTest extends UnitTestCase
                 ['name' => 'Advanced Custom Fields: Mask Field', 'slug' => 'acf-maskfield', 'source' => $root.'/plugins/acf-maskfield.zip', 'required' => true],
                 ['name' => 'Advanced Custom Fields: Extended', 'slug' => 'acf-extended', 'required' => true],
                 ['name' => 'FacetWP', 'slug' => 'facetwp', 'source' => $root.'/plugins/facetwp.zip', 'required' => true],
-                ['name' => 'FacetWP - Alpha for UAMS', 'slug' => 'facetwp-alpha-uams', 'source' => $root.'/plugins/facetwp-alpha-uams.zip', 'required' => true],
                 ['name' => 'FacetWP - Cache', 'slug' => 'facetwp-cache', 'source' => $root.'/plugins/facetwp-cache.zip', 'required' => false],
                 ['name' => 'Ajax Search Pro', 'slug' => 'ajax-search-pro', 'source' => $root.'/plugins/ajax-search-pro.zip', 'required' => false],
             ], $plugins);

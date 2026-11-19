@@ -106,7 +106,6 @@ final class PluginLoadTest extends IntegrationTestCase
             'acf-maskfield' => ['Advanced Custom Fields: Mask Field', true, $root.'/plugins/acf-maskfield.zip'],
             'acf-extended' => ['Advanced Custom Fields: Extended', true, 'repo'],
             'facetwp' => ['FacetWP', true, $root.'/plugins/facetwp.zip'],
-            'facetwp-alpha-uams' => ['FacetWP - Alpha for UAMS', true, $root.'/plugins/facetwp-alpha-uams.zip'],
             'facetwp-cache' => ['FacetWP - Cache', false, $root.'/plugins/facetwp-cache.zip'],
             'ajax-search-pro' => ['Ajax Search Pro', false, $root.'/plugins/ajax-search-pro.zip'],
         ];

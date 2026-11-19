@@ -26,7 +26,6 @@
             <file>./required-plugins.php</file>
             <directory suffix=".php">./includes</directory>
             <directory suffix=".php">./templates</directory>
-            <directory suffix=".php">./plugins/facetwp-alpha-uams</directory>
         </include>
         <exclude>
             <directory>./includes/_unused</directory>

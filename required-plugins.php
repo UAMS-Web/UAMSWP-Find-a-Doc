@@ -115,13 +115,6 @@ function uamswp_register_required_plugins(): void
             'required' => true, // If false, the plugin is only 'recommended' instead of required.
         ],
 
-        [
-            'name' => 'FacetWP - Alpha for UAMS', // The plugin name.
-            'slug' => 'facetwp-alpha-uams', // The plugin slug (typically the folder name).
-            'source' => __DIR__.'/plugins/facetwp-alpha-uams.zip', // The plugin source.
-            'required' => true, // If false, the plugin is only 'recommended' instead of required.
-        ],
-
         // array(
         // 	'name'               => 'FacetWP - Load More', // The plugin name.
         // 	'slug'               => 'factwp-load-more', // The plugin slug (typically the folder name).

@@ -44,7 +44,7 @@
         "test:integration": "@php tests/Integration/vendor/bin/phpunit --configuration tests/Integration/phpunit.xml",
         "mutate": [
             "Composer\\Config::disableProcessTimeout",
-            "pest --mutate --path=includes,templates,plugins/facetwp-alpha-uams,uamswp-find-a-doc.php,required-plugins.php --ignore=includes/_unused,includes\\_unused tests/Wiring/ContentHooksTest.php tests/Unit"
+            "pest --mutate --path=includes,templates,uamswp-find-a-doc.php,required-plugins.php --ignore=includes/_unused,includes\\_unused tests/Wiring/ContentHooksTest.php tests/Unit"
         ],
         "stan": "phpstan analyse --no-progress --memory-limit=2G",
         "refactor": "rector",

@@ -7,7 +7,8 @@ The WordPress plugin behind Find-a-Doc: the provider, location, area of expertis
 ## Requirements
 
 - WordPress 6.8 or later and PHP 8.2 or later (the plugin header's `Requires at least` and `Requires PHP`).
-- Advanced Custom Fields PRO, Advanced Custom Fields: Mask Field, Advanced Custom Fields: Extended, FacetWP and FacetWP - Alpha for UAMS. The plugin lists them as required and prompts for any that are missing (`required-plugins.php`).
+- Advanced Custom Fields PRO, Advanced Custom Fields: Mask Field, Advanced Custom Fields: Extended and FacetWP. The plugin lists them as required and prompts for any that are missing (`required-plugins.php`).
+- FacetWP - Alpha for UAMS ([`UAMS-Web/facetwp-alpha-uams`](https://github.com/UAMS-Web/facetwp-alpha-uams), v1.3.5.2 or later), which provides the alphabet facet on the provider and location lists. It is a private repository, so it is installed through UAMSWP-Pusher rather than from the prompt above, which does not list it.
 - The UAMS 2020 theme ([`UAMS-Web/uams-2020`](https://github.com/UAMS-Web/uams-2020)), a Genesis child theme. The templates are written for it, and the style build imports its Sass.
 
 ## Installation

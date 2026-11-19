@@ -60,9 +60,9 @@ jobs:
       # that turning it back on is this one line.
       mutate: false
       # The first-party PHP the `mutate` job selects changed files from, and that `composer mutate` mutates: the
-      # `includes` and `templates` folders, the facetwp-alpha-uams plugin and the two root files. `includes/_unused`
-      # holds code nothing loads and no test covers, so a git pathspec leaves it out of the selection.
-      mutate-paths: includes templates plugins/facetwp-alpha-uams uamswp-find-a-doc.php required-plugins.php :(exclude)includes/_unused
+      # `includes` and `templates` folders and the two root files. `includes/_unused` holds code nothing loads and no
+      # test covers, so a git pathspec leaves it out of the selection.
+      mutate-paths: includes templates uamswp-find-a-doc.php required-plugins.php :(exclude)includes/_unused
       # The check scans only these directories, where the `@pest-mutate-ignore` annotations are. Without the input it
       # scans whichever of `app`, `src` and `tests` exist, which here is `tests`, and audits none of them.
       mutate-ignore-paths: includes templates admin
