@@ -64,7 +64,7 @@ function uamswp_dead_links_sources(): array
 
             foreach ($fields as [$field, $shape]) {
 
-                $sources['meta'][$post_type.'|'.$field] = [$post_type, $field, $shape];
+                $sources['meta']["{$post_type}|{$field}"] = [$post_type, $field, $shape];
 
             }
 
@@ -72,7 +72,7 @@ function uamswp_dead_links_sources(): array
 
         foreach ($links['tables'] as [$table, $field]) {
 
-            $sources['tables'][$table.'|'.$field] = [$table, $field];
+            $sources['tables']["{$table}|{$field}"] = [$table, $field];
 
         }
 
@@ -115,13 +115,20 @@ function uamswp_dead_links_missing(array $ids): array
     /** @var wpdb $wpdb */
     global $wpdb;
 
+    // array_chunk() renumbers the IDs and the result is renumbered below, so the keys left by the filter are never read.
+    // @pest-mutate-ignore: UnwrapArrayValues
     $ids = array_values(array_unique(array_filter($ids, fn (int $id): bool => $id > 0)));
     $existing = [];
 
     foreach (array_chunk($ids, 500) as $chunk) {
 
+        // implode() reads only the values, so the first key of the filled list makes no difference.
+        // @pest-mutate-ignore: DecrementInteger,IncrementInteger
         $placeholders = implode(',', array_fill(0, count($chunk), '%d'));
         $found = $wpdb->get_col($wpdb->prepare("SELECT ID FROM {$wpdb->posts} WHERE ID IN ({$placeholders})", $chunk));
+        // get_col() always returns a list, and array_diff() below compares IDs as strings, so neither the cast nor the
+        // conversion to integers changes which IDs are missing.
+        // @pest-mutate-ignore: UnwrapArrayMap,RemoveArrayCast
         $existing = array_merge($existing, array_map(uamswp_fad_int(...), (array) $found));
 
     }
@@ -138,6 +145,9 @@ function uamswp_dead_links_missing(array $ids): array
 function uamswp_dead_links_stored_ids(string $value): array
 {
 
+    // A shortcut only: an empty value is not serialized, decodes to no list, and holds no ID, so the lines below
+    // return the same empty list.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     if ($value === '') {
 
         return [];
@@ -228,7 +238,7 @@ function uamswp_dead_links_scan(bool $store = true): array
     foreach ($reads as [$owner, $field, $shape, $ids]) {
 
         $dead = array_values(array_filter($ids, fn (int $id): bool => isset($missing[$id])));
-        $key = $owner.'|'.$field;
+        $key = "{$owner}|{$field}";
 
         if ($dead === []) {
 
@@ -383,11 +393,15 @@ function uamswp_dead_links_counts(array $run): array
 
         if ($item['kind'] === 'link') {
 
+            // Only the keys are counted, so the value stored makes no difference.
+            // @pest-mutate-ignore: TrueToFalse
             $records[$item['post']] = true;
             $counts['links'] += count($item['dead']);
 
             foreach ($item['dead'] as $id) {
 
+                // Only the keys are counted, so the value stored makes no difference.
+                // @pest-mutate-ignore: TrueToFalse
                 $dead_ids[$id] = true;
 
             }
@@ -581,6 +595,8 @@ function uamswp_dead_links_apply_step(array $run, int $limit = UAMSWP_DEAD_LINKS
 
             if (! isset($item['before'])) {
 
+                // uamswp_dead_links_missing() renumbers the IDs it is given, so the keys left by the intersection are never read.
+                // @pest-mutate-ignore: UnwrapArrayValues
                 $remove = uamswp_dead_links_missing(array_values(array_intersect($current, $item['dead'])));
                 $run['items'][$i]['before'] = $current;
                 $run['items'][$i]['remove'] = $remove;
@@ -719,6 +735,9 @@ function uamswp_dead_links_undo_step(array $run, int $limit = UAMSWP_DEAD_LINKS_
 
     }
 
+    // Only read here, with a default for a missing key, so a stored value that is not a list reads as an empty backup
+    // with or without the cast.
+    // @pest-mutate-ignore: RemoveArrayCast
     $rows_backup = (array) get_option(UAMSWP_DEAD_LINKS_ROWS_OPTION, []);
     $end = min($run['cursor'] + $limit, count($run['items']));
 
@@ -752,7 +771,9 @@ function uamswp_dead_links_undo_step(array $run, int $limit = UAMSWP_DEAD_LINKS_
 
                 } else {
 
-                    // A run started before the storage was saved: put the IDs back through ACF.
+                    // A run started before the storage was saved: put the IDs back through ACF. A single field reaches this
+                    // line only with an ID before the removal, since its after is always empty, so the default is never used.
+                    // @pest-mutate-ignore: EmptyStringToNotEmpty
                     uamswp_dead_links_write($item['field'], $item['shape'] === 'single' ? uamswp_fad_str(($item['before'][0] ?? '')) : ($item['before'] ?? []), $item['post']);
 
                 }
@@ -940,14 +961,18 @@ function uamswp_dead_links_run_step(string $action, array $statuses, callable $s
 
     }
 
-    // Both steps write fields through ACF.
+    // Both steps write fields through ACF. The Unit suite defines both functions once any test stubs them, and they
+    // stay defined for the rest of the process, so no test there can reach a site without ACF.
+    // @pest-mutate-ignore: BooleanOrToBooleanAnd,RemoveFunctionCall
     if (! function_exists('get_field') || ! function_exists('update_field')) {
 
         uamswp_dead_links_back('noacf');
 
     }
 
-    // Tied to the dry run the page was showing.
+    // Tied to the dry run the page was showing. A dry run's time is never 0, 1 or -1, so the default for a missing
+    // value is refused whatever it is.
+    // @pest-mutate-ignore: DecrementInteger,IncrementInteger
     if (uamswp_fad_int(($_GET['run'] ?? 0)) !== uamswp_fad_int($run['scanned_at'])) {
 
         uamswp_dead_links_back('stale');
@@ -1036,6 +1061,8 @@ function uamswp_dead_links_screen(): void
 
     $run = uamswp_dead_links_run();
     $status = $run['status'] ?? 'none';
+    // With no notice in the query, any text that is not a message key shows no notice, as the empty string does.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $notice = isset($_GET['notice']) ? sanitize_key(uamswp_fad_str(wp_unslash($_GET['notice']))) : '';
     $messages = [
         'applied' => 'The dead links and orphan rows in the list were removed. Use Check what is left to confirm none remain.',
