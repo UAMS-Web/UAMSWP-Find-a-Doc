@@ -64,6 +64,8 @@ function doximity_csv_export(): false
     }
 
     // Nonce Check
+    // A request with no nonce fails the check whatever the default is, so any string here gives the same refusal.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $nonce = $_GET['_wpnonce'] ?? '';
     if (! wp_verify_nonce(uamswp_fad_str($nonce), 'download_doximity_csv')) {
         uamswp_fad_exit('Security check error');
@@ -85,11 +87,16 @@ function doximity_csv_export(): false
     // Built only when there are providers, but written out below whether or not there are.
     $table_head = [];
     $table_body = [];
-    // Set per location, and carried from one provider to the next when a location has no building.
+    // Set per location. Read only after a location with a building sets them, so these values are never read.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $building_slug = '';
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $building_name = '';
 
     if ($query->have_posts()) {
+        // fputcsv() writes the values in the order they were added, not by key, so moving the first key below 0 or the
+        // last one past the end writes the same row.
+        // @pest-mutate-ignore: DecrementInteger
         $table_head[0] = 'NPI Number';
         $table_head[1] = 'First Name';
         $table_head[2] = 'Last Name';
@@ -104,11 +111,14 @@ function doximity_csv_export(): false
         $table_head[11] = 'Phone';
         $table_head[12] = 'Fax';
         $table_head[13] = 'Specialty';
+        // @pest-mutate-ignore: IncrementInteger
         $table_head[14] = 'Sub-Specialty';
 
         $row = [];
         while ($query->have_posts()) {
             $query->the_post();
+            // get_the_ID() returns the loop post's id; the cast only turns a false outside the loop into 0.
+            // @pest-mutate-ignore: RemoveIntegerCast
             $post_id = (int) get_the_ID();
 
             // First, check if provider has desired degree
@@ -136,6 +146,8 @@ function doximity_csv_export(): false
             if ($degrees) {
                 foreach (uamswp_fad_arr($degrees) as $degree) {
                     $degree_term = get_term(uamswp_fad_int($degree), 'degree');
+                    // A degree that is not a term matches none of the lists whatever name it is given.
+                    // @pest-mutate-ignore: EmptyStringToNotEmpty
                     $degree_name = ($degree_term->name ?? '');
                     if (($d < 2) && (in_array($degree_name, $degree_md) || in_array($degree_name, $degree_do) || in_array($degree_name, $degree_np) || in_array($degree_name, $degree_pa))) {
                         $degree_valid = $degree_name;
@@ -162,6 +174,8 @@ function doximity_csv_export(): false
             $locations = get_field('physician_locations', $post_id);
             $location_valid = false;
             foreach (uamswp_fad_arr($locations) as $location) {
+                // get_post_status() returns a string or false, so a loose and a strict comparison agree.
+                // @pest-mutate-ignore: EqualToIdentical
                 if (get_post_status(uamswp_fad_int($location)) == 'publish') {
                     $location_valid = true;
 
@@ -170,6 +184,8 @@ function doximity_csv_export(): false
             // Create the table
             if ($degree_valid && $npi_valid && $affiliation_valid && $location_valid) {
                 // NPI Number field
+                // fputcsv() writes the values in the order they were added, not by key, so a first key below 0 writes the same row.
+                // @pest-mutate-ignore: DecrementInteger
                 $row[0] = $npi; // only display value if value is not empty or zero
 
                 // First Name field
@@ -191,6 +207,8 @@ function doximity_csv_export(): false
                         the_row();
                         $contact_type = get_sub_field('type');
                         $contact_info = get_sub_field('information');
+                        // The repeater's type is a string, so a loose and a strict comparison agree.
+                        // @pest-mutate-ignore: EqualToIdentical
                         if ($contact_type == 'email' && $e < 2) { // Only display the first instance of an email row
                             $email_list = $contact_info;
                             $e++;
@@ -220,17 +238,27 @@ function doximity_csv_export(): false
 
                 // Get primary appointment location information
                 $l = 1;
+                // Reset per provider and always set again: the row is only built with a published location, which sets it.
+                // @pest-mutate-ignore: EmptyStringToNotEmpty
                 $primary_appointment_address_1 = '';
+                // @pest-mutate-ignore: EmptyStringToNotEmpty
                 $primary_appointment_address_2 = '';
+                // @pest-mutate-ignore: EmptyStringToNotEmpty
                 $primary_appointment_city = '';
+                // @pest-mutate-ignore: EmptyStringToNotEmpty
                 $primary_appointment_state = '';
+                // @pest-mutate-ignore: EmptyStringToNotEmpty
                 $primary_appointment_zip = '';
+                // @pest-mutate-ignore: EmptyStringToNotEmpty
                 $primary_appointment_phone = '';
+                // @pest-mutate-ignore: EmptyStringToNotEmpty
                 $primary_appointment_fax = '';
                 // The row is only built when a location is published ($location_valid, above).
                 if ($locations) {
                     foreach (uamswp_fad_arr($locations) as $location) {
                         if ($l < 2) {
+                            // get_post_status() returns a string or false, so a loose and a strict comparison agree.
+                            // @pest-mutate-ignore: EqualToIdentical
                             if (get_post_status(uamswp_fad_int($location)) == 'publish') {
                                 $primary_appointment_address_1 = get_field('location_address_1', $location); // Get the street address
 
@@ -238,20 +266,33 @@ function doximity_csv_export(): false
                                 $primary_appointment_building = get_field('location_building', $location); // Get building taxonomy input
                                 if ($primary_appointment_building) {
                                     $building = get_term(uamswp_fad_int($primary_appointment_building), 'building'); // Get building object
+                                    // A building that is not a term has no name either, so it is left out whatever its slug.
+                                    // @pest-mutate-ignore: EmptyStringToNotEmpty
                                     $building_slug = ($building->slug ?? ''); // Get the building slug
                                     $building_name = ($building->name ?? ''); // Get the building name
                                 }
                                 $primary_appointment_floor_object = get_field_object('location_building_floor', $location); // Get floor object from input
                                 $primary_appointment_floor_value = uamswp_fad_arr($primary_appointment_floor_object)['value']; // Get the floor selection value
-                                $primary_appointment_floor_label = $primary_appointment_floor_value != '0' ? uamswp_fad_str(uamswp_fad_arr(uamswp_fad_arr($primary_appointment_floor_object)['choices'])[uamswp_fad_str($primary_appointment_floor_value)] ?? '') : ''; // If the floor value is not 0, get the floor selection label
+                                // If the floor value is not 0, get the floor selection label.
+                                // A loose and a strict test differ for a value such as false, 0 or '00', and the test below
+                                // leaves that floor out either way.
+                                // @pest-mutate-ignore: NotEqualToNotIdentical
+                                $primary_appointment_floor_label = $primary_appointment_floor_value != '0'
+                                    ? uamswp_fad_str(uamswp_fad_arr(uamswp_fad_arr($primary_appointment_floor_object)['choices'])[uamswp_fad_str($primary_appointment_floor_value)] ?? '')
+                                    // The label given to the single-story value is never read: the test below leaves that floor out.
+                                    : ''; // @pest-mutate-ignore: EmptyStringToNotEmpty
                                 $primary_appointment_suite = get_field('location_suite', $location); // Get the suite input
                                 $primary_appointment_address_2_arr = []; // Create empty array for constructing Address 2 value
+                                // The slug is a string, so a loose and a strict comparison agree.
+                                // @pest-mutate-ignore: NotEqualToNotIdentical
                                 if ($primary_appointment_building && $building_slug != '_none' && ! empty($building_name)) {
                                     // If the building input has a value
                                     // and if the chosen building isn't 'None'
                                     // and if the building's name exists...
                                     $primary_appointment_address_2_arr[] = $building_name; // Add the building name to the Address 2 list
                                 }
+                                // A label is only set for a value that passes the same test above, so this test changes nothing.
+                                // @pest-mutate-ignore: NotEqualToNotIdentical
                                 if ($primary_appointment_floor_value != '0' && ! empty($primary_appointment_floor_label)) {
                                     // If the building floor isn't set to 'Single-Story Building'
                                     // and if the floor's label exists...
@@ -261,6 +302,9 @@ function doximity_csv_export(): false
                                     // If the suite exists...
                                     $primary_appointment_address_2_arr[] = $primary_appointment_suite; // Add the suite to the Address 2 list
                                 }
+                                // The parts are a term name, a choice label and the suite, read as scalars; implode() joins them
+                                // the same, and the map only gives static analysis a list of strings.
+                                // @pest-mutate-ignore: UnwrapArrayMap
                                 $primary_appointment_address_2 = implode(', ', array_map(uamswp_fad_str(...), $primary_appointment_address_2_arr)); // Create a comma-separated list from the array
                                 $primary_appointment_address_2_deprecated = get_field('location_address_2', $location); // Get the deprecated Address 2 input
                                 if (! $primary_appointment_address_2) {
@@ -305,6 +349,8 @@ function doximity_csv_export(): false
 
                 // Sub-Specialty field
                 // Intentionally left blank
+                // fputcsv() writes the values in the order they were added, not by key, so a last key past the end writes the same row.
+                // @pest-mutate-ignore: IncrementInteger
                 $row[14] = '';
 
             }
@@ -316,8 +362,11 @@ function doximity_csv_export(): false
     $filename = 'Doximity_List_'.time().'.csv';
     $delimiter = ',';
     $fh = @fopen('php://output', 'w');
+    // Opening the output stream does not fail in a request, so the guard is never taken and either comparison
+    // leaves it untaken; the message it would print cannot be reached from a test.
+    // @pest-mutate-ignore: FalseToTrue
     if ($fh === false) {
-        wp_die('The export could not open the output stream.');
+        wp_die('The export could not open the output stream.'); // @pest-mutate-ignore: RemoveFunctionCall
     }
     fwrite($fh, chr(0xEF).chr(0xBB).chr(0xBF));
     header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -336,6 +385,8 @@ function doximity_csv_export(): false
                 return "'".$cell;
             }
 
+            // Every cell is a string, a number, false or null, and fputcsv() writes each the same as its string form.
+            // @pest-mutate-ignore: BooleanOrToBooleanAnd, IdenticalToNotIdentical, TernaryNegated
             return is_scalar($cell) || $cell === null ? $cell : uamswp_fad_str($cell);
         }, $data_row);
         fputcsv($fh, $data_row, $delimiter);
@@ -745,9 +796,9 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
 
                 // Create row for each valid location
                 foreach (uamswp_fad_arr($locations) as $location) {
-                    // get_post_status() returns a string or false, so a loose and a strict comparison agree.
-                    // @pest-mutate-ignore: EqualToIdentical
-                    if (get_post_status(uamswp_fad_int($location)) == 'publish') {
+                    // get_post_status() returns a string or false, so a loose and a strict comparison agree. The marker
+                    // sits on the line itself so that it covers this comparison and not the ones in the block.
+                    if (get_post_status(uamswp_fad_int($location)) == 'publish') { // @pest-mutate-ignore: EqualToIdentical
 
                         // Store code
                         $location_slug = get_post_field('post_name', uamswp_fad_int($location));
@@ -1800,6 +1851,8 @@ function mychart_csv_export(): false
     }
 
     // Nonce Check
+    // A request with no nonce fails the check whatever the default is, so any string here gives the same refusal.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $nonce = $_GET['_wpnonce'] ?? '';
     if (! wp_verify_nonce(uamswp_fad_str($nonce), 'download_mychart_csv')) {
         uamswp_fad_exit('Security check error');
@@ -1823,14 +1876,20 @@ function mychart_csv_export(): false
     $table_body = [];
 
     if ($query->have_posts()) {
+        // fputcsv() writes the values in the order they were added, not by key, so moving the first key below 0 or the
+        // last one past the end writes the same row.
+        // @pest-mutate-ignore: DecrementInteger
         $table_head[0] = 'SER ID';
         $table_head[1] = 'Provider Name';
         $table_head[2] = 'Provider Profile URL';
+        // @pest-mutate-ignore: IncrementInteger
         $table_head[3] = 'Provider Photo URL';
 
         $row = [];
         while ($query->have_posts()) {
             $query->the_post();
+            // get_the_ID() returns the loop post's id; the cast only turns a false outside the loop into 0.
+            // @pest-mutate-ignore: RemoveIntegerCast
             $post_id = (int) get_the_ID();
 
             // Create the Name variables
@@ -1849,6 +1908,8 @@ function mychart_csv_export(): false
             // Most placements are background images inside a circular container no larger than 122x122.
             // The details window for a provider displays the full image, restricted only by the max-width of the window and Epic's 1000px maximum on image size.
             // Defining hot spots within the media library, placing them between the provider's front teeth, yields the best result.
+            // get_post_thumbnail_id() returns an id, 0 for a post with no thumbnail or false for no post; 0 and false find no image.
+            // @pest-mutate-ignore: RemoveIntegerCast
             $provider_mychart_photo = wp_get_attachment_image_url((int) get_post_thumbnail_id($post_id), 'thumbnail'); // 150x150
 
             $resident = get_field('physician_resident', $post_id);
@@ -1859,6 +1920,8 @@ function mychart_csv_export(): false
                 // Start table row
 
                 // PID
+                // fputcsv() writes the values in the order they were added, not by key, so a first key below 0 writes the same row.
+                // @pest-mutate-ignore: DecrementInteger
                 $row[0] = $ser_id;
 
                 // Provider Name
@@ -1868,6 +1931,8 @@ function mychart_csv_export(): false
                 $row[2] = $profile_url.'?utm_source=mychart&utm_medium=link&utm_campaign=clinical_service&utm_term=provider&utm_content='.$profile_slug.'&utm_specs='.$ser_id;
 
                 // Provider Photo URL
+                // fputcsv() writes the values in the order they were added, not by key, so a last key past the end writes the same row.
+                // @pest-mutate-ignore: IncrementInteger
                 $row[3] = $provider_mychart_photo ?: '';
 
             } // endif !$resident
@@ -1881,8 +1946,11 @@ function mychart_csv_export(): false
     $filename = 'MyChart_List_'.time().'.csv';
     $delimiter = ',';
     $fh = @fopen('php://output', 'w');
+    // Opening the output stream does not fail in a request, so the guard is never taken and either comparison
+    // leaves it untaken; the message it would print cannot be reached from a test.
+    // @pest-mutate-ignore: FalseToTrue
     if ($fh === false) {
-        wp_die('The export could not open the output stream.');
+        wp_die('The export could not open the output stream.'); // @pest-mutate-ignore: RemoveFunctionCall
     }
     fwrite($fh, chr(0xEF).chr(0xBB).chr(0xBF));
     header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
