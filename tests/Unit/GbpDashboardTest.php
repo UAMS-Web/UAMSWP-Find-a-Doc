@@ -461,4 +461,133 @@ final class GbpDashboardTest extends UnitTestCase
         uamswp_fad_gbp_render_dashboard_widget();
         ob_end_clean();
     }
+
+    /**
+     * Render the widget as an administrator and return its HTML.
+     */
+    private function render(): string
+    {
+        when('current_user_can')->justReturn(true);
+        // WordPress documents both as taking a string, so these stubs hold the widget to that.
+        when('esc_attr')->alias(static fn (string $text): string => htmlspecialchars($text, ENT_QUOTES));
+        when('esc_html')->alias(static fn (string $text): string => htmlspecialchars($text, ENT_QUOTES));
+        ob_start();
+        uamswp_fad_gbp_render_dashboard_widget();
+
+        return (string) ob_get_clean();
+    }
+
+    public function test_a_counter_for_today_with_no_count_counts_as_none(): void
+    {
+        $this->options['uamswp_fad_gbp_create_count'] = ['day' => '2026-11-03'];
+
+        $this->assertSame(0, uamswp_fad_gbp_dashboard_data(self::NOW)['used']);
+    }
+
+    public function test_the_data_counts_the_outcomes_in_the_activity_log(): void
+    {
+        $this->options['uamswp_fad_gbp_log'] = [['time' => self::NOW - 10, 'action' => 'create', 'reason' => 'Created']];
+
+        $this->assertSame(['create' => 1, 'update' => 0, 'review' => 0, 'error' => 0], uamswp_fad_gbp_dashboard_data(self::NOW)['outcomes']);
+    }
+
+    public function test_today_in_the_data_keeps_its_day_beside_the_count(): void
+    {
+        $this->options['uamswp_fad_gbp_create_count'] = ['day' => '2026-11-03', 'count' => 3];
+
+        $this->assertSame(['day' => '2026-11-03', 'count' => 3], uamswp_fad_gbp_dashboard_data(self::NOW)['days'][6]);
+    }
+
+    public function test_the_data_shows_running_while_a_run_holds_the_lock(): void
+    {
+        $this->options['uamswp_fad_gbp_modes'] = ['uams' => 'live'];
+        $this->transients['uamswp_fad_gbp_lock'] = 1;
+
+        $this->assertSame('running', uamswp_fad_gbp_dashboard_data(self::NOW)['status']['key']);
+    }
+
+    public function test_a_chart_draws_each_bar_to_scale_on_a_baseline(): void
+    {
+        $bar = fn (int $x, int $height): string => '<rect x="'.$x.'" y="'.(40 - $height).'" width="12" height="'.$height.'" fill="currentColor"></rect>'
+            .'<line x1="'.$x.'" y1="40" x2="'.($x + 12).'" y2="40" stroke="currentColor" stroke-width="1"></line>';
+
+        // 1, 3 and 4 of 7 are 5.7, 17.1 and 22.9 of the 40 high chart, so each rounds to the nearest.
+        $this->assertSame(
+            '<svg role="img" aria-label="Five values" width="72" height="41" viewBox="0 0 72 41" focusable="false">'
+            .$bar(0, 0).$bar(15, 6).$bar(30, 17).$bar(45, 23).$bar(60, 40).'</svg>',
+            uamswp_fad_gbp_dashboard_bars([0, 1, 3, 4, 7], 7, 'Five values')
+        );
+    }
+
+    public function test_a_chart_draws_a_small_value_two_high_and_scales_to_a_value_above_the_ceiling(): void
+    {
+        $this->assertStringContainsString('<rect x="0" y="38" width="12" height="2"', uamswp_fad_gbp_dashboard_bars([1], 100, 'One small value'));
+        $this->assertStringContainsString('<rect x="0" y="0" width="12" height="40"', uamswp_fad_gbp_dashboard_bars([1], 0, 'One value, no ceiling'));
+        $this->assertStringContainsString('<rect x="15" y="20" width="12" height="20"', uamswp_fad_gbp_dashboard_bars([4, 2], 1, 'A value above the ceiling'));
+    }
+
+    public function test_a_chart_with_no_values_has_no_width(): void
+    {
+        $this->assertSame('<svg role="img" aria-label="Nothing" width="0" height="41" viewBox="0 0 0 41" focusable="false"></svg>', uamswp_fad_gbp_dashboard_bars([], 0, 'Nothing'));
+    }
+
+    /**
+     * @return array<string, array{int, string}>
+     */
+    public static function creates_sent(): array
+    {
+        return [
+            'one, which rounds down' => [1, '1 of 80 (1%).'],
+            'seven, which rounds up' => [7, '7 of 80 (9%).'],
+            'sixty' => [60, '60 of 80 (75%).'],
+            'more than the budget' => [100, '100 of 80 (100%).'],
+        ];
+    }
+
+    #[\PHPUnit\Framework\Attributes\DataProvider('creates_sent')]
+    public function test_the_widget_gives_the_creates_sent_today_as_a_rounded_share_of_the_budget(int $used, string $figure): void
+    {
+        $this->options['uamswp_fad_gbp_modes'] = ['uams' => 'live'];
+        $this->options['uamswp_fad_gbp_create_count'] = ['day' => UAMSWP_FAD_GBP_Logic::pacific_day(time()), 'count' => $used];
+
+        $html = $this->render();
+
+        $this->assertStringContainsString($figure, $html);
+        $this->assertStringContainsString('<progress max="80" value="'.min($used, 80).'" aria-label="Creates sent today">'.$used.' of 80</progress>', $html);
+    }
+
+    public function test_the_widget_says_how_long_until_the_reset(): void
+    {
+        $html = $this->render();
+        $reset = UAMSWP_FAD_GBP_Logic::next_pacific_reset(time());
+
+        $this->assertStringContainsString(', in '.UAMSWP_FAD_GBP_Logic::remaining_label($reset - time()).'.', $html);
+    }
+
+    public function test_the_widget_counts_the_queue_and_charts_it_against_one_event_an_hour(): void
+    {
+        $now = time();
+        $this->schedule([$now - 10, $now + 100, $now + 3700]);
+
+        $html = $this->render();
+
+        $this->assertStringContainsString('3 scheduled, 1 due now, 0 waiting for the reset.', $html);
+        $this->assertStringContainsString('<rect x="0" y="0" width="12" height="40"', $html, 'one event in the next hour fills the bar');
+    }
+
+    public function test_the_widget_links_each_outcome_to_the_activity_log_filtered_by_it(): void
+    {
+        $html = $this->render();
+
+        foreach (['create' => 'created', 'update' => 'updated', 'review' => 'for review', 'error' => 'errors'] as $action => $label) {
+            $this->assertStringContainsString('<li><a href="https://example.test/wp-admin/admin.php?page=uamswp-fad-gbp&log_action='.$action.'">0 '.$label.'</a></li>', $html);
+        }
+    }
+
+    public function test_the_widget_is_registered_on_dashboard_setup(): void
+    {
+        expect('add_action')->once()->with('wp_dashboard_setup', 'uamswp_fad_gbp_register_dashboard_widget');
+
+        uamswp_fad_gbp_register_dashboard_hooks();
+    }
 }

@@ -45,6 +45,8 @@ function uamswp_fad_gbp_manual_sync(array $post_ids, ?string $silo, bool $dry_ru
         $covered = array_merge($covered, uamswp_fad_gbp_covered_post_ids($post_id));
     }
 
+    // Only whether the list is empty and the ids it holds are read, never their keys.
+    // @pest-mutate-ignore: UnwrapArrayValues
     $covered = array_values(array_unique($covered));
 
     if ($covered === []) {
@@ -92,6 +94,8 @@ function uamswp_fad_gbp_manual_sync(array $post_ids, ?string $silo, bool $dry_ru
         $items = uamswp_fad_gbp_attach_stored_ids($items);
 
         if ($silo !== null) {
+            // The items are only walked in order, so the keys the filter leaves are never read.
+            // @pest-mutate-ignore: UnwrapArrayValues
             $items = array_values(array_filter($items, fn (array $item): bool => $item['silo'] === $silo));
         }
 
@@ -141,6 +145,8 @@ function uamswp_fad_gbp_manual_sync(array $post_ids, ?string $silo, bool $dry_ru
         }
 
         if ($held) {
+            // A held create always sets the resume time, so the default is never used.
+            // @pest-mutate-ignore: DecrementInteger, IncrementInteger
             $out('Creates were held back and resume '.UAMSWP_FAD_GBP_Logic::reset_label($resume ?? 0).'. Run again after that.');
         }
 
@@ -340,6 +346,8 @@ function uamswp_fad_gbp_cli_sync(array $args, array $assoc): void
         }, ! empty($assoc['dry-run'])));
     }
 
+    // WP-CLI passes every option value as a string, so the cast never changes one.
+    // @pest-mutate-ignore: RemoveStringCast
     $post = isset($assoc['post']) ? (string) $assoc['post'] : '';
     $all = ! empty($assoc['all']);
 
@@ -348,6 +356,8 @@ function uamswp_fad_gbp_cli_sync(array $args, array $assoc): void
     }
 
     $ids = $all ? uamswp_fad_gbp_all_post_ids() : [(int) $post];
+    // WP-CLI passes every option value as a string, so the cast never changes one.
+    // @pest-mutate-ignore: RemoveStringCast
     $silo = isset($assoc['silo']) ? (string) $assoc['silo'] : null;
 
     $status = uamswp_fad_gbp_manual_sync($ids, $silo, ! empty($assoc['dry-run']), function (string $line): void {
@@ -363,8 +373,14 @@ function uamswp_fad_gbp_cli_sync(array $args, array $assoc): void
 function uamswp_fad_gbp_register_cli(): void
 {
     if (defined('WP_CLI') && WP_CLI && class_exists('WP_CLI')) {
+        // Only WP-CLI defines its constant, and a definition lasts the whole process, so the Unit suite cannot
+        // reach these calls without registering the commands for every test after it. Pest cannot run that test
+        // in a process of its own.
+        // @pest-mutate-ignore: RemoveMethodCall
         WP_CLI::add_command('uamswp gbp sync', 'uamswp_fad_gbp_cli_sync');
+        // @pest-mutate-ignore: RemoveMethodCall
         WP_CLI::add_command('uamswp gbp backfill-ids', 'uamswp_fad_gbp_cli_backfill');
+        // @pest-mutate-ignore: RemoveMethodCall
         WP_CLI::add_command('uamswp gbp cid-report', 'uamswp_fad_gbp_cli_cid_report');
     }
 }

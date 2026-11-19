@@ -25,10 +25,15 @@ function uamswp_fad_gbp_dashboard_data(?int $now = null): array
         $modes[$silo] = UAMSWP_FAD_GBP_Logic::effective_mode($mode, $production);
     }
 
+    // An unset pause or backoff reads as a time long past, and any time at or before now means none is in force.
+    // @pest-mutate-ignore: DecrementInteger, IncrementInteger
     $paused_until = uamswp_fad_int(get_option(UAMSWP_FAD_GBP_PAUSE_OPTION, 0));
+    // @pest-mutate-ignore: DecrementInteger, IncrementInteger
     $backoff_until = uamswp_fad_int(get_option(UAMSWP_FAD_GBP_BACKOFF_OPTION, 0));
 
     $count = get_option(UAMSWP_FAD_GBP_COUNT_OPTION, []);
+    // A counter with no day matches no Pacific day whatever it defaults to.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $used = is_array($count) && ($count['day'] ?? '') === UAMSWP_FAD_GBP_Logic::pacific_day($now) ? uamswp_fad_int(($count['count'] ?? 0)) : 0;
 
     $history = get_option(UAMSWP_FAD_GBP_HISTORY_OPTION, []);
@@ -70,7 +75,9 @@ function uamswp_fad_gbp_scheduled_times(): array
     $times = [];
 
     foreach ($cron as $time => $hooks) {
-        // One entry per job queued at that time.
+        // One entry per job queued at that time. WordPress keys the cron array by integer time and stores each hook's
+        // jobs as an array, so the casts change nothing, and array_merge() renumbers whatever key the fill starts at.
+        // @pest-mutate-ignore: RemoveArrayCast, RemoveIntegerCast, DecrementInteger, IncrementInteger
         $times = array_merge($times, array_fill(0, count((array) ($hooks[UAMSWP_FAD_GBP_SYNC_HOOK] ?? [])), (int) $time));
     }
 
@@ -90,6 +97,8 @@ function uamswp_fad_gbp_dashboard_bars(array $values, int $ceiling, string $desc
     $width = 12;
     $gap = 3;
     $height = 40;
+    // A floor of 0 draws the same as 1: a ceiling of 0 only arises when every value is 0, and then no bar divides by it.
+    // @pest-mutate-ignore: DecrementInteger
     $ceiling = max(1, $ceiling, ...$values);
     $bars = '';
 
@@ -178,7 +187,12 @@ function uamswp_fad_gbp_render_dashboard_widget(): void
     $data = uamswp_fad_gbp_dashboard_data();
     $settings = admin_url('admin.php?page=uamswp-fad-gbp');
     $disabled = $data['budget'] === 0;
-    $percent = $disabled ? 0 : min(100, (int) round($data['used'] / $data['budget'] * 100));
+    // The share is not shown while creates are disabled, so its value then is never read. round() gives a whole
+    // number, which prints the same with or without the cast.
+    // @pest-mutate-ignore: RemoveIntegerCast
+    $percent = $disabled
+        ? 0 // @pest-mutate-ignore: DecrementInteger, IncrementInteger
+        : min(100, (int) round($data['used'] / $data['budget'] * 100));
     $day_counts = array_column($data['days'], 'count');
     $queue = $data['queue'];
     $remaining = UAMSWP_FAD_GBP_Logic::remaining_label($data['reset'] - time());
@@ -202,7 +216,10 @@ function uamswp_fad_gbp_render_dashboard_widget(): void
     <h3>Queue</h3>
     <p>
         <?php echo esc_html($queue['total'].' scheduled, '.$queue['due'].' due now, '.$queue['waiting'].' waiting for the reset.'); ?>
-        <br><?php echo uamswp_fad_gbp_dashboard_bars($queue['hours'], 1, 'Scheduled sync events due in each of the next 24 hours, not counting those waiting for the reset: '.implode(', ', $queue['hours']), 'now', '+24 h'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built from integers and escaped text.?>
+        <br><?php
+        // The chart never scales below one event an hour, so a ceiling of 0 draws the same as 1.
+        // @pest-mutate-ignore: DecrementInteger
+        echo uamswp_fad_gbp_dashboard_bars($queue['hours'], 1, 'Scheduled sync events due in each of the next 24 hours, not counting those waiting for the reset: '.implode(', ', $queue['hours']), 'now', '+24 h'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built from integers and escaped text.?>
         <small><?php echo esc_html(uamswp_fad_gbp_queue_caption($queue['hours'])); ?> Not counting those waiting for the reset.</small>
     </p>
 
