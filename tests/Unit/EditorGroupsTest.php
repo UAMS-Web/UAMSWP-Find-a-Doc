@@ -675,4 +675,39 @@ final class EditorGroupsTest extends UnitTestCase
         $this->assertTrue($exited, 'The sync action ends the request.');
         $this->assertSame(['https://x/wp-admin/edit-tags.php?taxonomy=editor_group&post_type=provider&uamswp_synced=0'], $redirects);
     }
+
+    public function test_the_sync_action_applies_the_mapping_to_every_record_of_each_type_and_counts_the_ones_it_changed(): void
+    {
+        when('current_user_can')->justReturn(true);
+        when('check_admin_referer')->justReturn(1);
+        when('uamswp_fad_editor_group_post_types')->justReturn(['provider' => 'a', 'location' => 'b']);
+
+        $queries = [];
+        when('get_posts')->alias(static function (array $args) use (&$queries): array {
+            $queries[] = $args;
+
+            return $args['post_type'] === 'provider' ? [3, 4] : [5];
+        });
+        when('uamswp_fad_inherit_editor_group')->alias(static fn (int $post_id): bool => $post_id !== 4);
+        when('admin_url')->alias(static fn (string $path): string => 'https://x/wp-admin/'.$path);
+        when('add_query_arg')->alias(static fn (array $args, string $url): string => $url.'?'.http_build_query($args));
+
+        $redirects = [];
+        when('wp_safe_redirect')->alias(static function (string $location) use (&$redirects): bool {
+            $redirects[] = $location;
+
+            return true;
+        });
+
+        try {
+            \uamswp_fad_sync_editor_groups();
+        } catch (ExitCalled) {
+        }
+
+        $this->assertSame([
+            ['post_type' => 'provider', 'post_status' => 'any', 'posts_per_page' => -1, 'fields' => 'ids'],
+            ['post_type' => 'location', 'post_status' => 'any', 'posts_per_page' => -1, 'fields' => 'ids'],
+        ], $queries);
+        $this->assertSame(['https://x/wp-admin/edit-tags.php?taxonomy=editor_group&post_type=provider&uamswp_synced=2'], $redirects);
+    }
 }

@@ -19,13 +19,32 @@ use function Brain\Monkey\Functions\when;
 
 final class EditFlowStatusControlTest extends UnitTestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
+    /** @var list<array<int, mixed>> What the file hooked as it loaded. */
+    private static array $hooked = [];
 
-        // The file registers its hook at file scope, so the hook function must exist while it loads.
-        when('add_action')->justReturn(true);
+    /**
+     * Load the file once, from a test body, so a mutation run credits the hook it adds as it loads to the test
+     * that loads it first: the first test below, which pins that hook.
+     */
+    private static function load(): void
+    {
+        if (function_exists('uamswp_fad_edit_flow_published_status_control')) {
+            return;
+        }
+
+        when('add_action')->alias(static function (mixed ...$args): bool {
+            self::$hooked[] = $args;
+
+            return true;
+        });
         require_once dirname(__DIR__, 2).'/includes/class.fad-edit-flow-status.php';
+    }
+
+    public function test_the_control_is_hooked_to_the_admin_enqueue_after_edit_flow(): void
+    {
+        self::load();
+
+        $this->assertSame([['admin_enqueue_scripts', 'uamswp_fad_edit_flow_published_status_control', 20]], self::$hooked);
     }
 
     private function screen(string $post_type): void
@@ -44,6 +63,7 @@ final class EditFlowStatusControlTest extends UnitTestCase
     #[DataProvider('covered_post_types')]
     public function test_the_script_is_attached_to_the_edit_screen_of_a_provider_or_location(string $post_type): void
     {
+        self::load();
         when('wp_script_is')->justReturn(true);
         $this->screen($post_type);
 
@@ -62,6 +82,7 @@ final class EditFlowStatusControlTest extends UnitTestCase
 
     public function test_the_script_only_acts_for_a_published_profile_the_user_cannot_publish_but_can_edit(): void
     {
+        self::load();
         when('wp_script_is')->justReturn(true);
         $this->screen('provider');
 
@@ -85,6 +106,7 @@ final class EditFlowStatusControlTest extends UnitTestCase
 
     public function test_nothing_is_attached_on_other_admin_screens(): void
     {
+        self::load();
         when('wp_script_is')->justReturn(true);
         $this->screen('provider');
         expect('wp_add_inline_script')->never();
@@ -97,6 +119,7 @@ final class EditFlowStatusControlTest extends UnitTestCase
 
     public function test_nothing_is_attached_when_edit_flow_has_not_enqueued_its_script(): void
     {
+        self::load();
         when('wp_script_is')->justReturn(false);
         $this->screen('provider');
         expect('wp_add_inline_script')->never();
@@ -108,6 +131,7 @@ final class EditFlowStatusControlTest extends UnitTestCase
 
     public function test_nothing_is_attached_for_other_post_types(): void
     {
+        self::load();
         when('wp_script_is')->justReturn(true);
         $this->screen('post');
         expect('wp_add_inline_script')->never();
@@ -119,6 +143,7 @@ final class EditFlowStatusControlTest extends UnitTestCase
 
     public function test_nothing_is_attached_when_there_is_no_current_screen(): void
     {
+        self::load();
         when('wp_script_is')->justReturn(true);
         when('get_current_screen')->justReturn();
 
