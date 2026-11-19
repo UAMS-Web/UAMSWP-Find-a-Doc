@@ -225,6 +225,9 @@ test('a document reads its attachment field', function (): void {
 /**
  * Stub the video plugins: Lyte is present for every video test, so whether it is installed never depends on
  * which test ran first, and the embed is what wp_oembed_get() would return.
+ *
+ * Defining lyte_preparse() keeps it defined for the rest of the process, and SingleConditionTest's test of a page
+ * without Lyte skips once it is. This file is named to run after that one for that reason.
  */
 function resource_callback_video_stubs(): void
 {
