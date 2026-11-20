@@ -438,8 +438,8 @@ test('the provider loop reads the rating as one stored value and trims the clini
 });
 
 test('the provider loop labels the name and each related location with a non-breaking space turned into a space and an ampersand kept as one', function (): void {
-    $output = physician_loop([5], ['physician_first_name' => "Mom&#8217;s A&nbsp;B\u{A0}C & D", 'physician_last_name' => 'Lee', 'physician_locations' => [7]], ['titles' => [7 => "Mom&#8217;s A&nbsp;B\u{A0}C & D"]]);
+    $output = physician_loop([5], ['physician_first_name' => "Mom&#8217;s A&nbsp;B\u{A0}C & D", 'physician_last_name' => 'Lee', 'physician_locations' => [7]], ['titles' => [7 => "Mom&#8217;s \"A\"&nbsp;B\u{A0}C & D"]]);
 
     expect($output)->toContain('aria-label="Full profile for Mom\'s A B C & D Lee"')
-        ->and($output)->toContain('data-categorytitle="Related Location" data-typetitle="Mom\'s A B C & D"');
+        ->and($output)->toContain('data-categorytitle="Related Location" data-typetitle="Mom\'s \'A\' B C & D"');
 });

@@ -42,6 +42,8 @@ if ($expertise_parent_id) {
     $parent_expertise = get_post($expertise_parent_id);
 }
 // Get attributes of parent Area of Expertise
+// Printed only when the parent is found, which sets it below; PHPStan needs it defined.
+// @pest-mutate-ignore: EmptyStringToNotEmpty
 $parent_title_attr = '';
 if ($parent_expertise) {
     $parent_id = $parent_expertise->ID;

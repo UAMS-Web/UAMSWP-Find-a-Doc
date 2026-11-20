@@ -152,7 +152,10 @@
 	        </div><!-- .col-9 -->
 	    </div><!-- .row -->
 	</div><!-- .color -->
-	<?php $i++; ?>
+	<?php
+    // Counting down gives each row the same parity as counting up, so the backgrounds alternate the same way.
+    // @pest-mutate-ignore: PostIncrementToPostDecrement
+    $i++; ?>
 	<?php } ?>
 		<link rel="stylesheet" type="text/css" href="https://www.docscores.com/resources/css/docscores-lotw.v1330-2018121714.css" />
 

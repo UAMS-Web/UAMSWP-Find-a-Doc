@@ -690,7 +690,7 @@ test('the locations block button label turns a non-breaking space into a space a
 test('the location card cleans the title for its attributes: quotes, a non-breaking space either way, and an ampersand', function (): void {
     $output = location_card([], ['titles' => [location_card_next_id() + 1 => "A \"B\" C&nbsp;D\u{A0}E & F"]]);
 
-    expect($output)->toContain('data-itemtitle="A \'B\' C D E & F"');
+    expect($output)->toContain('target="_self" data-categorytitle="Name" data-itemtitle="A \'B\' C D E & F">');
 });
 
 test('the location card labels the closure alert with the title, its quote entity turned into an apostrophe', function (): void {
