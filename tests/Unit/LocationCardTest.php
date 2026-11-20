@@ -61,7 +61,10 @@ function location_card_world(array $fields, array $options = []): void
     when('esc_attr')->alias(static fn (mixed $text): string => htmlspecialchars((string) $text));
     when('esc_html')->alias(static fn (mixed $text): string => htmlspecialchars((string) $text));
     when('sanitize_title_with_dashes')->alias(static fn (string $text): string => strtolower(str_replace(' ', '-', $text)));
-    when('wp_reset_postdata')->justReturn();
+    $GLOBALS['location_card_resets'] = 0;
+    when('wp_reset_postdata')->alias(static function (): void {
+        $GLOBALS['location_card_resets']++;
+    });
     when('format_phone_dash')->alias(static fn (mixed $phone): string => $phone ? 'dash:'.$phone : '');
     when('uamswp_custom_table_query')->alias(static fn (string $table, string $field, mixed $values): array => $fields['__table:'.$field] ?? []);
 
@@ -596,4 +599,43 @@ test('the location loop prints a card for each post of the main loop, or a messa
     uamswp_test_main_loop([]);
 
     expect(trim(uamswp_test_include_partial('fwp/location-loop')))->toBe('<p>Sorry, no locations matched your criteria.</p>');
+});
+
+test('the locations block asks for the published locations of its filters by title, then each of them and the specific ids once', function (): void {
+    locations_block(['block_fad_locations_filter_ids' => [61], 'block_fad_locations_filter_type' => [3]], [[61, 62], [61, 62]], ['block' => ['id' => 'abc']]);
+
+    expect(WP_Query::$queries[0])->toBe([
+        'post_type' => 'location',
+        'order' => 'ASC',
+        'orderby' => 'title',
+        'posts_per_page' => -1,
+        'post_status' => 'publish',
+        'post__in' => [],
+        'tax_query' => [['taxonomy' => 'location_type', 'terms' => [3]]],
+        'fields' => 'ids',
+    ])
+        ->and(WP_Query::$queries[1]['post__in'])->toBe([0 => 61, 2 => 62]);
+});
+
+test('the locations block prints no description without one, and restores the post after the cards', function (): void {
+    $output = locations_block(['block_fad_locations_heading' => 'Our Locations', 'block_fad_locations_filter_ids' => [61]], [[61]], ['block' => ['id' => 'abc']]);
+
+    expect((string) preg_replace('/>\s+</', '><', $output))->toContain('<span class="title">Our Locations</span></h2><div class="card-list-container location-card-list-container">')
+        ->and($GLOBALS['location_card_resets'])->toBe(1);
+});
+
+test('the locations block reads a link array without an address as no address, with no warning', function (): void {
+    $output = '';
+    $warnings = uamswp_test_capture_warnings(static function () use (&$output): void {
+        $output = locations_block(['block_fad_locations_filter_ids' => [61], 'block_fad_locations_more' => true, 'block_fad_locations_more_button_url' => ['target' => '_self']], [[61]], ['block' => ['id' => 'abc']]);
+    });
+
+    expect($warnings)->toBe([])
+        ->and($output)->toContain('<a href="" class="btn btn-outline-white"');
+});
+
+test('the locations block button label turns a non-breaking space into a space and keeps an ampersand as one', function (): void {
+    $output = locations_block(['block_fad_locations_filter_ids' => [61], 'block_fad_locations_more' => true, 'block_fad_locations_more_button_description' => "Mom&#8217;s A&nbsp;B\u{A0}C & D"], [[61]], ['block' => ['id' => 'abc']]);
+
+    expect($output)->toContain('aria-label="Mom&#039;s A B C &amp; D"');
 });
