@@ -13,7 +13,8 @@ description: >-
   load-bearing dependency order (the patch comes out BEFORE the package moves, or
   `composer install` fails for everyone), when `patches.lock.json` alone is enough and when
   `composer.lock` must be relocked too, and the paid-for
-  traps (a reused `vendor/` needing the package reinstalled before re-patching, a stale `vendor/`
+  traps (a reused `vendor/` needing the package reinstalled before re-patching, and the
+  install-time check that does it, a stale `vendor/`
   faking `outdated` and `audit`, CRLF/LF vendor line endings, `internalClass` PHPStan pins for
   `@internal` vendor classes). Activate when registering a vendor patch in a consumer, filing the
   ticket chain for one, removing a retired patch, or editing `patches/`, `extra.patches`,
@@ -332,6 +333,7 @@ retires it.
 | Patch SHA-256s and the set `_hash` | `patches.lock.json` |
 | Composer's own manifest hash | `composer.lock` → `content-hash` |
 | The plugin itself | `cweagans/composer-patches ^2.0` in `require-dev` + `allow-plugins` |
+| The install-time patch check | `post-install-cmd` and `post-update-cmd` running `.claude/skills/upstream-patch-lifecycle/scripts/ensure-patches-applied.php` (see *The traps already paid for*) |
 | Per-patch narrative + removal checklist | `patches/README.md` where the repository has one; otherwise the entry's description key and the decision log (annotated on retirement, never pruned; removal step 11 expects that hit) |
 | PHPStan pins for vendor-guard tests | `internalClass` `ignoreErrors` in `phpstan.neon.dist` |
 
@@ -464,11 +466,42 @@ The mutation run needs a coverage driver.
 
 ### The traps already paid for
 
-- **A reused `vendor/` does not re-apply a changed patch.** On a warm tree `composer install`
-  reports "Nothing to install, update or remove", so no package-install event fires and
-  `cweagans/composer-patches` never applies a newly added or edited patch. The run then
-  validates the **previous** patch set and reports green. Fix it by removing the patched
-  packages and reinstalling: `rm -rf vendor/<vendor>/<package>` then `composer install`.
+- **A reused `vendor/` does not re-apply a changed patch.** `cweagans/composer-patches` 2.0.0
+  applies a package's patches only when that package itself is installed or updated (its
+  `POST_PACKAGE_INSTALL` and `POST_PACKAGE_UPDATE` handlers), and records nothing about what it
+  applied. So any change to the patch set that leaves the patched package's version alone never
+  reaches a working copy that already has the package: a patch added or edited in `extra.patches`
+  or `patches.json`, a `uams-web/patches-*` release that adds or changes a patch, or a first
+  `patches.lock.json`. `composer install` installs or upgrades the patches package, leaves the
+  target unpatched, and exits 0; every later install reports "Nothing to install, update or
+  remove". The run then validates the **previous** patch set and reports green. Measured on
+  2026-11-19 (UAMS-Web/uams-claude-skills#850, macOS, Composer 2.11.1): a `UAMSWP-Find-a-Doc`
+  working copy installed at the parent of `052f5215` (UAMS-Web/UAMSWP-Find-a-Doc#1389, which locked
+  `uams-web/patches-patchwork` v1.0.0 and `uams-web/patches-pest-plugin-mutate` v1.4.0 against
+  unchanged `antecedent/patchwork` 2.2.4 and `pestphp/pest-plugin-mutate` v5.0.2) and then fast-forwarded and
+  installed held none of the 15 locked patches, where a `composer install` from a deleted
+  `vendor/` at the same commit held all 15.
+
+  **The install-time check closes it.** `scripts/ensure-patches-applied.php` in this skill checks
+  every patch `patches.lock.json` records against `vendor/` by content (it reverse-applies each
+  package's patches, last first, to a scratch copy of the files they touch, comparing whitespace
+  exactly, and never writes `vendor/` to check; an earlier patch on the same file as a missing
+  one is reported undetermined rather than missing), and runs `composer reinstall <packages>` for any package that lacks one,
+  then checks again and fails if a patch is still missing. Wire it into both install hooks:
+
+  ```json
+  "scripts": {
+      "post-install-cmd": ["@php .claude/skills/upstream-patch-lifecycle/scripts/ensure-patches-applied.php"],
+      "post-update-cmd": ["@php .claude/skills/upstream-patch-lifecycle/scripts/ensure-patches-applied.php"]
+  }
+  ```
+
+  A correctly patched `vendor/` passes with nothing reinstalled. `--check` reports without
+  reinstalling (exit 1 when a patch is missing). It does not check a remote patch url, skips a
+  package that is not installed, exits 0 with a warning where `git` is unavailable (2 with
+  `--check`), and `composer install --no-scripts` bypasses it. Windows is not yet measured.
+  Without the hook, fix a working copy by reinstalling the patched packages:
+  `composer reinstall <vendor>/<package>`.
   **Not `composer patches-repatch`**: it runs its inner install through
   `$application->run()` and then `return 0` unconditionally, discarding that call's exit code
   (`cweagans/composer-patches` 2.0.0, `RepatchCommand.php:57-62`), so a patch that fails to
