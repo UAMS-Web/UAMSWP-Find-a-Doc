@@ -65,20 +65,17 @@ if ($parent_location) {
 
 $location_address_1 = uamswp_fad_str(get_field('location_address_1', $location_source_ids['street']));
 $location_building = get_field('location_building', $location_source_ids['facility']);
-// Read only when the location has a building, which sets both below; uamswp_location_address_2() reads the name only
-// then, and the slug check only then.
-// @pest-mutate-ignore: EmptyStringToNotEmpty
-$building_slug = '';
-// As above.
+// A building counts only when its term still exists and is not the _none term, so a deleted building adds no empty line.
+$has_building = false;
+// uamswp_location_address_2() reads the name only when there is a building, which sets it below.
 // @pest-mutate-ignore: EmptyStringToNotEmpty
 $building_name = '';
 if ($location_building) {
     $building = get_term(uamswp_fad_int($location_building), 'building');
-    $building_found = is_object($building) && ! is_wp_error($building);
-    // A building that is not found has a slug that is not '_none' whatever it reads as.
-    // @pest-mutate-ignore: EmptyStringToNotEmpty
-    $building_slug = $building_found ? uamswp_fad_str($building->slug) : '';
-    $building_name = $building_found ? uamswp_fad_str($building->name) : '';
+    if (is_object($building) && ! is_wp_error($building) && $building->slug !== '_none') {
+        $has_building = true;
+        $building_name = uamswp_fad_str($building->name);
+    }
 }
 /** @var array<string, mixed>|false $location_floor */
 $location_floor = get_field_object('location_building_floor', $location_source_ids['unit']);
@@ -93,8 +90,8 @@ if ($location_floor) {
     $location_floor_label = uamswp_fad_str(uamswp_fad_assoc($location_floor['choices'] ?? null)[$location_floor_value] ?? null);
 }
 $location_suite = uamswp_fad_str(get_field('location_suite', $location_source_ids['unit'])) ?: false;
-$location_address_2 = uamswp_location_address_2(($location_building && $building_slug !== '_none'), $building_name, $location_floor, $location_floor_value, $location_floor_label, $location_suite, '<br />', ', ');
-$location_address_2_schema = uamswp_location_address_2(($location_building && $building_slug !== '_none'), $building_name, $location_floor, $location_floor_value, $location_floor_label, $location_suite, ' ', ' ');
+$location_address_2 = uamswp_location_address_2($has_building, $building_name, $location_floor, $location_floor_value, $location_floor_label, $location_suite, '<br />', ', ');
+$location_address_2_schema = uamswp_location_address_2($has_building, $building_name, $location_floor, $location_floor_value, $location_floor_label, $location_suite, ' ', ' ');
 
 $location_address_2_deprecated = uamswp_fad_str(get_field('location_address_2', $location_source_ids['street']));
 if (! $location_address_2) {

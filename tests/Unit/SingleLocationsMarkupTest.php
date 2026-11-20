@@ -1280,3 +1280,14 @@ test('the areas of expertise section closes every div it opens', function (): vo
         ->and(substr_count($match[0], '<div'))->toBe(substr_count($match[0], '</div>'))
         ->and(substr_count($match[0], '<div'))->toBeGreaterThanOrEqual(5);
 });
+
+test('a building whose term is gone or is an error adds no line to the address', function (array $options): void {
+    $run = single_location(['location_address_1' => '1 Main St', 'location_building' => 70, 'location_suite' => 'Suite 5'], $options);
+
+    expect($run['single_location_warnings'])->toBe([])
+        ->and($run['location_address_2'])->toBe('Suite 5')
+        ->and($run['location_address_2_schema'])->toBe('Suite 5');
+})->with([
+    'no term' => [[]],
+    'an error object' => [['term_errors' => [70 => true]]],
+]);

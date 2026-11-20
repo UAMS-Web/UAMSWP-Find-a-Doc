@@ -83,6 +83,12 @@ test('the primary location prints the building, floor and suite lines', function
     expect($output)->toContain('1 Main St<br/>Tower<br />Second floor, 200<br/>Little Rock, AR 72205');
 });
 
+test('a location whose building term is gone prints no building line', function (): void {
+    $output = single_physician_markup(['physician_locations' => [21]], single_physician_clinic(['location_building' => 70, 'location_suite' => '200']));
+
+    expect($output)->toContain('1 Main St<br/>200<br/>Little Rock, AR 72205');
+});
+
 test('a location with the placeholder building prints no building line', function (): void {
     $options = single_physician_clinic(['location_building' => 70, 'location_suite' => '200']);
     $options['terms'] = [70 => 'None'];

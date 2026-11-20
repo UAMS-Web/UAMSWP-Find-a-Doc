@@ -717,7 +717,7 @@ test('the location card asks for each image as a lazy card photo labeled with th
     expect($GLOBALS['location_card_thumbnails'])->toBe([$want(900), $want($child)]);
 });
 
-test('the location card reads a building term that is an error as a building with no name, with no warning', function (): void {
+test('the location card leaves out a building whose term is gone or is an error, with no warning', function (array $options): void {
     $warnings = [];
     set_error_handler(static function (int $level, string $message) use (&$warnings): bool {
         $warnings[] = $message;
@@ -726,14 +726,17 @@ test('the location card reads a building term that is an error as a building wit
     });
 
     try {
-        $output = location_card(['location_building' => 44, 'location_suite' => 'Suite 2'], ['term_errors' => [44]]);
+        $output = location_card(['location_building' => 44, 'location_suite' => 'Suite 2'], $options);
     } finally {
         restore_error_handler();
     }
 
     expect($warnings)->toBe([])
-        ->and((string) preg_replace('/\s+/', ' ', $output))->toContain('<p class="card-text">1 Main St<br/> <br />Suite 2<br/> Little Rock, AR 72205 </p>');
-});
+        ->and((string) preg_replace('/\s+/', ' ', $output))->toContain('<p class="card-text">1 Main St<br/> Suite 2<br/> Little Rock, AR 72205 </p>');
+})->with([
+    'an error object' => [['term_errors' => [44]]],
+    'no term' => [[]],
+]);
 
 test('the location card prints no second address line without one', function (): void {
     expect((string) preg_replace('/\s+/', ' ', location_card()))->toContain('<p class="card-text">1 Main St<br/> Little Rock, AR 72205 </p>');
