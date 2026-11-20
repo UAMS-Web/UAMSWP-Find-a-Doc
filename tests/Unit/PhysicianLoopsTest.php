@@ -20,7 +20,7 @@ require_once __DIR__.'/../Support/acf-functions.php';
  * @param  array<string, mixed>  $options  `terms` (`taxonomy:id` => name), `rating` (the syndicated rating data as JSON),
  *                                         `rating_array` (store it as an array, as the sync does),
  *                                         `thumbnail` (whether the post has a featured image), `published` (the ids of
- *                                         the published locations; all others are drafts).
+ *                                         the published locations; all others are drafts), `titles` (post titles by id).
  */
 function physician_loops_world(array $fields, array $options = []): void
 {
@@ -32,7 +32,7 @@ function physician_loops_world(array $fields, array $options = []): void
     when('get_term')->alias(static fn (mixed $id, string $taxonomy): object|false => isset($terms[$taxonomy.':'.$id]) ? (object) ['name' => $terms[$taxonomy.':'.$id]] : false);
     when('get_term_link')->alias(static fn (mixed $term): string => 'https://example.test/specialty/'.$term.'/');
     when('get_permalink')->alias(static fn (mixed $id = 0): string => 'https://example.test/p/'.$id.'/');
-    when('get_the_title')->alias(static fn (mixed $id = 0): string => 'Location '.$id);
+    when('get_the_title')->alias(static fn (mixed $id = 0): string => $options['titles'][$id] ?? 'Location '.$id);
     when('get_post_status')->alias(static fn (mixed $id): string => $published === null || in_array($id, $published, true) ? 'publish' : 'draft');
     when('has_post_thumbnail')->justReturn($options['thumbnail'] ?? false);
     when('get_post_thumbnail_id')->justReturn(31);
@@ -412,4 +412,34 @@ test('the Meta Box provider loop reads the rating as one stored value and trims 
 
     expect(physician_loops_calls('get_post_meta'))->toBe([['get_post_meta', 5, '_syndicated_api_data', true]])
         ->and(physician_loops_calls('wp_trim_words'))->toBe([['wp_trim_words', 30]]);
+});
+
+test('the provider loop prints every portrait size it offers', function (): void {
+    $output = physician_loop([5], [], ['thumbnail' => true]);
+
+    preg_match_all('/srcset="(sized-[^"]+)"\s*media="([^"]+)"/', $output, $sources, PREG_SET_ORDER);
+
+    expect(array_map(static fn (array $source): string => $source[1].' '.$source[2], $sources))->toBe([
+        'sized-31-243x324 (min-width: 2054px)',
+        'sized-31-184x245 (min-width: 1784px)',
+        'sized-31-243x324 (min-width: 1200px)',
+        'sized-31-184x245 (min-width: 768px)',
+        'sized-31-95x127 (min-width: 576px)',
+        'sized-31-184x245 (min-width: 1px)',
+    ])
+        ->and($output)->toContain('<img src="sized-31-184x245" alt="Jo Smith" />');
+});
+
+test('the provider loop reads the rating as one stored value and trims the clinical bio to 30 words', function (): void {
+    physician_loop([5], ['physician_npi' => '123', 'physician_clinical_bio' => 'Long bio.'], ['rating' => '{}']);
+
+    expect(physician_loops_calls('get_post_meta'))->toBe([['get_post_meta', 5, '_syndicated_api_data', true]])
+        ->and(physician_loops_calls('wp_trim_words'))->toBe([['wp_trim_words', 30]]);
+});
+
+test('the provider loop labels the name and each related location with a non-breaking space turned into a space and an ampersand kept as one', function (): void {
+    $output = physician_loop([5], ['physician_first_name' => "Mom&#8217;s A&nbsp;B\u{A0}C & D", 'physician_last_name' => 'Lee', 'physician_locations' => [7]], ['titles' => [7 => "Mom&#8217;s A&nbsp;B\u{A0}C & D"]]);
+
+    expect($output)->toContain('aria-label="Full profile for Mom\'s A B C & D Lee"')
+        ->and($output)->toContain('data-categorytitle="Related Location" data-typetitle="Mom\'s A B C & D"');
 });

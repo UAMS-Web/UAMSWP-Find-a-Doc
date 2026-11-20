@@ -148,12 +148,12 @@
 
 	            // $data = json_decode( $request );
 
-	            $pg_rating_request = '';
-	            $pg_rating_data = '';
 	            $pg_rating_valid = false;
 	            if ($npi) {
 	                /** @var object{data: object{entities: list<object{totalRatingCount: int, totalCommentCount: int, overallRating: object{value: float|int|string}}>}}|null $pg_rating_data */
 	                $pg_rating_data = uamswp_fad_pg_payload(get_post_meta(uamswp_fad_int(get_the_ID()), '_syndicated_api_data', true));
+	                // The count check guards a payload with no count; for an object it gives the same answer as the count itself.
+	                // @pest-mutate-ignore: BooleanAndToBooleanOr
 	                if (is_object($pg_rating_data) && ! empty($pg_rating_data->data->entities[0]->totalRatingCount)) {
 	                    $pg_rating_valid = (($pg_rating_data->data->entities[0]->totalRatingCount) >= 30);
 	                }
@@ -200,7 +200,7 @@
 	                    $locations = uamswp_fad_arr(get_field('physician_locations'));
 	        $location_valid = false;
 	        foreach ($locations as $location) {
-	            if (get_post_status(uamswp_fad_int($location)) == 'publish') {
+	            if (get_post_status(uamswp_fad_int($location)) === 'publish') {
 	                $location_valid = true;
 	                break;
 	            }
@@ -210,7 +210,7 @@
 								<h4 class="h5">Locations</h4>
 									<ul>
 										<?php foreach ($locations as $location) {
-										    if (get_post_status(uamswp_fad_int($location)) == 'publish') {
+										    if (get_post_status(uamswp_fad_int($location)) === 'publish') {
 										        $related_location = get_the_title(uamswp_fad_int($location));
 										        $related_location_attr = $related_location;
 										        $related_location_attr = str_replace('"', "'", $related_location_attr); // Replace double quotes with single quote
@@ -236,119 +236,6 @@
 			</div>
 		</div>
 	</div>
-	<!--
-				<a href="<?php echo get_permalink($post->ID); ?>"><h2 class="margin-top-none margin-bottom-none" itemprop="name"><?php echo $full_name; ?></h2></a>
-				<?php
-                    if (! empty(get_field('physician_clinical_title')) || ! empty($physician_service_line)) {
-                        echo '<h4>';
-                        echo uamswp_fad_object_str(get_field('physician_clinical_title'), 'name');
-                        echo (! empty(get_field('physician_clinical_title'))) && (! empty($physician_service_line)) ? ', ' : '';
-                        echo $physician_service_line ? uamswp_fad_term_name($physician_service_line, 'service_line') : '';
-                        echo '</h4>';
-                    }
-	        ?>
-			</div>
-		</div>
-		<div class="row margin-top-half">
-	        <div class="col-md-3 col-sm-4" class="margin-top-none margin-bottom-two">
-	            <div class="margin-bottom-two text-center">
-	            	<span><a href="<?php echo get_permalink($post->ID); ?>" target="_self"><?php the_post_thumbnail('medium', ['itemprop' => 'image']); ?></a></span>
-	            </div>
-				<?php /*
-                    if(get_field('physician_npi')) {
-
-                            $npi =  get_field( 'physician_npi' );
-                            $request = wp_nrc_cached_api( $npi );
-
-                            $data = json_decode( $request );
-
-                            if( ! empty( $data ) ) {
-
-                                $rating_valid = $data->valid;
-
-                                if ( $rating_valid ){
-                                    echo '<div class="text-center">';
-                                    echo '<div class="ds-title">Patient Rating</div>';
-                                    echo '<div><span class="ds-stars ds-stars'. $data->profile->averageStarRatingStr .'"></span></div>';
-                                    echo '<div class="ds-xofy"><span class="ds-average">'. $data->profile->averageRatingStr .'</span><span class="ds-average-max">out of 5</span></div>';
-                                    echo '<div class="ds-ratings"><span class="ds-ratingcount">'. $data->profile->reviewcount .'</span> Ratings</div>';
-                                    echo '<div class="ds-comments"><span class="ds-commentcount">'. $data->profile->bodycount .'</span> Comments</div>';
-                                    echo '</div>';
-                                    //echo '<a href="' . esc_url( $rating->info->link ) . '">' . $product->info->title . '</a>';
-                                } else { ?>
-                                    <div class="text-center">
-                                    <div class="ds-title">Patient Rating</div>
-                                    <div><span class="ds-stars ds-stars0"></span></div>
-                                    <div class="small bold">No Patient Satisfaction Reviews</div>
-                                    <div><a href="#" class="js-modal" data-modal-close-text="Close" data-modal-close-title="Close this window" data-modal-content-id="why_not_modal" data-modal-title="Why Not?" aria-label="Learn why ratings are not available for this provider"><span aria-hidden="true">Why not?</span></a></div>
-                                    </div>
-                                <?php
-                                }
-                            }
-                        } else { ?>
-                            <div class="text-center">
-                            <div class="ds-title">Patient Rating</div>
-                            <div><span class="ds-stars ds-stars0"></span></div>
-                            <div class="small bold">No Patient Satisfaction Reviews</div>
-                            <div><a data-toggle="modal" data-target="#why_not_modal" aria-label="Learn why ratings are not available for this provider"><span aria-hidden="true">Why not?</span></a></div>
-                            </div>
-                        <?php }
-                */ ?>
-	        </div>
-	        <div class="col-md-9 col-sm-8" class="margin-top-none margin-bottom-none">
-	                <div class="row" class="margin-top-none margin-bottom-none">
-	                    <div class="col-md-6">
-
-	                        <p><?php echo get_field('physician_short_clinical_bio') ?: wp_trim_words(uamswp_fad_str(get_field('physician_clinical_bio')), 30, ' &hellip;'); ?></p>
-
-	                         <a class="uams-btn btn-blue btn-sm" target="_self" title="View Profile" href="<?php echo get_permalink($post->ID); ?>">View Profile</a>
-							<?php if (get_field('physician_youtube_link')) { ?>
-								<a class="uams-btn btn-red btn-play btn-sm" target="_self" title="View Physician Video" href="<?php echo esc_url(uamswp_fad_str(get_field('physician_youtube_link'))); ?>&rel=0" data-lity>View Video</a>
-							<?php } ?>
-	                    </div>
-	                    <div class="col-md-6">
-
-	                        <?php // load all 'specialties' terms for the post
-	                    $specialties = get_field('medical_specialties');
-
-	        // we will use the first term to load ACF data from
-	        if ($specialties) { ?>
-								<h3>Specialties</h3>
-								<ul>
-									<?php foreach (uamswp_fad_arr($specialties) as $specialty) { ?>
-										<li>
-											<a href="<?php echo uamswp_fad_str(get_term_link(uamswp_fad_int($specialty))); ?>">
-											<?php echo uamswp_fad_term_name($specialty, 'specialty'); ?>
-											</a>
-										</li>
-									<?php } ?>
-								</ul>
-							<?php } ?>
-							<?php
-
-	                        $locations = uamswp_fad_arr(get_field('physician_locations'));
-
-	        ?>
-							<?php if ($locations !== []) { ?>
-							<h3 data-fontsize="16" data-lineheight="24"><i class="fa fa-medkit"></i> Clinic(s)</h3>
-								<ul>
-								<?php foreach ($locations as $location) { ?>
-									<li>
-										<a href="<?php echo get_permalink(uamswp_fad_int($location)); ?>">
-											<?php echo get_the_title(uamswp_fad_int($location)); ?>
-										</a>
-									</li>
-								<?php } ?>
-								</ul>
-							<?php } ?>
-							-->
-	                    <!-- </div>.col-6 -->
-	                <!-- </div>.row -->
-
-	        <!-- </div>.col-9 -->
-	    <!-- </div>.row -->
-	<!-- </div>.color -->
-	<?php $i++; ?>
 	<?php } ?>
 		<link rel="stylesheet" type="text/css" href="https://www.docscores.com/resources/css/docscores-lotw.v1330-2018121714.css" />
 
