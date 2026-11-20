@@ -90,6 +90,14 @@ use Symfony\Component\Process\Process;
  *         scores would be fabricated, 2 = the instrument could not be located, or the probe's
  *         control failed, so nothing was measured.
  *
+ * How the shared local CI runner acts on these statuses before a `mutation` job (decided on
+ * UAMS-Web/uams-claude-skills#851): exit 0 runs the job. Exit 2, or an exit 0 that says NOT
+ * MEASURED, stops it only for a bare selection; where the job names its test files they reach
+ * this probe as --arg, and the job runs behind a warning. Exit 1 stops it, except, temporarily, a
+ * probe-child death where patches.lock.json records no patch, which runs behind a warning until
+ * UAMS-Web/uams-claude-skills#857 removes the exception. A form that cannot launch with no launch
+ * guard always stops it.
+ *
  * `--runner` exists so this check's OWN failing branch can be exercised against a copy of the
  * unpatched plugin. A guard whose red path nobody has watched fire is the false green this
  * script is about, so the seam is deliberate rather than a convenience.
@@ -190,7 +198,7 @@ if ($launchFabricates) {
     echo "check-mutation-instrument: FABRICATION LIKELY.\n";
     echo "A form above cannot launch a child, and the installed plugin has no guard, so every mutant\n";
     echo "reached through that form is scored KILLED without being executed and the run exits 0.\n";
-    echo "Re-apply any launch patch (composer install into a cold vendor/), or invoke via a form that launches.\n";
+    echo "Re-apply the patches the lock records (composer patches-repatch, then re-run this check), or invoke via a form that launches.\n";
 } elseif ($anyFails) {
     echo "launch: a form above cannot launch, but the installed plugin normalizes argv[0] and aborts\n";
     echo "rather than scoring a child that never started as a kill.\n";

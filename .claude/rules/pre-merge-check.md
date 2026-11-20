@@ -145,4 +145,6 @@ Use a `Workflow` under Ultracode or when asked, otherwise the same frame scaled 
 
 This file owns **the decision to merge** and what the gate does with a red. Elsewhere: the build gate ([`AGENTS.md`](../../AGENTS.md)), ship-time duties ([`closing-a-ticket`](closing-a-ticket.md)), branch sync ([`sync-pr-branch`](sync-pr-branch.md)), where you branch ([`worktrees`](worktrees.md)), and the composing behavior behind steps 6 and 7 ([`github-api-budget`](github-api-budget.md)). Don't restate them.
 
+The author-side counterpart, the fast checks run before every push to a pull-request branch, is [`pre-push-check`](pre-push-check.md).
+
 Evidence, measurements and history: [`pre-merge-check`](../skills/evidence-behind-rules/pre-merge-check.md).

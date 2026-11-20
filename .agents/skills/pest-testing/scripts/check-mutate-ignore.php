@@ -67,8 +67,26 @@ declare(strict_types=1);
  * annotated is the `adversarial-review` rule's, and out of scope here.
  *
  * Only comment tokens are inspected (`token_get_all`), so a heredoc or string that
- * contains the marker is not a finding. A comment is an annotation only when the marker
- * opens its content; a sentence that merely mentions the marker is prose about it.
+ * contains the marker is not a finding. Every comment that contains the marker is an
+ * annotation, wherever the marker sits, because the plugin's pattern matches it anywhere
+ * in the comment's text (UAMS-Web/uams-claude-skills#848). A marker is "after prose" when its
+ * own line within the comment carries text before it other than the comment opener, `*` and
+ * whitespace; a marker that begins a doc comment line is judged like a standalone one, however
+ * much text the lines above it hold. A marker after prose, as in
+ * `/** Guard kept. @pest-mutate-ignore`, is classified exactly as the plugin reads it, so a
+ * bare one is reported as `bare` and one naming a known mutator beside prose as `prose`, and the finding names the
+ * marker's own line and says it follows prose. A sentence that only mentions the marker
+ * (`// Put @pest-mutate-ignore above the node`) is counted but never flagged, in any position,
+ * when the plugin reads its tail as naming no mutator: it suppresses nothing, and its author
+ * meant no annotation, where a standalone marker with such a tail was meant as one and is
+ * flagged `inert`. Flagging these would only make every repository reword harmless prose (21
+ * such sentences in uams-statamic at 7bc77e5). The same sentence ending at the marker is a
+ * blanket suppression and is flagged `bare`, so mention the marker without its `@`
+ * (`pest-mutate-ignore`) where a rewrap could leave it at a line end.
+ *
+ *   second     The plugin reads only the FIRST marker in a comment, so a later marker in the
+ *              same comment is never applied. Reported unless it too is a mere mention
+ *              (after prose, naming no mutator), with the later marker's line.
  *
  * USAGE
  *     php check-mutate-ignore.php [path ...]
@@ -98,7 +116,9 @@ declare(strict_types=1);
  * planted valid annotation must be classified as bare, inert and clean, and planted
  * markers above a leading `&&`, `||` and infix `-` (and a block marker above `&&`) must
  * be flagged while the same marker above the parenthesized operand, above a unary
- * minus, or after a braceless `if` is not. A classifier that cannot tell
+ * minus, or after a braceless `if` is not; a bare marker after prose in a doc comment must
+ * be flagged, while a known name after prose and a sentence that mentions the marker are
+ * not. A classifier that cannot tell
  * them apart exits 2 before it reads a single project file.
  */
 const MEASURED_VERSION = 'v5.0.2';
@@ -323,6 +343,10 @@ function controlsPass(array $known): bool
         ["<?php\nif (\n    \$a\n    && (\n".$marker."        \$b !== ''\n    )\n) {}\n", 0],
         ["<?php\n\$x = [\n".$marker."    -1,\n];\n", 0],
         ["<?php\nif (\$a)\n".$marker."    -\$b;\n", 0],
+        // #848: a marker after prose is read like any other
+        ["<?php\n/**\n * Guard kept. ".MARKER."\n */\nfunction f() {}\n", 1],
+        ["<?php\n// Guard kept. ".MARKER.': '.$name."\n\$a = 1;\n", 0],
+        ["<?php\n// Put ".MARKER." above the node.\n\$a = 1;\n", 0],
     ];
 
     foreach ($layouts as [$planted, $expected]) {
@@ -520,10 +544,14 @@ function scanSource(string $source, string $label, array $known, bool $lineMapLi
 {
     $findings = [];
     $annotations = 0;
-    $lines = preg_split('/\R/', $source) ?: [];
     $tokens = token_get_all($source);
 
+    $offset = 0;
+
     foreach ($tokens as $index => $token) {
+        $start = $offset;
+        $offset += strlen(is_array($token) ? $token[1] : $token);
+
         if (! is_array($token) || ($token[0] !== T_COMMENT && $token[0] !== T_DOC_COMMENT)) {
             continue;
         }
@@ -535,22 +563,62 @@ function scanSource(string $source, string $label, array $known, bool $lineMapLi
             continue;
         }
 
-        $body = preg_replace('{^(/\*\*?|//|#)}', '', $text, 1) ?? $text;
-        $lead = substr($body, 0, (int) strpos($body, MARKER));
+        // The plugin matches the FIRST marker anywhere in the comment, so a marker after prose is
+        // an annotation too (UAMS-Web/uams-claude-skills#848). It is prose-led when its own line
+        // within the comment carries text before it, other than the opener, `*` and whitespace.
+        $textLines = explode("\n", $text);
+        $markerOffset = substr_count(substr($text, 0, $at), "\n");
+        $ownLine = $textLines[$markerOffset] ?? '';
+        $lead = substr($ownLine, 0, (int) strpos($ownLine, MARKER));
 
-        if (trim($lead, " \t\r\n*") !== '') {
-            continue;
+        if ($markerOffset === 0) {
+            $lead = preg_replace('{^\s*(/\*\*?|//|#)}', '', $lead, 1) ?? $lead;
         }
+
+        $proseLed = trim($lead, " \t\r*") !== '';
 
         $annotations++;
         $where = $label.':'.$line;
-        $first = trim(explode("\n", $text)[0]);
+        $first = trim($textLines[0]);
 
-        $thisLine = $lines[$line - 1] ?? '';
-        $markerAt = strpos($thisLine, MARKER);
-        $before = $markerAt === false ? '' : substr($thisLine, 0, $markerAt);
+        if ($proseLed) {
+            $where = $label.':'.($line + $markerOffset);
+            $first = trim($ownLine);
+        }
 
-        $standalone = trim($before, " \t/*#") === '';
+        // Only the first marker is read, so a later one in the same comment is never applied.
+        // It is reported unless it too is a mere mention: after prose, naming no mutator.
+        $second = strpos($text, MARKER, $at + strlen(MARKER));
+
+        if ($second !== false) {
+            $secondOffset = substr_count(substr($text, 0, $second), "\n");
+            $secondLine = $textLines[$secondOffset] ?? '';
+            $secondLead = substr($secondLine, 0, (int) strpos($secondLine, MARKER));
+            $secondMention = trim($secondLead, " \t\r*") !== ''
+                && (classifyAnnotation(substr($text, $second), $known)['kind'] ?? null) === 'inert';
+
+            if (! $secondMention) {
+                $findings[] = [
+                    $label.':'.($line + $secondOffset),
+                    'second marker in one comment: the plugin reads only the first marker in a comment, so this one is never applied; give it a comment of its own',
+                    trim($secondLine),
+                ];
+            }
+        }
+
+        $found = classifyAnnotation($text, $known);
+
+        // A sentence that mentions the marker and suppresses nothing is counted, not flagged,
+        // wherever it sits.
+        if ($proseLed && ($found['kind'] ?? null) === 'inert') {
+            continue;
+        }
+
+        // Standalone means the comment begins its line: nothing but whitespace before it.
+        $lineStart = strrpos(substr($source, 0, $start), "\n");
+        $before = substr($source, $lineStart === false ? 0 : $lineStart + 1, $start - ($lineStart === false ? 0 : $lineStart + 1));
+
+        $standalone = trim($before) === '';
 
         if (! $standalone && ! $lineMapLive) {
             $findings[] = [$where, 'trailing: does not begin its line, so it attaches to the NEXT node', $first];
@@ -566,10 +634,9 @@ function scanSource(string $source, string $label, array $known, bool $lineMapLi
             continue;
         }
 
-        $found = classifyAnnotation($text, $known);
-
         if ($found !== null) {
-            $findings[] = [$where, $found['kind'].': '.$found['detail'], $first];
+            $detail = $found['detail'].($proseLed ? '; the marker follows prose in its comment, which the plugin reads like any marker' : '');
+            $findings[] = [$where, $found['kind'].': '.$detail, $first];
         }
     }
 
