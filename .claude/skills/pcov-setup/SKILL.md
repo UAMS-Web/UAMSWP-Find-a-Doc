@@ -513,6 +513,8 @@ Run this whenever you have reason to distrust a result, not only when reviewing 
 php .claude/skills/pcov-setup/scripts/check-mutation-instrument.php     # 0 = a mutant child launches and reaches a test, 1 = scores would be fabricated, 2 = nothing measured
 ```
 
+**The shared local CI runner runs this check before every `mutation` job, and stops the run when it fails** (UAMS-Web/uams-claude-skills#849), with two exceptions decided on UAMS-Web/uams-claude-skills#851, each run behind a warning. An exit `2` or a `NOT MEASURED` stops only a bare selection: where the job's `run` names its test files, the probe is given them as `--arg`, and the run goes ahead. Temporarily, a probe-child death in a repository whose `patches.lock.json` is absent or records no patch also goes ahead, until UAMS-Web/uams-claude-skills#857 removes that exception. A form that cannot launch without a launch guard always stops the run. The `local-ci` skill has the detail. The patch need not be on the plugin: in `UAMS-Web/UAMSWP-Find-a-Doc`, a `vendor/` without `patchwork-directory-wrapper.patch` killed every mutant child with exit 255 on a Patchwork `TypeError` during a directory read, the plugin scored each death as a kill, and the run reported 756 of 756 tested, 100%. The remedy the runner prints is `composer patches-repatch`, then this check again; there is no option that skips it. A run started by hand is not checked, so run the check first.
+
 ## Mutation cannot reach a class that is already loaded
 
 This is the sharpest trap here, because it produces a **0% score that looks like a damning verdict on the tests** and is nothing of the kind.
