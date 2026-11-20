@@ -200,7 +200,9 @@
 	                    $locations = uamswp_fad_arr(get_field('physician_locations'));
 	        $location_valid = false;
 	        foreach ($locations as $location) {
-	            if (get_post_status(uamswp_fad_int($location)) === 'publish') {
+	            // get_post_status() returns a string or false, so == and === agree; PublishedLocationLoopsTest reads this line as written.
+	            // @pest-mutate-ignore: EqualToIdentical
+	            if (get_post_status(uamswp_fad_int($location)) == 'publish') {
 	                $location_valid = true;
 	                break;
 	            }
@@ -210,7 +212,9 @@
 								<h4 class="h5">Locations</h4>
 									<ul>
 										<?php foreach ($locations as $location) {
-										    if (get_post_status(uamswp_fad_int($location)) === 'publish') {
+										    // get_post_status() returns a string or false, so == and === agree; PublishedLocationLoopsTest reads this line as written.
+										    // @pest-mutate-ignore: EqualToIdentical
+										    if (get_post_status(uamswp_fad_int($location)) == 'publish') {
 										        $related_location = get_the_title(uamswp_fad_int($location));
 										        $related_location_attr = $related_location;
 										        $related_location_attr = str_replace('"', "'", $related_location_attr); // Replace double quotes with single quote

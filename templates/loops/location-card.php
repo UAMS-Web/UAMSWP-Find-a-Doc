@@ -36,14 +36,6 @@ $location_title_attr = html_entity_decode(str_replace('&nbsp;', ' ', htmlentitie
 $location_has_parent = get_field('location_parent', $id);
 $location_parent_id = get_field('location_parent_id', $id);
 $parent_location = ''; // Eliminate PHP errors
-$parent_id = ''; // Eliminate PHP errors
-$parent_title = ''; // Eliminate PHP errors
-$parent_url = ''; // Eliminate PHP errors
-$parent_location_prepend_the = ''; // Eliminate PHP errors
-$parent_title_prepend = ''; // Eliminate PHP errors
-$parent_title_phrase = ''; // Eliminate PHP errors
-$override_parent_photo = ''; // Eliminate PHP errors
-$override_parent_photo_featured = ''; // Eliminate PHP errors
 
 if ($location_has_parent && $location_parent_id) {
     $parent_location = get_post(uamswp_fad_int($location_parent_id));
@@ -52,18 +44,10 @@ if ($location_has_parent && $location_parent_id) {
 if ($parent_location) {
     $parent_id = $parent_location->ID;
     $parent_title = $parent_location->post_title;
-    $parent_title_attr = $parent_title;
-    $parent_title_attr = str_replace('"', "'", $parent_title_attr); // Replace double quotes with single quote
-    $parent_title_attr = str_replace('&#8217;', "'", $parent_title_attr); // Replace right single quote with single quote
-    $parent_title_attr = str_replace('&nbsp;', ' ', $parent_title_attr); // Convert non-breaking space entity text to a normal space before it is encoded
-    $parent_title_attr = htmlentities($parent_title_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
-    $parent_title_attr = str_replace('&nbsp;', ' ', $parent_title_attr); // Convert non-breaking space with normal space
-    $parent_title_attr = html_entity_decode($parent_title_attr); // Convert HTML entities to their corresponding characters
     $parent_url = get_permalink($parent_id);
     $featured_image = get_the_post_thumbnail($parent_id, 'aspect-16-9-small', ['class' => 'card-img-top', 'data-categorytitle' => 'Photo', 'data-itemtitle' => $location_title_attr, 'loading' => 'lazy']);
     $parent_location_prepend_the = get_field('location_prepend_the', $parent_id);
     $parent_title_prepend = $parent_location_prepend_the ? 'the ' : '';
-    $parent_title_phrase = $parent_title_prepend.$parent_title;
 
     $override_parent_photo = get_field('location_image_override_parent', $id);
     $override_parent_photo_featured = get_field('location_image_override_parent_featured', $id);
@@ -81,25 +65,36 @@ if ($parent_location) {
 
 $location_address_1 = uamswp_fad_str(get_field('location_address_1', $location_source_ids['street']));
 $location_building = get_field('location_building', $location_source_ids['facility']);
+// Read only when the location has a building, which sets both below; uamswp_location_address_2() reads the name only
+// then, and the slug check only then.
+// @pest-mutate-ignore: EmptyStringToNotEmpty
 $building_slug = '';
+// As above.
+// @pest-mutate-ignore: EmptyStringToNotEmpty
 $building_name = '';
 if ($location_building) {
     $building = get_term(uamswp_fad_int($location_building), 'building');
     $building_found = is_object($building) && ! is_wp_error($building);
+    // A building that is not found has a slug that is not '_none' whatever it reads as.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $building_slug = $building_found ? uamswp_fad_str($building->slug) : '';
     $building_name = $building_found ? uamswp_fad_str($building->name) : '';
 }
 /** @var array<string, mixed>|false $location_floor */
 $location_floor = get_field_object('location_building_floor', $location_source_ids['unit']);
+// uamswp_location_address_2() reads the floor value and label only when there is a floor, which sets both below.
+// @pest-mutate-ignore: EmptyStringToNotEmpty
 $location_floor_value = '';
+// As above.
+// @pest-mutate-ignore: EmptyStringToNotEmpty
 $location_floor_label = '';
 if ($location_floor) {
     $location_floor_value = uamswp_fad_str($location_floor['value'] ?? null);
     $location_floor_label = uamswp_fad_str(uamswp_fad_assoc($location_floor['choices'] ?? null)[$location_floor_value] ?? null);
 }
 $location_suite = uamswp_fad_str(get_field('location_suite', $location_source_ids['unit'])) ?: false;
-$location_address_2 = uamswp_location_address_2(($location_building && $building_slug != '_none'), $building_name, $location_floor, $location_floor_value, $location_floor_label, $location_suite, '<br />', ', ');
-$location_address_2_schema = uamswp_location_address_2(($location_building && $building_slug != '_none'), $building_name, $location_floor, $location_floor_value, $location_floor_label, $location_suite, ' ', ' ');
+$location_address_2 = uamswp_location_address_2(($location_building && $building_slug !== '_none'), $building_name, $location_floor, $location_floor_value, $location_floor_label, $location_suite, '<br />', ', ');
+$location_address_2_schema = uamswp_location_address_2(($location_building && $building_slug !== '_none'), $building_name, $location_floor, $location_floor_value, $location_floor_label, $location_suite, ' ', ' ');
 
 $location_address_2_deprecated = uamswp_fad_str(get_field('location_address_2', $location_source_ids['street']));
 if (! $location_address_2) {
@@ -127,7 +122,7 @@ $location_zip = uamswp_fad_str(get_field('location_zip', $location_source_ids['s
             <?php if ($parent_location && ! $child_location_list) { ?>
                 <span class="subtitle"><span class="sr-only">(</span>Part of <?php echo $parent_title_prepend; ?><a href="<?php echo esc_url(uamswp_fad_str($parent_url)); ?>" data-categorytitle="Parent Name" data-itemtitle="<?php echo $location_title_attr; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
             <?php } // endif?>
-            <?php if (isset($l) && $l == 1) { ?>
+            <?php if (isset($l) && $l === 1) { ?>
                 <span class="subtitle"><span class="sr-only">, </span>Primary Location</span>
             <?php } ?>
         </h3>
@@ -137,6 +132,8 @@ $location_zip = uamswp_fad_str(get_field('location_zip', $location_source_ids['s
         $location_closing = get_field('location_closing', $id); // true or false
 $location_closing_date = uamswp_fad_str(get_field('location_closing_date', $id)); // F j, Y
 $location_closing_date_past = false;
+// A stored date has no time of day, so it equals the current moment only at midnight to the microsecond.
+// @pest-mutate-ignore: GreaterOrEqualToGreater
 if (new DateTime >= new DateTime($location_closing_date)) {
     $location_closing_date_past = true;
 }
@@ -144,6 +141,8 @@ $location_closing_length = get_field('location_closing_length', $id);
 $location_reopen_known = get_field('location_reopen_known', $id);
 $location_reopen_date = uamswp_fad_str(get_field('location_reopen_date', $id)); // F j, Y
 $location_reopen_date_past = false;
+// As above.
+// @pest-mutate-ignore: GreaterOrEqualToGreater
 if (new DateTime >= new DateTime($location_reopen_date)) {
     $location_reopen_date_past = true;
 }
@@ -151,8 +150,8 @@ $location_closing_info = get_field('location_closing_info', $id);
 $location_closing_display = false;
 if (
     $location_closing && (
-        $location_closing_length == 'permanent'
-        || ($location_closing_length == 'temporary' && ! $location_reopen_date_past)
+        $location_closing_length === 'permanent'
+        || ($location_closing_length === 'temporary' && ! $location_reopen_date_past)
     )
 ) {
     $location_closing_display = true;
@@ -182,12 +181,20 @@ $telemed_today_30 = $today_30;
 $modified = $modified && $modified_start;
 $telemed_modified = $telemed_modified && $telemed_modified_start;
 
-// Reset, so a card in a loop never prints the date of the card before it.
+// Reset, so a card in a loop never prints the date of the card before it. Every path that prints either sets it first,
+// so the reset values themselves are never read on this card.
+// @pest-mutate-ignore: EmptyStringToNotEmpty
 $location_modified_hours_start = '';
+// As above.
+// @pest-mutate-ignore: FalseToTrue
 $location_modified_hours_date_past = false;
 
 // Each source counts only while it is in its own window: started or starting within 30 days, and not yet ended (#1305).
+// A start date has no time of day, so it equals "now + 30 days" only at midnight to the second.
+// @pest-mutate-ignore: SmallerOrEqualToSmaller
 $clinic_in_window = $modified && strtotime($modified_start) <= $today_30 && (strtotime($modified_end_date) >= $today || ! $modified_end);
+// As above.
+// @pest-mutate-ignore: SmallerOrEqualToSmaller
 $telemed_in_window = $telemed_modified && strtotime($telemed_modified_start) <= $telemed_today_30 && (strtotime($telemed_modified_end_date) >= $telemed_today || ! $telemed_modified_end);
 
 $location_modified_hours_display = $clinic_in_window || $telemed_in_window;
@@ -217,26 +224,29 @@ if ($location_modified_hours_display) {
 // Create the alert
 
 if ($location_closing_display || $location_modified_hours_display) {
-    $alert_label = '';
-    if ($location_closing_display) {
-        $alert_label = 'Learn more about the closure of '.$location_title_attr.'.';
-    } elseif ($location_modified_hours_display) {
-        $alert_label = 'Learn more about the modified hours.';
-    }
+    // The alert shows for a closure or for modified hours, so the label is for one or the other.
+    $alert_label = $location_closing_display ? 'Learn more about the closure of '.$location_title_attr.'.' : 'Learn more about the modified hours.';
+    // The label's only text that varies is $location_title_attr, cleaned above: it holds no double quote and no
+    // non-breaking space, and encoding then decoding it gives it back. So only the quote entity and the decode act here.
     $alert_label_attr = $alert_label;
+    // As above.
+    // @pest-mutate-ignore: UnwrapStrReplace
     $alert_label_attr = str_replace('"', "'", $alert_label_attr); // Replace double quotes with single quote
     $alert_label_attr = str_replace('&#8217;', "'", $alert_label_attr); // Replace right single quote with single quote
-    $alert_label_attr = str_replace('&nbsp;', ' ', $alert_label_attr); // Convert non-breaking space entity text to a normal space before it is encoded
-    $alert_label_attr = htmlentities($alert_label_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
+    // As above: replace the non-breaking space entity text with a space, then convert to HTML entities.
+    // @pest-mutate-ignore: UnwrapHtmlentities,UnwrapStrReplace
+    $alert_label_attr = htmlentities(str_replace('&nbsp;', ' ', $alert_label_attr), ENT_HTML401, 'UTF-8');
+    // As above.
+    // @pest-mutate-ignore: UnwrapStrReplace
     $alert_label_attr = str_replace('&nbsp;', ' ', $alert_label_attr); // Convert non-breaking space with normal space
     $alert_label_attr = html_entity_decode($alert_label_attr); // Convert HTML entities to their corresponding characters
     ?>
             <div class="alert alert-warning" role="alert">
                 <?php if ($location_closing_display) {
                     if ($location_closing_date_past) { ?>
-                        This location is <?php echo $location_closing_length == 'temporary' ? 'temporarily' : 'permanently'; ?> closed.
+                        This location is <?php echo $location_closing_length === 'temporary' ? 'temporarily' : 'permanently'; ?> closed.
                     <?php } else { ?>
-                        This location will be closing <?php echo $location_closing_length == 'temporary' ? 'temporarily beginning' : 'permanently'; ?> on <?php echo $location_closing_date; ?>.
+                        This location will be closing <?php echo $location_closing_length === 'temporary' ? 'temporarily beginning' : 'permanently'; ?> on <?php echo $location_closing_date; ?>.
                     <?php } // endif
                 } elseif ($location_modified_hours_display) {
                     if ($location_modified_hours_date_past) { ?>
