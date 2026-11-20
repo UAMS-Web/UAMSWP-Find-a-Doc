@@ -250,13 +250,14 @@ function display_provider_image_doximity_list(): void
 
                                     $primary_appointment_address_1 = uamswp_fad_str(get_field('location_address_1', $location_source_ids['street']));
                                     $primary_appointment_building = get_field('location_building', $location_source_ids['facility']);
+                                    // A building counts only when its term still exists and is not the _none term, so a deleted building adds no empty line.
+                                    $has_building = false;
                                     if ($primary_appointment_building) {
                                         $building = get_term(uamswp_fad_int($primary_appointment_building), 'building');
-                                        $building_found = is_object($building) && ! is_wp_error($building);
-                                        // The slug is only compared with _none, which an empty slug is not either.
-                                        // @pest-mutate-ignore: EmptyStringToNotEmpty
-                                        $building_slug = $building_found ? uamswp_fad_str($building->slug) : '';
-                                        $building_name = $building_found ? uamswp_fad_str($building->name) : '';
+                                        if (is_object($building) && ! is_wp_error($building) && $building->slug !== '_none') {
+                                            $has_building = true;
+                                            $building_name = uamswp_fad_str($building->name);
+                                        }
                                     }
                                     /** @var array<string, mixed>|false $primary_appointment_floor */
                                     $primary_appointment_floor = get_field_object('location_building_floor', $location_source_ids['unit']);
@@ -271,9 +272,9 @@ function display_provider_image_doximity_list(): void
                                         $primary_appointment_floor_label = uamswp_fad_str(uamswp_fad_assoc($primary_appointment_floor['choices'] ?? null)[$primary_appointment_floor_value] ?? null);
                                     }
                                     $primary_appointment_suite = uamswp_fad_str(get_field('location_suite', $location_source_ids['unit'])) ?: false;
-                                    // The building slug is a string, so loose and strict inequality agree, and the building name is read only when a building exists, which sets it.
-                                    // @pest-mutate-ignore: NotEqualToNotIdentical,EmptyStringToNotEmpty
-                                    $primary_appointment_address_2 = uamswp_location_address_2(($primary_appointment_building && $building_slug != '_none'), $building_name ?? '', $primary_appointment_floor, $primary_appointment_floor_value, $primary_appointment_floor_label, $primary_appointment_suite, '<br />', '<br />');
+                                    // The building name is read only when a building exists, which sets it.
+                                    // @pest-mutate-ignore: EmptyStringToNotEmpty
+                                    $primary_appointment_address_2 = uamswp_location_address_2($has_building, $building_name ?? '', $primary_appointment_floor, $primary_appointment_floor_value, $primary_appointment_floor_label, $primary_appointment_suite, '<br />', '<br />');
                                     $primary_appointment_address_2_deprecated = uamswp_fad_str(get_field('location_address_2', $location_source_ids['street']));
                                     if (! $primary_appointment_address_2) {
                                         $primary_appointment_address_2 = $primary_appointment_address_2_deprecated;
