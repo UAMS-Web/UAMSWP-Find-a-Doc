@@ -184,6 +184,7 @@ if ($filter_id || $filter_region || $filter_location || $filter_aoe) {
                     </div>
                 </div>
             </div>
+            </div>
         </section>
     <?php
     }

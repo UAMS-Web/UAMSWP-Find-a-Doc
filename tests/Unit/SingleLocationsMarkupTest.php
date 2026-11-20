@@ -1271,3 +1271,12 @@ test('the structured data has a medicalSpecialty key when there are conditions o
     'two treatments' => [[], [(object) ['ID' => 41, 'post_title' => 'Infusion'], (object) ['ID' => 42, 'post_title' => 'Dialysis']], ['Infusion', 'Dialysis']],
     'neither' => [[], [], null],
 ]);
+
+test('the areas of expertise section closes every div it opens', function (): void {
+    [$fields, $options] = single_location_lists();
+    $output = single_location_markup($fields, $options);
+
+    expect(preg_match('#<section class="uams-module expertise-list bg-auto" id="expertise">.*?</section>#s', $output, $match))->toBe(1)
+        ->and(substr_count($match[0], '<div'))->toBe(substr_count($match[0], '</div>'))
+        ->and(substr_count($match[0], '<div'))->toBeGreaterThanOrEqual(5);
+});

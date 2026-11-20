@@ -544,6 +544,7 @@ test('the locations section prints its heading around the location cards, and in
                     </div>
                 </div>
             </div>
+            </div>
         </section>'))
         ->and($resets->count())->toBe(1)
         ->and(fn () => resource_callback_section('uamswp_resource_locations', ['show_locations_section' => true, 'location_query' => resource_callback_query([31])]))->toThrow(RuntimeException::class, 'location card 31');

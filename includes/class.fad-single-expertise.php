@@ -343,6 +343,7 @@ function uamswp_expertise_locations(): void
                     </div>
                 </div>
             </div>
+            </div>
         </section>
     <?php
     } // endif

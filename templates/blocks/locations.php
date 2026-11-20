@@ -172,6 +172,7 @@ if ($filter_type || $filter_region || $filter_aoe || $filter_ids) {
                     </div>
                 </div>
             </div>
+            </div>
         </section>
     <?php
     }

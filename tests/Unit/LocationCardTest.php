@@ -738,3 +738,12 @@ test('the location card reads a building term that is an error as a building wit
 test('the location card prints no second address line without one', function (): void {
     expect((string) preg_replace('/\s+/', ' ', location_card()))->toContain('<p class="card-text">1 Main St<br/> Little Rock, AR 72205 </p>');
 });
+
+test('the locations block closes every div it opens, with or without its link button', function (array $fields): void {
+    $output = (string) preg_replace('/<!--.*?-->/s', '', locations_block(['block_fad_locations_filter_ids' => [61]] + $fields, [[61]], ['block' => ['id' => 'abc']]));
+
+    expect(preg_match_all('/<div\b/', $output))->toBe(substr_count($output, '</div>'));
+})->with([
+    'without the button' => [[]],
+    'with the button' => [['block_fad_locations_more' => true, 'block_fad_locations_more_text' => 'Want more?', 'block_fad_locations_more_button_text' => 'See all', 'block_fad_locations_more_button_url' => ['url' => 'https://example.test/locations/', 'target' => '']]],
+]);
