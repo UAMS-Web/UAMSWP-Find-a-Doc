@@ -1257,3 +1257,17 @@ test('the structured data leaves out the hours that vary and names the logo', fu
 test('the page ends with the site footer', function (): void {
     expect(single_location()['single_location_footers'])->toBe(1);
 });
+
+test('the structured data has a medicalSpecialty key when there are conditions or treatments, and none without either', function (array $conditions, array $treatments, ?array $names): void {
+    [$fields, $options] = single_location_lists();
+    $options['queries'][2] = $conditions;
+    $options['queries'][3] = $treatments;
+    $schema = single_location_schema($fields, $options);
+
+    expect(isset($schema['medicalSpecialty']) ? array_column(array_filter($schema['medicalSpecialty'], is_array(...)), 'name') : null)->toBe($names);
+})->with([
+    'conditions only' => [[(object) ['ID' => 31, 'post_title' => 'Asthma']], [], ['Asthma']],
+    'treatments only' => [[], [(object) ['ID' => 41, 'post_title' => 'Infusion']], ['Infusion']],
+    'two treatments' => [[], [(object) ['ID' => 41, 'post_title' => 'Infusion'], (object) ['ID' => 42, 'post_title' => 'Dialysis']], ['Infusion', 'Dialysis']],
+    'neither' => [[], [], null],
+]);

@@ -18,7 +18,8 @@ declare(strict_types=1);
  */
 function published_loop_flags(string $source): array
 {
-    preg_match_all('/get_post_status\((?:uamswp_fad_int\(\$\w+\)|\$\w+)\)\s*==\s*\'publish\'\)\s*\{\s*(\$\w+_valid)\s*=\s*true;\s*(break;)?/', $source, $matches, PREG_SET_ORDER);
+    // Loose or strict comparison, and any comment lines between the flag and the break.
+    preg_match_all('/get_post_status\((?:uamswp_fad_int\(\$\w+\)|\$\w+)\)\s*===?\s*\'publish\'\)\s*\{\s*(\$\w+_valid)\s*=\s*true;(?:\s*\/\/[^\n]*)*\s*(break;)?/', $source, $matches, PREG_SET_ORDER);
 
     return array_map(static fn (array $match): array => [$match[1], isset($match[2])], $matches);
 }
@@ -42,5 +43,6 @@ test('the reader tells a loop that leaves from one that does not', function (): 
     $closed = "if (get_post_status(\$location) == 'publish') {\n    \$location_valid = true;\n    break;\n}\n";
 
     expect(published_loop_flags($open))->toBe([['$location_valid', false]])
-        ->and(published_loop_flags($closed))->toBe([['$location_valid', true]]);
+        ->and(published_loop_flags($closed))->toBe([['$location_valid', true]])
+        ->and(published_loop_flags(str_replace(['==', "true;\n"], ['===', "true;\n    // A reason.\n    // @pest-mutate-ignore: BreakToContinue\n"], $closed)))->toBe([['$location_valid', true]]);
 });

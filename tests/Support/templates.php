@@ -158,8 +158,10 @@ function uamswp_test_main_loop(array $ids): void
     $position = new stdClass;
     $position->index = 0;
     $position->current = 0;
+    $position->checks = 0;
 
-    when('have_posts')->alias(static fn (): bool => $position->index < count($ids));
+    // A loop whose the_post() call is gone would never advance; cap the checks so a mutant of it ends and fails a test.
+    when('have_posts')->alias(static fn (): bool => $position->index < count($ids) && $position->checks++ < 100);
     when('the_post')->alias(static function () use ($position, $ids): void {
         $position->current = $ids[$position->index];
         $position->index++;

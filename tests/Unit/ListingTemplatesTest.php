@@ -442,6 +442,18 @@ test('the office address 2 is the building, floor and suite, or the older addres
         ->and(listing_body_rows($none['html']))->toBe(doximity_row(['address_2' => 'Old line 2']));
 });
 
+// Today the empty building still takes its line, so the address starts with a break; #1469 changes that.
+test('a building whose term is gone adds no building name to the office address 2', function (): void {
+    uamswp_test_template('doximity-list');
+
+    $case = doximity_case(
+        location: ['location_building' => 703, 'location_suite' => 'Suite 5'],
+    );
+
+    expect($case['warnings'])->toBe([])
+        ->and(listing_body_rows($case['html']))->toBe(doximity_row(['address_2' => '<br />Suite 5']));
+});
+
 test('only the first published location supplies the office, and an unpublished one before it is passed over', function (): void {
     uamswp_test_template('doximity-list');
     $closed = gmb_next_id();

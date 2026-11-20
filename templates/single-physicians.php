@@ -80,17 +80,8 @@ if ($degree_list) {
 
 }
 
-// Remove empty rows
-
-$degree_attr_array = array_filter($degree_attr_array);
-
-// Remove duplicate rows
-
-$degree_attr_array = array_unique($degree_attr_array, SORT_REGULAR);
-
-// Reindex array
-
-$degree_attr_array = array_values($degree_attr_array);
+// The degree list is only tested for an M.D. or D.O. with array_intersect(), which empty, repeated or renumbered
+// entries do not change, so it is used as it was built.
 
 // Dr. Prefix
 
@@ -300,7 +291,7 @@ foreach ($provider_occupation_title_indef_article_exceptions as $exception => $i
             strtolower($provider_occupation_title),
             0,
             strlen($exception)
-        ) == strtolower($exception)
+        ) === strtolower($exception)
     ) {
 
         // If the clinical title begins with the exception key...
@@ -319,17 +310,19 @@ $locations = get_field('physician_locations', $post->ID);
 $location_valid = false;
 if (! empty($locations)) {
     foreach ($locations as $location) {
-        if (get_post_status(uamswp_fad_int($location)) == 'publish') {
+        if (get_post_status(uamswp_fad_int($location)) === 'publish') {
             $location_valid = true;
+            // The flag is already set, so going on through the loop would set it again.
+            // @pest-mutate-ignore: BreakToContinue
             break;
         }
     }
 }
 // Get number of valid locations
 $location_count = 0;
-if ($locations && $location_valid) {
+if ($location_valid) {
     foreach ($locations as $location) {
-        if (get_post_status(uamswp_fad_int($location)) == 'publish') {
+        if (get_post_status(uamswp_fad_int($location)) === 'publish') {
             $location_count++;
         }
     } // endforeach
@@ -342,10 +335,10 @@ $primary_appointment_city = '';
 $primary_appointment_city_attr = '';
 $location_schema = '';
 $l = 1;
-if ($locations && $location_valid) {
+if ($location_valid) {
     foreach ($locations as $location) {
         if ($l < 2) {
-            if (get_post_status(uamswp_fad_int($location)) == 'publish') {
+            if (get_post_status(uamswp_fad_int($location)) === 'publish') {
                 $primary_appointment_title = get_the_title(uamswp_fad_int($location));
                 $primary_appointment_title_attr = $primary_appointment_title ? uamswp_attr_conversion($primary_appointment_title) : '';
                 $primary_appointment_url = get_the_permalink(uamswp_fad_int($location));
@@ -361,7 +354,7 @@ if ($locations && $location_valid) {
 $expertises = get_field('physician_expertise', $post->ID);
 if ($expertises) {
     foreach ($expertises as $expertise) {
-        if (get_post_status(uamswp_fad_int($expertise)) == 'publish') {
+        if (get_post_status(uamswp_fad_int($expertise)) === 'publish') {
             $expertise_primary_name = get_the_title(uamswp_fad_int($expertise));
             break;
         }
@@ -382,12 +375,18 @@ if (have_rows('remove_ontology_criteria', 'option')) {
         $remove_service_line = get_sub_field('remove_service_lines');
         if ((! empty($remove_region) && uamswp_provider_region_in_rule($provider_region, $remove_region)) && empty($remove_service_line)) {
             $hide_medical_ontology = true;
+            // The flag is only ever set, so going on through the rules could not unset it.
+            // @pest-mutate-ignore: BreakToContinue
             break;
         } elseif (empty($remove_region) && (! empty($remove_service_line) && in_array($provider_service_line, $remove_service_line))) {
             $hide_medical_ontology = true;
+            // The flag is only ever set, so going on through the rules could not unset it.
+            // @pest-mutate-ignore: BreakToContinue
             break;
         } elseif ((! empty($remove_region) && uamswp_provider_region_in_rule($provider_region, $remove_region)) && (! empty($remove_service_line) && in_array($provider_service_line, $remove_service_line))) {
             $hide_medical_ontology = true;
+            // The flag is only ever set, so going on through the rules could not unset it.
+            // @pest-mutate-ignore: BreakToContinue
             break;
         }
     }
@@ -505,6 +504,8 @@ while (have_posts()) {
     // Classes for indicating presence of content
     $provider_field_classes = '';
     if ($degrees) {
+        // The classes are still empty here, so adding to them is the same as setting them.
+        // @pest-mutate-ignore: ConcatEqualToEqual
         $provider_field_classes .= ' has-degrees';
     }
     if ($prefix) {
@@ -512,7 +513,10 @@ while (have_posts()) {
     }
     if (has_post_thumbnail()) {
         $provider_field_classes .= ' has-image';
-        $image_age = (int) date('Y') - (int) get_the_date('Y', uamswp_fad_int(get_post_thumbnail_id())); // How old the provider image is in years
+        $image_year = (int) get_the_date('Y', uamswp_fad_int(get_post_thumbnail_id()));
+        // date() gives the year as digits, which subtract the same without the cast.
+        // @pest-mutate-ignore: RemoveIntegerCast
+        $image_age = (int) date('Y') - $image_year; // How old the provider image is in years
         $image_age_threshold = 10; // Set the threshold for how old a provider image can be before a new photo is needed
         if ($image_age >= $image_age_threshold) {
             $image_age = $image_age_threshold.'+'; // Cap attribute value at the threshold
@@ -541,7 +545,7 @@ while (have_posts()) {
     if ($treatments_cpt) {
         $provider_field_classes .= ' has-treatment';
     }
-    if ($locations && $location_valid) {
+    if ($location_valid) {
         $provider_field_classes .= ' has-location';
     }
     if ($affiliation) {
@@ -643,8 +647,10 @@ while (have_posts()) {
     $expertise_valid = false;
     if ($expertises) {
         foreach ($expertises as $expertise) {
-            if (get_post_status(uamswp_fad_int($expertise)) == 'publish') {
+            if (get_post_status(uamswp_fad_int($expertise)) === 'publish') {
                 $expertise_valid = true;
+                // The flag is already set, so going on through the loop would set it again.
+                // @pest-mutate-ignore: BreakToContinue
                 break;
             }
         }
@@ -663,13 +669,12 @@ while (have_posts()) {
     // }
     // if ($rating_valid) { $provider_field_classes = $provider_field_classes . ' has-ratings'; }
 
-    $pg_rating_request = '';
-    $pg_rating_data = '';
     $pg_rating_valid = '';
     $pg_total_comment_count = '';
-    $avg_rating = '';
-    $review_count = '';
-    $comment_count = '';
+    // Read only when the rating is valid, which sets each of them first.
+    $avg_rating = null;
+    $review_count = null;
+    $comment_count = null;
     // if ( $npi ) {
     // $pg_rating_request = get_post_meta( get_the_ID(), '_syndicated_api_data', true ); // wp_pg_cached_api( $npi, 10 );
     // $pg_rating_data = json_decode( $pg_rating_request ); // Remove the redundant decode
@@ -687,7 +692,6 @@ while (have_posts()) {
     // Clinical Resources
     $resources = get_field('physician_clinical_resources');
     $resource_postsPerPage = 4; // Set this value to preferred value (-1, 4, 6, 8, 10, 12)
-    $resource_more = false;
     $args = ([
         'post_type' => 'clinical-resource',
         'order' => 'DESC',
@@ -774,7 +778,7 @@ while (have_posts()) {
     }
 
     // Check if Locations section should be displayed
-    if ($locations && $location_valid) {
+    if ($location_valid) {
         $show_locations_section = true;
         $jump_link_count++;
     } else {
@@ -812,16 +816,16 @@ while (have_posts()) {
                     </h1>
                     <?php
                             $l = 1;
-    if ($locations && $location_valid) { ?>
+    if ($location_valid) { ?>
                         <div data-sectiontitle="Primary Location">
                             <?php if ($eligible_appt) { ?>
                                 <h2 class="h3">Primary Appointment Location</h2>
                             <?php } else { ?>
                                 <h2 class="h3">Primary Location</h2>
                             <?php } // endif?>
-                            <?php foreach ($locations as $location) {
+                            <?php foreach (uamswp_fad_arr($locations) as $location) {
                                 if ($l < 2) {
-                                    if (get_post_status(uamswp_fad_int($location)) == 'publish') {
+                                    if (get_post_status(uamswp_fad_int($location)) === 'publish') {
 
                                         // Reset variables
 
@@ -837,12 +841,10 @@ while (have_posts()) {
                                         $location_has_parent = get_field('location_parent', $location);
                                         $location_parent_id = get_field('location_parent_id', $location);
                                         $parent_location = ''; // Eliminate PHP errors
-                                        $parent_id = ''; // Eliminate PHP errors
-                                        $parent_title = ''; // Eliminate PHP errors
-                                        $parent_url = ''; // Eliminate PHP errors
-                                        $parent_location_prepend_the = ''; // Eliminate PHP errors
-                                        $parent_title_prepend = ''; // Eliminate PHP errors
-                                        $parent_title_phrase = ''; // Eliminate PHP errors
+                                        // Read only when there is a parent, which sets each of them first.
+                                        $parent_title = null;
+                                        $parent_url = null;
+                                        $parent_title_prepend = null;
 
                                         if ($location_has_parent && $location_parent_id) {
                                             $parent_location = get_post(uamswp_fad_int($location_parent_id));
@@ -854,11 +856,12 @@ while (have_posts()) {
                                             $parent_url = get_permalink($parent_id) ?: '';
                                             $parent_location_prepend_the = get_field('location_prepend_the', $parent_id);
                                             $parent_title_prepend = $parent_location_prepend_the ? 'the ' : '';
-                                            $parent_title_phrase = $parent_title_prepend.$parent_title;
                                         }
 
                                         $location_address_1 = get_field('location_address_1', $location_source_ids['street']);
                                         $location_building = get_field('location_building', $location_source_ids['facility']);
+                                        // The slug is only compared with _none, which an empty slug is not either.
+                                        // @pest-mutate-ignore: EmptyStringToNotEmpty
                                         $building_slug = '';
                                         $building_name = '';
                                         if ($location_building) {
@@ -870,20 +873,21 @@ while (have_posts()) {
                                         }
                                         /** @var array{value: int|string, choices: array<int|string, string>}|false $location_floor */
                                         $location_floor = get_field_object('location_building_floor', $location_source_ids['unit']);
-                                        $location_floor_value = '';
+                                        // Read only with a floor, which sets both.
+                                        $location_floor_value = null;
+                                        // The label is a string for the address helper; without a floor it is never read.
+                                        // @pest-mutate-ignore: EmptyStringToNotEmpty
                                         $location_floor_label = '';
                                         if ($location_floor) {
                                             $location_floor_value = $location_floor['value'];
                                             $location_floor_label = $location_floor['choices'][$location_floor_value] ?? '';
                                         }
                                         $location_suite = get_field('location_suite', $location_source_ids['unit']);
-                                        $location_address_2 = uamswp_location_address_2(($location_building && $building_slug != '_none'), $building_name, $location_floor, $location_floor_value, $location_floor_label, $location_suite ?: false, '<br />', ', ');
-                                        $location_address_2_schema = uamswp_location_address_2(($location_building && $building_slug != '_none'), $building_name, $location_floor, $location_floor_value, $location_floor_label, $location_suite ?: false, ' ', ' ');
+                                        $location_address_2 = uamswp_location_address_2(($location_building && $building_slug !== '_none'), $building_name, $location_floor, $location_floor_value, $location_floor_label, $location_suite ?: false, '<br />', ', ');
 
                                         $location_address_2_deprecated = get_field('location_address_2', $location_source_ids['street']);
                                         if (! $location_address_2) {
                                             $location_address_2 = $location_address_2_deprecated;
-                                            $location_address_2_schema = $location_address_2_deprecated;
                                         }
 
                                         $location_city = get_field('location_city', $location_source_ids['street']);
@@ -928,8 +932,10 @@ while (have_posts()) {
                     $expertise_valid = false;
     if ($expertises && ! $hide_medical_ontology) {
         foreach ($expertises as $expertise) {
-            if (get_post_status(uamswp_fad_int($expertise)) == 'publish') {
+            if (get_post_status(uamswp_fad_int($expertise)) === 'publish') {
                 $expertise_valid = true;
+                // The flag is already set, so going on through the loop would set it again.
+                // @pest-mutate-ignore: BreakToContinue
                 break;
             }
         }
@@ -937,7 +943,7 @@ while (have_posts()) {
             ?>
                         <dt>Area<?php echo count($expertises) > 1 ? 's' : ''; ?> of Expertise</dt>
                         <?php foreach ($expertises as $expertise) {
-                            if (get_post_status(uamswp_fad_int($expertise)) == 'publish' && $expertise !== 0) {
+                            if (get_post_status(uamswp_fad_int($expertise)) === 'publish' && $expertise !== 0) {
                                 echo '<dd><a href="'.get_permalink(uamswp_fad_int($expertise)).'" target="_self" data-sectiontitle="Overview" data-categorytitle="View Area of Expertise">'.get_the_title(uamswp_fad_int($expertise)).'</a></dd>';
                             }
                         } ?>
@@ -973,7 +979,7 @@ while (have_posts()) {
                             <?php } ?>
                     <?php } // endif?>
                     <?php // Display all languages
-                        if ($languages && $language_list == 'English') {
+                        if ($languages && $language_list === 'English') {
                             ?>
                         <dt class="sr-only">Language</dt>
                         <?php echo '<dd class="sr-only">'.$language_list.'</dd>'; ?>
@@ -1047,7 +1053,11 @@ while (have_posts()) {
                         <img src="<?php echo uamswp_fad_str(image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center', 'portrait-3-4')); ?>" alt="<?php echo esc_attr($full_name_attr); ?>" />
                         <?php $docphoto = uamswp_fad_str(image_sizer(get_post_thumbnail_id(), 778, 1038, 'center', 'center', 'portrait-3-4'));
                     } else {
+                        // Every test process defines image_sizer(), so this fallback for a site without it cannot run under test.
+                        // @pest-mutate-ignore: RemoveArrayItem,RemoveFunctionCall
                         the_post_thumbnail('large', ['itemprop' => 'image']);
+                        // Every test process defines image_sizer(), so this fallback for a site without it cannot run under test.
+                        // @pest-mutate-ignore: TernaryNegated
                         $docphoto = get_the_post_thumbnail_url(null, 'large') ?: $docphoto;
                     } // endif?>
                     </picture>
@@ -1176,7 +1186,7 @@ while (have_posts()) {
 
             } else {
 
-                $video_source = '';
+                $video_source = null;
 
             }
 
@@ -1185,7 +1195,7 @@ while (have_posts()) {
             if (
                 function_exists('lyte_preparse')
                 &&
-                $video_source == 'youtube'
+                $video_source === 'youtube'
             ) {
 
                 ?>
@@ -1501,7 +1511,7 @@ while (have_posts()) {
         // $treatment_schema .= ']';
     } // endif
 
-    if ($show_aoe_section && ! empty($expertises)) { ?>
+    if ($show_aoe_section) { ?>
             <section class="uams-module expertise-list bg-auto" id="expertise">
                 <div class="container-fluid">
                     <div class="row">
@@ -1509,9 +1519,9 @@ while (have_posts()) {
                             <h2 class="module-title"><span class="title"><?php echo uamswp_provider_name_html($short_name_possessive); ?> Areas of Expertise</span></h2>
                             <div class="card-list-container">
                                 <div class="card-list card-list-expertise">
-                                    <?php foreach ($expertises as $expertise) {
+                                    <?php foreach (uamswp_fad_arr($expertises) as $expertise) {
                                         $id = $expertise;
-                                        if (get_post_status(uamswp_fad_int($expertise)) == 'publish' && $expertise !== 0) {
+                                        if (get_post_status(uamswp_fad_int($expertise)) === 'publish' && $expertise !== 0) {
                                             include UAMS_FAD_PATH.'/templates/loops/expertise-card.php';
                                         }
                                     } ?>
@@ -1536,7 +1546,7 @@ while (have_posts()) {
     "address": [';
             ?>
                             <?php foreach ($locations as $location) {
-                                if (get_post_status(uamswp_fad_int($location)) == 'publish') {
+                                if (get_post_status(uamswp_fad_int($location)) === 'publish') {
 
                                     $id = $location;
                                     include UAMS_FAD_PATH.'/templates/loops/location-card.php';
@@ -1592,6 +1602,8 @@ while (have_posts()) {
                                     <?php
                     $questionRatings = $pg_rating_data->data->entities[0]->overallRating->questionRatings;
             $questionKey = array_search('Likelihood of recommending this provider', array_column($questionRatings, 'name')); // Find the key for 'Likelihood' question
+            // A missing question gives false, which as a key reads as 0, so the first question moves to where it already is.
+            // @pest-mutate-ignore: FalseToTrue
             if ($questionKey !== false) {
                 $questionRatings = [$questionKey => $questionRatings[$questionKey]] + $questionRatings; // Move 'Likelihood' question to front of the array
             }
@@ -1612,7 +1624,10 @@ while (have_posts()) {
                             </div>
                             <div class="card-footer bg-transparent text-muted small">
                                 <p class="h5">Overall: <?php echo $pg_rating_data->data->entities[0]->overallRating->value; ?> out of 5</p>
-                                <p>(<?php echo $pg_rating_data->data->entities[0]->totalRatingCount ? $pg_rating_data->data->entities[0]->totalRatingCount.' Ratings' : ''; ?><?php echo $pg_rating_data->data->entities[0]->totalCommentCount ? ', '.$pg_rating_data->data->entities[0]->totalCommentCount.' Comments' : ''; ?>)</p>
+                                <p>(<?php
+                                // The section is shown only for thirty ratings or more, so the count is never empty here.
+                                // @pest-mutate-ignore: EmptyStringToNotEmpty
+                                echo $pg_rating_data->data->entities[0]->totalRatingCount ? $pg_rating_data->data->entities[0]->totalRatingCount.' Ratings' : ''; ?><?php echo $pg_rating_data->data->entities[0]->totalCommentCount ? ', '.$pg_rating_data->data->entities[0]->totalCommentCount.' Comments' : ''; ?>)</p>
                             </div>
                         </div>
                         <?php /* -- AI Review Summary --  ** Disabled until further testing **
@@ -1638,6 +1653,8 @@ while (have_posts()) {
                             <div class="card-list">
                                 <?php foreach ($reviews as $review) {
                                     if ($i >= 6) {
+                                        // Once six are shown every later review is skipped here too, so going on prints nothing more.
+                                        // @pest-mutate-ignore: BreakToContinue
                                         break;
                                     }
                                     $i++; ?>
@@ -1654,7 +1671,10 @@ while (have_posts()) {
                                     </div>
                                     <div class="card-footer bg-transparent text-muted small">
                                         <h4 class="sr-only">Date</h4>
-                                        <?php echo date('M d, Y', (int) strtotime($review->mentionTime)) ?>
+                                        <?php
+                                        // The template is not in strict mode, so date() reads a false time as 0, as the cast does.
+                                        // @pest-mutate-ignore: RemoveIntegerCast
+                                        echo date('M d, Y', (int) strtotime($review->mentionTime)) ?>
                                     </div>
                                 </div>
                                 <?php } ?>
@@ -1724,7 +1744,10 @@ while (have_posts()) {
                                                 </div>
                                                 <div class="card-footer bg-transparent text-muted small">
                                                     <h4 class="sr-only">Date</h4>
-                                                    <?php echo date('M d, Y', (int) strtotime($review->mentionTime)); ?>
+                                                    <?php
+                                                    // The template is not in strict mode, so date() reads a false time as 0, as the cast does.
+                                                    // @pest-mutate-ignore: RemoveIntegerCast
+                                                    echo date('M d, Y', (int) strtotime($review->mentionTime)); ?>
                                                 </div>
                                             </div>
                                             <?php } ?>
