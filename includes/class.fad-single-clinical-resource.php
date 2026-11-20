@@ -303,6 +303,7 @@ function uamswp_resource_locations(): void
                     </div>
                 </div>
             </div>
+            </div>
         </section>
     <?php
     } // endif

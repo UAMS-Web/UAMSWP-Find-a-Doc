@@ -1888,6 +1888,7 @@ while (have_posts()) {
 					</div>
 				</div>
 			</div>
+		</div>
         </section>
 	<?php } // endif
     // End Areas of Expertise Section

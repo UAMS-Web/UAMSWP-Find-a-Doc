@@ -467,3 +467,12 @@ test('the provider card label turns a non-breaking space into a space and keeps 
 
     expect($output)->toContain('aria-label="View profile for Mom\'s A B C & D Lee"');
 });
+
+test('the providers block closes every div it opens, with or without its link button', function (array $fields): void {
+    $output = (string) preg_replace('/<!--.*?-->/s', '', providers_block(['block_fad_providers_filter_ids' => [41]] + $fields, [[41]], ['block' => ['id' => 'abc']]));
+
+    expect(preg_match_all('/<div\b/', $output))->toBe(substr_count($output, '</div>'));
+})->with([
+    'without the button' => [[]],
+    'with the button' => [['block_fad_providers_more' => true, 'block_fad_providers_more_text' => 'Want more?', 'block_fad_providers_more_button_text' => 'See all', 'block_fad_providers_more_button_url' => ['url' => 'https://example.test/providers/', 'target' => '']]],
+]);

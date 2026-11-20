@@ -497,3 +497,12 @@ test('each jump link shows only with its section, and none print when the jump l
     'related areas' => ['show_related_aoe_section', 'related-expertise'],
     'appointment' => ['show_appointment_section', 'appointment-info'],
 ]);
+
+test('the locations section closes every div it opens', function (): void {
+    expertise_section_cards();
+
+    $output = expertise_section('uamswp_expertise_locations', ['show_locations_section' => true, 'location_query' => expertise_section_query([]), 'locations' => []]);
+
+    expect(substr_count($output, '<div'))->toBe(5)
+        ->and(substr_count($output, '</div>'))->toBe(5);
+});
