@@ -77,6 +77,8 @@ function bootstrap(): void
     // loop (PluginLoadTest) and the Unit suite pins the list it reads.
     // @pest-mutate-ignore: ForeachEmptyIterable
     foreach (files() as $file) {
+        // As above.
+        // @pest-mutate-ignore: ConcatRemoveLeft,ConcatRemoveRight,ConcatSwitchSides
         include_once __DIR__."/{$file}";
     }
 
