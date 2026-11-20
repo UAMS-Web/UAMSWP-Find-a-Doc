@@ -1268,5 +1268,6 @@ test('the structured data has a medicalSpecialty key when there are conditions o
 })->with([
     'conditions only' => [[(object) ['ID' => 31, 'post_title' => 'Asthma']], [], ['Asthma']],
     'treatments only' => [[], [(object) ['ID' => 41, 'post_title' => 'Infusion']], ['Infusion']],
+    'two treatments' => [[], [(object) ['ID' => 41, 'post_title' => 'Infusion'], (object) ['ID' => 42, 'post_title' => 'Dialysis']], ['Infusion', 'Dialysis']],
     'neither' => [[], [], null],
 ]);

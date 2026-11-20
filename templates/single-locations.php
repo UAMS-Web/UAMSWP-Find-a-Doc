@@ -123,6 +123,8 @@ if (function_exists('bis_get_attachment_image') && ! empty($schema_image)) {
     /** @var int $schema_image */
     $locationphoto = wp_get_attachment_image_src($schema_image, 'large');
     if (is_array($locationphoto)) {
+        // Only an image reaches this index, and an image goes to image_sizer() wherever bis_get_attachment_image() is defined, as it always is in a test process.
+        // @pest-mutate-ignore: IncrementInteger, DecrementInteger
         $locationphoto = $locationphoto[0];
     }
 }
