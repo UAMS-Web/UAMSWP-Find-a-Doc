@@ -19,6 +19,8 @@ declare(strict_types=1);
  * No WordPress is needed. The cache file opens with `defined('WPINC') or die(...)` and returns an
  * array, so a caller outside WordPress defines `WPINC` and requires this file.
  */
+// Runs when the file loads, before any test, and exits the process when it holds.
+// @pest-mutate-ignore: IfNegated,RemoveNot
 if (! defined('WPINC')) {
     exit;
 }
@@ -38,7 +40,8 @@ if (! defined('WPINC')) {
  */
 function uamswp_fad_acf_table_map_check(string $dir): array
 {
-    $cache_file = rtrim($dir, '/\\').'/.cache/_table_map.php';
+    $base = rtrim($dir, '/\\');
+    $cache_file = $base.'/.cache/_table_map.php';
 
     if (! is_dir($dir) || ! is_file($cache_file)) {
         return ['readable' => false, 'tables' => 0, 'problems' => ["Cannot read the table map cache at {$cache_file}"]];
@@ -56,9 +59,9 @@ function uamswp_fad_acf_table_map_check(string $dir): array
 
     $problems = [];
     $declared = [];
-    $files = glob(rtrim($dir, '/\\').'/table_*.json');
+    $files = glob($base.'/table_*.json') ?: [];
 
-    foreach ($files === false ? [] : $files as $file) {
+    foreach ($files as $file) {
         $json = json_decode((string) file_get_contents($file), true);
 
         if (! is_array($json) || ! isset($json['name']) || ! is_string($json['name'])) {
@@ -107,10 +110,12 @@ function uamswp_fad_acf_table_map_check(string $dir): array
             $problems[] = sprintf('table `%s`: JSON says post_type `%s`, cache says `%s`', $name, uamswp_fad_str($want['post_type'] ?? 'null'), uamswp_fad_str($have['post_type'] ?? 'null'));
         }
 
-        $want_columns = array_map(strval(...), array_values(array_filter((array) $want['columns'], is_scalar(...))));
-        $have_columns = array_map(strval(...), array_values(array_filter((array) $have['columns'], is_scalar(...))));
-        $missing = array_values(array_diff($want_columns, $have_columns));
-        $extra = array_values(array_diff($have_columns, $want_columns));
+        // array_diff() compares as strings, and implode() and array_slice() read only the values, so the keys and
+        // the types of the names need no clean-up beyond dropping a name that is not a scalar.
+        $want_columns = array_filter($want['columns'], is_scalar(...));
+        $have_columns = array_filter($have['columns'], is_scalar(...));
+        $missing = array_diff($want_columns, $have_columns);
+        $extra = array_diff($have_columns, $want_columns);
 
         if ($missing !== []) {
             $problems[] = sprintf('table `%s`: %d column(s) in JSON but not the cache (e.g. %s)', $name, count($missing), implode(', ', array_slice($missing, 0, 3)));

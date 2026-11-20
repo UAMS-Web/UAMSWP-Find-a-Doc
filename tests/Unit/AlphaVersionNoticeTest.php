@@ -154,4 +154,12 @@ final class AlphaVersionNoticeTest extends UnitTestCase
     {
         $this->assertSame('', $this->notice(null, false));
     }
+
+    public function test_the_notice_prints_the_whole_message(): void
+    {
+        $this->assertSame(
+            '<div class="notice notice-error"><p><strong>FacetWP - Alpha for UAMS 1.3.5 is installed; Find-a-Doc needs 1.3.5.2 or later.</strong> The alphabet filter on the provider and location lists needs it. Install or update it through UAMSWP-Pusher from the UAMS-Web/facetwp-alpha-uams repository.</p></div>',
+            $this->notice('1.3.5', true)
+        );
+    }
 }
