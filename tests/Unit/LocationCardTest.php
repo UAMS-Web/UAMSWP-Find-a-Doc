@@ -10,6 +10,7 @@ declare(strict_types=1);
 use function Brain\Monkey\Functions\when;
 
 require_once __DIR__.'/../Support/templates.php';
+require_once __DIR__.'/../Support/main-loop-guard.php';
 require_once __DIR__.'/../Support/acf-blocks.php';
 
 /**
@@ -53,7 +54,8 @@ function location_card_resolve(mixed $value, ?int $now = null): mixed
  * Stub the functions the location card reads.
  *
  * @param  array<string, mixed>  $fields  ACF fields by name; `name:id` keys win for one post.
- * @param  array<string, mixed>  $options  `titles` (id => title), `terms` (id => [slug, name]), `thumbnails` (ids with a featured image).
+ * @param  array<string, mixed>  $options  `titles` (id => title), `terms` (id => [slug, name]), `term_errors` (ids whose term
+ *                                         lookup returns an error), `thumbnails` (ids with a featured image).
  */
 function location_card_world(array $fields, array $options = []): void
 {
@@ -64,15 +66,22 @@ function location_card_world(array $fields, array $options = []): void
     $titles = $options['titles'] ?? [];
     $terms = $options['terms'] ?? [];
     $thumbnails = $options['thumbnails'] ?? [];
+    $errors = $options['term_errors'] ?? [];
 
     when('get_field')->alias(static fn (string $name, mixed $id = null): mixed => $fields[$name.':'.$id] ?? $fields[$name] ?? null);
     when('get_field_object')->alias(static fn (string $name, mixed $id = null): mixed => $fields[$name.':'.$id] ?? $fields[$name] ?? null);
     when('get_the_title')->alias(static fn (mixed $id = 0): string => $titles[$id] ?? 'Location '.$id);
     when('get_permalink')->alias(static fn (mixed $id = 0): string => 'https://example.test/location/'.$id.'/');
     when('get_post')->alias(static fn (mixed $id): object => (object) ['ID' => (int) $id, 'post_title' => $titles[$id] ?? 'Location '.$id]);
-    when('get_term')->alias(static fn (mixed $id): object|false => isset($terms[$id]) ? (object) ['slug' => $terms[$id][0], 'name' => $terms[$id][1]] : false);
+    when('get_term')->alias(static fn (mixed $id): object|false => in_array($id, $errors, true) ? new WP_Error : (isset($terms[$id]) ? (object) ['slug' => $terms[$id][0], 'name' => $terms[$id][1]] : false));
+    when('is_wp_error')->alias(static fn (mixed $thing): bool => $thing instanceof WP_Error);
     when('has_post_thumbnail')->alias(static fn (mixed $id = 0): bool => in_array($id, $thumbnails, true));
-    when('get_the_post_thumbnail')->alias(static fn (mixed $id, string $size, array $attributes): string => '[thumbnail '.$id.' '.$size.' '.$attributes['data-itemtitle'].']');
+    $GLOBALS['location_card_thumbnails'] = [];
+    when('get_the_post_thumbnail')->alias(static function (mixed $id, string $size, array $attributes): string {
+        $GLOBALS['location_card_thumbnails'][] = [$id, $size, $attributes];
+
+        return '[thumbnail '.$id.' '.$size.' '.$attributes['data-itemtitle'].']';
+    });
     when('get_the_ID')->alias(static fn (): int => WP_Query::$current);
     when('__')->returnArg();
     when('esc_html__')->returnArg();
@@ -355,6 +364,8 @@ test('the location card warns about modified hours that are under way or coming'
     'coming within 30 days' => [['location_modified_hours' => true, 'location_modified_hours_start_date' => '{+10 days}', 'location_modified_hours_end' => true, 'location_modified_hours_end_date' => '{+20 days}'], "This location's hours will be temporarily modified beginning on {+10 days}."],
     'telemedicine under way' => [['location_telemed_modified_hours_query' => true, 'location_telemed_modified_hours_start_date' => '{-3 days}', 'location_telemed_modified_hours_end' => true, 'location_telemed_modified_hours_end_date' => '{+3 days}'], "This location's hours have been temporarily modified."],
     'telemedicine coming' => [['location_telemed_modified_hours_query' => true, 'location_telemed_modified_hours_start_date' => '{+4 days}'], "This location's hours will be temporarily modified beginning on {+4 days}."],
+    'telemedicine ending today' => [['location_telemed_modified_hours_query' => true, 'location_telemed_modified_hours_start_date' => '{-3 days}', 'location_telemed_modified_hours_end' => true, 'location_telemed_modified_hours_end_date' => '{today}'], "This location's hours have been temporarily modified."],
+    'starting today' => [['location_modified_hours' => true, 'location_modified_hours_start_date' => '{today}'], "This location's hours have been temporarily modified."],
 ]);
 
 test('the location card does not warn about modified hours that are over or more than 30 days away', function (array $hours): void {
@@ -620,7 +631,7 @@ test('the locations block prints only the placeholder for a new block in the edi
 
 test('the location loop prints a card for each post of the main loop, or a message', function (): void {
     location_card_world(['location_hours_group' => location_card_hours()], ['titles' => [71 => 'Clinic One', 72 => 'Clinic Two']]);
-    uamswp_test_main_loop([71, 72]);
+    uamswp_test_guarded_main_loop([71, 72]);
 
     $output = uamswp_test_include_partial('fwp/location-loop');
 
@@ -632,7 +643,7 @@ test('the location loop prints a card for each post of the main loop, or a messa
     when('_e')->alias(static function (string $text): void {
         echo $text;
     });
-    uamswp_test_main_loop([]);
+    uamswp_test_guarded_main_loop([]);
 
     expect(trim(uamswp_test_include_partial('fwp/location-loop')))->toBe('<p>Sorry, no locations matched your criteria.</p>');
 });
@@ -674,4 +685,56 @@ test('the locations block button label turns a non-breaking space into a space a
     $output = locations_block(['block_fad_locations_filter_ids' => [61], 'block_fad_locations_more' => true, 'block_fad_locations_more_button_description' => "Mom&#8217;s A&nbsp;B\u{A0}C & D"], [[61]], ['block' => ['id' => 'abc']]);
 
     expect($output)->toContain('aria-label="Mom&#039;s A B C &amp; D"');
+});
+
+test('the location card cleans the title for its attributes: quotes, a non-breaking space either way, and an ampersand', function (): void {
+    $output = location_card([], ['titles' => [location_card_next_id() + 1 => "A \"B\" C&nbsp;D\u{A0}E & F"]]);
+
+    expect($output)->toContain('target="_self" data-categorytitle="Name" data-itemtitle="A \'B\' C D E & F">');
+});
+
+test('the location card labels the closure alert with the title, its quote entity turned into an apostrophe', function (): void {
+    $output = location_card([
+        'location_closing:ID' => true,
+        'location_closing_length:ID' => 'permanent',
+        'location_closing_date:ID' => location_card_date('-10 days'),
+    ], ['titles' => [location_card_next_id() + 1 => 'Mom&#8217;s A & B']]);
+
+    expect($output)->toContain('aria-label="Learn more about the closure of Mom\'s A & B." class="alert-link"');
+});
+
+test('the location card asks for each image as a lazy card photo labeled with the title', function (): void {
+    $want = static fn (int $id): array => [$id, 'aspect-16-9-small', ['class' => 'card-img-top', 'data-categorytitle' => 'Photo', 'data-itemtitle' => 'Clinic A', 'loading' => 'lazy']];
+
+    $own = location_card_next_id() + 1;
+    location_card([], ['thumbnails' => [$own]]);
+
+    expect($GLOBALS['location_card_thumbnails'])->toBe([$want($own)]);
+
+    $child = location_card_next_id() + 1;
+    location_card(['location_parent:ID' => true, 'location_parent_id:ID' => 900, 'location_image_override_parent:ID' => true, 'location_image_override_parent_featured:ID' => true]);
+
+    expect($GLOBALS['location_card_thumbnails'])->toBe([$want(900), $want($child)]);
+});
+
+test('the location card reads a building term that is an error as a building with no name, with no warning', function (): void {
+    $warnings = [];
+    set_error_handler(static function (int $level, string $message) use (&$warnings): bool {
+        $warnings[] = $message;
+
+        return true;
+    });
+
+    try {
+        $output = location_card(['location_building' => 44, 'location_suite' => 'Suite 2'], ['term_errors' => [44]]);
+    } finally {
+        restore_error_handler();
+    }
+
+    expect($warnings)->toBe([])
+        ->and((string) preg_replace('/\s+/', ' ', $output))->toContain('<p class="card-text">1 Main St<br/> <br />Suite 2<br/> Little Rock, AR 72205 </p>');
+});
+
+test('the location card prints no second address line without one', function (): void {
+    expect((string) preg_replace('/\s+/', ' ', location_card()))->toContain('<p class="card-text">1 Main St<br/> Little Rock, AR 72205 </p>');
 });

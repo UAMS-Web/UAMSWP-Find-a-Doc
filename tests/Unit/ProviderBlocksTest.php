@@ -10,6 +10,7 @@ declare(strict_types=1);
 use function Brain\Monkey\Functions\when;
 
 require_once __DIR__.'/../Support/templates.php';
+require_once __DIR__.'/../Support/main-loop-guard.php';
 require_once __DIR__.'/../Support/acf-blocks.php';
 
 /**
@@ -405,7 +406,7 @@ test('the providers block prints only the placeholder for a new block in the edi
 
 test('the provider card loop prints a card for each post of the main loop, and nothing without posts', function (): void {
     provider_blocks_world(['physician_first_name:81' => 'Jo', 'physician_last_name:81' => 'Smith', 'physician_first_name:82' => 'Al', 'physician_last_name:82' => 'Jones']);
-    uamswp_test_main_loop([81, 82]);
+    uamswp_test_guarded_main_loop([81, 82]);
 
     $output = uamswp_test_include_partial('fwp/physician-loop-card');
 
@@ -413,7 +414,7 @@ test('the provider card loop prints a card for each post of the main loop, and n
         ->and($output)->toContain('<span class="name">Jo Smith</span>')
         ->and($output)->toContain('<span class="name">Al Jones</span>');
 
-    uamswp_test_main_loop([]);
+    uamswp_test_guarded_main_loop([]);
 
     expect(trim(uamswp_test_include_partial('fwp/physician-loop-card')))->toBe('');
 });
@@ -459,4 +460,10 @@ test('the providers block button label turns a non-breaking space into a space a
     $output = providers_block(['block_fad_providers_filter_ids' => [41], 'block_fad_providers_more' => true, 'block_fad_providers_more_button_description' => "Mom&#8217;s A&nbsp;B\u{A0}C & D"], [[41]], ['block' => ['id' => 'abc']]);
 
     expect($output)->toContain('aria-label="Mom&#039;s A B C &amp; D"');
+});
+
+test('the provider card label turns a non-breaking space into a space and keeps an ampersand as one', function (): void {
+    $output = provider_card(['physician_first_name' => "Mom&#8217;s A&nbsp;B\u{A0}C & D", 'physician_last_name' => 'Lee']);
+
+    expect($output)->toContain('aria-label="View profile for Mom\'s A B C & D Lee"');
 });

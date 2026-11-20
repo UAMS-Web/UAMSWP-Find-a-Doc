@@ -30,16 +30,20 @@ $expertise_title_attr = html_entity_decode($expertise_title_attr); // Convert HT
 
 // Parent Area of Expertise
 $expertise_parent_id = wp_get_post_parent_id($expertise_id);
-$expertise_has_parent = (bool) $expertise_parent_id;
 $parent_expertise = '';
-$parent_id = '';
+// Printed only when the parent is found, which sets it below; PHPStan needs it defined.
+// @pest-mutate-ignore: EmptyStringToNotEmpty
 $parent_title = '';
+// As above.
+// @pest-mutate-ignore: EmptyStringToNotEmpty
 $parent_url = '';
 
 if ($expertise_parent_id) {
     $parent_expertise = get_post($expertise_parent_id);
 }
 // Get attributes of parent Area of Expertise
+// Printed only when the parent is found, which sets it below; PHPStan needs it defined.
+// @pest-mutate-ignore: EmptyStringToNotEmpty
 $parent_title_attr = '';
 if ($parent_expertise) {
     $parent_id = $parent_expertise->ID;

@@ -10,6 +10,7 @@ declare(strict_types=1);
 use function Brain\Monkey\Functions\when;
 
 require_once __DIR__.'/../Support/templates.php';
+require_once __DIR__.'/../Support/main-loop-guard.php';
 
 /**
  * A stand-in for a post query that holds the given posts.
@@ -106,7 +107,13 @@ function loop_partials_locations(array $locations): void
 {
     $position = -1;
     $current = [];
-    when('have_posts')->alias(static function () use (&$position, $locations): bool {
+    $asked = 0;
+    when('have_posts')->alias(static function () use (&$position, &$asked, $locations): bool {
+        // A loop that never moves on would ask forever; fail instead (see main-loop-guard.php).
+        if (++$asked > 2 * count($locations) + 4) {
+            throw new RuntimeException('have_posts() asked again without the_post()');
+        }
+
         return $position + 1 < count($locations);
     });
     when('the_post')->alias(static function () use (&$position, $locations, &$current): void {
@@ -222,7 +229,12 @@ function loop_partials_expertise(string $title, string $excerpt, array $parents 
     when('wp_strip_all_tags')->alias(static fn (string $text): string => strip_tags($text));
     when('wp_trim_words')->alias(static fn (string $text, int $words, string $more): string => $words.' words'.$more);
     when('has_post_thumbnail')->justReturn($thumbnail);
-    when('get_the_post_thumbnail')->alias(static fn (int $id, string $size, array $attributes): string => '<img data-size="'.$size.'" data-class="'.$attributes['class'].'">');
+    $GLOBALS['loop_partials_thumbnail'] = null;
+    when('get_the_post_thumbnail')->alias(static function (int $id, string $size, array $attributes): string {
+        $GLOBALS['loop_partials_thumbnail'] = $attributes;
+
+        return '<img data-size="'.$size.'" data-class="'.$attributes['class'].'">';
+    });
     when('esc_url')->alias(static fn (string $url): string => $url);
     when('esc_attr')->alias(static fn (string $text): string => htmlspecialchars($text));
 }
@@ -293,14 +305,7 @@ test('the area of expertise card takes the text of the content when there is no 
 
 test('the area of expertise loop prints a card for each post, or says nothing matched', function (): void {
     loop_partials_expertise('Cardiology', 'Heart care.');
-    $remaining = 2;
-    when('have_posts')->alias(static function () use (&$remaining): bool {
-        return $remaining > 0;
-    });
-    when('the_post')->alias(static function () use (&$remaining): void {
-        $remaining--;
-    });
-    when('get_the_ID')->justReturn(1);
+    uamswp_test_guarded_main_loop([1, 1]);
 
     $output = uamswp_test_include_partial('fwp/expertise-loop');
 
@@ -335,4 +340,22 @@ test('the area of expertise card reads the id of a post object it is given', fun
     $post->ID = 1;
 
     expect(uamswp_test_include_partial('loops/expertise-card', ['id' => $post]))->toContain('<span class="name"><a href="https://example.test/e/1/"');
+});
+
+test('the area of expertise card asks for its thumbnail as a lazy card image with an empty alt', function (): void {
+    loop_partials_expertise('Title', 'Text.', [], [], true);
+
+    uamswp_test_include_partial('loops/expertise-card', ['id' => 1]);
+
+    expect($GLOBALS['loop_partials_thumbnail'])->toBe(['class' => 'card-img-top', 'alt' => '', 'loading' => 'lazy']);
+});
+
+test('the area of expertise card labels turn a non-breaking space into a space and keep an ampersand as one', function (): void {
+    $parent = (object) ['ID' => 2, 'post_title' => "Mom&#8217;s A&nbsp;B\u{A0}C & D"];
+    loop_partials_expertise("Mom&#8217;s A&nbsp;B\u{A0}C & D", 'Text.', [1 => 2], [2 => $parent]);
+
+    $output = uamswp_test_include_partial('loops/expertise-card', ['id' => 1]);
+
+    expect($output)->toContain('data-itemtitle="Mom\'s A B C & D"')
+        ->and($output)->toContain('aria-label="Go to Area of Expertise page for Mom&#039;s A B C &amp; D"');
 });
