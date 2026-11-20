@@ -111,11 +111,24 @@ jobs:
         env:
           UAMS_2020_THEME: ${{ github.workspace }}/uams-2020
 
+  # Patchwork, which the Unit suite loads, rewrites each first-party file as it loads it. A rewrite that joins two
+  # lines makes PCOV credit every later line to the line above it, so the mutation run reports those mutants
+  # uncovered (#1459). This runs Patchwork's own rewrite over every file `composer mutate` covers and fails, naming
+  # the file, when its line count changes. It needs no coverage driver and runs whether or not mutation is on.
+  patchwork-lines:
+    name: Patchwork line counts
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - run: composer test:patchwork-lines
+
   # The one check a ruleset requires from this workflow. Keep `needs:` naming the call and
   # every plain job above.
   ci:
     name: CI
-    needs: [checks, style-build]
+    needs: [checks, style-build, patchwork-lines]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 5
