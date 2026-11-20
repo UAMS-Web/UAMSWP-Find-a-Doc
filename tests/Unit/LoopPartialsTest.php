@@ -229,7 +229,12 @@ function loop_partials_expertise(string $title, string $excerpt, array $parents 
     when('wp_strip_all_tags')->alias(static fn (string $text): string => strip_tags($text));
     when('wp_trim_words')->alias(static fn (string $text, int $words, string $more): string => $words.' words'.$more);
     when('has_post_thumbnail')->justReturn($thumbnail);
-    when('get_the_post_thumbnail')->alias(static fn (int $id, string $size, array $attributes): string => '<img data-size="'.$size.'" data-class="'.$attributes['class'].'">');
+    $GLOBALS['loop_partials_thumbnail'] = null;
+    when('get_the_post_thumbnail')->alias(static function (int $id, string $size, array $attributes): string {
+        $GLOBALS['loop_partials_thumbnail'] = $attributes;
+
+        return '<img data-size="'.$size.'" data-class="'.$attributes['class'].'">';
+    });
     when('esc_url')->alias(static fn (string $url): string => $url);
     when('esc_attr')->alias(static fn (string $text): string => htmlspecialchars($text));
 }
@@ -335,4 +340,22 @@ test('the area of expertise card reads the id of a post object it is given', fun
     $post->ID = 1;
 
     expect(uamswp_test_include_partial('loops/expertise-card', ['id' => $post]))->toContain('<span class="name"><a href="https://example.test/e/1/"');
+});
+
+test('the area of expertise card asks for its thumbnail as a lazy card image with an empty alt', function (): void {
+    loop_partials_expertise('Title', 'Text.', [], [], true);
+
+    uamswp_test_include_partial('loops/expertise-card', ['id' => 1]);
+
+    expect($GLOBALS['loop_partials_thumbnail'])->toBe(['class' => 'card-img-top', 'alt' => '', 'loading' => 'lazy']);
+});
+
+test('the area of expertise card labels turn a non-breaking space into a space and keep an ampersand as one', function (): void {
+    $parent = (object) ['ID' => 2, 'post_title' => "Mom&#8217;s A&nbsp;B\u{A0}C & D"];
+    loop_partials_expertise("Mom&#8217;s A&nbsp;B\u{A0}C & D", 'Text.', [1 => 2], [2 => $parent]);
+
+    $output = uamswp_test_include_partial('loops/expertise-card', ['id' => 1]);
+
+    expect($output)->toContain('data-itemtitle="Mom\'s A B C & D"')
+        ->and($output)->toContain('aria-label="Go to Area of Expertise page for Mom&#039;s A B C &amp; D"');
 });

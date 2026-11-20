@@ -38,18 +38,22 @@ function physician_loops_world(array $fields, array $options = []): void
     when('get_post_thumbnail_id')->justReturn(31);
     when('bis_get_attachment_image')->justReturn('');
     when('image_sizer')->alias(static fn (mixed $image, int $width, int $height, string $x, string $y, string $class): string => 'sized-'.$image.'-'.$width.'x'.$height);
-    when('the_post_thumbnail')->alias(static function (string $size): void {
+    $GLOBALS['physician_loops_calls'] = [];
+    when('the_post_thumbnail')->alias(static function (string $size, mixed $attributes = null): void {
+        $GLOBALS['physician_loops_calls'][] = ['the_post_thumbnail', $size, $attributes];
         echo '[thumbnail '.$size.']';
     });
-    when('get_post_meta')->alias(static fn (mixed $id, string $key): mixed => isset($options['rating']) ? ($options['rating_array'] ?? false ? json_decode($options['rating'], true) : ($options['rating_object'] ?? false ? json_decode($options['rating']) : $options['rating'])) : '');
+    when('get_post_meta')->alias(static fn (mixed $id, string $key, bool $single = false): mixed => ($GLOBALS['physician_loops_calls'][] = ['get_post_meta', $id, $key, $single]) && isset($options['rating']) ? ($options['rating_array'] ?? false ? json_decode($options['rating'], true) : ($options['rating_object'] ?? false ? json_decode($options['rating']) : $options['rating'])) : '');
     when('wp_json_encode')->alias(static fn (mixed $value): string|false => json_encode($value));
-    when('wp_trim_words')->alias(static fn (mixed $text, int $words, string $more): string => 'TRIMMED('.$text.')'.$more);
+    when('wp_trim_words')->alias(static fn (mixed $text, int $words, string $more): string => 'TRIMMED('.$text.')'.$more.(($GLOBALS['physician_loops_calls'][] = ['wp_trim_words', $words]) ? '' : ''));
     when('esc_url')->returnArg();
     when('__')->returnArg();
     when('_e')->alias(static function (string $text): void {
         echo $text;
     });
-    when('wp_reset_postdata')->justReturn();
+    when('wp_reset_postdata')->alias(static function (): void {
+        $GLOBALS['physician_loops_calls'][] = ['wp_reset_postdata'];
+    });
 
     WP_Query::$queue = [];
     WP_Query::$queries = [];
@@ -372,4 +376,40 @@ test('the Meta Box provider loop reads the pedigree of the current provider with
 
     expect($output)->toContain('Jo Smith&nbsp;III</h2>')
         ->and(physician_loops_warnings())->toBe([]);
+});
+
+/**
+ * The calls of one name the stubs recorded during the last render.
+ *
+ * @return list<list<mixed>>
+ */
+function physician_loops_calls(string $name): array
+{
+    return array_values(array_filter($GLOBALS['physician_loops_calls'], static fn (array $call): bool => $call[0] === $name));
+}
+
+test('the Meta Box provider loop starts on white and alternates every row', function (): void {
+    $output = physician_loop_mb([5, 6, 7]);
+
+    preg_match_all('/<div class="(\w+) archive-box">/', $output, $classes);
+
+    expect($classes[1])->toBe(['whiteBackground', 'grayBackground', 'whiteBackground']);
+});
+
+test('the Meta Box provider loop names a provider without a middle name, pedigree or degree', function (): void {
+    expect(physician_loop_mb([5]))->toContain('itemprop="name">Jo Smith</h2>');
+});
+
+test('the Meta Box provider loop asks for the medium thumbnail as an image, and restores the post after each list of clinics', function (): void {
+    physician_loop_mb([5, 6], [], [[], []]);
+
+    expect(physician_loops_calls('the_post_thumbnail'))->toBe([['the_post_thumbnail', 'medium', ['itemprop' => 'image']], ['the_post_thumbnail', 'medium', ['itemprop' => 'image']]])
+        ->and(physician_loops_calls('wp_reset_postdata'))->toHaveCount(2);
+});
+
+test('the Meta Box provider loop reads the rating as one stored value and trims the clinical bio to 30 words', function (): void {
+    physician_loop_mb([5], ['physician_npi' => '123', 'physician_clinical_bio' => 'Long bio.'], [], ['rating' => '{}']);
+
+    expect(physician_loops_calls('get_post_meta'))->toBe([['get_post_meta', 5, '_syndicated_api_data', true]])
+        ->and(physician_loops_calls('wp_trim_words'))->toBe([['wp_trim_words', 30]]);
 });

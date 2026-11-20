@@ -461,3 +461,9 @@ test('the providers block button label turns a non-breaking space into a space a
 
     expect($output)->toContain('aria-label="Mom&#039;s A B C &amp; D"');
 });
+
+test('the provider card label turns a non-breaking space into a space and keeps an ampersand as one', function (): void {
+    $output = provider_card(['physician_first_name' => "Mom&#8217;s A&nbsp;B\u{A0}C & D", 'physician_last_name' => 'Lee']);
+
+    expect($output)->toContain('aria-label="View profile for Mom\'s A B C & D Lee"');
+});

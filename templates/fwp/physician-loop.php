@@ -47,9 +47,6 @@
 
 	        // Eliminate PHP errors
 
-	        $provider_specialty = '';
-	        $provider_specialty_term = '';
-	        $provider_specialty_name = '';
 	        $provider_occupation_title = '';
 
 	        if ($physician_resident) {
@@ -116,7 +113,10 @@
 								media="(min-width: 1px)">
 							<img src="<?php echo uamswp_fad_str(image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center', 'portrait-3-4')); ?>" alt="<?php echo $full_name_attr; ?>" />
 						<?php } elseif (has_post_thumbnail()) { ?>
-							<?php the_post_thumbnail('medium', ['itemprop' => 'image']); ?>
+							<?php
+	                        // Reached only without the image sizing function, which the Unit suite defines once and cannot undefine.
+	                        // @pest-mutate-ignore: RemoveFunctionCall,RemoveArrayItem
+	                        the_post_thumbnail('medium', ['itemprop' => 'image']); ?>
 						<?php } else { ?>
 							<source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.svg" media="(min-width: 1px)">
 							<img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.jpg" alt="" role="presentation" />
