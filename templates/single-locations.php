@@ -386,12 +386,16 @@ while (have_posts()) {
     $map = get_field('location_map', $location_source_ids['map']);
     $location_address_1 = get_field('location_address_1', $location_source_ids['street']);
     $location_building = get_field('location_building', $location_source_ids['facility']);
+    // A building counts only when its term still exists and is not the _none term, so a deleted building adds no empty line.
+    $has_building = false;
     if ($location_building) {
         // The template runs without strict types, so PHP coerces the uncast value the same way.
         // @pest-mutate-ignore: RemoveIntegerCast
         $building = get_term((int) $location_building, 'building');
-        $building_slug = $building instanceof WP_Term ? $building->slug : null;
-        $building_name = $building instanceof WP_Term ? $building->name : null;
+        if ($building instanceof WP_Term && $building->slug !== '_none') {
+            $has_building = true;
+            $building_name = $building->name;
+        }
     }
     /** @var array{value: int|string, choices: array<int|string, string>}|false $location_floor */
     $location_floor = get_field_object('location_building_floor', $location_source_ids['unit']);
@@ -406,11 +410,11 @@ while (have_posts()) {
     /** @var string|null $building_name */
     // The building name is read only when the location has a building, and then it is set, so its default is never used.
     // @pest-mutate-ignore: EmptyStringToNotEmpty
-    $location_address_2 = uamswp_location_address_2(($location_building && $building_slug !== '_none'), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, '<br />', ', ');
+    $location_address_2 = uamswp_location_address_2($has_building, $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, '<br />', ', ');
     /** @var string|null $building_name */
     // The building name is read only when the location has a building, and then it is set, so its default is never used.
     // @pest-mutate-ignore: EmptyStringToNotEmpty
-    $location_address_2_schema = uamswp_location_address_2(($location_building && $building_slug !== '_none'), $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, ' ', ' ');
+    $location_address_2_schema = uamswp_location_address_2($has_building, $building_name ?? '', $location_floor, $location_floor_value, $location_floor_label, $location_suite, ' ', ' ');
 
     $location_address_2_deprecated = get_field('location_address_2', $location_source_ids['street']);
     if (! $location_address_2) {

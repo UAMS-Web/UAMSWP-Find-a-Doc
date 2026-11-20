@@ -860,14 +860,15 @@ while (have_posts()) {
 
                                         $location_address_1 = get_field('location_address_1', $location_source_ids['street']);
                                         $location_building = get_field('location_building', $location_source_ids['facility']);
-                                        // The slug is only compared with _none, which an empty slug is not either.
+                                        // A building counts only when its term still exists and is not the _none term, so a deleted building adds no empty line.
+                                        $has_building = false;
+                                        // uamswp_location_address_2() reads the name only when there is a building, which sets it below.
                                         // @pest-mutate-ignore: EmptyStringToNotEmpty
-                                        $building_slug = '';
                                         $building_name = '';
                                         if ($location_building) {
                                             $building = get_term(uamswp_fad_int($location_building), 'building');
-                                            if (is_object($building) && ! is_wp_error($building)) {
-                                                $building_slug = $building->slug;
+                                            if (is_object($building) && ! is_wp_error($building) && $building->slug !== '_none') {
+                                                $has_building = true;
                                                 $building_name = $building->name;
                                             }
                                         }
@@ -883,7 +884,7 @@ while (have_posts()) {
                                             $location_floor_label = $location_floor['choices'][$location_floor_value] ?? '';
                                         }
                                         $location_suite = get_field('location_suite', $location_source_ids['unit']);
-                                        $location_address_2 = uamswp_location_address_2(($location_building && $building_slug !== '_none'), $building_name, $location_floor, $location_floor_value, $location_floor_label, $location_suite ?: false, '<br />', ', ');
+                                        $location_address_2 = uamswp_location_address_2($has_building, $building_name, $location_floor, $location_floor_value, $location_floor_label, $location_suite ?: false, '<br />', ', ');
 
                                         $location_address_2_deprecated = get_field('location_address_2', $location_source_ids['street']);
                                         if (! $location_address_2) {
