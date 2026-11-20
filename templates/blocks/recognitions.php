@@ -12,12 +12,6 @@ if (function_exists('uams_fad_block_placeholder') && uams_fad_block_placeholder(
     return;
 }
 
-$block_data = uamswp_fad_assoc($block ?? null);
-$className = '';
-if (! empty($block_data['className'])) {
-    $className .= ' '.uamswp_fad_str($block_data['className']);
-}
-
 // Load Values
 if (empty($recognition_id)) {
     $recognition_id = get_field('field_select_recognition_list');
@@ -42,9 +36,8 @@ $args = ([
     // We can define any additional arguments that we need - see Codex for the full list
 ]);
 $recognition_query = new WP_Query($args);
-$recognition_list = '';
 if ($recognition_query->have_posts()) {
-    $recognition_list .= '<div class="table-responsive">
+    $recognition_list = '<div class="table-responsive">
 			<table class="table table-striped">
 			<thead>
 			<tr>
@@ -84,9 +77,6 @@ if ($recognition_query->have_posts()) {
 
         // Eliminate PHP errors
 
-        $provider_specialty = '';
-        $provider_specialty_term = '';
-        $provider_specialty_name = '';
         $provider_occupation_title = '';
 
         if ($resident) {

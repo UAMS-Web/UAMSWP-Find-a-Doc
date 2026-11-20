@@ -33,7 +33,7 @@ $location_phone_data_categorytitle = 'Telephone Number';
 $location_title = '';
 $location_phone_data_itemtitle = '';
 $location_title_attr = '';
-if ($phone_output == 'associated_locations') {
+if ($phone_output === 'associated_locations') {
     $location_title = get_the_title(uamswp_fad_int($phone_output_id));
     $location_title_attr = $location_title;
     $location_title_attr = str_replace('"', "'", $location_title_attr); // Replace double quotes with single quote
@@ -48,7 +48,7 @@ if ($phone_output == 'associated_locations') {
 // General information phone number
 $location_phone = get_field('location_phone', $phone_output_id);
 $location_phone_format_dash = uamswp_fad_str(format_phone_dash($location_phone));
-if ($location_appointments_query && ($phone_output == 'associated_locations')) {
+if ($location_appointments_query && ($phone_output === 'associated_locations')) {
     // IF a patient can schedule an appointment for services rendered at this location...
     // AND IF the output is on references to associated locations like location cards and a Provider profile's primary location section...
     $location_phone_link_data_typetitle = 'Appointment Phone Number for New and Returning Patients';
@@ -125,15 +125,13 @@ if ($location_appointment_phone_query || $location_ac_appointments_query) {
 // Set variable values only if the output is a Location profile's contact information section
 $location_fax = '';
 $location_fax_format_dash = '';
-$location_fax_link = '';
 $location_phone_numbers = '';
-if ($phone_output == 'location_profile') {
+if ($phone_output === 'location_profile') {
     // Fax number
     if (! $location_ac_query) {
         // IF this is not an Arkansas Children's location...
         $location_fax = get_field('location_fax', $phone_output_id); // Get the fax number
         $location_fax_format_dash = uamswp_fad_str(format_phone_dash($location_fax));
-        $location_fax_link = '<a href="tel:'.$location_fax_format_dash.'" class="icon-phone"'.' data-categorytitle="'.$location_phone_data_categorytitle.'"'.' data-typetitle="Clinic Fax Number">'.$location_fax_format_dash.'</a>'; // Build the anchor element for the fax number
     }
 
     // Additional phone numbers
@@ -141,14 +139,10 @@ if ($phone_output == 'location_profile') {
         // IF this is not an Arkansas Children's location...
         $location_phone_numbers = get_field('field_location_phone_numbers', $phone_output_id); // Get the repeater for additional phone numbers
     }
-} else {
-    $location_fax = '';
-    $location_fax_link = '';
-    $location_phone_numbers = '';
 }
 
 // Display phone numbers on location profile's contact information section
-if ($phone_output == 'location_profile') {
+if ($phone_output === 'location_profile') {
     /** @var list<string> $profile_phone_schema */
     $profile_phone_schema = []; // The numbers for the structured data
     ?>
@@ -203,8 +197,6 @@ if ($phone_output == 'location_profile') {
         <?php } ?>
         <?php if ($location_phone_numbers) {
             // Additional phone numbers
-
-            $phone_numbers = $location_phone_numbers;
             while (have_rows('field_location_phone_numbers')) {
                 the_row();
                 $title = uamswp_fad_str(get_sub_field('location_appointments_text'));
@@ -221,7 +213,7 @@ if ($phone_output == 'location_profile') {
                 ?>
             <dt><?php echo $title; ?></dt>
             <dd><a href="tel:<?php echo $phone_format_dash; ?>" data-typetitle="Additional Phone Number: <?php echo $title_attr; ?>"><?php echo $phone_format_dash; ?></a><?php echo $text ? '<br/><span class="subtitle">'.$text.'</span>' : ''; ?></dd>
-            <?php if ($phone != '') {
+            <?php if ($phone !== '') {
                 if (isset($phone_schema)) {
                     $profile_phone_schema[] = $phone_format_dash;
                 }
@@ -248,7 +240,7 @@ if ($phone_output == 'location_profile') {
 <?php } // endif
 
 // Display phone numbers for associated locations
-if ($phone_output == 'associated_locations') { ?>
+if ($phone_output === 'associated_locations') { ?>
     <?php if ($location_phone) { ?>
         <dl data-categorytitle="<?php echo $location_phone_data_categorytitle; ?>">
             <?php if ($location_appointments_query) {

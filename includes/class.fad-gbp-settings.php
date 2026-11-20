@@ -30,6 +30,8 @@ function uamswp_fad_gbp_sanitize_modes(array $posted): array
     $modes = [];
 
     foreach (array_keys(uamswp_fad_gbp_silos()) as $silo) {
+        // A missing mode is not a known one whatever it reads as, so the silo is in dry-run either way.
+        // @pest-mutate-ignore: EmptyStringToNotEmpty
         $mode = $posted[$silo] ?? '';
         $modes[$silo] = is_string($mode) && in_array($mode, UAMSWP_FAD_GBP_Logic::MODES, true) ? $mode : 'dry-run';
     }
@@ -92,7 +94,11 @@ function uamswp_fad_gbp_queue_all_action(bool $exit = true, ?callable $lookup = 
  */
 function uamswp_fad_gbp_log_filters(array $query): array
 {
+    // A missing filter is not a known action or silo whatever it reads as, so it filters nothing either way.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $action = $query['log_action'] ?? '';
+    // As above.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $silo = $query['log_silo'] ?? '';
 
     return [
@@ -114,7 +120,11 @@ function uamswp_fad_gbp_render_entries(array $entries): void
         <tbody>
         <?php foreach ($entries as $entry) { ?>
             <tr>
-                <td><?php echo esc_html((string) wp_date('Y-m-d H:i', uamswp_fad_int(($entry['time'] ?? 0)))); ?></td>
+                <td><?php
+                // wp_date() returns false only for a timezone it cannot build, and esc_html() prints false
+                // and an empty string the same.
+                // @pest-mutate-ignore: RemoveStringCast
+                echo esc_html((string) wp_date('Y-m-d H:i', uamswp_fad_int(($entry['time'] ?? 0)))); ?></td>
                 <td><code><?php echo esc_html(uamswp_fad_str(($entry['store_code'] ?? ''))); ?></code></td>
                 <td><?php echo esc_html(uamswp_fad_str(($entry['silo'] ?? ''))); ?></td>
                 <td><?php echo esc_html(uamswp_fad_str(($entry['mode'] ?? ''))); ?></td>
@@ -185,7 +195,11 @@ function uamswp_fad_gbp_render_settings_page(): void
             <?php foreach (uamswp_fad_gbp_credential_names() as $name) { ?>
                 <tr>
                     <td><code><?php echo esc_html($name); ?></code></td>
-                    <td><?php echo (defined($name) && constant($name) !== '') || getenv($name) ? 'Set' : '<strong>Missing</strong>'; ?></td>
+                    <td><?php
+                    // The Unit suite cannot define these constants: GbpDashboardTest and GbpRunPostTest read them
+                    // as missing for the rest of the process, so the value of a defined one is never compared there.
+                    // @pest-mutate-ignore: NotIdenticalToIdentical,EmptyStringToNotEmpty
+                    echo (defined($name) && constant($name) !== '') || getenv($name) ? 'Set' : '<strong>Missing</strong>'; ?></td>
                 </tr>
             <?php } ?>
             </tbody>

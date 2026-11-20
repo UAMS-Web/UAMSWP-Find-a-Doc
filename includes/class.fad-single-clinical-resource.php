@@ -56,9 +56,13 @@ function uamswp_resource_text(): void
     $nci_query = get_field('clinical_resource_text_nci_query');
     $nci_embed = get_field('clinical_resource_nci_embed');
 
-    if ($resource_type_value == 'text' && $text && ! $nci_query) { // $show_text_section ) {
+    // The type is a string from the template, so == and === agree.
+    // @pest-mutate-ignore: EqualToIdentical
+    $is_text = $resource_type_value == 'text';
+
+    if ($is_text && $text && ! $nci_query) { // $show_text_section ) {
         echo $text;
-    } elseif ($resource_type_value == 'text' && $nci_query && $nci_embed) {
+    } elseif ($is_text && $nci_query && $nci_embed) {
         echo $nci_embed;
     }
 }
@@ -74,6 +78,8 @@ function uamswp_resource_infographic(): void
     $infographic_transcript = get_field('clinical_resource_infographic_transcript');
     $size = 'content-image-wide';
 
+    // The type is a string from the template, so == and === agree.
+    // @pest-mutate-ignore: EqualToIdentical
     if ($resource_type_value == 'infographic' && $infographic) {
         if ($infographic_descr) {
             echo '<h2 class="sr-only">Description</h2>';
@@ -108,6 +114,24 @@ function uamswp_resource_document(): void
     $icon_excel = 'far fa-file-excel';
     $icon_image = 'far fa-file-image';
 
+    // The icon of each file extension; a file of any other type keeps the icon of the one before it.
+    $icons = [
+        'pdf' => $icon_pdf,
+        'doc' => $icon_word,
+        'docx' => $icon_word,
+        'ppt' => $icon_powerpoint,
+        'pptx' => $icon_powerpoint,
+        'xls' => $icon_excel,
+        'xlsx' => $icon_excel,
+        'jpg' => $icon_image,
+        'jpeg' => $icon_image,
+        'gif' => $icon_image,
+        'png' => $icon_image,
+        'bmp' => $icon_image,
+    ];
+
+    // The type is a string from the template, so == and === agree.
+    // @pest-mutate-ignore: EqualToIdentical
     if ($resource_type_value == 'doc' && have_rows('clinical_resource_document')) {
         echo $document_descr;
         echo '<hr />';
@@ -119,19 +143,11 @@ function uamswp_resource_document(): void
             $document_file = uamswp_fad_assoc(get_sub_field('document_file'));
             $document_url = uamswp_fad_str($document_file['url'] ?? '');
             $document_url_path = pathinfo($document_url);
+            // A file with no extension reads as one no icon has, so the fallback text makes no difference.
+            // @pest-mutate-ignore: EmptyStringToNotEmpty
             $document_url_extension = $document_url_path['extension'] ?? '';
 
-            if ($document_url_extension == 'pdf') {
-                $icon_file = $icon_pdf;
-            } elseif ($document_url_extension == 'doc' || $document_url_extension == 'docx') {
-                $icon_file = $icon_word;
-            } elseif ($document_url_extension == 'ppt' || $document_url_extension == 'pptx') {
-                $icon_file = $icon_powerpoint;
-            } elseif ($document_url_extension == 'xls' || $document_url_extension == 'xlsx') {
-                $icon_file = $icon_excel;
-            } elseif (in_array($document_url_extension, ['jpg', 'jpeg', 'gif', 'png', 'bmp'])) {
-                $icon_file = $icon_image;
-            }
+            $icon_file = $icons[$document_url_extension] ?? $icon_file;
             ?>
             <li><a class="attachment-link" href="<?php echo esc_url($document_url); ?>" title="<?php echo esc_attr($document_title); ?>" target="_blank"><span class="<?php echo $icon_file; ?> fa-fw"></span><span class="attachment-label"><?php echo esc_html($document_title); ?></span></a></li>
         <?php }
@@ -197,11 +213,15 @@ function uamswp_resource_video(): void
     $video_descr = get_field('clinical_resource_video_descr');
     $video_transcript = get_field('clinical_resource_video_transcript');
 
+    // Only ever compared with 'youtube', so its value before a match makes no difference.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $video_source = '';
     if ((str_contains($video, 'youtube')) || (str_contains($video, 'youtu.be'))) {
         $video_source = 'youtube';
     }
 
+    // The type is a string from the template, so == and === agree.
+    // @pest-mutate-ignore: EqualToIdentical
     if ($resource_type_value == 'video' && $video) { ?>
         <?php if ($video_descr) {
             echo '<h2 class="sr-only">Description</h2>';
@@ -301,8 +321,15 @@ function uamswp_resource_associated(): void
     $resource_heading_related_pre = true; // "Related Resources"
     $resource_heading_related_post = false; // "Resources Related to __"
     $resource_heading_related_name = $page_title; // To what is it related?
+    // A clinical resource has no key to filter the full list by, so the link to it never shows and neither
+    // the suppression nor the empty key and value can change that.
+    // @pest-mutate-ignore: FalseToTrue
     $resource_more_suppress = false; // Force div.more to not display
+    // The link needs both a key and a value, and the value below stays empty.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $resource_more_key = '';
+    // The link needs both a key and a value, and the key above stays empty.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $resource_more_value = '';
     if ($show_related_resource_section) {
         include UAMS_FAD_PATH.'/templates/blocks/clinical-resources.php';
@@ -338,6 +365,7 @@ function uamswp_resource_expertise(): void
 					</div>
 				</div>
 			</div>
+		</div>
         </section>
 	<?php
     } // endif

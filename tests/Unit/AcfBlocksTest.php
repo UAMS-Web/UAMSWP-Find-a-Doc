@@ -123,6 +123,13 @@ final class AcfBlocksTest extends UnitTestCase
         $this->assertFalse(\uams_fad_block_placeholder());
     }
 
+    public function test_an_empty_block_with_no_preview_flag_is_not_a_preview(): void
+    {
+        $this->expectOutputString('');
+
+        $this->assertFalse(\uams_fad_block_placeholder(['title' => 'T', 'data' => []]));
+    }
+
     /**
      * @return array<string, array{0: array<string, mixed>}>
      */

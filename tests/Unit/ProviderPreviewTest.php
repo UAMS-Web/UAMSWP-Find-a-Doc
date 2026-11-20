@@ -150,4 +150,28 @@ final class ProviderPreviewTest extends UnitTestCase
 
         $this->assertStringContainsString("add_filter('acfcdt/settings/store_acf_values_in_core_meta', '__return_false');", $source);
     }
+
+    public function test_the_revision_is_looked_up_by_the_number_of_an_id_given_as_a_string(): void
+    {
+        $asked = [];
+        when('wp_is_post_revision')->alias(static function ($id) use (&$asked): int {
+            $asked[] = $id;
+
+            return 89;
+        });
+        when('get_post_type')->justReturn('provider');
+
+        uamswp_fad_preview_keep_saved_post_id('412', 89);
+
+        $this->assertSame([412], $asked);
+    }
+
+    public function test_a_preview_with_no_post_named_in_the_request_keeps_the_id_even_for_post_one(): void
+    {
+        unset($_GET['p']);
+        when('wp_is_post_revision')->justReturn(1);
+        when('get_post_type')->justReturn('provider');
+
+        $this->assertSame(412, uamswp_fad_preview_keep_saved_post_id(412));
+    }
 }

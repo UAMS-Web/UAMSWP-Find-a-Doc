@@ -384,4 +384,186 @@ final class AcfTableMapCheckTest extends UnitTestCase
         $this->assertSame(5, substr_count($html, 'is declared in JSON but absent from the cache'));
         $this->assertStringContainsString('and 2 more', $html);
     }
+
+    public function test_an_unreadable_cache_is_reported_whole_with_its_path_and_no_tables(): void
+    {
+        $dir = $this->fixture(['uamswp_locations' => $this->locations()], []);
+        unlink($dir.'/.cache/_table_map.php');
+
+        $this->assertSame(['readable' => false, 'tables' => 0, 'problems' => ["Cannot read the table map cache at {$dir}/.cache/_table_map.php"]], uamswp_fad_acf_table_map_check($dir.'/'));
+
+        file_put_contents($dir.'/.cache/_table_map.php', '<?php return [;');
+        $parse = uamswp_fad_acf_table_map_check($dir);
+
+        $this->assertSame([false, 0], [$parse['readable'], $parse['tables']]);
+        $this->assertCount(1, $parse['problems']);
+        $this->assertStringStartsWith("Cannot load the table map cache at {$dir}/.cache/_table_map.php: ", $parse['problems'][0]);
+
+        file_put_contents($dir.'/.cache/_table_map.php', "<?php return 'nope';");
+
+        $this->assertSame(['readable' => false, 'tables' => 0, 'problems' => ["The table map cache at {$dir}/.cache/_table_map.php does not return an array"]], uamswp_fad_acf_table_map_check($dir));
+    }
+
+    public function test_a_directory_named_with_a_trailing_slash_reads_the_same_files(): void
+    {
+        $dir = $this->fixture(['uamswp_locations' => $this->locations('location_phone', 'location_city', 'location_suite')], ['uamswp_locations' => $this->locations()]);
+
+        $this->assertSame(uamswp_fad_acf_table_map_check($dir), uamswp_fad_acf_table_map_check($dir.'/'));
+        $this->assertSame(1, uamswp_fad_acf_table_map_check($dir.'/')['tables']);
+    }
+
+    public function test_a_table_file_that_cannot_be_read_is_a_problem_not_a_crash(): void
+    {
+        if (function_exists('posix_geteuid') && posix_geteuid() === 0) {
+            $this->markTestSkipped('root reads a file whatever its mode');
+        }
+
+        $dir = $this->fixture(['uamswp_locations' => $this->locations()], ['uamswp_locations' => $this->locations()]);
+        file_put_contents($dir.'/table_locked.json', '{}');
+        chmod($dir.'/table_locked.json', 0);
+
+        $warnings = [];
+        set_error_handler(static function (int $level, string $message) use (&$warnings): bool {
+            $warnings[] = $message;
+
+            return true;
+        });
+
+        try {
+            $problems = uamswp_fad_acf_table_map_check($dir)['problems'];
+        } finally {
+            restore_error_handler();
+            chmod($dir.'/table_locked.json', 0644);
+        }
+
+        $this->assertSame(['table_locked.json is not valid JSON with a table name'], $problems);
+        $this->assertNotSame([], $warnings, 'the failed read warns, and the check carries on');
+    }
+
+    public function test_a_table_file_without_a_name_or_with_a_name_that_is_not_text_is_a_problem(): void
+    {
+        $dir = $this->fixture(['uamswp_locations' => $this->locations()], ['uamswp_locations' => $this->locations()]);
+        file_put_contents($dir.'/table_nameless.json', json_encode(['columns' => [], 'relationship' => []]));
+        file_put_contents($dir.'/table_numbered.json', json_encode(['name' => 5, 'columns' => [], 'relationship' => []]));
+
+        $this->assertSame(
+            ['table_nameless.json is not valid JSON with a table name', 'table_numbered.json is not valid JSON with a table name'],
+            uamswp_fad_acf_table_map_check($dir)['problems']
+        );
+    }
+
+    public function test_a_table_file_without_a_relationship_is_a_problem(): void
+    {
+        $dir = $this->fixture(['uamswp_locations' => $this->locations()], ['uamswp_locations' => $this->locations()]);
+        file_put_contents($dir.'/table_loose.json', json_encode(['name' => 'loose', 'columns' => []]));
+
+        $this->assertSame(['table_loose.json has no `columns` list or `relationship` object'], uamswp_fad_acf_table_map_check($dir)['problems']);
+    }
+
+    public function test_a_cache_entry_without_columns_or_relationship_is_a_problem_and_the_next_entry_is_still_read(): void
+    {
+        $dir = $this->fixture(['uamswp_locations' => $this->locations()], []);
+        $map = ['tables' => [
+            'no_columns' => ['relationship' => ['post_type' => 'x']],
+            'no_relationship' => ['columns' => []],
+            'not_a_table' => 'x',
+            'uamswp_locations' => $this->definition('uamswp_locations', $this->locations()),
+        ]];
+        file_put_contents($dir.'/.cache/_table_map.php', '<?php return '.var_export($map, true).';');
+
+        $this->assertSame([
+            'table `no_columns` in the cache has no `columns` list or `relationship` object',
+            'table `no_relationship` in the cache has no `columns` list or `relationship` object',
+            'table `not_a_table` in the cache has no `columns` list or `relationship` object',
+        ], uamswp_fad_acf_table_map_check($dir)['problems']);
+    }
+
+    public function test_a_cache_whose_tables_are_not_a_list_reads_as_one_entry_that_is_not_a_table(): void
+    {
+        $dir = $this->fixture(['uamswp_locations' => $this->locations()], []);
+        file_put_contents($dir.'/.cache/_table_map.php', "<?php return ['tables' => 'x'];");
+
+        $this->assertSame([
+            'table `0` in the cache has no `columns` list or `relationship` object',
+            'table `uamswp_locations` is declared in JSON but absent from the cache',
+        ], uamswp_fad_acf_table_map_check($dir)['problems']);
+    }
+
+    public function test_column_names_that_are_not_text_compare_as_text_and_a_list_of_names_is_left_out(): void
+    {
+        $dir = $this->fixture(['uamswp_locations' => $this->locations()], []);
+        $json = $this->definition('uamswp_locations', $this->locations());
+        $json['columns'] = [['name' => 5], ['name' => ['nested']], ['name' => 'location_city']];
+        file_put_contents($dir.'/table_uamswp_locations.json', json_encode($json));
+        $cached = $json;
+        $cached['columns'] = [['name' => '5'], ['name' => ['other']], ['name' => 'location_city']];
+        file_put_contents($dir.'/.cache/_table_map.php', '<?php return '.var_export(['tables' => ['uamswp_locations' => $cached]], true).';');
+
+        $errors = [];
+        set_error_handler(static function (int $level, string $message) use (&$errors): bool {
+            $errors[] = $message;
+
+            return true;
+        });
+
+        try {
+            $check = uamswp_fad_acf_table_map_check($dir);
+        } finally {
+            restore_error_handler();
+        }
+
+        $this->assertSame(['readable' => true, 'tables' => 1, 'problems' => []], $check);
+        $this->assertSame([], $errors);
+    }
+
+    public function test_a_long_list_of_columns_is_counted_and_sampled_by_its_first_three(): void
+    {
+        $dir = $this->fixture(
+            ['uamswp_locations' => $this->locations('a', 'b', 'c', 'd', 'location_city')],
+            ['uamswp_locations' => $this->locations('location_city', 'w', 'x', 'y', 'z')]
+        );
+
+        $this->assertSame([
+            'table `uamswp_locations`: 4 column(s) in JSON but not the cache (e.g. a, b, c)',
+            'table `uamswp_locations`: 4 column(s) in the cache but not the JSON (e.g. w, x, y)',
+        ], uamswp_fad_acf_table_map_check($dir)['problems']);
+    }
+
+    public function test_the_notice_prints_the_whole_message(): void
+    {
+        $dir = $this->fixture(['uamswp_locations' => $this->locations('location_phone', 'location_city', 'location_suite')], ['uamswp_locations' => $this->locations()]);
+
+        $this->assertSame(
+            '<div class="notice notice-error"><p><strong>The ACF custom table map is out of date.</strong> The plugin reads a cached copy of the table definitions, and the cache no longer matches them. Open'
+            .' <a href="https://example.test/wp-admin/edit.php?post_type=acf-field-group&page=acf-custom-database-tables">Custom Fields &gt; Database Tables</a> '
+            .'and run Create/Update Tables.</p><ul><li>table `uamswp_locations`: 1 column(s) in JSON but not the cache (e.g. location_suite)</li></ul>'
+            .'<p><em>This check compares the cache with the table definition files only. It does not compare the ACF field groups with the table definitions.</em></p></div>',
+            $this->notice($dir, true)
+        );
+    }
+
+    public function test_the_notice_lists_exactly_five_differences_with_no_count_of_more(): void
+    {
+        $tables = [];
+
+        foreach (range(1, 5) as $i) {
+            $tables['table_'.$i] = $this->locations();
+        }
+
+        $html = $this->notice($this->fixture($tables, []), true);
+
+        $this->assertSame(5, substr_count($html, '<li>'));
+        $this->assertStringNotContainsString('more', $html);
+    }
+
+    public function test_the_notice_counts_the_differences_past_five_in_a_list_item(): void
+    {
+        $tables = [];
+
+        foreach (range(1, 7) as $i) {
+            $tables['table_'.$i] = $this->locations();
+        }
+
+        $this->assertStringContainsString('absent from the cache</li><li>and 2 more</li></ul>', $this->notice($this->fixture($tables, []), true));
+    }
 }

@@ -300,3 +300,18 @@ test('the profile phone block lists additional numbers in the schema when there 
 
     expect(trim((string) preg_replace('/\s+/', ' ', $schema)))->toBe('"telephone": ["dash:501-6"],');
 });
+
+test('the profile phone block cleans an additional number title for its tracking label', function (): void {
+    $rows = [['location_appointments_text' => "Mom&#8217;s A&nbsp;B\u{A0}C & D", 'location_appointments_phone' => '501-6', 'location_appointments_additional_text' => '']];
+
+    $output = location_phone(['field_location_phone_numbers' => $rows], 'location_profile', [], $rows);
+
+    expect($output)->toContain('data-typetitle="Additional Phone Number: Mom\'s A B C & D">dash:501-6</a>');
+});
+
+test('the profile phone block prints the older appointments rows when the first row has a number, whatever the next one has', function (): void {
+    $output = location_phone(['location_appointments' => [['text' => 'After hours', 'number' => '501-8', 'after' => ''], ['text' => 'Later', 'number' => '', 'after' => '']]], 'location_profile');
+
+    expect($output)->toContain('<dt>After hours</dt><dd><a href="tel:501-8" class="icon-phone">501-8</a> </dd>')
+        ->not->toContain('Later');
+});

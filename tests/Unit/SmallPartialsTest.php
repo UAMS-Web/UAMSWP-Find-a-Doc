@@ -115,3 +115,16 @@ test('the resource list item prints no type label for a resource without a type'
 
     expect(uamswp_test_include_partial('loops/resource-list-item', ['id' => 7]))->toContain('<span class="subtitle"><span class="sr-only">(</span><span class="sr-only">)</span></span>');
 });
+
+test('the resource list item label turns a non-breaking space into a space and keeps an ampersand as one', function (): void {
+    small_partials_resource(['clinical_resource_type' => ['value' => 'guide', 'label' => 'Guide']], "Mom&#8217;s A&nbsp;B\u{A0}C & D", 'An excerpt.');
+
+    expect(uamswp_test_include_partial('loops/resource-list-item', ['id' => 7]))->toContain('aria-label="View Clinical Resource page for Mom&#039;s A B C &amp; D"');
+});
+
+test('the resource list item trims a long excerpt to 23 words', function (): void {
+    small_partials_resource(['clinical_resource_type' => ['value' => 'guide', 'label' => 'Guide']], 'Title', str_repeat('a', 161));
+    when('wp_trim_words')->alias(static fn (string $text, int $words, string $more): string => $words.' words'.$more);
+
+    expect(uamswp_test_include_partial('loops/resource-list-item', ['id' => 7]))->toContain('<p>23 words &hellip;</p>');
+});

@@ -20,15 +20,16 @@
 $appointment_show_main_line_sys = get_field('provider_mainline', 'option');
 
 $appointment_phone_name = 'the UAMS&nbsp;Health appointment line'; // default (UAMS)
+$appointment_phone_name_attr = 'the UAMS Health appointment line'; // The line's name for an attribute: no entity, no quotes
 $appointment_phone = '5016868000'; // default (UAMS)
 $show_portal = false;
-$portal_name = '';
-$portal_name_attr = '';
 $portal_url = '';
 // Portal
 if ($physician_portal) {
     $portal = get_term(uamswp_fad_int($physician_portal), 'portal');
     $portal_found = is_object($portal) && ! is_wp_error($portal);
+    // A portal that is not found has a slug that names no hospital and is not '_none' whatever it reads as.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $portal_slug = $portal_found ? uamswp_fad_str($portal->slug) : '';
     $portal_name = $portal_found ? uamswp_fad_str($portal->name) : '';
     $portal_name_attr = $portal_name;
@@ -38,37 +39,29 @@ if ($physician_portal) {
     $portal_name_attr = htmlentities($portal_name_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
     $portal_name_attr = str_replace('&nbsp;', ' ', $portal_name_attr); // Convert non-breaking space with normal space
     $portal_name_attr = html_entity_decode($portal_name_attr); // Convert HTML entities to their corresponding characters
-    $portal_content = get_field('portal_content', $portal);
     $portal_link = uamswp_fad_assoc(get_field('portal_url', $portal));
     if ($portal_link !== []) {
         $portal_url = uamswp_fad_str($portal_link['url'] ?? null);
-        $portal_link_title = $portal_link['title'] ?? null;
     }
 
     if ($location_valid && $portal && $portal_slug !== '_none') {
         $show_portal = true;
     }
-    if ($portal_slug == 'ach-mychart') {
+    if ($portal_slug === 'ach-mychart') {
         $appointment_phone_name = "the main Arkansas Children's Hospital appointment line";
+        $appointment_phone_name_attr = $appointment_phone_name;
         $appointment_phone = '5013644000';
-    } elseif ($portal_slug == 'my-healthevet') {
+    } elseif ($portal_slug === 'my-healthevet') {
         $appointment_phone_name = 'the main Central Arkansas Veterans Healthcare System appointment line';
+        $appointment_phone_name_attr = $appointment_phone_name;
         $appointment_phone = '5012573999';
     }
 }
 
-$appointment_phone_name_attr = $appointment_phone_name;
-$appointment_phone_name_attr = str_replace('"', "'", $appointment_phone_name_attr); // Replace double quotes with single quote
-$appointment_phone_name_attr = str_replace('&#8217;', "'", $appointment_phone_name_attr); // Replace right single quote with single quote
-$appointment_phone_name_attr = str_replace('&nbsp;', ' ', $appointment_phone_name_attr); // Convert non-breaking space entity text to a normal space before it is encoded
-$appointment_phone_name_attr = htmlentities($appointment_phone_name_attr, ENT_HTML401, 'UTF-8'); // Convert all applicable characters to HTML entities
-$appointment_phone_name_attr = str_replace('&nbsp;', ' ', $appointment_phone_name_attr); // Convert non-breaking space with normal space
-$appointment_phone_name_attr = html_entity_decode($appointment_phone_name_attr); // Convert HTML entities to their corresponding characters
-
 $appointment_phone_tel = preg_replace('/^(\+?\d)?(\d{3})(\d{3})(\d{4})$/', '$2-$3-$4', $appointment_phone);
 $appointment_phone_text = preg_replace('/^(\+?\d)?(\d{3})(\d{3})(\d{4})$/', '($2) $3-$4', $appointment_phone);
 
-if ($location_count == 1) {
+if ($location_count === 1) {
     $appointment_location_url = $primary_appointment_url;
     $appointment_location_title = $primary_appointment_title;
     $appointment_location_data = 'Contact the Clinic Directly | Direct Link | '.$primary_appointment_title;
@@ -109,7 +102,9 @@ $appointment_reference_main = 'by calling '.$appointment_phone_name.' at <a href
                     <?php } else { ?>
                         <?php echo $appointment_reference_direct; ?>.
                     <?php } ?></p>
-                <?php } elseif ($location_valid && ! $refer_req && $accept_new && $show_portal) { ?>
+                <?php } elseif (! $refer_req && $accept_new && $show_portal) {
+                    // The portal is shown only for a valid location (above), so this is the valid-location case.
+                    ?>
                     <p>New patients can make an appointment <?php if ($appointment_show_main_line_sys) { ?>
                         <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.
                     <?php } else { ?>
@@ -123,7 +118,9 @@ $appointment_reference_main = 'by calling '.$appointment_phone_name.' at <a href
                     // appointment with this provider.
                     ?>
                     <p>New and existing patients can make an appointment <?php echo $appointment_reference_main; ?>.</p>
-                <?php } elseif ($location_valid && ! $refer_req && $accept_new && ! $show_portal) { ?>
+                <?php } elseif (! $refer_req && $accept_new && ! $show_portal) {
+                    // A provider with no valid location who needs no referral and takes new patients matched above, so the location is valid here.
+                    ?>
                     <p>New and existing patients can make an appointment <?php if ($appointment_show_main_line_sys) { ?>
                         <?php echo $appointment_reference_direct; ?> or <?php echo $appointment_reference_main; ?>.
                     <?php } else { ?>

@@ -122,10 +122,7 @@ function uamswp_expertise_physicians(): void
         // if cookie is set, run modified physician query
         if (isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region'])) {
 
-            $provider_region = '';
-            if (isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region'])) {
-                $provider_region = $_GET['_filter_region'] ?? $_COOKIE['wp_filter_region'];
-            }
+            $provider_region = $_GET['_filter_region'] ?? $_COOKIE['wp_filter_region'];
 
             $tax_query = [];
             if (! empty($provider_region)) {
@@ -295,10 +292,7 @@ function uamswp_expertise_locations(): void
         // if cookie is set, run modified physician query
         if (isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region'])) {
 
-            $location_region = '';
-            if (isset($_COOKIE['wp_filter_region']) || isset($_GET['_filter_region'])) {
-                $location_region = $_GET['_filter_region'] ?? $_COOKIE['wp_filter_region'];
-            }
+            $location_region = $_GET['_filter_region'] ?? $_COOKIE['wp_filter_region'];
 
             $tax_query = [];
             if (! empty($location_region)) {

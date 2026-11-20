@@ -60,6 +60,9 @@ final class DeadLinksDb
     /** @var bool Whether get_results() fails, returning null as wpdb does on a query error. */
     public bool $fail_results = false;
 
+    /** @var (callable(string): void)|null Run with each statement before it runs, so a test can act as another request in between. */
+    public $before;
+
     private int $next_meta = 1;
 
     /**
@@ -121,6 +124,7 @@ final class DeadLinksDb
     public function get_var(string $sql): ?string
     {
         $this->queries[] = $sql;
+        $this->run_before($sql);
 
         if (preg_match("/^SHOW TABLES LIKE '(.+)'$/", $sql, $m)) {
             // Undo prepare()'s quoting, then esc_like()'s escapes.
@@ -129,8 +133,8 @@ final class DeadLinksDb
             return str_starts_with($name, $this->prefix) && isset($this->tables[substr($name, strlen($this->prefix))]) ? $name : null;
         }
 
-        if (preg_match("/^SELECT MD5\\(option_value\\) FROM wp_options WHERE option_name = '([^']+)'$/", $sql, $m)) {
-            return isset($this->option_values[$m[1]]) ? md5($this->option_values[$m[1]]) : null;
+        if (preg_match("/^SELECT option_value FROM wp_options WHERE option_name = '([^']+)'$/", $sql, $m)) {
+            return $this->option_values[$m[1]] ?? null;
         }
 
         if (preg_match('/^SELECT COUNT\\(\\*\\) FROM wp_(\\w+) WHERE post_id = (\\d+)$/', $sql, $m)) {
@@ -138,6 +142,43 @@ final class DeadLinksDb
         }
 
         throw new LogicException('Unexpected get_var(): '.$sql);
+    }
+
+    /**
+     * Run a statement that returns no rows: the lock's insert and its conditional delete.
+     *
+     * Returns the number of rows affected, or false for an empty statement, as wpdb does on an error.
+     */
+    public function query(string $sql): int|false
+    {
+        $this->queries[] = $sql;
+        $this->run_before($sql);
+
+        if ($sql === '') {
+            return false;
+        }
+
+        if (preg_match("/^DELETE FROM wp_options WHERE option_name = '([^']+)' AND option_value = '([^']*)'$/", $sql, $m)) {
+            if (($this->option_values[$m[1]] ?? null) !== $m[2]) {
+                return 0;
+            }
+
+            unset($this->option_values[$m[1]]);
+
+            return 1;
+        }
+
+        if (preg_match("/^INSERT IGNORE INTO wp_options \\(option_name, option_value, autoload\\) VALUES \\('([^']+)', '([^']*)', 'no'\\)$/", $sql, $m)) {
+            if (isset($this->option_values[$m[1]])) {
+                return 0;
+            }
+
+            $this->option_values[$m[1]] = $m[2];
+
+            return 1;
+        }
+
+        throw new LogicException('Unexpected query(): '.$sql);
     }
 
     /**
@@ -328,6 +369,13 @@ final class DeadLinksDb
 
         if (! isset($this->lose[$name])) {
             $this->option_values[$name] = $serialized;
+        }
+    }
+
+    private function run_before(string $sql): void
+    {
+        if ($this->before !== null) {
+            ($this->before)($sql);
         }
     }
 

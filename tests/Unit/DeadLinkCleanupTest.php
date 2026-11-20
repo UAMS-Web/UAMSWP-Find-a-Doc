@@ -124,8 +124,8 @@ test('going back to the screen redirects there with the notice and ends the requ
 ]);
 
 test('a step that leaves the run unfinished redirects to the next step and ends the request', function (string $action, string $from, string $status): void {
-    dead_links_load();
-    $redirects = dead_links_world(dead_links_stored_run($from));
+    [$db, $redirects] = dead_links_admin();
+    $db->option_values[UAMSWP_DEAD_LINKS_RUN_OPTION] = serialize(dead_links_stored_run($from));
     $_GET['run'] = '1700000000';
 
     expect(fn () => uamswp_dead_links_run_step($action, [$from], static fn (array $run): array => ['status' => $status] + $run, 'done'))->toThrow(ExitCalled::class)
@@ -136,8 +136,8 @@ test('a step that leaves the run unfinished redirects to the next step and ends 
 ]);
 
 test('a step that finishes or fails the run goes back to the screen instead of the next step', function (string $status, string $notice): void {
-    dead_links_load();
-    $redirects = dead_links_world(dead_links_stored_run('scanned'));
+    [$db, $redirects] = dead_links_admin();
+    $db->option_values[UAMSWP_DEAD_LINKS_RUN_OPTION] = serialize(dead_links_stored_run('scanned'));
     $_GET['run'] = '1700000000';
 
     expect(fn () => uamswp_dead_links_run_step('uamswp_dead_links_apply', ['scanned'], static fn (array $run): array => ['status' => $status] + $run, 'applied'))->toThrow(ExitCalled::class)
@@ -196,26 +196,47 @@ function dead_links_db(): DeadLinksDb
 
     when('is_serialized')->alias(dead_links_is_serialized(...));
     when('maybe_serialize')->alias(static fn (mixed $value): mixed => is_array($value) || is_object($value) ? serialize($value) : $value);
-    when('get_option')->alias(static fn (string $name, mixed $default = false): mixed => isset($db->option_values[$name]) ? $unserialize($db->option_values[$name]) : $default);
+    // As in WordPress: a missing option is remembered in the request's notoptions, and add_option() skips its
+    // check for an existing row when notoptions lists the name, then overwrites whatever row is there.
+    $notoptions = new ArrayObject;
+    when('get_option')->alias(static function (string $name, mixed $default = false) use ($db, $unserialize, $notoptions): mixed {
+        if (isset($db->option_values[$name])) {
+            return $unserialize($db->option_values[$name]);
+        }
+
+        $notoptions[$name] = true;
+
+        return $default;
+    });
     when('update_option')->alias(static function (string $name, mixed $value, mixed $autoload = null) use ($db, $serialize): bool {
         $db->calls[] = ['update_option', $name, $autoload];
         $db->store_option($name, $serialize($value));
 
         return true;
     });
-    when('add_option')->alias(static function (string $name, mixed $value = '', string $deprecated = '', mixed $autoload = 'yes') use ($db, $serialize): bool {
+    when('add_option')->alias(static function (string $name, mixed $value = '', string $deprecated = '', mixed $autoload = 'yes') use ($db, $serialize, $notoptions): bool {
         $db->calls[] = ['add_option', $name, $value, $deprecated, $autoload];
 
-        if (isset($db->option_values[$name])) {
+        if ($db->before !== null) {
+            ($db->before)('add_option '.$name);
+        }
+
+        if (! isset($notoptions[$name]) && isset($db->option_values[$name])) {
             return false;
         }
 
+        unset($notoptions[$name]);
         $db->store_option($name, $serialize($value));
 
         return true;
     });
     when('delete_option')->alias(static function (string $name) use ($db): bool {
         $db->calls[] = ['delete_option', $name];
+
+        if ($db->before !== null) {
+            ($db->before)('delete_option '.$name);
+        }
+
         unset($db->option_values[$name]);
 
         return true;
@@ -257,7 +278,7 @@ function dead_links_db(): DeadLinksDb
 
         return true;
     });
-    when('wp_cache_delete')->alias(static function (int $key, string $group) use ($db): bool {
+    when('wp_cache_delete')->alias(static function (int|string $key, string $group) use ($db): bool {
         $db->calls[] = ['wp_cache_delete', $key, $group];
 
         return true;
@@ -410,7 +431,7 @@ test('saving an option writes it without autoload and is true when the database 
     expect(uamswp_dead_links_save('uamswp_fad_test', ['a' => 1]))->toBeTrue()
         ->and($db->option_values['uamswp_fad_test'])->toBe(serialize(['a' => 1]))
         ->and($db->calls)->toBe([['update_option', 'uamswp_fad_test', false]])
-        ->and($db->queries)->toBe(["SELECT MD5(option_value) FROM wp_options WHERE option_name = 'uamswp_fad_test'"]);
+        ->and($db->queries)->toBe(["SELECT option_value FROM wp_options WHERE option_name = 'uamswp_fad_test'"]);
 });
 
 test('saving an option is false when the database does not hold the value written', function (): void {
@@ -425,16 +446,21 @@ test('saving an option is false when the database does not hold the value writte
     expect(uamswp_dead_links_save('uamswp_fad_test', ['new']))->toBeFalse();
 });
 
-test('the lock is taken when nobody holds it, with the time and no autoload', function (): void {
-    $db = dead_links_db();
-    $before = time();
+test('the lock is taken when nobody holds it, by inserting its row with the time and no autoload', function (): void {
+    // Repeated until the clock did not tick during the call, so the time written is the time read.
+    do {
+        $db = dead_links_db();
+        $now = time();
+        $taken = uamswp_dead_links_lock();
+    } while (time() !== $now);
 
-    expect(uamswp_dead_links_lock())->toBeTrue()
-        ->and($db->calls)->toHaveCount(1)
-        ->and($db->calls[0][0])->toBe('add_option')
-        ->and($db->calls[0][1])->toBe('uamswp_fad_dead_links_lock')
-        ->and($db->calls[0][2])->toBeGreaterThanOrEqual($before)->toBeLessThanOrEqual(time())
-        ->and(array_slice($db->calls[0], 3))->toBe(['', false]);
+    expect($taken)->toBeTrue()
+        ->and($db->option_values)->toBe(['uamswp_fad_dead_links_lock' => (string) $now])
+        ->and($db->queries)->toBe([
+            "SELECT option_value FROM wp_options WHERE option_name = 'uamswp_fad_dead_links_lock'",
+            "INSERT IGNORE INTO wp_options (option_name, option_value, autoload) VALUES ('uamswp_fad_dead_links_lock', '".$now."', 'no')",
+        ])
+        ->and($db->calls)->toBe([['wp_cache_delete', 'uamswp_fad_dead_links_lock', 'options'], ['wp_cache_delete', 'notoptions', 'options']]);
 });
 
 test('a lock held for less than five minutes is not taken', function (int $age): void {
@@ -447,25 +473,61 @@ test('a lock held for less than five minutes is not taken', function (int $age):
     } while (time() !== $now);
 
     expect($taken)->toBeFalse()
+        ->and($db->option_values)->toBe(['uamswp_fad_dead_links_lock' => (string) ($now - $age)])
+        ->and($db->queries)->toHaveCount(1)
         ->and($db->calls)->toBe([]);
 })->with(['just taken' => [0], 'four minutes' => [240], 'a second short of five minutes' => [299]]);
 
 test('a lock held for five minutes or more is taken over', function (int $age): void {
-    $db = dead_links_db();
-    $db->option_values['uamswp_fad_dead_links_lock'] = (string) (time() - $age);
+    do {
+        $db = dead_links_db();
+        $now = time();
+        $db->option_values['uamswp_fad_dead_links_lock'] = (string) ($now - $age);
+        $taken = uamswp_dead_links_lock();
+    } while (time() !== $now);
 
-    expect(uamswp_dead_links_lock())->toBeTrue()
-        ->and(array_column($db->calls, 0))->toBe(['delete_option', 'add_option'])
-        ->and($db->calls[0])->toBe(['delete_option', 'uamswp_fad_dead_links_lock']);
+    expect($taken)->toBeTrue()
+        ->and($db->option_values)->toBe(['uamswp_fad_dead_links_lock' => (string) $now])
+        ->and($db->queries[1])->toBe("DELETE FROM wp_options WHERE option_name = 'uamswp_fad_dead_links_lock' AND option_value = '".($now - $age)."'");
 })->with(['five minutes' => [300], 'an hour' => [3600]]);
 
-// WordPress' add_option() can succeed over an existing row within one request, so this is not yet a lock two
-// requests cannot both take: #1457.
-test('the lock is not taken when adding its option fails', function (): void {
-    dead_links_db();
-    when('add_option')->justReturn(false);
+test('a lock another request takes between this one reading it and adding it is not taken over', function (): void {
+    $db = dead_links_db();
+    // The other request adds its row once this one has read that there is none, just before this one adds its own.
+    $db->before = static function (string $sql) use ($db): void {
+        if (str_starts_with($sql, 'INSERT IGNORE') || str_starts_with($sql, 'add_option')) {
+            $db->option_values['uamswp_fad_dead_links_lock'] = 'the other request';
+        }
+    };
 
-    expect(uamswp_dead_links_lock())->toBeFalse();
+    expect(uamswp_dead_links_lock())->toBeFalse()
+        ->and($db->option_values)->toBe(['uamswp_fad_dead_links_lock' => 'the other request']);
+});
+
+test('of two requests taking over the same stale lock, the one that deletes it second does not take it', function (): void {
+    $db = dead_links_db();
+    $stale = (string) (time() - 600);
+    $db->option_values['uamswp_fad_dead_links_lock'] = $stale;
+    // The other request read the same stale lock and took it over first.
+    $db->before = static function (string $sql) use ($db, $stale): void {
+        if ((str_starts_with($sql, 'DELETE') || str_starts_with($sql, 'delete_option')) && ($db->option_values['uamswp_fad_dead_links_lock'] ?? null) === $stale) {
+            $db->option_values['uamswp_fad_dead_links_lock'] = 'the other request';
+        }
+    };
+
+    expect(uamswp_dead_links_lock())->toBeFalse()
+        ->and($db->option_values)->toBe(['uamswp_fad_dead_links_lock' => 'the other request']);
+});
+
+test('the lock is not taken when its insert fails', function (): void {
+    $db = dead_links_db();
+    $db->before = static function (string $sql): void {
+        if (str_starts_with($sql, 'INSERT IGNORE')) {
+            throw new LogicException('the insert failed');
+        }
+    };
+
+    expect(fn () => uamswp_dead_links_lock())->toThrow(LogicException::class, 'the insert failed');
 });
 
 test('unlocking deletes the lock', function (): void {

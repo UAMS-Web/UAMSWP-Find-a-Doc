@@ -12,7 +12,7 @@
  *
  * @var int|false $id From `get_the_ID()`.
  */
-$resource_id = (int) $id;
+$resource_id = uamswp_fad_int($id);
 
 // Cards and lists prefer the optional Short Title, falling back to the full
 // title. The full title is still used for the page's own heading.
@@ -29,7 +29,6 @@ $resource_title_attr = html_entity_decode($resource_title_attr); // Convert HTML
 $resource_label = 'View Clinical Resource page for '.$resource_title_attr;
 
 $resource_type = get_field('clinical_resource_type', $resource_id);
-$resource_type_value = is_array($resource_type) ? $resource_type['value'] : '';
 $resource_type_label = is_array($resource_type) ? $resource_type['label'] : '';
 
 // The post is the third argument of get_the_content(); the first is the "more" link text.

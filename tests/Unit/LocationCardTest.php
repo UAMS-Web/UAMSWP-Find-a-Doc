@@ -10,6 +10,7 @@ declare(strict_types=1);
 use function Brain\Monkey\Functions\when;
 
 require_once __DIR__.'/../Support/templates.php';
+require_once __DIR__.'/../Support/main-loop-guard.php';
 require_once __DIR__.'/../Support/acf-blocks.php';
 
 /**
@@ -25,16 +26,36 @@ function location_card_next_id(): int
 /**
  * The date of a day from today, in the format of the ACF date fields.
  */
-function location_card_date(string $relative): string
+function location_card_date(string $relative, ?int $now = null): string
 {
-    return date('F j, Y', (int) strtotime($relative));
+    return date('F j, Y', (int) strtotime($relative, $now ?? time()));
+}
+
+/**
+ * Turn each `{<relative day>}` in a dataset value into that day's date, as of `$now` (default: the moment of the call).
+ *
+ * A dataset holds the placeholder and the test resolves it when the case runs: Pest builds a dataset when it collects
+ * the tests, and a date made then is a day behind a template that renders after midnight (#1484).
+ */
+function location_card_resolve(mixed $value, ?int $now = null): mixed
+{
+    if (is_array($value)) {
+        return array_map(static fn (mixed $item): mixed => location_card_resolve($item, $now), $value);
+    }
+
+    if (is_string($value)) {
+        return preg_replace_callback('/\{([^{}]+)\}/', static fn (array $match): string => location_card_date($match[1], $now), $value);
+    }
+
+    return $value;
 }
 
 /**
  * Stub the functions the location card reads.
  *
  * @param  array<string, mixed>  $fields  ACF fields by name; `name:id` keys win for one post.
- * @param  array<string, mixed>  $options  `titles` (id => title), `terms` (id => [slug, name]), `thumbnails` (ids with a featured image).
+ * @param  array<string, mixed>  $options  `titles` (id => title), `terms` (id => [slug, name]), `term_errors` (ids whose term
+ *                                         lookup returns an error), `thumbnails` (ids with a featured image).
  */
 function location_card_world(array $fields, array $options = []): void
 {
@@ -45,15 +66,22 @@ function location_card_world(array $fields, array $options = []): void
     $titles = $options['titles'] ?? [];
     $terms = $options['terms'] ?? [];
     $thumbnails = $options['thumbnails'] ?? [];
+    $errors = $options['term_errors'] ?? [];
 
     when('get_field')->alias(static fn (string $name, mixed $id = null): mixed => $fields[$name.':'.$id] ?? $fields[$name] ?? null);
     when('get_field_object')->alias(static fn (string $name, mixed $id = null): mixed => $fields[$name.':'.$id] ?? $fields[$name] ?? null);
     when('get_the_title')->alias(static fn (mixed $id = 0): string => $titles[$id] ?? 'Location '.$id);
     when('get_permalink')->alias(static fn (mixed $id = 0): string => 'https://example.test/location/'.$id.'/');
     when('get_post')->alias(static fn (mixed $id): object => (object) ['ID' => (int) $id, 'post_title' => $titles[$id] ?? 'Location '.$id]);
-    when('get_term')->alias(static fn (mixed $id): object|false => isset($terms[$id]) ? (object) ['slug' => $terms[$id][0], 'name' => $terms[$id][1]] : false);
+    when('get_term')->alias(static fn (mixed $id): object|false => in_array($id, $errors, true) ? new WP_Error : (isset($terms[$id]) ? (object) ['slug' => $terms[$id][0], 'name' => $terms[$id][1]] : false));
+    when('is_wp_error')->alias(static fn (mixed $thing): bool => $thing instanceof WP_Error);
     when('has_post_thumbnail')->alias(static fn (mixed $id = 0): bool => in_array($id, $thumbnails, true));
-    when('get_the_post_thumbnail')->alias(static fn (mixed $id, string $size, array $attributes): string => '[thumbnail '.$id.' '.$size.' '.$attributes['data-itemtitle'].']');
+    $GLOBALS['location_card_thumbnails'] = [];
+    when('get_the_post_thumbnail')->alias(static function (mixed $id, string $size, array $attributes): string {
+        $GLOBALS['location_card_thumbnails'][] = [$id, $size, $attributes];
+
+        return '[thumbnail '.$id.' '.$size.' '.$attributes['data-itemtitle'].']';
+    });
     when('get_the_ID')->alias(static fn (): int => WP_Query::$current);
     when('__')->returnArg();
     when('esc_html__')->returnArg();
@@ -61,7 +89,10 @@ function location_card_world(array $fields, array $options = []): void
     when('esc_attr')->alias(static fn (mixed $text): string => htmlspecialchars((string) $text));
     when('esc_html')->alias(static fn (mixed $text): string => htmlspecialchars((string) $text));
     when('sanitize_title_with_dashes')->alias(static fn (string $text): string => strtolower(str_replace(' ', '-', $text)));
-    when('wp_reset_postdata')->justReturn();
+    $GLOBALS['location_card_resets'] = 0;
+    when('wp_reset_postdata')->alias(static function (): void {
+        $GLOBALS['location_card_resets']++;
+    });
     when('format_phone_dash')->alias(static fn (mixed $phone): string => $phone ? 'dash:'.$phone : '');
     when('uamswp_custom_table_query')->alias(static fn (string $table, string $field, mixed $values): array => $fields['__table:'.$field] ?? []);
 
@@ -275,7 +306,19 @@ test('the location card prints the phone numbers of the location', function (): 
         ->and($output)->toContain('data-itemtitle="Clinic A" data-typetitle="Appointment Phone Number for New and Returning Patients">dash:501-1</a>');
 });
 
+test('a dataset day resolves on the day its case runs, not the day the dataset was built', function (): void {
+    // A dataset built a second before midnight, and its case run four seconds after (#1484).
+    $built = strtotime('2026-11-19 23:59:59');
+    $runs = strtotime('2026-11-20 00:00:04');
+    $case = [['location_modified_hours_end' => true, 'location_modified_hours_end_date' => '{today}'], 'Ends {today}, began {-5 days}.'];
+
+    expect(location_card_resolve($case, $runs))->toBe([['location_modified_hours_end' => true, 'location_modified_hours_end_date' => 'November 20, 2026'], 'Ends November 20, 2026, began November 15, 2026.'])
+        ->and(location_card_date('today', $built))->toBe('November 19, 2026')
+        ->and(location_card_resolve(['{today}', 7, null], $runs))->toBe(['November 20, 2026', 7, null]);
+});
+
 test('the location card warns about a closure that has passed, is coming, or is temporary', function (string $length, string $date, string $reopen, string $expected): void {
+    [$date, $reopen, $expected] = location_card_resolve([$date, $reopen, $expected]);
     $id = null;
     $output = location_card([
         'location_closing:ID' => true,
@@ -289,47 +332,52 @@ test('the location card warns about a closure that has passed, is coming, or is 
     expect($output)->toContain('<div class="alert alert-warning" role="alert">')
         ->and($text)->toContain($expected)
         ->and($output)->toContain('aria-label="Learn more about the closure of Clinic A." class="alert-link" data-categorytitle="Alert" data-itemtitle="Clinic A">Learn more</a>');
-})->with(fn () => [
-    'permanent and past' => ['permanent', location_card_date('-10 days'), '', 'This location is permanently closed.'],
-    'permanent and coming' => ['permanent', location_card_date('+10 days'), '', 'This location will be closing permanently on '.location_card_date('+10 days').'.'],
-    'temporary, past and not reopened' => ['temporary', location_card_date('-10 days'), location_card_date('+20 days'), 'This location is temporarily closed.'],
-    'temporary and coming' => ['temporary', location_card_date('+10 days'), location_card_date('+20 days'), 'This location will be closing temporarily beginning on '.location_card_date('+10 days').'.'],
+})->with([
+    'permanent and past' => ['permanent', '{-10 days}', '', 'This location is permanently closed.'],
+    'permanent and coming' => ['permanent', '{+10 days}', '', 'This location will be closing permanently on {+10 days}.'],
+    'temporary, past and not reopened' => ['temporary', '{-10 days}', '{+20 days}', 'This location is temporarily closed.'],
+    'temporary and coming' => ['temporary', '{+10 days}', '{+20 days}', 'This location will be closing temporarily beginning on {+10 days}.'],
 ]);
 
 test('the location card does not warn about a closure without the flag, with a temporary closure that has ended, or with an unknown length', function (array $fields): void {
+    $fields = location_card_resolve($fields);
     $output = location_card($fields);
 
     expect($output)->not->toContain('class="alert');
-})->with(fn () => [
-    'no flag' => [['location_closing_length:ID' => 'permanent', 'location_closing_date:ID' => location_card_date('-10 days')]],
-    'ended' => [['location_closing:ID' => true, 'location_closing_length:ID' => 'temporary', 'location_closing_date:ID' => location_card_date('-20 days'), 'location_reopen_date:ID' => location_card_date('-1 days')]],
-    'unknown length' => [['location_closing:ID' => true, 'location_closing_length:ID' => 'other', 'location_closing_date:ID' => location_card_date('-20 days')]],
+})->with([
+    'no flag' => [['location_closing_length:ID' => 'permanent', 'location_closing_date:ID' => '{-10 days}']],
+    'ended' => [['location_closing:ID' => true, 'location_closing_length:ID' => 'temporary', 'location_closing_date:ID' => '{-20 days}', 'location_reopen_date:ID' => '{-1 days}']],
+    'unknown length' => [['location_closing:ID' => true, 'location_closing_length:ID' => 'other', 'location_closing_date:ID' => '{-20 days}']],
 ]);
 
 test('the location card warns about modified hours that are under way or coming', function (array $hours, string $expected): void {
+    [$hours, $expected] = location_card_resolve([$hours, $expected]);
     $output = location_card(['location_hours_group' => location_card_hours($hours)]);
     $text = trim((string) preg_replace('/\s+/', ' ', strip_tags($output)));
 
     expect($text)->toContain($expected)
         ->and($output)->toContain('aria-label="Learn more about the modified hours." class="alert-link"');
-})->with(fn () => [
-    'under way with an end in the future' => [['location_modified_hours' => true, 'location_modified_hours_start_date' => location_card_date('-5 days'), 'location_modified_hours_end' => true, 'location_modified_hours_end_date' => location_card_date('+5 days')], "This location's hours have been temporarily modified."],
-    'under way with no known end' => [['location_modified_hours' => true, 'location_modified_hours_start_date' => location_card_date('-5 days')], "This location's hours have been temporarily modified."],
-    'ending today' => [['location_modified_hours' => true, 'location_modified_hours_start_date' => location_card_date('-5 days'), 'location_modified_hours_end' => true, 'location_modified_hours_end_date' => location_card_date('today')], "This location's hours have been temporarily modified."],
-    'coming within 30 days' => [['location_modified_hours' => true, 'location_modified_hours_start_date' => location_card_date('+10 days'), 'location_modified_hours_end' => true, 'location_modified_hours_end_date' => location_card_date('+20 days')], "This location's hours will be temporarily modified beginning on ".location_card_date('+10 days').'.'],
-    'telemedicine under way' => [['location_telemed_modified_hours_query' => true, 'location_telemed_modified_hours_start_date' => location_card_date('-3 days'), 'location_telemed_modified_hours_end' => true, 'location_telemed_modified_hours_end_date' => location_card_date('+3 days')], "This location's hours have been temporarily modified."],
-    'telemedicine coming' => [['location_telemed_modified_hours_query' => true, 'location_telemed_modified_hours_start_date' => location_card_date('+4 days')], "This location's hours will be temporarily modified beginning on ".location_card_date('+4 days').'.'],
+})->with([
+    'under way with an end in the future' => [['location_modified_hours' => true, 'location_modified_hours_start_date' => '{-5 days}', 'location_modified_hours_end' => true, 'location_modified_hours_end_date' => '{+5 days}'], "This location's hours have been temporarily modified."],
+    'under way with no known end' => [['location_modified_hours' => true, 'location_modified_hours_start_date' => '{-5 days}'], "This location's hours have been temporarily modified."],
+    'ending today' => [['location_modified_hours' => true, 'location_modified_hours_start_date' => '{-5 days}', 'location_modified_hours_end' => true, 'location_modified_hours_end_date' => '{today}'], "This location's hours have been temporarily modified."],
+    'coming within 30 days' => [['location_modified_hours' => true, 'location_modified_hours_start_date' => '{+10 days}', 'location_modified_hours_end' => true, 'location_modified_hours_end_date' => '{+20 days}'], "This location's hours will be temporarily modified beginning on {+10 days}."],
+    'telemedicine under way' => [['location_telemed_modified_hours_query' => true, 'location_telemed_modified_hours_start_date' => '{-3 days}', 'location_telemed_modified_hours_end' => true, 'location_telemed_modified_hours_end_date' => '{+3 days}'], "This location's hours have been temporarily modified."],
+    'telemedicine coming' => [['location_telemed_modified_hours_query' => true, 'location_telemed_modified_hours_start_date' => '{+4 days}'], "This location's hours will be temporarily modified beginning on {+4 days}."],
+    'telemedicine ending today' => [['location_telemed_modified_hours_query' => true, 'location_telemed_modified_hours_start_date' => '{-3 days}', 'location_telemed_modified_hours_end' => true, 'location_telemed_modified_hours_end_date' => '{today}'], "This location's hours have been temporarily modified."],
+    'starting today' => [['location_modified_hours' => true, 'location_modified_hours_start_date' => '{today}'], "This location's hours have been temporarily modified."],
 ]);
 
 test('the location card does not warn about modified hours that are over or more than 30 days away', function (array $hours): void {
+    $hours = location_card_resolve($hours);
     $output = location_card(['location_hours_group' => location_card_hours($hours)]);
 
     expect($output)->not->toContain('class="alert');
-})->with(fn () => [
-    'over' => [['location_modified_hours' => true, 'location_modified_hours_start_date' => location_card_date('-10 days'), 'location_modified_hours_end' => true, 'location_modified_hours_end_date' => location_card_date('-2 days')]],
-    'too far away' => [['location_modified_hours' => true, 'location_modified_hours_start_date' => location_card_date('+40 days'), 'location_modified_hours_end' => true, 'location_modified_hours_end_date' => location_card_date('+50 days')]],
-    'telemedicine over' => [['location_telemed_modified_hours_query' => true, 'location_telemed_modified_hours_start_date' => location_card_date('-10 days'), 'location_telemed_modified_hours_end' => true, 'location_telemed_modified_hours_end_date' => location_card_date('-2 days')]],
-    'telemedicine too far away' => [['location_telemed_modified_hours_query' => true, 'location_telemed_modified_hours_start_date' => location_card_date('+40 days')]],
+})->with([
+    'over' => [['location_modified_hours' => true, 'location_modified_hours_start_date' => '{-10 days}', 'location_modified_hours_end' => true, 'location_modified_hours_end_date' => '{-2 days}']],
+    'too far away' => [['location_modified_hours' => true, 'location_modified_hours_start_date' => '{+40 days}', 'location_modified_hours_end' => true, 'location_modified_hours_end_date' => '{+50 days}']],
+    'telemedicine over' => [['location_telemed_modified_hours_query' => true, 'location_telemed_modified_hours_start_date' => '{-10 days}', 'location_telemed_modified_hours_end' => true, 'location_telemed_modified_hours_end_date' => '{-2 days}']],
+    'telemedicine too far away' => [['location_telemed_modified_hours_query' => true, 'location_telemed_modified_hours_start_date' => '{+40 days}']],
     'not modified' => [[]],
 ]);
 
@@ -358,32 +406,34 @@ test('the location card starts the modified hours at the earlier of the clinic a
 });
 
 test('the location card names the start date of the source that is in its window', function (array $hours, string $expected): void {
+    [$hours, $expected] = location_card_resolve([$hours, $expected]);
     $output = location_card(['location_hours_group' => location_card_hours($hours)]);
 
     expect($output)->toContain($expected);
 })->with([
     'clinic over, telemedicine coming' => [[
-        'location_modified_hours' => true, 'location_modified_hours_start_date' => location_card_date('-10 days'), 'location_modified_hours_end' => true, 'location_modified_hours_end_date' => location_card_date('-2 days'),
-        'location_telemed_modified_hours_query' => true, 'location_telemed_modified_hours_start_date' => location_card_date('+5 days'),
-    ], 'hours will be temporarily modified beginning on '.location_card_date('+5 days').'.'],
+        'location_modified_hours' => true, 'location_modified_hours_start_date' => '{-10 days}', 'location_modified_hours_end' => true, 'location_modified_hours_end_date' => '{-2 days}',
+        'location_telemed_modified_hours_query' => true, 'location_telemed_modified_hours_start_date' => '{+5 days}',
+    ], 'hours will be temporarily modified beginning on {+5 days}.'],
     'clinic too far away, telemedicine under way' => [[
-        'location_modified_hours' => true, 'location_modified_hours_start_date' => location_card_date('+40 days'),
-        'location_telemed_modified_hours_query' => true, 'location_telemed_modified_hours_start_date' => location_card_date('-3 days'), 'location_telemed_modified_hours_end' => true, 'location_telemed_modified_hours_end_date' => location_card_date('+3 days'),
+        'location_modified_hours' => true, 'location_modified_hours_start_date' => '{+40 days}',
+        'location_telemed_modified_hours_query' => true, 'location_telemed_modified_hours_start_date' => '{-3 days}', 'location_telemed_modified_hours_end' => true, 'location_telemed_modified_hours_end_date' => '{+3 days}',
     ], "This location's hours have been temporarily modified."],
     'telemedicine over, clinic coming' => [[
-        'location_modified_hours' => true, 'location_modified_hours_start_date' => location_card_date('+7 days'),
-        'location_telemed_modified_hours_query' => true, 'location_telemed_modified_hours_start_date' => location_card_date('-10 days'), 'location_telemed_modified_hours_end' => true, 'location_telemed_modified_hours_end_date' => location_card_date('-2 days'),
-    ], 'hours will be temporarily modified beginning on '.location_card_date('+7 days').'.'],
+        'location_modified_hours' => true, 'location_modified_hours_start_date' => '{+7 days}',
+        'location_telemed_modified_hours_query' => true, 'location_telemed_modified_hours_start_date' => '{-10 days}', 'location_telemed_modified_hours_end' => true, 'location_telemed_modified_hours_end_date' => '{-2 days}',
+    ], 'hours will be temporarily modified beginning on {+7 days}.'],
 ]);
 
 test('the location card does not warn about modified hours flagged without a start date', function (array $hours): void {
+    $hours = location_card_resolve($hours);
     // ACF requires the start date once the flag is on, so only data saved some other way has none.
     $output = location_card(['location_hours_group' => location_card_hours($hours)]);
 
     expect($output)->not->toContain('class="alert');
-})->with(fn () => [
+})->with([
     'clinic' => [['location_modified_hours' => true]],
-    'clinic with a future end' => [['location_modified_hours' => true, 'location_modified_hours_end' => true, 'location_modified_hours_end_date' => location_card_date('+5 days')]],
+    'clinic with a future end' => [['location_modified_hours' => true, 'location_modified_hours_end' => true, 'location_modified_hours_end_date' => '{+5 days}']],
     'telemedicine' => [['location_telemed_modified_hours_query' => true]],
     'both' => [['location_modified_hours' => true, 'location_telemed_modified_hours_query' => true]],
 ]);
@@ -581,7 +631,7 @@ test('the locations block prints only the placeholder for a new block in the edi
 
 test('the location loop prints a card for each post of the main loop, or a message', function (): void {
     location_card_world(['location_hours_group' => location_card_hours()], ['titles' => [71 => 'Clinic One', 72 => 'Clinic Two']]);
-    uamswp_test_main_loop([71, 72]);
+    uamswp_test_guarded_main_loop([71, 72]);
 
     $output = uamswp_test_include_partial('fwp/location-loop');
 
@@ -593,7 +643,98 @@ test('the location loop prints a card for each post of the main loop, or a messa
     when('_e')->alias(static function (string $text): void {
         echo $text;
     });
-    uamswp_test_main_loop([]);
+    uamswp_test_guarded_main_loop([]);
 
     expect(trim(uamswp_test_include_partial('fwp/location-loop')))->toBe('<p>Sorry, no locations matched your criteria.</p>');
+});
+
+test('the locations block asks for the published locations of its filters by title, then each of them and the specific ids once', function (): void {
+    locations_block(['block_fad_locations_filter_ids' => [61], 'block_fad_locations_filter_type' => [3]], [[61, 62], [61, 62]], ['block' => ['id' => 'abc']]);
+
+    expect(WP_Query::$queries[0])->toBe([
+        'post_type' => 'location',
+        'order' => 'ASC',
+        'orderby' => 'title',
+        'posts_per_page' => -1,
+        'post_status' => 'publish',
+        'post__in' => [],
+        'tax_query' => [['taxonomy' => 'location_type', 'terms' => [3]]],
+        'fields' => 'ids',
+    ])
+        ->and(WP_Query::$queries[1]['post__in'])->toBe([0 => 61, 2 => 62]);
+});
+
+test('the locations block prints no description without one, and restores the post after the cards', function (): void {
+    $output = locations_block(['block_fad_locations_heading' => 'Our Locations', 'block_fad_locations_filter_ids' => [61]], [[61]], ['block' => ['id' => 'abc']]);
+
+    expect((string) preg_replace('/>\s+</', '><', $output))->toContain('<span class="title">Our Locations</span></h2><div class="card-list-container location-card-list-container">')
+        ->and($GLOBALS['location_card_resets'])->toBe(1);
+});
+
+test('the locations block reads a link array without an address as no address, with no warning', function (): void {
+    $output = '';
+    $warnings = uamswp_test_capture_warnings(static function () use (&$output): void {
+        $output = locations_block(['block_fad_locations_filter_ids' => [61], 'block_fad_locations_more' => true, 'block_fad_locations_more_button_url' => ['target' => '_self']], [[61]], ['block' => ['id' => 'abc']]);
+    });
+
+    expect($warnings)->toBe([])
+        ->and($output)->toContain('<a href="" class="btn btn-outline-white"');
+});
+
+test('the locations block button label turns a non-breaking space into a space and keeps an ampersand as one', function (): void {
+    $output = locations_block(['block_fad_locations_filter_ids' => [61], 'block_fad_locations_more' => true, 'block_fad_locations_more_button_description' => "Mom&#8217;s A&nbsp;B\u{A0}C & D"], [[61]], ['block' => ['id' => 'abc']]);
+
+    expect($output)->toContain('aria-label="Mom&#039;s A B C &amp; D"');
+});
+
+test('the location card cleans the title for its attributes: quotes, a non-breaking space either way, and an ampersand', function (): void {
+    $output = location_card([], ['titles' => [location_card_next_id() + 1 => "A \"B\" C&nbsp;D\u{A0}E & F"]]);
+
+    expect($output)->toContain('target="_self" data-categorytitle="Name" data-itemtitle="A \'B\' C D E & F">');
+});
+
+test('the location card labels the closure alert with the title, its quote entity turned into an apostrophe', function (): void {
+    $output = location_card([
+        'location_closing:ID' => true,
+        'location_closing_length:ID' => 'permanent',
+        'location_closing_date:ID' => location_card_date('-10 days'),
+    ], ['titles' => [location_card_next_id() + 1 => 'Mom&#8217;s A & B']]);
+
+    expect($output)->toContain('aria-label="Learn more about the closure of Mom\'s A & B." class="alert-link"');
+});
+
+test('the location card asks for each image as a lazy card photo labeled with the title', function (): void {
+    $want = static fn (int $id): array => [$id, 'aspect-16-9-small', ['class' => 'card-img-top', 'data-categorytitle' => 'Photo', 'data-itemtitle' => 'Clinic A', 'loading' => 'lazy']];
+
+    $own = location_card_next_id() + 1;
+    location_card([], ['thumbnails' => [$own]]);
+
+    expect($GLOBALS['location_card_thumbnails'])->toBe([$want($own)]);
+
+    $child = location_card_next_id() + 1;
+    location_card(['location_parent:ID' => true, 'location_parent_id:ID' => 900, 'location_image_override_parent:ID' => true, 'location_image_override_parent_featured:ID' => true]);
+
+    expect($GLOBALS['location_card_thumbnails'])->toBe([$want(900), $want($child)]);
+});
+
+test('the location card reads a building term that is an error as a building with no name, with no warning', function (): void {
+    $warnings = [];
+    set_error_handler(static function (int $level, string $message) use (&$warnings): bool {
+        $warnings[] = $message;
+
+        return true;
+    });
+
+    try {
+        $output = location_card(['location_building' => 44, 'location_suite' => 'Suite 2'], ['term_errors' => [44]]);
+    } finally {
+        restore_error_handler();
+    }
+
+    expect($warnings)->toBe([])
+        ->and((string) preg_replace('/\s+/', ' ', $output))->toContain('<p class="card-text">1 Main St<br/> <br />Suite 2<br/> Little Rock, AR 72205 </p>');
+});
+
+test('the location card prints no second address line without one', function (): void {
+    expect((string) preg_replace('/\s+/', ' ', location_card()))->toContain('<p class="card-text">1 Main St<br/> Little Rock, AR 72205 </p>');
 });

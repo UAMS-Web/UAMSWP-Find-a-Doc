@@ -15,7 +15,7 @@
 	<?php if (have_posts()) {
 	    while (have_posts()) {
 	        the_post(); ?>
-	<?php $class = ($i % 2 == 0) ? 'whiteBackground' : 'grayBackground'; ?>
+	<?php $class = ($i % 2 === 0) ? 'whiteBackground' : 'grayBackground'; ?>
 	<?php $full_name = uamswp_fad_str(rwmb_meta('physician_first_name')).' '.(rwmb_meta('physician_middle_name') ? uamswp_fad_str(rwmb_meta('physician_middle_name')).' ' : '').uamswp_fad_str(rwmb_meta('physician_last_name')).(rwmb_meta('physician_pedigree') ? '&nbsp;'.uamswp_fad_str(rwmb_meta('physician_pedigree')) : '').(rwmb_meta('physician_degree') ? ', '.uamswp_fad_str(rwmb_meta('physician_degree')) : '');
 	        // $profileurl = '/directory/physician/' . $post->post_name .'/';
 	        ?>
@@ -45,8 +45,6 @@
 	                $npi = rwmb_meta('physician_npi');
 	                // $request = wp_nrc_cached_api( $npi );
 
-	                $pg_rating_request = '';
-	                $pg_rating_data = '';
 	                $pg_rating_valid = '';
 	                if ($npi) {
 	                    $pg_rating_request = get_post_meta(uamswp_fad_int(get_the_ID()), '_syndicated_api_data', true); // wp_pg_cached_api( $npi, 0 );
@@ -154,7 +152,10 @@
 	        </div><!-- .col-9 -->
 	    </div><!-- .row -->
 	</div><!-- .color -->
-	<?php $i++; ?>
+	<?php
+    // Counting down gives each row the same parity as counting up, so the backgrounds alternate the same way.
+    // @pest-mutate-ignore: PostIncrementToPostDecrement
+    $i++; ?>
 	<?php } ?>
 		<link rel="stylesheet" type="text/css" href="https://www.docscores.com/resources/css/docscores-lotw.v1330-2018121714.css" />
 

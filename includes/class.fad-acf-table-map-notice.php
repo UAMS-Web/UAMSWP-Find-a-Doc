@@ -13,10 +13,14 @@ declare(strict_types=1);
  * with the table JSON, and says so, so a missing notice is not read as proof that the tables are
  * complete.
  */
+// Runs when the file loads, before any test, and exits the process when it holds.
+// @pest-mutate-ignore: IfNegated,RemoveNot
 if (! defined('WPINC')) {
     exit;
 }
 
+// Runs when the file loads, before any test; a wrong path fails every test that reads the check.
+// @pest-mutate-ignore: ConcatRemoveLeft,ConcatRemoveRight,ConcatSwitchSides
 require_once __DIR__.'/class.fad-acf-table-map-check.php';
 
 /**
@@ -76,4 +80,6 @@ function uamswp_fad_acf_table_map_register(): void
     add_action('admin_notices', 'uamswp_fad_acf_table_map_notice');
 }
 
+// Runs when the file loads, before any test; the test of uamswp_fad_acf_table_map_register() pins what it adds.
+// @pest-mutate-ignore: RemoveFunctionCall
 uamswp_fad_acf_table_map_register();
