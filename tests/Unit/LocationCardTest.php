@@ -10,6 +10,7 @@ declare(strict_types=1);
 use function Brain\Monkey\Functions\when;
 
 require_once __DIR__.'/../Support/templates.php';
+require_once __DIR__.'/../Support/main-loop-guard.php';
 require_once __DIR__.'/../Support/acf-blocks.php';
 
 /**
@@ -620,7 +621,7 @@ test('the locations block prints only the placeholder for a new block in the edi
 
 test('the location loop prints a card for each post of the main loop, or a message', function (): void {
     location_card_world(['location_hours_group' => location_card_hours()], ['titles' => [71 => 'Clinic One', 72 => 'Clinic Two']]);
-    uamswp_test_main_loop([71, 72]);
+    uamswp_test_guarded_main_loop([71, 72]);
 
     $output = uamswp_test_include_partial('fwp/location-loop');
 
@@ -632,7 +633,7 @@ test('the location loop prints a card for each post of the main loop, or a messa
     when('_e')->alias(static function (string $text): void {
         echo $text;
     });
-    uamswp_test_main_loop([]);
+    uamswp_test_guarded_main_loop([]);
 
     expect(trim(uamswp_test_include_partial('fwp/location-loop')))->toBe('<p>Sorry, no locations matched your criteria.</p>');
 });

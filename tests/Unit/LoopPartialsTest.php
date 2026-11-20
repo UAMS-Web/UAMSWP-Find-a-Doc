@@ -10,6 +10,7 @@ declare(strict_types=1);
 use function Brain\Monkey\Functions\when;
 
 require_once __DIR__.'/../Support/templates.php';
+require_once __DIR__.'/../Support/main-loop-guard.php';
 
 /**
  * A stand-in for a post query that holds the given posts.
@@ -106,7 +107,13 @@ function loop_partials_locations(array $locations): void
 {
     $position = -1;
     $current = [];
-    when('have_posts')->alias(static function () use (&$position, $locations): bool {
+    $asked = 0;
+    when('have_posts')->alias(static function () use (&$position, &$asked, $locations): bool {
+        // A loop that never moves on would ask forever; fail instead (see main-loop-guard.php).
+        if (++$asked > 2 * count($locations) + 4) {
+            throw new RuntimeException('have_posts() asked again without the_post()');
+        }
+
         return $position + 1 < count($locations);
     });
     when('the_post')->alias(static function () use (&$position, $locations, &$current): void {
@@ -293,14 +300,7 @@ test('the area of expertise card takes the text of the content when there is no 
 
 test('the area of expertise loop prints a card for each post, or says nothing matched', function (): void {
     loop_partials_expertise('Cardiology', 'Heart care.');
-    $remaining = 2;
-    when('have_posts')->alias(static function () use (&$remaining): bool {
-        return $remaining > 0;
-    });
-    when('the_post')->alias(static function () use (&$remaining): void {
-        $remaining--;
-    });
-    when('get_the_ID')->justReturn(1);
+    uamswp_test_guarded_main_loop([1, 1]);
 
     $output = uamswp_test_include_partial('fwp/expertise-loop');
 

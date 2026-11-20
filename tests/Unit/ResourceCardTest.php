@@ -10,6 +10,7 @@ declare(strict_types=1);
 use function Brain\Monkey\Functions\when;
 
 require_once __DIR__.'/../Support/templates.php';
+require_once __DIR__.'/../Support/main-loop-guard.php';
 
 /**
  * Render the resource card for resource 7.
@@ -222,7 +223,7 @@ test('a page value other than archive gives the single card', function (): void 
 });
 
 test('the resource loop prints an archive card for each post of the main loop, or a message', function (): void {
-    uamswp_test_main_loop([7, 8]);
+    uamswp_test_guarded_main_loop([7, 8]);
 
     $output = resource_card([], ['partial' => 'fwp/clinical-resource-loop']);
 
@@ -235,7 +236,7 @@ test('the resource loop prints an archive card for each post of the main loop, o
     when('_e')->alias(static function (string $text): void {
         echo $text;
     });
-    uamswp_test_main_loop([]);
+    uamswp_test_guarded_main_loop([]);
 
     expect(trim(resource_card([], ['partial' => 'fwp/clinical-resource-loop'])))->toBe('<p>Sorry, no resources matched your criteria.</p>');
 });

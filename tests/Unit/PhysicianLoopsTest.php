@@ -10,6 +10,7 @@ declare(strict_types=1);
 use function Brain\Monkey\Functions\when;
 
 require_once __DIR__.'/../Support/templates.php';
+require_once __DIR__.'/../Support/main-loop-guard.php';
 require_once __DIR__.'/../Support/acf-functions.php';
 
 /**
@@ -64,7 +65,7 @@ function physician_loops_world(array $fields, array $options = []): void
 function physician_loop(array $ids, array $fields = [], array $options = []): string
 {
     physician_loops_world($fields + ['physician_first_name' => 'Jo', 'physician_last_name' => 'Smith', 'physician_locations' => []], $options + ['rating_object' => true]);
-    uamswp_test_main_loop($ids);
+    uamswp_test_guarded_main_loop($ids);
 
     $output = uamswp_test_include_partial('fwp/physician-loop', ['post' => (object) ['ID' => 99]]);
 
@@ -225,7 +226,7 @@ test('the provider loop prints no locations column for a provider with no locati
 function physician_loop_mb(array $ids, array $fields = [], array $locations = [], array $options = []): string
 {
     physician_loops_world($fields + ['physician_first_name' => 'Jo', 'physician_last_name' => 'Smith'], $options + ['rating_object' => false]);
-    uamswp_test_main_loop($ids);
+    uamswp_test_guarded_main_loop($ids);
     WP_Query::$queue = $locations;
 
     $output = '';
@@ -357,7 +358,7 @@ test('the provider loop stops looking for a published location at the first one'
 
         return 'publish';
     });
-    uamswp_test_main_loop([5]);
+    uamswp_test_guarded_main_loop([5]);
 
     $second = uamswp_test_include_partial('fwp/physician-loop', ['post' => (object) ['ID' => 99]]);
 
