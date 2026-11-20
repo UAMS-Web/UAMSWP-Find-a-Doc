@@ -15,6 +15,8 @@ declare(strict_types=1);
  * undefined constant therefore means either the plugin is missing or it is older than 1.3.5, and
  * the notice says both.
  */
+// Runs when the file loads, before any test, and exits the process when it holds.
+// @pest-mutate-ignore: IfNegated,RemoveNot
 if (! defined('WPINC')) {
     exit;
 }
@@ -96,4 +98,6 @@ function uamswp_fad_alpha_version_register(): void
     add_action('admin_notices', 'uamswp_fad_alpha_version_notice');
 }
 
+// Runs when the file loads, before any test; the test of uamswp_fad_alpha_version_register() pins what it adds.
+// @pest-mutate-ignore: RemoveFunctionCall
 uamswp_fad_alpha_version_register();

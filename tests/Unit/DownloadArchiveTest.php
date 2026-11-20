@@ -120,7 +120,8 @@ final class DownloadArchiveTest extends TestCase
     /**
      * Follow the require and include statements from the entry files.
      *
-     * Recognized: a string literal appended to __DIR__, dirname( __FILE__ ) or UAMS_FAD_PATH. Commented lines are skipped.
+     * Recognized: a string literal appended to __DIR__, dirname( __FILE__ ) or UAMS_FAD_PATH, and the class files the
+     * loader lists in `UAMS\Find_a_Doc\files()`, read from its source so the file is not loaded here. Commented lines are skipped.
      *
      * @return array<string, string> Required path (relative to the plugin root) => the file that requires it
      */
@@ -147,6 +148,15 @@ final class DownloadArchiveTest extends TestCase
                 $matches,
                 PREG_SET_ORDER
             );
+
+            if ($file === 'includes/find-a-doc.php' && preg_match('~function files\(\): array\s*\{\s*return \[(.*?)\];~s', $source, $list) === 1) {
+                preg_match_all("~^[ \t]*'(class\.fad-[a-z-]+\.php)',~m", $list[1], $listed);
+
+                foreach ($listed[1] as $name) {
+                    $required['includes/'.$name] ??= $file;
+                    $queue[] = 'includes/'.$name;
+                }
+            }
 
             foreach ($matches as $match) {
                 $base = $match[1] === 'UAMS_FAD_PATH' ? '' : dirname($file);

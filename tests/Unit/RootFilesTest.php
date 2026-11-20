@@ -19,6 +19,8 @@ use UamswpFindADoc\Tests\Support\UnitTestCase;
 
 use function Brain\Monkey\Functions\expect;
 use function Brain\Monkey\Functions\when;
+use function UAMS\Find_a_Doc\files;
+use function UAMS\Find_a_Doc\registrations;
 
 final class RootFilesTest extends UnitTestCase
 {
@@ -157,38 +159,28 @@ final class RootFilesTest extends UnitTestCase
     /**
      * The loader runs only when WordPress fires plugins_loaded, and it pulls in every class file, so it cannot be
      * executed in this process without loading each of them over the files the other Unit tests load. The
-     * Integration suite executes it (PluginLoadTest). This pins what it includes and registers.
+     * Integration suite executes it (PluginLoadTest). This pins the lists it reads.
      */
     public function test_the_loader_includes_every_part_of_the_plugin_and_registers_the_business_profile_hooks(): void
     {
-        $source = (string) file_get_contents($this->root().'/includes/find-a-doc.php');
+        include_once $this->root().'/includes/find-a-doc.php';
 
-        preg_match_all("/^    include_once __DIR__\\.'\\/(class\\.fad-[a-z-]+\\.php)';/m", $source, $match);
-        $included = $match[1];
+        $included = files();
         $onDisk = array_map(basename(...), glob($this->root().'/includes/class.fad-*.php') ?: []);
-        sort($included);
         sort($onDisk);
 
         $this->assertSame(32, count($included));
         $this->assertSame(array_values(array_unique($included)), $included, 'no file is included twice');
+        $this->assertSame(['class.fad-physicians.php', 'class.fad-custom-post.php', 'class.fad-helper-functions.php'], array_slice($included, 0, 3), 'the post types and helpers load first');
         $this->assertSame(
             ['class.fad-acf-table-map-check.php', 'class.fad-expertise-attributes-meta-box.php', 'class.fad-set-session.php'],
             array_values(array_diff($onDisk, $included)),
             'the table map check is required by its notice; the other two are not loaded by the plugin'
         );
+        $this->assertSame([], array_values(array_diff($included, $onDisk)), 'every listed file exists');
         $this->assertSame(
             ['uamswp_fad_gbp_register_hooks', 'uamswp_fad_gbp_register_settings_hooks', 'uamswp_fad_gbp_register_dashboard_hooks', 'uamswp_fad_gbp_register_orphan_hooks', 'uamswp_fad_gbp_register_cli'],
-            $this->registrations($source)
+            registrations()
         );
-    }
-
-    /**
-     * @return list<string>
-     */
-    private function registrations(string $source): array
-    {
-        preg_match_all('/^    \\\\(uamswp_fad_gbp_register_[a-z_]+)\\(\\);/m', $source, $match);
-
-        return $match[1];
     }
 }
