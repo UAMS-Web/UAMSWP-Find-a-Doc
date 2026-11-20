@@ -159,6 +159,11 @@ final class DownloadArchiveTest extends TestCase
             }
 
             foreach ($matches as $match) {
+                // A path built from a variable (the loader's loop) is followed through the list it reads, above.
+                if (str_contains($match[2], '{$')) {
+                    continue;
+                }
+
                 $base = $match[1] === 'UAMS_FAD_PATH' ? '' : dirname($file);
                 $path = ltrim(($base === '.' || $base === '' ? '' : $base.'/').ltrim($match[2], '/'), '/');
                 $required[$path] ??= $file;

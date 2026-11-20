@@ -77,12 +77,14 @@ function bootstrap(): void
     // loop (PluginLoadTest) and the Unit suite pins the list it reads.
     // @pest-mutate-ignore: ForeachEmptyIterable
     foreach (files() as $file) {
-        include_once implode('/', [__DIR__, $file]);
+        include_once __DIR__."/{$file}";
     }
 
     // The registrations live in the class files the loop above loads, so the Integration suite runs them too.
     // @pest-mutate-ignore: ForeachEmptyIterable
     foreach (registrations() as $register) {
+        // As above.
+        // @pest-mutate-ignore: RemoveFunctionCall
         $register();
     }
 }
