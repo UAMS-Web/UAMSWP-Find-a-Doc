@@ -144,5 +144,3 @@ For an unpublished profile the count starts on the day it left Published, or on 
 | 14 or more, Live | The listing is marked permanently closed; its website, description, phone numbers, labels and additional categories are cleared. Its name, address and primary category stay. |
 
 A listing already closed on Google, or no longer on Google, is left alone. The scan can also be run at once with `wp uamswp gbp sync --orphans`.
-
-**Note:** a profile moved to the Edit Flow *Inactive* status is not yet found by the daily scan, so its listing is not closed. The fix is [UAMS-Web/UAMSWP-Find-a-Doc#1432](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1432); until it ships, move such a profile to Draft instead.

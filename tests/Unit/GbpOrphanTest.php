@@ -31,6 +31,9 @@ final class GbpOrphanTest extends UnitTestCase
     /** @var array<int, array<string, mixed>> */
     private array $unpublished = [];
 
+    /** @var array<int, string> Unpublished post ID => its status; a post not listed is a draft. */
+    private array $statuses = [];
+
     /** @var array<int, array<string, mixed>> */
     private array $providers = [];
 
@@ -55,6 +58,7 @@ final class GbpOrphanTest extends UnitTestCase
         $this->meta = [];
         $this->options = [];
         $this->unpublished = [];
+        $this->statuses = [];
         $this->providers = [];
         $this->locations = [];
         $this->types = [];
@@ -96,11 +100,17 @@ final class GbpOrphanTest extends UnitTestCase
 
             return true;
         });
+        // The built-in statuses and one custom status, as Edit Flow registers Inactive.
+        when('get_post_stati')->justReturn(['publish', 'future', 'draft', 'pending', 'private', 'trash', 'auto-draft', 'inherit', 'inactive']);
         when('get_posts')->alias(function (array $args): array {
             $this->queries[] = $args;
 
+            // Like WordPress, only a post whose status is among those asked for is returned.
             if ($args['post_status'] !== 'publish') {
-                return array_keys($this->unpublished);
+                return array_values(array_filter(
+                    array_keys($this->unpublished),
+                    fn (int $id): bool => in_array($this->statuses[$id] ?? 'draft', (array) $args['post_status'], true),
+                ));
             }
 
             return $args['post_type'] === 'location' ? array_keys($this->locations) : array_keys($this->providers);
@@ -497,8 +507,38 @@ final class GbpOrphanTest extends UnitTestCase
         $this->assertSame([
             ['post_type' => 'location', 'post_status' => 'publish', 'posts_per_page' => -1, 'fields' => 'ids'],
             ['post_type' => 'provider', 'post_status' => 'publish', 'posts_per_page' => -1, 'fields' => 'ids'],
-            ['post_type' => ['provider', 'location'], 'post_status' => ['draft', 'pending', 'private', 'future', 'trash'], 'posts_per_page' => -1, 'fields' => 'ids'],
+            ['post_type' => ['provider', 'location'], 'post_status' => ['future', 'draft', 'pending', 'private', 'trash', 'inactive'], 'posts_per_page' => -1, 'fields' => 'ids'],
         ], $this->queries);
+    }
+
+    public function test_a_provider_or_location_in_a_custom_status_with_a_stored_listing_is_a_candidate(): void
+    {
+        $this->unpublished[9] = [];
+        $this->statuses[9] = 'inactive';
+        $this->meta[9] = [
+            UAMSWP_FAD_GBP_LISTING_MAP_META => [10 => ['id' => 'locations/9', 'orphaned_since' => null]],
+            UAMSWP_FAD_GBP_UNPUBLISHED_META => '2026-11-01',
+        ];
+        $this->unpublished[12] = [];
+        $this->statuses[12] = 'inactive';
+        $this->types[12] = 'location';
+        $this->meta[12] = [UAMSWP_FAD_GBP_LISTING_META => 'locations/12', UAMSWP_FAD_GBP_UNPUBLISHED_META => '2026-11-03'];
+
+        $this->assertSame([
+            ['name' => 'locations/9', 'cause' => 'unpublished', 'since' => '2026-11-01', 'label' => 'Post 9 (post 9)'],
+            ['name' => 'locations/12', 'cause' => 'unpublished', 'since' => '2026-11-03', 'label' => 'Post 12 (post 12)'],
+        ], uamswp_fad_gbp_orphan_candidates(self::NOW, fn (int $id): array => [10]));
+    }
+
+    public function test_the_two_statuses_that_are_never_a_profile_are_not_asked_for(): void
+    {
+        uamswp_fad_gbp_orphan_candidates(self::NOW, fn (int $id): array => []);
+
+        $asked = $this->queries[2]['post_status'];
+
+        $this->assertNotContains('publish', $asked);
+        $this->assertNotContains('auto-draft', $asked);
+        $this->assertNotContains('inherit', $asked);
     }
 
     public function test_by_default_a_provider_s_locations_are_the_location_ids_of_its_sync_items(): void

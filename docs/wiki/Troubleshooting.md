@@ -128,6 +128,6 @@ Shown in WP-CLI as *A sync is already running. Try again when it finishes.*
 
 ## A retired profile's listing stays open
 
-**Cause:** the listing closes only after 14 continuous days orphaned, and only in a Live silo. A profile moved to the Edit Flow *Inactive* status is not found by the daily scan yet ([UAMS-Web/UAMSWP-Find-a-Doc#1432](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1432)).
+**Cause:** the listing closes only after 14 continuous days orphaned, and only in a Live silo. A profile moved to a custom Edit Flow status such as *Inactive* counts as unpublished from the day it was moved.
 
-**Fix:** check *Needs attention* for the listing's *days left* entry. For an Inactive profile, set it to Draft until the fix ships. See [Closing listings for retired profiles](Business-Profile-sync.md#closing-listings-for-retired-profiles).
+**Fix:** check *Needs attention* for the listing's *days left* entry. See [Closing listings for retired profiles](Business-Profile-sync.md#closing-listings-for-retired-profiles).
