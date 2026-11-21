@@ -80,7 +80,7 @@ final class EditorGroupDetailsTest extends UnitTestCase
         $this->assertSame('field_uamswp_service_line_editor_group', $service_line['fields'][0]['key']);
         $this->assertSame('Editor group', $service_line['fields'][0]['label']);
         $this->assertSame(
-            'Providers and locations in this service line that have no editor group of their own are placed in this group when they are saved.',
+            'Every provider and location in this service line is placed in this group when it is saved. A group added to a record by hand is kept alongside it.',
             $service_line['fields'][0]['instructions']
         );
     }
