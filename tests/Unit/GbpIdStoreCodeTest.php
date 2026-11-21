@@ -137,7 +137,8 @@ final class GbpIdStoreCodeTest extends UnitTestCase
 
     public function test_a_review_for_an_id_store_code_stays_under_needs_attention_until_a_later_entry_for_it_settles(): void
     {
-        $code = 'id--p4821-l17';
+        $code = UAMSWP_FAD_GBP_Logic::provider_store_code(str_repeat('a', 80), 4821, 17);
+        $this->assertSame('id--p4821-l17', $code, 'the code a builder would give a provider over the limit');
         $review = ['store_code' => $code, 'silo' => 'uams', 'action' => 'review', 'reason' => 'Store code is on 2 listings'];
 
         $attention = UAMSWP_FAD_GBP_Logic::next_attention([], $review, 10);
