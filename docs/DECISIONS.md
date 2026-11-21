@@ -123,3 +123,13 @@ Every entry heading is `## YYYY-MM-DD`, a space, and a short title. Leave exactl
 **Rejected.** Shortening the slugs on the website: it changes public URLs and every code built from the slug for one affected row, and a later rename moves the code again. Building ID-based codes now: the limit it works around is not verified.
 
 **Companion.** [UAMS-Web/UAMSWP-Find-a-Doc#1425](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1425) (its `## Decision` section); the follow-ups [UAMS-Web/UAMSWP-Find-a-Doc#1426](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1426) and [UAMS-Web/UAMSWP-Find-a-Doc#1427](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1427).
+
+## 2026-11-21 Build an ID-based store code only for a listing whose slug code is over 64 characters (#1427)
+
+**Decision.** A provider or location store code built from slugs stays as it is when it is 64 characters or fewer. When it would be over 64, the code is built from the provider and location post IDs instead, in a form with no underscore so it cannot equal a slug code. No existing listing's code, matching or `websiteUri` changes. The build is #1496.
+
+**Why.** Google rejects a store code over 64 characters with `STRING_TOO_LONG` and accepts 64 (#1426), and on staging 1 of 1,594 provider rows is over the limit, so the guard keeps one listing from ever being created. No update path sends `storeCode`, so a listing keeps the code it was created with, and the stored Google ID already carries matching across a slug change. Changing only the over-limit code fixes that listing and touches nothing else.
+
+**Rejected.** Building nothing: the over-limit listing stays unlisted. ID-based codes for every listing: it changes the `utm_specs` value and so the `websiteUri` of every listing, breaks analytics continuity unless `utm_specs` is separated from the code, and a listing with no stored Google ID would be created again unless a backfill ran first with the old builder.
+
+**Companion.** [UAMS-Web/UAMSWP-Find-a-Doc#1427](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1427) (its `## Decision` section); the build in [UAMS-Web/UAMSWP-Find-a-Doc#1496](https://github.com/UAMS-Web/UAMSWP-Find-a-Doc/issues/1496).
