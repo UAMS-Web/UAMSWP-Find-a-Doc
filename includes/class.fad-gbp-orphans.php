@@ -85,7 +85,9 @@ function uamswp_fad_gbp_orphan_candidates(?int $now = null, ?callable $locations
 
     $live = array_flip($live);
 
-    $unpublished = uamswp_fad_ids(get_posts(['post_type' => ['provider', 'location'], 'post_status' => ['draft', 'pending', 'private', 'future', 'trash'], 'posts_per_page' => -1, 'fields' => 'ids']));
+    // Every registered status but these is a profile that is not published, the custom ones Edit Flow adds (such as Inactive) among them.
+    $unpublished_statuses = array_values(array_diff(get_post_stati(), ['publish', 'auto-draft', 'inherit']));
+    $unpublished = uamswp_fad_ids(get_posts(['post_type' => ['provider', 'location'], 'post_status' => $unpublished_statuses, 'posts_per_page' => -1, 'fields' => 'ids']));
 
     foreach ($unpublished as $post_id) {
         $names = uamswp_fad_gbp_stored_names($post_id);
