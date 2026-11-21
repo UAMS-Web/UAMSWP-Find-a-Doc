@@ -132,6 +132,54 @@ class UAMSWP_FAD_GBP_Logic
     }
 
     /**
+     * The store code of a provider at a location.
+     *
+     * `{provider_slug}_{location_slug}` while that is within Google's limit. A longer one is replaced by a code built
+     * from the two post IDs, `id--p{provider_id}-l{location_id}`. WordPress collapses every run of hyphens in a slug
+     * to one (`sanitize_title_with_dashes()`), so no slug code contains `--` and the two forms cannot be equal.
+     *
+     * @param  string  $slug_code  The code built from the slugs.
+     */
+    public static function provider_store_code(string $slug_code, int $provider_id, int $location_id): string
+    {
+
+        return mb_strlen($slug_code) > UAMSWP_FAD_GBP_Sync::STORE_CODE_MAX ? 'id--p'.$provider_id.'-l'.$location_id : $slug_code;
+
+    }
+
+    /**
+     * The store code of a location.
+     *
+     * The slug code (`{slug}`, or `{parent_slug}_{child_slug}` for a child) while it is within Google's limit, else
+     * `id--l{location_id}`, which no slug code can equal (see `provider_store_code()`).
+     *
+     * @param  string  $slug_code  The code built from the slugs.
+     */
+    public static function location_store_code(string $slug_code, int $location_id): string
+    {
+
+        return mb_strlen($slug_code) > UAMSWP_FAD_GBP_Sync::STORE_CODE_MAX ? 'id--l'.$location_id : $slug_code;
+
+    }
+
+    /**
+     * Split an ID-based provider store code into its provider and location post IDs.
+     *
+     * @param  mixed  $store_code  A provider store code.
+     * @return array{0: int, 1: int}|null The provider and location post IDs, or null if the code is not of that form.
+     */
+    public static function split_id_provider_store_code($store_code): ?array
+    {
+
+        if (! is_string($store_code) || preg_match('/^id--p([1-9][0-9]*)-l([1-9][0-9]*)$/', $store_code, $matches) !== 1) {
+            return null;
+        }
+
+        return [(int) $matches[1], (int) $matches[2]];
+
+    }
+
+    /**
      * Turn one table row into the Business Profile fields the sync owns.
      *
      * Column numbers match the shared table builders (0 store code through 17 description).

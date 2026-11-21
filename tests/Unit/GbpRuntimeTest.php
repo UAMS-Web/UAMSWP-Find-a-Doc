@@ -135,6 +135,43 @@ final class GbpRuntimeTest extends UnitTestCase
         $this->assertSame($expected, uamswp_fad_gbp_location_info('some-clinic'));
     }
 
+    /**
+     * @param  array<string, string>  $stored
+     * @param  array{id: int, silo: ?string, providers_excluded: bool}  $expected
+     */
+    #[DataProvider('location_info_cases')]
+    public function test_location_info_by_id_reads_the_same_silo_and_exclusion_for_a_published_location(array $stored, array $expected): void
+    {
+        $this->enable();
+        when('get_post_type')->justReturn('location');
+        when('get_post_status')->justReturn('publish');
+        when('get_post_meta')->alias(fn (int $id, string $key) => $key === 'schema_brandorg_query' ? $stored['query'] : $stored['org']);
+        when('get_field')->alias(fn (string $name, int $id) => $name === 'location_gmb_exclude_providers' ? $stored['exclude_providers'] : null);
+
+        $this->assertSame($expected, uamswp_fad_gbp_location_info_by_id(321));
+    }
+
+    public function test_location_info_by_id_reads_a_post_that_is_not_a_published_location_as_no_location(): void
+    {
+        $this->enable();
+        when('get_post_meta')->justReturn('1');
+        when('get_field')->justReturn('1');
+
+        $none = ['silo' => null, 'providers_excluded' => false, 'id' => 0];
+
+        when('get_post_type')->justReturn('provider');
+        when('get_post_status')->justReturn('publish');
+        $this->assertSame($none, uamswp_fad_gbp_location_info_by_id(321), 'a provider post');
+
+        when('get_post_type')->justReturn('location');
+        when('get_post_status')->justReturn('draft');
+        $this->assertSame($none, uamswp_fad_gbp_location_info_by_id(321), 'an unpublished location');
+
+        when('get_post_type')->justReturn(false);
+        when('get_post_status')->justReturn(false);
+        $this->assertSame($none, uamswp_fad_gbp_location_info_by_id(321), 'no such post');
+    }
+
     public function test_an_unknown_location_has_no_silo_and_is_not_excluded(): void
     {
         $this->enable();

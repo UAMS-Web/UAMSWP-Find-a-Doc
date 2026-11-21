@@ -357,6 +357,39 @@ final class GbpSyncTest extends UnitTestCase
         $this->assertSame('Created', $this->log[0]['reason']);
     }
 
+    public function test_an_id_store_code_is_created_in_dry_run_as_the_listing_with_that_code_and_sends_nothing(): void
+    {
+        $code = 'id--p4821-l17';
+
+        $this->sync(['uams' => 'dry-run'])->run([$this->item(['store_code' => $code])]);
+
+        $this->assertSame(['create'], $this->actions());
+        $this->assertSame($code, $this->log[0]['store_code']);
+        $this->assertSame('dry-run', $this->log[0]['mode']);
+        $this->assertSame([], $this->client->calls);
+    }
+
+    public function test_an_id_store_code_is_sent_to_create_unchanged(): void
+    {
+        $code = 'id--p4821-l17';
+
+        $this->sync()->run([$this->item(['store_code' => $code])]);
+
+        $this->assertSame(['create'], $this->actions());
+        $this->assertSame($code, $this->client->calls[0][3]);
+    }
+
+    public function test_a_listing_already_under_an_id_store_code_is_not_created_again(): void
+    {
+        $code = 'id--p4821-l17';
+        $item = $this->item(['store_code' => $code]);
+
+        $this->sync(['uams' => 'live', 'baptist-health' => 'live'], true, [$this->listing('accounts/up', $code, $item['fields'])])->run([$item]);
+
+        $this->assertNotContains('create', $this->actions());
+        $this->assertSame([], $this->client->calls, 'a listing that already matches needs no call');
+    }
+
     public function test_a_store_code_of_65_characters_is_a_review_that_names_the_code_and_sends_nothing(): void
     {
         $code = str_repeat('a', 33).'_'.str_repeat('b', 31);

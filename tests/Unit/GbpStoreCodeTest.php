@@ -33,7 +33,7 @@ final class GbpStoreCodeTest extends UnitTestCase
     {
         $source = $this->builder_source('uamswp_fad_gmb_provider_table');
 
-        $this->assertStringContainsString('$store_code = $profile_slug.\'_\'.$location_slug;', $source);
+        $this->assertStringContainsString('$store_code = UAMSWP_FAD_GBP_Logic::provider_store_code($profile_slug.\'_\'.$location_slug, $post_id, uamswp_fad_int($location));', $source);
         $this->assertStringContainsString('$row[0] = $store_code;', $source);
     }
 
@@ -41,11 +41,11 @@ final class GbpStoreCodeTest extends UnitTestCase
     {
         $source = $this->builder_source('uamswp_fad_gmb_location_table');
 
-        $this->assertStringContainsString("\$store_code = (\$location_parent_location ? get_post_field('post_name', \$location_post_id).'_' : '').get_post_field('post_name', \$location_child_id);", $source);
+        $this->assertStringContainsString("\$store_code = UAMSWP_FAD_GBP_Logic::location_store_code((\$location_parent_location ? get_post_field('post_name', \$location_post_id).'_' : '').get_post_field('post_name', \$location_child_id), uamswp_fad_int(\$location_child_id));", $source);
         $this->assertStringContainsString('$row[0] = $store_code;', $source);
     }
 
-    public function test_neither_builder_checks_the_length_of_a_store_code_because_the_sync_does(): void
+    public function test_neither_builder_measures_the_store_code_itself_because_the_logic_class_does(): void
     {
         foreach (['uamswp_fad_gmb_provider_table', 'uamswp_fad_gmb_location_table'] as $function) {
             $source = $this->builder_source($function);

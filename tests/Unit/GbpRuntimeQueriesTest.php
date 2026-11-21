@@ -411,6 +411,46 @@ final class GbpRuntimeQueriesTest extends UnitTestCase
         $this->assertSame(['dr-example_gone-clinic', [], 0, null, false], [$items[1]['store_code'], $items[1]['photos'], $items[1]['location_id'], $items[1]['silo'], $items[1]['excluded']], 'a row whose location is gone sends no photos');
     }
 
+    public function test_a_provider_row_with_an_id_store_code_is_an_item_for_the_location_it_names(): void
+    {
+        require_once __DIR__.'/../Support/gmb-page.php';
+        \uamswp_test_gmb_page();
+        when('uamswp_fad_gmb_provider_table')->alias(fn (array $ids) => ['head' => [], 'body' => $ids === [7] ? [
+            $this->providerRow('id--p7-l55'),
+            $this->providerRow('id--p7-l0'),
+        ] : []]);
+        $by_id = [];
+        when('uamswp_fad_gbp_location_info_by_id')->alias(function (int $id) use (&$by_id): array {
+            $by_id[] = $id;
+
+            return ['id' => $id, 'silo' => 'baptist-health', 'providers_excluded' => true];
+        });
+        when('uamswp_fad_gbp_location_info')->alias(function (string $slug): array {
+            $this->fail('an ID code is not looked up by slug');
+        });
+        $categories = ['Doctor' => 'categories/gcid:doctor'];
+
+        $items = uamswp_fad_gbp_items_for_provider(7, $categories);
+
+        $this->assertCount(1, $items, 'a code with a zero location id is malformed');
+        $this->assertSame([55], $by_id);
+        $this->assertSame(['id--p7-l55', 'provider', 7, 55, 'baptist-health', true], [$items[0]['store_code'], $items[0]['kind'], $items[0]['post_id'], $items[0]['location_id'], $items[0]['silo'], $items[0]['excluded']]);
+        $this->assertSame(\UAMSWP_FAD_GBP_Logic::fields_from_row($this->providerRow('id--p7-l55'), $categories), $items[0]['fields']);
+    }
+
+    public function test_a_provider_row_with_a_slug_store_code_is_never_looked_up_by_id(): void
+    {
+        require_once __DIR__.'/../Support/gmb-page.php';
+        \uamswp_test_gmb_page();
+        when('uamswp_fad_gmb_provider_table')->alias(fn (array $ids) => ['head' => [], 'body' => [$this->providerRow('dr-example_main-clinic')]]);
+        when('uamswp_fad_gbp_location_info_by_id')->alias(function (int $id): array {
+            $this->fail('a slug code is looked up by slug');
+        });
+        when('uamswp_fad_gbp_location_info')->alias(fn (string $slug) => ['id' => 55, 'silo' => 'uams', 'providers_excluded' => false]);
+
+        $this->assertSame([55], array_column(uamswp_fad_gbp_items_for_provider(7, []), 'location_id'));
+    }
+
     public function test_the_transport_sends_the_method_headers_and_a_45_second_timeout_and_no_body_when_there_is_none(): void
     {
         $sent = [];
