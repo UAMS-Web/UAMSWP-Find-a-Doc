@@ -804,7 +804,7 @@ function uamswp_fad_gmb_provider_table($post_ids = []): array
 
                         // Store code
                         $location_slug = get_post_field('post_name', uamswp_fad_int($location));
-                        $store_code = $profile_slug.'_'.$location_slug;
+                        $store_code = UAMSWP_FAD_GBP_Logic::provider_store_code($profile_slug.'_'.$location_slug, $post_id, uamswp_fad_int($location));
 
                         $row[0] = $store_code; // . '-' . implode(",",$locations) . '-' . $location;
 
@@ -1470,7 +1470,7 @@ function uamswp_fad_gmb_location_table($post_ids = []): array
             }
 
             // Get slug
-            $store_code = ($location_parent_location ? get_post_field('post_name', $location_post_id).'_' : '').get_post_field('post_name', $location_child_id);
+            $store_code = UAMSWP_FAD_GBP_Logic::location_store_code(($location_parent_location ? get_post_field('post_name', $location_post_id).'_' : '').get_post_field('post_name', $location_child_id), uamswp_fad_int($location_child_id));
             $location_slug = ($location_parent_location ? get_post_field('post_name', $location_post_id).'/' : '').get_post_field('post_name', $location_child_id);
 
             // Create location variables

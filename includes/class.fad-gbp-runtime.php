@@ -674,11 +674,33 @@ function uamswp_fad_gbp_location_info(string $slug): array
 {
     $ids = uamswp_fad_ids(get_posts(['name' => $slug, 'post_type' => 'location', 'post_status' => 'publish', 'posts_per_page' => 1, 'fields' => 'ids']));
 
-    if ($ids === []) {
+    return uamswp_fad_gbp_location_details($ids === [] ? 0 : $ids[0]);
+}
+
+/**
+ * The same as `uamswp_fad_gbp_location_info()`, for a location given by its post ID (an ID-based store code).
+ *
+ * A post that is not a published location reads as no location.
+ *
+ * @return array{id: int, silo: ?string, providers_excluded: bool}
+ */
+function uamswp_fad_gbp_location_info_by_id(int $location_id): array
+{
+    $is_published_location = get_post_type($location_id) === 'location' && get_post_status($location_id) === 'publish';
+
+    return uamswp_fad_gbp_location_details($is_published_location ? $location_id : 0);
+}
+
+/**
+ * The silo and provider exclusion of a published location, or the no-location answer for ID 0.
+ *
+ * @return array{id: int, silo: ?string, providers_excluded: bool}
+ */
+function uamswp_fad_gbp_location_details(int $location_id): array
+{
+    if ($location_id === 0) {
         return ['silo' => null, 'providers_excluded' => false, 'id' => 0];
     }
-
-    $location_id = $ids[0];
 
     return [
         'id' => $location_id,
@@ -702,11 +724,18 @@ function uamswp_fad_gbp_items_for_provider(int $provider_id, array $categories):
         $store_code = uamswp_fad_str(($row[0] ?? null));
         $parts = UAMSWP_FAD_GBP_Logic::split_provider_store_code($store_code);
 
-        if ($parts === null) {
-            continue;
-        }
+        if ($parts !== null) {
+            $location = uamswp_fad_gbp_location_info($parts[1]);
+        } else {
+            // A code built from IDs names the location by its post ID, not by its slug.
+            $id_parts = UAMSWP_FAD_GBP_Logic::split_id_provider_store_code($store_code);
 
-        $location = uamswp_fad_gbp_location_info($parts[1]);
+            if ($id_parts === null) {
+                continue;
+            }
+
+            $location = uamswp_fad_gbp_location_info_by_id($id_parts[1]);
+        }
 
         $items[] = [
             'store_code' => $store_code,

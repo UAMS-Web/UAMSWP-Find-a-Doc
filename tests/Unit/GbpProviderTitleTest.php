@@ -73,7 +73,7 @@ final class GbpProviderTitleTest extends UnitTestCase
 
         $this->assertStringContainsString('$row[1] = UAMSWP_FAD_GBP_Logic::provider_listing_title(', $source);
         $this->assertStringContainsString('html_entity_decode(get_the_title(uamswp_fad_int($location)))', $source);
-        $this->assertStringContainsString('$store_code = $profile_slug.\'_\'.$location_slug;', $source);
+        $this->assertStringContainsString('UAMSWP_FAD_GBP_Logic::provider_store_code($profile_slug.\'_\'.$location_slug, $post_id, uamswp_fad_int($location))', $source);
         $this->assertStringNotContainsString("'UAMS Health - '.html_entity_decode(\$full_name)", $source, 'the provider-only title is gone');
     }
 }
