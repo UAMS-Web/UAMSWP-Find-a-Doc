@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 class UAMSWP_FAD_GBP_Logic
 {
-    /** The Business Profile fields the sync owns. Photos, posts, hours and Q&A are never written. */
+    /** The Business Profile fields the sync owns. Photos are added but never replaced or removed; posts, hours and Q&A are never written. */
     const OWNED_FIELDS = ['title', 'storefrontAddress', 'latlng', 'phoneNumbers', 'websiteUri', 'categories', 'profile'];
 
     /** Modes a silo can be in, from least to most permissive. */

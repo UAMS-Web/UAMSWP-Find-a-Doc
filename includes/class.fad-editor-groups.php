@@ -11,8 +11,8 @@ declare(strict_types=1);
  * author or a member of one of its groups. Deleting and publishing stay with administrators;
  * a doc_admin can edit any record but can neither delete nor publish.
  *
- * Service lines can point at an editor group; providers and locations that have no group
- * of their own inherit it from their service line when they are saved.
+ * Service lines can point at an editor group; every provider and location in the service line
+ * is placed in that group when it is saved, and a group added by hand is kept alongside it.
  */
 // The guard exits the process when ABSPATH is missing. A mutant of it exits the test child before any test runs,
 // so no test can score it; the guard is plain WordPress boilerplate with no logic to pin.
@@ -148,7 +148,7 @@ function uamswp_fad_register_editor_group_fields(): void
                     'label' => 'Editor group',
                     'name' => 'service_line_editor_group',
                     'type' => 'taxonomy',
-                    'instructions' => 'Providers and locations in this service line that have no editor group of their own are placed in this group when they are saved.',
+                    'instructions' => 'Every provider and location in this service line is placed in this group when it is saved. A group added to a record by hand is kept alongside it.',
                     'taxonomy' => UAMSWP_FAD_EDITOR_GROUP_TAX,
                     'field_type' => 'select',
                     'allow_null' => 1,
