@@ -334,9 +334,24 @@ export function baseRef(opts, env = process.env) {
     return 'origin/main'
 }
 
+/**
+ * How to start `php` with `args`. Node refuses to start a `.bat` or `.cmd` file without a shell
+ * (CVE-2024-27980, `spawnSync ... EINVAL`), and Herd on Windows puts only such a shim on PATH, so on
+ * Windows a shim path, or a bare `php` that a shell must resolve through PATHEXT, goes through a shell
+ * with each argument quoted. Everything else, a `php.exe` path and any binary on macOS and Linux, is
+ * started directly as before (UAMS-Web/uams-claude-skills#880).
+ */
+export function phpInvocation(php, args, platform = process.platform) {
+    const viaShell = platform === 'win32' && (/\.(?:bat|cmd)$/i.test(php) || php === 'php')
+    if (!viaShell) return { command: php, args, options: {} }
+    const quote = (arg) => (/[ \s"&|<>^%()]/.test(arg) ? `"${arg.replace(/(\\*)"/g, '$1$1\\"').replace(/(\\*)$/, '$1$1')}"` : arg)
+    return { command: [php, ...args].map(quote).join(' '), args: [], options: { shell: true } }
+}
+
 function runTests(tree, opts, files, junit) {
     rmSync(junit, { force: true })
-    const r = spawnSync(opts.php, [opts.bin, ...files, '--log-junit', junit, '--colors=never'], { cwd: tree, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 })
+    const start = phpInvocation(opts.php, [opts.bin, ...files, '--log-junit', junit, '--colors=never'])
+    const r = spawnSync(start.command, start.args, { cwd: tree, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, ...start.options })
     if (r.error) throw new CannotRun(`could not start ${opts.php} ${opts.bin}: ${r.error.message}`)
     const xml = existsSync(junit) ? readFileSync(junit, 'utf8') : ''
     return { suites: parseJunit(xml), output: `${r.stdout ?? ''}\n${r.stderr ?? ''}` }
