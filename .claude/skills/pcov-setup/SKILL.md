@@ -22,7 +22,7 @@ description: >-
   Edit it there, not here; the next sync overwrites this copy.
   Delivered to this repository through the profile(s): pest.
 -->
-<!-- cspell:ignore codesign CODESIGNING dlopen dyld elif hardlink imagick Mathur's phpversion repoint Shivam Triaging -->
+<!-- cspell:ignore codesign CODESIGNING dlopen dyld elif hardlink imagick Mathur's phpversion redefinable repoint Shivam Triaging usort -->
 
 # Coverage driver for Pest mutation testing and coverage
 
@@ -415,11 +415,25 @@ PHP helpers ship under [`scripts/`](scripts/) with this skill and sync into ever
 | [`build-coverage-scope-csv.php`](scripts/build-coverage-scope-csv.php) | Reads `<source>` from `phpunit.xml` / `phpunit.xml.dist` and writes the three-pass tracker CSV (`file`, `pass1_touched`, `pass2_line_pct`, `pass3_mutation_clean`). That CSV is the inventory. |
 | [`publish-coverage-scope-comment.php`](scripts/publish-coverage-scope-comment.php) | Upserts a Markdown tracker comment on the repository's full-coverage issue from the CSV. It requires `--pass2-min=<N>` and exits 1 without it. It posts to the `origin` repository unless `--repo=<owner>/<name>` names another, and exits 1 when neither resolves. |
 | [`check-mutation-instrument.php`](scripts/check-mutation-instrument.php) | Whether a mutant child can actually launch on this machine, and whether an identical-copy child reaches test discovery through the invocation a run uses. Exit `0` only before trusting a mutate score; exit `1` means scores can fabricate kills (see below); exit `2` means the probe measured nothing. |
+| [`check-patchwork-lines.php`](scripts/check-patchwork-lines.php) | Whether Patchwork's rewrite changes the line count of a file the mutation run covers, which makes PCOV credit later lines to the wrong ones and hides mutants as uncovered. Exit `0` when every file keeps its length; `1` names each file that does not; `2` means the check could not run, including that its control cannot see the rewrite. |
 
 ```bash
 php .claude/skills/pcov-setup/scripts/build-coverage-scope-csv.php --pass1
 php .claude/skills/pcov-setup/scripts/check-mutation-instrument.php
+php .claude/skills/pcov-setup/scripts/check-patchwork-lines.php src
 ```
+
+### The Patchwork line-count check
+
+**Patchwork can shorten a file as it loads it, and a mutation run then reports mutants uncovered while nothing else fails.** When a repository's `patchwork.json` lists any `redefinable-internals`, Patchwork drops the line break before the first argument of a call to a callback-taking internal (`array_filter`, `array_map`, `usort` and the rest of its default list). The file PHP loads is then shorter than the source, so PCOV credits every later line to the line above it. In `UAMS-Web/UAMSWP-Find-a-Doc` this hid 282 mutants in one file (UAMS-Web/UAMSWP-Find-a-Doc#1459). The defect is reported upstream as antecedent/patchwork#230.
+
+`check-patchwork-lines.php` runs Patchwork's own string rewrite (its `transformString()` function) over each file and compares newline counts, so it needs no coverage driver and no test run. Name the files or directories the mutation run covers, or name none and it reads `<source>` from `phpunit.xml` (or `phpunit.xml.dist`), less its excludes. `--root=<dir>` points it at a repository root other than the one above the script.
+
+- **Who runs it:** every repository whose Unit suite loads Patchwork with a non-empty `redefinable-internals` list, as a plain CI job beside the mutation job. The exposure is the pair, so a repository that lists no internal, or does not load Patchwork, has nothing for it to read.
+- **Its control runs before any file is read:** a split `array_filter()` call must lose a line under the rewrite and the same call on one line must not. A run that cannot show both exits `2` and prints what `patchwork.json` lists, so a repository with no internals listed, or a Patchwork release that has stopped joining lines, is never read as clean.
+- **When it can go:** it stays until antecedent/patchwork#230 is fixed in a release the repository installs. The control is what says so: it exits `2` once the rewrite stops joining lines, and that is the signal to remove the job.
+- **What to do with a hit:** put the call Patchwork joins on one line, the way the file named in the report shows. The report counts the lines lost, so a fix is confirmed by a re-run reading `every file keeps its line count`.
+- **Measured:** antecedent/patchwork 2.2.3, PHP 8.4, Windows 11, in a scratch project with `redefinable-internals: ["array_filter"]` (UAMS-Web/uams-claude-skills#859): the split call loses one line, the one-line call none, and an empty internals list loses nothing. Other platforms and Patchwork releases are not measured here.
 
 ### Three-pass walk of the inventory
 

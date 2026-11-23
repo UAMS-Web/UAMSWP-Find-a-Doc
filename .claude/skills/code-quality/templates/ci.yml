@@ -18,9 +18,10 @@ name: CI
 #   branch, so a change to the shared chain reaches this repository only when the tag here moves.
 #   Dependabot does not move it. scripts/check-templates.mjs in UAMS-Web/uams-claude-skills fails
 #   this template when the reference is not a tag or a full commit hash.
-# - Inputs: `with:` sets the legs and the optional jobs. `linux-only: true` runs every job on
-#   `ubuntu-latest` alone, and `all-platform-jobs` is a space-separated list of job ids kept on all
-#   three runners whatever else is set. The optional jobs (`encoding-guard`, `vitest`,
+# - Inputs: `with:` sets the legs and the optional jobs. Every job runs on `ubuntu-latest` alone unless
+#   the call says otherwise: `all-platform-jobs` is a space-separated list of job ids raised to all three
+#   runners, `windows-jobs` raises ids to Linux and Windows, and `linux-only: false` restores each job's
+#   own classification. A leg beyond Linux gets its reason in a comment beside the input. The optional jobs (`encoding-guard`, `vitest`,
 #   `vite-build`, `mutation-smoke`) are off until their input is `true`, and each runs the command
 #   its `-command` input names. The reusable workflow's own header lists every input and its default.
 # - A WordPress plugin switches on `floor-lint`, `download-archive` and `phpcs` and may set `pest-command`
@@ -80,16 +81,14 @@ permissions:
 jobs:
   # The shared chain. Its checks report as `checks / <job name> (<operating system>)`.
   checks:
-    uses: UAMS-Web/uams-ci-workflows/.github/workflows/ci.yml@v0.14.0
+    uses: UAMS-Web/uams-ci-workflows/.github/workflows/ci.yml@v0.17.0
     # with:
-    #   linux-only: true
     #   all-platform-jobs: 'pint'
     #   mutate-paths: src
     #   vitest: true
     #   vitest-command: npm run test:js
     #
     # A WordPress plugin (UAMS-Web/uams-claude-skills#607):
-    #   linux-only: true
     #   mutate: false
     #   mutate-ignore-paths: includes
     #   floor-lint: true

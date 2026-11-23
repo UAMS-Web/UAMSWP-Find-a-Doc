@@ -26,17 +26,19 @@ name: CI chain
 # A job's steps are the ones in ci.yml; this file differs in two ways: the legs are inputs, and the optional jobs
 # at the end run a command the caller names.
 #
-# Operating systems (UAMS-Web/uams-claude-skills#438, #454): every job runs as a matrix over `os`. The
-# Windows and macOS legs of a job classified for one runner are off, and of a job classified for all three are
-# on, until the caller says otherwise:
+# Operating systems (UAMS-Web/uams-claude-skills#438, #454; UAMS-Web/uams-ci-workflows#70): every job runs as a
+# matrix over `os`, and a caller that passes no leg input gets `ubuntu-latest` only for every job. GitHub runs only
+# a few macOS jobs at once, so a Windows or macOS leg is asked for by a caller that can say why, with the reason
+# beside the input:
 #
-# - `linux-only: true` turns the Windows and macOS legs off for every job.
+# - `linux-only` defaults to `true`, which keeps the Windows and macOS legs off for every job. `linux-only: false`
+#   restores each job's own classification: three runners for a job classified for all three, one for the rest.
 # - `all-platform-jobs` is a space-separated list of job ids kept on all three runners whatever else is set:
 #   a job classified Linux only gains its Windows and macOS legs, and a job classified for all three keeps them
-#   under `linux-only`.
+#   under `linux-only: true`.
 # - `windows-jobs` is a space-separated list of job ids that run on `ubuntu-latest` and `windows-latest` and not on
-#   `macos-latest`, whatever `linux-only` says: a job classified for all three loses its macOS leg, and a job classified
-#   Linux only gains its Windows leg. A job named in both lists keeps all three. Omitted, it changes nothing.
+#   `macos-latest`, whatever `linux-only` says: a job classified for all three loses its macOS leg when `linux-only` is
+#   `false`, and a job classified Linux only gains its Windows leg. A job named in both lists keeps all three. Omitted, it changes nothing.
 #
 # The `mutate` job is the exception to all three inputs: it runs on `ubuntu-latest` only, because a mutation score
 # taken on a Windows leg has counted mutants the tests never detect as killed (UAMS-Web/uams-ci-workflows#13).
@@ -44,17 +46,18 @@ name: CI chain
 # Each job carries a `# Legs:` line saying which classification it has and why; scripts/check-templates.mjs
 # fails this template when a job is unclassified, when a job's matrix is not the one its classification
 # requires, or when the final `result` job does not need every job. The code-quality skill's "Which jobs run
-# on which operating system" section holds the evidence. A job with no recorded evidence runs on all three.
+# on which operating system" section holds the evidence. A job with no recorded evidence is classified for all
+# three, and runs on them only for a caller that passes `linux-only: false` or names the job.
 #
 # The four optional jobs (`encoding-guard`, `vitest`, `vite-build`, `mutation-smoke`) are off unless the caller
 # turns them on, and each runs a command the caller supplies. `encoding-guard` and `vite-build` are Linux only,
-# `vitest` and `mutation-smoke` run on all three, on the seeded-fault evidence in
+# `vitest` and `mutation-smoke` are classified for all three, on the seeded-fault evidence in
 # UAMS-Web/uams-claude-skills#478 (see the code-quality skill).
 #
 # Three more optional jobs serve a WordPress plugin (UAMS-Web/uams-claude-skills#607): `floor-lint` (inputs
 # `floor-lint-php` and `floor-lint-command`), `download-archive` (`download-archive-command`) and `phpcs`
 # (`phpcs-command`). Each is off until its boolean input is `true` and Linux only. A plugin caller passes
-# `linux-only: true`, `mutate: false`, those three jobs on, and `pest-command: composer test:unit` when its unit suite is
+# `mutate: false`, those three jobs on, and `pest-command: composer test:unit` when its unit suite is
 # that script. A plugin that does not receive the `pest-testing` skill also passes `mutate: false`, which skips the
 # `mutate-ignore` job, and `global-test-symbols: false`. Its WordPress integration matrix (a MySQL service, a WordPress download, single and multisite) stays a
 # plain job in the caller beside the call, listed in the `needs:` of its `CI` job; this chain does not run it.
@@ -81,6 +84,15 @@ name: CI chain
 # The full pass is what catches drift from a dependency or tooling change, so a caller adds a `schedule:` trigger to its
 # own `ci.yml` (the caller template shows one). Any other event, and a pushed commit with no parent, mutates everything.
 #
+# Two inputs serve a caller that turns mutation on before its score can gate merges (UAMS-Web/uams-ci-workflows#68).
+# `mutate-advisory: true` runs the `mutate` job, every shard of it, and keeps its result out of the `result` job:
+# the job still reports its own status, and `result` prints a warning for it in place of failing. The `mutate-plan`
+# job still gates: it fails on a setup error (a `mutate-shards` value that is not a count, no tracked PHP file under
+# `mutate-paths`, a path the shard list cannot carry), not on a score. `mutate-submodules` names the caller's
+# submodules the `mutate` job checks out, by path, and `mutate-submodules-recursive` adds the ones nested in them. A
+# private submodule needs the `mutate-submodules-token` secret, passed by name, since the job's own token reads only
+# the calling repository.
+#
 # The `pest` job is on unless the caller passes `pest: false`. A repository whose suite needs what the called
 # chain cannot give it (private submodules, a secret, a sharded run with its own reports) keeps its own Pest
 # jobs as plain jobs beside the call and lists them in the `needs:` of its `CI` job. `pest: false` skips the job
@@ -96,9 +108,9 @@ on:
   workflow_call:
     inputs:
       linux-only:
-        description: Run every job on ubuntu-latest only, except the jobs named in all-platform-jobs.
+        description: Run every job on ubuntu-latest only, except the jobs named in all-platform-jobs or windows-jobs. Pass false to run each job on the runners its classification names.
         type: boolean
-        default: false
+        default: true
       all-platform-jobs:
         description: Space-separated job ids to run on all three runners whatever linux-only says.
         type: string
@@ -143,6 +155,18 @@ on:
         description: Space-separated paths the mutate job selects changed PHP files from, the paths `composer mutate` passes to --path.
         type: string
         default: src
+      mutate-advisory:
+        description: Run the mutate job, every shard of it, without its result gating the result job (UAMS-Web/uams-ci-workflows#68). The job still reports its own status, and the result job prints a warning for a mutate result other than success in place of failing. The default false keeps a failing mutate job failing the result job.
+        type: boolean
+        default: false
+      mutate-submodules:
+        description: Space-separated paths of the caller's submodules the mutate job checks out, at depth 1 (UAMS-Web/uams-ci-workflows#68). The default, empty, checks out none. A path that .gitmodules does not register as a submodule fails the job. A private submodule also needs the mutate-submodules-token secret.
+        type: string
+        default: ''
+      mutate-submodules-recursive:
+        description: Check out the submodules nested inside the ones mutate-submodules names as well (UAMS-Web/uams-ci-workflows#68). It does nothing while mutate-submodules is empty.
+        type: boolean
+        default: false
       encoding-guard:
         description: Run the encoding-guard job, which runs encoding-guard-command.
         type: boolean
@@ -231,6 +255,18 @@ on:
         description: Paths the dev-lint job skips, space-separated and relative to the repository root, with no spaces inside a path. vendor and node_modules are always skipped.
         type: string
         default: ''
+      changed-tests:
+        description: Run the changed-tests job, which runs a pull request's changed test files against the base branch's source and reports each file (UAMS-Web/uams-claude-skills#876, decided on #865). It reports and never gates, so only a comparison that could not run fails it. Needs the `pest-testing` skill's changed-tests-against-base.mjs.
+        type: boolean
+        default: false
+      changed-tests-paths:
+        description: The test directories the changed-tests job compares, space-separated and relative to the repository root, with no spaces inside a path. Each becomes a `--tests` argument of the script. Name only directories whose tests run without a host application, such as `tests/Unit tests/Integration`.
+        type: string
+        default: tests
+    secrets:
+      mutate-submodules-token:
+        description: A token the mutate job fetches the submodules mutate-submodules names with, in place of the job's own, for a submodule in a private repository (UAMS-Web/uams-ci-workflows#68). It needs read access to every submodule named. Without it the fetch uses the job's own token, which reads only the calling repository. Pass it by name; secrets inherit cannot supply it, since a repository or organization secret's name cannot hold a hyphen.
+        required: false
 
 permissions:
   contents: read
@@ -638,9 +674,41 @@ jobs:
     steps:
       # Depth 2: on a pull request the checkout is GitHub's merge commit, and its first parent
       # is the base branch it was merged onto. On a push it is the pushed commit and its parent.
+      # It persists no credentials when the next step fetches submodules, so the job's token is not on disk either.
       - uses: actions/checkout@v7
         with:
           fetch-depth: 2
+          persist-credentials: ${{ inputs.mutate-submodules == '' }}
+      # Only the submodules the caller names (UAMS-Web/uams-ci-workflows#68): a caller's tests can need a content
+      # submodule while a large asset submodule beside it is not needed. The token reaches git through GIT_CONFIG_*
+      # variables of this step alone, so it is never written to disk, and the caller's scripts, Pest and the mutants
+      # in later steps cannot read it.
+      - name: Check out the named submodules
+        if: inputs.mutate-submodules != ''
+        env:
+          SUBMODULES: ${{ inputs.mutate-submodules }}
+          RECURSIVE: ${{ inputs.mutate-submodules-recursive }}
+          TOKEN: ${{ secrets.mutate-submodules-token || github.token }}
+        run: |
+          read -r -a paths <<< "$SUBMODULES"
+          if [ "${#paths[@]}" -eq 0 ]; then echo "::error::mutate-submodules holds no path"; exit 1; fi
+          registered=$(git config --file .gitmodules --get-regexp '^submodule\..*\.path$' 2>/dev/null | awk '{print $2}' || true)
+          for path in "${paths[@]}"; do
+            if [[ $'\n'"$registered"$'\n' != *$'\n'"$path"$'\n'* ]]; then
+              echo "::error::mutate-submodules names $path, which .gitmodules does not register as a submodule path"
+              exit 1
+            fi
+          done
+          auth=$(printf 'x-access-token:%s' "$TOKEN" | base64 | tr -d '\n')
+          echo "::add-mask::$auth"
+          n=${GIT_CONFIG_COUNT:-0}
+          export "GIT_CONFIG_KEY_$n=http.https://github.com/.extraheader" "GIT_CONFIG_VALUE_$n=AUTHORIZATION: basic $auth"
+          export "GIT_CONFIG_KEY_$((n + 1))=url.https://github.com/.insteadOf" "GIT_CONFIG_VALUE_$((n + 1))=git@github.com:"
+          export GIT_CONFIG_COUNT=$((n + 2))
+          flags=(--init --depth 1)
+          if [ "$RECURSIVE" = "true" ]; then flags+=(--recursive); fi
+          git submodule update "${flags[@]}" -- "${paths[@]}"
+          for path in "${paths[@]}"; do echo "$path checked out at $(git -C "$path" rev-parse HEAD)"; done
       - name: Read the PHP pin
         id: php
         shell: bash
@@ -1324,22 +1392,86 @@ jobs:
           done < php-files.list
           if [ "$failed" -ne 0 ]; then echo "::error::$failed PHP file(s) failed php -l"; exit 1; fi
 
+  changed-tests:
+    name: Changed tests against base (${{ matrix.os }})
+    if: inputs.changed-tests
+    needs: [composer-validate]
+    # Legs: Linux only. Decided on UAMS-Web/uams-claude-skills#876 from what the job reads, not from a seeded fault: the script diffs with git and runs the changed Pest files once, and its report is the same on any platform. A caller that wants more names it in `all-platform-jobs`.
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ${{ fromJSON(contains(format(' {0} ', inputs.all-platform-jobs), ' changed-tests ') && '["ubuntu-latest","windows-latest","macos-latest"]' || contains(format(' {0} ', inputs.windows-jobs), ' changed-tests ') && '["ubuntu-latest","windows-latest"]' || '["ubuntu-latest"]') }}
+    timeout-minutes: 20
+    defaults:
+      run:
+        shell: bash
+    steps:
+      # `fetch-depth: 0` is what makes the base branch present; without it the script fails and names that cause.
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Read the PHP pin
+        id: php
+        shell: bash
+        run: |
+          pin=""
+          if [ -f composer.json ]; then pin=$(jq -r '.config.platform.php // empty' composer.json); fi
+          if [ -z "$pin" ]; then
+            echo "pinned=none" >> "$GITHUB_OUTPUT"
+            echo "minor=8.4" >> "$GITHUB_OUTPUT"
+            echo "No config.platform.php in composer.json; installing the default PHP 8.4."
+          else
+            # The whole value must be a version: a prefix match let `8.4.x` through, and a newline in the pin wrote extra lines to GITHUB_OUTPUT.
+            if ! [[ "$pin" =~ ^[0-9]+\.[0-9]+(\.[0-9]+)*$ ]]; then echo "::error::config.platform.php is '$pin', which is not a version of the form major.minor or major.minor.patch"; exit 1; fi
+            minor=$(printf '%s' "$pin" | grep -oE '^[0-9]+\.[0-9]+')
+            echo "pinned=$pin" >> "$GITHUB_OUTPUT"
+            echo "minor=$minor" >> "$GITHUB_OUTPUT"
+            echo "config.platform.php is $pin; installing PHP $minor."
+          fi
+      - uses: ./.github/actions/setup
+        with:
+          php-version: ${{ steps.php.outputs.minor }}
+      - name: Report pinned and installed PHP
+        shell: bash
+        env:
+          PINNED: ${{ steps.php.outputs.pinned }}
+        run: |
+          installed=$(php -r 'echo PHP_VERSION;')
+          echo "PHP pinned: $PINNED, installed: $installed"
+          case "$PINNED" in none|"$installed") ;; *) echo "::warning::config.platform.php pins $PINNED but the runner installed $installed; setup-php installs the newest patch of a minor" ;; esac
+
+      # The base branch reaches the script through the environment (GITHUB_BASE_REF), and the paths through TEST_PATHS,
+      # so no expression sits in `run:`. An empty path list is a configuration error and fails, never a silent pass.
+      - name: Changed tests against base
+        env:
+          TEST_PATHS: ${{ inputs.changed-tests-paths }}
+        run: |
+          # Globbing is off so a path is never expanded against the checkout.
+          set -f
+          args=()
+          for p in $TEST_PATHS; do args+=(--tests "$p"); done
+          if [ ${#args[@]} -eq 0 ]; then echo "::error::changed-tests is on but changed-tests-paths is empty"; exit 1; fi
+          node .claude/skills/pest-testing/scripts/changed-tests-against-base.mjs "${args[@]}"
+
   # The one job that reads every other job's result. Keep `needs:` listing every other job in the
   # file; scripts/check-templates.mjs in UAMS-Web/uams-claude-skills checks it.
   result:
     name: Chain result
-    needs: [composer-validate, synced-files, no-emoji, aggregate-needs, pint, rector, phpstan, mutate-ignore, mutate-plan, mutate, pest, encoding-guard, vitest, vite-build, mutation-smoke, floor-lint, download-archive, phpcs, guard, dev-lint]
+    needs: [composer-validate, synced-files, no-emoji, aggregate-needs, pint, rector, phpstan, mutate-ignore, mutate-plan, mutate, pest, encoding-guard, vitest, vite-build, mutation-smoke, floor-lint, download-archive, phpcs, guard, dev-lint, changed-tests]
     if: always()
     # Legs: Linux only. It reads job results with jq.
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       # `skipped` and `cancelled` fail as well as `failure`, except that an optional job its input
-      # switched off is `skipped` by design.
+      # switched off is `skipped` by design, and a job named in ADVISORY (`mutate` under `mutate-advisory`)
+      # is reported with a warning whatever its result (UAMS-Web/uams-ci-workflows#68).
       - name: Every needed job succeeded
         env:
           NEEDS: ${{ toJSON(needs) }}
-          SWITCHED_OFF: ${{ format('{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}{11}{12}', !inputs.pest && 'pest ' || '', !inputs.mutate && 'mutate ' || '', !inputs.mutate && 'mutate-plan ' || '', (!inputs.mutate && !inputs.mutate-ignore) && 'mutate-ignore ' || '', !inputs.encoding-guard && 'encoding-guard ' || '', !inputs.vitest && 'vitest ' || '', !inputs.vite-build && 'vite-build ' || '', !inputs.mutation-smoke && 'mutation-smoke ' || '', !inputs.floor-lint && 'floor-lint ' || '', !inputs.download-archive && 'download-archive ' || '', !inputs.phpcs && 'phpcs ' || '', !inputs.guard && 'guard ' || '', !inputs.dev-lint && 'dev-lint ' || '') }}
+          ADVISORY: ${{ inputs.mutate-advisory && 'mutate ' || '' }}
+          SWITCHED_OFF: ${{ format('{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}{11}{12}{13}', !inputs.pest && 'pest ' || '', !inputs.mutate && 'mutate ' || '', !inputs.mutate && 'mutate-plan ' || '', (!inputs.mutate && !inputs.mutate-ignore) && 'mutate-ignore ' || '', !inputs.encoding-guard && 'encoding-guard ' || '', !inputs.vitest && 'vitest ' || '', !inputs.vite-build && 'vite-build ' || '', !inputs.mutation-smoke && 'mutation-smoke ' || '', !inputs.floor-lint && 'floor-lint ' || '', !inputs.download-archive && 'download-archive ' || '', !inputs.phpcs && 'phpcs ' || '', !inputs.guard && 'guard ' || '', !inputs.dev-lint && 'dev-lint ' || '', !inputs.changed-tests && 'changed-tests ' || '') }}
         run: |
           results=$(echo "$NEEDS" | jq -r 'to_entries[] | "\(.key) \(.value.result)"')
           echo "Needed job results:"
@@ -1350,6 +1482,7 @@ jobs:
           while read -r id result; do
             if [ "$result" = "success" ]; then continue; fi
             if [ "$result" = "skipped" ] && [[ " $SWITCHED_OFF" == *" $id "* ]]; then continue; fi
+            if [[ " $ADVISORY" == *" $id "* ]]; then echo "::warning::$id reported $result, which mutate-advisory keeps out of this result"; continue; fi
             echo "::error::$id reported $result"
             failed=1
           done <<< "$results"
