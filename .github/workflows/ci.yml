@@ -114,7 +114,8 @@ jobs:
   # Patchwork, which the Unit suite loads, rewrites each first-party file as it loads it. A rewrite that joins two
   # lines makes PCOV credit every later line to the line above it, so the mutation run reports those mutants
   # uncovered (#1459). This runs Patchwork's own rewrite over every file `composer mutate` covers and fails, naming
-  # the file, when its line count changes. It needs no coverage driver and runs whether or not mutation is on.
+  # the file, when its line count changes. The check is the synced `pcov-setup` script, which reads the files from
+  # `<source>` in `phpunit.xml`. It needs no coverage driver and runs whether or not mutation is on.
   patchwork-lines:
     name: Patchwork line counts
     runs-on: ubuntu-latest
