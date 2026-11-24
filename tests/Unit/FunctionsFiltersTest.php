@@ -1331,6 +1331,8 @@ final class FunctionsFiltersTest extends UnitTestCase
     /**
      * Run a filter callback with a region in the query string and the cookie, and return the cookies it set.
      *
+     * @param  string  $callback  The filter callback to run.
+     * @param  array<string, string>  $server  The `$_SERVER` entries to set for the request, over the rest.
      * @return list<array<int, mixed>>
      */
     private function regionCookie(string $callback, array $server): array

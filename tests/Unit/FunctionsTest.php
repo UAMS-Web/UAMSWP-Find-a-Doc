@@ -1406,14 +1406,19 @@ final class FunctionsTest extends UnitTestCase
         when('is_wp_error')->justReturn(false);
 
         ob_start();
+        $exited = false;
 
         try {
             (new \pubmed_field_on_change)->load_content_from_pubmed();
-            $this->fail('The handler did not end the request.');
         } catch (ExitCalled) {
+            $exited = true;
+        } finally {
+            $output = (string) ob_get_clean();
         }
 
-        return (array) json_decode((string) ob_get_clean(), true);
+        $this->assertTrue($exited, 'The handler ends the request.');
+
+        return (array) json_decode($output, true);
     }
 
     public function test_the_pubmed_handler_returns_the_citation_with_the_authors_joined_and_ended_with_a_period(): void
