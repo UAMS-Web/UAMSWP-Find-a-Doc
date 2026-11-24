@@ -57,17 +57,23 @@ test('a single page title adds the second part only while it fits in 60 characte
     'treatment' => ['uamswp_fad_title_single_treatment', 'treatment_title_attr'],
 ]);
 
-test('a single page title keeps the second part at exactly 60 characters', function (): void {
+test('a single page title keeps the second part at exactly 60 characters and drops it at 61', function (string $function, string $global): void {
     $GLOBALS['page_title_attr'] = 'A';
     // "A | " + x + " | UAMS Health" is 4 + x + 14 characters.
-    $GLOBALS['condition_title_attr'] = str_repeat('c', 42);
+    $GLOBALS[$global] = str_repeat('c', 42);
 
-    expect(strlen(uamswp_fad_title_single_condition('x')))->toBe(60);
+    expect(strlen($function('x')))->toBe(60);
 
-    $GLOBALS['condition_title_attr'] = str_repeat('c', 43);
+    $GLOBALS[$global] = str_repeat('c', 43);
 
-    expect(uamswp_fad_title_single_condition('x'))->toBe('A | UAMS Health');
-});
+    expect($function('x'))->toBe('A | UAMS Health');
+})->with([
+    'clinical resource' => ['uamswp_fad_title_single_clinical_resource', 'resource_archive_title_attr'],
+    'condition' => ['uamswp_fad_title_single_condition', 'condition_title_attr'],
+    'expertise' => ['uamswp_fad_title_single_expertise', 'expertise_single_name_attr'],
+    'location' => ['uamswp_fad_title_single_locations', 'location_city'],
+    'treatment' => ['uamswp_fad_title_single_treatment', 'treatment_title_attr'],
+]);
 
 test('a provider title grows from the name through the clinical title, city and area of expertise while it fits', function (): void {
     $GLOBALS['full_name_attr'] = 'Jo Smith';
@@ -94,6 +100,31 @@ test('a provider title grows from the name through the clinical title, city and 
     expect(uamswp_fad_title_single_physicians('x'))->toBe('Jo Smith | UAMS Health');
 });
 
+test('a provider title keeps each longer form at exactly 60 characters and drops to the next form at 61', function (string $occupation, string $city, string $expertise, string $expected): void {
+    $GLOBALS['full_name_attr'] = 'A';
+    $GLOBALS['provider_occupation_title_attr'] = $occupation;
+    $GLOBALS['primary_appointment_city_attr'] = $city;
+    $GLOBALS['expertise_primary_name'] = $expertise;
+
+    expect(uamswp_fad_title_single_physicians('x'))->toBe($expected);
+})->with(function (): array {
+    $site = 'UAMS Health';
+    $sep = ' | ';
+    $o = 'B';
+
+    return [
+        // "A | B | {expertise} | {city} | UAMS Health" is 23 + 1 + 1 + expertise + city characters.
+        'area of expertise form at 60' => [$o, str_repeat('c', 20), str_repeat('e', 15), 'A'.$sep.$o.$sep.str_repeat('e', 15).$sep.str_repeat('c', 20).$sep.$site],
+        'area of expertise form at 61 falls to the city form' => [$o, str_repeat('c', 20), str_repeat('e', 16), 'A'.$sep.$o.$sep.str_repeat('c', 20).$sep.$site],
+        // "A | B | {city} | UAMS Health" is 20 + 1 + 1 + city characters.
+        'city form at 60' => [$o, str_repeat('c', 38), '', 'A'.$sep.$o.$sep.str_repeat('c', 38).$sep.$site],
+        'city form at 61 falls to the clinical title form' => [$o, str_repeat('c', 39), '', 'A'.$sep.$o.$sep.$site],
+        // "A | {title} | UAMS Health" is 17 + 1 + title characters.
+        'clinical title form at 60' => [str_repeat('t', 42), '', '', 'A'.$sep.str_repeat('t', 42).$sep.$site],
+        'clinical title form at 61 falls to the name form' => [str_repeat('t', 43), '', '', 'A'.$sep.$site],
+    ];
+});
+
 test('the archive excerpt length is 35 words', function (): void {
     expect(wpdocs_custom_excerpt_length(55))->toBe(35);
 });
@@ -106,6 +137,34 @@ test('the custom field excerpt trims the field text and runs the excerpt filters
 
     expect(custom_field_excerpt('field'))->toBe('<the_excerpt><the_content>Some text|35| (more)');
 });
+
+test('the custom field excerpt trims to 35 words and passes the excerpt-more filter the ellipsis marker', function (): void {
+    $received = [];
+    when('get_field')->justReturn('Some text');
+    when('strip_shortcodes')->alias(static fn (string $text): string => $text);
+    when('apply_filters')->alias(static function (string $tag, mixed $value) use (&$received): mixed {
+        $received[$tag] = $value;
+
+        return $tag === 'excerpt_more' ? '<more:'.$value.'>' : $value;
+    });
+    when('wp_trim_words')->alias(static fn (string $text, int $words, string $more): string => $text.'|'.$words.'|'.$more);
+
+    expect(custom_field_excerpt('field'))->toBe('Some text|35|<more: [...]>')
+        ->and($received['excerpt_more'])->toBe(' [...]');
+});
+
+test('the custom field excerpt of a field with no value is not trimmed or run through the shortcode filter', function (mixed $value): void {
+    when('get_field')->justReturn($value);
+    when('strip_shortcodes')->alias(static function (): string {
+        throw new LogicException('a field with no value is not stripped');
+    });
+    when('apply_filters')->alias(static fn (string $tag, mixed $text): mixed => [$tag, $text]);
+
+    expect(custom_field_excerpt('field'))->toBe(['the_excerpt', $value]);
+})->with([
+    'null' => [null],
+    'false' => [false],
+]);
 
 test('the custom field excerpt of an empty field is passed through the excerpt filter untrimmed', function (): void {
     when('get_field')->justReturn('');
@@ -120,6 +179,13 @@ test('the provider breadcrumb drops the last crumb for the provider name', funct
 
     expect(be_remove_title_from_single_crumb('Home > Providers > Old', ['sep' => ' > ']))
         ->toBe('Home > Providers > Jo &lt;b&gt;Smith&lt;/b&gt;');
+});
+
+test('the provider breadcrumb of a crumb without the separator is the separator and the provider name', function (): void {
+    $GLOBALS['full_name'] = 'Jo Smith';
+    when('uamswp_provider_name_html')->alias(static fn (string $name): string => $name);
+
+    expect(be_remove_title_from_single_crumb('Home', ['sep' => ' > ']))->toBe(' > Jo Smith');
 });
 
 test('the SEOPress breadcrumbs end with the provider name and permalink', function (): void {

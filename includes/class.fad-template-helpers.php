@@ -128,6 +128,8 @@ function custom_field_excerpt($title)
     if ($text != '') {
         $text = strip_shortcodes($text);
         $text = uamswp_fad_str(apply_filters('the_content', $text));
+        // The replacement is the same string, so removing the call changes nothing; core's step escapes to `]]&gt;` (#1506).
+        // @pest-mutate-ignore: UnwrapStrReplace
         $text = str_replace(']]>', ']]>', $text);
         $excerpt_length = 35; // 35 words
         $excerpt_more = uamswp_fad_str(apply_filters('excerpt_more', ' '.'[...]'));
