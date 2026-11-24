@@ -1599,6 +1599,9 @@ function provider_title_ajax_filter_callback(): void
             $title_list[] = get_field('physician_title', $id);
             include UAMS_FAD_PATH.'/templates/loops/physician-card.php';
         }
+        // The clinical title field holds a term ID or nothing, and implode() and array_unique() read either as text
+        // already, so the map only gives static analysis a list of strings.
+        // @pest-mutate-ignore: UnwrapArrayMap
         echo '<data id="provider_ids" data-postids="'.implode(',', $provider_ids).'," data-titles="'.implode(',', array_unique(array_map(uamswp_fad_str(...), $title_list))).',"></data>';
     } else {
         // var_dump($args);

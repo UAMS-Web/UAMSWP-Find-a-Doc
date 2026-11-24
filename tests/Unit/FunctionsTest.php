@@ -1381,4 +1381,76 @@ final class FunctionsTest extends UnitTestCase
 
         $this->assertSame([], $calls->getArrayCopy());
     }
+
+    public function test_the_retries_default_to_three_attempts_a_wait_of_two_seconds_times_the_attempt(): void
+    {
+        $this->transients(['pg_api_token' => 'tok']);
+        $requests = $this->responses(array_fill(0, 5, ['code' => 429, 'body' => '{}']));
+        expect('sleep')->once()->with(2)->ordered();
+        expect('sleep')->once()->with(4)->ordered();
+
+        $this->assertInstanceOf(\WP_Error::class, \fetch_pg_api_with_retry('https://example.test/api'));
+        $this->assertCount(3, $requests);
+    }
+
+    /**
+     * Run the PubMed field's AJAX handler for a summary, and return the JSON it printed, decoded.
+     *
+     * @param  array<string, mixed>  $summary  The record PubMed returns for the ID.
+     * @return array<string, mixed>
+     */
+    private function pubmed(array $summary): array
+    {
+        $_POST = ['pmid' => '123'];
+        $this->responses([['code' => 200, 'body' => (string) json_encode(['result' => ['123' => $summary]])]]);
+        when('is_wp_error')->justReturn(false);
+
+        ob_start();
+        $exited = false;
+
+        try {
+            (new \pubmed_field_on_change)->load_content_from_pubmed();
+        } catch (ExitCalled) {
+            $exited = true;
+        } finally {
+            $output = (string) ob_get_clean();
+        }
+
+        $this->assertTrue($exited, 'The handler ends the request.');
+
+        return (array) json_decode($output, true);
+    }
+
+    public function test_the_pubmed_handler_returns_the_citation_with_the_authors_joined_and_ended_with_a_period(): void
+    {
+        $summary = [
+            'title' => 'Tumors & treatment.',
+            'authors' => [['name' => 'Lee A'], ['name' => 'Ray B'], ['name' => 'Cho C']],
+            'source' => 'J Med',
+            'volume' => '12',
+            'issue' => '3',
+            'pages' => '45-50',
+            'pubdate' => '2024 Jan',
+            'elocationid' => 'doi: 10.1/x',
+            'uid' => '123',
+        ];
+
+        $this->assertSame([
+            'full' => htmlentities('Lee A, Ray B, Cho C. Tumors & treatment. J Med. 2024 Jan; 12(3):45-50. doi: 10.1/x PMID: 123. <br/> View in Pubmed: <a href="https://www.ncbi.nlm.nih.gov/pubmed/123" target="_blank">123</a>'),
+            'title' => 'Tumors & treatment.',
+            'authors' => ['Lee A', 'Ray B', 'Cho C'],
+            'url' => 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&retmode=json&id=123',
+            'id' => '123',
+        ], $this->pubmed($summary));
+    }
+
+    public function test_the_pubmed_handler_returns_no_citation_for_a_record_with_no_title(): void
+    {
+        $summary = ['title' => '', 'authors' => [['name' => 'Lee A']], 'source' => 'J', 'volume' => '', 'issue' => '', 'pages' => '', 'pubdate' => '', 'elocationid' => '', 'uid' => '123'];
+
+        $result = $this->pubmed($summary);
+
+        $this->assertSame('', $result['full']);
+        $this->assertSame(['Lee A'], $result['authors']);
+    }
 }
