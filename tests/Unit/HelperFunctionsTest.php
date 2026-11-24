@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace UamswpFindADoc\Tests\Unit;
 
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\IgnoreDeprecations;
 use UamswpFindADoc\Tests\Support\UnitTestCase;
 
 use function Brain\Monkey\Filters\expectApplied;
@@ -366,6 +367,72 @@ final class HelperFunctionsTest extends UnitTestCase
         foreach (['', [], null, false, 'not json', '5', '[1,2]', [1, 2], 7] as $stored) {
             $this->assertNull(\uamswp_fad_pg_payload($stored), var_export($stored, true));
         }
+    }
+
+    // The helper calls `strftime()`, which PHP has deprecated since 8.1; the deprecation is the function's, not the test's.
+    #[IgnoreDeprecations]
+    #[DataProvider('apStyleTimes')]
+    public function test_an_ap_style_date_is_a_twelve_hour_time_without_empty_minutes(string $input, string $expected): void
+    {
+        // `%l` is not supported by `strftime()` on Windows, where the helper answers with an empty string.
+        if (PHP_OS_FAMILY === 'Windows') {
+            $this->markTestSkipped('strftime() does not support %l on Windows.');
+        }
+
+        $this->assertSame($expected, \apStyleDate($input));
+    }
+
+    /** @return array<string, array{string, string}> */
+    public static function apStyleTimes(): array
+    {
+        return [
+            'on the hour drops the minutes' => ['2:00 pm', ' 2 PM'],
+            'minutes stay' => ['9:30 am', ' 9:30 AM'],
+            'noon' => ['12:00 pm', '12 PM'],
+            'a time that cannot be read is midnight at the epoch' => ['not a time', '12 AM'],
+        ];
+    }
+
+    public function test_a_stored_array_is_encoded_only_when_it_has_items(): void
+    {
+        // An empty array and a scalar are answered without encoding anything.
+        expect('wp_json_encode')->never();
+
+        foreach ([[], 7, 1.5, true] as $stored) {
+            $this->assertNull(\uamswp_fad_pg_payload($stored), var_export($stored, true));
+        }
+    }
+
+    public function test_an_array_the_encoder_refuses_is_null_instead_of_a_type_error(): void
+    {
+        // `wp_json_encode()` returns `false` for a value it cannot encode, and `json_decode()` takes a string.
+        when('wp_json_encode')->justReturn(false);
+
+        $this->assertNull(\uamswp_fad_pg_payload(['a' => 1]));
+    }
+
+    public function test_the_custom_table_query_returns_ids_as_strings_whatever_the_database_returns(): void
+    {
+        global $wpdb;
+        $previous = $wpdb;
+        $wpdb = new class
+        {
+            public string $prefix = 'wp_';
+
+            /** @return list<int> */
+            public function get_col(string $sql): array
+            {
+                return [4, 9];
+            }
+        };
+
+        try {
+            $ids = \uamswp_custom_table_query('t', 'f', ['a']);
+        } finally {
+            $wpdb = $previous;
+        }
+
+        $this->assertSame(['4', '9'], $ids);
     }
 
     public function test_an_array_is_returned_as_it_is_and_anything_else_is_empty(): void

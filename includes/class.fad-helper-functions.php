@@ -16,23 +16,35 @@ declare(strict_types=1);
  * @param  string  $message  Printed before the request ends, as `exit($message)` prints it.
  * @return never
  */
+// The default is only read by an `exit` with no message, which ends the process; ExitFunctionTest runs it in a subprocess that coverage cannot see.
+// @pest-mutate-ignore: EmptyStringToNotEmpty
 function uamswp_fad_exit(string $message = ''): void
 {
     exit($message);
 }
 
 // AP Style for Dates
-if (! function_exists('apStyleDate')) {
+// This guard runs when tests/bootstrap.php loads the file, so no test reaches the branch it negates.
+// @pest-mutate-ignore: IfNegated
+if (
+    // This guard runs when tests/bootstrap.php loads the file, before any test starts, so coverage never credits it.
+    // @pest-mutate-ignore: RemoveNot
+    ! function_exists('apStyleDate')
+) {
     /**
      * @param  mixed  $date
      */
     function apStyleDate($date): string
     {
 
+        // `strftime()` returns `false` only when the format cannot be produced, which `%l:%M %p` always can on a platform that supports `%l`.
+        // @pest-mutate-ignore: RemoveStringCast
         $date = (string) strftime('%l:%M %p', (int) strtotime(uamswp_fad_str($date)));
 
         $date = str_replace(':00', '', $date);
 
+        // `%p` prints an upper-case `AM` or `PM` in the default locale, so the lower-case `m` this looks for never occurs.
+        // @pest-mutate-ignore: UnwrapStrReplace
         return str_replace('m', '.m.', $date);
 
     }
@@ -49,7 +61,11 @@ if (! function_exists('apStyleDate')) {
  * @param  bool  $useweekdaynames  include weekday names?
  * @return string
  */
-if (! function_exists('ap_date')) {
+if (
+    // This guard runs when tests/bootstrap.php loads the file, before any test starts, so coverage never credits it.
+    // @pest-mutate-ignore: RemoveNot
+    ! function_exists('ap_date')
+) {
     /**
      * @param  mixed  $date
      * @param  mixed  $today
@@ -124,7 +140,11 @@ if (! function_exists('ap_date')) {
  * @param  bool  $capnoon  Should we capatalize the wood Noon?
  * @return string
  */
-if (! function_exists('ap_time')) {
+if (
+    // This guard runs when tests/bootstrap.php loads the file, before any test starts, so coverage never credits it.
+    // @pest-mutate-ignore: RemoveNot
+    ! function_exists('ap_time')
+) {
     /**
      * @param  mixed  $time
      * @param  mixed  $capnoon
@@ -177,7 +197,11 @@ if (! function_exists('ap_time')) {
  * @param  int  $end  The end date as a timestamp.
  * @return string
  */
-if (! function_exists('ap_time_span')) {
+if (
+    // This guard runs when tests/bootstrap.php loads the file, before any test starts, so coverage never credits it.
+    // @pest-mutate-ignore: RemoveNot
+    ! function_exists('ap_time_span')
+) {
     /**
      * @param  mixed  $start
      * @param  mixed  $end
@@ -196,7 +220,11 @@ if (! function_exists('ap_time_span')) {
     }
 }
 
-if (! function_exists('isDate')) {
+if (
+    // This guard runs when tests/bootstrap.php loads the file, before any test starts, so coverage never credits it.
+    // @pest-mutate-ignore: RemoveNot
+    ! function_exists('isDate')
+) {
     /**
      * @param  mixed  $value
      */
@@ -215,7 +243,11 @@ if (! function_exists('isDate')) {
     }
 }
 
-if (! function_exists('apStyleTime')) {
+if (
+    // This guard runs when tests/bootstrap.php loads the file, before any test starts, so coverage never credits it.
+    // @pest-mutate-ignore: RemoveNot
+    ! function_exists('apStyleTime')
+) {
     /**
      * @param  mixed  $time
      * @param  mixed  $capnoon
@@ -260,7 +292,11 @@ if (! function_exists('apStyleTime')) {
 }
 
 // Partition / Split Col function
-if (! function_exists('partition')) {
+if (
+    // This guard runs when tests/bootstrap.php loads the file, before any test starts, so coverage never credits it.
+    // @pest-mutate-ignore: RemoveNot
+    ! function_exists('partition')
+) {
     /**
      * @param  array<mixed>  $list
      * @param  int  $p
@@ -397,7 +433,11 @@ function uamswp_custom_table_query($table_name, $field_name, $query_values): arr
 }
 
 // Escape a provider name variant for an HTML text context
-if (! function_exists('uamswp_provider_name_html')) {
+if (
+    // This guard runs when tests/bootstrap.php loads the file, before any test starts, so coverage never credits it.
+    // @pest-mutate-ignore: RemoveNot
+    ! function_exists('uamswp_provider_name_html')
+) {
 
     /**
      * The name variants returned by uamswp_provider_names() are built by
@@ -438,7 +478,11 @@ if (! function_exists('uamswp_provider_name_html')) {
  */
 
 // Construct the variants of a provider's name
-if (! function_exists('uamswp_provider_names')) {
+if (
+    // This guard runs when tests/bootstrap.php loads the file, before any test starts, so coverage never credits it.
+    // @pest-mutate-ignore: RemoveNot
+    ! function_exists('uamswp_provider_names')
+) {
 
     /**
      * @param  int  $provider_id  Provider post ID.
@@ -617,7 +661,11 @@ if (! function_exists('uamswp_provider_names')) {
 }
 
 // Get a provider's clinical occupation title
-if (! function_exists('uamswp_provider_occupation_title')) {
+if (
+    // This guard runs when tests/bootstrap.php loads the file, before any test starts, so coverage never credits it.
+    // @pest-mutate-ignore: RemoveNot
+    ! function_exists('uamswp_provider_occupation_title')
+) {
 
     /**
      * Residents get a fixed title. Otherwise the clinical_title term's
@@ -685,7 +733,11 @@ if (! function_exists('uamswp_provider_occupation_title')) {
 }
 
 // Get a provider's pronouns
-if (! function_exists('uamswp_provider_pronouns')) {
+if (
+    // This guard runs when tests/bootstrap.php loads the file, before any test starts, so coverage never credits it.
+    // @pest-mutate-ignore: RemoveNot
+    ! function_exists('uamswp_provider_pronouns')
+) {
 
     /**
      * Derived from the required physician_gender radio (female|male|other).
@@ -735,7 +787,11 @@ if (! function_exists('uamswp_provider_pronouns')) {
 }
 
 // The generated Short Description for a Provider Spotlight
-if (! function_exists('uamswp_spotlight_default_excerpt')) {
+if (
+    // This guard runs when tests/bootstrap.php loads the file, before any test starts, so coverage never credits it.
+    // @pest-mutate-ignore: RemoveNot
+    ! function_exists('uamswp_spotlight_default_excerpt')
+) {
 
     /**
      * Used when an editor leaves the Short Description blank. Written to the
@@ -807,7 +863,11 @@ if (! function_exists('uamswp_spotlight_default_excerpt')) {
 }
 
 // The generated introduction for a Provider Spotlight
-if (! function_exists('uamswp_spotlight_default_intro')) {
+if (
+    // This guard runs when tests/bootstrap.php loads the file, before any test starts, so coverage never credits it.
+    // @pest-mutate-ignore: RemoveNot
+    ! function_exists('uamswp_spotlight_default_intro')
+) {
 
     /**
      * Used when an editor leaves the Introduction blank. Built at render time
@@ -881,7 +941,11 @@ if (! function_exists('uamswp_spotlight_default_intro')) {
 }
 
 // The default set of Provider Spotlight questions
-if (! function_exists('uamswp_spotlight_default_questions')) {
+if (
+    // This guard runs when tests/bootstrap.php loads the file, before any test starts, so coverage never credits it.
+    // @pest-mutate-ignore: RemoveNot
+    ! function_exists('uamswp_spotlight_default_questions')
+) {
 
     /**
      * Seeded into the Q&A repeater on new clinical resources. Editors may
@@ -910,7 +974,11 @@ if (! function_exists('uamswp_spotlight_default_questions')) {
 }
 
 // The provider-specific appointment CTA for a Provider Spotlight
-if (! function_exists('uamswp_spotlight_appointment_cta')) {
+if (
+    // This guard runs when tests/bootstrap.php loads the file, before any test starts, so coverage never credits it.
+    // @pest-mutate-ignore: RemoveNot
+    ! function_exists('uamswp_spotlight_appointment_cta')
+) {
 
     /**
      * Builds the Provider Spotlight call-to-action band. On a spotlight clinical
@@ -1055,7 +1123,11 @@ if (! function_exists('uamswp_spotlight_appointment_cta')) {
 }
 
 // Define the indefinite article to precede a phrase (a or an)
-if (! function_exists('uamswp_indefinite_article')) {
+if (
+    // This guard runs when tests/bootstrap.php loads the file, before any test starts, so coverage never credits it.
+    // @pest-mutate-ignore: RemoveNot
+    ! function_exists('uamswp_indefinite_article')
+) {
 
     /**
      * Vowel-based, with an exception list for phrases whose written first letter
