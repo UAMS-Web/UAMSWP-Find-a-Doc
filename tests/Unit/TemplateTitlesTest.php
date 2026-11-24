@@ -153,6 +153,15 @@ test('the custom field excerpt trims to 35 words and passes the excerpt-more fil
         ->and($received['excerpt_more'])->toBe(' [...]');
 });
 
+test('the custom field excerpt escapes a CDATA terminator in the text', function (): void {
+    when('get_field')->justReturn('before ]]> after');
+    when('strip_shortcodes')->alias(static fn (string $text): string => $text);
+    when('apply_filters')->alias(static fn (string $tag, mixed $value): mixed => $value);
+    when('wp_trim_words')->alias(static fn (string $text, int $words, string $more): string => $text);
+
+    expect(custom_field_excerpt('field'))->toBe('before ]]&gt; after');
+});
+
 test('the custom field excerpt of a field with no value is not trimmed or run through the shortcode filter', function (mixed $value): void {
     when('get_field')->justReturn($value);
     when('strip_shortcodes')->alias(static function (): string {

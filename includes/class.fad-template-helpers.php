@@ -128,9 +128,8 @@ function custom_field_excerpt($title)
     if ($text != '') {
         $text = strip_shortcodes($text);
         $text = uamswp_fad_str(apply_filters('the_content', $text));
-        // The replacement is the same string, so removing the call changes nothing; core's step escapes to `]]&gt;` (#1506).
-        // @pest-mutate-ignore: UnwrapStrReplace
-        $text = str_replace(']]>', ']]>', $text);
+        // Core's `wp_trim_excerpt()` does the same: a CDATA terminator in the text would end a CDATA section the excerpt is printed in.
+        $text = str_replace(']]>', ']]&gt;', $text);
         $excerpt_length = 35; // 35 words
         $excerpt_more = uamswp_fad_str(apply_filters('excerpt_more', ' '.'[...]'));
         $text = wp_trim_words($text, $excerpt_length, $excerpt_more);
