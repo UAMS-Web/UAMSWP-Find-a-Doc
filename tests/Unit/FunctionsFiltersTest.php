@@ -1327,4 +1327,82 @@ final class FunctionsFiltersTest extends UnitTestCase
 
         $this->assertSame($first, \uamswp_fad_location_source_ids(9171));
     }
+
+    /**
+     * Run a filter callback with a region in the query string and the cookie, and return the cookies it set.
+     *
+     * @return list<array<int, mixed>>
+     */
+    private function regionCookie(string $callback, array $server): array
+    {
+        $_GET = ['_filter_region' => 'north<b>'];
+        $_COOKIE = ['wp_filter_region' => 'north'];
+        $backup = $_SERVER;
+        unset($_SERVER['HTTP_HOST']);
+        $_SERVER = $server + $_SERVER;
+        $this->callbackStubs([]);
+        $set = [];
+        when('setcookie')->alias(static function (mixed ...$args) use (&$set): bool {
+            $set[] = $args;
+
+            return true;
+        });
+
+        ob_start();
+
+        try {
+            $callback();
+        } finally {
+            ob_end_clean();
+            $_SERVER = $backup;
+            $_GET = [];
+        }
+
+        return $set;
+    }
+
+    /**
+     * @return array<string, array{0: string}>
+     */
+    public static function region_callbacks(): array
+    {
+        return ['provider' => ['provider_ajax_filter_callback'], 'location' => ['location_ajax_filter_callback']];
+    }
+
+    #[DataProvider('region_callbacks')]
+    public function test_a_region_in_the_query_string_is_kept_in_an_escaped_session_cookie_for_the_site_host(string $callback): void
+    {
+        $this->assertSame(
+            [['wp_filter_region', 'north&lt;b&gt;', ['expires' => 0, 'path' => '/', 'domain' => 'example.test']]],
+            $this->regionCookie($callback, ['HTTP_HOST' => 'example.test'])
+        );
+        $this->assertSame(
+            [['wp_filter_region', 'north&lt;b&gt;', ['expires' => 0, 'path' => '/', 'domain' => '']]],
+            $this->regionCookie($callback, []),
+            'with no host the cookie names no domain'
+        );
+    }
+
+    public function test_the_title_callback_prints_a_card_and_the_ids_and_each_title_once_for_the_providers_found(): void
+    {
+        $_POST = ['providers' => '4,5,6'];
+        \WP_Query::$queue = [[4, 5, 6]];
+        $this->cardStubs();
+        when('get_field')->alias(static fn (string $field, mixed $id = null): mixed => match ($field) {
+            'physician_title' => $id === 6 ? 9 : '7',
+            'physician_first_name' => 'First'.$id,
+            'physician_last_name' => 'Last',
+            default => null,
+        });
+
+        ob_start();
+        \provider_title_ajax_filter_callback();
+        $html = (string) ob_get_clean();
+
+        $this->assertSame(3, substr_count($html, '<div class="card">'));
+        $this->assertStringContainsString('<span class="name">First4 Last</span>', $html);
+        $this->assertStringContainsString('<span class="name">First6 Last</span>', $html);
+        $this->assertStringEndsWith('<data id="provider_ids" data-postids="4,5,6," data-titles="7,9,"></data>', $html);
+        $this->assertStringNotContainsString('no-results', $html);
+    }
 }
