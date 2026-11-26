@@ -1,0 +1,42 @@
+{
+    // The shared spell check (UAMS-Web/uams-claude-skills#173). The sync creates this file in a
+    // repository that takes the `spell` profile and never rewrites it afterward: the repository owns it.
+    // Prefer a reword to a dictionary entry. A word only some files may use (a quoted rejected form, a
+    // tool's own spelling, an identifier fragment) belongs in an `overrides` entry keyed to those files,
+    // never in project-words.txt, which admits it everywhere. The american-english-prose rule says why.
+    "version": "0.2",
+    "language": "en",
+    "dictionaryDefinitions": [
+        {
+            "name": "project-words",
+            "path": "./project-words.txt",
+            "addWords": true
+        }
+    ],
+    "dictionaries": ["project-words"],
+    "overrides": [],
+    // scripts/spell.mjs reads files with --dot so .github/ and .githooks/ are checked, which also makes
+    // every other dot-path reachable. Each exclusion below is deliberate.
+    // .claude/, .agents/ and .cursor/ hold the files the sync writes: their spelling is checked at
+    // the source, in UAMS-Web/uams-claude-skills, and a word list copied here for them would only
+    // grow. A repository with its own skills or rules there removes the entry that covers them.
+    "ignorePaths": [
+        ".git/**",
+        ".claude/**",
+        ".agents/**",
+        ".cursor/**",
+        "node_modules/**",
+        "vendor/**",
+        "public/build/**",
+        "public/vendor/**",
+        "build/**",
+        "dist/**",
+        "storage/**",
+        "bootstrap/cache/**",
+        "**/*.lock",
+        "package-lock.json",
+        "composer.lock",
+        "project-words.txt"
+    ],
+    "ignoreRegExpList": []
+}

@@ -1,0 +1,17 @@
+# The `spell` job for .github/workflows/ci.yml, a snippet rather than a workflow. Paste it under `jobs:`
+# beside the other jobs (UAMS-Web/uams-claude-skills#173). It needs no PHP, so it stands outside the
+# `needs:` chain and can be dropped or moved without touching another job. A repository that gates its
+# Actions jobs on RUN_REMOTE_CI adds `if: vars.RUN_REMOTE_CI == 'true'` to it. The local CI runner runs
+# the same command as its `spell` job (local-ci.app-jobs.json).
+  spell:
+    name: Spell check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run spell

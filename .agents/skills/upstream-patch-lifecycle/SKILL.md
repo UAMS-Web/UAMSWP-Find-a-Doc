@@ -28,7 +28,7 @@ description: >-
   Edit it there, not here; the next sync overwrites this copy.
   Delivered to this repository through the profile(s): php.
 -->
-<!-- cspell:ignore lockfiles Packagist retargeted -->
+<!-- cspell:ignore Packagist retargeted -->
 
 # Carry and retire a vendor Composer patch
 
@@ -224,6 +224,10 @@ the package's order and description keys. The patch files themselves stay in one
 
 #### Moving a consumer to the package
 
+**Moving a consumer that already requires the package to a newer release is one command**,
+`scripts/update-patches-package.mjs` in this skill (*Moving to a newer release* below). The
+steps that follow are the first adoption, and the manual form of what that script does.
+
 1. **Take out the copies the package now ships**: their entries in `extra.patches` or
    `patches.json`, and their files under `patches/`. A patch only this repository carries stays.
 2. **Add the `vcs` entry before the require** (*How a consumer requires it*), or Composer looks for
@@ -252,6 +256,47 @@ the package's order and description keys. The patch files themselves stay in one
    `Found cached patch` line per patch) and
    run the gate that proves the patched tool works (*Proving it worked*). Commit `composer.json`,
    `composer.lock`, `patches.json` where it changed, and `patches.lock.json` together.
+
+#### Moving to a newer release
+
+```bash
+node .claude/skills/upstream-patch-lifecycle/scripts/update-patches-package.mjs     --package uams-web/patches-<package> --release vX.Y.Z --dry-run
+```
+
+Drop `--dry-run` to perform it. The script reads the release's `composer.json` at the tag over
+REST (`gh`), or from `--manifest <file>`, and works in `--root <dir>` (default: the current
+directory). It does what steps 4 and 5 above do, in this order:
+
+1. **Registers** each patch the release declares that the root `patches.json` lacks, in the
+   package's order, after the last entry already pointing into `vendor/<package>/` for that
+   target, leaving every other entry in place. Only where the package is in `require-dev`: a
+   package in `require` is applied from its own declaration, so nothing is registered.
+   Entries of a target are keyed by description, so a declared description already in
+   `patches.json` is handled by whose file it points at: a file of this package the release no
+   longer declares (a renamed file) has its entry updated in place; any other file (a patch the consumer
+   carries under that description) is a **conflict**, and the script writes nothing, runs no
+   command and exits 1, naming it. A `patches.json` that lists a target's patches as an array is
+   refused (exit 2).
+2. **Moves the package to the release**: `composer update <package> --with-dependencies
+   --no-plugins --no-scripts --with <package>:<version>`. `--no-scripts` is required: the
+   install hook `ensure-patches-applied.php` (*The traps already paid for*) would otherwise fail
+   the update against the old `patches.lock.json`.
+3. **`composer patches-relock`, then `composer patches-repatch`.**
+4. **Runs `check-registered-patches.mjs`** and fails when it does.
+
+`--dry-run` prints the plan (each entry it would add, each command) and writes nothing. It
+**names but does not remove** a registered entry the release no longer declares, which a person
+retires (*Removing a patch*). It does not commit, does not run `composer update --lock`, and its
+last step proves registration, not application: `composer patches-repatch` exits 0 when a patch
+fails to apply, so finish with a `composer install` from a deleted `vendor/` and commit
+`composer.lock`, `patches.json` and `patches.lock.json` together. Exit `0` done, `1` a step or the
+check failed, `2` it could not answer (bad arguments, an unreadable file).
+
+Measured on Windows 11 (Composer 2.11.2, PHP 8.4) against `aether-redirects` at `3a774fa`, moving
+`patches-pest-plugin-mutate` `v1.4.0` to `v1.5.1`: the plan named the one added patch; the run
+exited 0 with the check clean at 18 declared patches; the changed `patches.lock.json` installed
+cold, and the previous one failed the same cold install. Without `--no-scripts` the same run
+failed at the install hook. macOS and Linux are not yet measured.
 
 **Steps 2, 3 and 5 were run in this order on one real package consumer**, 2026-11-11 on macOS 27.3,
 PHP 8.4.27, Composer 2.11.1, `cweagans/composer-patches` 2.0.0, against
@@ -357,7 +402,7 @@ Writing a patch and documenting it moved to the `patch-package` skill, which the
 6. Name the gate that proves the patched tool works (see *Proving it worked*.
 7. `vendor/bin/pint --dirty`.
 
-### The relock, and when it is two lockfiles
+### The relock, and when it is two lock files
 
 `composer patches-relock` rewrites **`patches.lock.json`** (the per-patch SHA-256s and the set
 `_hash`). It does **not** touch **`composer.lock`**.

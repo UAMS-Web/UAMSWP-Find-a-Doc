@@ -55,6 +55,28 @@ initiative. The skill records how a release is cut; it cannot create, widen or r
 recorded grant is used exactly as recorded: a request outside its bounds goes back to the
 operator.
 
+## Before the notes: check the wiki
+
+In a repository that carries `docs/wiki/`, the wiki publishes on a release and republishes whatever
+`main` holds, so the pages a reader sees describe the last release unless they are brought forward
+first. Before the release is prepared for tagging, compare the pages with the release's code and
+set the `Written against` line to the release on the footer and on each page the release leaves
+accurate, in a change merged before the tag. The `github-wiki` skill says how the pages are written
+and marked; this skill does not repeat it.
+
+A change in the release needs a wiki change when it adds, changes or removes any of:
+
+- a configuration key;
+- a route;
+- a template tag;
+- a console command;
+- a permission;
+- a screen in the Control Panel.
+
+A release with none of them still moves the footer's `Written against` line. A check at publish time
+(`UAMS-Web/uams-claude-skills#910`) is the backstop for a page left behind, and this step does not
+depend on it.
+
 ## Title
 
 `vX.Y.Z — <Theme>`: an **em dash** (Unicode `U+2014`, shown as `—` in release titles only) with a space either side, never a hyphen, then a
