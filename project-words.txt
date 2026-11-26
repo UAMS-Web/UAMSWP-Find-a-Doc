@@ -1,0 +1,31 @@
+# The words every UAMS-Web repository's prose uses and the base dictionary does not know.
+# The sync adds a word here that a later shared list gains and never removes one, so a repository
+# keeps its own words in this file beside these. Keep the list sorted by lowercase code point.
+# A word only some files may use belongs in a cspell.json override, not here.
+# `ampcode`, `cntrl` and `sprintf` are names that cannot be reworded (american-english-prose, first
+# category) in files the sync delivers into every repository that checks them (UAMS-Web/uams-claude-skills#838):
+# `ampcode` is the host of the Amp thread URL that check-commit-session-links.mjs matches, `cntrl` is the
+# POSIX character class [[:cntrl:]] in the ci-reusable.yml mutate-plan job (a byte copy of the published
+# workflow, so it takes no cspell:ignore line), and `sprintf` is the PHP function the no-emoji rule names.
+# `phpcs` and `phpversion` are the tool and the PHP function the same ci-reusable.yml names (the phpcs job and
+# its inputs, the coverage steps), and `strtolower` is the PHP function inside the Pest mutator name
+# `UnwrapStrtolower` that the pcov-setup skill quotes (UAMS-Web/uams-claude-skills#839).
+ampcode
+cntrl
+frontmatter
+Larastan
+laravel
+Livewire
+multisite
+Packagist
+PCOV
+phpcs
+phpstan
+phpunit
+phpversion
+sprintf
+Statamic
+strtolower
+UAMS
+wcag
+worktrees

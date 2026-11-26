@@ -53,8 +53,9 @@ Closes #
 
 ## Test plan
 
-<!-- Mandatory, and always last. `- [x]` = verified locally; `- [ ]` = deferred to CI, review,
-     or staging. Name the command, URL, or observation. -->
+<!-- Mandatory, and always last. `- [x]` = verified locally; `- [ ]` = deferred to CI or review,
+     checked before the merge. Name the command, URL, or observation. An act or
+     observation that can only happen after the merge goes under `## Follow-up`, not here. -->
 
 <!-- A gate item belongs here only where no status check is required (a repository without
      protection, or a private one with remote CI off). Where `gh api

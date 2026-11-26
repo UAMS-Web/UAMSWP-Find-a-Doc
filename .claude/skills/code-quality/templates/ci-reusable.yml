@@ -60,7 +60,8 @@ name: CI chain
 # `mutate: false`, those three jobs on, and `pest-command: composer test:unit` when its unit suite is
 # that script. A plugin that does not receive the `pest-testing` skill also passes `mutate: false`, which skips the
 # `mutate-ignore` job, and `global-test-symbols: false`. Its WordPress integration matrix (a MySQL service, a WordPress download, single and multisite) stays a
-# plain job in the caller beside the call, listed in the `needs:` of its `CI` job; this chain does not run it.
+# plain job in the caller beside the call, listed in the `needs:` of its `CI` job; this chain does not run it. That job can
+# stand the environment up with the same composite action the `mutate` job uses under `mutate-wordpress`.
 #
 # Two more optional jobs serve any repository (UAMS-Web/uams-claude-skills#620), each off until its boolean input is `true` and
 # Linux only: `guard` (input `guard-patterns`, extra patterns added to the built-in ones) fails when a tracked file looks like a
@@ -92,6 +93,14 @@ name: CI chain
 # submodules the `mutate` job checks out, by path, and `mutate-submodules-recursive` adds the ones nested in them. A
 # private submodule needs the `mutate-submodules-token` secret, passed by name, since the job's own token reads only
 # the calling repository.
+#
+# `mutate-wordpress: true` serves a caller whose `composer mutate` boots WordPress (UAMS-Web/uams-ci-workflows#78). Once
+# the job has files to mutate, it runs the composite action `.github/actions/wordpress-integration` of this repository
+# before `composer mutate`: a database container, a WordPress download, the Composer install under `tests/Integration`
+# and the `WP_TESTS_*` variables. `mutate-wordpress-version`, `mutate-wordpress-multisite`,
+# `mutate-wordpress-database-image` and `mutate-wordpress-env` pass through to it. Off by default, and the
+# action is then not run. The step names it as `$/...`, which resolves to this repository at the commit the caller's
+# pin runs, so the action and this file always come from one commit.
 #
 # The `pest` job is on unless the caller passes `pest: false`. A repository whose suite needs what the called
 # chain cannot give it (private submodules, a secret, a sharded run with its own reports) keeps its own Pest
@@ -167,6 +176,26 @@ on:
         description: Check out the submodules nested inside the ones mutate-submodules names as well (UAMS-Web/uams-ci-workflows#68). It does nothing while mutate-submodules is empty.
         type: boolean
         default: false
+      mutate-wordpress:
+        description: Stand up a WordPress integration environment in the mutate job before composer mutate, for a caller whose mutation pass boots WordPress (UAMS-Web/uams-ci-workflows#78). It starts a database container, downloads WordPress, installs the Composer setup under tests/Integration and exports the WP_TESTS_* variables. The default, false, stands up nothing.
+        type: boolean
+        default: false
+      mutate-wordpress-version:
+        description: The WordPress version mutate-wordpress downloads. Empty reads the version of wp-phpunit/wp-phpunit in tests/Integration/composer.lock.
+        type: string
+        default: ''
+      mutate-wordpress-multisite:
+        description: With mutate-wordpress, `true` exports WP_MULTISITE=1 and `false` exports WP_MULTISITE=0. Empty exports neither and leaves the choice to the suite. `false` does not override a suite that defines WP_TESTS_MULTISITE or MULTISITE as true; set that suite's own switch in mutate-wordpress-env.
+        type: string
+        default: ''
+      mutate-wordpress-database-image:
+        description: The image of the database container mutate-wordpress starts, a mysql or mariadb tag.
+        type: string
+        default: mysql:8.0
+      mutate-wordpress-env:
+        description: More variables mutate-wordpress exports for the suite, one NAME=value a line, such as a variable a suite uses to choose between single site and multisite. The log shows them, so they are not for secrets.
+        type: string
+        default: ''
       encoding-guard:
         description: Run the encoding-guard job, which runs encoding-guard-command.
         type: boolean
@@ -820,6 +849,17 @@ jobs:
           echo "mode=changed" >> "$GITHUB_OUTPUT"
           echo "paths=$(IFS=,; echo "${files[*]}")" >> "$GITHUB_OUTPUT"
 
+      # Off unless the caller asks for it (UAMS-Web/uams-ci-workflows#78), and skipped when nothing is mutated. `$/` is
+      # this repository at the commit this file was called at, not the caller's checkout.
+      - name: Set up the WordPress integration environment
+        if: inputs.mutate-wordpress && steps.select.outputs.mode != 'none'
+        uses: $/.github/actions/wordpress-integration
+        with:
+          wordpress-version: ${{ inputs.mutate-wordpress-version }}
+          multisite: ${{ inputs.mutate-wordpress-multisite }}
+          database-image: ${{ inputs.mutate-wordpress-database-image }}
+          env: ${{ inputs.mutate-wordpress-env }}
+
       # `--min=100` makes Pest fail the step on any survivor. The run is kept in a log
       # because a run that mutated nothing is a setup failure that Pest's exit status
       # reports or not depending on its version and `ignore_min_score_on_zero_mutations`.
@@ -840,7 +880,8 @@ jobs:
 
       # Reads the log, not the exit status: fails on zero mutants, and on any untested,
       # uncovered, pending or timed-out mutant. Runs even when the step above failed, so the
-      # log's own account of the failure is printed; skipped only when nothing was selected.
+      # log's own account of the failure is printed; it reads the first summary in the log only, so a `composer mutate`
+      # of several Pest commands is judged on the first (UAMS-Web/uams-claude-skills#914); skipped only when nothing was selected.
       # One exception: changed files that exist, mutated with PCOV loaded, that produce zero
       # mutants hold no code a mutator changes (an interface, say), which is a pass. Zero
       # mutants on a full run, or with no PCOV, still fails.

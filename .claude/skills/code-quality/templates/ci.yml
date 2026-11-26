@@ -81,7 +81,7 @@ permissions:
 jobs:
   # The shared chain. Its checks report as `checks / <job name> (<operating system>)`.
   checks:
-    uses: UAMS-Web/uams-ci-workflows/.github/workflows/ci.yml@v0.17.0
+    uses: UAMS-Web/uams-ci-workflows/.github/workflows/ci.yml@v0.18.0
     # with:
     #   all-platform-jobs: 'pint'
     #   mutate-paths: src

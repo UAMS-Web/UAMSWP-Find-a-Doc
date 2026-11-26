@@ -14,6 +14,11 @@ declare(strict_types=1);
  *
  * Written in PHP so a CI job that sets up PHP and nothing else can run it.
  *
+ * A log can hold several runs, when `composer mutate` starts Pest more than once into the one
+ * log. Each `N Mutations for M Files created` line starts a run, and every run is read and judged
+ * on its own: one line each, and the log fails when any run fails. A log with one run prints and
+ * exits as it always did.
+ *
  * USAGE
  *     composer mutate -- --min=100 2>&1 | tee mutate.log
  *     php check-mutation-run.php mutate.log [--min=<score>]
@@ -23,10 +28,14 @@ declare(strict_types=1);
  *
  * WHAT FAILS
  *     - no `N Mutations for M Files created` line (the log holds no mutation run)
+ *     - in a log of several runs, any run below failing, a run with no `Mutations:` or `Score:` line
+ *       included, and a run holding more than one of either (a run whose own header is missing)
  *     - N or M is 0 (nothing was mutated)
  *     - any mutant reported untested, uncovered, pending or timed out. A timeout is
  *       unverified, never a kill.
  *     - no mutant tested, or no `Score:` line, or a score under the minimum
+ *
+ * Every rule above applies to each run.
  *
  * EXIT
  *     0  every mutant was tested and the score meets the minimum
@@ -35,13 +44,41 @@ declare(strict_types=1);
  */
 const ANSI_PATTERN = '/\x1b\[[0-9;]*m/';
 
+const HEADER_PATTERN = '/^\s*(\d+) Mutations for (\d+) Files created\s*$/m';
+
+/**
+ * The runs a log holds, each as its own text. A run starts at its `N Mutations for M Files created`
+ * line; text before the first one stays with the first run, so a log with one run is read whole.
+ *
+ * @return list<string>
+ */
+function splitRuns(string $log): array
+{
+    $text = preg_replace(ANSI_PATTERN, '', $log) ?? $log;
+    if (preg_match_all(HEADER_PATTERN, $text, $all, PREG_OFFSET_CAPTURE) === 0 || count($all[0]) < 2) {
+        return [$text];
+    }
+
+    $starts = array_map(static fn (array $hit): int => $hit[1], $all[0]);
+    $starts[0] = 0;
+    $starts[] = strlen($text);
+    $runs = [];
+    for ($i = 0; $i < count($starts) - 1; $i++) {
+        $runs[] = substr($text, $starts[$i], $starts[$i + 1] - $starts[$i]);
+    }
+
+    return $runs;
+}
+
 /** The run's own counts, read from its summary lines. Null where a line is absent. */
 function parseRun(string $log): array
 {
     $text = preg_replace(ANSI_PATTERN, '', $log) ?? $log;
-    $run = ['total' => null, 'files' => null, 'counts' => null, 'score' => null, 'lines' => []];
+    $run = ['total' => null, 'files' => null, 'counts' => null, 'score' => null, 'lines' => [], 'summaries' => 0, 'scores' => 0];
+    $run['summaries'] = (int) preg_match_all('/^\s*Mutations:\s*\S/m', $text);
+    $run['scores'] = (int) preg_match_all('/^\s*Score:\s*\S/m', $text);
 
-    if (preg_match('/^\s*(\d+) Mutations for (\d+) Files created\s*$/m', $text, $m) === 1) {
+    if (preg_match(HEADER_PATTERN, $text, $m) === 1) {
         $run['total'] = (int) $m[1];
         $run['files'] = (int) $m[2];
     }
@@ -102,6 +139,10 @@ function evaluateRun(array $run, float $min): array
         $findings[] = sprintf('score %.2f%% is under the minimum %.2f%%', $run['score'], $min);
     }
 
+    if ($run['summaries'] > 1 || $run['scores'] > 1) {
+        $findings[] = 'the run holds '.$run['summaries'].' `Mutations:` and '.$run['scores'].' `Score:` lines, more than one run: a run in this log has no `N Mutations for M Files created` line of its own';
+    }
+
     return $findings;
 }
 
@@ -143,27 +184,38 @@ function main(array $argv): int
         return 2;
     }
 
-    $run = parseRun($log);
+    $texts = splitRuns($log);
+    $many = count($texts) > 1;
+    $failed = false;
 
-    // The denominator comes before any finding, so a run that read nothing is visible.
-    echo sprintf(
-        'check-mutation-run: mutations=%s files=%s tested=%s score=%s minimum=%.2f',
-        $run['total'] ?? 'none',
-        $run['files'] ?? 'none',
-        $run['counts']['tested'] ?? 'none',
-        $run['score'] === null ? 'none' : sprintf('%.2f', $run['score']),
-        $min,
-    ).PHP_EOL;
+    foreach ($texts as $index => $text) {
+        $run = parseRun($text);
+        $label = $many ? 'run '.($index + 1).' of '.count($texts).': ' : '';
 
-    $findings = evaluateRun($run, $min);
-    foreach ($findings as $finding) {
-        echo 'FAIL: '.$finding.PHP_EOL;
+        // The denominator comes before any finding, so a run that read nothing is visible.
+        echo sprintf(
+            'check-mutation-run: %s%s=%s files=%s tested=%s score=%s minimum=%.2f',
+            $label,
+            'mutations',
+            $run['total'] ?? 'none',
+            $run['files'] ?? 'none',
+            $run['counts']['tested'] ?? 'none',
+            $run['score'] === null ? 'none' : sprintf('%.2f', $run['score']),
+            $min,
+        ).PHP_EOL;
+
+        $findings = evaluateRun($run, $min);
+        foreach ($findings as $finding) {
+            echo 'FAIL: '.$label.$finding.PHP_EOL;
+        }
+        foreach ($run['lines'] as $line) {
+            echo '  '.$line.PHP_EOL;
+        }
+
+        $failed = $failed || $findings !== [];
     }
-    foreach ($run['lines'] as $line) {
-        echo '  '.$line.PHP_EOL;
-    }
 
-    return $findings === [] ? 0 : 1;
+    return $failed ? 1 : 0;
 }
 
 if (PHP_SAPI === 'cli' && isset($argv[0]) && realpath($argv[0]) === __FILE__) {

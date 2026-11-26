@@ -53,7 +53,7 @@ Closes #
 <!--
   Mandatory, and always last. First line: the environment this plan was run on.
     To `master`: Run on the local install.
-  `- [x]` = verified here; `- [ ]` = deferred to CI, review, or another environment. Name the
+  `- [x]` = verified here; `- [ ]` = deferred to CI or review. A check that needs another environment goes under `## Follow-up`. Name the
   command, URL, or observation. Check a box only for a check you actually ran.
 -->
 

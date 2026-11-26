@@ -197,7 +197,7 @@ session validates and merges for it; the last bullet says how to tell, by readin
   satisfied yet stays unticked with the reason beside it. Then flip the pull request to ready
   (`gh pr ready <n>`) and read `draft` back from the API to confirm.
 - **Merge (a public repository with no gate session).** When a ready pull request has every
-  check on its head green and every test plan item satisfied and ticked, the author merges it,
+  check on its head green and every test plan item satisfied and ticked (the plan holds only what can be checked before the merge; post-merge items sit under `## Follow-up`), the author merges it,
   after working the re-verification in the [`pre-merge-check`](../rule-pre-merge-check/SKILL.md)
   rule against the head being merged (the head SHA must be the one the checks ran on). Merge
   through REST with a method the repository allows, passing the head:
@@ -539,8 +539,9 @@ describe code changes in prose instead.
 Every PR ends with a `## Test plan` GitHub task list. Conventions:
 
 - `- [x]` = author has already verified locally; `- [ ]` = unverified, deferred to
-  reviewer / CI / staging.
-- **Scope the plan to the base branch's environment, and name it on the plan's first line.** Each branch a PR can target is tested somewhere: where the repository records that mapping (its `CONTRIBUTING.md`, or `## About this repository` in `AGENTS.md`), use it. A PR to the first branch a change lands on (`dev`, or the default branch in a repository with neither `dev` nor `staging`) is tested in the **local environment**: the plan opens with "Run on the local install." and its items are checked before review, apart from deferred items and a gate item a validating session runs after the flip (both below). A PR to `staging` is tested on the **staging environment** once the change is deployed there: the plan opens with "Run on the staging environment once this branch is deployed there.", naming the host where the repository's mapping gives one, and its items start unchecked. A repository with `staging` and no `dev` has one PR to `staging`, so its plan carries both: local items checked before review (with the same exceptions), then staging items unchecked under their own line. In the `dev` and `staging` pair the two lists overlap but are not copies: a check that means something on only one environment goes only on that one. Name environments by role in shared text, and leave host names to the repository's own mapping.
+  a reviewer or CI.
+- **The plan holds only what can be checked before the merge.** An act or an observation that can only be true after the merge (a deploy, the next scheduled run, a bump in another repository that waits on this pull request's own merge, a production spot-check) goes under `## Follow-up`, never in the plan, because the **Merge** rule requires every plan item ticked and an item that can only happen afterwards can never be ticked first. Test: could a reviewer tick this item with the head as it stands, before pressing merge? If not, it is a follow-up. A companion splits on that test: it stays in the plan when the companion's merge is a precondition checked before this pull request merges (a pointer or fixtures bump the head must carry), and moves to `## Follow-up` when it can only happen afterwards. One of each: plan, `- [ ] Companion pointer bumped to content main and CI green on the head.`; follow-up, `Spot-check a page with multiple hero slides once deployed.`
+- **Scope the plan to the base branch's environment, and name it on the plan's first line.** Each branch a PR can target is tested somewhere: where the repository records that mapping (its `CONTRIBUTING.md`, or `## About this repository` in `AGENTS.md`), use it. A PR to the first branch a change lands on (`dev`, or the default branch in a repository with neither `dev` nor `staging`) is tested in the **local environment**: the plan opens with "Run on the local install." and its items are checked before review, apart from deferred items and a gate item a validating session runs after the flip (both below). A PR to `staging` is, as a rule, merged before the change reaches the **staging environment** (an inference from staging sites deploying the branch they track, not measured per repository; a repository that deploys the branch first says so in its own contributing guide, and its plan follows that guide), so its plan holds only what can be checked before the merge: it opens with "Run on the local install before the merge. Checks on the staging environment go under `## Follow-up`, once this branch is deployed there.", and its items are checked before review like a `dev` plan (with the same exceptions). The checks that need the shared site go under `## Follow-up` as unchecked items, naming the host where the repository's mapping gives one, and are run once the change is deployed there. A repository with `staging` and no `dev` has one PR to `staging`, so that one PR carries both: the plan, and its staging checks under `## Follow-up`. In the `dev` and `staging` pair the two lists overlap but are not copies: a check that means something on only one environment goes only on that one. Name environments by role in shared text, and leave host names to the repository's own mapping.
 - **Include a gate item for a non-trivial PR only where nothing else enforces it, and tick it honestly.** Read what the default branch requires: `gh api repos/<owner>/<repo>/rules/branches/<default>` lists a `required_status_checks` rule where status checks are required. **Where it does, the plan carries no `CI is green` item**: GitHub will not merge a head that is not green, so the item gates nothing, and it is circular, since it can only be ticked after CI finishes and every plan then opens with it unticked. The required checks are the record. A gate item stays there only for a check the required checks do not run (a local gate a validating session runs, a command the author ran), and it names that check. **Where no status check is required** (a repository without protection, or a private repository with remote CI off), the item stays, because nothing else enforces it. A companion item that says CI is expected red until the companion merges is unchanged (see below). **Tick any gate item that stays honestly.** `- [x]` asserts *the author verified this*. Write `- [x]` only for a check you actually ran and can name the result of (`- [x] \`vendor/bin/pint --test\` clean on the changed paths.`); where a validating session runs the gate after the flip, the item stays unticked. **Name the commit the runner printed, not the branch**: that is the whole point of it printing one.
 
   **Say what the gate does not cover.** A docs-only or scripts-only change may have **zero** gate coverage, and a PR that implies otherwise is claiming a green means something it does not.
@@ -549,11 +550,11 @@ Every PR ends with a `## Test plan` GitHub task list. Conventions:
 - Imperative mood, often a full sentence or two of context per item.
 - Nest sub-checks with 2-space-indented `-` bullets directly under the parent checkbox.
 - Include a regression / no-regression item when the change touches shared surface.
-- Include a deferred / staging item under `[ ]` for anything the author can't verify locally
-  (e.g. "Production / staging: confirm no `.env` has `STATAMIC_PROTECT_PASSWORD=secret`
-  carried over", or anything needing a second site in a multisite network or the production
-  data set).
-- When the PR has a companion at all (a submodule pointer, a fixtures bump, a sibling-repo PR, or a release the consumer needs), include a `[ ]` item for the gated follow-through. Note CI is expected-red until the companion merges **when the branch depends on it**; when it does not, say so explicitly, because then nothing goes red and the item is the only thing left holding the bump. See **Companion PRs and merge order** above.
+- Include a deferred item under `[ ]` for anything the author can't verify locally
+  but a reviewer or CI can check **before the merge** (e.g. a check that needs a second site in a
+  multisite network). A check that needs the staging environment or the production data set can only be made
+  after a deploy, so it is a `## Follow-up` item, per the boundary above.
+- When the PR has a companion at all (a submodule pointer, a fixtures bump, a sibling-repo PR, or a release the consumer needs), include a `[ ]` item for the gated follow-through **when it is a precondition checked before this pull request merges** (the bump the head must carry); a step that can only happen after the merge goes under `## Follow-up` instead. Note CI is expected-red until the companion merges **when the branch depends on it**; when it does not, say so explicitly, because then nothing goes red and the item is the only thing left holding the bump. See **Companion PRs and merge order** above.
 
 ### A test-plan item that needs a running WordPress is a test, or it carries a reason
 
@@ -622,11 +623,10 @@ Disable Bootstrap auto-cycling on the multi-slide hero (`data-interval="false"`)
   - Markup renders `data-interval="false"`, `data-ride="carousel"`, both indicators, both arrow controls.
   - After 10s of no interaction, active slide stays at index 0.
   - Clicking the next arrow advances to slide 1.
-- [ ] Production / staging: spot-check a page with multiple hero slides once deployed.
 
 ## Follow-up
 
-The `<section>` carousel root has no `tabindex`, so keyboard users can't reach the arrow-key handler: `data-keyboard="true"` is effectively dead on the live page. Pre-existing, worth a separate issue.
+Spot-check a page with multiple hero slides once deployed. The `<section>` carousel root has no `tabindex`, so keyboard users can't reach the arrow-key handler: `data-keyboard="true"` is effectively dead on the live page. Pre-existing, worth a separate issue.
 ```
 ````
 
